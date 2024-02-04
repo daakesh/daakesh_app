@@ -1,0 +1,1 @@
+export 'trending_deals_to_swap.dart';
