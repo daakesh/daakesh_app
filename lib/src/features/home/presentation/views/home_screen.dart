@@ -16,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
+          ///AppBar
           SliverAppBar(
             backgroundColor: ColorName.blueGray,
             expandedHeight: 160.0,
@@ -61,8 +62,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
+          ///Carousel slider.
           const SliverToBoxAdapter(child: HomeCarouselSliderWidget(),),
           const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
+          ///Popular-section.
           SliverToBoxAdapter(child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
@@ -88,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SliverPadding(padding: EdgeInsets.only(top: 16.0)),
+          ///What's_new-section.
           SliverToBoxAdapter(child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text('What\'s New',
@@ -112,6 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SliverPadding(padding: EdgeInsets.only(top: 20.0)),
+          ///Daakesh today deal-section.
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -140,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 )),
           ),
           const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
+          ///Today deal-section.
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -173,46 +179,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-//import 'package:flutter/material.dart';
-// import '../../../../src.export.dart';
-//
-// class HomeScreen extends StatefulWidget {
-//   const HomeScreen({super.key});
-//
-//   @override
-//   State<HomeScreen> createState() => _HomeScreenState();
-// }
-//
-// class _HomeScreenState extends State<HomeScreen> {
-//   final searchController = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SingleChildScrollView(
-//         child: SizedBox(
-//           width: double.infinity,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               SearchBarWidget(searchController: searchController),
-//               const SizedBox(height: 14.0,),
-//               const HomeCarouselSliderWidget(),
-//               const SizedBox(height: 24.0,),
-//               const PopularCategoriesWidget(),
-//               const SizedBox(height: 16.0,),
-//               const WhatsNewWidget(),
-//               const SizedBox(height: 23.0,),
-//               const DaakeshTodayDealsWidget(),
-//               const SizedBox(height: 75.0,),
-//
-//
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
