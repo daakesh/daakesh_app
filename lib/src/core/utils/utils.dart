@@ -135,3 +135,7 @@ void fieldFocusChange(
 bool isOpenKeyboard(context) => MediaQuery.of(context).viewInsets.bottom == 0;
 
 bool getTextDirection(context) => Directionality.of(context) == TextDirection.rtl;
+
+bool get isLightTheme => easyTheme.brightness == Brightness.light;
+
+BuildContext get currentContext => navigatorKey.currentState!.context;

@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
-import '../../core.export.dart';
+import '../../../src.export.dart';
 
 class BodyTextHelper{
-  /// Montserrat-Black
-  static const TextStyle montserratBlack26 = TextStyle(
-    fontFamily: FontsHelper.montserratBlack,
-    fontSize: 26.0,
-    height: 1.5,
-    color: ColorsHelper.black,
+  /// BOLD
+  static const TextStyle apercuBold = TextStyle(
+    fontFamily: FontFamily.apercuBold,
+    fontSize: 20.0,
+    height: 2.7,
+    color: ColorName.blueGray,
   );
-
-
-
-
+  /// REGULAR
+  static const TextStyle apercuRegular = TextStyle(
+    fontFamily: FontFamily.apercuRegular,
+    fontSize: 20.0,
+    height: 2.7,
+    color: ColorName.white,
+  );
+  /// MEDIUM
+  static const TextStyle apercuMedium = TextStyle(
+    fontFamily: FontFamily.apercuMedium,
+    fontSize: 20.0,
+    height: 2.7,
+    color: ColorName.blueGray,
+  );
 
 
 }

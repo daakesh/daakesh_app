@@ -14,6 +14,7 @@ class RegExpValidator {
   static FilteringTextInputFormatter removeCountryCode =  FilteringTextInputFormatter.deny(RegExp(r'^94+'));
   static FilteringTextInputFormatter clearSymbol =  FilteringTextInputFormatter.deny(RegExp('[\\.|\\,|\\@]'));
 
+
   ///Insert English language only
   static FilteringTextInputFormatter insertEnglish =FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'));
   static FilteringTextInputFormatter insertText =FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'));

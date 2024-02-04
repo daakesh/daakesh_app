@@ -1,4 +1,6 @@
+import 'package:daakesh/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
+import '../../../gen/colors.gen.dart';
 
 
 /// This is class[AppTheme] to toggle between app mode.
@@ -12,43 +14,138 @@ import 'package:flutter/material.dart';
 class AppTheme {
   ///lightMode
   static final ThemeData lightMode = ThemeData(
-      scaffoldBackgroundColor: Colors.white,
-      elevatedButtonTheme: ElevatedButtonThemeData(
+    scaffoldBackgroundColor: Colors.white,
+    ///ElevatedButtonTheme
+    elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(130.0, 34.0),
+        minimumSize: const Size(387.0, 56.0),
+        backgroundColor: ColorName.blueGray,
+        foregroundColor: ColorName.white,
+        textStyle: const TextStyle(
+          fontFamily: FontFamily.apercuRegular,
+          fontSize: 20.0,
+        ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8.0),
         ),
       ),
     ),
-     buttonTheme: ButtonThemeData(
-       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
-       splashColor: Colors.red,
-       buttonColor: const Color(0xFF7A3FE1),
-       height: 34.0,
-       highlightColor: Colors.green,
-       textTheme: ButtonTextTheme.normal,
-     ),
-       textTheme: const TextTheme(
-       bodyLarge:TextStyle(
-           fontSize: 26.0,
-           color: Color(0xff2E2B2A),
-           height: 2.0
-       ),
-       bodyMedium:TextStyle(
-         fontSize: 14.0,
-         color: Color(0xff2E2B2A),
-         height: 1.8,
-       ),
-       bodySmall:TextStyle(
-         fontSize: 10.0,
-         color: Color(0xFF7A3FE1),
-         height: 1.3,
+    ///OutlinedButtonTheme
+    outlinedButtonTheme: OutlinedButtonThemeData(
+       style: OutlinedButton.styleFrom(
+         foregroundColor: ColorName.blueGray,
+         side: const BorderSide(color: ColorName.blueGray),
+         minimumSize:const Size(387.0, 56.0),
+         textStyle: const TextStyle(
+           fontFamily: FontFamily.apercuMedium,
+           fontSize: 20.0,
+         ),
+         shape: RoundedRectangleBorder(
+           borderRadius: BorderRadius.circular(8.0),
+         ),
        ),
      ),
+    ///
+
+    ///TextStyle
+    textTheme: const TextTheme(
+
+      ///labelMedium
+      labelMedium: TextStyle(
+        fontFamily: FontFamily.sfProDisplayRegular,
+        fontSize: 18.0,
+        color: ColorName.black,
+      ),
+      ///bodyMedium
+      bodyMedium:TextStyle(
+        fontFamily: FontFamily.apercuRegular,
+        fontSize: 17.0,
+        color: ColorName.blueGray,
+      ),
+      ///bodyLarge
+      bodyLarge:TextStyle(
+        fontFamily: FontFamily.apercuMedium,
+        fontSize: 20.0,
+        color: ColorName.blueGray,
+      ),
+      ///headlineMedium
+      headlineSmall: TextStyle(
+        fontFamily: FontFamily.apercuBold,
+        fontSize: 18.0,
+        color: ColorName.blueGray,
+      ),
+      ///headlineMedium
+      headlineMedium: TextStyle(
+        fontFamily: FontFamily.apercuBold,
+        fontSize: 25.0,
+        color: ColorName.blueGray,
+      ),
+      ///headlineLarge
+      headlineLarge: TextStyle(
+        fontFamily: FontFamily.apercuBold,
+        fontSize: 40.0,
+        color: ColorName.blueGray,
+      ),
+
+
+    ),
 
   );
 
   ///darkMode
-  static final ThemeData darkMode = ThemeData();
+  static final ThemeData darkMode = ThemeData(
+    scaffoldBackgroundColor: ColorName.blueGray,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(387.0, 56.0),
+        backgroundColor: ColorName.white,
+        foregroundColor: ColorName.skyBlue,
+        textStyle: const TextStyle(
+          fontFamily: FontFamily.apercuRegular,
+          fontSize: 20.0,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+    ),
+    ///OutlinedButtonTheme
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: ColorName.white,
+        side: const BorderSide(color: ColorName.white),
+        minimumSize:const Size(387.0, 56.0),
+        textStyle: const TextStyle(
+          fontFamily: FontFamily.apercuMedium,
+          fontSize: 20.0,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+    ),
+
+    ///Body-Text style
+    textTheme: const TextTheme(
+      bodyMedium:TextStyle(
+        fontFamily: FontFamily.apercuRegular,
+        fontSize: 17.0,
+        color: ColorName.blueGray,
+      ),
+      headlineMedium: TextStyle(
+        fontFamily: FontFamily.apercuBold,
+        fontSize: 25.0,
+
+        color: ColorName.white,
+      ),
+      headlineLarge: TextStyle(
+        fontFamily: FontFamily.apercuBold,
+        fontSize: 40.0,
+        color: ColorName.white,
+      ),
+
+
+    ),
+
+  );
 }
