@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "311956579675",
+    "project_id": "daakesh-af3a0",
+    "storage_bucket": "daakesh-af3a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311956579675:android:6c54fc8d05e73f97dc267e",
+        "android_client_info": {
+          "package_name": "com.daakesh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpDXfVlGG-OW-6oogrEdVXCyq_LxeY2aQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
