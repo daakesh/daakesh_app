@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../src.export.dart';
 
-class LoginScreen extends StatelessWidget {
-   LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool? checkedValue = false;
@@ -83,7 +88,14 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-  void onLogin(){}
+
+  void onLogin(){
+    context.read<AuthBloc>().add(OnLoginEvent(
+          phoneNumber: emailController.text.trim(),
+          password: passwordController.text,
+        ));
+  }
+
   void forgetPassword(){}
 }
 

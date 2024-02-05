@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -29,7 +30,10 @@ class WelcomeScreen extends StatelessWidget {
                     child: DaakeshLogoWidget(),
                   ),
                   const SizedBox(height: 170.0,),
-                  Text('Welcome',style: easyTheme.textTheme.headlineLarge,),
+                  Text(
+                    'Welcome',
+                    style: easyTheme.textTheme.headlineLarge,
+                  ),
                   const SizedBox(height: 20.86,),
                   Text(
                     'Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',
@@ -51,6 +55,6 @@ class WelcomeScreen extends StatelessWidget {
       ),
     );
   }
-  void onLogin()=> openNewPage(LoginScreen());
+  void onLogin()=> openNewPage(const LoginScreen());
 }
 

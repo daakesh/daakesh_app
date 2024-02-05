@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-MultiBlocProvider listOfBlocProviders({Widget? child}) {
+import '../features/features.export.dart';
+
+MultiBlocProvider listOfBloc({Widget? child}) {
   return MultiBlocProvider(
-    providers: const [
-      //BlocProvider<AuthBloc>(create: (context) => di.sl<AuthBloc>()),
+    providers: [
+      BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
+
+
 
     ],
     child: child!,
