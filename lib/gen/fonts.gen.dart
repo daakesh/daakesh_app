@@ -19,6 +19,9 @@ class FontFamily {
   /// Font family: Apercu-Regular
   static const String apercuRegular = 'Apercu-Regular';
 
+  /// Font family: Segoe-UI-Semi-Bold
+  static const String segoeUISemiBold = 'Segoe-UI-Semi-Bold';
+
   /// Font family: Sf-Pro-Display-Regular
   static const String sfProDisplayRegular = 'Sf-Pro-Display-Regular';
 }

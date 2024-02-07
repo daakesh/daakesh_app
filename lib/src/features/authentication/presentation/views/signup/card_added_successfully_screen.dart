@@ -27,11 +27,9 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
                   Container(
                     width: 150.0,
                     height: 150.0,
-                    decoration: const BoxDecoration(
-                      color: ColorName.amber,
-                      shape: BoxShape.circle,
+                    decoration:BoxDecoration(
+                        image: DecorationImage(image: AssetImage(Assets.png.checkIcon.path))
                     ),
-                    child: const Icon(Icons.check,color: ColorName.white,size: 150.0),
                   ),
                   const SizedBox(height: 19.0,),
                   Text('The payment card has been added successfully',

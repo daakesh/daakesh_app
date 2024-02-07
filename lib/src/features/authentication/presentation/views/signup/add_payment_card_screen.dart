@@ -23,7 +23,7 @@ class AddPaymentCardScreen extends StatelessWidget {
                     child: Align(alignment: AlignmentDirectional.centerStart,child: DaakeshLogoWidget()),
                   ),
                   const Spacer(flex: 1,),
-                  Assets.png.googleIcon.image(height:167.0 ,width:216.0,),
+                  Assets.svg.creditCardLogoIcon.svg(height:167.0 ,width:216.0,),
                   const SizedBox(height: 35.0,),
                   Text('Add Your Payment Card',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 28.0)),
                   const SizedBox(height: 9.0,),

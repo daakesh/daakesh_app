@@ -6,9 +6,12 @@ import '../../../src.export.dart';
 class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
-  final bool isSuffixOn;
+  final bool isSuffixPrefixOn;
+  final bool? enabled;
   final bool isUnderlineOn;
+  final bool readOnly;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final List<TextInputFormatter> inputFormatters;
   final TextInputType keyboardType;
   final TextAlign textAlign;
@@ -16,6 +19,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final FocusNode? focusNode;
   final String hintText;
+  final VoidCallback? onTap;
   final TextCapitalization textCapitalization;
   final TextStyle? hintStyle;
   final TextStyle? style;
@@ -23,12 +27,14 @@ class TextFormFieldWidget extends StatelessWidget {
   final double cursorWidth;
   final TextAlignVertical textAlignVertical;
 
-  const TextFormFieldWidget({
+
+  const   TextFormFieldWidget({
     super.key,
     required this.controller,
     this.obscureText = false,
-    this.isSuffixOn = false,
+    this.isSuffixPrefixOn = false,
     this.suffixIcon,
+    this.prefixIcon,
     this.inputFormatters = const[],
     this.keyboardType = TextInputType.text,
     this.textAlign = TextAlign.start,
@@ -43,6 +49,10 @@ class TextFormFieldWidget extends StatelessWidget {
     this.cursorHeight,
     this.cursorWidth = 2.0,
     this.textAlignVertical = TextAlignVertical.center,
+    this.onTap,
+    this.enabled,
+    this.readOnly = false,
+
 
   });
 
@@ -56,6 +66,9 @@ class TextFormFieldWidget extends StatelessWidget {
       inputFormatters: inputFormatters,
       obscureText: obscureText,
       textAlign: textAlign,
+      onTap: onTap ?? (){},
+      enabled:enabled ?? true,
+      readOnly:readOnly ,
       cursorWidth:cursorWidth,
       cursorHeight:cursorHeight,
       onChanged: onChanged ?? (value){return;},
@@ -72,7 +85,7 @@ class TextFormFieldWidget extends StatelessWidget {
         hintStyle: easyTheme.textTheme.labelMedium!.copyWith(color: ColorName.black.withOpacity(0.3)),
 
       )
-          : !isSuffixOn
+          : !isSuffixPrefixOn
           ? InputDecoration(
         hintText:hintText,
         hintStyle:hintStyle ?? easyTheme.textTheme.labelMedium,
@@ -92,7 +105,8 @@ class TextFormFieldWidget extends StatelessWidget {
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
         ),
-        suffixIcon: suffixIcon ?? const SizedBox(width: 0.0,height: 0.0,),
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
       ),
 
 

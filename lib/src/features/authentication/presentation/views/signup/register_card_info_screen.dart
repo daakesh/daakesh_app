@@ -40,11 +40,11 @@ class RegisterCardInfoScreen extends StatelessWidget {
                   Text('Enter Card Information',style: easyTheme.textTheme.headlineMedium),
                   const SizedBox(height: 19.0,),
                   Row(children: [
-                    Assets.svg.appleIcon.svg(),
-                    const SizedBox(width: 24.0,),
-                    Assets.svg.facebookIcon.svg(),
-                    const SizedBox(width: 24.0,),
-                    Assets.svg.appleIcon.svg(),
+                    Assets.png.visaIcon.image(height: 42.0,width: 42.0),
+                    const SizedBox(width: 10.0,),
+                    Assets.png.mastercardIcon.image(height: 42.0,width: 42.0),
+                    const SizedBox(width: 10.0,),
+                    Assets.png.americanExpressIcon.image(height: 42.0,width: 42.0),
                   ],),
                   const SizedBox(height: 30.0,),
                   Padding(
@@ -73,7 +73,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                   Text('Expiry Date',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18,color: ColorName.darkGray)),
                                   TextFormFieldWidget(
                                     controller: expiryDateController,
-                                    isSuffixOn: true,
+                                    isSuffixPrefixOn: true,
                                     focusNode: expiryDateFocus,
                                     onFieldSubmitted: (value)=> fieldFocusChange(context, expiryDateFocus, cvvFocus),
                                     keyboardType: TextInputType.number,
@@ -83,15 +83,12 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                       CardMonthInputFormatter(),
                                     ],
                                     hintText: 'MM/YY',
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        Icons.error_outline,
-                                        size: 25.0,
-                                        color: ColorName.darkGray,
-
-                                      ),
-                                      onPressed: () {},
-                                    ),
+                                    suffixIcon: InkWell(
+                                        onTap: () {},
+                                        focusColor: ColorName.transparent,
+                                        highlightColor: ColorName.transparent,
+                                        splashColor: ColorName.transparent,
+                                        child:SizedBox(width: 22.0,height: 22.0,child: Center(child: Assets.svg.furtherInfoIcon.svg(height: 22.0,width: 22.0)))),
                                   ),
                                 ],
                               ),
@@ -115,17 +112,13 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                       FilteringTextInputFormatter.digitsOnly,
                                       LengthLimitingTextInputFormatter(3),
                                     ],
-                                    isSuffixOn: true,
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        Icons.error_outline,
-                                        size: 25.0,
-                                        color: ColorName.darkGray,
-
-                                      ),
-
-                                      onPressed: () {},
-                                    ),
+                                    isSuffixPrefixOn: true,
+                                    suffixIcon: InkWell(
+                                        onTap: () {},
+                                        focusColor: ColorName.transparent,
+                                        highlightColor: ColorName.transparent,
+                                        splashColor: ColorName.transparent,
+                                        child:SizedBox(width: 22.0,height: 22.0,child: Center(child: Assets.svg.furtherInfoIcon.svg(height: 22.0,width: 22.0)))),
                                   ),
                                 ],
                               ),
@@ -137,6 +130,9 @@ class RegisterCardInfoScreen extends StatelessWidget {
                           controller: nicknameController,
                           focusNode: nicknameFocus,
                           textCapitalization: TextCapitalization.characters,
+                          inputFormatters: [
+                            RegExpValidator.insertEnglish
+                          ],
                         ),
                       ],),
                   ),

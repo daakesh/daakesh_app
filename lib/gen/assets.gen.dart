@@ -14,12 +14,20 @@ import 'package:flutter/services.dart';
 class $AssetsPngGen {
   const $AssetsPngGen();
 
+  /// File path: assets/png/american_express_icon.png
+  AssetGenImage get americanExpressIcon =>
+      const AssetGenImage('assets/png/american_express_icon.png');
+
   /// File path: assets/png/auth_screens_background.png
   AssetGenImage get authScreensBackground =>
       const AssetGenImage('assets/png/auth_screens_background.png');
 
   /// File path: assets/png/baby_icon.png
   AssetGenImage get babyIcon => const AssetGenImage('assets/png/baby_icon.png');
+
+  /// File path: assets/png/check_icon.png
+  AssetGenImage get checkIcon =>
+      const AssetGenImage('assets/png/check_icon.png');
 
   /// File path: assets/png/glasses.png
   AssetGenImage get glasses => const AssetGenImage('assets/png/glasses.png');
@@ -31,6 +39,10 @@ class $AssetsPngGen {
   /// File path: assets/png/handmade_icon.png
   AssetGenImage get handmadeIcon =>
       const AssetGenImage('assets/png/handmade_icon.png');
+
+  /// File path: assets/png/mastercard_icon.png
+  AssetGenImage get mastercardIcon =>
+      const AssetGenImage('assets/png/mastercard_icon.png');
 
   /// File path: assets/png/my_order_icon.png
   AssetGenImage get myOrderIcon =>
@@ -47,17 +59,24 @@ class $AssetsPngGen {
   /// File path: assets/png/swap_icon.png
   AssetGenImage get swapIcon => const AssetGenImage('assets/png/swap_icon.png');
 
+  /// File path: assets/png/visa_icon.png
+  AssetGenImage get visaIcon => const AssetGenImage('assets/png/visa_icon.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+        americanExpressIcon,
         authScreensBackground,
         babyIcon,
+        checkIcon,
         glasses,
         googleIcon,
         handmadeIcon,
+        mastercardIcon,
         myOrderIcon,
         productIcon,
         splashScreenBackground,
-        swapIcon
+        swapIcon,
+        visaIcon
       ];
 }
 
@@ -67,6 +86,10 @@ class $AssetsSvgGen {
   /// File path: assets/svg/apple_icon.svg
   SvgGenImage get appleIcon => const SvgGenImage('assets/svg/apple_icon.svg');
 
+  /// File path: assets/svg/arrow_drop_down_icon.svg
+  SvgGenImage get arrowDropDownIcon =>
+      const SvgGenImage('assets/svg/arrow_drop_down_icon.svg');
+
   /// File path: assets/svg/cart_add_icon.svg
   SvgGenImage get cartAddIcon =>
       const SvgGenImage('assets/svg/cart_add_icon.svg');
@@ -74,6 +97,10 @@ class $AssetsSvgGen {
   /// File path: assets/svg/credit_card_icon.svg
   SvgGenImage get creditCardIcon =>
       const SvgGenImage('assets/svg/credit_card_icon.svg');
+
+  /// File path: assets/svg/credit_card_logo_icon.svg
+  SvgGenImage get creditCardLogoIcon =>
+      const SvgGenImage('assets/svg/credit_card_logo_icon.svg');
 
   /// File path: assets/svg/daakesh_logo.svg
   SvgGenImage get daakeshLogo =>
@@ -83,12 +110,20 @@ class $AssetsSvgGen {
   SvgGenImage get facebookIcon =>
       const SvgGenImage('assets/svg/facebook_icon.svg');
 
+  /// File path: assets/svg/further_info_icon.svg
+  SvgGenImage get furtherInfoIcon =>
+      const SvgGenImage('assets/svg/further_info_icon.svg');
+
   /// File path: assets/svg/home_icon.svg
   SvgGenImage get homeIcon => const SvgGenImage('assets/svg/home_icon.svg');
 
   /// File path: assets/svg/light_daakesh_logo.svg
   SvgGenImage get lightDaakeshLogo =>
       const SvgGenImage('assets/svg/light_daakesh_logo.svg');
+
+  /// File path: assets/svg/location_pin_icon.svg
+  SvgGenImage get locationPinIcon =>
+      const SvgGenImage('assets/svg/location_pin_icon.svg');
 
   /// File path: assets/svg/my_product_icon.svg
   SvgGenImage get myProductIcon =>
@@ -104,12 +139,16 @@ class $AssetsSvgGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         appleIcon,
+        arrowDropDownIcon,
         cartAddIcon,
         creditCardIcon,
+        creditCardLogoIcon,
         daakeshLogo,
         facebookIcon,
+        furtherInfoIcon,
         homeIcon,
         lightDaakeshLogo,
+        locationPinIcon,
         myProductIcon,
         profileIcon,
         searchIcon

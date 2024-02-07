@@ -14,6 +14,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool? checkedValue = false;
+  final FocusNode emailFocusNode= FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
                         TextFormFieldWidget(
                           controller: emailController,
+                          focusNode: emailFocusNode,
+                          onFieldSubmitted: (value)=>fieldFocusChange(context, emailFocusNode, passwordFocusNode),
                           keyboardType: TextInputType.emailAddress,
                           inputFormatters: [
                             RegExpValidator.clearWhitespace,
@@ -53,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text('Password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
                         TextFormFieldWidget(
                           controller: passwordController,
+                          focusNode: passwordFocusNode,
                           obscureText: true,
                         ),
                         Row(

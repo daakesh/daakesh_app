@@ -61,23 +61,16 @@ double getScreenHeight(BuildContext context, {bool realHeight = false}) {
 }
 
 class ProgressCircleDialog {
-  static bool _isShow = false;
-
   static void show() {
     showDialog(
         context: navigatorKey.currentState!.context,
-        builder: (_) => const Center(child: CircularProgressIndicator()),
+        builder: (_) => const Center(child: CircularProgressIndicator(color: ColorName.blueGray,)),
         barrierDismissible: false);
-    _isShow = true;
   }
-
   static dismiss() {
-    if (_isShow) {
       Navigator.pop(navigatorKey.currentState!.context);
-      _isShow = false;
     }
   }
-}
 
 class MyBlocObserver extends BlocObserver {
   @override
