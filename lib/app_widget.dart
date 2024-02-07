@@ -23,7 +23,7 @@ class AppWidget extends StatelessWidget {
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
         navigatorKey: navigatorKey,
-        home: VerificationScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
