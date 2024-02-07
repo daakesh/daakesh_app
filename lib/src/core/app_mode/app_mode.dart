@@ -56,6 +56,12 @@ class AppTheme {
         fontSize: 18.0,
         color: ColorName.black,
       ),
+      ///labelMedium
+      labelLarge: TextStyle(
+        fontFamily: FontFamily.segoeUISemiBold,
+        fontSize: 22.0,
+        color: ColorName.white,
+      ),
       ///bodyMedium
       bodyMedium:TextStyle(
         fontFamily: FontFamily.apercuRegular,

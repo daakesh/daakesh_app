@@ -95,10 +95,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onLogin(){
-    context.read<AuthBloc>().add(OnLoginEvent(
-          phoneNumber: emailController.text.trim(),
-          password: passwordController.text,
-        ));
+
+    if(emailController.text.isEmpty || passwordController.text.isEmpty){
+      ShowToastSnackBar.showSnackBars(message: 'Fill data firstly');
+      return;
+    }
+
+    AuthBloc.get.add(OnLoginEvent(
+      phoneNumber: emailController.text.trim(),
+      password: passwordController.text,
+    ));
+
   }
 
   void forgetPassword(){}

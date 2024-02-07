@@ -48,7 +48,10 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
   void checkUserLogin() {
-    openNewPage(const WelcomeScreen(),popPreviousPages: true);
-
+    if (ValueConstants.token.isEmpty) {
+      openNewPage(const WelcomeScreen());
+      return;
+    }
+    openNewPage(const MainScreen(), popPreviousPages: true);
   }
 }

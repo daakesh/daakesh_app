@@ -54,7 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(width: 14.0,),
-                  Assets.svg.cartAddIcon.svg(width: 24.0,height: 24.0),
+                  InkWell(
+                    onTap: ()=>user.logOut(),
+                      child: Assets.svg.cartAddIcon
+                          .svg(width: 24.0, height: 24.0)),
                 ],
               ),
               titlePadding: const EdgeInsetsDirectional.only(end: 19.0,start: 19.0,bottom: 12.0,),

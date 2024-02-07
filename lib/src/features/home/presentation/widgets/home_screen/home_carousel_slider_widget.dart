@@ -64,7 +64,7 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                                     color: ColorName.red,
                                     borderRadius: BorderRadius.all(Radius.circular(4.0))
                                 ),
-                                child: Center(child: Text('23% OFF',style: easyTheme.textTheme.headlineMedium!.copyWith(color: ColorName.white),),),
+                                child: Center(child: Text('23% OFF',style: easyTheme.textTheme.labelLarge,),),
                               ),
 
                             ],

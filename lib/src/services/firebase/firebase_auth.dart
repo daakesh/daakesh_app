@@ -40,8 +40,8 @@ class FirebaseAuthentication{
       PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
       await firebaseAuth.signInWithCredential(credential);
       ProgressCircleDialog.dismiss();
-      ///
       AuthBloc.get.add(ActivateUserEvent());
+      user.saveUserToken;
       openNewPage(const VerificationScreen());
     } catch (error) {
       ProgressCircleDialog.dismiss();

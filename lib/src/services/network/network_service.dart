@@ -34,9 +34,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
     "lang":"en"
   };
 
-  final bool enableLog;
 
-  NetworkServiceImpl({this.enableLog = false});
 
 
   @override
@@ -55,7 +53,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
       final response = await http.get(uri, headers: _headers);
       final data = jsonDecode(response.body);
       final str = utf8.decode(response.bodyBytes);
-      if (enableLog) _networkLog(response, 'null');
+      _networkLog(response, 'null');
       return Right(
         ValidResponse(
           statusCode: response.statusCode,
@@ -89,7 +87,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
       final response = await http.post(uri, headers: _headers,body: body);
       final data = jsonDecode(response.body);
       final str = utf8.decode(response.bodyBytes);
-      if (enableLog) _networkLog(response, body.toString());
+      _networkLog(response, body.toString());
       return Right(
         ValidResponse(
           statusCode: response.statusCode,
