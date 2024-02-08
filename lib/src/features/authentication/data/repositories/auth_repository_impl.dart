@@ -19,6 +19,11 @@ class AuthRepositoryImpl implements AuthRepository {
     return await getIt.get<AuthDatasource>().activateUser(id);
 
   }
+  @override
+  Future<Either<Failure, ValidResponse>> getUserData() async{
+    return await getIt.get<AuthDatasource>().getUserData();
+
+  }
 
 
 

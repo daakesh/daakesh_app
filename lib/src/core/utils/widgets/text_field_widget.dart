@@ -83,6 +83,8 @@ class TextFormFieldWidget extends StatelessWidget {
         isCollapsed: true,
         hintText:hintText,
         hintStyle: easyTheme.textTheme.labelMedium!.copyWith(color: ColorName.black.withOpacity(0.3)),
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
 
       )
           : !isSuffixPrefixOn
@@ -95,6 +97,8 @@ class TextFormFieldWidget extends StatelessWidget {
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
         ),
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
       )
           : InputDecoration(
         hintText:hintText,

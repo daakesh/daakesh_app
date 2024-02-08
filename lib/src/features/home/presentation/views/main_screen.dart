@@ -21,6 +21,7 @@ class MainScreen extends StatelessWidget {
       stateManagement: true,
       hideNavigationBarWhenKeyboardShows: false,
       popAllScreensOnTapOfSelectedTab: true,
+
       popActionScreens: PopActionScreensType.all,
       navBarStyle: NavBarStyle.style15,
 
@@ -45,16 +46,14 @@ class MainScreen extends StatelessWidget {
     return [
 
       PersistentBottomNavBarItem(
-        icon: bottomNavBarItem(icon:SizedBox(height:24.0,child: Assets.svg.homeIcon.svg(width: 28.0,height: 26.0,)), title: 'Home'),
-        activeColorPrimary: ColorName.amber,
-        inactiveColorPrimary:ColorName.lightGray,
+        icon: bottomNavBarItem(icon:SizedBox(height:24.0,child: Assets.svg.enableHomeIcon.svg(width: 28.0,height: 26.0,)), title: 'Home'),
+        inactiveIcon: bottomNavBarItem(icon:SizedBox(height:24.0,child: Assets.svg.disableHomeIcon.svg(width: 28.0,height: 26.0,)), title: 'Home'),
 
       ),
 
       PersistentBottomNavBarItem(
-        icon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.svg.myProductIcon.svg(width: 24.0,height: 24.0,)), title: 'My Product'),
-        activeColorPrimary: ColorName.amber,
-        inactiveColorPrimary:ColorName.red,
+        icon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.svg.enableProductIcon.svg(width: 24.0,height: 24.0,)), title: 'My Product'),
+        inactiveIcon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.svg.disableProductIcon.svg(width: 24.0,height: 24.0,)), title: 'My Product'),
       ),
 
       PersistentBottomNavBarItem(
@@ -64,13 +63,13 @@ class MainScreen extends StatelessWidget {
       ),
 
       PersistentBottomNavBarItem(
-        icon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.png.myOrderIcon.image(width: 26.0,height: 26.0,)), title: 'My Order'),
-        inactiveColorPrimary:ColorName.lightGray,
+        icon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.png.enableMyOrderIcon.image(width: 26.0,height: 26.0,)), title: 'My Order'),
+        inactiveIcon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.png.disableMyOrderIcon.image(width: 26.0,height: 26.0,)), title: 'My Order'),
       ),
 
       PersistentBottomNavBarItem(
-        icon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.svg.profileIcon.svg(width: 26.0,height: 26.0)), title: 'Profile'),
-        inactiveColorPrimary:ColorName.lightGray,
+        icon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.svg.enableProfileIcon.svg(width: 26.0,height: 26.0)), title: 'Profile'),
+        inactiveIcon: bottomNavBarItem(icon: SizedBox(height: 24.0,child: Assets.svg.disableProfileIcon.svg(width: 26.0,height: 26.0)), title: 'Profile'),
       ),
 
     ];

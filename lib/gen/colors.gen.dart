@@ -37,6 +37,9 @@ class ColorName {
   /// Color: #FEBD69
   static const Color lightOrange = Color(0xFFFEBD69);
 
+  /// Color: #9F9F9F
+  static const Color mediumGray = Color(0xFF9F9F9F);
+
   /// Color: #BFBFBF
   static const Color mediumSilver = Color(0xFFBFBFBF);
 

@@ -156,7 +156,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         )),
                   ],),
                   const SizedBox(height: 39.0),
-                  TextButtonWidget(text: 'Send code again', onPressed: (){}),
+                  TextButtonWidget(text: 'Send code again', onPressed: resendSMSCode),
                   const SizedBox(height: 100,),
                   DefaultButtonWidget(text: 'VALIDATE', onPressed: onValidate),
                   const SizedBox(height: 44.0),
@@ -207,4 +207,9 @@ class _OTPScreenState extends State<OTPScreen> {
             sixthDigitController.text;
     AuthBloc.get.add(ValidateSMSCodeEvent(smsCode:smsCode));
   }
+
+  void resendSMSCode(){
+    AuthBloc.get.add(ResendSMSCodeEvent());
+  }
+
 }

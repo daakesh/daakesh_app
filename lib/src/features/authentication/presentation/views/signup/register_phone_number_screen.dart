@@ -78,9 +78,7 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
       ShowToastSnackBar.showSnackBars(message: 'Fill location data firstly');
       return;
     }
-    AuthBloc.get.add(EnterPhoneEvent(
-          phoneNumber: phoneNumberController.text.trim()
-        ));
+    AuthBloc.get.add(EnterPhoneEvent(phoneNumber: phoneNumberController.text.trim()));
 
   }
 

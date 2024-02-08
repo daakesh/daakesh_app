@@ -31,7 +31,7 @@ class AddPaymentCardScreen extends StatelessWidget {
                   const Spacer(flex: 1,),
                   DefaultButtonWidget(text: 'ADD PAYMENT CARD', onPressed: addPaymentCard),
                   const SizedBox(height: 9.0,),
-                  OutlineButtonWidget(text: 'LATER', onPressed: (){}),
+                  OutlineButtonWidget(text: 'LATER', onPressed: onLater),
                   const SizedBox(height: 72.0,),
 
                 ],
@@ -44,5 +44,9 @@ class AddPaymentCardScreen extends StatelessWidget {
   }
   void addPaymentCard(){
     openNewPage(RegisterCardInfoScreen());
+  }
+  void onLater(){
+    openNewPage(const MainScreen(),popPreviousPages: true);
+
   }
 }

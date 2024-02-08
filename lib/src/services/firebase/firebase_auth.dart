@@ -15,6 +15,8 @@ class FirebaseAuthentication{
         verificationFailed: (FirebaseAuthException error) {
           ProgressCircleDialog.dismiss();
           ShowToastSnackBar.showSnackBars(message: error.toString());
+          debugPrint("ERROR $error");
+
         },
         codeSent: (String verificationId, int? resendToken) {
           AuthBloc.get.add(SetVerificationIdEvent(verificationId: verificationId));
@@ -23,9 +25,7 @@ class FirebaseAuthentication{
           ShowToastSnackBar.showSnackBars(message: 'Code sent');
           openNewPage(const OTPScreen());
         },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          ProgressCircleDialog.dismiss();
-        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
       );
     }catch(error){
       ProgressCircleDialog.dismiss();

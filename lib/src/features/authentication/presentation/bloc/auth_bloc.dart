@@ -10,7 +10,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   static AuthBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
 
   Future<FutureOr<void>> _handleEvent(AuthEvent event, Emitter<AuthState> emit) async {
-
+    ///Login Event
     if (event is OnLoginEvent) {
       emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
       ProgressCircleDialog.show();
@@ -27,11 +27,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           return;
         }
         UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
+        user.setUserDataAndCheckIsActive(userModel);
+        emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
+      });
+    }
+    ///Get User Data Event
+    if (event is GetUserDataEvent) {
+      emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
+      ProgressCircleDialog.show();
+      final result = await getIt.get<AuthUseCases>().getUserData();
+      result.fold((l) {
+        emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
+        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+        ProgressCircleDialog.dismiss();
+      }, (r) async{
+        if(!r.status!){
+          ProgressCircleDialog.dismiss();
+          ShowToastSnackBar.showSnackBars(message: r.message.toString());
+          return;
+        }
+        UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
         user.setUserData(userModel);
         emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
       });
     }
-
+    /// SignUp Events
     if(event is EnterPersonalInfoEvent){
       emit(state.copyWith(
         name: event.name,
@@ -79,7 +99,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           return;
         }
         UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
-        user.setUserData(userModel);
+        user.setUserDataAndCheckIsActive(userModel);
         emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
       });
     }
@@ -88,11 +108,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         state.copyWith(verificationId: event.verificationId),
       );
     }
-
     if(event is ValidateSMSCodeEvent){
       FirebaseAuthentication.verificationCompleted(state.verificationId,event.smsCode);
     }
-    ///
+    ///Activate user Event
     if(event is ActivateUserEvent){
       final result = await getIt.get<AuthUseCases>().activateUser(user.userData.id.toString());
       result.fold((l) {
@@ -102,13 +121,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ShowToastSnackBar.showSnackBars(message: r.message.toString());
           return;
         }
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
         emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
       });
     }
-    ///
+    ///Resend SMS Code Event
     if(event is ResendSMSCodeEvent){
-      FirebaseAuthentication.resendSMSCode('+${state.phoneCode}${state.phone}');
+      FirebaseAuthentication.resendSMSCode(user.userData.phoneNumber.toString());
     }
 
 

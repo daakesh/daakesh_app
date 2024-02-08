@@ -29,6 +29,18 @@ class $AssetsPngGen {
   AssetGenImage get checkIcon =>
       const AssetGenImage('assets/png/check_icon.png');
 
+  /// File path: assets/png/disable_my_order_icon.png
+  AssetGenImage get disableMyOrderIcon =>
+      const AssetGenImage('assets/png/disable_my_order_icon.png');
+
+  /// File path: assets/png/enable_my_order_icon.png
+  AssetGenImage get enableMyOrderIcon =>
+      const AssetGenImage('assets/png/enable_my_order_icon.png');
+
+  /// File path: assets/png/filter_icon.png
+  AssetGenImage get filterIcon =>
+      const AssetGenImage('assets/png/filter_icon.png');
+
   /// File path: assets/png/glasses.png
   AssetGenImage get glasses => const AssetGenImage('assets/png/glasses.png');
 
@@ -43,10 +55,6 @@ class $AssetsPngGen {
   /// File path: assets/png/mastercard_icon.png
   AssetGenImage get mastercardIcon =>
       const AssetGenImage('assets/png/mastercard_icon.png');
-
-  /// File path: assets/png/my_order_icon.png
-  AssetGenImage get myOrderIcon =>
-      const AssetGenImage('assets/png/my_order_icon.png');
 
   /// File path: assets/png/product_icon.png
   AssetGenImage get productIcon =>
@@ -68,11 +76,13 @@ class $AssetsPngGen {
         authScreensBackground,
         babyIcon,
         checkIcon,
+        disableMyOrderIcon,
+        enableMyOrderIcon,
+        filterIcon,
         glasses,
         googleIcon,
         handmadeIcon,
         mastercardIcon,
-        myOrderIcon,
         productIcon,
         splashScreenBackground,
         swapIcon,
@@ -106,6 +116,30 @@ class $AssetsSvgGen {
   SvgGenImage get daakeshLogo =>
       const SvgGenImage('assets/svg/daakesh_logo.svg');
 
+  /// File path: assets/svg/disable_home_icon.svg
+  SvgGenImage get disableHomeIcon =>
+      const SvgGenImage('assets/svg/disable_home_icon.svg');
+
+  /// File path: assets/svg/disable_product_icon.svg
+  SvgGenImage get disableProductIcon =>
+      const SvgGenImage('assets/svg/disable_product_icon.svg');
+
+  /// File path: assets/svg/disable_profile_icon.svg
+  SvgGenImage get disableProfileIcon =>
+      const SvgGenImage('assets/svg/disable_profile_icon.svg');
+
+  /// File path: assets/svg/enable_home_icon.svg
+  SvgGenImage get enableHomeIcon =>
+      const SvgGenImage('assets/svg/enable_home_icon.svg');
+
+  /// File path: assets/svg/enable_product_icon.svg
+  SvgGenImage get enableProductIcon =>
+      const SvgGenImage('assets/svg/enable_product_icon.svg');
+
+  /// File path: assets/svg/enable_profile_icon.svg
+  SvgGenImage get enableProfileIcon =>
+      const SvgGenImage('assets/svg/enable_profile_icon.svg');
+
   /// File path: assets/svg/facebook_icon.svg
   SvgGenImage get facebookIcon =>
       const SvgGenImage('assets/svg/facebook_icon.svg');
@@ -114,9 +148,6 @@ class $AssetsSvgGen {
   SvgGenImage get furtherInfoIcon =>
       const SvgGenImage('assets/svg/further_info_icon.svg');
 
-  /// File path: assets/svg/home_icon.svg
-  SvgGenImage get homeIcon => const SvgGenImage('assets/svg/home_icon.svg');
-
   /// File path: assets/svg/light_daakesh_logo.svg
   SvgGenImage get lightDaakeshLogo =>
       const SvgGenImage('assets/svg/light_daakesh_logo.svg');
@@ -124,14 +155,6 @@ class $AssetsSvgGen {
   /// File path: assets/svg/location_pin_icon.svg
   SvgGenImage get locationPinIcon =>
       const SvgGenImage('assets/svg/location_pin_icon.svg');
-
-  /// File path: assets/svg/my_product_icon.svg
-  SvgGenImage get myProductIcon =>
-      const SvgGenImage('assets/svg/my_product_icon.svg');
-
-  /// File path: assets/svg/profile_icon.svg
-  SvgGenImage get profileIcon =>
-      const SvgGenImage('assets/svg/profile_icon.svg');
 
   /// File path: assets/svg/search_icon.svg
   SvgGenImage get searchIcon => const SvgGenImage('assets/svg/search_icon.svg');
@@ -144,13 +167,16 @@ class $AssetsSvgGen {
         creditCardIcon,
         creditCardLogoIcon,
         daakeshLogo,
+        disableHomeIcon,
+        disableProductIcon,
+        disableProfileIcon,
+        enableHomeIcon,
+        enableProductIcon,
+        enableProfileIcon,
         facebookIcon,
         furtherInfoIcon,
-        homeIcon,
         lightDaakeshLogo,
         locationPinIcon,
-        myProductIcon,
-        profileIcon,
         searchIcon
       ];
 }

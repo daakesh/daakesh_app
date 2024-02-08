@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -23,6 +24,7 @@ class SearchBarWidget extends StatelessWidget {
       child: const Padding(
         padding: EdgeInsetsDirectional.symmetric(horizontal: 19.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 53.0,
@@ -32,6 +34,7 @@ class SearchBarWidget extends StatelessWidget {
               isLight: true,
               height: 44.0,
             )),
+
           ],
         ),
       ),
