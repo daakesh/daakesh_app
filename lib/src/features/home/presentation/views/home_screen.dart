@@ -11,12 +11,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final searchController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
+        controller: scrollController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return [
           SliverAppBar(
@@ -84,9 +86,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ];
       },
         body:BlocBuilder<HomeBloc,HomeState>(builder: (_,state){
-          return !state.isSearchOn
-              ? const HomeDataWidget()
-              : const SearchWidget();
+         if(state.isSearchOn){
+           return const SearchScreen();
+         }else if(state.isProductDetailsOn){
+           return  MoreInfoProductScreen();
+         }
+         else{
+           return  HomeDataWidget(scrollController: scrollController);
+         }
+
+
+
         }),
       ),
     );
@@ -96,8 +106,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
 }
 
+
+
+
+
+
 class HomeDataWidget extends StatelessWidget {
-  const HomeDataWidget({super.key});
+  final ScrollController scrollController;
+
+  const HomeDataWidget({super.key, required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +192,7 @@ class HomeDataWidget extends StatelessWidget {
           padding:const EdgeInsets.symmetric(horizontal: 20.0),
           sliver: SliverGrid(
               delegate: SliverChildBuilderDelegate((_, index) {
-                return const TodayDealProduct();
+                return  TodayDealProduct(scrollController:scrollController,);
               },
                 childCount: 11,
               ),
@@ -204,7 +221,7 @@ class HomeDataWidget extends StatelessWidget {
           padding:const EdgeInsets.symmetric(horizontal: 20.0),
           sliver: SliverGrid(
               delegate: SliverChildBuilderDelegate((_, index) {
-                return const TodayDealProduct(isDaakeshTodayDeal: true,);
+                return  TodayDealProduct(isDaakeshTodayDeal: true,scrollController:scrollController ,);
               },
                 childCount: 6,
               ),

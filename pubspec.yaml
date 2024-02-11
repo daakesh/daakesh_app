@@ -108,6 +108,11 @@ flutter:
        fonts:
          - asset: assets/fonts/sf_pro_display/sf_pro_display_regular.otf
 
+
+     - family: Sf-Pro-Display-Semi_Bold
+       fonts:
+         - asset: assets/fonts/sf_pro_display/sf_pro_display_semi_bold.otf
+
      - family: Segoe-UI-Semi-Bold
        fonts:
          - asset: assets/fonts/segoe_ui/segoe_ui_semi_bold.ttf

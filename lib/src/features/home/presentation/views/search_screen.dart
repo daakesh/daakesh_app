@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../../../src.export.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import '../../../../src.export.dart';
 
-class SearchWidget extends StatefulWidget {
-  const SearchWidget({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
   @override
-  State<SearchWidget> createState() => _SearchWidgetState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchWidgetState extends State<SearchWidget> {
+class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return  Padding(
@@ -50,7 +51,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ],
                 ),
               );
-            }, childCount: 50),
+            }, childCount: 5),
           ),
           const SliverPadding(padding: EdgeInsetsDirectional.only(top: 55.0)),
           SliverToBoxAdapter(
@@ -67,6 +68,23 @@ class _SearchWidgetState extends State<SearchWidget> {
     );
   }
   void openFilterScreen(){
-    openNewPage(const FilterScreen());
+    FocusScope.of(context).unfocus();
+    PersistentNavBarNavigator.pushNewScreen(
+      context,
+      screen: const FilterScreen(),
+      withNavBar: true, // OPTIONAL VALUE. True by default.
+    );
+    //openNewPage(const FilterScreen());
   }
+
+
+  void open(widget){
+    PersistentNavBarNavigator.pushNewScreen(
+      navigatorKey.currentState!.context,
+      screen: widget,
+      withNavBar: true, // OPTIONAL VALUE. True by default.
+    );
+  }
+
+
 }

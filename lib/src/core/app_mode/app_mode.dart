@@ -49,7 +49,12 @@ class AppTheme {
 
     ///TextStyle
     textTheme: const TextTheme(
-
+      ///sfProDisplaySemiBold
+      labelSmall: TextStyle(
+        fontFamily: FontFamily.sfProDisplaySemiBold,
+        fontSize: 18.0,
+        color: ColorName.black,
+      ),
       ///labelMedium
       labelMedium: TextStyle(
         fontFamily: FontFamily.sfProDisplayRegular,
@@ -74,7 +79,7 @@ class AppTheme {
         fontSize: 20.0,
         color: ColorName.blueGray,
       ),
-      ///headlineMedium
+      ///headlineSmall
       headlineSmall: TextStyle(
         fontFamily: FontFamily.apercuBold,
         fontSize: 18.0,
@@ -95,6 +100,7 @@ class AppTheme {
 
 
     ),
+    //sliderTheme: SliderThemeData(),
 
   );
 

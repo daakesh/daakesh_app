@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../src.export.dart';
 
 Future<void> openNewPage(Widget widget, {bool popPreviousPages = false}) {
@@ -21,6 +22,25 @@ Future<void> openNewPage(Widget widget, {bool popPreviousPages = false}) {
           ),
         ),
             (Route<dynamic> route) => false);
+  });
+}
+
+Future<void> openNewPageWithNav(Widget widget, {bool withNavBar = false,}) {
+  return Future<dynamic>.delayed(Duration.zero, () {
+    if (!withNavBar) {
+      return PersistentNavBarNavigator.pushNewScreen(
+        navigatorKey.currentState!.context,
+        screen: widget,
+        withNavBar: true, // OPTIONAL VALUE. True by default.
+      );
+
+
+    }
+    return PersistentNavBarNavigator.pushNewScreen(
+      navigatorKey.currentState!.context,
+      screen: widget,
+      withNavBar: true, // OPTIONAL VALUE. True by default.
+    );
   });
 }
 

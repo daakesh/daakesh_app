@@ -24,4 +24,7 @@ class FontFamily {
 
   /// Font family: Sf-Pro-Display-Regular
   static const String sfProDisplayRegular = 'Sf-Pro-Display-Regular';
+
+  /// Font family: Sf-Pro-Display-Semi_Bold
+  static const String sfProDisplaySemiBold = 'Sf-Pro-Display-Semi_Bold';
 }

@@ -15,4 +15,8 @@
     <color name="medium_silver">#BFBFBF</color>
     <color name="silver_chalice">#B4B4B4</color>
     <color name="medium_gray">#9F9F9F</color>
+    <color name="sliver">#EBEBEB</color>
+    <color name="dark_slate_blue">#222F3EBF</color>
+    <color name="silver_sand">#F7F7F7</color>
+    <color name="grayish_blue">#787B86</color>
 </manifest>

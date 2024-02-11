@@ -25,8 +25,14 @@ class ColorName {
   /// Color: #8B8B8B
   static const Color darkGray = Color(0xFF8B8B8B);
 
+  /// Color: #222F3EBF
+  static const Color darkSlateBlue = Color(0x222F3EBF);
+
   /// Color: #707070
   static const Color gray = Color(0xFF707070);
+
+  /// Color: #787B86
+  static const Color grayishBlue = Color(0xFF787B86);
 
   /// Color: #F7F7F9
   static const Color lavenderGray = Color(0xFFF7F7F9);
@@ -52,8 +58,14 @@ class ColorName {
   /// Color: #C5C5C5
   static const Color silverGray = Color(0xFFC5C5C5);
 
+  /// Color: #F7F7F7
+  static const Color silverSand = Color(0xFFF7F7F7);
+
   /// Color: #5092E8
   static const Color skyBlue = Color(0xFF5092E8);
+
+  /// Color: #EBEBEB
+  static const Color sliver = Color(0xFFEBEBEB);
 
   /// Color: #00000000
   static const Color transparent = Color(0x00000000);

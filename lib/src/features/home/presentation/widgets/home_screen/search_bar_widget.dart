@@ -21,19 +21,32 @@ class SearchBarWidget extends StatelessWidget {
         ),
 
       ),
-      child: const Padding(
-        padding: EdgeInsetsDirectional.symmetric(horizontal: 19.0),
+      child: Padding(
+        padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 53.0,
             ),
-            Center(
-                child: DaakeshLogoWidget(
-              isLight: true,
-              height: 44.0,
-            )),
+            const Center(
+              child: DaakeshLogoWidget(
+                isLight: true,
+                height: 44.0,
+              ),
+            ),
+            BlocBuilder<HomeBloc, HomeState>(builder: (_, state) {
+              return state.isProductDetailsOn
+                  ? IconButton(
+                      onPressed: () => HomeBloc.get.add(
+                          ShowMoreProductDetails(
+                              isProductDetailsOn: false)),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: ColorName.white,
+                      ))
+                  : const SizedBox();
+            }),
 
           ],
         ),

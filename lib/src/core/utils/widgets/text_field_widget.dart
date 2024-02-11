@@ -10,6 +10,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final bool? enabled;
   final bool isUnderlineOn;
   final bool readOnly;
+  final bool expands;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final List<TextInputFormatter> inputFormatters;
@@ -25,6 +26,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextStyle? style;
   final double? cursorHeight;
   final double cursorWidth;
+  final int maxLines;
   final TextAlignVertical textAlignVertical;
 
 
@@ -52,72 +54,79 @@ class TextFormFieldWidget extends StatelessWidget {
     this.onTap,
     this.enabled,
     this.readOnly = false,
+    this.expands = false,
+    this.maxLines = 1,
 
 
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      textCapitalization:textCapitalization,
-      textAlignVertical: textAlignVertical,
-      style: style ?? easyTheme.textTheme.labelMedium,
-      inputFormatters: inputFormatters,
-      obscureText: obscureText,
-      textAlign: textAlign,
-      onTap: onTap ?? (){},
-      enabled:enabled ?? true,
-      readOnly:readOnly ,
-      cursorWidth:cursorWidth,
-      cursorHeight:cursorHeight,
-      onChanged: onChanged ?? (value){return;},
-      onFieldSubmitted:onFieldSubmitted ??(value){return;},
-      focusNode:focusNode,
-      cursorColor: ColorName.blueGray,
-      keyboardType: keyboardType,
-      decoration: isUnderlineOn
-          ? InputDecoration(
-        enabledBorder: InputBorder.none,
-        focusedBorder:InputBorder.none,
-        isCollapsed: true,
-        hintText:hintText,
-        hintStyle: easyTheme.textTheme.labelMedium!.copyWith(color: ColorName.black.withOpacity(0.3)),
-        suffixIcon: suffixIcon,
-        prefixIcon: prefixIcon,
+    return Material(
+      color: ColorName.transparent,
+      child: TextFormField(
+        controller: controller,
+        textCapitalization:textCapitalization,
+        textAlignVertical: textAlignVertical,
+        style: style ?? easyTheme.textTheme.labelMedium,
+        inputFormatters: inputFormatters,
+        obscureText: obscureText,
+        textAlign: textAlign,
+        expands:expands,
+        maxLines:maxLines,
+        onTap: onTap ?? (){},
+        enabled:enabled ?? true,
+        readOnly:readOnly ,
+        cursorWidth:cursorWidth,
+        cursorHeight:cursorHeight,
+        onChanged: onChanged ?? (value){return;},
+        onFieldSubmitted:onFieldSubmitted ??(value){return;},
+        focusNode:focusNode,
+        cursorColor: ColorName.blueGray,
+        keyboardType: keyboardType,
+        decoration: isUnderlineOn
+            ? InputDecoration(
+          enabledBorder: InputBorder.none,
+          focusedBorder:InputBorder.none,
+          isCollapsed: true,
+          hintText:hintText,
+          hintStyle: easyTheme.textTheme.labelMedium!.copyWith(color: ColorName.black.withOpacity(0.3)),
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
 
-      )
-          : !isSuffixPrefixOn
-          ? InputDecoration(
-        hintText:hintText,
-        hintStyle:hintStyle ?? easyTheme.textTheme.labelMedium,
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
+        )
+            : !isSuffixPrefixOn
+            ? InputDecoration(
+          hintText:hintText,
+          hintStyle:hintStyle ?? easyTheme.textTheme.labelMedium,
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
+          ),
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
+        )
+            : InputDecoration(
+          hintText:hintText,
+          hintStyle:easyTheme.textTheme.labelMedium,
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
+          ),
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
         ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
-        ),
-        suffixIcon: suffixIcon,
-        prefixIcon: prefixIcon,
-      )
-          : InputDecoration(
-        hintText:hintText,
-        hintStyle:easyTheme.textTheme.labelMedium,
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorName.darkGray,width: 1.5),
-        ),
-        suffixIcon: suffixIcon,
-        prefixIcon: prefixIcon,
+
+
+
+
+
+
       ),
-
-
-
-
-
-
     );
   }
 }

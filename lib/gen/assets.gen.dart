@@ -159,6 +159,13 @@ class $AssetsSvgGen {
   /// File path: assets/svg/search_icon.svg
   SvgGenImage get searchIcon => const SvgGenImage('assets/svg/search_icon.svg');
 
+  /// File path: assets/svg/send_icon.svg
+  SvgGenImage get sendIcon => const SvgGenImage('assets/svg/send_icon.svg');
+
+  /// File path: assets/svg/zoom_in_icon.svg
+  SvgGenImage get zoomInIcon =>
+      const SvgGenImage('assets/svg/zoom_in_icon.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         appleIcon,
@@ -177,7 +184,9 @@ class $AssetsSvgGen {
         furtherInfoIcon,
         lightDaakeshLogo,
         locationPinIcon,
-        searchIcon
+        searchIcon,
+        sendIcon,
+        zoomInIcon
       ];
 }
 
