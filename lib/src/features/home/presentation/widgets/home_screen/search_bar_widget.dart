@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class SearchBarWidget extends StatelessWidget {
+  final HomeState state;
+
   const SearchBarWidget({
     super.key,
+    required this.state,
   });
 
 
@@ -35,18 +37,16 @@ class SearchBarWidget extends StatelessWidget {
                 height: 44.0,
               ),
             ),
-            BlocBuilder<HomeBloc, HomeState>(builder: (_, state) {
-              return state.isProductDetailsOn
-                  ? IconButton(
-                      onPressed: () => HomeBloc.get.add(
-                          ShowMoreProductDetails(
-                              isProductDetailsOn: false)),
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: ColorName.white,
-                      ))
-                  : const SizedBox();
-            }),
+            state.isProductDetailsOn || state.isShowCart
+                ? IconButton(
+                onPressed: () => HomeBloc.get.add(
+                    ShowMoreProductDetailsEvent(
+                        isProductDetailsOn: false)),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: ColorName.white,
+                ))
+                : const SizedBox(),
 
           ],
         ),

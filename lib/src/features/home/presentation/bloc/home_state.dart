@@ -20,8 +20,15 @@ class HomeState extends Equatable {
   ///Product screen details state
   final bool isProductDetailsOn;
   final bool isDaakeshTodayDeal;
-  ///
+  ///More Info Product Screen
   final int productSliderIndex;
+  final int productSizeIndex;
+  ///Search Screen
+  final bool isShowSearchResult;
+  ///Cart Screen
+  final bool isShowCart;
+
+
 
   const HomeState({
     this.homeStateStatus = HomeStateStatus.INITIAL,
@@ -33,8 +40,14 @@ class HomeState extends Equatable {
     ///Product screen details state
     this.isProductDetailsOn = false,
     this.isDaakeshTodayDeal = false,
-    ///
+    ///More Info Product Screen
     this.productSliderIndex = 0,
+    this.productSizeIndex = 0,
+    ///Search Screen
+    this.isShowSearchResult = false,
+    ///Cart screen
+    this.isShowCart = false,
+
 
   });
 
@@ -48,8 +61,13 @@ class HomeState extends Equatable {
     ///Product screen details state
     bool? isProductDetailsOn,
     bool? isDaakeshTodayDeal,
-    ///
+    ///More Info Product Screen
     int? productSliderIndex,
+    int? productSizeIndex,
+    ///
+    bool? isShowSearchResult,
+    ///Cart screen
+    bool? isShowCart,
 
 
   }) {
@@ -63,21 +81,35 @@ class HomeState extends Equatable {
       ///Product screen details states
       isProductDetailsOn: isProductDetailsOn ?? this.isProductDetailsOn,
       isDaakeshTodayDeal: isDaakeshTodayDeal ?? this.isDaakeshTodayDeal,
-      ///
+      ///More Info Product Screen
       productSliderIndex: productSliderIndex ?? this.productSliderIndex,
+      productSizeIndex: productSizeIndex ?? this.productSizeIndex,
+      ///
+      isShowSearchResult: isShowSearchResult ?? this.isShowSearchResult,
+      ///Cart Screen
+      isShowCart: isShowCart ?? this.isShowCart,
 
     );
   }
 
   @override
   List<Object?> get props => [
+
     homeStateStatus,
     isSearchOn,
+    ///Filter screen States
     rateIndex,
     productIndex,
+    ///Product screen details states
     isProductDetailsOn,
     isDaakeshTodayDeal,
+    ///More Info Product Screen
     productSliderIndex,
+    productSizeIndex,
+    ///
+    isShowSearchResult,
+    ///Cart
+    isShowCart,
 
   ];
 }

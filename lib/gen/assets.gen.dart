@@ -116,6 +116,9 @@ class $AssetsSvgGen {
   SvgGenImage get daakeshLogo =>
       const SvgGenImage('assets/svg/daakesh_logo.svg');
 
+  /// File path: assets/svg/delete_icon.svg
+  SvgGenImage get deleteIcon => const SvgGenImage('assets/svg/delete_icon.svg');
+
   /// File path: assets/svg/disable_home_icon.svg
   SvgGenImage get disableHomeIcon =>
       const SvgGenImage('assets/svg/disable_home_icon.svg');
@@ -156,11 +159,17 @@ class $AssetsSvgGen {
   SvgGenImage get locationPinIcon =>
       const SvgGenImage('assets/svg/location_pin_icon.svg');
 
+  /// File path: assets/svg/plus_icon.svg
+  SvgGenImage get plusIcon => const SvgGenImage('assets/svg/plus_icon.svg');
+
   /// File path: assets/svg/search_icon.svg
   SvgGenImage get searchIcon => const SvgGenImage('assets/svg/search_icon.svg');
 
   /// File path: assets/svg/send_icon.svg
   SvgGenImage get sendIcon => const SvgGenImage('assets/svg/send_icon.svg');
+
+  /// File path: assets/svg/sort_icon.svg
+  SvgGenImage get sortIcon => const SvgGenImage('assets/svg/sort_icon.svg');
 
   /// File path: assets/svg/zoom_in_icon.svg
   SvgGenImage get zoomInIcon =>
@@ -174,6 +183,7 @@ class $AssetsSvgGen {
         creditCardIcon,
         creditCardLogoIcon,
         daakeshLogo,
+        deleteIcon,
         disableHomeIcon,
         disableProductIcon,
         disableProfileIcon,
@@ -184,8 +194,10 @@ class $AssetsSvgGen {
         furtherInfoIcon,
         lightDaakeshLogo,
         locationPinIcon,
+        plusIcon,
         searchIcon,
         sendIcon,
+        sortIcon,
         zoomInIcon
       ];
 }

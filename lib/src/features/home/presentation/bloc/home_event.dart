@@ -15,16 +15,30 @@ class SelectProductTypeEvent extends HomeEvent{
   SelectProductTypeEvent({required this.index});
 }
 
-class ShowMoreProductDetails extends HomeEvent{
+class ShowMoreProductDetailsEvent extends HomeEvent{
   final bool isProductDetailsOn;
   final bool? isDaakeshTodayDeal;
-  ShowMoreProductDetails({required this.isProductDetailsOn,this.isDaakeshTodayDeal});
+  ShowMoreProductDetailsEvent({required this.isProductDetailsOn,this.isDaakeshTodayDeal});
+}
+class ShowSearchResultEvent extends HomeEvent{
+  final bool isShowSearchResult;
+  ShowSearchResultEvent({required this.isShowSearchResult});
+}
+class ShowCartEvent extends HomeEvent{
+  final bool isShowCart;
+  ShowCartEvent({required this.isShowCart});
 }
 
-class ChangeProductSliderIndex extends HomeEvent{
-  final int index;
-  ChangeProductSliderIndex({required this.index});
+
+class ChangeProductSliderIndexEvent extends HomeEvent{
+  final int sliderIndex;
+  ChangeProductSliderIndexEvent({required this.sliderIndex});
 }
+class SelectProductSizeIndex extends HomeEvent{
+  final int productSizeIndex;
+  SelectProductSizeIndex({required this.productSizeIndex});
+}
+
 
 
 

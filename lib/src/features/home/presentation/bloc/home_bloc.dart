@@ -10,36 +10,64 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<FutureOr<void>> _handleEvent(HomeEvent event, Emitter<HomeState> emit) async {
 
+    ///Home Screen event
     if(event is SearchOnOffEvent){
       emit(state.copyWith(
         isSearchOn: event.isSearchOn,
         isProductDetailsOn: false,
+        isShowSearchResult: false,
+        isShowCart:false,
+      ));
+    }
+    if(event is ShowMoreProductDetailsEvent) {
+      emit(state.copyWith(
+        isProductDetailsOn: event.isProductDetailsOn,
+        isDaakeshTodayDeal: event.isDaakeshTodayDeal,
+        isSearchOn: false,
+        productSizeIndex: 0,
+        productSliderIndex: 0,
+        isShowSearchResult: false,
+        isShowCart:false,
+      ));
+    }
+    if(event is ShowSearchResultEvent){
+      emit(state.copyWith(
+          isSearchOn: false,
+          isShowSearchResult:event.isShowSearchResult
+      ));
+    }
+    if(event is ShowCartEvent){
+      emit(state.copyWith(
+          isSearchOn: false,
+          isProductDetailsOn: false,
+          isShowSearchResult: false,
+          isShowCart:event.isShowCart
       ));
     }
 
+
+    ///Filter Screen event
     if(event is ChangeRateTypeEvent){
       emit(state.copyWith(
         rateIndex: event.index,
       ));
     }
-
     if (event is SelectProductTypeEvent) {
       emit(state.copyWith(
         productIndex: event.index,
       ));
     }
 
-    if (event is ShowMoreProductDetails) {
+
+    ///More Info Product Screen
+    if(event is ChangeProductSliderIndexEvent){
       emit(state.copyWith(
-        isProductDetailsOn: event.isProductDetailsOn,
-        isDaakeshTodayDeal: event.isDaakeshTodayDeal,
-        isSearchOn: false,
+        productSliderIndex: event.sliderIndex,
       ));
     }
-    if(event is ChangeProductSliderIndex){
+    if(event is SelectProductSizeIndex){
       emit(state.copyWith(
-        productSliderIndex: event.index,
-
+        productSizeIndex: event.productSizeIndex,
       ));
     }
 

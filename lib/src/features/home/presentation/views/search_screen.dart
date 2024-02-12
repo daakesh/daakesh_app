@@ -27,8 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     splashColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
                       onTap: openFilterScreen,
-                      child: Assets.png.filterIcon
-                          .image(width: 38.0, height: 38.0)),
+                      child: Assets.png.filterIcon.image(width: 38.0, height: 38.0)),
                 ],
             ),
           ),),
@@ -37,18 +36,27 @@ class _SearchScreenState extends State<SearchScreen> {
             delegate: SliverChildBuilderDelegate((_, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
-                child: Row(
-                  children: [
-                    Assets.svg.searchIcon.svg(),
-                    const SizedBox(width: 12.0,),
-                    Text(
-                      'Samsung S21 Phone 24G',
-                      style: easyTheme.textTheme.bodyMedium!.copyWith(
-                          fontSize: 18.0, color: ColorName.mediumGray),
-                    ),
-                    const Spacer(flex: 1,),
-                    const Icon(Icons.arrow_upward,color: ColorName.gray,)
-                  ],
+                child: InkWell(
+                  splashColor: ColorName.transparent,
+                  highlightColor: ColorName.transparent,
+                  focusColor: ColorName.transparent,
+                  onTap: (){
+                    FocusScope.of(context).unfocus();
+                    HomeBloc.get.add(ShowSearchResultEvent(isShowSearchResult: true));
+                  },
+                  child: Row(
+                    children: [
+                      Assets.svg.searchIcon.svg(),
+                      const SizedBox(width: 12.0,),
+                      Text(
+                        'Samsung S21 Phone 24G',
+                        style: easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0, color: ColorName.mediumGray),
+                      ),
+                      const Spacer(flex: 1,),
+                      const Icon(Icons.arrow_upward,color: ColorName.gray,)
+                    ],
+                  ),
                 ),
               );
             }, childCount: 5),

@@ -22,11 +22,17 @@ class ColorName {
   /// Color: #222F3E
   static const Color blueGray = Color(0xFF222F3E);
 
+  /// Color: #9B9B9B
+  static const Color charcoalGray = Color(0xFF9B9B9B);
+
   /// Color: #8B8B8B
   static const Color darkGray = Color(0xFF8B8B8B);
 
   /// Color: #222F3EBF
   static const Color darkSlateBlue = Color(0x222F3EBF);
+
+  /// Color: #909090
+  static const Color dimGray = Color(0xFF909090);
 
   /// Color: #707070
   static const Color gray = Color(0xFF707070);
@@ -43,11 +49,17 @@ class ColorName {
   /// Color: #FEBD69
   static const Color lightOrange = Color(0xFFFEBD69);
 
+  /// Color: #F2F2F2
+  static const Color lightSilver = Color(0xFFF2F2F2);
+
   /// Color: #9F9F9F
   static const Color mediumGray = Color(0xFF9F9F9F);
 
   /// Color: #BFBFBF
   static const Color mediumSilver = Color(0xFFBFBFBF);
+
+  /// Color: #EEEEEE
+  static const Color paleGray = Color(0xFFEEEEEE);
 
   /// Color: #E92222
   static const Color red = Color(0xFFE92222);

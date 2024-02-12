@@ -19,4 +19,8 @@
     <color name="dark_slate_blue">#222F3EBF</color>
     <color name="silver_sand">#F7F7F7</color>
     <color name="grayish_blue">#787B86</color>
+    <color name="charcoal_gray">#9B9B9B</color>
+    <color name="pale_gray">#EEEEEE</color>
+    <color name="light_silver">#F2F2F2</color>
+    <color name="dim_gray">#909090</color>
 </manifest>

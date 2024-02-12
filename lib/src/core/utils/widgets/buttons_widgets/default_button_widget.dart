@@ -6,7 +6,7 @@ class DefaultButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final ButtonStyle? style;
-  final EdgeInsets? padding;
+  final EdgeInsetsDirectional? padding;
 
   const DefaultButtonWidget({
     Key? key,
@@ -24,7 +24,7 @@ class DefaultButtonWidget extends StatelessWidget {
         onPressed: onPressed,
         style: style ?? easyTheme.elevatedButtonTheme.style,
         child: Text(
-          text.toUpperCase(),
+          text,
         ),
       ),
     );
