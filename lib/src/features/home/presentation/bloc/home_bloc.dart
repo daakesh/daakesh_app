@@ -10,6 +10,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<FutureOr<void>> _handleEvent(HomeEvent event, Emitter<HomeState> emit) async {
 
+    if(event is ResetStateEvent){
+      emit(state.copyWith(
+        isSearchOn: false,
+        isProductDetailsOn: false,
+        isShowSearchResult: false,
+        isShowCart:false,
+      ));
+    }
+
     ///Home Screen event
     if(event is SearchOnOffEvent){
       emit(state.copyWith(

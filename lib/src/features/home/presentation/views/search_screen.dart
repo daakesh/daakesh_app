@@ -75,24 +75,15 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
-  void openFilterScreen(){
+  void openFilterScreen() {
     FocusScope.of(context).unfocus();
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: const FilterScreen(),
       withNavBar: true, // OPTIONAL VALUE. True by default.
     );
-    //openNewPage(const FilterScreen());
   }
 
-
-  void open(widget){
-    PersistentNavBarNavigator.pushNewScreen(
-      navigatorKey.currentState!.context,
-      screen: widget,
-      withNavBar: true, // OPTIONAL VALUE. True by default.
-    );
-  }
 
 
 }

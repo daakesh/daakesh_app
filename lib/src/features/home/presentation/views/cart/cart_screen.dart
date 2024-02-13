@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class CartScreen extends StatelessWidget {
@@ -66,7 +67,7 @@ class CartScreen extends StatelessWidget {
               const SizedBox(height: 14.0,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 21.5),
-                child: Center(child: DefaultButtonWidget(text: 'CHECKOUT', onPressed: (){})),
+                child: Center(child: DefaultButtonWidget(text: 'CHECKOUT', onPressed: ()=>openCheckOutScreen(context))),
               ),
 
             ],
@@ -74,6 +75,18 @@ class CartScreen extends StatelessWidget {
         )
       ],
     );
+  }
+  void openCheckOutScreen(context)async{
+    ProgressCircleDialog.show();
+    await Future.delayed(const Duration(seconds: 1));
+    ProgressCircleDialog.dismiss();
+    PersistentNavBarNavigator.pushNewScreen(
+      context,
+      screen: const CheckOutScreen(),
+      withNavBar: true, // OPTIONAL VALUE. True by default.
+    );
+
+
   }
 }
 

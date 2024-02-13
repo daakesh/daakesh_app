@@ -40,6 +40,9 @@ class SelectProductSizeIndex extends HomeEvent{
 }
 
 
+class ResetStateEvent extends HomeEvent{}
+
+
 
 
 

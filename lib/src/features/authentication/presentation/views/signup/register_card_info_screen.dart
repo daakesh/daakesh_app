@@ -3,10 +3,14 @@ import 'package:flutter/services.dart';
 import '../../../../../src.export.dart';
 
 class RegisterCardInfoScreen extends StatelessWidget {
-   RegisterCardInfoScreen({super.key});
+  final bool isLoggedIn;
 
+  RegisterCardInfoScreen({
+    super.key,
+    this.isLoggedIn = false,
+  });
 
-   final cardNumberController = TextEditingController();
+  final cardNumberController = TextEditingController();
    final expiryDateController = TextEditingController();
    final cvvController = TextEditingController();
    final nicknameController = TextEditingController();
@@ -139,7 +143,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
 
                   const SizedBox(height: 71.0,),
 
-                  Center(child: DefaultButtonWidget(text: 'ADD CARD', onPressed:onAddCard)),
+                  Center(child: DefaultButtonWidget(text: 'ADD CARD', onPressed:()=>onAddCard(context,isLoggedIn))),
                   const SizedBox(height: 82.0,),
 
 
@@ -152,7 +156,14 @@ class RegisterCardInfoScreen extends StatelessWidget {
     );
   }
 
-  void onAddCard() {
+  void onAddCard(context,bool isLoggedIn)async {
+    ProgressCircleDialog.show();
+    await Future.delayed(const Duration(seconds: 1));
+    ProgressCircleDialog.dismiss();
+    if(isLoggedIn){
+      Navigator.pop(context);
+      return;
+    }
     openNewPage(const CardAddedSuccessfullyScreen());
   }
 }

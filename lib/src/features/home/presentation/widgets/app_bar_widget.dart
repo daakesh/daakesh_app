@@ -75,7 +75,10 @@ class AppBarWidget extends StatelessWidget {
                 width: 14.0,
               ),
               InkWell(
-                  onTap: () => HomeBloc.get.add(ShowCartEvent(isShowCart: true)),
+                  onTap: () {
+                  HomeBloc.get.add(ShowCartEvent(isShowCart: true));
+                  FocusScope.of(context).unfocus();
+                  },
                   child: Assets.svg.cartAddIcon.svg(width: 24.0, height: 24.0)),
             ],
           ),
