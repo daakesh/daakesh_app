@@ -1,48 +1,152 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'dart:developer' as developer;
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import '../services.export.dart';
 
-abstract class NetworkService {
+abstract class NetworkService{
   Future<Either<Failure, ValidResponse>> get({
     required String baseUrl,
     String path,
     Map<String, String>? headers,
     Map<String, dynamic>? params = const {},
+    String? userToken,
+  });
+  Future<Either<Failure, ValidResponse>> post({
+    required String baseUrl,
+    String path,
+    Map<String, String>? headers,
+    Map<String, String> body = const{},
+    Map<String, dynamic>? params = const {},
+    String? userToken,
+
   });
 }
 
 @LazySingleton(as: NetworkService)
-class NetworkServiceImpl implements NetworkService {
+class NetworkServiceImpl with NetworksLogs implements NetworkService {
+  final Map<String, String> _headers = {
+    "Accept": "application/json",
+  };
+  final Map<String, dynamic> _params = {
+    "lang":"en"
+  };
+
+
+
+
   @override
   Future<Either<Failure, ValidResponse>> get({
     required String baseUrl,
     String path = '',
     Map<String, String>? headers,
-    Map<String, dynamic>? params = const {},
+    Map<String, dynamic>? params,
+    String? userToken,
+
   }) async {
     try {
-      final uri = Uri.https(baseUrl, path, params);
+      _requestHandler(headers,params,userToken);
+      final uri = Uri.https(baseUrl, path, _params);
       if (!uri.isAbsolute) throw Exception('Not valid URL');
-      final response = await http.get(uri, headers: headers);
+      final response = await http.get(uri, headers: _headers);
       final data = jsonDecode(response.body);
       final str = utf8.decode(response.bodyBytes);
+      _networkLog(response, 'null');
       return Right(
         ValidResponse(
           statusCode: response.statusCode,
           data: json.decode(str),
-          message: data['message'] ?? '',
+          message: data['error'] ?? '',
+          status: data['status'] ?? false,
         ),
       );
     } on SocketException catch (e) {
       return Left(Failure(statusCode: 500, message: e.message));
     } on ValidResponse catch (e) {
-      return Right(ValidResponse(statusCode: e.statusCode, data: e.data, message: e.message));
+      return Right(ValidResponse(statusCode: e.statusCode, data: e.data, message: e.message,status: e.status));
     } on Exception catch (e) {
       return Left(Failure(statusCode: 500, message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> post(
+      {required String baseUrl,
+      String path = '',
+      Map<String, String>? headers,
+      Map<String, String> body = const{},
+      Map<String, dynamic>? params,
+      String? userToken,
+      }) async{
+    try {
+      _requestHandler(headers,params,userToken);
+      final uri = Uri.https(baseUrl, path, _params);
+      if (!uri.isAbsolute) throw Exception('Not valid URL');
+      final response = await http.post(uri, headers: _headers,body: body);
+      final data = jsonDecode(response.body);
+      final str = utf8.decode(response.bodyBytes);
+      _networkLog(response, body.toString());
+      return Right(
+        ValidResponse(
+          statusCode: response.statusCode,
+          data: json.decode(str),
+          message: data['error'] ?? '',
+          status: data['status'] ?? false,
+        ),
+      );
+    } on SocketException catch (e) {
+      return Left(Failure(statusCode: 500, message: e.message));
+    } on ValidResponse catch (e) {
+      return Right(ValidResponse(statusCode: e.statusCode, data: e.data, message: e.message,status: e.status));
+    } on Exception catch (e) {
+      return Left(Failure(statusCode: 500, message: e.toString()));
+    }
+  }
+  void _requestHandler(
+      Map<String, String>? headers,
+      Map<String,dynamic>? params,
+      String? userToken,
+      ) {
+    if (headers != null) _headers.addAll(headers);
+    if (params != null) _params.addAll(params);
+    if (userToken != null) _headers.addAll({"Authorization": " Bearer $userToken"});
+  }
+
+}
+mixin NetworksLogs{
+  void _networkLog(http.Response response,String body) =>
+      developer.log('-----------------------------------------------\n'
+          '|Http [RESPONSE] info ==> \n'
+          '|ENVIRONMENT: \n'
+          '|BASE_URL: http://${response.request!.url.authority}\n'
+          '|PATH: ${response.request!.url.path}\n'
+          '|FULL_URL: ${response.request!.url}\n'
+          '|Method: ${response.request!.method}\n'
+          '|Params: ${response.request!.url.queryParameters}\n'
+          '|Host: ${response.request!.url.host}\n'
+          '|statusCode: ${response.statusCode}\n'
+          '|Scheme: ${response.request!.url.scheme}\n'
+          '|Body: $body\n'
+          '|RESPONSE:${jsonDecode(response.body)}\n'
+          '|Header: ${response.headers}\n'
+          '|[END] -----------------------------------------------\n\n');
+
+  void traceError(http.Response response,String body) =>
+      developer.log('🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫\n'
+          '| Http [ERROR] info ==> \n'
+          '| ENVIRONMENT: \n'
+          '| BASE_URL: http://${response.request!.url.authority}\n'
+          '| PATH: ${response.request!.url.path}\n'
+          '| FULL_URL: ${response.request!.url}\n'
+          '| Method: ${response.request!.method}\n'
+          '| Params: ${response.request!.url.queryParameters}\n'
+          '| Host: ${response.request!.url.host}\n'
+          '| statusCode: ${response.statusCode}\n'
+          '| Scheme: ${response.request!.url.scheme}\n'
+          '| Body: $body\n'
+          '| Header: ${response.headers}\n'
+          '| RESPONSE: ${response.body} \n'
+          '| [END] 🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫\n\n');
 }

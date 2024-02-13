@@ -14,15 +14,17 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    return MaterialApp(
-      title: 'Currency Task',
-      debugShowCheckedModeBanner: false,
-      locale: const Locale.fromSubtags(languageCode: 'en'),
-      theme: AppTheme.lightMode,
-      localizationsDelegates: localizationsDelegates,
-      supportedLocales: supportedLocales,
-      navigatorKey: navigatorKey,
-      home: const MainScreen(),
+    return listOfBloc(
+      child: MaterialApp(
+        title: 'Currency Task',
+        debugShowCheckedModeBanner: false,
+        locale: const Locale.fromSubtags(languageCode: 'en'),
+        theme: AppTheme.lightMode,
+        localizationsDelegates: localizationsDelegates,
+        supportedLocales: supportedLocales,
+        navigatorKey: navigatorKey,
+        home: const SplashScreen(),
+      ),
     );
   }
 }

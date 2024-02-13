@@ -1,29 +1,71 @@
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../src.export.dart';
 
-class CacheHelper {
-  static SharedPreferences? sharedPreferences;
+final prefs = getIt.get<CacheHelper>();
 
-  static Future init() async {
+abstract class CacheHelper{
+  dynamic getData(String key);
+  Future<bool> setString(String key,String value);
+  Future<bool> setInt(String key,int value);
+  Future<bool> setBool(String key,bool value);
+  Future<bool> setDouble(String key,double value);
+  Future<bool> removeData(String key);
+}
+
+
+@Singleton(as: CacheHelper)
+class CacheHelperImpl implements CacheHelper{
+   SharedPreferences? sharedPreferences;
+   CacheHelperImpl(){
+     init();
+   }
+
+   Future init() async {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  static dynamic getData({required String? key}) {
-    return sharedPreferences!.get(key!);
+   @override
+   dynamic getData(String key) {
+    return sharedPreferences!.get(key);
   }
 
-  static Future<bool> saveData({
-    required String? key,
-    required dynamic value,
-  }) async {
-    if (value is String) {return await sharedPreferences!.setString(key!,value,);}
-    if (value is int) {return await sharedPreferences!.setInt(key!, value,);}
-    if (value is bool) {return await sharedPreferences!.setBool(key!,value,);}
-    return await sharedPreferences!.setDouble(key!,value,);
-  }
+   @override
+   Future<bool> setString(
+      String key,
+      String value,
+   ) async {
+     return await sharedPreferences!.setString(key,value);
+   }
 
-  static Future<bool> removeData({
-    required String key,
-  }) async {
+   @override
+   Future<bool> setInt(
+     String key,
+     int value,
+   ) async {
+     return await sharedPreferences!.setInt(key,value);
+   }
+
+   @override
+   Future<bool> setBool(
+     String key,
+     bool value,
+   ) async {
+     return await sharedPreferences!.setBool(key, value);
+   }
+
+   @override
+   Future<bool> setDouble(
+     String key,
+     double value,
+   ) async {
+     return await sharedPreferences!.setDouble(key,value);
+   }
+
+   @override
+   Future<bool> removeData(
+    String key,
+  ) async {
     return await sharedPreferences!.remove(key);
   }
 }

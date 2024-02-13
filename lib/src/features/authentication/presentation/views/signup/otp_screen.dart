@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class _OTPScreenState extends State<OTPScreen> {
   final thirdDigitController = TextEditingController();
   final fourthDigitController = TextEditingController();
   final fifthDigitController = TextEditingController();
+  final sixthDigitController = TextEditingController();
 
 
   final FocusNode firstTextField= FocusNode();
@@ -23,6 +25,7 @@ class _OTPScreenState extends State<OTPScreen> {
   final FocusNode thirdTextField = FocusNode();
   final FocusNode fourthTextField = FocusNode();
   final FocusNode fifthTextField = FocusNode();
+  final FocusNode sixthTextField = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,13 @@ class _OTPScreenState extends State<OTPScreen> {
                   const SizedBox(height: 8.0,),
                   Text('Verify Your Identity',style: easyTheme.textTheme.headlineMedium),
                   const SizedBox(height: 19.0),
-                  Text('We Send You A Code To 079856422 Phone Number Please Enter The Code To Create Account',style: easyTheme.textTheme.bodyMedium),
+                  BlocBuilder<AuthBloc,AuthState>(
+                    buildWhen: (previous,current)=>current.authStateStatus.isSuccess,
+                    builder: (context, state) {
+                      return Text(
+                        'We Send You A Code To +${state.phoneCode+state.phone} Phone Number Please Enter The Code To Create Account',
+                        style: easyTheme.textTheme.bodyMedium);
+                  },),
                   const SizedBox(height: 39.0),
                   Text('Phone Number',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
                   Row(children: [
@@ -62,6 +71,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       onChanged: (text)=>otpCursorHandler(text,firstTextField,nextFocus:secondTextField ,isFirst: true),
+
 
 
                     ),),
@@ -126,12 +136,27 @@ class _OTPScreenState extends State<OTPScreen> {
                         ],
                         keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
-                            onChanged: (text)=>otpCursorHandler(text,fifthTextField,previousFocus:fourthTextField,isLast: true),
+                            onChanged: (text)=>otpCursorHandler(text,fifthTextField,nextFocus: sixthTextField,previousFocus:fourthTextField),
 
                           )),
+                    const SizedBox(width: 16.0,),
+                    Expanded(
+                        child: TextFormFieldWidget(
+                          style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuBold,fontSize: 27.0),
+                          focusNode:sixthTextField,
+                          controller: sixthDigitController,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(1),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          onChanged: (text)=>otpCursorHandler(text,sixthTextField,previousFocus:fifthTextField,isLast: true),
+
+                        )),
                   ],),
                   const SizedBox(height: 39.0),
-                  TextButtonWidget(text: 'Send code again', onPressed: (){}),
+                  TextButtonWidget(text: 'Send code again', onPressed: resendSMSCode),
                   const SizedBox(height: 100,),
                   DefaultButtonWidget(text: 'VALIDATE', onPressed: onValidate),
                   const SizedBox(height: 44.0),
@@ -174,6 +199,17 @@ class _OTPScreenState extends State<OTPScreen> {
 
 
   void onValidate() {
-    openNewPage(const VerificationScreen());
+    String smsCode = firstDigitController.text +
+            secondDigitController.text +
+            thirdDigitController.text +
+            fourthDigitController.text +
+            fifthDigitController.text +
+            sixthDigitController.text;
+    AuthBloc.get.add(ValidateSMSCodeEvent(smsCode:smsCode));
   }
+
+  void resendSMSCode(){
+    AuthBloc.get.add(ResendSMSCodeEvent());
+  }
+
 }

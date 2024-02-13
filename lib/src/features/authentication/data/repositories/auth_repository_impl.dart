@@ -1,16 +1,30 @@
-import 'package:daakesh/src/features/authentication/data/data.export.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../core/injection/inj.dart';
-import '../../../../services/services.export.dart';
 import '../../../../src.export.dart';
-import '../../domain/domain.export.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
   @override
-  Future<Either<Failure, ValidResponse>> onLogin() async {
-    return await getIt.get<AuthDatasource>().onLogin();
+  Future<Either<Failure, ValidResponse>> onLogin(String phoneNumber,String passwordNumber) async {
+    return await getIt.get<AuthDatasource>().onLogin(phoneNumber,passwordNumber);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> addUser(String name, String email, String password, String phoneNumber, String userType) async{
+    return await getIt.get<AuthDatasource>().addUser(name,email,password,phoneNumber,userType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> activateUser(String id) async{
+    return await getIt.get<AuthDatasource>().activateUser(id);
+
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getUserData() async{
+    return await getIt.get<AuthDatasource>().getUserData();
+
+  }
+
+
+
 }

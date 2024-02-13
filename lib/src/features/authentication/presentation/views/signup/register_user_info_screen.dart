@@ -1,16 +1,16 @@
-import 'package:daakesh/app_widget.dart';
-import 'package:daakesh/gen/colors.gen.dart';
-import 'package:daakesh/src/core/core.export.dart';
-import 'package:daakesh/src/features/authentication/authentication.export.dart';
 import 'package:flutter/material.dart';
+import '../../../../../src.export.dart';
+
 
 class RegisterPersonalInfoScreen extends StatelessWidget {
-   RegisterPersonalInfoScreen({super.key});
+  RegisterPersonalInfoScreen({super.key});
 
-   final nameController = TextEditingController();
-   final emailController = TextEditingController();
-   final passwordController = TextEditingController();
-
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final FocusNode nameFocusNode = FocusNode();
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +38,8 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
                   Text('Name',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
                   TextFormFieldWidget(
                     controller: nameController,
+                    focusNode: nameFocusNode,
+                    onFieldSubmitted: (value)=>fieldFocusChange(context,nameFocusNode,emailFocusNode),
                     inputFormatters: [
                       RegExpValidator.beginWhitespace,
                     ],
@@ -46,25 +48,25 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
                   Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
                   TextFormFieldWidget(
                     controller: emailController,
+                    focusNode: emailFocusNode,
                     keyboardType: TextInputType.emailAddress,
+                    onFieldSubmitted: (value)=>fieldFocusChange(context,emailFocusNode,passwordFocusNode),
                     inputFormatters: [
                       RegExpValidator.clearWhitespace,
                     ],
                   ),
                   const SizedBox(height: 33.0),
                   Text('Password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
-                  TextFormFieldWidget(controller: passwordController,obscureText: true),
+                  TextFormFieldWidget(
+                    controller: passwordController,
+                    focusNode: passwordFocusNode,
+                    obscureText: true,
+                  ),
                   const SizedBox(height: 64.0),
-                  Center(child: DefaultButtonWidget(text: 'NEXT', onPressed: onNext)),
+                  Center(child: DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context))),
                   const SizedBox(height: 44.0),
                   const AlreadyHaveAccountWidget(),
                   const SizedBox(height: 55.0),
-
-
-
-
-
-
 
                 ],
               ),
@@ -74,7 +76,23 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
       ),
     );
   }
-  void onNext(){
+
+  void onNext(context)async{
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty) {
+      ShowToastSnackBar.showSnackBars(message: 'Fill personal data firstly');
+      return;
+    }
+
+    ProgressCircleDialog.show();
+    AuthBloc.get.add(EnterPersonalInfoEvent(
+          name: nameController.text,
+          email: emailController.text.trim(),
+          password: passwordController.text,
+        ));
+    await Future.delayed(const Duration(seconds: 1));
+    ProgressCircleDialog.dismiss();
     openNewPage(RegisterLocationInfoScreen());
   }
 }

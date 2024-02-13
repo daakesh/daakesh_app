@@ -1,11 +1,11 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class RegisterPhoneNumberScreen extends StatelessWidget {
    RegisterPhoneNumberScreen({super.key});
-
    final phoneNumberController = TextEditingController();
 
 
@@ -36,14 +36,31 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                   TextFormFieldWidget(
                     controller: phoneNumberController,
                     keyboardType: TextInputType.number,
+                    isSuffixPrefixOn: true,
+                    suffixIcon: BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
+                      return InkWell(
+                        onTap: ()=>selectCountry(context),
+                        child: SizedBox(
+                          width: 65.0,
+                          child: Row(children: [
+                            Text(
+                              state.phoneFlag,
+                              style: const TextStyle(
+                                  color: ColorName.blueGray, fontSize: 24.0),
+                            ),
+                            const Icon(Icons.arrow_drop_down_outlined,color: ColorName.blueGray,size: 35.0,),
+
+                          ],),
+                        ),
+                      );
+                    }),
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(16),
                       RegExpValidator.clearZero
-
                     ],
                   ),
                   const SizedBox(height: 200.0),
-                  Center(child: DefaultButtonWidget(text: 'NEXT', onPressed: onNext)),
+                  Center(child: DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context))),
                   const SizedBox(height: 44.0),
                   const AlreadyHaveAccountWidget(),
                   const SizedBox(height: 55.0),
@@ -56,7 +73,27 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
     );
   }
 
-  void onNext() {
-    openNewPage(const OTPScreen());
+  void onNext(context) async{
+    if (phoneNumberController.text.isEmpty) {
+      ShowToastSnackBar.showSnackBars(message: 'Fill location data firstly');
+      return;
+    }
+    AuthBloc.get.add(EnterPhoneEvent(phoneNumber: phoneNumberController.text.trim()));
+
   }
+
+  void selectCountry(context){
+    return showCountryPicker(
+      context:context,
+      showPhoneCode: true,
+      onSelect: (Country country) {
+        AuthBloc.get.add(ChangeCodeCountryEvent(
+          phoneCode: country.phoneCode,
+          phoneFlag: country.flagEmoji,
+        ));
+      },
+
+    );
+  }
+
 }

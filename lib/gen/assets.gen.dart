@@ -14,12 +14,32 @@ import 'package:flutter/services.dart';
 class $AssetsPngGen {
   const $AssetsPngGen();
 
+  /// File path: assets/png/american_express_icon.png
+  AssetGenImage get americanExpressIcon =>
+      const AssetGenImage('assets/png/american_express_icon.png');
+
   /// File path: assets/png/auth_screens_background.png
   AssetGenImage get authScreensBackground =>
       const AssetGenImage('assets/png/auth_screens_background.png');
 
   /// File path: assets/png/baby_icon.png
   AssetGenImage get babyIcon => const AssetGenImage('assets/png/baby_icon.png');
+
+  /// File path: assets/png/check_icon.png
+  AssetGenImage get checkIcon =>
+      const AssetGenImage('assets/png/check_icon.png');
+
+  /// File path: assets/png/disable_my_order_icon.png
+  AssetGenImage get disableMyOrderIcon =>
+      const AssetGenImage('assets/png/disable_my_order_icon.png');
+
+  /// File path: assets/png/enable_my_order_icon.png
+  AssetGenImage get enableMyOrderIcon =>
+      const AssetGenImage('assets/png/enable_my_order_icon.png');
+
+  /// File path: assets/png/filter_icon.png
+  AssetGenImage get filterIcon =>
+      const AssetGenImage('assets/png/filter_icon.png');
 
   /// File path: assets/png/glasses.png
   AssetGenImage get glasses => const AssetGenImage('assets/png/glasses.png');
@@ -32,9 +52,9 @@ class $AssetsPngGen {
   AssetGenImage get handmadeIcon =>
       const AssetGenImage('assets/png/handmade_icon.png');
 
-  /// File path: assets/png/my_order_icon.png
-  AssetGenImage get myOrderIcon =>
-      const AssetGenImage('assets/png/my_order_icon.png');
+  /// File path: assets/png/mastercard_icon.png
+  AssetGenImage get mastercardIcon =>
+      const AssetGenImage('assets/png/mastercard_icon.png');
 
   /// File path: assets/png/product_icon.png
   AssetGenImage get productIcon =>
@@ -47,17 +67,26 @@ class $AssetsPngGen {
   /// File path: assets/png/swap_icon.png
   AssetGenImage get swapIcon => const AssetGenImage('assets/png/swap_icon.png');
 
+  /// File path: assets/png/visa_icon.png
+  AssetGenImage get visaIcon => const AssetGenImage('assets/png/visa_icon.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+        americanExpressIcon,
         authScreensBackground,
         babyIcon,
+        checkIcon,
+        disableMyOrderIcon,
+        enableMyOrderIcon,
+        filterIcon,
         glasses,
         googleIcon,
         handmadeIcon,
-        myOrderIcon,
+        mastercardIcon,
         productIcon,
         splashScreenBackground,
-        swapIcon
+        swapIcon,
+        visaIcon
       ];
 }
 
@@ -67,6 +96,10 @@ class $AssetsSvgGen {
   /// File path: assets/svg/apple_icon.svg
   SvgGenImage get appleIcon => const SvgGenImage('assets/svg/apple_icon.svg');
 
+  /// File path: assets/svg/arrow_drop_down_icon.svg
+  SvgGenImage get arrowDropDownIcon =>
+      const SvgGenImage('assets/svg/arrow_drop_down_icon.svg');
+
   /// File path: assets/svg/cart_add_icon.svg
   SvgGenImage get cartAddIcon =>
       const SvgGenImage('assets/svg/cart_add_icon.svg');
@@ -75,44 +108,97 @@ class $AssetsSvgGen {
   SvgGenImage get creditCardIcon =>
       const SvgGenImage('assets/svg/credit_card_icon.svg');
 
+  /// File path: assets/svg/credit_card_logo_icon.svg
+  SvgGenImage get creditCardLogoIcon =>
+      const SvgGenImage('assets/svg/credit_card_logo_icon.svg');
+
   /// File path: assets/svg/daakesh_logo.svg
   SvgGenImage get daakeshLogo =>
       const SvgGenImage('assets/svg/daakesh_logo.svg');
+
+  /// File path: assets/svg/delete_icon.svg
+  SvgGenImage get deleteIcon => const SvgGenImage('assets/svg/delete_icon.svg');
+
+  /// File path: assets/svg/disable_home_icon.svg
+  SvgGenImage get disableHomeIcon =>
+      const SvgGenImage('assets/svg/disable_home_icon.svg');
+
+  /// File path: assets/svg/disable_product_icon.svg
+  SvgGenImage get disableProductIcon =>
+      const SvgGenImage('assets/svg/disable_product_icon.svg');
+
+  /// File path: assets/svg/disable_profile_icon.svg
+  SvgGenImage get disableProfileIcon =>
+      const SvgGenImage('assets/svg/disable_profile_icon.svg');
+
+  /// File path: assets/svg/enable_home_icon.svg
+  SvgGenImage get enableHomeIcon =>
+      const SvgGenImage('assets/svg/enable_home_icon.svg');
+
+  /// File path: assets/svg/enable_product_icon.svg
+  SvgGenImage get enableProductIcon =>
+      const SvgGenImage('assets/svg/enable_product_icon.svg');
+
+  /// File path: assets/svg/enable_profile_icon.svg
+  SvgGenImage get enableProfileIcon =>
+      const SvgGenImage('assets/svg/enable_profile_icon.svg');
 
   /// File path: assets/svg/facebook_icon.svg
   SvgGenImage get facebookIcon =>
       const SvgGenImage('assets/svg/facebook_icon.svg');
 
-  /// File path: assets/svg/home_icon.svg
-  SvgGenImage get homeIcon => const SvgGenImage('assets/svg/home_icon.svg');
+  /// File path: assets/svg/further_info_icon.svg
+  SvgGenImage get furtherInfoIcon =>
+      const SvgGenImage('assets/svg/further_info_icon.svg');
 
   /// File path: assets/svg/light_daakesh_logo.svg
   SvgGenImage get lightDaakeshLogo =>
       const SvgGenImage('assets/svg/light_daakesh_logo.svg');
 
-  /// File path: assets/svg/my_product_icon.svg
-  SvgGenImage get myProductIcon =>
-      const SvgGenImage('assets/svg/my_product_icon.svg');
+  /// File path: assets/svg/location_pin_icon.svg
+  SvgGenImage get locationPinIcon =>
+      const SvgGenImage('assets/svg/location_pin_icon.svg');
 
-  /// File path: assets/svg/profile_icon.svg
-  SvgGenImage get profileIcon =>
-      const SvgGenImage('assets/svg/profile_icon.svg');
+  /// File path: assets/svg/plus_icon.svg
+  SvgGenImage get plusIcon => const SvgGenImage('assets/svg/plus_icon.svg');
 
   /// File path: assets/svg/search_icon.svg
   SvgGenImage get searchIcon => const SvgGenImage('assets/svg/search_icon.svg');
 
+  /// File path: assets/svg/send_icon.svg
+  SvgGenImage get sendIcon => const SvgGenImage('assets/svg/send_icon.svg');
+
+  /// File path: assets/svg/sort_icon.svg
+  SvgGenImage get sortIcon => const SvgGenImage('assets/svg/sort_icon.svg');
+
+  /// File path: assets/svg/zoom_in_icon.svg
+  SvgGenImage get zoomInIcon =>
+      const SvgGenImage('assets/svg/zoom_in_icon.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         appleIcon,
+        arrowDropDownIcon,
         cartAddIcon,
         creditCardIcon,
+        creditCardLogoIcon,
         daakeshLogo,
+        deleteIcon,
+        disableHomeIcon,
+        disableProductIcon,
+        disableProfileIcon,
+        enableHomeIcon,
+        enableProductIcon,
+        enableProfileIcon,
         facebookIcon,
-        homeIcon,
+        furtherInfoIcon,
         lightDaakeshLogo,
-        myProductIcon,
-        profileIcon,
-        searchIcon
+        locationPinIcon,
+        plusIcon,
+        searchIcon,
+        sendIcon,
+        sortIcon,
+        zoomInIcon
       ];
 }
 

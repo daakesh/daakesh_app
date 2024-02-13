@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../src.export.dart';
 
-class LoginScreen extends StatelessWidget {
-   LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool? checkedValue = false;
+  final FocusNode emailFocusNode= FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +46,8 @@ class LoginScreen extends StatelessWidget {
                         Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
                         TextFormFieldWidget(
                           controller: emailController,
+                          focusNode: emailFocusNode,
+                          onFieldSubmitted: (value)=>fieldFocusChange(context, emailFocusNode, passwordFocusNode),
                           keyboardType: TextInputType.emailAddress,
                           inputFormatters: [
                             RegExpValidator.clearWhitespace,
@@ -48,6 +57,7 @@ class LoginScreen extends StatelessWidget {
                         Text('Password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
                         TextFormFieldWidget(
                           controller: passwordController,
+                          focusNode: passwordFocusNode,
                           obscureText: true,
                         ),
                         Row(
@@ -83,7 +93,21 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-  void onLogin(){}
+
+  void onLogin(){
+
+    if(emailController.text.isEmpty || passwordController.text.isEmpty){
+      ShowToastSnackBar.showSnackBars(message: 'Fill data firstly');
+      return;
+    }
+
+    AuthBloc.get.add(OnLoginEvent(
+      phoneNumber: emailController.text.trim(),
+      password: passwordController.text,
+    ));
+
+  }
+
   void forgetPassword(){}
 }
 

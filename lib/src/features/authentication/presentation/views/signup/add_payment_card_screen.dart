@@ -23,7 +23,7 @@ class AddPaymentCardScreen extends StatelessWidget {
                     child: Align(alignment: AlignmentDirectional.centerStart,child: DaakeshLogoWidget()),
                   ),
                   const Spacer(flex: 1,),
-                  Assets.png.googleIcon.image(height:167.0 ,width:216.0,),
+                  Assets.svg.creditCardLogoIcon.svg(height:167.0 ,width:216.0,),
                   const SizedBox(height: 35.0,),
                   Text('Add Your Payment Card',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 28.0)),
                   const SizedBox(height: 9.0,),
@@ -31,7 +31,7 @@ class AddPaymentCardScreen extends StatelessWidget {
                   const Spacer(flex: 1,),
                   DefaultButtonWidget(text: 'ADD PAYMENT CARD', onPressed: addPaymentCard),
                   const SizedBox(height: 9.0,),
-                  OutlineButtonWidget(text: 'LATER', onPressed: (){}),
+                  OutlineButtonWidget(text: 'LATER', onPressed: onLater),
                   const SizedBox(height: 72.0,),
 
                 ],
@@ -44,5 +44,9 @@ class AddPaymentCardScreen extends StatelessWidget {
   }
   void addPaymentCard(){
     openNewPage(RegisterCardInfoScreen());
+  }
+  void onLater(){
+    openNewPage(const MainScreen(),popPreviousPages: true);
+
   }
 }

@@ -14,4 +14,13 @@
     <color name="gray">#707070</color>
     <color name="medium_silver">#BFBFBF</color>
     <color name="silver_chalice">#B4B4B4</color>
+    <color name="medium_gray">#9F9F9F</color>
+    <color name="sliver">#EBEBEB</color>
+    <color name="dark_slate_blue">#222F3EBF</color>
+    <color name="silver_sand">#F7F7F7</color>
+    <color name="grayish_blue">#787B86</color>
+    <color name="charcoal_gray">#9B9B9B</color>
+    <color name="pale_gray">#EEEEEE</color>
+    <color name="light_silver">#F2F2F2</color>
+    <color name="dim_gray">#909090</color>
 </manifest>

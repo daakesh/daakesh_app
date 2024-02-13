@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class SearchBarWidget extends StatelessWidget {
+  final HomeState state;
+
   const SearchBarWidget({
     super.key,
+    required this.state,
   });
 
 
@@ -20,18 +23,34 @@ class SearchBarWidget extends StatelessWidget {
         ),
 
       ),
-      child: const Padding(
-        padding: EdgeInsetsDirectional.symmetric(horizontal: 19.0),
+      child: Padding(
+        padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 53.0,
             ),
             Center(
-                child: DaakeshLogoWidget(
-              isLight: true,
-              height: 44.0,
-            )),
+              child: InkWell(
+                onTap: ()=>user.logOut(),
+                child: const DaakeshLogoWidget(
+                  isLight: true,
+                  height: 44.0,
+                ),
+              ),
+            ),
+            state.isProductDetailsOn || state.isShowCart
+                ? IconButton(
+                onPressed: () => HomeBloc.get.add(
+                    ShowMoreProductDetailsEvent(
+                        isProductDetailsOn: false)),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: ColorName.white,
+                ))
+                : const SizedBox(),
+
           ],
         ),
       ),
