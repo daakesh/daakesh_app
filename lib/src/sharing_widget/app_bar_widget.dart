@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../src.export.dart';
+import '../src.export.dart';
 
 class AppBarWidget extends StatelessWidget {
   final TextEditingController searchController;

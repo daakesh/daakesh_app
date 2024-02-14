@@ -11,7 +11,7 @@ class PaymentMethodScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CartHeaderWidget(),
+            const HeaderWidget(),
             const SizedBox(height: 15.0,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21.0),

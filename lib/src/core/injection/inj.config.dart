@@ -22,10 +22,16 @@ import 'package:daakesh/src/features/home/data/repositories/home_repository_impl
     as _i10;
 import 'package:daakesh/src/features/home/domain/use_cases/home_use_cases.dart'
     as _i11;
+import 'package:daakesh/src/features/profile/data/datasource/remote_profile_datasource.dart'
+    as _i13;
+import 'package:daakesh/src/features/profile/data/repositories/profile_repository_impl.dart'
+    as _i14;
+import 'package:daakesh/src/features/profile/domain/use_cases/profile_use_cases.dart'
+    as _i15;
 import 'package:daakesh/src/services/connectivity/connectivity_service.dart'
     as _i8;
 import 'package:daakesh/src/services/network/network_service.dart' as _i12;
-import 'package:daakesh/src/services/user_service/user_data.dart' as _i13;
+import 'package:daakesh/src/services/user_service/user_data.dart' as _i16;
 import 'package:daakesh/src/src.export.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -58,7 +64,14 @@ extension GetItInjectableX on _i1.GetIt {
       registerFor: {_dev},
     );
     gh.lazySingleton<_i12.NetworkService>(() => _i12.NetworkServiceImpl());
-    gh.singleton<_i13.UserData>(_i13.UserDataImpl());
+    gh.lazySingleton<_i3.ProfileDatasource>(
+        () => _i13.RemoteProfileDatasource());
+    gh.lazySingleton<_i3.ProfileRepository>(() => _i14.ProfileRepositoryImpl());
+    gh.lazySingleton<_i15.ProfileUseCases>(
+      () => _i15.ProfileUseCasesImpl(),
+      registerFor: {_dev},
+    );
+    gh.singleton<_i16.UserData>(_i16.UserDataImpl());
     return this;
   }
 }

@@ -33,8 +33,8 @@ class RegisterCardInfoScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 110.0,),
-                  const Padding(
+                  isLoggedIn ?const SizedBox(height: 58.0,):const SizedBox(height: 110.0,),
+                  isLoggedIn ?const SizedBox():const Padding(
                     padding: EdgeInsetsDirectional.only(start: 38.0,),
                     child: Align(alignment: AlignmentDirectional.centerStart,child: DaakeshLogoWidget()),
                   ),
@@ -140,11 +140,13 @@ class RegisterCardInfoScreen extends StatelessWidget {
                         ),
                       ],),
                   ),
-
-                  const SizedBox(height: 71.0,),
-
-                  Center(child: DefaultButtonWidget(text: 'ADD CARD', onPressed:()=>onAddCard(context,isLoggedIn))),
-                  const SizedBox(height: 82.0,),
+                  const Spacer(flex: 1,),
+                  isLoggedIn ? Column(children: [
+                    Center(child: DefaultButtonWidget(text: 'ADD CARD', onPressed:()=>onAddCard(context,isLoggedIn))),
+                    const SizedBox(height: 12.0,),
+                    Center(child: OutlineButtonWidget(text: 'CANCEL', onPressed:onCancel))
+                  ],):Center(child: DefaultButtonWidget(text: 'ADD CARD', onPressed:()=>onAddCard(context,isLoggedIn))),
+                  const SizedBox(height: 50.0,),
 
 
                 ],
@@ -161,9 +163,15 @@ class RegisterCardInfoScreen extends StatelessWidget {
     await Future.delayed(const Duration(seconds: 1));
     ProgressCircleDialog.dismiss();
     if(isLoggedIn){
-      Navigator.pop(context);
+      getBack();
       return;
     }
     openNewPage(const CardAddedSuccessfullyScreen());
   }
+
+  void onCancel(){
+    getBack();
+
+  }
+
 }

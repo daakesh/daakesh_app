@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../src.export.dart';
+import '../src.export.dart';
 
-class CartHeaderWidget extends StatelessWidget {
-  const CartHeaderWidget({super.key});
+class HeaderWidget extends StatelessWidget {
+  final bool withArrowBack;
+
+  const HeaderWidget({
+    super.key,
+    this.withArrowBack = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class CartHeaderWidget extends StatelessWidget {
           alignment: AlignmentDirectional.centerEnd,
         ),
       ),
-      child:Stack(
+      child:withArrowBack ? Stack(
         alignment: AlignmentDirectional.bottomStart,
         children: [
           const Center(
@@ -31,6 +36,11 @@ class CartHeaderWidget extends StatelessWidget {
             child: IconButton(onPressed: ()=>Navigator.pop(context), icon: const Icon(Icons.arrow_back,color: ColorName.white,)),
           )
         ],
+      ):const Center(
+        child: DaakeshLogoWidget(
+          isLight: true,
+          height: 44.0,
+        ),
       ),
     );
   }

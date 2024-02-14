@@ -23,4 +23,5 @@
     <color name="pale_gray">#EEEEEE</color>
     <color name="light_silver">#F2F2F2</color>
     <color name="dim_gray">#909090</color>
+    <color name="gainsboro">#D3D3D3</color>
 </manifest>
