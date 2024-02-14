@@ -52,6 +52,9 @@ class $AssetsPngGen {
   AssetGenImage get handmadeIcon =>
       const AssetGenImage('assets/png/handmade_icon.png');
 
+  /// File path: assets/png/lang_icon.png
+  AssetGenImage get langIcon => const AssetGenImage('assets/png/lang_icon.png');
+
   /// File path: assets/png/mastercard_icon.png
   AssetGenImage get mastercardIcon =>
       const AssetGenImage('assets/png/mastercard_icon.png');
@@ -82,6 +85,7 @@ class $AssetsPngGen {
         glasses,
         googleIcon,
         handmadeIcon,
+        langIcon,
         mastercardIcon,
         productIcon,
         splashScreenBackground,
@@ -100,9 +104,17 @@ class $AssetsSvgGen {
   SvgGenImage get arrowDropDownIcon =>
       const SvgGenImage('assets/svg/arrow_drop_down_icon.svg');
 
+  /// File path: assets/svg/arrow_right_icon.svg
+  SvgGenImage get arrowRightIcon =>
+      const SvgGenImage('assets/svg/arrow_right_icon.svg');
+
   /// File path: assets/svg/cart_add_icon.svg
   SvgGenImage get cartAddIcon =>
       const SvgGenImage('assets/svg/cart_add_icon.svg');
+
+  /// File path: assets/svg/comment_icon.svg
+  SvgGenImage get commentIcon =>
+      const SvgGenImage('assets/svg/comment_icon.svg');
 
   /// File path: assets/svg/credit_card_icon.svg
   SvgGenImage get creditCardIcon =>
@@ -159,8 +171,19 @@ class $AssetsSvgGen {
   SvgGenImage get locationPinIcon =>
       const SvgGenImage('assets/svg/location_pin_icon.svg');
 
+  /// File path: assets/svg/person_icon.svg
+  SvgGenImage get personIcon => const SvgGenImage('assets/svg/person_icon.svg');
+
   /// File path: assets/svg/plus_icon.svg
   SvgGenImage get plusIcon => const SvgGenImage('assets/svg/plus_icon.svg');
+
+  /// File path: assets/svg/profile_credit_card_icon.svg
+  SvgGenImage get profileCreditCardIcon =>
+      const SvgGenImage('assets/svg/profile_credit_card_icon.svg');
+
+  /// File path: assets/svg/profile_phone_icon.svg
+  SvgGenImage get profilePhoneIcon =>
+      const SvgGenImage('assets/svg/profile_phone_icon.svg');
 
   /// File path: assets/svg/search_icon.svg
   SvgGenImage get searchIcon => const SvgGenImage('assets/svg/search_icon.svg');
@@ -179,7 +202,9 @@ class $AssetsSvgGen {
   List<SvgGenImage> get values => [
         appleIcon,
         arrowDropDownIcon,
+        arrowRightIcon,
         cartAddIcon,
+        commentIcon,
         creditCardIcon,
         creditCardLogoIcon,
         daakeshLogo,
@@ -194,7 +219,10 @@ class $AssetsSvgGen {
         furtherInfoIcon,
         lightDaakeshLogo,
         locationPinIcon,
+        personIcon,
         plusIcon,
+        profileCreditCardIcon,
+        profilePhoneIcon,
         searchIcon,
         sendIcon,
         sortIcon,

@@ -8,6 +8,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
     providers: [
       BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
+      BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
 
 
 

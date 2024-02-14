@@ -10,11 +10,16 @@ abstract class UserData {
   void get activateUser;
   void get saveUserToken;
   void logOut();
+
+
+
 }
 
 @Singleton(as: UserData)
 class UserDataImpl implements UserData {
-  UserDataImpl();
+  UserDataImpl(){
+    ///lang = prefs.getData('lang') ?? 'en';
+  }
 
   @override
   UserModel userData = UserModel();
@@ -49,6 +54,15 @@ class UserDataImpl implements UserData {
     ValueConstants.token ='';
     prefs.removeData('token').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
   }
+
+
+
+
+
+
+
+
+
 
 
 }

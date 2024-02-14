@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../src.export.dart';
-enum CardsTypes {
-  None,
-  VISA,
-  MASTERCARD,
-  AMIRICANEXPRESS,
-}
+
 class TypePaymentMethod extends StatelessWidget {
   final String title;
   final int index;

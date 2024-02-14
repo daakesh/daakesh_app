@@ -12,7 +12,7 @@ class CartPayScreen extends StatelessWidget {
       body: LayoutBuilderWidget(
         child: Column(
           children: [
-            const CartHeaderWidget(),
+            const HeaderWidget(),
             const SizedBox(height: 25.0,),
             const YourCartItemWidget(isWithEdit: false),
             const SizedBox(height: 14.0,),

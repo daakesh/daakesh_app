@@ -92,7 +92,6 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
           phoneFlag: country.flagEmoji,
         ));
       },
-
     );
   }
 

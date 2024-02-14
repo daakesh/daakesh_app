@@ -11,7 +11,7 @@ class CheckOutScreen extends StatelessWidget {
       body: LayoutBuilderWidget(
         child: Column(
           children: [
-            const CartHeaderWidget(),
+            const HeaderWidget(),
             const SizedBox(height: 25.0,),
             const YourCartItemWidget(),
             const SizedBox(height: 14.0,),
