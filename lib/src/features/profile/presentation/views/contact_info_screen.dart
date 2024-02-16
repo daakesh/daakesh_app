@@ -24,8 +24,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return  AuthenticationBackgroundWidget(
-      widget: Scaffold(
+    return  DefaultBackgroundWidget(
+      child: Scaffold(
         backgroundColor:ColorName.transparent,
         body: LayoutBuilderWidget(
           child: BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
@@ -87,11 +87,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                               style: const TextStyle(
                                   color: ColorName.blueGray, fontSize: 24.0),
                             ),
-                            const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              color: ColorName.blueGray,
-                              size: 35.0,
-                            ),
+                            const SizedBox(width: 10.0,),
+                            Assets.svg.arrowDropDownIcon.svg(),
                           ],
                         ),
                       ),
@@ -130,12 +127,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                               style: const TextStyle(
                                   color: ColorName.blueGray, fontSize: 24.0),
                             ),
-
-                            const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              color: ColorName.blueGray,
-                              size: 35.0,
-                            ),
+                            const SizedBox(width: 10.0,),
+                            Assets.svg.arrowDropDownIcon.svg(),
                           ],
                         ),
                       ),
@@ -174,11 +167,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                               style: const TextStyle(
                                   color: ColorName.blueGray, fontSize: 24.0),
                             ),
-                            const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              color: ColorName.blueGray,
-                              size: 35.0,
-                            ),
+                            const SizedBox(width: 10.0,),
+                            Assets.svg.arrowDropDownIcon.svg(),
                           ],
                         ),
                       ),

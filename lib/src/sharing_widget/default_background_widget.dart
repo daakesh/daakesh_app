@@ -2,9 +2,9 @@ import 'package:daakesh/gen/assets.gen.dart';
 import 'package:daakesh/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 
-class AuthenticationBackgroundWidget extends StatelessWidget {
-  final Widget widget;
-  const AuthenticationBackgroundWidget({super.key, required this.widget});
+class DefaultBackgroundWidget extends StatelessWidget {
+  final Widget child;
+  const DefaultBackgroundWidget({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class AuthenticationBackgroundWidget extends StatelessWidget {
           opacity: 0.4
         ),
       ),
-      child:widget ,
+      child:child ,
     );
 
   }

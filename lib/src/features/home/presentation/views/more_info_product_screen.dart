@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class MoreInfoProductScreen extends StatelessWidget {
-  MoreInfoProductScreen({super.key});
+class MoreInfoProductScreen extends StatefulWidget {
+  const MoreInfoProductScreen({super.key});
+
+  @override
+  State<MoreInfoProductScreen> createState() => _MoreInfoProductScreenState();
+}
+
+class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
   final commentController = TextEditingController();
 
   @override

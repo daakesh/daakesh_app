@@ -67,6 +67,12 @@ class AppTheme {
         fontSize: 22.0,
         color: ColorName.white,
       ),
+      ///bodySmall => apercuLight
+      bodySmall:TextStyle(
+        fontFamily: FontFamily.apercuLight,
+        fontSize: 14.0,
+        color: ColorName.ashGray,
+      ),
       ///bodyMedium
       bodyMedium:TextStyle(
         fontFamily: FontFamily.apercuRegular,
@@ -79,6 +85,7 @@ class AppTheme {
         fontSize: 20.0,
         color: ColorName.blueGray,
       ),
+
       ///headlineSmall
       headlineSmall: TextStyle(
         fontFamily: FontFamily.apercuBold,

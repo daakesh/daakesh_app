@@ -5,142 +5,137 @@ import '../../../../src.export.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(const AuthState()) {
-    on<AuthEvent>(_handleEvent);
+    on<OnLoginEvent>(_onLogin);
+    on<GetUserDataEvent>(_getUserData);
+    on<EnterPersonalInfoEvent>(_enterPersonalInfo);
+    on<EnterLocationInfoEvent>(_enterLocationInfo);
+    on<ChangeFlagEvent>(_changeCountryFlag);
+    on<EnterPhoneEvent>(_enterPhone);
+    on<ChangeCountryCodeEvent>(_changeCountryCode);
+    on<SetVerificationIdEvent>(_setVerificationId);
+    on<ValidateSMSCodeEvent>(_validateSMSCode);
+    on<ActivateUserEvent>(_activateUser);
+    on<ResendSMSCodeEvent>(_resendSMSCode);
   }
   static AuthBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
-
-  Future<FutureOr<void>> _handleEvent(AuthEvent event, Emitter<AuthState> emit) async {
-    ///Login Event
-    if (event is OnLoginEvent) {
-      emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
-      ProgressCircleDialog.show();
-      final result = await getIt.get<AuthUseCases>().onLogin(event.phoneNumber, event.password);
-
-      result.fold((l) {
-        emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
-        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+  ///Login Event,
+  FutureOr<void> _onLogin(OnLoginEvent event, Emitter<AuthState> emit) async{
+    emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
+    ProgressCircleDialog.show();
+    final result = await getIt.get<AuthUseCases>().onLogin(event.phoneNumber, event.password);
+    result.fold((l) {
+      emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ProgressCircleDialog.dismiss();
+    }, (r) async{
+      if(!r.status!){
         ProgressCircleDialog.dismiss();
-      }, (r) async{
-        if(!r.status!){
-          ProgressCircleDialog.dismiss();
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
-          return;
-        }
-        UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
-        user.setUserDataAndCheckIsActive(userModel);
-        emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
-      });
-    }
-    ///Get User Data Event
-    if (event is GetUserDataEvent) {
-      emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
-      ProgressCircleDialog.show();
-      final result = await getIt.get<AuthUseCases>().getUserData();
-      result.fold((l) {
-        emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
-        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
+      user.setUserDataAndCheckIsActive(userModel);
+      emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
+    });
+  }
+  ///Get User Data Event,
+  FutureOr<void> _getUserData(GetUserDataEvent event, Emitter<AuthState> emit) async{
+    emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
+    ProgressCircleDialog.show();
+    final result = await getIt.get<AuthUseCases>().getUserData();
+    result.fold((l) {
+      emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ProgressCircleDialog.dismiss();
+    }, (r) async{
+      if(!r.status!){
         ProgressCircleDialog.dismiss();
-      }, (r) async{
-        if(!r.status!){
-          ProgressCircleDialog.dismiss();
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
-          return;
-        }
-        UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
-        user.setUserData(userModel);
-        emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
-      });
-    }
-    /// SignUp Events
-    if(event is EnterPersonalInfoEvent){
-      emit(state.copyWith(
-        name: event.name,
-        email: event.email,
-        password: event.password,
-      ));
-    }
-    if(event is EnterLocationInfoEvent){
-      emit(state.copyWith(
-        country: event.country,
-        city: event.city,
-        address: event.address,
-      ));
-    }
-    if(event is ChangeFlagEvent){
-      emit(state.copyWith(
-          flagEmoji: event.flagEmoji
-      ));
-    }
-    if(event is ChangeCodeCountryEvent){
-      emit(state.copyWith(
-          phoneFlag: event.phoneFlag,
-          phoneCode: event.phoneCode
-      ));
-      debugPrint(event.phoneCode);
-      debugPrint(state.phoneCode);
-    }
-    if(event is EnterPhoneEvent){
-      emit(state.copyWith(phone:event.phoneNumber));
-      ProgressCircleDialog.show();
-      await Future.delayed(const Duration(seconds: 1));
-      final result = await getIt.get<AuthUseCases>().addUser(
-        state.name,
-        state.email,
-        state.password,
-        '+${state.phoneCode}${state.phone}',
-        'Normal',
-      );
-      result.fold((l) {
-        emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
-      }, (r) {
-        if(!r.status!){
-          ProgressCircleDialog.dismiss();
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
-          return;
-        }
-        UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
-        user.setUserDataAndCheckIsActive(userModel);
-        emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
-      });
-    }
-    if(event is SetVerificationIdEvent){
-      emit(
-        state.copyWith(verificationId: event.verificationId),
-      );
-    }
-    if(event is ValidateSMSCodeEvent){
-      FirebaseAuthentication.verificationCompleted(state.verificationId,event.smsCode);
-    }
-    ///Activate user Event
-    if(event is ActivateUserEvent){
-      final result = await getIt.get<AuthUseCases>().activateUser(user.userData.id.toString());
-      result.fold((l) {
-        emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
-      }, (r) {
-        if(!r.status!){
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
-          return;
-        }
-        emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
-      });
-    }
-    ///Resend SMS Code Event
-    if(event is ResendSMSCodeEvent){
-      FirebaseAuthentication.resendSMSCode(user.userData.phoneNumber.toString());
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
+      user.setUserData(userModel);
+      emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
+    });
+  }
+  ///Insert Personal info such as {Name, Email, Password}.
+  FutureOr<void> _enterPersonalInfo(EnterPersonalInfoEvent event, Emitter<AuthState> emit)async {
+    emit(state.copyWith(
+      name: event.name,
+      email: event.email,
+      password: event.password,
+    ));
+  }
+  ///Insert Location info such as {Country, City, Address}.
+  FutureOr<void> _enterLocationInfo(EnterLocationInfoEvent event, Emitter<AuthState> emit)async {
+    emit(state.copyWith(
+      country: event.country,
+      city: event.city,
+      address: event.address,
+    ));
+  }
+  ///Change a Flag of country attribute that belong to [Location info] or [EnterLocationInfoEvent].
+  FutureOr<void> _changeCountryFlag(ChangeFlagEvent event, Emitter<AuthState> emit)async {
+    emit(state.copyWith(
+        flagEmoji: event.flagEmoji
+    ));
+  }
+  ///Insert cell phone number info such as {country code, cell phone number}.
+  ///In Addition make sign-up request for user with previous details in [EnterPersonalInfoEvent]&[EnterLocationInfoEvent].
+  FutureOr<void> _enterPhone(EnterPhoneEvent event, Emitter<AuthState> emit) async{
+    emit(state.copyWith(phone:event.phoneNumber));
+    ProgressCircleDialog.show();
+    await Future.delayed(const Duration(seconds: 1));
+    final result = await getIt.get<AuthUseCases>().addUser(
+      state.name,
+      state.email,
+      state.password,
+      '+${state.phoneCode}${state.phone}',
+      'Normal',
+    );
+    result.fold((l) {
+      emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
+    }, (r) {
+      if(!r.status!){
+        ProgressCircleDialog.dismiss();
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
+      user.setUserDataAndCheckIsActive(userModel);
+      emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
+    });
+  }
+  ///Change country code & flag of cell phone number in [EnterPhoneEvent].
+  FutureOr<void> _changeCountryCode(ChangeCountryCodeEvent event, Emitter<AuthState> emit)async {
+    emit(state.copyWith(
+        phoneFlag: event.phoneFlag,
+        phoneCode: event.phoneCode
+    ));
+  }
+  ///[VerificationId] Used to send OTP code via firebase.
+  FutureOr<void> _setVerificationId(SetVerificationIdEvent event, Emitter<AuthState> emit) {
+    emit(state.copyWith(verificationId: event.verificationId));
+  }
+  ///This event take [VerificationId] & [OTPCode] that user inserted and compare it with actual code message.
+  FutureOr<void> _validateSMSCode(ValidateSMSCodeEvent event, Emitter<AuthState> emit)async{
+    FirebaseAuthentication.verificationCompleted(state.verificationId,event.smsCode);
+  }
+  ///This event make a user account is active if the [OTPCode] is verified.
+  FutureOr<void> _activateUser(ActivateUserEvent event, Emitter<AuthState> emit) async{
+    final result = await getIt.get<AuthUseCases>().activateUser(user.userData.id.toString());
+    result.fold((l) {
+      emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
+    }, (r) {
+      if(!r.status!){
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
+    });
+  }
+  ///Resend SMS code if user never get any SMS message about the verification code.
+  FutureOr<void> _resendSMSCode(ResendSMSCodeEvent event, Emitter<AuthState> emit)async {
+    FirebaseAuthentication.resendSMSCode(user.userData.phoneNumber.toString());
   }
 }

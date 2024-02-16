@@ -37,11 +37,9 @@ class SearchBarWidget extends StatelessWidget {
                 height: 44.0,
               ),
             ),
-            state.isProductDetailsOn || state.isShowCart
+            state.homeScreenState.isProductDetails || state.homeScreenState.isCart
                 ? IconButton(
-                onPressed: () => HomeBloc.get.add(
-                    ShowMoreProductDetailsEvent(
-                        isProductDetailsOn: false)),
+                onPressed: () => HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME )),
                 icon: const Icon(
                   Icons.arrow_back,
                   color: ColorName.white,

@@ -13,6 +13,9 @@ class FontFamily {
   /// Font family: Apercu-Bold
   static const String apercuBold = 'Apercu-Bold';
 
+  /// Font family: Apercu-Light
+  static const String apercuLight = 'Apercu-Light';
+
   /// Font family: Apercu-Medium
   static const String apercuMedium = 'Apercu-Medium';
 

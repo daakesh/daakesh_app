@@ -33,8 +33,8 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  AuthenticationBackgroundWidget(
-      widget: Scaffold(
+    return  DefaultBackgroundWidget(
+      child: Scaffold(
         backgroundColor:ColorName.transparent,
         body: LayoutBuilderWidget(
           child: BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {

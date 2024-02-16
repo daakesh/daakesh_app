@@ -66,8 +66,6 @@ class PriceRateSection extends StatelessWidget {
           !state.isDaakeshTodayDeal ?
           Assets.svg.creditCardIcon.svg(width: 30.0,height: 22.0):const Icon(Icons.phone,color: ColorName.silverChalice,size: 30.0),
 
-
-
         ],
       ),
       const SizedBox(height: 17.0,),

@@ -11,8 +11,8 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
 
    @override
   Widget build(BuildContext context) {
-    return AuthenticationBackgroundWidget(
-      widget: Scaffold(
+    return DefaultBackgroundWidget(
+      child: Scaffold(
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: SizedBox(
@@ -87,7 +87,7 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
       context:context,
       showPhoneCode: true,
       onSelect: (Country country) {
-        AuthBloc.get.add(ChangeCodeCountryEvent(
+        AuthBloc.get.add(ChangeCountryCodeEvent(
           phoneCode: country.phoneCode,
           phoneFlag: country.flagEmoji,
         ));

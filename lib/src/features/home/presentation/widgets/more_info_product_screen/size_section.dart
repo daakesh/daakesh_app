@@ -24,7 +24,7 @@ class SizeSection extends StatelessWidget {
                   splashColor: ColorName.transparent,
                   focusColor: ColorName.transparent,
                   highlightColor: ColorName.transparent,
-                  onTap: ()=>HomeBloc.get.add(SelectProductSizeIndex(productSizeIndex: index)),
+                  onTap: ()=>HomeBloc.get.add(SelectProductPropertiesEvent(productSizeIndex: index)),
                   child: Container(
                     width: 121.0,
                     height: 54.0,

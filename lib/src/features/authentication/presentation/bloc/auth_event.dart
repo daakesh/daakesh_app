@@ -41,11 +41,11 @@ class ChangeFlagEvent extends AuthEvent{
     required this.flagEmoji,
   });
 }
-class ChangeCodeCountryEvent extends AuthEvent{
+class ChangeCountryCodeEvent extends AuthEvent{
   final String phoneCode;
   final String phoneFlag;
 
-  ChangeCodeCountryEvent({
+  ChangeCountryCodeEvent({
     required this.phoneCode,
     required this.phoneFlag,
   });

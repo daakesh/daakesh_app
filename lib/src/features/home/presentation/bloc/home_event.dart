@@ -1,38 +1,36 @@
+import '../../../../src.export.dart';
+
 abstract class HomeEvent{}
 
-class SearchOnOffEvent extends HomeEvent{
-  final bool isSearchOn;
-  SearchOnOffEvent({required this.isSearchOn});
+
+class SwapHomeScreenStateEvent extends HomeEvent{
+  final HomeScreenState homeScreenState;
+  SwapHomeScreenStateEvent({required this.homeScreenState});
 }
 
-class ChangeRateTypeEvent extends HomeEvent{
-  final int index;
-  ChangeRateTypeEvent({required this.index});
+class DetermentTodayDealEvent extends HomeEvent{
+  final bool isDaakeshTodayDeal;
+  DetermentTodayDealEvent({required this.isDaakeshTodayDeal});
 }
 
-class SelectProductTypeEvent extends HomeEvent{
-  final int index;
-  SelectProductTypeEvent({required this.index});
+class SetFilterDataEvent extends HomeEvent{
+  final int? rateTypeIndex;
+  final int? productTypeIndex;
+
+  SetFilterDataEvent({
+    this.rateTypeIndex,
+    this.productTypeIndex,
+  });
 }
 
-class ShowMoreProductDetailsEvent extends HomeEvent{
-  final bool isProductDetailsOn;
-  final bool? isDaakeshTodayDeal;
-  ShowMoreProductDetailsEvent({required this.isProductDetailsOn,this.isDaakeshTodayDeal});
-}
-class ShowSearchResultEvent extends HomeEvent{
-  final bool isShowSearchResult;
-  ShowSearchResultEvent({required this.isShowSearchResult});
-}
-class ShowCartEvent extends HomeEvent{
-  final bool isShowCart;
-  ShowCartEvent({required this.isShowCart});
-}
+class SelectProductPropertiesEvent extends HomeEvent{
+  final int? productSliderIndex;
+  final int? productSizeIndex;
 
-
-class ChangeProductSliderIndexEvent extends HomeEvent{
-  final int sliderIndex;
-  ChangeProductSliderIndexEvent({required this.sliderIndex});
+  SelectProductPropertiesEvent({
+    this.productSliderIndex,
+    this.productSizeIndex,
+  });
 }
 class SelectProductSizeIndex extends HomeEvent{
   final int productSizeIndex;
@@ -40,7 +38,6 @@ class SelectProductSizeIndex extends HomeEvent{
 }
 
 
-class ResetStateEvent extends HomeEvent{}
 
 
 

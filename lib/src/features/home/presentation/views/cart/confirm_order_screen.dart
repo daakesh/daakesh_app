@@ -7,8 +7,8 @@ class ConfirmOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  AuthenticationBackgroundWidget(
-      widget: LayoutBuilderWidget(
+    return  DefaultBackgroundWidget(
+      child: LayoutBuilderWidget(
         child: Scaffold(
           backgroundColor: ColorName.transparent,
           body: SizedBox(
@@ -53,7 +53,7 @@ class ConfirmOrderScreen extends StatelessWidget {
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 1));
     ProgressCircleDialog.dismiss();
-    HomeBloc.get.add(ResetStateEvent());
+    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
     openNewPage(const MainScreen(),popPreviousPages: true);
   }
 

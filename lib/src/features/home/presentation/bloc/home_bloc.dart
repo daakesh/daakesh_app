@@ -4,82 +4,36 @@ import '../../../../src.export.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
-    on<HomeEvent>(_handleEvent);
+    on<SwapHomeScreenStateEvent>(_swapHomeScreenState);
+    on<DetermentTodayDealEvent>(_determentTodayDeal);
+    on<SetFilterDataEvent>(_setFilterDataEvent);
+    on<SelectProductPropertiesEvent>(_selectProductProperties);
   }
   static HomeBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
-
-  Future<FutureOr<void>> _handleEvent(HomeEvent event, Emitter<HomeState> emit) async {
-
-    if(event is ResetStateEvent){
-      emit(state.copyWith(
-        isSearchOn: false,
-        isProductDetailsOn: false,
-        isShowSearchResult: false,
-        isShowCart:false,
-      ));
-    }
-
-    ///Home Screen event
-    if(event is SearchOnOffEvent){
-      emit(state.copyWith(
-        isSearchOn: event.isSearchOn,
-        isProductDetailsOn: false,
-        isShowSearchResult: false,
-        isShowCart:false,
-      ));
-    }
-    if(event is ShowMoreProductDetailsEvent) {
-      emit(state.copyWith(
-        isProductDetailsOn: event.isProductDetailsOn,
-        isDaakeshTodayDeal: event.isDaakeshTodayDeal,
-        isSearchOn: false,
-        productSizeIndex: 0,
-        productSliderIndex: 0,
-        isShowSearchResult: false,
-        isShowCart:false,
-      ));
-    }
-    if(event is ShowSearchResultEvent){
-      emit(state.copyWith(
-          isSearchOn: false,
-          isShowSearchResult:event.isShowSearchResult
-      ));
-    }
-    if(event is ShowCartEvent){
-      emit(state.copyWith(
-          isSearchOn: false,
-          isProductDetailsOn: false,
-          isShowSearchResult: false,
-          isShowCart:event.isShowCart
-      ));
-    }
-
-
-    ///Filter Screen event
-    if(event is ChangeRateTypeEvent){
-      emit(state.copyWith(
-        rateIndex: event.index,
-      ));
-    }
-    if (event is SelectProductTypeEvent) {
-      emit(state.copyWith(
-        productIndex: event.index,
-      ));
-    }
-
-
-    ///More Info Product Screen
-    if(event is ChangeProductSliderIndexEvent){
-      emit(state.copyWith(
-        productSliderIndex: event.sliderIndex,
-      ));
-    }
-    if(event is SelectProductSizeIndex){
-      emit(state.copyWith(
-        productSizeIndex: event.productSizeIndex,
-      ));
-    }
-
-
+  ///Event to swap between home screen states with widget like:
+  /// [HomeDataWidget],[SearchScreen],[ResultsScreen],[CartScreen],[MoreInfoProductScreen]
+  FutureOr<void> _swapHomeScreenState(SwapHomeScreenStateEvent event, Emitter<HomeState> emit) {
+    emit(state.copyWith(homeScreenState: event.homeScreenState));
+  }
+  ///In [HomeDataWidget], Specify today deal is [DaakeshTodayDealProduct] or [TodayDealProduct]
+  /// by passing [isDaakeshTodayDeal] flag.
+  FutureOr<void> _determentTodayDeal(DetermentTodayDealEvent event, Emitter<HomeState> emit) {
+    emit(state.copyWith(
+      isDaakeshTodayDeal: event.isDaakeshTodayDeal,
+    ));
+  }
+  ///Event to insert [FilterScreen] data.
+  FutureOr<void> _setFilterDataEvent(SetFilterDataEvent event, Emitter<HomeState> emit) {
+    emit(state.copyWith(
+      rateIndex: event.rateTypeIndex,
+      productTypeIndex: event.productTypeIndex,
+    ));
+  }
+  ///Event to select product properties such as {Size, preview images ...etc}.
+  FutureOr<void> _selectProductProperties(SelectProductPropertiesEvent event, Emitter<HomeState> emit) {
+    emit(state.copyWith(
+      productSliderIndex: event.productSliderIndex,
+      productSizeIndex:event.productSizeIndex,
+    ));
   }
 }

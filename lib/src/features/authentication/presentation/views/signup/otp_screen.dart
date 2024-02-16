@@ -29,8 +29,8 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthenticationBackgroundWidget(
-      widget: Scaffold(
+    return DefaultBackgroundWidget(
+      child: Scaffold(
         backgroundColor: ColorName.transparent,
         body: SingleChildScrollView(
           child: SizedBox(

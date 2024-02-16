@@ -7,8 +7,8 @@ class ThirdPartyLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  AuthenticationBackgroundWidget(
-      widget: Scaffold(
+    return  DefaultBackgroundWidget(
+      child: Scaffold(
         backgroundColor: ColorName.transparent,
         body: SingleChildScrollView(
           child: SizedBox(
