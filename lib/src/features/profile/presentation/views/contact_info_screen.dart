@@ -73,9 +73,9 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                     enabled: state.isUpdateActive,
                     suffixIcon: InkWell(
                       onTap: () => selectCountry(context,(Country country) {
-                        ProfileBloc.get.add(EditPersonalPhoneCountryEvent(
-                          phoneCode: country.phoneCode,
-                          phoneFlag: country.flagEmoji,
+                        ProfileBloc.get.add(EditContactInfoEvent(
+                          personalPhoneCode: country.phoneCode,
+                          personalPhoneFlagEmoji: country.flagEmoji,
                         ));
                       }),
                       child: SizedBox(
@@ -113,9 +113,9 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                     enabled: state.isUpdateActive,
                     suffixIcon: InkWell(
                       onTap: () => selectCountry(context,(Country country) {
-                        ProfileBloc.get.add(EditCommercialPhoneCountryEvent(
-                        phoneCode: country.phoneCode,
-                        phoneFlag: country.flagEmoji,
+                        ProfileBloc.get.add(EditContactInfoEvent(
+                        commercialPhoneCode: country.phoneCode,
+                        commercialPhoneFlagEmoji: country.flagEmoji,
                       ));
                       }),
                       child:  SizedBox(
@@ -153,9 +153,9 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                     enabled: state.isUpdateActive,
                     suffixIcon: InkWell(
                       onTap: () => selectCountry(context,(Country country) {
-                        ProfileBloc.get.add(EditWhatsAppPhoneCountryEvent(
-                        phoneCode: country.phoneCode,
-                        phoneFlag: country.flagEmoji,
+                        ProfileBloc.get.add(EditContactInfoEvent(
+                        whatsAppPhoneCode: country.phoneCode,
+                        whatsAppPhoneFlagEmoji: country.flagEmoji,
                       ));
                       }),
                       child:  SizedBox(

@@ -5,9 +5,7 @@ import '../../../../src.export.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(const ProfileState()) {
     on<ActivateUpdateEvent>(_activateUpdate);
-    on<EditPersonalPhoneCountryEvent>(_editPersonalPhoneCountry);
-    on<EditCommercialPhoneCountryEvent>(_editCommercialPhoneCountry);
-    on<EditWhatsAppPhoneCountryEvent>(_editWhatsAppPhoneCountry);
+    on<EditContactInfoEvent>(_editContactInfoEvent);
     on<ChangeLocationFlagEvent>(_changeLocationFlag);
     on<ChangeLangEvent>(_changeLang);
   }
@@ -25,25 +23,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       whatsAppPhoneCode : '962',
     ));
   }
-  ///This event allows user to change the {Flag, Country code} of personal phone at [ContactInfoScreen].
-  FutureOr<void> _editPersonalPhoneCountry(EditPersonalPhoneCountryEvent event, Emitter<ProfileState> emit) {
+  ///This event allows user to change the {Flag, Country code} of contact info at [ContactInfoScreen].
+  FutureOr<void> _editContactInfoEvent(EditContactInfoEvent event, Emitter<ProfileState> emit) {
     emit(state.copyWith(
-      personalPhoneFlagEmoji: event.phoneFlag,
-      personalPhoneCode: event.phoneCode,
-    ));
-  }
-  ///This event allows user to change the {Flag, Country code} of Commercial phone at [ContactInfoScreen].
-  FutureOr<void> _editCommercialPhoneCountry(EditCommercialPhoneCountryEvent event, Emitter<ProfileState> emit) {
-    emit(state.copyWith(
-        commercialPhoneFlagEmoji: event.phoneFlag,
-        commercialPhoneCode: event.phoneCode
-    ));
-  }
-  ///This event allows user to change the {Flag, Country code} of WhatsApp phone at [ContactInfoScreen].
-  FutureOr<void> _editWhatsAppPhoneCountry(EditWhatsAppPhoneCountryEvent event, Emitter<ProfileState> emit) {
-    emit(state.copyWith(
-        whatsAppPhoneFlagEmoji: event.phoneFlag,
-        whatsAppPhoneCode: event.phoneCode
+      personalPhoneFlagEmoji: event.personalPhoneFlagEmoji,
+      personalPhoneCode: event.personalPhoneCode,
+      commercialPhoneFlagEmoji: event.commercialPhoneFlagEmoji,
+      commercialPhoneCode: event.commercialPhoneCode,
+      whatsAppPhoneFlagEmoji: event.whatsAppPhoneFlagEmoji,
+      whatsAppPhoneCode: event.whatsAppPhoneCode
     ));
   }
   ///This event allows user to change the {Country Flag} of Location as [LocationScreen].
