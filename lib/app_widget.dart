@@ -21,8 +21,8 @@ class AppWidget extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           locale: const Locale('en'),
           theme: AppTheme.lightMode,
-          localizationsDelegates: localizationsDelegates,
-          supportedLocales: supportedLocales,
+          localizationsDelegates: context.localizationsDelegates,
+          supportedLocales: context.supportedLocales,
           navigatorKey: navigatorKey,
           home: const SplashScreen(),
         );
