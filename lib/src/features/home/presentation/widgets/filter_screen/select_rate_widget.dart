@@ -51,7 +51,7 @@ class StarTypeWidget extends StatelessWidget {
       return isAllType
           ? Expanded(
               child: GestureDetector(
-                onTap: ()=>HomeBloc.get.add(ChangeRateTypeEvent(index: index)),
+                onTap: ()=>HomeBloc.get.add(SetFilterDataEvent(rateTypeIndex: index)),
                 child: Container(
                   width: 50.0,
                   decoration: BoxDecoration(
@@ -73,7 +73,7 @@ class StarTypeWidget extends StatelessWidget {
             )
           : Expanded(
               child: GestureDetector(
-                onTap: ()=>HomeBloc.get.add(ChangeRateTypeEvent(index: index)),
+                onTap: ()=>HomeBloc.get.add(SetFilterDataEvent(rateTypeIndex: index)),
                 child: Container(
                   width: 50.0,
                   decoration: BoxDecoration(

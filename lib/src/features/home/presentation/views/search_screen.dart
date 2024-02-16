@@ -42,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   focusColor: ColorName.transparent,
                   onTap: (){
                     FocusScope.of(context).unfocus();
-                    HomeBloc.get.add(ShowSearchResultEvent(isShowSearchResult: true));
+                    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SEARCHRESULT));
                   },
                   child: Row(
                     children: [

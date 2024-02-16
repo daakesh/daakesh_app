@@ -104,6 +104,10 @@ flutter:
        fonts:
          - asset: assets/fonts/apercu/apercu_regular_pro.otf
 
+     - family: Apercu-Light
+       fonts:
+         - asset: assets/fonts/apercu/apercu_light.ttf
+
      - family: Sf-Pro-Display-Regular
        fonts:
          - asset: assets/fonts/sf_pro_display/sf_pro_display_regular.otf

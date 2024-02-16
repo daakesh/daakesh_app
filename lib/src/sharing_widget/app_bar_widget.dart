@@ -36,7 +36,7 @@ class AppBarWidget extends StatelessWidget {
                         width: 20.0,
                       ),
                       Assets.svg.searchIcon.svg(
-                          color: state.isSearchOn
+                          color: state.homeScreenState.isSearch
                               ? ColorName.amber
                               : ColorName.charcoalGray),
                       Expanded(
@@ -45,12 +45,13 @@ class AppBarWidget extends StatelessWidget {
                           child: TextFormFieldWidget(
                             controller: searchController,
                             isSuffixPrefixOn: true,
-                            suffixIcon: state.isSearchOn || state.isShowSearchResult
+                            suffixIcon: state.homeScreenState.isSearch ||
+                                state.homeScreenState.isSearchResult
                                 ? InkWell(
                                     onTap: () {
                                       FocusScope.of(context).unfocus();
                                       searchController.clear();
-                                      HomeBloc.get.add(SearchOnOffEvent(isSearchOn: false));
+                                      HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
                                     },
                                     child: const Icon(
                                       Icons.clear_outlined,
@@ -59,7 +60,7 @@ class AppBarWidget extends StatelessWidget {
                                   )
                                 : const SizedBox(),
                             onTap: () => HomeBloc.get
-                                .add(SearchOnOffEvent(isSearchOn: true)),
+                                .add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SEARCH )),
                             style: easyTheme.textTheme.labelMedium!
                                 .copyWith(fontFamily: FontFamily.apercuRegular),
                             isUnderlineOn: true,
@@ -76,7 +77,7 @@ class AppBarWidget extends StatelessWidget {
               ),
               InkWell(
                   onTap: () {
-                  HomeBloc.get.add(ShowCartEvent(isShowCart: true));
+                  HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.CART ));
                   FocusScope.of(context).unfocus();
                   },
                   child: Assets.svg.cartAddIcon.svg(width: 24.0, height: 24.0)),

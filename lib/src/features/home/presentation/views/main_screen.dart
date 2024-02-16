@@ -9,6 +9,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
+      backgroundColor: ColorName.white,
       screens: const[
         HomeScreen(),
         MyProductsScreen(),
@@ -21,14 +22,10 @@ class MainScreen extends StatelessWidget {
       stateManagement: true,
       hideNavigationBarWhenKeyboardShows: false,
       popAllScreensOnTapOfSelectedTab: true,
-
       popActionScreens: PopActionScreensType.all,
       navBarStyle: NavBarStyle.style15,
-
-
       padding:  const NavBarPadding.only(bottom: 12.0),
       navBarHeight: 77,
-
       decoration: const NavBarDecoration(
           boxShadow: [
             BoxShadow(
@@ -94,21 +91,14 @@ class MainScreen extends StatelessWidget {
 }
 
 
-class MyProductsScreen extends StatelessWidget {
-  const MyProductsScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text('My Products Screen'),);
-  }
-}
 
 class SwapScreen extends StatelessWidget {
   const SwapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Swap Screen'),);
+    return const Scaffold(body: Center(child: Text('Swap Screen'),));
   }
 }
 
@@ -117,7 +107,7 @@ class MyOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('My Order Screen'),);
+    return const Scaffold(body: Center(child: Text('My Order Screen'),));
   }
 }
 

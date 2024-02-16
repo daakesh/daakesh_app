@@ -6,38 +6,27 @@ class ChangeLangEvent extends ProfileEvent{
   ChangeLangEvent({required this.switchLangValue});
 }
 
-
 class ActivateUpdateEvent extends ProfileEvent{
   final bool isUpdatePersonalActive;
   ActivateUpdateEvent({required this.isUpdatePersonalActive});
 }
 
 
-class EditPersonalPhoneCountryEvent extends ProfileEvent{
-  final String phoneCode;
-  final String phoneFlag;
+class EditContactInfoEvent extends ProfileEvent{
+  final String? personalPhoneFlagEmoji;
+  final String? personalPhoneCode;
+  final String? commercialPhoneFlagEmoji;
+  final String? commercialPhoneCode;
+  final String? whatsAppPhoneFlagEmoji;
+  final String? whatsAppPhoneCode;
 
-  EditPersonalPhoneCountryEvent({
-    required this.phoneCode,
-    required this.phoneFlag,
-  });
-}
-class EditCommercialPhoneCountryEvent extends ProfileEvent{
-  final String phoneCode;
-  final String phoneFlag;
-
-  EditCommercialPhoneCountryEvent({
-    required this.phoneCode,
-    required this.phoneFlag,
-  });
-}
-class EditWhatsAppPhoneCountryEvent extends ProfileEvent{
-  final String phoneCode;
-  final String phoneFlag;
-
-  EditWhatsAppPhoneCountryEvent({
-    required this.phoneCode,
-    required this.phoneFlag,
+  EditContactInfoEvent({
+     this.personalPhoneFlagEmoji,
+     this.personalPhoneCode,
+     this.commercialPhoneFlagEmoji,
+     this.commercialPhoneCode,
+     this.whatsAppPhoneFlagEmoji,
+     this.whatsAppPhoneCode,
   });
 }
 

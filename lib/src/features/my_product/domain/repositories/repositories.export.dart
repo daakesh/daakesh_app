@@ -1,0 +1,1 @@
+export 'my_product_repository.dart';

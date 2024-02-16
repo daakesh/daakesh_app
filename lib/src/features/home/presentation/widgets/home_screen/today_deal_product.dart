@@ -12,7 +12,9 @@ class TodayDealProduct extends StatelessWidget {
     return InkWell(
       onTap: (){
         scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-        HomeBloc.get.add(ShowMoreProductDetailsEvent(isProductDetailsOn: true,isDaakeshTodayDeal: isDaakeshTodayDeal));
+        HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.PRODUCTDETAILS));
+        HomeBloc.get.add(DetermentTodayDealEvent(isDaakeshTodayDeal:isDaakeshTodayDeal));
+
       },
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,

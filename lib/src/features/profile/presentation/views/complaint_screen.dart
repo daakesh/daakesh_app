@@ -22,8 +22,8 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  AuthenticationBackgroundWidget(
-      widget: Scaffold(
+    return  DefaultBackgroundWidget(
+      child: Scaffold(
         backgroundColor:ColorName.transparent,
         body: LayoutBuilderWidget(
           child: BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
@@ -72,11 +72,10 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                     isSuffixPrefixOn: true,
                     suffixIcon: InkWell(
                       onTap: () {},
-                        child: const Icon(
-                          Icons.arrow_drop_down_outlined,
-                          color: ColorName.blueGray,
-                          size: 35.0,
-                        ),
+                        child: SizedBox(
+                            width: 20.0,
+                            height: 20.0,
+                            child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
                       )),
                   const SizedBox(
                     height: 25.0,

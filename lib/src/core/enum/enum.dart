@@ -4,3 +4,18 @@ enum CardsTypes {
   MASTERCARD,
   AMIRICANEXPRESS,
 }
+
+enum ProductTapBar{
+  SHOP,
+  SWAP,
+}
+
+enum HomeScreenState{
+  SEARCH,
+  PRODUCTDETAILS,
+  SEARCHRESULT,
+  CART,
+  HOME,
+}
+
+

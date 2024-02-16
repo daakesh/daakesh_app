@@ -52,7 +52,7 @@ class ProductCarousalSlider extends StatelessWidget {
               initialPage: 0,
               scrollDirection: Axis.horizontal,
               onPageChanged: (index, reason) {
-                HomeBloc.get.add(ChangeProductSliderIndexEvent(sliderIndex: index));
+                HomeBloc.get.add(SelectProductPropertiesEvent(productSliderIndex: index));
               }),
           items: [1, 2, 3].map((i) {
             return Builder(

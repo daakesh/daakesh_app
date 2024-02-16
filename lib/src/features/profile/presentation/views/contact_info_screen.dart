@@ -24,8 +24,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return  AuthenticationBackgroundWidget(
-      widget: Scaffold(
+    return  DefaultBackgroundWidget(
+      child: Scaffold(
         backgroundColor:ColorName.transparent,
         body: LayoutBuilderWidget(
           child: BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
@@ -73,9 +73,9 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                     enabled: state.isUpdateActive,
                     suffixIcon: InkWell(
                       onTap: () => selectCountry(context,(Country country) {
-                        ProfileBloc.get.add(EditPersonalPhoneCountryEvent(
-                          phoneCode: country.phoneCode,
-                          phoneFlag: country.flagEmoji,
+                        ProfileBloc.get.add(EditContactInfoEvent(
+                          personalPhoneCode: country.phoneCode,
+                          personalPhoneFlagEmoji: country.flagEmoji,
                         ));
                       }),
                       child: SizedBox(
@@ -87,11 +87,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                               style: const TextStyle(
                                   color: ColorName.blueGray, fontSize: 24.0),
                             ),
-                            const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              color: ColorName.blueGray,
-                              size: 35.0,
-                            ),
+                            const SizedBox(width: 10.0,),
+                            Assets.svg.arrowDropDownIcon.svg(),
                           ],
                         ),
                       ),
@@ -116,9 +113,9 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                     enabled: state.isUpdateActive,
                     suffixIcon: InkWell(
                       onTap: () => selectCountry(context,(Country country) {
-                        ProfileBloc.get.add(EditCommercialPhoneCountryEvent(
-                        phoneCode: country.phoneCode,
-                        phoneFlag: country.flagEmoji,
+                        ProfileBloc.get.add(EditContactInfoEvent(
+                        commercialPhoneCode: country.phoneCode,
+                        commercialPhoneFlagEmoji: country.flagEmoji,
                       ));
                       }),
                       child:  SizedBox(
@@ -130,12 +127,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                               style: const TextStyle(
                                   color: ColorName.blueGray, fontSize: 24.0),
                             ),
-
-                            const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              color: ColorName.blueGray,
-                              size: 35.0,
-                            ),
+                            const SizedBox(width: 10.0,),
+                            Assets.svg.arrowDropDownIcon.svg(),
                           ],
                         ),
                       ),
@@ -160,9 +153,9 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                     enabled: state.isUpdateActive,
                     suffixIcon: InkWell(
                       onTap: () => selectCountry(context,(Country country) {
-                        ProfileBloc.get.add(EditWhatsAppPhoneCountryEvent(
-                        phoneCode: country.phoneCode,
-                        phoneFlag: country.flagEmoji,
+                        ProfileBloc.get.add(EditContactInfoEvent(
+                        whatsAppPhoneCode: country.phoneCode,
+                        whatsAppPhoneFlagEmoji: country.flagEmoji,
                       ));
                       }),
                       child:  SizedBox(
@@ -174,11 +167,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                               style: const TextStyle(
                                   color: ColorName.blueGray, fontSize: 24.0),
                             ),
-                            const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              color: ColorName.blueGray,
-                              size: 35.0,
-                            ),
+                            const SizedBox(width: 10.0,),
+                            Assets.svg.arrowDropDownIcon.svg(),
                           ],
                         ),
                       ),

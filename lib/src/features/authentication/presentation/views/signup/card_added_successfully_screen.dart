@@ -6,8 +6,8 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthenticationBackgroundWidget(
-      widget: Scaffold(
+    return DefaultBackgroundWidget(
+      child: Scaffold(
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: SizedBox(
@@ -50,5 +50,10 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
       ),
     );
   }
-  void onStartShopping(){}
+  void onStartShopping()async{
+    ProgressCircleDialog.show();
+    await Future.delayed(const Duration(seconds: 1));
+    ProgressCircleDialog.dismiss();
+    openNewPage(const MainScreen(),popPreviousPages: true,);
+  }
 }

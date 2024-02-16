@@ -112,7 +112,7 @@ class HomeDataWidget extends StatelessWidget {
           padding:const EdgeInsets.symmetric(horizontal: 20.0),
           sliver: SliverGrid(
               delegate: SliverChildBuilderDelegate((_, index) {
-                return  TodayDealProduct(isDaakeshTodayDeal: true,scrollController:scrollController ,);
+                return TodayDealProduct(isDaakeshTodayDeal: true,scrollController:scrollController ,);
               },
                 childCount: 6,
               ),

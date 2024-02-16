@@ -16,6 +16,9 @@ class ColorName {
   /// Color: #FFA31D
   static const Color amber = Color(0xFFFFA31D);
 
+  /// Color: #ADADAD
+  static const Color ashGray = Color(0xFFADADAD);
+
   /// Color: #000000
   static const Color black = Color(0xFF000000);
 
@@ -28,6 +31,9 @@ class ColorName {
   /// Color: #8B8B8B
   static const Color darkGray = Color(0xFF8B8B8B);
 
+  /// Color: #029729
+  static const Color darkGreen = Color(0xFF029729);
+
   /// Color: #222F3EBF
   static const Color darkSlateBlue = Color(0x222F3EBF);
 
@@ -39,6 +45,9 @@ class ColorName {
 
   /// Color: #707070
   static const Color gray = Color(0xFF707070);
+
+  /// Color: #A7A7A7
+  static const Color grayish = Color(0xFFA7A7A7);
 
   /// Color: #787B86
   static const Color grayishBlue = Color(0xFF787B86);
@@ -87,4 +96,7 @@ class ColorName {
 
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);
+
+  /// Color: #FAFAFA
+  static const Color whiteSmoke = Color(0xFFFAFAFA);
 }
