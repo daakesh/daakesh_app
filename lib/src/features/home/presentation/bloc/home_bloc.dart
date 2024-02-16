@@ -36,4 +36,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       productSizeIndex:event.productSizeIndex,
     ));
   }
+
 }
