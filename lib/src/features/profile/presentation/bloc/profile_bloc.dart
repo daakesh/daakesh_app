@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc() : super(const ProfileState()) {
+  ProfileBloc() : super(const ProfileState()){
     on<ActivateUpdateEvent>(_activateUpdate);
     on<EditContactInfoEvent>(_editContactInfoEvent);
     on<ChangeLocationFlagEvent>(_changeLocationFlag);
@@ -44,5 +44,4 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       switchLangValue: event.switchLangValue,
     ));
   }
-
 }
