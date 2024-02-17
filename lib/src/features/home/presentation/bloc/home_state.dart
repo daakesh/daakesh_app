@@ -27,7 +27,6 @@ class HomeState extends Equatable {
   const HomeState({
     this.homeStateStatus = HomeStateStatus.INITIAL,
     this.homeScreenState = HomeScreenState.HOME,
-    ///Search screen widget
     ///Filter screen State
     this.rateIndex = 1,
     this.productTypeIndex = 0,
@@ -38,7 +37,7 @@ class HomeState extends Equatable {
     this.productSizeIndex = 0,
 
 
-  });
+  }); // Assign default value here if null is provided
 
   HomeState copyWith({
     HomeStateStatus? homeStateStatus,

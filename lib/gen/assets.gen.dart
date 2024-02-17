@@ -100,6 +100,10 @@ class $AssetsSvgGen {
   /// File path: assets/svg/apple_icon.svg
   SvgGenImage get appleIcon => const SvgGenImage('assets/svg/apple_icon.svg');
 
+  /// File path: assets/svg/arrow_back_icon.svg
+  SvgGenImage get arrowBackIcon =>
+      const SvgGenImage('assets/svg/arrow_back_icon.svg');
+
   /// File path: assets/svg/arrow_drop_down_icon.svg
   SvgGenImage get arrowDropDownIcon =>
       const SvgGenImage('assets/svg/arrow_drop_down_icon.svg');
@@ -163,6 +167,10 @@ class $AssetsSvgGen {
   SvgGenImage get furtherInfoIcon =>
       const SvgGenImage('assets/svg/further_info_icon.svg');
 
+  /// File path: assets/svg/image_picker_icon.svg
+  SvgGenImage get imagePickerIcon =>
+      const SvgGenImage('assets/svg/image_picker_icon.svg');
+
   /// File path: assets/svg/light_daakesh_logo.svg
   SvgGenImage get lightDaakeshLogo =>
       const SvgGenImage('assets/svg/light_daakesh_logo.svg');
@@ -201,6 +209,7 @@ class $AssetsSvgGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         appleIcon,
+        arrowBackIcon,
         arrowDropDownIcon,
         arrowRightIcon,
         cartAddIcon,
@@ -217,6 +226,7 @@ class $AssetsSvgGen {
         enableProfileIcon,
         facebookIcon,
         furtherInfoIcon,
+        imagePickerIcon,
         lightDaakeshLogo,
         locationPinIcon,
         personIcon,

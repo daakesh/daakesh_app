@@ -124,5 +124,6 @@ class CardAndAccountScreen extends StatelessWidget {
   }
   void cancel(bool isUpdateActive){
     ProfileBloc.get.add(ActivateUpdateEvent(isUpdatePersonalActive: false));
+    getBack();
   }
 }

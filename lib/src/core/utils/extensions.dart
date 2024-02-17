@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-import '../../src.export.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../src.export.dart';
 
-///
 ///To capitalize first letter only.
 extension StringExtension on String {
-  String capitalize() {
-    return
-      "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
-  }
+  String get capitalize => "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
 }
-///
-///
+///More functionality for swapping between screen in [HomeScreen]
 extension HomeScreenStateX on HomeScreenState{
   bool get isSearch => this == HomeScreenState.SEARCH;
   bool get isProductDetails => this == HomeScreenState.PRODUCTDETAILS;
@@ -25,6 +19,7 @@ extension HomeScreenStateX on HomeScreenState{
 
 extension GlobalBuildContext on BuildContext{
   ThemeData get easyTheme => Theme.of(this);
+  void get disMissKeyboard=> FocusScope.of(this).unfocus();
   AppLocalizations get locale => AppLocalizations.of(this)!;
   List<Locale> get supportedLocales => [
     const Locale('en'), // English

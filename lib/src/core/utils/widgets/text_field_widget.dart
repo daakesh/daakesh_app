@@ -26,7 +26,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextStyle? style;
   final double? cursorHeight;
   final double cursorWidth;
-  final int maxLines;
+  final int? maxLines;
   final TextAlignVertical textAlignVertical;
 
 
@@ -55,7 +55,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.enabled,
     this.readOnly = false,
     this.expands = false,
-    this.maxLines = 1,
+    this.maxLines,
 
 
   });

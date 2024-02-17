@@ -8,7 +8,7 @@ class SearchProductBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.only(start: 16.0,top: 17.0,end: 13.0,bottom: 31.0),
+      padding: const EdgeInsetsDirectional.only(start: 16.0,end: 13.0,bottom: 0.0),
       child: Row(
         children: [
           Expanded(

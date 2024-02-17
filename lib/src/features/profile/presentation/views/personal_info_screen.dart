@@ -73,6 +73,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       controller: passwordController,
                       enabled: state.isUpdateActive,
                       obscureText: true,
+                      maxLines: 1,
                     ),
                     const SizedBox(height: 40.0,),
                     const Spacer(flex: 1,),

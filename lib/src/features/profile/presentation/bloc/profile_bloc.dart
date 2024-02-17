@@ -21,6 +21,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       commercialPhoneCode : '962',
       whatsAppPhoneFlagEmoji : '🇯🇴',
       whatsAppPhoneCode : '962',
+      locationFlagEmoji : '🇯🇴',
     ));
   }
   ///This event allows user to change the {Flag, Country code} of contact info at [ContactInfoScreen].
