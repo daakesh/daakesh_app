@@ -63,7 +63,6 @@ class SellerInfoCard extends StatelessWidget {
           ],),
           const SizedBox(height: 8.0,),
           Row(children: [
-
             Text('Your Store Rate:',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0,color: ColorName.grayish),),
             const SizedBox(width: 2.0,),
             RatingBar.builder(
@@ -84,19 +83,7 @@ class SellerInfoCard extends StatelessWidget {
             const SizedBox(width: 4.0,),
             Expanded(child: Text('5.9',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 13.0,color: ColorName.black),)),
             Text('Active',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 16.0,color: ColorName.darkGreen),),
-
-
-
-
-
-
           ],),
-
-
-
-
-
-
 
         ],
       ),
@@ -104,6 +91,6 @@ class SellerInfoCard extends StatelessWidget {
   }
 
   void onEditSellerInfo() {
-    openNewPage(const EditSellerInfoScreen());
+    openNewPage(EditSellerInfoScreen());
   }
 }

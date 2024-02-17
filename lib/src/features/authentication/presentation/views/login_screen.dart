@@ -59,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: passwordController,
                           focusNode: passwordFocusNode,
                           obscureText: true,
+                          maxLines: 1,
                         ),
                         Row(
                           children: [

@@ -24,7 +24,7 @@ class MainScreen extends StatelessWidget {
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       navBarStyle: NavBarStyle.style15,
-      padding:  const NavBarPadding.only(bottom: 12.0),
+      padding: const NavBarPadding.only(bottom: 12.0),
       navBarHeight: 77,
       decoration: const NavBarDecoration(
           boxShadow: [
@@ -41,11 +41,9 @@ class MainScreen extends StatelessWidget {
   }
   List<PersistentBottomNavBarItem> _navBarsItems(context) {
     return [
-
       PersistentBottomNavBarItem(
         icon: bottomNavBarItem(icon:SizedBox(height:24.0,child: Assets.svg.enableHomeIcon.svg(width: 28.0,height: 26.0,)), title: 'Home'),
         inactiveIcon: bottomNavBarItem(icon:SizedBox(height:24.0,child: Assets.svg.disableHomeIcon.svg(width: 28.0,height: 26.0,)), title: 'Home'),
-
       ),
 
       PersistentBottomNavBarItem(

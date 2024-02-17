@@ -5,7 +5,7 @@ import '../../../../../src.export.dart';
 class AddCommentRateSection extends StatelessWidget {
   final HomeState state;
   AddCommentRateSection({super.key, required this.state,});
-  final  commentController = TextEditingController();
+  final commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,10 @@ class AddCommentRateSection extends StatelessWidget {
                       Icons.star,
                       color: Colors.amber,
                     ),
-                    onRatingUpdate: (rating) {},
+                    onRatingUpdate: (rating) {
+                      context.disMissKeyboard;
+                    },
+
                   ),
                   Assets.svg.sendIcon.svg(width: 27.0,height: 27.0),
                 ],),
@@ -58,7 +61,7 @@ class AddCommentRateSection extends StatelessWidget {
                   controller: commentController,
                   hintText: 'Comment',
                   isUnderlineOn: true,
-                  maxLines: 3,
+                  maxLines: 5,
                 ),
               ),
 

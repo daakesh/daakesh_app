@@ -61,6 +61,7 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
                     controller: passwordController,
                     focusNode: passwordFocusNode,
                     obscureText: true,
+                    maxLines: 1,
                   ),
                   const SizedBox(height: 64.0),
                   Center(child: DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context))),
