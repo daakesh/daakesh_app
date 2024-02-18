@@ -11,41 +11,44 @@ class MyProductsScreen extends StatelessWidget {
       backgroundColor: ColorName.whiteSmoke,
       floatingActionButton: const FloatingAddProductWidget(),
       body: BlocBuilder<MyProductBloc, MyProductState>(builder: (_, state) {
-        return  CustomScrollView(
+        return CustomScrollView(
           slivers: [
             const SliverToBoxAdapter(child: HeaderWidget(withArrowBack: false),),
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 16.0)),
+            SliverPadding(padding: EdgeInsetsDirectional.only(top: 16.0.h)),
             const SliverToBoxAdapter(child: SellerInfoCard()),
+            SliverPadding(padding: EdgeInsetsDirectional.only(top: 8.0.h)),
             SliverAppBar(
               backgroundColor: ColorName.whiteSmoke,
               pinned: true,
-              bottom: const PreferredSize(preferredSize:Size.fromHeight(50) , child: SizedBox(),),
+              bottom: PreferredSize(preferredSize:Size.fromHeight(70.h) , child: const SizedBox(),),
               surfaceTintColor: ColorName.whiteSmoke,
               flexibleSpace: FlexibleSpaceBar(
                 title: SizedBox(
-                  height: 140.0,
+                  height: 130.0.h,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       ProductTypeTabBar(state:state),
-                      const SizedBox(height: 17.0,),
+                      SizedBox(height: 17.0.h,),
                       const SearchProductBarWidget(),
+
                     ],
                   ),
                 ),
-                titlePadding: const EdgeInsetsDirectional.symmetric(vertical: 5.0),
+                titlePadding: EdgeInsetsDirectional.symmetric(vertical: 5.0.h),
               ),
             ),
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 30.0)),
+            SliverPadding(padding: EdgeInsetsDirectional.only(top: 30.0.h)),
             SliverToBoxAdapter(child:Padding(
-              padding: const EdgeInsetsDirectional.only(start: 28.0,bottom: 13.0),
-              child: Text('My Product',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 20.0,color: ColorName.black),),
-            ),),
+              padding: EdgeInsetsDirectional.only(start: 28.0.w,bottom: 13.0.h),
+                child: Text(
+                  'My Product',
+                  style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 20.0.sp, color: ColorName.black),
+                ),
+              ),),
             state.productTapBar == ProductTapBar.SHOP
                 ? const ShopProductItem()
                 : const SwapProductItem(),
-            SliverPadding(padding: EdgeInsetsDirectional.only(top: getScreenHeight(context) * 0.15)),
+            SliverPadding(padding: EdgeInsetsDirectional.only(top: 150.0.h)),
           ],
         );
       }),

@@ -13,7 +13,7 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150.0,
+      height: 140.h,
       width: double.infinity,
       decoration: BoxDecoration(
         color: ColorName.blueGray,
@@ -22,26 +22,33 @@ class HeaderWidget extends StatelessWidget {
           alignment: AlignmentDirectional.centerEnd,
         ),
       ),
-      child:withArrowBack ? Stack(
+      child:withArrowBack
+          ? Stack(
         alignment: AlignmentDirectional.bottomStart,
         children: [
-          const Center(
-            child: DaakeshLogoWidget(
-              isLight: true,
-              height: 44.0,
+          Center(
+            child: Column(
+              children: [
+                SizedBox(height: 53.0.h,),
+                DaakeshLogoWidget(
+                  isLight: true,
+                  height: 44.0.h,
+                ),
+              ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(bottom: 38.0,start: 20.0),
-            child: IconButton(onPressed: ()=>Navigator.pop(context), icon: const Icon(Icons.arrow_back,color: ColorName.white,)),
-          )
+          IconButton(onPressed: ()=>Navigator.pop(context), icon: const Icon(Icons.arrow_back,color: ColorName.white,))
         ],
-      ):const Center(
-        child: DaakeshLogoWidget(
-          isLight: true,
-          height: 44.0,
-        ),
-      ),
+      )
+          : Column(
+            children: [
+              SizedBox(height: 53.0.h,),
+              DaakeshLogoWidget(
+                  isLight: true,
+                  height: 44.0.h,
+                ),
+            ],
+          ),
     );
   }
 }

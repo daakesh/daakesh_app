@@ -1,4 +1,5 @@
 import 'package:daakesh/gen/fonts.gen.dart';
+import 'package:daakesh/src/src.export.dart';
 import 'package:flutter/material.dart';
 import '../../../gen/colors.gen.dart';
 
@@ -21,9 +22,9 @@ class AppTheme {
         minimumSize: const Size(387.0, 56.0),
         backgroundColor: ColorName.blueGray,
         foregroundColor: ColorName.white,
-        textStyle: const TextStyle(
+        textStyle:  TextStyle(
           fontFamily: FontFamily.apercuRegular,
-          fontSize: 20.0,
+          fontSize: 20.0.sp,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -36,9 +37,9 @@ class AppTheme {
          foregroundColor: ColorName.blueGray,
          side: const BorderSide(color: ColorName.blueGray),
          minimumSize:const Size(387.0, 56.0),
-         textStyle: const TextStyle(
+         textStyle: TextStyle(
            fontFamily: FontFamily.apercuMedium,
-           fontSize: 20.0,
+           fontSize: 20.0.sp,
          ),
          shape: RoundedRectangleBorder(
            borderRadius: BorderRadius.circular(8.0),
@@ -48,60 +49,60 @@ class AppTheme {
     ///
 
     ///TextStyle
-    textTheme: const TextTheme(
+    textTheme:  TextTheme(
       ///sfProDisplaySemiBold
       labelSmall: TextStyle(
         fontFamily: FontFamily.sfProDisplaySemiBold,
-        fontSize: 18.0,
+        fontSize: 18.0.sp,
         color: ColorName.black,
       ),
       ///labelMedium
       labelMedium: TextStyle(
         fontFamily: FontFamily.sfProDisplayRegular,
-        fontSize: 18.0,
+        fontSize: 18.0.sp,
         color: ColorName.black,
       ),
       ///labelMedium
       labelLarge: TextStyle(
         fontFamily: FontFamily.segoeUISemiBold,
-        fontSize: 22.0,
+        fontSize: 22.0.sp,
         color: ColorName.white,
       ),
       ///bodySmall => apercuLight
       bodySmall:TextStyle(
         fontFamily: FontFamily.apercuLight,
-        fontSize: 14.0,
+        fontSize: 14.0.sp,
         color: ColorName.ashGray,
       ),
       ///bodyMedium
       bodyMedium:TextStyle(
         fontFamily: FontFamily.apercuRegular,
-        fontSize: 17.0,
+        fontSize: 17.0.sp,
         color: ColorName.blueGray,
       ),
       ///bodyLarge
       bodyLarge:TextStyle(
         fontFamily: FontFamily.apercuMedium,
-        fontSize: 20.0,
+        fontSize: 20.0.sp,
         color: ColorName.blueGray,
       ),
 
       ///headlineSmall
       headlineSmall: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: 18.0,
+        fontSize: 18.0.sp,
         color: ColorName.blueGray,
       ),
       ///headlineMedium
       headlineMedium: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: 25.0,
+        fontSize: 25.0.sp,
         color: ColorName.blueGray,
       ),
       ///headlineLarge
       headlineLarge: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: 40.0,
+        fontSize: 40.0.sp,
         color: ColorName.blueGray,
       ),
 
