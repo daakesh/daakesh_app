@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../src.export.dart';
+import '../../../../../src.export.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
@@ -8,6 +8,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DetermentTodayDealEvent>(_determentTodayDeal);
     on<SetFilterDataEvent>(_setFilterDataEvent);
     on<SelectProductPropertiesEvent>(_selectProductProperties);
+    on<GetAllHomeDataEvent>(_getAllHomeData);
   }
   static HomeBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
   ///Event to swap between home screen states with widget like:
@@ -36,4 +37,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       productSizeIndex:event.productSizeIndex,
     ));
   }
+  ///Event to gat home screen data such as {Categories, Deals, Daakesh Deals, What's New Section}
+  FutureOr<void> _getAllHomeData(GetAllHomeDataEvent event, Emitter<HomeState> emit)async{
+    emit(state.copyWith(homeStateStatus:  HomeStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().getAllData();
+    result.fold((l) {
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async{
+      if(!r.status!){
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      HomeDataModel homeDataList = HomeDataModel.fromJson(r.data);
+      List<SectionModel> sectionListData = homeDataList.data!.sections!.toList();
+
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,sectionListData:sectionListData));
+    });
+  }
+
 }

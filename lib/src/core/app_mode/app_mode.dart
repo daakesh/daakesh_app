@@ -19,7 +19,7 @@ class AppTheme {
     ///ElevatedButtonTheme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(387.0, 56.0),
+        minimumSize:  Size(387.0.w, 56.0.h),
         backgroundColor: ColorName.blueGray,
         foregroundColor: ColorName.white,
         textStyle:  TextStyle(
@@ -27,7 +27,7 @@ class AppTheme {
           fontSize: 20.0.sp,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(8.0.r),
         ),
       ),
     ),
@@ -36,13 +36,13 @@ class AppTheme {
        style: OutlinedButton.styleFrom(
          foregroundColor: ColorName.blueGray,
          side: const BorderSide(color: ColorName.blueGray),
-         minimumSize:const Size(387.0, 56.0),
+         minimumSize:Size(387.0.w, 56.0.h),
          textStyle: TextStyle(
            fontFamily: FontFamily.apercuMedium,
            fontSize: 20.0.sp,
          ),
          shape: RoundedRectangleBorder(
-           borderRadius: BorderRadius.circular(8.0),
+           borderRadius: BorderRadius.circular(8.0.r),
          ),
        ),
      ),

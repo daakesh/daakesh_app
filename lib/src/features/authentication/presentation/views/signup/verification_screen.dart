@@ -25,34 +25,30 @@ class _VerificationScreenState extends State<VerificationScreen> {
         body: LayoutBuilderWidget(
           child: SizedBox(
             width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 110.0,),
-                  const Padding(
-                    padding: EdgeInsetsDirectional.only(start: 38.0),
-                    child: Align(alignment: AlignmentDirectional.centerStart,child: DaakeshLogoWidget()),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 110.0.h,),
+                Padding(
+                  padding: EdgeInsetsDirectional.only(start: 56.0.w,end: 97.0.w),
+                  child: const DaakeshLogoWidget(),
+                ),
+                const Spacer(flex: 1,),
+                Container(
+                  width: 150.0.w,
+                  height: 150.0.h,
+                  decoration:BoxDecoration(
+                    image: DecorationImage(image: AssetImage(Assets.png.checkIcon.path))
                   ),
-                  //const SizedBox(height: 185.0,),
-                  const Spacer(flex: 1,),
-                  Container(
-                    width: 150.0,
-                    height: 150.0,
-                    decoration:BoxDecoration(
-                      image: DecorationImage(image: AssetImage(Assets.png.checkIcon.path))
-                    ),
-                  ),
-                  const SizedBox(height: 19.0,),
-                  Text('Verification Complete!',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 32.0)),
-                  const SizedBox(height: 9.0,),
-                  Text('Now You Can Start And Find Best Deals',style: easyTheme.textTheme.bodyMedium),
-                  const Spacer(flex: 1,),
-                  const SizedBox(height: 100.0,),
+                ),
+                SizedBox(height: 19.0.h,),
+                Text('Verification Complete!',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 32.0.sp)),
+                SizedBox(height: 9.0.h,),
+                Text('Now You Can Start And Find Best Deals',style: easyTheme.textTheme.bodyMedium),
+                const Spacer(flex: 1,),
+                SizedBox(height: 100.0.h,),
 
-                ],
-              ),
+              ],
             ),
           ),
         ),

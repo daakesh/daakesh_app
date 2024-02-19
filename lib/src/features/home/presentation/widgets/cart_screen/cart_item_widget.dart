@@ -39,7 +39,7 @@ class CartItemWidget extends StatelessWidget {
             const Spacer(flex: 1,),
             Text('By',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0,color: ColorName.gray),),
             const SizedBox(width: 5.0,),
-            const DaakeshLogoWidget(height: 18.0),
+            DaakeshLogoWidget(width: 68.0.w,),
             const SizedBox(width: 12.0,),
 
           ],),

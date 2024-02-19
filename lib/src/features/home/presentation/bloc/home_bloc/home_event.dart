@@ -1,4 +1,5 @@
-import '../../../../src.export.dart';
+
+import '../../../../../src.export.dart';
 
 abstract class HomeEvent{}
 
@@ -36,6 +37,8 @@ class SelectProductSizeIndex extends HomeEvent{
   final int productSizeIndex;
   SelectProductSizeIndex({required this.productSizeIndex});
 }
+class GetAllHomeDataEvent extends HomeEvent{}
+
 
 
 

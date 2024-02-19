@@ -9,7 +9,6 @@ class RemoteAuthDatasource implements AuthDatasource {
   @override
   Future<Either<Failure, ValidResponse>> onLogin(String phoneNumber,String passwordNumber) async {
     final result = await getIt.get<NetworkService>().post(
-      baseUrl: NetworkConstants.baseUrl,
       path: 'DaakeshServices/api/user/login',
       body: {
           "phoneNumber": phoneNumber.toString(),
@@ -21,7 +20,6 @@ class RemoteAuthDatasource implements AuthDatasource {
   @override
   Future<Either<Failure, ValidResponse>> addUser(String name, String email, String password, String phoneNumber, String userType) async{
     final result = await getIt.get<NetworkService>().post(
-        baseUrl: NetworkConstants.baseUrl,
         path: 'DaakeshServices/api/user/addUser',
         body: {
           "name":name.toString(),
@@ -36,7 +34,6 @@ class RemoteAuthDatasource implements AuthDatasource {
   @override
   Future<Either<Failure, ValidResponse>> activateUser(String id) async{
     final result = await getIt.get<NetworkService>().get(
-        baseUrl: NetworkConstants.baseUrl,
         path: 'DaakeshServices/api/user/activateUser',
         params: {
           "id": id.toString(),
@@ -47,7 +44,6 @@ class RemoteAuthDatasource implements AuthDatasource {
   @override
   Future<Either<Failure, ValidResponse>> getUserData() async{
     final result = await getIt.get<NetworkService>().get(
-      baseUrl: NetworkConstants.baseUrl,
       path: 'DaakeshServices/api/user/getUserData',
       userToken: ValueConstants.token,
     );

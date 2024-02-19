@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class PopularCategoriesWidget extends StatelessWidget {
+  final SectionModel data;
   const PopularCategoriesWidget({
-    super.key,
+    super.key, required this.data,
   });
 
   @override
@@ -28,23 +29,50 @@ class PopularCategoriesWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 2.0,
-            ),
-            Padding(
-              padding:
-              const EdgeInsetsDirectional.only(start: 11.0),
-              child: Text('Baby',
-                  style: easyTheme.textTheme.bodyMedium!
-                      .copyWith(fontSize: 20.0)),
+            Expanded(
+              child: Padding(
+                padding:
+                const EdgeInsetsDirectional.only(start: 11.0),
+                child: Text(data.name.toString(),
+                    style: easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontSize: 15.0)),
+              ),
             ),
             Align(
-                alignment: AlignmentDirectional.bottomEnd,
-                child: Assets.png.babyIcon
-                    .image(width: 101.0, height: 90.0)),
+              alignment: AlignmentDirectional.bottomEnd,
+              child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      bottomRight: Radius.circular(18.0),bottomLeft: Radius.circular(18.0)),
+                  child: CachedImage(imageUrl: data.secImg.toString())),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+
+///
+///       Stack(
+///           fit: StackFit.expand,
+///           children: [
+///             ClipRRect(
+///                 borderRadius: const BorderRadius.all(Radius.circular(18.0)),
+///                 child: CachedImage(imageUrl:data.secImg.toString())),
+///             Padding(
+///               padding:
+///               EdgeInsetsDirectional.only(start: 11.0.w,top: 5.0.h),
+///               child: Text(data.name.toString().capitalize,
+///                   style: easyTheme.textTheme.bodyMedium!
+///                       .copyWith(fontSize: 16.0.sp)),
+///             ),
+///
+///           ],
+///         )
+///
+///
+///
+///
+///
+///

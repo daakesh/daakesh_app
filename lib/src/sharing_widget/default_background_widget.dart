@@ -13,6 +13,7 @@ class DefaultBackgroundWidget extends StatelessWidget {
         color: ColorName.white,
         image: DecorationImage(
           image: AssetImage(Assets.png.authScreensBackground.path),
+          fit: BoxFit.cover,
           opacity: 0.4
         ),
       ),

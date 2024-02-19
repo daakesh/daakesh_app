@@ -43,10 +43,7 @@ class HeaderWidget extends StatelessWidget {
           : Column(
             children: [
               SizedBox(height: 53.0.h,),
-              DaakeshLogoWidget(
-                  isLight: true,
-                  height: 44.0.h,
-                ),
+              DaakeshLogoWidget(isLight: true, width: 184.0.w,),
             ],
           ),
     );

@@ -49,7 +49,7 @@ class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
                                 onPressed: () {},
                                 style: easyTheme.elevatedButtonTheme.style!
                                     .copyWith(
-                                  minimumSize: MaterialStateProperty.all(const Size(40.0, 56.0)),
+                                  minimumSize: MaterialStateProperty.all( Size(40.0.w, 56.0.h)),
                                   backgroundColor: MaterialStateProperty.all(ColorName.amber),
 
 

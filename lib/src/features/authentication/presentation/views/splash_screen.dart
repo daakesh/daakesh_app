@@ -36,12 +36,13 @@ class _SplashScreenState extends State<SplashScreen> {
           fit: BoxFit.fill,
         ),
       ),
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: ColorName.transparent,
-        body: Center(
+        body: Align(
+          alignment: AlignmentDirectional.centerStart,
           child: Padding(
-            padding: EdgeInsetsDirectional.only(end: 50.0),
-            child: DaakeshLogoWidget(),
+            padding: EdgeInsetsDirectional.only(start: 53.0.w,end: 105.w),
+            child: const DaakeshLogoWidget(),
           ),
         ),
       ),

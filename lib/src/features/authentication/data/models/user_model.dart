@@ -9,9 +9,11 @@ class UserModel {
   String? email;
   String? img;
   String? deviceToken;
-
-  UserModel(
-      {this.id,
+  String? country;
+  String? city;
+  String? address;
+  UserModel({
+        this.id,
         this.name,
         this.phoneNumber,
         this.password,
@@ -20,7 +22,11 @@ class UserModel {
         this.token,
         this.email,
         this.img,
-        this.deviceToken});
+        this.deviceToken,
+        this.country,
+        this.city,
+        this.address,
+      });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -33,20 +39,9 @@ class UserModel {
     email = json['email'];
     img = json['img'];
     deviceToken = json['deviceToken'];
+    deviceToken = json['country'];
+    deviceToken = json['city'];
+    deviceToken = json['address'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['phoneNumber'] = phoneNumber;
-    data['password'] = password;
-    data['active'] = active;
-    data['userType'] = userType;
-    data['token'] = token;
-    data['email'] = email;
-    data['img'] = img;
-    data['deviceToken'] = deviceToken;
-    return data;
-  }
 }

@@ -24,13 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
           AppBarWidget(searchController: searchController,),
         ];
       },
-        body:BlocBuilder<HomeBloc,HomeState>(builder: (ctx,state){
+        body:BlocBuilder<HomeBloc,HomeState>(
+            builder: (ctx,state){
            switch(state.homeScreenState){
              case HomeScreenState.SEARCH: return const SearchScreen();
              case HomeScreenState.SEARCHRESULT: return const ResultsScreen();
              case HomeScreenState.CART: return const CartScreen();
              case HomeScreenState.PRODUCTDETAILS: return const MoreInfoProductScreen();
-             default:return HomeDataWidget(scrollController: scrollController,);
+             default:return HomeDataWidget(scrollController: scrollController, state: state,);
            }
         }),
       ),

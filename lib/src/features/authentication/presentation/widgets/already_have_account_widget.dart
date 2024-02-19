@@ -14,7 +14,7 @@ class AlreadyHaveAccountWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text('Don\'t have an Account? ', style: easyTheme.textTheme.bodyMedium,),
-        TextButtonWidget(text: 'Login', onPressed: ()=>openNewPage(LoginScreen()),isBold: true),
+        TextButtonWidget(text: 'Login', onPressed: ()=>openNewPage(const LoginScreen()),isBold: true),
       ],
     );
   }

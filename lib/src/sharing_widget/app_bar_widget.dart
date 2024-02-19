@@ -1,12 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../src.export.dart';
 
-class AppBarWidget extends StatelessWidget {
+class AppBarWidget extends StatefulWidget {
   final TextEditingController searchController;
 
   const AppBarWidget({super.key, required this.searchController});
+
+  @override
+  State<AppBarWidget> createState() => _AppBarWidgetState();
+}
+
+class _AppBarWidgetState extends State<AppBarWidget> {
+  Timer? _debounceTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +41,8 @@ class AppBarWidget extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      const SizedBox(
-                        width: 20.0,
+                      SizedBox(
+                        width: 12.0.w,
                       ),
                       Assets.svg.searchIcon.svg(
                           color: state.homeScreenState.isSearch
@@ -41,26 +50,25 @@ class AppBarWidget extends StatelessWidget {
                               : ColorName.charcoalGray),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                           child: TextFormFieldWidget(
-                            controller: searchController,
+                            controller: widget.searchController,
                             isSuffixPrefixOn: true,
+                            onChanged: onChange,
+                            inputFormatters: [
+                              RegExpValidator.beginWhitespace,
+                            ],
                             suffixIcon: state.homeScreenState.isSearch ||
                                 state.homeScreenState.isSearchResult
                                 ? InkWell(
-                                    onTap: () {
-                                      FocusScope.of(context).unfocus();
-                                      searchController.clear();
-                                      HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
-                                    },
+                                    onTap: clearText,
                                     child: const Icon(
                                       Icons.clear_outlined,
                                       color: ColorName.blueGray,
                                     ),
                                   )
                                 : const SizedBox(),
-                            onTap: () => HomeBloc.get
-                                .add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SEARCH )),
+                            onTap: () => HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SEARCH )),
                             style: easyTheme.textTheme.labelMedium!
                                 .copyWith(fontFamily: FontFamily.apercuRegular),
                             isUnderlineOn: true,
@@ -72,15 +80,13 @@ class AppBarWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 14.0,
-              ),
+              SizedBox(width: 14.0.w),
               InkWell(
                   onTap: () {
                   HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.CART ));
                   FocusScope.of(context).unfocus();
                   },
-                  child: Assets.svg.cartAddIcon.svg(width: 24.0, height: 24.0)),
+                  child: Assets.svg.cartAddIcon.svg(width: 24.0.w, height: 24.0.h)),
             ],
           ),
           titlePadding: const EdgeInsetsDirectional.only(
@@ -91,5 +97,23 @@ class AppBarWidget extends StatelessWidget {
         ),
       );
     });
+  }
+
+  void onChange(String value) {
+      SearchBloc.get.add(EmptySearchEvent());
+    _debounceTimer?.cancel();
+    if (value.isEmpty) {
+      SearchBloc.get.add(EmptySearchEvent());
+      return;
+    }
+    _debounceTimer = Timer(const Duration(milliseconds: 900), () {
+      SearchBloc.get.add(SearchOnItemsEvent(searchValue: value));
+    });
+  }
+  void clearText(){
+    FocusScope.of(context).unfocus();
+    widget.searchController.clear();
+    SearchBloc.get.add(EmptySearchEvent());
+    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
   }
 }

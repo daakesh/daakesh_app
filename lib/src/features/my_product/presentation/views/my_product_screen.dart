@@ -30,7 +30,6 @@ class MyProductsScreen extends StatelessWidget {
                       ProductTypeTabBar(state:state),
                       SizedBox(height: 17.0.h,),
                       const SearchProductBarWidget(),
-
                     ],
                   ),
                 ),

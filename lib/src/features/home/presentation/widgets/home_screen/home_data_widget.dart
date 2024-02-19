@@ -4,8 +4,9 @@ import '../../../../../src.export.dart';
 
 class HomeDataWidget extends StatelessWidget {
   final ScrollController scrollController;
+  final HomeState state;
 
-  const HomeDataWidget({super.key, required this.scrollController});
+  const HomeDataWidget({super.key, required this.scrollController, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +34,9 @@ class HomeDataWidget extends StatelessWidget {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (ctx, index) {
-                  return const PopularCategoriesWidget();
+                  return  PopularCategoriesWidget(data:state.sectionListData[index]);
                 },
-                itemCount: 20,
+                itemCount: state.sectionListData.length,
               ),
             ),
           ),
@@ -85,12 +86,12 @@ class HomeDataWidget extends StatelessWidget {
               delegate: SliverChildBuilderDelegate((_, index) {
                 return  TodayDealProduct(scrollController:scrollController,);
               },
-                childCount: 11,
+                childCount: 12,
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.65,
-                  mainAxisSpacing: 9.0,
+                  childAspectRatio:0.75,
+                  mainAxisSpacing: 8.0,
                   crossAxisSpacing: 8.0
               )),
         ),
@@ -118,9 +119,9 @@ class HomeDataWidget extends StatelessWidget {
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.65,
-                  mainAxisSpacing: 13.0,
-                  crossAxisSpacing: 12.0
+                  childAspectRatio: 0.75,
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 10.0
               )),
         ),
         const SliverPadding(padding: EdgeInsets.only(top: 50.0)),

@@ -10,6 +10,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
       BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
       BlocProvider<MyProductBloc>(create: (_) => MyProductBloc()),
+      BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
 
 
 

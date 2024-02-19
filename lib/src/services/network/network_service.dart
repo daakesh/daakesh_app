@@ -4,18 +4,18 @@ import 'dart:developer' as developer;
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
-import '../services.export.dart';
+import '../../src.export.dart';
 
 abstract class NetworkService{
   Future<Either<Failure, ValidResponse>> get({
-    required String baseUrl,
+    String baseUrl,
     String path,
     Map<String, String>? headers,
     Map<String, dynamic>? params = const {},
     String? userToken,
   });
   Future<Either<Failure, ValidResponse>> post({
-    required String baseUrl,
+    String baseUrl,
     String path,
     Map<String, String>? headers,
     Map<String, String> body = const{},
@@ -39,7 +39,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
 
   @override
   Future<Either<Failure, ValidResponse>> get({
-    required String baseUrl,
+    String baseUrl =NetworkConstants.baseUrl,
     String path = '',
     Map<String, String>? headers,
     Map<String, dynamic>? params,
@@ -72,8 +72,8 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> post(
-      {required String baseUrl,
+  Future<Either<Failure, ValidResponse>> post({
+      String baseUrl = NetworkConstants.baseUrl,
       String path = '',
       Map<String, String>? headers,
       Map<String, String> body = const{},

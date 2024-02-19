@@ -28,7 +28,7 @@ class ProductCarousalSlider extends StatelessWidget {
                 width: 6.0,
               ),
               !state.isDaakeshTodayDeal
-                  ? const DaakeshLogoWidget(height: 28.0)
+                  ? DaakeshLogoWidget(width: 140.0.w,)
                   : Text(
                 'NF Store',
                 style: easyTheme.textTheme.bodyMedium!

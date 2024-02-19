@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import '../../../../src.export.dart';
+
+import '../../../../../src.export.dart';
 
 enum HomeStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
 
@@ -21,6 +22,10 @@ class HomeState extends Equatable {
   ///More Info Product Screen
   final int productSliderIndex;
   final int productSizeIndex;
+  ///API Data
+  final List<SectionModel> sectionListData;
+
+
 
 
 
@@ -35,9 +40,12 @@ class HomeState extends Equatable {
     ///More Info Product Screen
     this.productSliderIndex = 0,
     this.productSizeIndex = 0,
+    ///API Data.
+    this.sectionListData = const[],
 
 
-  }); // Assign default value here if null is provided
+
+  });
 
   HomeState copyWith({
     HomeStateStatus? homeStateStatus,
@@ -49,7 +57,8 @@ class HomeState extends Equatable {
     ///More Info Product Screen
     int? productSliderIndex,
     int? productSizeIndex,
-
+    ///API Data
+    List<SectionModel>? sectionListData,
 
 
   }) {
@@ -64,6 +73,9 @@ class HomeState extends Equatable {
       ///More Info Product Screen
       productSliderIndex: productSliderIndex ?? this.productSliderIndex,
       productSizeIndex: productSizeIndex ?? this.productSizeIndex,
+      ///API Data
+      sectionListData: sectionListData ?? this.sectionListData,
+
 
     );
   }
@@ -80,5 +92,7 @@ class HomeState extends Equatable {
     ///More Info Product Screen
     productSliderIndex,
     productSizeIndex,
+    ///API Data
+    sectionListData,
   ];
 }

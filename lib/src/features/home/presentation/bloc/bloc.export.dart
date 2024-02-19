@@ -1,3 +1,2 @@
-export 'home_bloc.dart';
-export 'home_event.dart';
-export 'home_state.dart';
+export 'home_bloc/home_bloc_export.dart';
+export 'search_bloc/search_bloc.export.dart';
