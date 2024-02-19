@@ -76,9 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
   ///Change a Flag of country attribute that belong to [Location info] or [EnterLocationInfoEvent].
   FutureOr<void> _changeCountryFlag(ChangeFlagEvent event, Emitter<AuthState> emit)async {
-    emit(state.copyWith(
-        flagEmoji: event.flagEmoji
-    ));
+    emit(state.copyWith(flagEmoji: event.flagEmoji));
   }
   ///Insert cell phone number info such as {country code, cell phone number}.
   ///In Addition make sign-up request for user with previous details in [EnterPersonalInfoEvent]&[EnterLocationInfoEvent].

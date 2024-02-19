@@ -17,5 +17,10 @@ enum HomeScreenState{
   CART,
   HOME,
 }
+enum ProductDisplayMethod{
+  SALE,
+  SWAP,
+  SALESWAP,
+}
 
 

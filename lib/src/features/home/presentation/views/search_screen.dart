@@ -3,14 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key,});
 
-  @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,62 +21,18 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   Expanded(child: Align(
                       alignment: AlignmentDirectional.bottomStart, child: Text(
-                    'Search', style: easyTheme.textTheme.headlineMedium,))),
+                    'Search', style: easyTheme.textTheme.headlineMedium!.copyWith(color: ColorName.black.withOpacity(0.57)),))),
                   InkWell(
                       splashColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
-                      onTap: openFilterScreen,
+                      onTap: ()=>openFilterScreen(context),
                       child: Assets.png.filterIcon.image(
                           width: 38.0, height: 38.0)),
                 ],
               ),
             ),),
             const SliverPadding(padding: EdgeInsetsDirectional.only(top: 21.0)),
-            state.searchStateStatus.isLoading
-                ? const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator(color: ColorName.blueGray,)))
-                : state.searchStateStatus.isNull
-                ? const SliverToBoxAdapter(child: Center(child: Text('No information available...')))
-                : SliverList(
-              delegate: SliverChildBuilderDelegate((_, index) {
-                   SearchResultModel searchModelData = state.searchResultList[index];
-                   return state.searchResultList.isEmpty
-                    ? const SizedBox()
-                    : Padding(
-                     padding: const EdgeInsets.only(bottom: 20.0),
-                     child: InkWell(
-                       splashColor: ColorName.transparent,
-                       highlightColor: ColorName.transparent,
-                       focusColor: ColorName.transparent,
-                       onTap: () {
-                         FocusScope.of(context).unfocus();
-                         HomeBloc.get.add(SwapHomeScreenStateEvent(
-                             homeScreenState: HomeScreenState.SEARCHRESULT));
-                       },
-                       child: SizedBox(
-                         width: double.infinity,
-                         child: Row(
-                           children: [
-                             Assets.svg.searchIcon.svg(),
-                             const SizedBox(width: 12.0,),
-                             Expanded(
-                               child: Text(
-                                 searchModelData.description!
-                                     .replaceAll('\n', ' ')
-                                     .toString(),
-                                 style: easyTheme.textTheme.bodyMedium!.copyWith(
-                                     fontSize: 18.0,
-                                     color: ColorName.mediumGray,
-                                     overflow: TextOverflow.ellipsis),
-                               ),
-                             ),
-                             const Icon(Icons.arrow_upward, color: ColorName.gray,)
-                           ],
-                         ),
-                       ),
-                     ),
-                   );
-              }, childCount: state.searchResultList.length),
-            ),
+            _SearchResultHandler(state: state),
             const SliverPadding(padding: EdgeInsetsDirectional.only(top: 55.0)),
             SliverToBoxAdapter(
               child: !state.isMoreData
@@ -109,7 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  void openFilterScreen() {
+  void openFilterScreen(context) {
     FocusScope.of(context).unfocus();
     PersistentNavBarNavigator.pushNewScreen(
       context,
@@ -121,44 +72,58 @@ class _SearchScreenState extends State<SearchScreen> {
   void seeMore(String searchValue) {
     SearchBloc.get.add(SearchOnItemsEvent(searchValue: searchValue, isSeeMore: true));
   }
+}
 
-  Widget _stateHandler(SearchState state, SearchResultModel searchModelData) {
+class _SearchResultHandler extends StatelessWidget {
+  final SearchState state;
+  const _SearchResultHandler({super.key, required this.state});
+
+  @override
+  Widget build(BuildContext context) {
     switch (state.searchStateStatus) {
-      case SearchStateStatus.LOADING:return const CircularProgressIndicator();
-      default: return Padding(
-          padding: const EdgeInsets.only(bottom: 20.0),
-          child: InkWell(
-            splashColor: ColorName.transparent,
-            highlightColor: ColorName.transparent,
-            focusColor: ColorName.transparent,
-            onTap: () {
-              FocusScope.of(context).unfocus();
-              HomeBloc.get.add(SwapHomeScreenStateEvent(
-                  homeScreenState: HomeScreenState.SEARCHRESULT));
-            },
-            child: SizedBox(
-              width: double.infinity,
-              child: Row(
-                children: [
-                  Assets.svg.searchIcon.svg(),
-                  const SizedBox(width: 12.0,),
-                  Expanded(
-                    child: Text(
-                      searchModelData.description!
-                          .replaceAll('\n', ' ')
-                          .toString(),
-                      style: easyTheme.textTheme.bodyMedium!.copyWith(
-                          fontSize: 18.0,
-                          color: ColorName.mediumGray,
-                          overflow: TextOverflow.ellipsis),
+      case SearchStateStatus.LOADING:return const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator(color: ColorName.blueGray,)));
+      case SearchStateStatus.NULL:return const SliverToBoxAdapter(child: Center(child: Text('No information available...')));
+      default: return SliverList(
+        delegate: SliverChildBuilderDelegate((_, index) {
+          SearchResultModel searchModelData = state.searchResultList[index];
+          return state.searchResultList.isEmpty
+              ? const SizedBox()
+              : Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: InkWell(
+              splashColor: ColorName.transparent,
+              highlightColor: ColorName.transparent,
+              focusColor: ColorName.transparent,
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                HomeBloc.get.add(SwapHomeScreenStateEvent(
+                    homeScreenState: HomeScreenState.SEARCHRESULT));
+              },
+              child: SizedBox(
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    Assets.svg.searchIcon.svg(),
+                    const SizedBox(width: 12.0,),
+                    Expanded(
+                      child: Text(
+                        searchModelData.description!
+                            .replaceAll('\n', ' ')
+                            .toString(),
+                        style: easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.mediumGray,
+                            overflow: TextOverflow.ellipsis),
+                      ),
                     ),
-                  ),
-                  const Icon(Icons.arrow_upward, color: ColorName.gray,)
-                ],
+                    const Icon(Icons.arrow_upward, color: ColorName.gray,)
+                  ],
+                ),
               ),
             ),
-          ),
-        );
+          );
+        }, childCount: state.searchResultList.length),
+      );
     }
   }
 }

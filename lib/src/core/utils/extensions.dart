@@ -32,3 +32,11 @@ extension GlobalBuildContext on BuildContext{
     GlobalCupertinoLocalizations.delegate,
   ];
 }
+
+
+extension ProductDisplayMethodX on ProductDisplayMethod{
+  bool get isSale => this == ProductDisplayMethod.SALE;
+  bool get isSwap => this == ProductDisplayMethod.SWAP;
+  bool get isSaleSwap => this == ProductDisplayMethod.SALESWAP;
+}
+

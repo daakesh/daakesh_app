@@ -50,10 +50,9 @@ class CardNumberInputFormatter extends TextInputFormatter{
 
     var string =  buffer.toString();
     return newValue.copyWith(
-        text: buffer.toString(),
-        selection: TextSelection.collapsed(offset: buffer.toString().length)
+        text: string.toString(),
+        selection: TextSelection.collapsed(offset: string.toString().length)
     );
-
 
 
   }

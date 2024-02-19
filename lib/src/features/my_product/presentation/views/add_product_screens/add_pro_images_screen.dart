@@ -130,7 +130,7 @@ class AddProImagesScreen extends StatelessWidget {
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 2));
     ProgressCircleDialog.dismiss();
-    openNewPage(const SelectProDisplayMethodScreen());
+    openNewPage(const SelectProMethodScreen());
   }
   void cancel(){
     getBack();

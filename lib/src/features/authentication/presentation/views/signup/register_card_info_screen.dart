@@ -168,10 +168,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
     }
     openNewPage(const CardAddedSuccessfullyScreen());
   }
-
   void onCancel(){
     getBack();
-
   }
-
 }

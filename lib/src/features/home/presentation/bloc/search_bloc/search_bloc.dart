@@ -52,6 +52,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   FutureOr<void> _emptySearch(EmptySearchEvent event, Emitter<SearchState> emit) {
-    emit(state.copyWith(searchStateStatus: SearchStateStatus.SUCCESS,searchResultList: [],searchValue: '',currentSearchPage: 1,isMoreData: true));
+    emit(state.copyWith(
+        searchStateStatus: SearchStateStatus.SUCCESS,
+        searchResultList: [],
+        searchValue: '',
+        currentSearchPage: 1,
+        isMoreData: true));
   }
 }
