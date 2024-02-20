@@ -107,9 +107,7 @@ class _SearchResultHandler extends StatelessWidget {
                     const SizedBox(width: 12.0,),
                     Expanded(
                       child: Text(
-                        searchModelData.description!
-                            .replaceAll('\n', ' ')
-                            .toString(),
+                        searchModelData.description.toString().replaceAll('\n', ' '),
                         style: easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.mediumGray,
