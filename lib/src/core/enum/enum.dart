@@ -9,6 +9,10 @@ enum ProductTapBar{
   SHOP,
   SWAP,
 }
+enum MyOrderTapBar{
+  MYORDER,
+  SWAPREQUEST,
+}
 
 enum HomeScreenState{
   SEARCH,

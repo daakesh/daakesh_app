@@ -4,19 +4,21 @@ import '../src.export.dart';
 
 class HeaderWidget extends StatelessWidget {
   final bool withArrowBack;
+  final bool isLight;
 
   const HeaderWidget({
     super.key,
     this.withArrowBack = true,
+    this.isLight = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140.h,
+      height: 120.h,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: ColorName.blueGray,
+        color: isLight ?ColorName.white: ColorName.blueGray,
         image: DecorationImage(
           image: AssetImage(Assets.png.authScreensBackground.path),
           alignment: AlignmentDirectional.centerEnd,
@@ -29,22 +31,31 @@ class HeaderWidget extends StatelessWidget {
           Center(
             child: Column(
               children: [
-                SizedBox(height: 53.0.h,),
+                SizedBox(height: 40.0.h,),
                 DaakeshLogoWidget(
-                  isLight: true,
-                  height: 44.0.h,
+                  isLight: isLight ? false:true,
+                    width: 184.0.w,
                 ),
               ],
             ),
           ),
-          IconButton(onPressed: ()=>Navigator.pop(context), icon: const Icon(Icons.arrow_back,color: ColorName.white,))
+          GestureDetector(
+            onTap: ()=> Navigator.pop(context),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.0.w,vertical: 20.0.h),
+              child: Assets.svg.arrowBackIcon.svg(color: isLight ? ColorName.blueGray:ColorName.white),
+            ),
+          ),
         ],
       )
           : Column(
             children: [
-              SizedBox(height: 53.0.h,),
-              DaakeshLogoWidget(isLight: true, width: 184.0.w,),
-            ],
+              SizedBox(height: 40.0.h,),
+                DaakeshLogoWidget(
+                  isLight: isLight ? false:true,
+                  width: 184.0.w,
+                ),
+              ],
           ),
     );
   }

@@ -114,13 +114,5 @@ class SwapScreen extends StatelessWidget {
   }
 }
 
-class MyOrderScreen extends StatelessWidget {
-  const MyOrderScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('My Order Screen'),));
-  }
-
-}
 

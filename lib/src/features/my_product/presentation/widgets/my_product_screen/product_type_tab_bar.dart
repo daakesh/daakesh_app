@@ -18,10 +18,8 @@ class ProductTypeTabBar extends StatelessWidget {
       ),
       child: Row(children: [
         Expanded(
-          child: InkWell(
-            focusColor: ColorName.transparent,
-            highlightColor: ColorName.transparent,
-            splashColor: ColorName.transparent,
+          child: GestureDetector(
+
             onTap: ()=>swapTabBar(ProductTapBar.SHOP),
             child: Container(
               width: double.infinity,
@@ -45,10 +43,7 @@ class ProductTypeTabBar extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: InkWell(
-            focusColor: ColorName.transparent,
-            highlightColor: ColorName.transparent,
-            splashColor: ColorName.transparent,
+          child: GestureDetector(
             onTap: ()=>swapTabBar(ProductTapBar.SWAP),
             child: Container(
               width: double.infinity,

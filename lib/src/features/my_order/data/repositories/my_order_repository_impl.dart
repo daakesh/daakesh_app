@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../src.export.dart';
 
-@LazySingleton(as: MyProductRepository)
-class MyProductRepositoryImpl implements MyProductRepository {
+@LazySingleton(as: MyOrderRepository)
+class MyOrderRepositoryImpl implements MyOrderRepository {
   @override
   Future<Either<Failure, ValidResponse>> updateUserData() async {
-    return await getIt.get<MyProductDatasource>().updateUserData();
+    return await getIt.get<MyOrderDatasource>().updateUserData();
   }
 
 

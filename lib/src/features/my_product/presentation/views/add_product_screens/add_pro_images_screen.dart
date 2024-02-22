@@ -121,10 +121,6 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                                   color: ColorName.paleGray,
                                   borderRadius: const BorderRadius.all(Radius.circular(4.0)),
                                   border: Border.all(color: ColorName.gray),
-                                  //image: DecorationImage(
-                                  //  fit: BoxFit.fitWidth,
-                                  //  image: Image.file(),
-                                  //),
                                 ),
                               child: Image.file(File(state.imagesList[index].path),fit: BoxFit.cover),
                               ),

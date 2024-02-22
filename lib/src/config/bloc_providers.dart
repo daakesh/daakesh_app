@@ -11,6 +11,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
       BlocProvider<MyProductBloc>(create: (_) => MyProductBloc()),
       BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
+      BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
 
 
 
