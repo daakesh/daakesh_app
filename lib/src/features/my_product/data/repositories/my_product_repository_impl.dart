@@ -6,7 +6,7 @@ import '../../../../src.export.dart';
 class MyProductRepositoryImpl implements MyProductRepository {
   @override
   Future<Either<Failure, ValidResponse>> updateUserData() async {
-    return await getIt.get<ProfileDatasource>().updateUserData();
+    return await getIt.get<MyProductDatasource>().updateUserData();
   }
 
 

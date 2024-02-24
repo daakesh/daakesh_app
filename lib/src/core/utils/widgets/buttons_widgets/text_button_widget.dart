@@ -5,7 +5,7 @@ import '../../../../src.export.dart';
 class TextButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
-  final ButtonStyle? style;
+  final TextStyle? style;
   final EdgeInsets? padding;
   final bool isBold;
 
@@ -22,15 +22,13 @@ class TextButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: padding ?? EdgeInsets.zero,
-      child: InkWell(
-        highlightColor: ColorName.transparent,
-        splashColor: ColorName.transparent,
+      child: GestureDetector(
         onTap: onPressed,
         child: Text(
           text,
-          style: !isBold
+          style: style ?? (!isBold
               ? easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.skyBlue)
-              : easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.skyBlue,fontFamily: FontFamily.apercuBold),
+              : easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.skyBlue,fontFamily: FontFamily.apercuBold)),
         ),
       ),
     );

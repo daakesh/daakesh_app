@@ -12,15 +12,15 @@ class FloatingAddProductWidget extends StatelessWidget {
       splashColor: ColorName.transparent,
       onTap: ()=>openNewPage(AddProInfoScreen()),
       child: SizedBox(
-        width: 120.0,
-        height: 120.0,
+        width: 120.0.w,
+        height: 120.0.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 70.0,
-              height: 70.0,
+              width: 70.5.w,
+              height: 70.5.h,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: ColorName.amber,
@@ -32,11 +32,11 @@ class FloatingAddProductWidget extends StatelessWidget {
                   )
                 ],
               ),
-              child: const Center(
+              child: Center(
                 child: SizedBox(
-                    width: 70.0,
-                    height: 70.0,
-                    child: FittedBox(
+                    width: 70.0.w,
+                    height: 70.0.h,
+                    child: const FittedBox(
                         child: Icon(
                       Icons.add_rounded,
                       color: ColorName.white,
@@ -46,7 +46,7 @@ class FloatingAddProductWidget extends StatelessWidget {
             Text(
               'Add Product',
               style: easyTheme.textTheme.bodyLarge!.copyWith(
-                  fontSize: 18.0, color: ColorName.black.withOpacity(0.36)),
+                  fontSize: 18.0.sp, color: ColorName.black.withOpacity(0.36)),
             ),
           ],
         ),

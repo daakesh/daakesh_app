@@ -25,6 +25,12 @@ class ColorName {
   /// Color: #222F3E
   static const Color blueGray = Color(0xFF222F3E);
 
+  /// Color: #8A1A1A
+  static const Color burgundy = Color(0xFF8A1A1A);
+
+  /// Color: #14C2ED
+  static const Color ceruleanBlue = Color(0xFF14C2ED);
+
   /// Color: #9B9B9B
   static const Color charcoalGray = Color(0xFF9B9B9B);
 
@@ -58,6 +64,9 @@ class ColorName {
   /// Color: #D5D5D5
   static const Color lightGray = Color(0xFFD5D5D5);
 
+  /// Color: #F5F6F9
+  static const Color lightGrayishBlue = Color(0xFFF5F6F9);
+
   /// Color: #FEBD69
   static const Color lightOrange = Color(0xFFFEBD69);
 
@@ -90,6 +99,9 @@ class ColorName {
 
   /// Color: #EBEBEB
   static const Color sliver = Color(0xFFEBEBEB);
+
+  /// Color: #55AE7B
+  static const Color springGreen = Color(0xFF55AE7B);
 
   /// Color: #00000000
   static const Color transparent = Color(0x00000000);

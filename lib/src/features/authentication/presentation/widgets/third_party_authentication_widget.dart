@@ -12,11 +12,11 @@ class ThirdPartyAuthenticationWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Assets.png.googleIcon.image(height:36.0 ,width: 36.0),
-        const SizedBox(width: 44.04,),
-        Assets.svg.facebookIcon.svg(height:36.0 ,width: 36.0),
-        const SizedBox(width: 44.04,),
-        Assets.svg.appleIcon.svg(height:36.0 ,width: 36.0),
+        Assets.png.googleIcon.image(height:36.0.h ,width: 36.0.w),
+        SizedBox(width: 44.04.w,),
+        Assets.svg.facebookIcon.svg(height:36.0.h ,width: 36.0.w),
+        SizedBox(width: 44.04.w,),
+        Assets.svg.appleIcon.svg(height:36.0.h ,width: 36.0.w),
       ],);
   }
 }

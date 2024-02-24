@@ -16,49 +16,47 @@ class TodayDealProduct extends StatelessWidget {
         HomeBloc.get.add(DetermentTodayDealEvent(isDaakeshTodayDeal:isDaakeshTodayDeal));
 
       },
-      child: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
+      child: Column(
         children: [
           Container(
-            height: 250.0,
             width: double.infinity,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: ColorName.lavenderGray,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   offset: Offset(0, 3),
                   blurRadius: 6.0,
                   color: Color.fromRGBO(0, 0, 0, 0.16),
                 ),
               ],
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0.r),topRight: Radius.circular(10.0.r)),
             ),
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.only(top: 25.0),
+                  padding:EdgeInsetsDirectional.only(top: 25.0.h),
                   child: Align(
                       alignment: AlignmentDirectional.topCenter,
-                      child: Assets.png.glasses.image(height: 80.0, width: 80.0)),
+                      child: Assets.png.glasses.image(height: 80.0.h, width: 80.0.w)),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 2.0),
+                  padding: EdgeInsetsDirectional.only(start: 2.0.w),
                   child: Container(
-                    constraints: const BoxConstraints(maxWidth: 75.0),
-                    height: 22.0,
-                    margin: const EdgeInsetsDirectional.only(top: 1.0, start: 4.0),
-                    padding: const EdgeInsets.only(top: 2.0),
-                    decoration: const BoxDecoration(
+                    constraints: BoxConstraints(maxWidth: 75.0.w),
+                    height: 22.0.h,
+                    margin:  EdgeInsetsDirectional.only(top: 1.0.h, start: 4.0.w),
+                    padding:  EdgeInsets.only(top: 2.0.h),
+                    decoration: BoxDecoration(
                       color: ColorName.red,
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      padding: EdgeInsets.symmetric(horizontal: 5.0.h),
                       child: Text(
                         '23% OFF',
                         textAlign: TextAlign.center,
                         style: easyTheme.textTheme.headlineMedium!
-                            .copyWith(fontSize: 14.0, color: ColorName.white),
+                            .copyWith(fontSize: 14.0.sp, color: ColorName.white),
                       ),
                     ),
                   ),
@@ -67,34 +65,37 @@ class TodayDealProduct extends StatelessWidget {
             ),
           ),
           Container(
-            height: 135.0,
-            padding: const EdgeInsetsDirectional.only(start: 16.0),
-            decoration: const BoxDecoration(
+            padding:EdgeInsetsDirectional.only(start: 16.0.w),
+            decoration:  BoxDecoration(
               color: ColorName.white,
+              boxShadow: const [
+                BoxShadow(
+                  offset: Offset(0, 3),
+                  blurRadius: 6.0,
+                  color: Color.fromRGBO(0, 0, 0, 0.16),
+                ),
+              ],
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10.0),
-                bottomRight: Radius.circular(10.0),
+                bottomLeft: Radius.circular(10.0.r),
+                bottomRight: Radius.circular(10.0.r),
               ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 2.0,
+                SizedBox(
+                  height: 2.0.h,
+                ),
+                Text(
+                  'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                  maxLines: 2,
+                  style: easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 14.0.sp,
+                      color: ColorName.gray,
+                      overflow: TextOverflow.ellipsis),
                 ),
                 SizedBox(
-                  height: 38.0,
-                  child: Text(
-                    'AquaOasis™ Cool Mist Humidefier (2.2L Water',
-                    maxLines: 2,
-                    style: easyTheme.textTheme.bodyMedium!.copyWith(
-                        fontSize: 14.0,
-                        color: ColorName.gray,
-                        overflow: TextOverflow.ellipsis),
-                  ),
-                ),
-                const SizedBox(
-                  height: 4.5,
+                  height: 4.5.h,
                 ),
                 Row(
                   children: [
@@ -104,47 +105,46 @@ class TodayDealProduct extends StatelessWidget {
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
-                      itemSize: 15.0,
-
+                      itemSize: 15.0.r,
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {},
                     ),
-                    const SizedBox(
-                      width: 2.0,
+                    SizedBox(
+                      width: 2.0.w,
                     ),
                     Flexible(
                       child: Text(
                         '5.9',
-                        style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 14.0,overflow:TextOverflow.ellipsis ),
+                        style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 14.0.sp,overflow:TextOverflow.ellipsis ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 4.0,
+                    SizedBox(
+                      width: 4.0.w,
                     ),
                     Flexible(
                       child: Text(
                         '(200)',
                         style: easyTheme.textTheme.headlineMedium!
-                            .copyWith(fontSize: 13.0, color: ColorName.gray,overflow:TextOverflow.ellipsis),
+                            .copyWith(fontSize: 13.0.sp, color: ColorName.gray,overflow:TextOverflow.ellipsis),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 2.0,
+                SizedBox(
+                  height: 2.0.h,
                 ),
                  Row(
                   children: [
-                    Text('\$44',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 20.0),),
-                    Text('99 ',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 14.0, color: ColorName.gray,),),
+                    Text('\$44',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 20.0.sp),),
+                    Text('99 ',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 14.0.sp, color: ColorName.gray,),),
                     Flexible(
                       child: Text(
                         '\$79.99',
                         style: easyTheme.textTheme.headlineMedium!.copyWith(
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             overflow: TextOverflow.ellipsis,
                             decoration: TextDecoration.lineThrough,
                             color: ColorName.gray),
@@ -162,35 +162,37 @@ class TodayDealProduct extends StatelessWidget {
                     Assets.svg.creditCardIcon.svg(),
                     Row(
                       children: [
-                        Text('By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0, color: ColorName.gray)),
-                        const DaakeshLogoWidget(height: 14.0),
-                        const SizedBox(width: 8.0),
+                        Text('By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp, color: ColorName.gray)),
+                        DaakeshLogoWidget(width: 63.0.w,),
+                        SizedBox(width: 8.0.w),
                       ],
                     ),
                   ],
                 ):Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Icon(Icons.phone,color: ColorName.silverChalice,),
-                    const SizedBox(width: 10.0,),
+                    Icon(Icons.phone,color: ColorName.silverChalice,size: 20.0.sp,),
+                    SizedBox(width: 10.0.sp,),
                     Expanded(
                       child: SizedBox(
-                        width: 100.0,
+                        width: 100.0.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text('By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0, color: ColorName.gray)),
-                            Flexible(child: Text('NF Store',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0,overflow: TextOverflow.ellipsis))),
-                            const SizedBox(width: 8.0,),
+                            Text('By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp, color: ColorName.gray)),
+                            Flexible(child: Text('NF Store',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp,overflow: TextOverflow.ellipsis))),
+                             SizedBox(width: 8.0.w,),
                           ],
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 2.0,
+                SizedBox(
+                  height: 2.0.h,
                 ),
+                SizedBox(height: 10.0.h,),
+
               ],
             ),
           ),

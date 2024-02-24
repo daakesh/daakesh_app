@@ -12,15 +12,15 @@ class ShopProductItem extends StatelessWidget {
         delegate: SliverChildBuilderDelegate((_, index) {
           return Container(
             width: double.infinity,
-            margin: const EdgeInsetsDirectional.only(
-              start: 15.0,
-              end: 15.0,
-              bottom: 13.0,
+            margin: EdgeInsetsDirectional.only(
+              start:15.0.w,
+              end:15.0.w,
+              bottom:13.0.h,
             ),
-            decoration: const BoxDecoration(
+            decoration:BoxDecoration(
               color: ColorName.white,
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              boxShadow: [
+              borderRadius: BorderRadius.all(Radius.circular(8.0.r)),
+              boxShadow: const [
                 BoxShadow(
                     offset: Offset(0, 3),
                     color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -37,42 +37,37 @@ class ShopProductItem extends StatelessWidget {
                     Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: Padding(
-                        padding:
-                        const EdgeInsetsDirectional.only(end: 20.0, top: 12.0),
+                        padding: EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
                         child: Text(
                           'Edit',
                           style: easyTheme.textTheme.bodyLarge!
-                              .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
+                              .copyWith(fontSize: 12.0.sp, color: ColorName.skyBlue),
                         ),
                       ),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          width: 12.0,
-                        ),
-                        Assets.png.glasses.image(height: 90.0, width: 90.0),
-                        const SizedBox(
-                          width: 18.0,
-                        ),
+                        SizedBox(width: 12.0.w),
+                        Assets.png.glasses.image(height: 90.0.h, width: 90.0.w),
+                        SizedBox(width: 18.0.w),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.only(end: 80.0),
+                                padding: EdgeInsetsDirectional.only(end: 80.0.w),
                                 child: Text(
                                   'AquaOasis™ Cool Mist Humidefier (2.2L Water',
                                   style: easyTheme.textTheme.labelMedium!.copyWith(
-                                      fontSize: 14.0,
+                                      fontSize: 15.0.sp,
                                       color: ColorName.gray,
                                       overflow: TextOverflow.ellipsis),
                                   maxLines: 2,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 8.0,
+                              SizedBox(
+                                height: 8.0.h,
                               ),
                               Row(
                                 children: [
@@ -83,33 +78,29 @@ class ShopProductItem extends StatelessWidget {
                                     maxRating: 5,
                                     ignoreGestures: true,
                                     initialRating: 5.0,
-                                    itemSize: 20.0,
+                                    itemSize: 14.6.h,
                                     itemBuilder: (context, _) => const Icon(
                                       Icons.star,
                                       color: Colors.amber,
                                     ),
                                     onRatingUpdate: (rating) {},
                                   ),
-                                  const SizedBox(
-                                    width: 8.0,
-                                  ),
+                                  SizedBox(width: 8.0.w),
                                   Text(
                                     '5.9',
                                     style: easyTheme.textTheme.labelMedium!
-                                        .copyWith(fontSize: 15.0),
+                                        .copyWith(fontSize: 15.0.sp),
                                   ),
-                                  const SizedBox(
-                                    width: 8.0,
-                                  ),
+                                  SizedBox(width: 8.0.w),
                                   Text(
                                     '(200)',
                                     style: easyTheme.textTheme.labelMedium!.copyWith(
-                                        fontSize: 13.0, color: ColorName.gray),
+                                        fontSize: 13.0.sp, color: ColorName.gray),
                                   )
                                 ],
                               ),
                               SizedBox(
-                                height: 38.0,
+                                height: 38.0.h,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -119,7 +110,7 @@ class ShopProductItem extends StatelessWidget {
                                         Text(
                                           '\$44',
                                           style: easyTheme.textTheme.labelMedium!
-                                              .copyWith(fontSize: 21.0),
+                                              .copyWith(fontSize: 21.0.sp),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(bottom: 2.0),
@@ -130,21 +121,18 @@ class ShopProductItem extends StatelessWidget {
                                                 style: easyTheme
                                                     .textTheme.labelMedium!
                                                     .copyWith(
-                                                    fontSize: 12.0,
+                                                    fontSize: 15.0.sp,
                                                     color: ColorName.gray),
                                               ),
-                                              const SizedBox(
-                                                width: 8.0,
-                                              ),
+                                              SizedBox(width: 8.0.w),
                                               Text(
                                                 '\$79.99',
                                                 style: easyTheme
                                                     .textTheme.labelMedium!
                                                     .copyWith(
-                                                  fontSize: 13.0,
+                                                  fontSize: 15.0.sp,
                                                   color: ColorName.gray,
-                                                  decoration:
-                                                  TextDecoration.lineThrough,
+                                                  decoration: TextDecoration.lineThrough,
                                                 ),
                                               ),
                                             ],
@@ -160,22 +148,21 @@ class ShopProductItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Divider(
+                    Divider(
                       color: ColorName.gray,
-                      endIndent: 17.0,
-                      indent: 17.0,
+                      endIndent: 17.0.w,
+                      indent: 17.0.w,
                     ),
-                    const SizedBox(
-                      height: 15.0,
+                    SizedBox(
+                      height: 15.0.h,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      padding: EdgeInsets.symmetric(horizontal: 18.0.w),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
-                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -187,13 +174,13 @@ class ShopProductItem extends StatelessWidget {
                                           text: 'Entry Date : ',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0,
+                                              fontSize: 15.0.sp,
                                               color: ColorName.gray)),
                                       TextSpan(
                                           text: '12/12/2012',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0,
+                                              fontSize: 15.0.sp,
                                               color: ColorName.black)),
                                     ],
                                   ),
@@ -208,13 +195,13 @@ class ShopProductItem extends StatelessWidget {
                                           text: 'Categories : ',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0,
+                                              fontSize: 15.0.sp,
                                               color: ColorName.gray)),
                                       TextSpan(
                                           text: 'MEN',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0,
+                                              fontSize: 15.0.sp,
                                               color: ColorName.black)),
                                     ],
                                   ),
@@ -234,13 +221,14 @@ class ShopProductItem extends StatelessWidget {
                                           text: 'Quantity : ',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0,
+                                              fontSize: 15.0.sp,
                                               color: ColorName.gray)),
                                       TextSpan(
                                           text: '200',
+
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0,
+                                              fontSize:15.0.sp,
                                               color: ColorName.black)),
                                     ],
                                   ),
@@ -255,13 +243,13 @@ class ShopProductItem extends StatelessWidget {
                                           text: 'Ship To : ',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0,
+                                              fontSize: 15.0.sp,
                                               color: ColorName.gray)),
                                       TextSpan(
                                           text: 'ALL',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0,
+                                              fontSize: 15.0.sp,
                                               color: ColorName.black)),
                                     ],
                                   ),
@@ -272,7 +260,7 @@ class ShopProductItem extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 14.0),
+                    SizedBox(height: 14.0.h),
                   ],
                 ),
                 Row(
@@ -280,18 +268,18 @@ class ShopProductItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      constraints:
-                      const BoxConstraints(minWidth: 70.0, maxHeight: 25.0),
-                      margin: const EdgeInsetsDirectional.symmetric(horizontal: 6.0),
-                      padding: const EdgeInsetsDirectional.symmetric(horizontal: 6.0),
-                      decoration: const BoxDecoration(
+                      height: 30.0.h,
+                      constraints: BoxConstraints(minWidth: 70.0.w,),
+                      margin:EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
+                      padding:EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
+                      decoration:BoxDecoration(
                           color: ColorName.red,
-                          borderRadius: BorderRadius.all(Radius.circular(4.0))),
+                          borderRadius: BorderRadius.all(Radius.circular(4.0.r))),
                       child: Center(
                         child: Text(
                           '23% OFF',
                           style: easyTheme.textTheme.labelLarge!
-                              .copyWith(fontSize: 14.0),
+                              .copyWith(fontSize: 15.0.sp),
                         ),
                       ),
                     ),

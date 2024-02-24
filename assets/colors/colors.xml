@@ -28,4 +28,8 @@
     <color name="grayish">#A7A7A7</color>
     <color name="dark_green">#029729</color>
     <color name="white_smoke">#FAFAFA</color>
+    <color name="cerulean_blue">#14C2ED</color>
+    <color name="light_grayish_blue">#F5F6F9</color>
+    <color name="burgundy">#8A1A1A</color>
+    <color name="spring_green">#55AE7B</color>
 </manifest>

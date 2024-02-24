@@ -2,9 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    getAllData();
+  }
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
@@ -39,6 +50,10 @@ class MainScreen extends StatelessWidget {
               topLeft: Radius.circular(6.0), topRight: Radius.circular(6.0))),
     );
   }
+  void getAllData(){
+    HomeBloc.get.add(GetAllHomeDataEvent());
+  }
+
   List<PersistentBottomNavBarItem> _navBarsItems(context) {
     return [
       PersistentBottomNavBarItem(
@@ -85,7 +100,6 @@ class MainScreen extends StatelessWidget {
                   style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0)))
         ],
       );
-
 }
 
 
@@ -100,12 +114,5 @@ class SwapScreen extends StatelessWidget {
   }
 }
 
-class MyOrderScreen extends StatelessWidget {
-  const MyOrderScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('My Order Screen'),));
-  }
-}
 

@@ -31,10 +31,10 @@ class SearchBarWidget extends StatelessWidget {
             const SizedBox(
               height: 53.0,
             ),
-            const Center(
+            Center(
               child: DaakeshLogoWidget(
                 isLight: true,
-                height: 44.0,
+                width: 184.0.w,
               ),
             ),
             state.homeScreenState.isProductDetails || state.homeScreenState.isCart

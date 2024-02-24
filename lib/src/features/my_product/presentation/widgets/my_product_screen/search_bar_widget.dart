@@ -8,28 +8,27 @@ class SearchProductBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.only(start: 16.0,end: 13.0,bottom: 0.0),
+      padding:  EdgeInsetsDirectional.only(start: 16.0.w,end: 13.0.w,bottom: 0.0),
       child: Row(
         children: [
           Expanded(
             child: Container(
               width: double.infinity,
-              height: 40.0,
-              margin: const EdgeInsetsDirectional.only(end: 8.0),
-              decoration: const BoxDecoration(
+              height: 50.0.h,
+              margin: EdgeInsetsDirectional.only(end: 8.0.w),
+              decoration: BoxDecoration(
                 color: ColorName.white,
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
               ),
               child: Row(
                 children: [
-                  const SizedBox(
-                    width: 20.0,
+                  SizedBox(
+                    width: 20.0.w,
                   ),
-                  Assets.svg.searchIcon.svg(
-                      color:  ColorName.charcoalGray),
+                  Assets.svg.searchIcon.svg(color:  ColorName.charcoalGray,width:20.0.w ,height: 20.0.h),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child:Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                       child: TextFormFieldWidget(
                         controller: TextEditingController(),
                         onTap: () {},
@@ -45,8 +44,8 @@ class SearchProductBarWidget extends StatelessWidget {
           ),
           InkWell(onTap: () {},
               child: Assets.png.filterIcon.image(
-                width: 38.0,
-                height: 38.0,
+                width: 38.0.w,
+                height: 38.0.h,
               ),
           ),
         ],
