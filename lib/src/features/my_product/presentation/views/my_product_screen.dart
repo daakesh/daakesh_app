@@ -23,7 +23,7 @@ class MyProductsScreen extends StatelessWidget {
                 SliverAppBar(
                   backgroundColor: ColorName.whiteSmoke,
                   pinned: true,
-                  bottom: PreferredSize(preferredSize:Size.fromHeight(70.h) , child: const SizedBox(),),
+                  bottom: PreferredSize(preferredSize:Size.fromHeight(90.h) , child: const SizedBox(),),
                   surfaceTintColor: ColorName.whiteSmoke,
                   flexibleSpace: FlexibleSpaceBar(
                     title: SizedBox(

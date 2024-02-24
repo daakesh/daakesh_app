@@ -26,7 +26,7 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
         CarouselSlider(
           carouselController: controller,
           options: CarouselOptions(
-              height: 162.0,
+              height: 200.0.h,
               viewportFraction: 1,
               initialPage: 0,
               autoPlay: true,
@@ -57,7 +57,7 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                               Text('Today\'s Deals',style: easyTheme.textTheme.headlineMedium!.copyWith(color: ColorName.white),),
                               const SizedBox(height: 35.0,),
                               Container(
-                                height: 36.0,
+                                height: 36.0.h,
                                 constraints: const BoxConstraints(minWidth: 108.0),
                                 padding: const EdgeInsetsDirectional.symmetric(horizontal: 6.0),
                                 decoration: const BoxDecoration(

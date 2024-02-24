@@ -16,11 +16,9 @@ class TodayDealProduct extends StatelessWidget {
         HomeBloc.get.add(DetermentTodayDealEvent(isDaakeshTodayDeal:isDaakeshTodayDeal));
 
       },
-      child: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
+      child: Column(
         children: [
           Container(
-            height: 250.0.h,
             width: double.infinity,
             decoration: BoxDecoration(
               color: ColorName.lavenderGray,
@@ -31,7 +29,7 @@ class TodayDealProduct extends StatelessWidget {
                   color: Color.fromRGBO(0, 0, 0, 0.16),
                 ),
               ],
-              borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0.r),topRight: Radius.circular(10.0.r)),
             ),
             child: Stack(
               children: [
@@ -67,10 +65,16 @@ class TodayDealProduct extends StatelessWidget {
             ),
           ),
           Container(
-            height: 140.0.h,
             padding:EdgeInsetsDirectional.only(start: 16.0.w),
             decoration:  BoxDecoration(
               color: ColorName.white,
+              boxShadow: const [
+                BoxShadow(
+                  offset: Offset(0, 3),
+                  blurRadius: 6.0,
+                  color: Color.fromRGBO(0, 0, 0, 0.16),
+                ),
+              ],
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10.0.r),
                 bottomRight: Radius.circular(10.0.r),
@@ -187,6 +191,8 @@ class TodayDealProduct extends StatelessWidget {
                 SizedBox(
                   height: 2.0.h,
                 ),
+                SizedBox(height: 10.0.h,),
+
               ],
             ),
           ),
