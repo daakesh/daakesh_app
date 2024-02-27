@@ -2,6 +2,10 @@ import 'package:dartz/dartz.dart';
 import '../../../../services/services.export.dart';
 
 abstract class HomeDatasource {
-  Future<Either<Failure, ValidResponse>> getAllData();
+  Future<Either<Failure, ValidResponse>> getAdvertisementData();
+  Future<Either<Failure, ValidResponse>> getSectionData();
+  Future<Either<Failure, ValidResponse>> getHandmadeData();
+  Future<Either<Failure, ValidResponse>> getBrandsData();
+  Future<Either<Failure, ValidResponse>> getTodayItemsData();
   Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage);
 }

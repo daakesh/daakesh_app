@@ -51,7 +51,11 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
   void getAllData(){
-    HomeBloc.get.add(GetAllHomeDataEvent());
+    HomeBloc.get.add(GetAdvertisementDataEvent());
+    HomeBloc.get.add(GetSectionDataEvent());
+    HomeBloc.get.add(GetHandmadeDataEvent());
+    HomeBloc.get.add(GetBrandsDataEvent());
+    HomeBloc.get.add(GetTodayItemsDataEvent());
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems(context) {

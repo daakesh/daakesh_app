@@ -23,7 +23,7 @@ class HomeState extends Equatable {
   final int productSliderIndex;
   final int productSizeIndex;
   ///API Data
-  final List<SectionModel> sectionListData;
+  final List<SectionItemModel> sectionListData;
 
 
 
@@ -58,7 +58,7 @@ class HomeState extends Equatable {
     int? productSliderIndex,
     int? productSizeIndex,
     ///API Data
-    List<SectionModel>? sectionListData,
+    List<SectionItemModel>? sectionListData,
 
 
   }) {

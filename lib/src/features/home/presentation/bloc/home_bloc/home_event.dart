@@ -37,7 +37,18 @@ class SelectProductSizeIndex extends HomeEvent{
   final int productSizeIndex;
   SelectProductSizeIndex({required this.productSizeIndex});
 }
-class GetAllHomeDataEvent extends HomeEvent{}
+class GetSectionDataEvent extends HomeEvent{}
+
+class GetHandmadeDataEvent extends HomeEvent{}
+
+class GetBrandsDataEvent extends HomeEvent{}
+
+class GetTodayItemsDataEvent extends HomeEvent{}
+
+class GetDaakeshTodayItemsDataEvent extends HomeEvent{}
+
+class GetAdvertisementDataEvent extends HomeEvent{}
+
 
 
 

@@ -46,6 +46,9 @@ class ColorName {
   /// Color: #909090
   static const Color dimGray = Color(0xFF909090);
 
+  /// Color: #276B0A
+  static const Color forestGreen = Color(0xFF276B0A);
+
   /// Color: #D3D3D3
   static const Color gainsboro = Color(0xFFD3D3D3);
 

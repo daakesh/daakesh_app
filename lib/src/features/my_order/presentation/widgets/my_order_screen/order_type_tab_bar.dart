@@ -35,7 +35,7 @@ class OrderTypeTabBar extends StatelessWidget {
                       child: Text(
                         'My Order',
                         style: easyTheme.textTheme.headlineMedium!.copyWith(
-                            fontSize: 18.0.sp,
+                            fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
                             color:  state.myOrderTapBar.isMyOrder
                                 ? ColorName.white
                                 : ColorName.blueGray,),
@@ -59,7 +59,7 @@ class OrderTypeTabBar extends StatelessWidget {
                       child: Text(
                         'Swap Requests',
                         style: easyTheme.textTheme.headlineMedium!.copyWith(
-                          fontSize: 18.0.sp,
+                          fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
                         color: state.myOrderTapBar.isSwapRequest
                             ? ColorName.white
                             : ColorName.blueGray,
@@ -74,7 +74,7 @@ class OrderTypeTabBar extends StatelessWidget {
         state.myOrderTapBar.isSwapRequest ? Padding(
           padding: EdgeInsetsDirectional.only(start: 17.0.w,end: 13.0.w,top: 13.0.h),
           child: Row(children: [
-            Text('Send',style: easyTheme.textTheme.bodyLarge,),
+            Text('Send',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0)),),
             Transform.scale(
               scale: 0.8,
               child: Switch(
@@ -88,7 +88,7 @@ class OrderTypeTabBar extends StatelessWidget {
                   thumbColor: MaterialStateProperty.all(ColorName.white),
                   onChanged: onChange),
             ),
-            Text('Receive',style: easyTheme.textTheme.bodyLarge,),
+            Text('Receive',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0)),),
             const Spacer(flex: 1),
             Assets.png.filterIcon.image(width: 38.0.w,height: 38.0.h),
           ],),

@@ -10,7 +10,7 @@ class MyOrderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsetsDirectional.only(start: 15.0.w,end: 15.0.w,bottom: 11.0.h),
+      margin: const EdgeInsetsDirectional.only(start: 15.0,end: 15.0,bottom: 11.0),
       decoration: BoxDecoration(
           color: ColorName.white,
           borderRadius: BorderRadius.all(Radius.circular(11.0.r)),
@@ -26,106 +26,174 @@ class MyOrderItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        SizedBox(height: 9.0.h),
+        const SizedBox(height: 9.0),
         Row(children: [
-          SizedBox(width: 14.0.w,),
-          Text('Order ID :',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.black),),
-          SizedBox(width: 3.0.w,),
-          Text('#',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 20.0.sp,color: ColorName.black),),
-          Text('12354',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.black),),
-          SizedBox(width: 9.0.w,),
-              index % 2 == 0
-                  ? Text('On The Way',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 12.0.sp,color: ColorName.ceruleanBlue),)
-                  : Text('Delivered',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 12.0.sp,color: ColorName.springGreen),),
-          const Spacer(flex: 1,),
-          Text(
-                '\$88.6',
-                style: easyTheme.textTheme.labelLarge!.copyWith(
-                    fontSize: 21.0.sp,
-                    color: ColorName.black),
-              ),
-          SizedBox(width: 19.0.w,),
-        ],),
-        Row(children: [
-          SizedBox(width: 14.0.w,),
-          Text('Poced In: 12/12/2012',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 14.0.sp,color: ColorName.gray,),),
-          const Spacer(flex: 1,),
-          Text('Total Price',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 14.0.sp,color: ColorName.gray,),),
-          SizedBox(width: 11.0.w,),
+          const SizedBox(width: 14.0,),
+          Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: 'Order ID :',
+                                style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0), color: ColorName.black,),
+                              ),
+                              TextSpan(text: '#12354',
+                                style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0), color: ColorName.black,),
+                              ),
 
+
+
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 9.0,),
+                        index % 2 == 0
+                            ? Text(
+                                'On The Way',
+                                style: easyTheme.textTheme.headlineMedium!.copyWith(
+                                  fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 12.0),
+                                  color: ColorName.ceruleanBlue,
+                                ),
+                              )
+                            : Text(
+                                'Delivered',
+                                style: easyTheme.textTheme.headlineMedium!.copyWith(
+                                    fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 12.0),
+                                    color: ColorName.springGreen),
+                              ),
+                      ],
+                    ),
+                    Text(
+                      'Poced In: 12/12/2012',
+                      style: easyTheme.textTheme.labelLarge!.copyWith(
+                        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
+                        color: ColorName.gray,
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+          Column(
+            children: [
+              Text(
+                    '\$88.6',
+                    style: easyTheme.textTheme.labelLarge!.copyWith(
+                        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 21.0),
+                        color: ColorName.black),
+                  ),
+              Text(
+                'Total Price',
+                style: easyTheme.textTheme.labelLarge!.copyWith(
+                  fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
+                  color: ColorName.gray,
+                ),
+              ),
+
+            ],
+          ),
+          const SizedBox(width: 13.0,),
         ],),
-        SizedBox(height: 11.0.h),
+        const SizedBox(height: 11.0),
         Container(
           width: double.infinity,
-          height: 42.0.h,
+          height: 42.0,
           color: ColorName.lightGrayishBlue,
           child: Row(children: [
-            SizedBox(width: 14.0.w),
-            Assets.png.glasses.image(width: 32.0.w, height: 32.0.h),
-            SizedBox(width: 15.0.w),
-            Flexible(
+            const SizedBox(width: 14.0),
+            Assets.png.glasses.image(width: 32.0, height: 32.0),
+            const SizedBox(width: 15.0),
+            Expanded(
                   child: Text(
                     'AquaOasis™ Cool Mist Humidefier (2.2L Water',
                     overflow: TextOverflow.ellipsis,
                     style: easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontSize: 14.0.sp,color: ColorName.gray),
+                        .copyWith(
+                        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
+                        color: ColorName.gray),
                   ),
                 ),
-            SizedBox(width: 15.0.w),
+            const SizedBox(width: 15.0),
             Text(
               '1 Item',
               overflow: TextOverflow.ellipsis,
               style: easyTheme.textTheme.bodyMedium!
-                  .copyWith(fontSize: 14.0.sp,color: ColorName.gray),
+                  .copyWith(
+                  fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
+                  color: ColorName.gray),
             ),
-            SizedBox(width: 16.0.w),
+            const SizedBox(width: 16.0),
 
               ],
             ),
           ),
-        SizedBox(height: 4.0.h),
+        const SizedBox(height: 4.0),
         Container(
           width: double.infinity,
-          height: 42.0.h,
+          height: 42.0,
           color: ColorName.white,
           child: Row(children: [
-            SizedBox(width: 14.0.w),
-            Assets.png.glasses.image(width: 32.0.w,height: 32.0.h),
-            SizedBox(width: 15.0.w),
-            Flexible(
+            const SizedBox(width: 14.0),
+            Assets.png.glasses.image(width: 32.0,height: 32.0),
+            const SizedBox(width: 15.0),
+            Expanded(
               child: Text(
                 'AquaOasis™ Cool Mist Humidefier (2.2L Water',
                 overflow: TextOverflow.ellipsis,
                 style: easyTheme.textTheme.bodyMedium!
-                    .copyWith(fontSize: 14.0.sp,color: ColorName.gray),
+                    .copyWith(
+                    fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
+                    color: ColorName.gray),
               ),
             ),
-            SizedBox(width: 15.0.w),
+            const SizedBox(width: 15.0),
             Text(
               '1 Item',
               overflow: TextOverflow.ellipsis,
               style: easyTheme.textTheme.bodyMedium!
-                  .copyWith(fontSize: 14.0.sp,color: ColorName.gray),
+                  .copyWith(
+                  fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
+                  color: ColorName.gray),
             ),
-            SizedBox(width: 16.0.w),
+            const SizedBox(width: 16.0),
 
           ],
           ),
         ),
-        Divider(color: ColorName.gray,endIndent: 16.5.w,indent: 16.5.w,),
-        SizedBox(height: 9.0.h),
+        const Divider(color: ColorName.gray,endIndent: 16.5,indent: 16.5,),
+        const SizedBox(height: 9.0),
         Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 14.0.w),
+          padding:  const EdgeInsets.symmetric(horizontal: 14.0),
           child: Text.rich(TextSpan(children: [
-            TextSpan(text: 'Shipping to : ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0)),
-            TextSpan(text: 'Jordan , Amman , Tla Ali ,29.',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0,color: ColorName.gray)),
+            TextSpan(text: 'Shipping to : ',style: easyTheme.textTheme.bodyMedium!.copyWith(
+              fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
+            )),
+            TextSpan(text: 'Jordan , Amman , Tla Ali ,29.',style: easyTheme.textTheme.bodyMedium!.copyWith(
+                fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
+                color: ColorName.gray)),
           ])),
         ),
-        SizedBox(height: 13.0.h),
+        const SizedBox(height: 13.0),
         ],),
     );
   }
 
+
+
+}
+
+
+abstract class FontStyle{
+
+  TextStyle regular = const TextStyle(
+    fontFamily: FontFamily.segoeUISemiBold,
+    fontSize: 22.0,
+    color: ColorName.white,
+  );
 
 
 }

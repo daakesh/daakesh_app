@@ -23,7 +23,7 @@ class MyOrderScreen extends StatelessWidget {
                   backgroundColor: ColorName.whiteSmoke,
                   surfaceTintColor: ColorName.whiteSmoke,
                   bottom: PreferredSize(
-                    preferredSize: Size(double.infinity, state.myOrderTapBar.isMyOrder ?  17.0.h:70.0.h),
+                    preferredSize: Size(double.infinity, state.myOrderTapBar.isMyOrder ?  50.0.h:85.0.h),
                     child: const Text(''),
                   ),
                   flexibleSpace: OrderTypeTabBar(state: state),
@@ -33,22 +33,24 @@ class MyOrderScreen extends StatelessWidget {
                     ? SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (context, index) => MyOrderItem(index: index),
-                      childCount: 10),
-                ) :state.sendReceiveFlag
+                      childCount: 6),
+                )
+                    :state.sendReceiveFlag
                     ? SliverList(
                   delegate: SliverChildBuilderDelegate(
                           (context, index) => index % 2 == 0
                               ? const ReceiveSwapItem()
                               : const ReceiveDoneDealItem(),
-                      childCount: 5),
-                ):SliverList(
+                      childCount: 2),
+                )
+                    : SliverList(
                   delegate: SliverChildBuilderDelegate(
                           (context, index) => index % 2 == 0
-                              ? const WaitingSwapRequestItem()
-                              : const AcceptedSwapRequestItem(),
-                      childCount: 20),
+                              ? const SendSwapWaitingItem()
+                              : const SendSwapAcceptedItem(),
+                      childCount: 2),
                 ),
-                  SliverPadding(
+                    SliverPadding(
                     padding: EdgeInsetsDirectional.symmetric(vertical: 26.0.h)),
               ],
             );

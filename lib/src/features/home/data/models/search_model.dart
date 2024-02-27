@@ -46,7 +46,7 @@ class SearchResultModel {
   CategoryModel? category;
   BrandModel? brand;
   SubCategory? subcategory;
-  SectionModel? section;
+  SectionItemModel? section;
 
   SearchResultModel(
       {this.id,
@@ -82,7 +82,7 @@ class SearchResultModel {
     category = json['category'] != null ? CategoryModel.fromJson(json['category']) : null;
     brand = json['brand'] != null ? BrandModel.fromJson(json['section']) : null;
     subcategory = json['subcategory']!= null ? SubCategory.fromJson(json['subcategory']) : null;
-    section = json['section'] != null ? SectionModel.fromJson(json['section']) : null;
+    section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
   }
 
 }

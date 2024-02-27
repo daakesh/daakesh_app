@@ -4,13 +4,18 @@ import 'package:flutter/material.dart';
 
 class CachedImage extends StatelessWidget {
   final String imageUrl;
-  const CachedImage({super.key, required this.imageUrl});
+  final double? height;
+  final double? width;
+  final BoxFit? fit;
+  const CachedImage({super.key, required this.imageUrl, this.height, this.width, this.fit});
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      fit: BoxFit.cover,
+      fit: fit,
+      height:height ,
+      width: width,
       filterQuality: FilterQuality.high,
       placeholder: (_, __) {
         return const Center(child: CircularProgressIndicator(color: ColorName.blueGray,),);

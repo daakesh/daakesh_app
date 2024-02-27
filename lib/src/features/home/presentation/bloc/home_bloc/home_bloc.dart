@@ -8,7 +8,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DetermentTodayDealEvent>(_determentTodayDeal);
     on<SetFilterDataEvent>(_setFilterDataEvent);
     on<SelectProductPropertiesEvent>(_selectProductProperties);
-    on<GetAllHomeDataEvent>(_getAllHomeData);
+    on<GetSectionDataEvent>(_getSectionData);
+    on<GetHandmadeDataEvent>(_getHandmadeData);
+    on<GetBrandsDataEvent>(_getBrandsData);
+    on<GetTodayItemsDataEvent>(_getTodayItemsData);
+    on<GetAdvertisementDataEvent>(_getAdvertisementData);
   }
   static HomeBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
   ///Event to swap between home screen states with widget like:
@@ -37,10 +41,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       productSizeIndex:event.productSizeIndex,
     ));
   }
-  ///Event to gat home screen data such as {Categories, Deals, Daakesh Deals, What's New Section}
-  FutureOr<void> _getAllHomeData(GetAllHomeDataEvent event, Emitter<HomeState> emit)async{
+  ///Event to get Categories data at [HomeDataWidget]
+  FutureOr<void> _getSectionData(GetSectionDataEvent event, Emitter<HomeState> emit)async{
     emit(state.copyWith(homeStateStatus:  HomeStateStatus.LOADING));
-    final result = await getIt.get<HomeUseCases>().getAllData();
+    final result = await getIt.get<HomeUseCases>().getSectionData();
     result.fold((l) {
       emit(state.copyWith(homeStateStatus: HomeStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -49,11 +53,69 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      HomeDataModel homeDataList = HomeDataModel.fromJson(r.data);
-      List<SectionModel> sectionListData = homeDataList.data!.sections!.toList();
-
+      SectionModel sectionModel = SectionModel.fromJson(r.data);
+      List<SectionItemModel> sectionListData = sectionModel.data!.data!.toList();
       emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,sectionListData:sectionListData));
     });
   }
+  ///Event to get Handmade data at [HomeDataWidget]
+  FutureOr<void> _getHandmadeData(GetHandmadeDataEvent event, Emitter<HomeState> emit)async {
+    emit(state.copyWith(homeStateStatus:  HomeStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().getHandmadeData();
+    result.fold((l) {
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async{
+      if(!r.status!){
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,));
+    });
+  }
+  ///Event to get Brands data at [HomeDataWidget]
+  FutureOr<void> _getBrandsData(GetBrandsDataEvent event, Emitter<HomeState> emit)async{
+    emit(state.copyWith(homeStateStatus:  HomeStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().getBrandsData();
+    result.fold((l) {
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async{
+      if(!r.status!){
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,));
+    });
+  }
 
+  FutureOr<void> _getTodayItemsData(GetTodayItemsDataEvent event, Emitter<HomeState> emit)async {
+    emit(state.copyWith(homeStateStatus:  HomeStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().getTodayItemsData();
+    result.fold((l) {
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async{
+      if(!r.status!){
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,));
+    });
+  }
+
+  FutureOr<void> _getAdvertisementData(GetAdvertisementDataEvent event, Emitter<HomeState> emit) async{
+    emit(state.copyWith(homeStateStatus:  HomeStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().getAdvertisementData();
+    result.fold((l) {
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async{
+      if(!r.status!){
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,));
+    });
+  }
 }

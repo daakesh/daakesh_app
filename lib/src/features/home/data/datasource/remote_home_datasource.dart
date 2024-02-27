@@ -5,9 +5,37 @@ import '../../../../src.export.dart';
 @LazySingleton(as:HomeDatasource )
 class RemoteHomeDatasource implements HomeDatasource {
   @override
-  Future<Either<Failure, ValidResponse>> getAllData() async {
+  Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
     final result = await getIt.get<NetworkService>().get(
-      path: 'DaakeshServices/api/index/getAllData',
+      path: 'DaakeshServices/api/advertisement/getAllAdv',
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getSectionData() async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/section/getSections',
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getHandmadeData() async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/item/getHandmadeItems',
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getBrandsData() async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/brand/getBrands',
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getTodayItemsData() async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/item/getTodaysItems',
     );
     return result;
   }
