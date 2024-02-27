@@ -24,6 +24,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         const SliverToBoxAdapter(child: HomeCarouselSliderWidget(),),
         const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
         ///Popular-section.
+        ///
         SliverToBoxAdapter(child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
