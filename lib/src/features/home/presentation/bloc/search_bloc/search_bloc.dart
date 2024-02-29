@@ -4,7 +4,6 @@ import '../../../../../src.export.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc() : super(const SearchState()) {
-
     on<SearchOnItemsEvent>(_searchOnItems);
     on<EmptySearchEvent>(_emptySearch);
   }
@@ -32,14 +31,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       int lastPage = searchModel.data!.lastPage!;
     List<SearchResultModel> newResultList = searchModel.data!.data!.toList();
     List<SearchResultModel> searchResultList = state.searchResultList.toList();
-    searchResultList.addAll(newResultList);
     if(newResultList.isEmpty){
-      emit(state.copyWith(searchStateStatus: SearchStateStatus.NULL,
+        emit(state.copyWith(searchStateStatus: SearchStateStatus.NULL,
         searchResultList: searchResultList,
         isMoreData:lastPage == state.currentSearchPage,
       ));
       return;
     }
+    searchResultList.addAll(newResultList);
+
     emit(state.copyWith(searchStateStatus: SearchStateStatus.SUCCESS,
       searchResultList: searchResultList,
       isMoreData:lastPage == state.currentSearchPage,

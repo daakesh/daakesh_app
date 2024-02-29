@@ -4,6 +4,7 @@ import '../../../../services/services.export.dart';
 abstract class HomeDatasource {
   Future<Either<Failure, ValidResponse>> getAdvertisementData();
   Future<Either<Failure, ValidResponse>> getSectionData();
+  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(int secID,int page);
   Future<Either<Failure, ValidResponse>> getHandmadeData();
   Future<Either<Failure, ValidResponse>> getBrandsData();
   Future<Either<Failure, ValidResponse>> getTodayItemsData();

@@ -21,10 +21,9 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
       slivers: [
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
         ///Carousel slider.
-        const SliverToBoxAdapter(child: HomeCarouselSliderWidget(),),
+         SliverToBoxAdapter(child: HomeCarouselSliderWidget(data: widget.state.advListData),),
         const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
         ///Popular-section.
-        ///
         SliverToBoxAdapter(child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
@@ -37,11 +36,22 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
           child: Padding(
             padding:const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
             child: SizedBox(
-              height: 130.0,
+              height: 150.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (ctx, index) {
-                  return  PopularCategoriesWidget(data:widget.state.sectionListData[index]);
+                  SectionItemModel sectionItem = widget.state.sectionListData[index];
+                  return GestureDetector(
+                    onTap: () => exploreSection(
+                      sectionItem.id!,
+                      index,
+                      sectionItem.name.toString()
+                    ),
+                    child: PopularCategoriesWidget(
+                      data: widget.state.sectionListData[index],
+
+                    ),
+                  );
                 },
                 itemCount: widget.state.sectionListData.length,
               ),
@@ -132,4 +142,16 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
       ],
     );
   }
+
+  void exploreSection(int secID,int sectionIndex,String categoryTitle){
+    SectionsBloc.get.add(GetCategoryBySectionIDEvent(
+        secID: secID,
+        sectionIndex: sectionIndex,
+        categoryTitle: categoryTitle));
+    widget.scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SECTIONS));
+  }
+
+
+
 }

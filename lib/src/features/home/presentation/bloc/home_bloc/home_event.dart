@@ -39,6 +39,7 @@ class SelectProductSizeIndex extends HomeEvent{
 }
 class GetSectionDataEvent extends HomeEvent{}
 
+
 class GetHandmadeDataEvent extends HomeEvent{}
 
 class GetBrandsDataEvent extends HomeEvent{}

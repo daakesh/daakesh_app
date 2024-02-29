@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class HomeCarouselSliderWidget extends StatefulWidget {
-  final List<int> data;
+  final List<AdvItem> data;
   const HomeCarouselSliderWidget({
     super.key,
-    this.data = const[1,2,3],
+    required this.data,
   });
 
   @override
@@ -25,7 +25,7 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
         CarouselSlider(
           carouselController: controller,
           options: CarouselOptions(
-              height: 200.0.h,
+              height: 160.0,
               viewportFraction: 1,
               initialPage: 0,
               autoPlay: true,
@@ -67,9 +67,8 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                         ],
                       ),
                       const Spacer(flex: 1,),
-                      Assets.png.productIcon.image(width: 150.0,height: 150.0),
-
-
+                      FadeInImageWidget(imageUrl: i.image.toString(),width: 150.0,height: 150.0,radius: 16.0,),
+                      const SizedBox(width: 8.0,)
                     ],
                   )
               ),

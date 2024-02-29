@@ -155,7 +155,6 @@ class AppTheme {
       headlineMedium: TextStyle(
         fontFamily: FontFamily.apercuBold,
         fontSize: 25.0,
-
         color: ColorName.white,
       ),
       headlineLarge: TextStyle(

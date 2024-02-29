@@ -43,7 +43,7 @@ class SearchResultModel {
   String? condition;
   int? price;
   UserModel? user;
-  CategoryModel? category;
+  CategoryItem? category;
   BrandModel? brand;
   SubCategory? subcategory;
   SectionItemModel? section;
@@ -79,7 +79,7 @@ class SearchResultModel {
     condition = json['Condition'];
     price = json['Price'];
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    category = json['category'] != null ? CategoryModel.fromJson(json['category']) : null;
+    category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;
     brand = json['brand'] != null ? BrandModel.fromJson(json['section']) : null;
     subcategory = json['subcategory']!= null ? SubCategory.fromJson(json['subcategory']) : null;
     section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;

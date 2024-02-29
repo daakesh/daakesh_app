@@ -5,3 +5,4 @@ export 'main_screen.dart';
 export 'more_info_product_screen.dart';
 export 'results_screen.dart';
 export 'search_screen.dart';
+export 'sections_screen.dart';

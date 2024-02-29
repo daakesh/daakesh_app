@@ -24,6 +24,7 @@ class HomeState extends Equatable {
   final int productSizeIndex;
   ///API Data
   final List<SectionItemModel> sectionListData;
+  final List<AdvItem> advListData;
 
 
 
@@ -42,6 +43,7 @@ class HomeState extends Equatable {
     this.productSizeIndex = 0,
     ///API Data.
     this.sectionListData = const[],
+    this.advListData = const[],
 
 
 
@@ -59,6 +61,7 @@ class HomeState extends Equatable {
     int? productSizeIndex,
     ///API Data
     List<SectionItemModel>? sectionListData,
+    List<AdvItem>? advListData,
 
 
   }) {
@@ -75,6 +78,7 @@ class HomeState extends Equatable {
       productSizeIndex: productSizeIndex ?? this.productSizeIndex,
       ///API Data
       sectionListData: sectionListData ?? this.sectionListData,
+      advListData: advListData ?? this.advListData,
 
 
     );
@@ -94,5 +98,6 @@ class HomeState extends Equatable {
     productSizeIndex,
     ///API Data
     sectionListData,
+    advListData,
   ];
 }

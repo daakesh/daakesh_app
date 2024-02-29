@@ -37,9 +37,9 @@ class SearchBarWidget extends StatelessWidget {
                 width: 184.0.w,
               ),
             ),
-            state.homeScreenState.isProductDetails || state.homeScreenState.isCart
+            state.homeScreenState.isProductDetails || state.homeScreenState.isCart || state.homeScreenState.isSections
                 ? IconButton(
-                onPressed: () => HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME )),
+                onPressed: () =>onBack(state),
                 icon: const Icon(
                   Icons.arrow_back,
                   color: ColorName.white,
@@ -51,4 +51,12 @@ class SearchBarWidget extends StatelessWidget {
       ),
     );
   }
+
+  void onBack(HomeState state){
+    if(state.homeScreenState.isSections){
+    SectionsBloc.get.add(ResetVarEvent());
+    }
+    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
+  }
+
 }

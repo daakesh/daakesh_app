@@ -1,7 +1,9 @@
 export 'corner_painter.dart';
 export 'daakesh_logo_widget.dart';
+export 'fade_in_image_widget.dart';
 export 'buttons_widgets/buttons_widget.export.dart';
 export 'layout_builder.dart';
 export 'toast_snackbar.dart';
 export 'text_field_widget.dart';
 export 'cached_image.dart';
+export 'circular_progress_indicator_widget.dart';

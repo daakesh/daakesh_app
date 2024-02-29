@@ -147,6 +147,10 @@ class $AssetsSvgGen {
   SvgGenImage get disableProfileIcon =>
       const SvgGenImage('assets/svg/disable_profile_icon.svg');
 
+  /// File path: assets/svg/empty_image_icon.svg
+  SvgGenImage get emptyImageIcon =>
+      const SvgGenImage('assets/svg/empty_image_icon.svg');
+
   /// File path: assets/svg/enable_home_icon.svg
   SvgGenImage get enableHomeIcon =>
       const SvgGenImage('assets/svg/enable_home_icon.svg');
@@ -221,6 +225,7 @@ class $AssetsSvgGen {
         disableHomeIcon,
         disableProductIcon,
         disableProfileIcon,
+        emptyImageIcon,
         enableHomeIcon,
         enableProductIcon,
         enableProfileIcon,

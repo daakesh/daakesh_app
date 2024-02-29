@@ -19,6 +19,7 @@ enum HomeScreenState{
   PRODUCTDETAILS,
   SEARCHRESULT,
   CART,
+  SECTIONS,
   HOME,
 }
 enum ProductDisplayMethod{

@@ -6,6 +6,7 @@ import '../../../../src.export.dart';
 abstract class HomeUseCases {
   Future<Either<Failure,ValidResponse>> getAdvertisementData();
   Future<Either<Failure,ValidResponse>> getSectionData();
+  Future<Either<Failure,ValidResponse>> getCategoryBySectionID(int secID,int page);
   Future<Either<Failure,ValidResponse>> getHandmadeData();
   Future<Either<Failure,ValidResponse>> getBrandsData();
   Future<Either<Failure,ValidResponse>> getTodayItemsData();
@@ -22,6 +23,10 @@ class HomeUseCasesImpl implements HomeUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getSectionData() async {
     return await getIt.get<HomeRepository>().getSectionData();
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(int secID,int page) async {
+    return await getIt.get<HomeRepository>().getCategoryBySectionID(secID,page);
   }
   @override
   Future<Either<Failure, ValidResponse>> getHandmadeData() async {

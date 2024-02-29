@@ -7,9 +7,14 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
     return await getIt.get<HomeDatasource>().getAdvertisementData();
-  }  @override
+  }
+  @override
   Future<Either<Failure, ValidResponse>> getSectionData() async {
     return await getIt.get<HomeDatasource>().getSectionData();
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(int secID,int page) async {
+    return await getIt.get<HomeDatasource>().getCategoryBySectionID(secID,page);
   }
   @override
   Future<Either<Failure, ValidResponse>> getHandmadeData() async {

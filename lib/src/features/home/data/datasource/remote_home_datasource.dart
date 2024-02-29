@@ -19,6 +19,17 @@ class RemoteHomeDatasource implements HomeDatasource {
     return result;
   }
   @override
+  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(int secID,int page) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/category/getCategoryBySection',
+      params: {
+        "secID":secID.toString(),
+        "page":page.toString()
+      }
+    );
+    return result;
+  }
+  @override
   Future<Either<Failure, ValidResponse>> getHandmadeData() async {
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/item/getHandmadeItems',

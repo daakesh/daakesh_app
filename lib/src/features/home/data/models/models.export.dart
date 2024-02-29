@@ -1,3 +1,4 @@
+export 'adv_model.dart';
 export 'brand_model.dart';
 export 'category_model.dart';
 export 'search_model.dart';

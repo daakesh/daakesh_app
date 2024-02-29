@@ -3,8 +3,10 @@ import '../../../../../src.export.dart';
 
 class PopularCategoriesWidget extends StatelessWidget {
   final SectionItemModel data;
+  final int? secIndex;
+  final int? index;
   const PopularCategoriesWidget({
-    super.key, required this.data,
+    super.key, required this.data, this.index, this.secIndex,
   });
 
   @override
@@ -15,14 +17,10 @@ class PopularCategoriesWidget extends StatelessWidget {
       child: Container(
         width: 115.0,
         height: 130.0,
-        decoration:  BoxDecoration(
-          color: ColorName.white,
+        decoration:  const BoxDecoration(
+          color:ColorName.white,
           borderRadius: BorderRadius.all(Radius.circular(18.0)),
-          image: DecorationImage(
-            image: NetworkImage(data.secImg.toString()),
-            alignment: AlignmentDirectional.bottomStart
-          ),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
               offset: Offset(0, 3),
               blurRadius: 6,
@@ -31,7 +29,9 @@ class PopularCategoriesWidget extends StatelessWidget {
           ],
         ),
         child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
           children: [
+            FadeInImageWidget(imageUrl: data.secImg.toString(),isCircle: false),
             Align(
               alignment: AlignmentDirectional.topStart,
               child: Padding(

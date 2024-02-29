@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
              case HomeScreenState.SEARCHRESULT: return const ResultsScreen();
              case HomeScreenState.CART: return const CartScreen();
              case HomeScreenState.PRODUCTDETAILS: return const MoreInfoProductScreen();
+             case HomeScreenState.SECTIONS: return SectionScreen(homeState: state,);
              default:return HomeDataWidget(scrollController: scrollController, state: state,);
            }
         }),
@@ -38,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
 
 
 

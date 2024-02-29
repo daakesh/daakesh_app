@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -88,7 +89,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,));
     });
   }
-
+  ///
   FutureOr<void> _getTodayItemsData(GetTodayItemsDataEvent event, Emitter<HomeState> emit)async {
     emit(state.copyWith(homeStateStatus:  HomeStateStatus.LOADING));
     final result = await getIt.get<HomeUseCases>().getTodayItemsData();
@@ -103,7 +104,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,));
     });
   }
-
+  ///
   FutureOr<void> _getAdvertisementData(GetAdvertisementDataEvent event, Emitter<HomeState> emit) async{
     emit(state.copyWith(homeStateStatus:  HomeStateStatus.LOADING));
     final result = await getIt.get<HomeUseCases>().getAdvertisementData();
@@ -115,7 +116,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,));
+      AdvModel advModel =AdvModel.fromJson(r.data);
+
+      emit(state.copyWith(homeStateStatus: HomeStateStatus.SUCCESS,advListData: advModel.data!.toList()));
     });
   }
+
+
+
+
 }
