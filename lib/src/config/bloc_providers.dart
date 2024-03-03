@@ -15,10 +15,13 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<BrandsBloc>(create: (_) => BrandsBloc()),
       BlocProvider<HandmadeBloc>(create: (_) => HandmadeBloc()),
       BlocProvider<TodayDealsBloc>(create: (_) => TodayDealsBloc()),
-
+      BlocProvider<PassDataBloc>(create: (_) => PassDataBloc()),
+      BlocProvider<AdvBloc>(create: (_) => AdvBloc()),
+      ///BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
 
 
     ],
     child: child!,
   );
 }
+

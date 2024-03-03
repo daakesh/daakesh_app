@@ -70,12 +70,14 @@ class SectionScreen extends StatelessWidget {
         state.categoriesListData.isNotEmpty
             ? SliverList(
             delegate: SliverChildBuilderDelegate(
-                    (context, index) => SectionCategoryItem(
-                        categoryItem: state.categoriesListData[index]),
+                    (context, index) => GestureDetector(
+                      onTap: ()=> openSubCategories(state.categoriesListData,index),
+                      child: SectionCategoryItem(
+                          categoryItem: state.categoriesListData[index]),
+                    ),
                     childCount: state.categoriesListData.length,
             ))
             : const SliverToBoxAdapter(child: SizedBox()),
-
         const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
             SliverToBoxAdapter(
                 child: seeMoreHandler(state)),
@@ -91,10 +93,15 @@ class SectionScreen extends StatelessWidget {
     SectionsBloc.get.add(GetCategoryBySectionIDEvent(secID: secID, sectionIndex:sectionIndex , categoryTitle: categoryTitle));
   }
 
-  void onSeeMore(){
-    SectionsBloc.get.add(GetCategoryBySectionIDEvent(isSeeMore: true));
+  void onSeeMore()=>SectionsBloc.get.add(GetCategoryBySectionIDEvent(isSeeMore: true));
 
+  void openSubCategories(List<CategoryItem> categoriesListData,index) {
+    PassDataBloc.get.add(PassSectionSubCategoriesEvent(categoriesListData:categoriesListData));
+    PassDataBloc.get.add(PreviewSectionSubCategoriesEvent(index:index));
+    HomeBloc.get.add(GetToTopScreenEvent());
+    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.SUBCATEGORYRESULT));
   }
+
   Widget seeMoreHandler(SectionsState state) {
     switch (!state.isMoreData) {
       case true:

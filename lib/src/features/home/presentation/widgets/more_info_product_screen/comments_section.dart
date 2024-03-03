@@ -4,8 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
 class CommentsSection extends StatelessWidget {
-  final HomeState state;
-  const CommentsSection({super.key, required this.state});
+  const CommentsSection({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +78,7 @@ class CommentsSection extends StatelessWidget {
                             onRatingUpdate: (rating) {},
                           ),
                           const SizedBox(width: 6.0,),
-                          Text('4.5',style: easyTheme.textTheme.labelSmall!.copyWith(fontSize:14.0),),
+                          Text('4.5',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize:14.0,fontWeight: FontWeight.w600),),
 
 
 

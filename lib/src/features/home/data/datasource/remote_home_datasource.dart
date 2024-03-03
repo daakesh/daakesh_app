@@ -70,4 +70,41 @@ class RemoteHomeDatasource implements HomeDatasource {
     );
     return result;
   }
+  ///Comments API.
+  @override
+  Future<Either<Failure, ValidResponse>> addComment(int userId, int itemId, String commentDesc)async {
+    final result = await getIt.get<NetworkService>().post(
+      path: 'DaakeshServices/api/comment/addComment',
+      body: {
+        "userID":"$userId",
+        "itemID":"$itemId",
+        "commentDesc":commentDesc,
+      }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> editComments(int id, String commentDesc) async {
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/comment/updateComment',
+        params: {
+      "id": "$id",
+      "commentDesc": commentDesc,
+    });
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/comment/getCommentsByItem',
+        params: {"itemID": "$itemID"});
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> removeComments(int id) async{
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/comment/removeComment',
+        params: {"id": "$id"});
+    return result;
+  }
 }

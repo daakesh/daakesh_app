@@ -58,8 +58,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                             inputFormatters: [
                               RegExpValidator.beginWhitespace,
                             ],
-                            suffixIcon: state.homeScreenState.isSearch ||
-                                state.homeScreenState.isSearchResult
+                            suffixIcon: state.homeScreenState.isSearch
                                 ? InkWell(
                                     onTap: clearText,
                                     child: const Icon(

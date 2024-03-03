@@ -41,7 +41,9 @@ class SearchBarWidget extends StatelessWidget {
                     state.homeScreenState.isCart ||
                     state.homeScreenState.isSections ||
                 state.homeScreenState.isShopByBrands ||
-                state.homeScreenState.isHomemade
+                state.homeScreenState.isHomemade ||
+                state.homeScreenState.isSubCategoryResult
+
                 ? IconButton(
                 onPressed: () =>onBack(state),
                 icon: const Icon(
@@ -57,8 +59,12 @@ class SearchBarWidget extends StatelessWidget {
   }
 
   void onBack(HomeState state){
+    if(state.homeScreenState.isSubCategoryResult){
+      HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SECTIONS));
+      return;
+    }
     if(state.homeScreenState.isSections){
-    SectionsBloc.get.add(ResetVarEvent());
+      SectionsBloc.get.add(ResetVarEvent());
     }
     HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
   }

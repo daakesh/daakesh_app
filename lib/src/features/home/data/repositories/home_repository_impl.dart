@@ -28,9 +28,34 @@ class HomeRepositoryImpl implements HomeRepository {
     return await getIt.get<HomeDatasource>().getTodayItemsData(page);
   }
 
-
   @override
   Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
     return await getIt.get<HomeDatasource>().searchOnItems(searchValue,page,perPage);
   }
+  ///Comment API.
+  @override
+  Future<Either<Failure, ValidResponse>> addComment(int userId, int itemId, String commentDesc) async{
+    return await getIt.get<HomeDatasource>().addComment(userId,itemId,commentDesc);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> editComments(int id, String commentDesc) async{
+    return await getIt.get<HomeDatasource>().editComments(id,commentDesc);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async{
+    return await getIt.get<HomeDatasource>().getCommentsByItem(itemID);
+
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeComments(int id) async{
+    return await getIt.get<HomeDatasource>().removeComments(id);
+  }
+
+
+
+
+
 }

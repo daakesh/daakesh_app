@@ -8,6 +8,7 @@ class SwapHomeScreenStateEvent extends HomeEvent{
   final HomeScreenState homeScreenState;
   SwapHomeScreenStateEvent({required this.homeScreenState});
 }
+class GetToTopScreenEvent extends HomeEvent{}
 
 class DetermentTodayDealEvent extends HomeEvent{
   final bool isDaakeshTodayDeal;
@@ -39,14 +40,10 @@ class SelectProductSizeIndex extends HomeEvent{
 }
 class GetSectionDataEvent extends HomeEvent{}
 
-
-
-
 class GetTodayItemsDataEvent extends HomeEvent{}
 
 class GetDaakeshTodayItemsDataEvent extends HomeEvent{}
 
-class GetAdvertisementDataEvent extends HomeEvent{}
 
 
 

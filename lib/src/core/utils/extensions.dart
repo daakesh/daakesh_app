@@ -11,7 +11,7 @@ extension StringExtension on String {
 extension HomeScreenStateX on HomeScreenState{
   bool get isSearch => this == HomeScreenState.SEARCH;
   bool get isProductDetails => this == HomeScreenState.PRODUCTDETAILS;
-  bool get isSearchResult => this == HomeScreenState.SEARCHRESULT;
+  bool get isSubCategoryResult => this == HomeScreenState.SUBCATEGORYRESULT;
   bool get isCart => this == HomeScreenState.CART;
   bool get isSections => this == HomeScreenState.SECTIONS;
   bool get isShopByBrands => this == HomeScreenState.SHOPBYBRANDS;

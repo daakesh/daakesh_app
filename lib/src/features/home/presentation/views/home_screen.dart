@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
-        controller: scrollController,
+        controller: HomeBloc.scrollController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return [
           AppBarWidget(searchController: searchController,),
@@ -28,13 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (ctx,state){
            switch(state.homeScreenState){
              case HomeScreenState.SEARCH: return const SearchScreen();
-             case HomeScreenState.SEARCHRESULT: return const ResultsScreen();
+             case HomeScreenState.SUBCATEGORYRESULT: return const ResultsScreen();
              case HomeScreenState.CART: return const CartScreen();
              case HomeScreenState.PRODUCTDETAILS: return const MoreInfoProductScreen();
              case HomeScreenState.SECTIONS: return SectionScreen(homeState: state,);
              case HomeScreenState.SHOPBYBRANDS: return const ShopByBrandsScreen();
              case HomeScreenState.HOMEMADE: return const HomemadeScreen();
-             default:return HomeDataWidget(scrollController: scrollController, state: state);
+             default:return HomeDataWidget(state: state);
            }
         }),
       ),

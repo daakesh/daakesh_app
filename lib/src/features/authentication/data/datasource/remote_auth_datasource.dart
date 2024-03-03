@@ -45,7 +45,7 @@ class RemoteAuthDatasource implements AuthDatasource {
   Future<Either<Failure, ValidResponse>> getUserData() async{
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/user/getUserData',
-      userToken: ValueConstants.token,
+      userToken: ValueConstants.userId,
     );
     return result;
   }
