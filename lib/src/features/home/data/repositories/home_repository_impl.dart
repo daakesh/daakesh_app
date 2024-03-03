@@ -1,14 +1,35 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../services/services.export.dart';
 import '../../../../src.export.dart';
 
 @LazySingleton(as: HomeRepository)
 class HomeRepositoryImpl implements HomeRepository {
   @override
-  Future<Either<Failure, ValidResponse>> getAllData() async {
-    return await getIt.get<HomeDatasource>().getAllData();
-  }@override
+  Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
+    return await getIt.get<HomeDatasource>().getAdvertisementData();
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getSectionData() async {
+    return await getIt.get<HomeDatasource>().getSectionData();
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(int secID,int page) async {
+    return await getIt.get<HomeDatasource>().getCategoryBySectionID(secID,page);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
+    return await getIt.get<HomeDatasource>().getHandmadeData(page);
+  } @override
+  Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
+    return await getIt.get<HomeDatasource>().getBrandsData(page);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
+    return await getIt.get<HomeDatasource>().getTodayItemsData(page);
+  }
+
+
+  @override
   Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
     return await getIt.get<HomeDatasource>().searchOnItems(searchValue,page,perPage);
   }

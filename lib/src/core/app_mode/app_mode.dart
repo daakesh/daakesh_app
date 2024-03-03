@@ -53,56 +53,56 @@ class AppTheme {
       ///sfProDisplaySemiBold
       labelSmall: TextStyle(
         fontFamily: FontFamily.sfProDisplaySemiBold,
-        fontSize: 18.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
         color: ColorName.black,
       ),
       ///labelMedium
       labelMedium: TextStyle(
         fontFamily: FontFamily.sfProDisplayRegular,
-        fontSize: 18.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
         color: ColorName.black,
       ),
       ///labelMedium
       labelLarge: TextStyle(
         fontFamily: FontFamily.segoeUISemiBold,
-        fontSize: 22.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 22.0),
         color: ColorName.white,
       ),
       ///bodySmall => apercuLight
       bodySmall:TextStyle(
         fontFamily: FontFamily.apercuLight,
-        fontSize: 14.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
         color: ColorName.ashGray,
       ),
       ///bodyMedium
       bodyMedium:TextStyle(
         fontFamily: FontFamily.apercuRegular,
-        fontSize: 17.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 17.0),
         color: ColorName.blueGray,
       ),
       ///bodyLarge
       bodyLarge:TextStyle(
         fontFamily: FontFamily.apercuMedium,
-        fontSize: 20.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 20.0),
         color: ColorName.blueGray,
       ),
 
       ///headlineSmall
       headlineSmall: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: 18.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
         color: ColorName.blueGray,
       ),
       ///headlineMedium
       headlineMedium: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: 25.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 25.0),
         color: ColorName.blueGray,
       ),
       ///headlineLarge
       headlineLarge: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: 40.0.sp,
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 40.0),
         color: ColorName.blueGray,
       ),
 
@@ -155,7 +155,6 @@ class AppTheme {
       headlineMedium: TextStyle(
         fontFamily: FontFamily.apercuBold,
         fontSize: 25.0,
-
         color: ColorName.white,
       ),
       headlineLarge: TextStyle(

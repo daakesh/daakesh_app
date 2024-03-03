@@ -152,3 +152,5 @@ bool getTextDirection(context) => Directionality.of(context) == TextDirection.rt
 bool get isLightTheme => easyTheme.brightness == Brightness.light;
 
 BuildContext get currentContext => navigatorKey.currentState!.context;
+
+

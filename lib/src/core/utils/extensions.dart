@@ -13,6 +13,9 @@ extension HomeScreenStateX on HomeScreenState{
   bool get isProductDetails => this == HomeScreenState.PRODUCTDETAILS;
   bool get isSearchResult => this == HomeScreenState.SEARCHRESULT;
   bool get isCart => this == HomeScreenState.CART;
+  bool get isSections => this == HomeScreenState.SECTIONS;
+  bool get isShopByBrands => this == HomeScreenState.SHOPBYBRANDS;
+  bool get isHomemade => this == HomeScreenState.HOMEMADE ;
   bool get isHome => this == HomeScreenState.HOME;
 }
 

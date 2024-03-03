@@ -15,7 +15,7 @@ class HomeDataModel {
 }
 
 class HomeData {
-  List<SectionModel>? sections;
+  List<SectionItemModel>? sections;
 
   HomeData({
     this.sections,
@@ -23,8 +23,8 @@ class HomeData {
 
   HomeData.fromJson(Map<String, dynamic> json) {
     if (json['sections'] != null) {
-      sections = <SectionModel>[];
-      sections = (json['sections'] as List<dynamic>).map((v) => SectionModel.fromJson(v)).toList();
+      sections = <SectionItemModel>[];
+      sections = (json['sections'] as List<dynamic>).map((v) => SectionItemModel.fromJson(v)).toList();
     }
 
   }

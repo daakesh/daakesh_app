@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class PopularCategoriesWidget extends StatelessWidget {
-  final SectionModel data;
+  final SectionItemModel data;
+  final int? secIndex;
+  final int? index;
   const PopularCategoriesWidget({
-    super.key, required this.data,
+    super.key, required this.data, this.index, this.secIndex,
   });
 
   @override
@@ -15,8 +17,8 @@ class PopularCategoriesWidget extends StatelessWidget {
       child: Container(
         width: 115.0,
         height: 130.0,
-        decoration: const BoxDecoration(
-          color: ColorName.white,
+        decoration:  const BoxDecoration(
+          color:ColorName.white,
           borderRadius: BorderRadius.all(Radius.circular(18.0)),
           boxShadow: [
             BoxShadow(
@@ -26,24 +28,17 @@ class PopularCategoriesWidget extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
           children: [
-            Expanded(
-              child: Padding(
-                padding:
-                const EdgeInsetsDirectional.only(start: 11.0),
-                child: Text(data.name.toString(),
-                    style: easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontSize: 15.0)),
-              ),
-            ),
+            CachedImage(imageUrl: data.secImg.toString(),),
             Align(
-              alignment: AlignmentDirectional.bottomEnd,
-              child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      bottomRight: Radius.circular(18.0),bottomLeft: Radius.circular(18.0)),
-                  child: CachedImage(imageUrl: data.secImg.toString())),
+              alignment: AlignmentDirectional.topStart,
+              child: Padding(
+                padding: const EdgeInsetsDirectional.only(start: 11.0),
+                child: Text(data.name.toString(), style: easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 15.0)),
+              ),
             ),
           ],
         ),
@@ -53,26 +48,3 @@ class PopularCategoriesWidget extends StatelessWidget {
 }
 
 
-///
-///       Stack(
-///           fit: StackFit.expand,
-///           children: [
-///             ClipRRect(
-///                 borderRadius: const BorderRadius.all(Radius.circular(18.0)),
-///                 child: CachedImage(imageUrl:data.secImg.toString())),
-///             Padding(
-///               padding:
-///               EdgeInsetsDirectional.only(start: 11.0.w,top: 5.0.h),
-///               child: Text(data.name.toString().capitalize,
-///                   style: easyTheme.textTheme.bodyMedium!
-///                       .copyWith(fontSize: 16.0.sp)),
-///             ),
-///
-///           ],
-///         )
-///
-///
-///
-///
-///
-///

@@ -5,11 +5,18 @@ import '../../../../../src.export.dart';
 class TodayDealProduct extends StatelessWidget {
   final ScrollController scrollController;
   final bool isDaakeshTodayDeal;
-  const TodayDealProduct({super.key,this.isDaakeshTodayDeal = false, required this.scrollController});
+  final HandmadeItem todayDealItem;
+
+  const TodayDealProduct({
+    super.key,
+    this.isDaakeshTodayDeal = false,
+    required this.scrollController,
+    required this.todayDealItem,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: (){
         scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
         HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.PRODUCTDETAILS));
@@ -19,7 +26,6 @@ class TodayDealProduct extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: double.infinity,
             decoration: BoxDecoration(
               color: ColorName.lavenderGray,
               boxShadow: const [
@@ -31,35 +37,30 @@ class TodayDealProduct extends StatelessWidget {
               ],
               borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0.r),topRight: Radius.circular(10.0.r)),
             ),
-            child: Stack(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding:EdgeInsetsDirectional.only(top: 25.0.h),
-                  child: Align(
-                      alignment: AlignmentDirectional.topCenter,
-                      child: Assets.png.glasses.image(height: 80.0.h, width: 80.0.w)),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.only(start: 2.0.w),
-                  child: Container(
-                    constraints: BoxConstraints(maxWidth: 75.0.w),
-                    height: 22.0.h,
-                    margin:  EdgeInsetsDirectional.only(top: 1.0.h, start: 4.0.w),
-                    padding:  EdgeInsets.only(top: 2.0.h),
-                    decoration: BoxDecoration(
-                      color: ColorName.red,
-                      borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.0.h),
-                      child: Text(
-                        '23% OFF',
-                        textAlign: TextAlign.center,
-                        style: easyTheme.textTheme.headlineMedium!
-                            .copyWith(fontSize: 14.0.sp, color: ColorName.white),
-                      ),
+                Container(
+                  constraints: BoxConstraints(maxWidth: 75.0.w),
+                  height: 22.0.h,
+                  margin:  const EdgeInsetsDirectional.only(top: 1.0, start: 4.0),
+                  padding:  EdgeInsets.only(top: 2.0.h),
+                  decoration: BoxDecoration(
+                    color: ColorName.red,
+                    borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.0.h),
+                    child: Text(
+                      '23% OFF',
+                      textAlign: TextAlign.center,
+                      style: easyTheme.textTheme.headlineMedium!
+                          .copyWith(fontSize: 14.0.sp, color: ColorName.white),
                     ),
                   ),
+                ),
+                CachedImage(
+                  imageUrl: todayDealItem.itemImg.toString(),
                 ),
               ],
             ),
@@ -87,7 +88,7 @@ class TodayDealProduct extends StatelessWidget {
                   height: 2.0.h,
                 ),
                 Text(
-                  'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                  '${todayDealItem.description}',
                   maxLines: 2,
                   style: easyTheme.textTheme.bodyMedium!.copyWith(
                       fontSize: 14.0.sp,
@@ -136,18 +137,22 @@ class TodayDealProduct extends StatelessWidget {
                 SizedBox(
                   height: 2.0.h,
                 ),
-                 Row(
+                Row(
                   children: [
-                    Text('\$44',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 20.0.sp),),
-                    Text('99 ',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 14.0.sp, color: ColorName.gray,),),
                     Flexible(
-                      child: Text(
-                        '\$79.99',
-                        style: easyTheme.textTheme.headlineMedium!.copyWith(
-                            fontSize: 14.0.sp,
-                            overflow: TextOverflow.ellipsis,
-                            decoration: TextDecoration.lineThrough,
-                            color: ColorName.gray),
+                        child: Text(
+                      '\$${todayDealItem.price}',
+                      style: easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 20.0,fontWeight: FontWeight.w600),
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                    Text('99 ',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 12.0, color: ColorName.gray,),),
+                    Text(
+                      '\$79.99',
+                      style: easyTheme.textTheme.headlineMedium!.copyWith(
+                          fontSize: 14.0.sp,
+                          decoration: TextDecoration.lineThrough,
+                          color: ColorName.gray,
                       ),
                     ),
                   ],
@@ -155,7 +160,8 @@ class TodayDealProduct extends StatelessWidget {
                 const SizedBox(
                   height: 10.0,
                 ),
-                !isDaakeshTodayDeal ? Row(
+                !isDaakeshTodayDeal
+                    ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -168,7 +174,8 @@ class TodayDealProduct extends StatelessWidget {
                       ],
                     ),
                   ],
-                ):Row(
+                )
+                    : Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(Icons.phone,color: ColorName.silverChalice,size: 20.0.sp,),
@@ -188,12 +195,9 @@ class TodayDealProduct extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 2.0.h,
-                ),
-                SizedBox(height: 10.0.h,),
-
+                const SizedBox(height: 10.0,)
               ],
+
             ),
           ),
         ],

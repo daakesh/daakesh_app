@@ -43,7 +43,7 @@ class HeaderWidget extends StatelessWidget {
             onTap: ()=> Navigator.pop(context),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 18.0.w,vertical: 20.0.h),
-              child: Assets.svg.arrowBackIcon.svg(color: isLight ? ColorName.blueGray:ColorName.white),
+              child: Assets.svg.arrowBackIcon.svg(color: isLight ? ColorName.blueGray:ColorName.white,height: 20.0.h,width: 20.0.w),
             ),
           ),
         ],

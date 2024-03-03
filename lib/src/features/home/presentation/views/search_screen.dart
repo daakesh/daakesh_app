@@ -22,9 +22,7 @@ class SearchScreen extends StatelessWidget {
                   Expanded(child: Align(
                       alignment: AlignmentDirectional.bottomStart, child: Text(
                     'Search', style: easyTheme.textTheme.headlineMedium!.copyWith(color: ColorName.black.withOpacity(0.57)),))),
-                  InkWell(
-                      splashColor: ColorName.transparent,
-                      highlightColor: ColorName.transparent,
+                  GestureDetector(
                       onTap: ()=>openFilterScreen(context),
                       child: Assets.png.filterIcon.image(
                           width: 38.0, height: 38.0)),
@@ -49,7 +47,7 @@ class SearchScreen extends StatelessWidget {
                   ),
                 ),
               ):
-                   const Center(child: CircularProgressIndicator(color: ColorName.blueGray,),)
+                    const CircularProgressIndicatorWidget()
                   : const SizedBox(),
             ),
             const SliverPadding(padding: EdgeInsetsDirectional.only(top: 55.0)),
@@ -81,7 +79,7 @@ class _SearchResultHandler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (state.searchStateStatus) {
-      case SearchStateStatus.LOADING:return const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator(color: ColorName.blueGray,)));
+      case SearchStateStatus.LOADING:return const SliverToBoxAdapter(child: CircularProgressIndicatorWidget());
       case SearchStateStatus.NULL:return const SliverToBoxAdapter(child: Center(child: Text('No information available...')));
       default: return SliverList(
         delegate: SliverChildBuilderDelegate((_, index) {

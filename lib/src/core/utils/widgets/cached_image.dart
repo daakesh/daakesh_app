@@ -1,23 +1,46 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:daakesh/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
+import '../../../src.export.dart';
 
 class CachedImage extends StatelessWidget {
   final String imageUrl;
-  const CachedImage({super.key, required this.imageUrl});
+  final double? height;
+  final double? width;
+  final BoxFit fit;
+  final BorderRadiusGeometry borderRadius;
+  final Alignment alignment;
+
+  const CachedImage(
+      {super.key,
+      required this.imageUrl,
+      this.height,
+      this.width,
+      this.fit = BoxFit.cover,
+      this.borderRadius = BorderRadius.zero,
+      this.alignment = Alignment.center,
+      });
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
-      fit: BoxFit.cover,
-      filterQuality: FilterQuality.high,
-      placeholder: (_, __) {
-        return const Center(child: CircularProgressIndicator(color: ColorName.blueGray,),);
-      },
-      errorWidget: (_, __, error) {
-        return const Icon(Icons.image_not_supported_outlined);
-      },
+    return ClipRRect(
+      borderRadius:borderRadius,
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        fit: fit,
+        height:height ,
+        width: width,
+        filterQuality: FilterQuality.high,
+        fadeInCurve: Curves.easeInOut,
+        alignment: alignment,
+        placeholder: (_, __) {
+          return const SizedBox();
+        },
+        errorWidget: (_, __, error) {
+          return Center(
+            child: Assets.svg.emptyImageIcon.svg(height: 20.0, width: 20.0),
+          );
+        },
+
+      ),
     );
   }
 }

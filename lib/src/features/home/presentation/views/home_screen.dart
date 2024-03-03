@@ -31,14 +31,16 @@ class _HomeScreenState extends State<HomeScreen> {
              case HomeScreenState.SEARCHRESULT: return const ResultsScreen();
              case HomeScreenState.CART: return const CartScreen();
              case HomeScreenState.PRODUCTDETAILS: return const MoreInfoProductScreen();
-             default:return HomeDataWidget(scrollController: scrollController, state: state,);
+             case HomeScreenState.SECTIONS: return SectionScreen(homeState: state,);
+             case HomeScreenState.SHOPBYBRANDS: return const ShopByBrandsScreen();
+             case HomeScreenState.HOMEMADE: return const HomemadeScreen();
+             default:return HomeDataWidget(scrollController: scrollController, state: state);
            }
         }),
       ),
     );
   }
 }
-
 
 
 
