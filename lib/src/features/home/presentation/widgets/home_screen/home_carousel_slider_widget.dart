@@ -67,7 +67,12 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                         ],
                       ),
                       const Spacer(flex: 1,),
-                      FadeInImageWidget(imageUrl: i.image.toString(),width: 150.0,height: 150.0,radius: 16.0,),
+                      CachedImage(
+                        imageUrl: i.image.toString(),
+                        width: 150.0,
+                        height: 150.0,
+                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                      ),
                       const SizedBox(width: 8.0,)
                     ],
                   )

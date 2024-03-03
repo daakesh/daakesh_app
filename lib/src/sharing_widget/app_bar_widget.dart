@@ -81,9 +81,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                 ),
               ),
               SizedBox(width: 14.0.w),
-              InkWell(
+              GestureDetector(
                   onTap: () {
-                  HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.CART ));
+                  HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.CART));
                   FocusScope.of(context).unfocus();
                   },
                   child: Assets.svg.cartAddIcon.svg(width: 24.0.w, height: 24.0.h)),

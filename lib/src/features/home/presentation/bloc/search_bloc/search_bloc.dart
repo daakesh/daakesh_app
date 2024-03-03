@@ -18,7 +18,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     else{
       emit(state.copyWith(searchStateStatus: SearchStateStatus.LOADING,currentSearchPage: 1));
     }
-
     final result = await getIt.get<HomeUseCases>().searchOnItems(event.searchValue.toString(), state.currentSearchPage, 1);
     result.fold((l) {
       emit(state.copyWith(searchStateStatus: SearchStateStatus.ERROR));

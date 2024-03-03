@@ -31,7 +31,7 @@ class PopularCategoriesWidget extends StatelessWidget {
         child: Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            FadeInImageWidget(imageUrl: data.secImg.toString(),isCircle: false),
+            CachedImage(imageUrl: data.secImg.toString(),),
             Align(
               alignment: AlignmentDirectional.topStart,
               child: Padding(

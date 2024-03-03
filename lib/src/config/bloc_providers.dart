@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../features/features.export.dart';
 
 MultiBlocProvider listOfBloc({Widget? child}) {
@@ -13,6 +12,9 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
       BlocProvider<SectionsBloc>(create: (_) => SectionsBloc()),
+      BlocProvider<BrandsBloc>(create: (_) => BrandsBloc()),
+      BlocProvider<HandmadeBloc>(create: (_) => HandmadeBloc()),
+      BlocProvider<TodayDealsBloc>(create: (_) => TodayDealsBloc()),
 
 
 

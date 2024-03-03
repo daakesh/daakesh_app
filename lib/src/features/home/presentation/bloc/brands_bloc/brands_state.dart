@@ -1,0 +1,53 @@
+import 'package:equatable/equatable.dart';
+
+import '../../../../../src.export.dart';
+
+enum BrandsStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
+
+extension BrandsStateStatusX on BrandsStateStatus{
+  bool get isInitial => this == BrandsStateStatus.INITIAL;
+  bool get isSuccess => this == BrandsStateStatus.SUCCESS;
+  bool get isError => this == BrandsStateStatus.ERROR;
+  bool get isLoading => this == BrandsStateStatus.LOADING;
+  bool get isLoadingMore => this == BrandsStateStatus.LOADINGMORE;
+  bool get isNull => this == BrandsStateStatus.NULL;
+}
+
+class BrandsState extends Equatable {
+  final BrandsStateStatus brandsStateStatus;
+  final List<BrandItem> brandListData;
+  final int currentPage;
+  final bool isMoreData;
+
+  const BrandsState({
+    this.brandsStateStatus = BrandsStateStatus.INITIAL,
+    this.brandListData = const[],
+    this.currentPage = 1,
+    this.isMoreData = true,
+  });
+
+  BrandsState copyWith({
+    BrandsStateStatus? brandsStateStatus,
+    List<BrandItem>? brandListData,
+    int? currentPage,
+    bool? isMoreData,
+  }) {
+    return BrandsState(
+      brandsStateStatus: brandsStateStatus ?? this.brandsStateStatus,
+      brandListData: brandListData ?? this.brandListData,
+      currentPage: currentPage ?? this.currentPage,
+      isMoreData: isMoreData ?? this.isMoreData,
+
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+    brandsStateStatus,
+    brandListData,
+    currentPage,
+    isMoreData,
+  ];
+}
+
+

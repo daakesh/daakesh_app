@@ -37,7 +37,11 @@ class SearchBarWidget extends StatelessWidget {
                 width: 184.0.w,
               ),
             ),
-            state.homeScreenState.isProductDetails || state.homeScreenState.isCart || state.homeScreenState.isSections
+            state.homeScreenState.isProductDetails ||
+                    state.homeScreenState.isCart ||
+                    state.homeScreenState.isSections ||
+                state.homeScreenState.isShopByBrands ||
+                state.homeScreenState.isHomemade
                 ? IconButton(
                 onPressed: () =>onBack(state),
                 icon: const Icon(

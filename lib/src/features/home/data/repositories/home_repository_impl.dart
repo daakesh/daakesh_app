@@ -17,15 +17,15 @@ class HomeRepositoryImpl implements HomeRepository {
     return await getIt.get<HomeDatasource>().getCategoryBySectionID(secID,page);
   }
   @override
-  Future<Either<Failure, ValidResponse>> getHandmadeData() async {
-    return await getIt.get<HomeDatasource>().getHandmadeData();
+  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
+    return await getIt.get<HomeDatasource>().getHandmadeData(page);
   } @override
-  Future<Either<Failure, ValidResponse>> getBrandsData() async {
-    return await getIt.get<HomeDatasource>().getBrandsData();
+  Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
+    return await getIt.get<HomeDatasource>().getBrandsData(page);
   }
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData() async {
-    return await getIt.get<HomeDatasource>().getTodayItemsData();
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
+    return await getIt.get<HomeDatasource>().getTodayItemsData(page);
   }
 
 

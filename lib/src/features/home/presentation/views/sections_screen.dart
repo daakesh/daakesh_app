@@ -78,16 +78,7 @@ class SectionScreen extends StatelessWidget {
 
         const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
             SliverToBoxAdapter(
-                child: !state.isMoreData ? state.sectionsStateStatus.isLoadingMore
-                    ? Center(
-                            child: TextButtonWidget(
-                            text: 'See More',
-                            onPressed: () => onSeeMore(),
-                            isBold: true,
-                          ))
-                        : const CircularProgressIndicatorWidget()
-                    :const SizedBox()
-            ),
+                child: seeMoreHandler(state)),
             const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
 
       ],
@@ -103,6 +94,24 @@ class SectionScreen extends StatelessWidget {
   void onSeeMore(){
     SectionsBloc.get.add(GetCategoryBySectionIDEvent(isSeeMore: true));
 
+  }
+  Widget seeMoreHandler(SectionsState state) {
+    switch (!state.isMoreData) {
+      case true:
+        switch (state.sectionsStateStatus) {
+          case SectionsStateStatus.LOADINGMORE:
+            return const CircularProgressIndicatorWidget();
+          default:
+            return Center(
+                child: TextButtonWidget(
+                  text: 'See More',
+                  onPressed: () => onSeeMore(),
+                  isBold: true,
+                ));
+        }
+      default:
+        return const SizedBox();
+    }
   }
 
 }

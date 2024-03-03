@@ -35,7 +35,10 @@ class SectionCategoryItem extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: ColorName.gray.withOpacity(0.5),
               ),
-              child: FadeInImageWidget(imageUrl: categoryItem.catImg.toString(),),
+              child: CachedImage(
+                imageUrl: categoryItem.catImg.toString(),
+                borderRadius: const BorderRadius.all(Radius.circular(100.0)),
+              ),
             ),
             const SizedBox(width: 8.0,),
             Expanded(

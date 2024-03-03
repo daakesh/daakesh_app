@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:json_theme/json_theme.dart';
 
 import '../../../../../src.export.dart';
@@ -67,14 +68,21 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                     .copyWith(fontSize: 18.0)),
           ),),
         const SliverPadding(padding: EdgeInsets.only(top: 17.0)),
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
                 children: [
-                  Expanded(child: WhatsNewWidget(title: 'Shop By Brands',)),
-                  SizedBox(width: 8.0,),
-                  Expanded(child: WhatsNewWidget(title: 'Homemade',)),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: onShopByBrands,
+                    child: const WhatsNewWidget(
+                      title: 'Shop By Brands',
+                    ),
+                  ),
+                ),
+                  const SizedBox(width: 8.0,),
+                  Expanded(child: GestureDetector(onTap: openHandmade,child: const WhatsNewWidget(title: 'Handmade',))),
                 ],
               ),
             ),
@@ -82,32 +90,41 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         const SliverPadding(padding: EdgeInsets.only(top: 20.0)),
         ///Daakesh today deal-section.
         SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                'Daakesh Today\'s Deals',
-                style: easyTheme.textTheme.headlineMedium!.copyWith(
-                  fontSize: 18.0,
-                ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Text(
+              'Daakesh Today\'s Deals',
+              style: easyTheme.textTheme.headlineMedium!.copyWith(
+                fontSize: 18.0,
               ),
             ),
           ),
+        ),
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
-        SliverPadding(
-            padding:const EdgeInsets.symmetric(horizontal: 20.0),
-            sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate((_, index) {
-                  return  TodayDealProduct(scrollController:widget.scrollController,);
-                },
-                  childCount: 12,
-                ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio:0.75,
-                    mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 8.0
-                )),
-          ),
+        BlocBuilder<TodayDealsBloc, TodayDealsState>(
+          builder: (context, state) {
+            return SliverPadding(
+              padding:const EdgeInsets.symmetric(horizontal: 20.0),
+              sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate((_, index) {
+                    HandmadeItem todayDealItem = state.todayDealsListData[index];
+
+                      return TodayDealProduct(
+                        scrollController: widget.scrollController,
+                        todayDealItem: todayDealItem,
+                      );
+                    },
+                    childCount: state.todayDealsListData.length,
+                  ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.6,
+                      mainAxisSpacing: 8.0,
+                      crossAxisSpacing: 8.0
+                  )),
+            );
+          },
+        ),
         const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
         ///Today deal-section.
         SliverToBoxAdapter(
@@ -122,21 +139,30 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
             ),
           ),
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
-        SliverPadding(
-            padding:const EdgeInsets.symmetric(horizontal: 20.0),
-            sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate((_, index) {
-                  return TodayDealProduct(isDaakeshTodayDeal: true,scrollController:widget.scrollController ,);
-                },
-                  childCount: 6,
-                ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.75,
-                    mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 10.0
-                )),
-          ),
+        BlocBuilder<TodayDealsBloc, TodayDealsState>(
+          builder: (context, state) {
+            return SliverPadding(
+              padding:const EdgeInsets.symmetric(horizontal: 20.0),
+              sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate((_, index) {
+                    HandmadeItem todayDealItem = state.todayDealsListData[index];
+                      return TodayDealProduct(
+                        isDaakeshTodayDeal: true,
+                        scrollController: widget.scrollController,
+                        todayDealItem: todayDealItem,
+                      );
+                    },
+                    childCount: state.todayDealsListData.length,
+                  ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.6,
+                      mainAxisSpacing: 8.0,
+                      crossAxisSpacing: 10.0
+                  )),
+            );
+          },
+        ),
         const SliverPadding(padding: EdgeInsets.only(top: 50.0)),
 
       ],
@@ -152,6 +178,13 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
     HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SECTIONS));
   }
 
+  void onShopByBrands() {
+    widget.scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.SHOPBYBRANDS));
+  }
 
-
+  void openHandmade() {
+    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.HOMEMADE));
+    widget.scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  }
 }

@@ -30,23 +30,32 @@ class RemoteHomeDatasource implements HomeDatasource {
     return result;
   }
   @override
-  Future<Either<Failure, ValidResponse>> getHandmadeData() async {
+  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/item/getHandmadeItems',
+      params: {
+        "page":"$page"
+      }
     );
     return result;
   }
   @override
-  Future<Either<Failure, ValidResponse>> getBrandsData() async {
+  Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/brand/getBrands',
+      params: {
+        "page":"$page"
+      }
     );
     return result;
   }
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData() async {
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/item/getTodaysItems',
+      params: {
+        "page":"$page"
+      }
     );
     return result;
   }
@@ -57,7 +66,6 @@ class RemoteHomeDatasource implements HomeDatasource {
       params: {
         "name":searchValue.toString(),
         "page":page.toString(),
-        ///"perPage":perPage.toString(),
       }
     );
     return result;
