@@ -62,7 +62,7 @@ class RemoteHomeDatasource implements HomeDatasource {
   @override
   Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
     final result = await getIt.get<NetworkService>().get(
-      path: 'DaakeshServices/api/item/SearchItems',
+      path: 'DaakeshServices/api/item/SearchUserItems',
       params: {
         "name":searchValue.toString(),
         "page":page.toString(),
@@ -107,4 +107,44 @@ class RemoteHomeDatasource implements HomeDatasource {
         params: {"id": "$id"});
     return result;
   }
+  ///Rate API.
+  @override
+  Future<Either<Failure, ValidResponse>> addRate(int itemId, int userId, int catID, int rateValue) async{
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/rate/addRate',
+        body: {
+          "itemID":"$itemId",
+          "userID":"$userId",
+          "catID":"$catID",
+          "rateValue":"$rateValue",
+        }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId) async{
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/rate/getItemRate',
+        params: {
+          "itemID":"$itemId",
+          "userID":"$userId",
+        }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue) async{
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/rate/updateRate',
+        params: {
+          "id":"$id",
+          "rateValue":"$rateValue",
+        }
+    );
+    return result;
+  }
+
+
+
+
 }

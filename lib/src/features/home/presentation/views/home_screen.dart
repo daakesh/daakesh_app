@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: HomeBloc.scrollController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return [
-          AppBarWidget(searchController: searchController,),
+          HomeAppBarWidget(searchController: searchController,),
         ];
       },
         body:BlocBuilder<HomeBloc,HomeState>(

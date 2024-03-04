@@ -19,7 +19,8 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
     return await getIt.get<HomeDatasource>().getHandmadeData(page);
-  } @override
+  }
+  @override
   Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
     return await getIt.get<HomeDatasource>().getBrandsData(page);
   }
@@ -27,7 +28,6 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
     return await getIt.get<HomeDatasource>().getTodayItemsData(page);
   }
-
   @override
   Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
     return await getIt.get<HomeDatasource>().searchOnItems(searchValue,page,perPage);
@@ -37,21 +37,31 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, ValidResponse>> addComment(int userId, int itemId, String commentDesc) async{
     return await getIt.get<HomeDatasource>().addComment(userId,itemId,commentDesc);
   }
-
   @override
   Future<Either<Failure, ValidResponse>> editComments(int id, String commentDesc) async{
     return await getIt.get<HomeDatasource>().editComments(id,commentDesc);
   }
-
   @override
   Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async{
     return await getIt.get<HomeDatasource>().getCommentsByItem(itemID);
-
   }
-
   @override
   Future<Either<Failure, ValidResponse>> removeComments(int id) async{
     return await getIt.get<HomeDatasource>().removeComments(id);
+  }
+  ///Rate API
+  @override
+  Future<Either<Failure, ValidResponse>> addRate(int itemId,int userId,int catID,int rateValue) async{
+    return await getIt.get<HomeDatasource>().addRate(itemId,userId,catID,rateValue);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getRateByItem(int itemId,int userId) async{
+    return await getIt.get<HomeDatasource>().getRateByItem(itemId,userId);
+
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> editRate(int id,int rateValue) async{
+    return await getIt.get<HomeDatasource>().editRate(id,rateValue);
   }
 
 

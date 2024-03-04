@@ -19,6 +19,17 @@ extension HomeScreenStateX on HomeScreenState{
   bool get isHome => this == HomeScreenState.HOME;
 }
 
+extension SwapScreenStateX on SwapScreenState{
+  bool get isSearch => this == SwapScreenState.SEARCH;
+  bool get isProductDetails => this == SwapScreenState.PRODUCTDETAILS;
+  bool get isSubCategoryResult => this == SwapScreenState.SUBCATEGORYRESULT;
+  bool get isCart => this == SwapScreenState.CART;
+  bool get isSections => this == SwapScreenState.SECTIONS;
+  bool get isShopByBrands => this == SwapScreenState.SHOPBYBRANDS;
+  bool get isHomemade => this == SwapScreenState.HOMEMADE ;
+  bool get isHome => this == SwapScreenState.HOME;
+}
+
 
 extension GlobalBuildContext on BuildContext{
   ThemeData get easyTheme => Theme.of(this);

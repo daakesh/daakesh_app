@@ -1,0 +1,150 @@
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../src.export.dart';
+
+@LazySingleton(as:SwapDatasource )
+class RemoteSwapDatasource implements SwapDatasource {
+  @override
+  Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/advertisement/getAllAdv',
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getSectionData() async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/section/getSections',
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(int secID,int page) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/category/getCategoryBySection',
+      params: {
+        "secID":secID.toString(),
+        "page":page.toString()
+      }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/item/getHandmadeItems',
+      params: {
+        "page":"$page"
+      }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/brand/getBrands',
+      params: {
+        "page":"$page"
+      }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/item/getTodaysItems',
+      params: {
+        "page":"$page"
+      }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/item/SearchUserItems',
+      params: {
+        "name":searchValue.toString(),
+        "page":page.toString(),
+      }
+    );
+    return result;
+  }
+  ///Comments API.
+  @override
+  Future<Either<Failure, ValidResponse>> addComment(int userId, int itemId, String commentDesc)async {
+    final result = await getIt.get<NetworkService>().post(
+      path: 'DaakeshServices/api/comment/addComment',
+      body: {
+        "userID":"$userId",
+        "itemID":"$itemId",
+        "commentDesc":commentDesc,
+      }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> editComments(int id, String commentDesc) async {
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/comment/updateComment',
+        params: {
+      "id": "$id",
+      "commentDesc": commentDesc,
+    });
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/comment/getCommentsByItem',
+        params: {"itemID": "$itemID"});
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> removeComments(int id) async{
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/comment/removeComment',
+        params: {"id": "$id"});
+    return result;
+  }
+  ///Rate API.
+  @override
+  Future<Either<Failure, ValidResponse>> addRate(int itemId, int userId, int catID, int rateValue) async{
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/rate/addRate',
+        body: {
+          "itemID":"$itemId",
+          "userID":"$userId",
+          "catID":"$catID",
+          "rateValue":"$rateValue",
+        }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId) async{
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/rate/getItemRate',
+        params: {
+          "itemID":"$itemId",
+          "userID":"$userId",
+        }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue) async{
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/rate/updateRate',
+        params: {
+          "id":"$id",
+          "rateValue":"$rateValue",
+        }
+    );
+    return result;
+  }
+
+
+
+
+}

@@ -14,6 +14,10 @@ abstract class HomeDatasource {
   Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
   Future<Either<Failure, ValidResponse>> editComments(int id,String commentDesc);
+  ///Rate API
+  Future<Either<Failure, ValidResponse>> addRate(int itemId,int userId,int catID,int rateValue);
+  Future<Either<Failure, ValidResponse>> getRateByItem(int itemId,int userId);
+  Future<Either<Failure, ValidResponse>> editRate(int id,int rateValue);
 
 
 

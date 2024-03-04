@@ -40,10 +40,16 @@ import 'package:daakesh/src/features/profile/data/repositories/profile_repositor
     as _i20;
 import 'package:daakesh/src/features/profile/domain/use_cases/profile_use_cases.dart'
     as _i21;
+import 'package:daakesh/src/features/swap/data/datasource/remote_swap_datasource.dart'
+    as _i22;
+import 'package:daakesh/src/features/swap/data/repositories/swap_repository_impl.dart'
+    as _i23;
+import 'package:daakesh/src/features/swap/domain/use_cases/swap_use_cases.dart'
+    as _i24;
 import 'package:daakesh/src/services/connectivity/connectivity_service.dart'
     as _i8;
 import 'package:daakesh/src/services/network/network_service.dart' as _i18;
-import 'package:daakesh/src/services/user_service/user_data.dart' as _i22;
+import 'package:daakesh/src/services/user_service/user_data.dart' as _i25;
 import 'package:daakesh/src/src.export.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -75,9 +81,13 @@ extension GetItInjectableX on _i1.GetIt {
       () => _i11.HomeUseCasesImpl(),
       registerFor: {_dev},
     );
-    gh.lazySingleton<_i3.MyOrderDatasource>(() => _i12.RemoteMyOrderDatasource());
+    gh.lazySingleton<_i3.MyOrderDatasource>(
+        () => _i12.RemoteMyOrderDatasource());
     gh.lazySingleton<_i3.MyOrderRepository>(() => _i13.MyOrderRepositoryImpl());
-    gh.lazySingleton<_i14.MyOrderUseCases>(() => _i14.MyOrderUseCasesImpl(), registerFor: {_dev},);
+    gh.lazySingleton<_i14.MyOrderUseCases>(
+      () => _i14.MyOrderUseCasesImpl(),
+      registerFor: {_dev},
+    );
     gh.lazySingleton<_i3.MyProductDatasource>(
         () => _i15.RemoteMyProductDatasource());
     gh.lazySingleton<_i3.MyProductRepository>(
@@ -94,7 +104,13 @@ extension GetItInjectableX on _i1.GetIt {
       () => _i21.ProfileUseCasesImpl(),
       registerFor: {_dev},
     );
-    gh.singleton<_i22.UserData>(_i22.UserDataImpl());
+    gh.lazySingleton<_i3.SwapDatasource>(() => _i22.RemoteSwapDatasource());
+    gh.lazySingleton<_i3.SwapRepository>(() => _i23.SwapRepositoryImpl());
+    gh.lazySingleton<_i24.SwapUseCases>(
+      () => _i24.SwapUseCasesImpl(),
+      registerFor: {_dev},
+    );
+    gh.singleton<_i25.UserData>(_i25.UserDataImpl());
     return this;
   }
 }

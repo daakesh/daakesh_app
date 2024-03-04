@@ -24,6 +24,16 @@ enum HomeScreenState{
   HOMEMADE,
   HOME,
 }
+enum SwapScreenState{
+  SEARCH,
+  PRODUCTDETAILS,
+  SUBCATEGORYRESULT,
+  CART,
+  SECTIONS,
+  SHOPBYBRANDS,
+  HOMEMADE,
+  HOME,
+}
 enum ProductDisplayMethod{
   SALE,
   SWAP,

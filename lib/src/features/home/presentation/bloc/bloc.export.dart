@@ -7,3 +7,4 @@ export 'sections_bloc/sections_bloc.export.dart';
 export 'pass_data_bloc/pass_data_bloc.export.dart';
 export 'comment_bloc/comment_bloc.export.dart';
 export 'adv_bloc/adv_bloc.export.dart';
+export 'rate_bloc/rate_bloc.export.dart';
