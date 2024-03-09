@@ -30,14 +30,19 @@ enum SwapScreenState{
   SUBCATEGORYRESULT,
   CART,
   SECTIONS,
-  SHOPBYBRANDS,
-  HOMEMADE,
+  SENDOFFER,
+  OFFERDETAILS,
   HOME,
 }
 enum ProductDisplayMethod{
   SALE,
   SWAP,
   SALESWAP,
+}
+
+enum AuthManner{
+  SIGNUPIN,
+  FORGETPASSWORD,
 }
 
 

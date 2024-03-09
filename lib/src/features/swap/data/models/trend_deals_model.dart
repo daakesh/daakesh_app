@@ -57,8 +57,8 @@ class TrendDealsItem {
   SectionItemModel? section;
   UserModel? user;
   CategoryItem? category;
-  List<BrandItem>? brand;
-  List<SubCategory>? subcategory;
+  BrandItem? brand;
+  SwapSubCategory? subcategory;
   TrendDealsItem(
       {this.id,
       this.description,
@@ -97,14 +97,11 @@ class TrendDealsItem {
     discountFrom = json['discount_from'];
     discountTo = json['discount_to'];
     country = json['country'];
-    section = json['section'] != null
-        ? SectionItemModel.fromJson(json['section'])
-        : null;
+    section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    category = json['category'] != null
-        ? CategoryItem.fromJson(json['category'])
-        : null;
-    brand = json['brand'];
-    subcategory = json['subcategory'];
+    category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;
+    brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
+    subcategory = json['subcategory'] != null ? SwapSubCategory.fromJson(json['subcategory']) : null;
+
   }
 }

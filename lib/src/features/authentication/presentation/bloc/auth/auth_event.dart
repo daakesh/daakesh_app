@@ -69,6 +69,16 @@ class ValidateSMSCodeEvent extends AuthEvent{
 class ActivateUserEvent extends AuthEvent{}
 class ResendSMSCodeEvent extends AuthEvent{}
 
+class InitialValueEvent extends AuthEvent{}
+
+class ToggleRememberMeValueEvent extends AuthEvent{
+  final bool rememberMeValue;
+  ToggleRememberMeValueEvent({
+    required this.rememberMeValue,
+  });
+}
+
+
 
 
 

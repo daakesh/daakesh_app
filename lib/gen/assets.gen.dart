@@ -163,6 +163,10 @@ class $AssetsSvgGen {
   SvgGenImage get enableProfileIcon =>
       const SvgGenImage('assets/svg/enable_profile_icon.svg');
 
+  /// File path: assets/svg/exchange_logo.svg
+  SvgGenImage get exchangeLogo =>
+      const SvgGenImage('assets/svg/exchange_logo.svg');
+
   /// File path: assets/svg/facebook_icon.svg
   SvgGenImage get facebookIcon =>
       const SvgGenImage('assets/svg/facebook_icon.svg');
@@ -174,6 +178,14 @@ class $AssetsSvgGen {
   /// File path: assets/svg/image_picker_icon.svg
   SvgGenImage get imagePickerIcon =>
       const SvgGenImage('assets/svg/image_picker_icon.svg');
+
+  /// File path: assets/svg/ios_arrow_back.svg
+  SvgGenImage get iosArrowBack =>
+      const SvgGenImage('assets/svg/ios_arrow_back.svg');
+
+  /// File path: assets/svg/ios_arrow_forward.svg
+  SvgGenImage get iosArrowForward =>
+      const SvgGenImage('assets/svg/ios_arrow_forward.svg');
 
   /// File path: assets/svg/light_daakesh_logo.svg
   SvgGenImage get lightDaakeshLogo =>
@@ -229,9 +241,12 @@ class $AssetsSvgGen {
         enableHomeIcon,
         enableProductIcon,
         enableProfileIcon,
+        exchangeLogo,
         facebookIcon,
         furtherInfoIcon,
         imagePickerIcon,
+        iosArrowBack,
+        iosArrowForward,
         lightDaakeshLogo,
         locationPinIcon,
         personIcon,

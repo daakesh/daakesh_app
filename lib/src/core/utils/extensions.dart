@@ -25,11 +25,15 @@ extension SwapScreenStateX on SwapScreenState{
   bool get isSubCategoryResult => this == SwapScreenState.SUBCATEGORYRESULT;
   bool get isCart => this == SwapScreenState.CART;
   bool get isSections => this == SwapScreenState.SECTIONS;
-  bool get isShopByBrands => this == SwapScreenState.SHOPBYBRANDS;
-  bool get isHomemade => this == SwapScreenState.HOMEMADE ;
+  bool get isSendOffer => this == SwapScreenState.SENDOFFER;
+  bool get isOfferDetails => this == SwapScreenState.OFFERDETAILS;
   bool get isHome => this == SwapScreenState.HOME;
 }
 
+extension AuthMannerX on AuthManner{
+  bool get isSignUpIn => this == AuthManner.SIGNUPIN;
+  bool get isForgetPassword => this == AuthManner.FORGETPASSWORD;
+}
 
 extension GlobalBuildContext on BuildContext{
   ThemeData get easyTheme => Theme.of(this);
@@ -46,7 +50,6 @@ extension GlobalBuildContext on BuildContext{
     GlobalCupertinoLocalizations.delegate,
   ];
 }
-
 
 extension ProductDisplayMethodX on ProductDisplayMethod{
   bool get isSale => this == ProductDisplayMethod.SALE;

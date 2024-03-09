@@ -6,9 +6,14 @@ MultiBlocProvider listOfBloc({Widget? child}) {
   return MultiBlocProvider(
     providers: [
       BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
+      BlocProvider<ForgetPassBloc>(create: (_) => ForgetPassBloc()),
+      ///
       BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
+      ///
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
+      ///
       BlocProvider<MyProductBloc>(create: (_) => MyProductBloc()),
+      ///
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
       BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
       BlocProvider<SectionsBloc>(create: (_) => SectionsBloc()),
@@ -19,6 +24,8 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<AdvBloc>(create: (_) => AdvBloc()),
       ///BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<RateBloc>(create: (_) => RateBloc()),
+
+      ///
       BlocProvider<SwapBloc>(create: (_) => SwapBloc()),
       BlocProvider<SwapSearchBloc>(create: (_) => SwapSearchBloc()),
       BlocProvider<SwapSectionsBloc>(create: (_) => SwapSectionsBloc()),

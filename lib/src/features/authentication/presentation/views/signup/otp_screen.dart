@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class OTPScreen extends StatefulWidget {
-   const OTPScreen({super.key});
+  final AuthManner authManner;
+   const OTPScreen({super.key, required this.authManner});
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -53,8 +54,14 @@ class _OTPScreenState extends State<OTPScreen> {
                       SizedBox(height: 8.0.h,),
                       Text('Verify Your Identity',style: easyTheme.textTheme.headlineMedium),
                       SizedBox(height: 19.0.h),
-                      BlocBuilder<AuthBloc,AuthState>(
-                        buildWhen: (previous,current)=>current.authStateStatus.isSuccess,
+                      widget.authManner.isSignUpIn
+                          ? BlocBuilder<AuthBloc,AuthState>(
+                        builder: (context, state) {
+                          return Text(
+                              'We Send You A Code To +${state.phoneCode+state.phone} Phone Number Please Enter The Code To Create Account',
+                              style: easyTheme.textTheme.bodyMedium);
+                        },)
+                          : BlocBuilder<ForgetPassBloc,ForgetPassState>(
                         builder: (context, state) {
                           return Text(
                               'We Send You A Code To +${state.phoneCode+state.phone} Phone Number Please Enter The Code To Create Account',
@@ -82,9 +89,6 @@ class _OTPScreenState extends State<OTPScreen> {
                           keyboardType: TextInputType.number,
                           textAlign: TextAlign.center,
                           onChanged: (text)=>otpCursorHandler(text,firstTextField,nextFocus:secondTextField ,isFirst: true),
-
-
-
                         ),),
                         const SizedBox(width: 16.0,),
                         Expanded(child: TextFormFieldWidget(
@@ -212,20 +216,45 @@ class _OTPScreenState extends State<OTPScreen> {
     }
   }
 
-
-
   void onValidate() {
+    if(firstDigitController.text.isEmpty ||
+        secondDigitController.text.isEmpty ||
+        thirdDigitController.text.isEmpty ||
+        fourthDigitController.text.isEmpty ||
+        fifthDigitController.text.isEmpty ||
+        sixthDigitController.text.isEmpty){
+
+      ShowToastSnackBar.showSnackBars(message: 'Insert full sms code');
+      return;
+    }
+
    String smsCode = firstDigitController.text +
            secondDigitController.text +
            thirdDigitController.text +
            fourthDigitController.text +
            fifthDigitController.text +
            sixthDigitController.text;
-   AuthBloc.get.add(ValidateSMSCodeEvent(smsCode:smsCode));
+
+   checkManner(smsCode);
+  }
+  void resendSMSCode(){
+    if(widget.authManner.isSignUpIn){
+      AuthBloc.get.add(ResendSMSCodeEvent());
+    }
+    if(widget.authManner.isForgetPassword){
+      ForgetPassBloc.get.add(ResendCodeEvent());
+    }
+  }
+  void checkManner(String smsCode){
+    if(widget.authManner.isSignUpIn){
+      AuthBloc.get.add(ValidateSMSCodeEvent(smsCode:smsCode));
+    }
+    if(widget.authManner.isForgetPassword){
+      ForgetPassBloc.get.add(VerifySMSCodeEvent(smsCode:smsCode));
+    }
+
   }
 
-  void resendSMSCode(){
-    AuthBloc.get.add(ResendSMSCodeEvent());
-  }
+
 
 }

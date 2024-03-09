@@ -40,9 +40,9 @@ class SwapSearchBarWidget extends StatelessWidget {
             state.swapScreenState.isProductDetails ||
                     state.swapScreenState.isCart ||
                     state.swapScreenState.isSections ||
-                state.swapScreenState.isShopByBrands ||
-                state.swapScreenState.isHomemade ||
-                state.swapScreenState.isSubCategoryResult
+                state.swapScreenState.isSubCategoryResult ||
+                state.swapScreenState.isSendOffer ||
+                state.swapScreenState.isOfferDetails
 
                 ? IconButton(
                 onPressed: () =>onBack(state),
@@ -59,6 +59,14 @@ class SwapSearchBarWidget extends StatelessWidget {
   }
 
   void onBack(SwapState state){
+    if(state.swapScreenState.isOfferDetails){
+      SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.SENDOFFER));
+      return;
+    }
+    if(state.swapScreenState.isSendOffer){
+      SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.PRODUCTDETAILS));
+      return;
+    }
     if(state.swapScreenState.isSubCategoryResult){
       SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.SECTIONS));
       return;

@@ -41,7 +41,7 @@ class UserDataImpl implements UserData {
   void setUserData(UserModel userData)=> this.userData = userData;
 
   @override
-  void get activateUser=> FirebaseAuthentication.verifyPhoneNumber(userData.phoneNumber.toString());
+  void get activateUser=> FirebaseAuthentication.verifyPhoneNumber(userData.phoneNumber.toString(),AuthManner.SIGNUPIN);
 
   @override
   void get saveUserToken async => await prefs.setString('userId', userData.id.toString());
@@ -52,7 +52,7 @@ class UserDataImpl implements UserData {
     await Future.delayed(const Duration(seconds: 2));
     ProgressCircleDialog.dismiss();
     ValueConstants.userId ='';
-    prefs.removeData('token').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
+    prefs.removeData('userId').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
   }
 
 

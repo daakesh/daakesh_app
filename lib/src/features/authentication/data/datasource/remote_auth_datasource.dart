@@ -42,6 +42,27 @@ class RemoteAuthDatasource implements AuthDatasource {
     return result;
   }
   @override
+  Future<Either<Failure, ValidResponse>> isPhoneNumberExist(String phoneNumber) async{
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/user/isPhoneNumberExist',
+        body: {
+          "phoneNumber":phoneNumber.toString(),
+        }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> updatePassword(String phoneNumber,String password) async{
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/user/updatePassword',
+        body: {
+          "phoneNumber":phoneNumber.toString(),
+          "password":phoneNumber.toString(),
+        }
+    );
+    return result;
+  }
+  @override
   Future<Either<Failure, ValidResponse>> getUserData() async{
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/user/getUserData',

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class SwapMoreInfoProductScreen extends StatefulWidget {
-  const SwapMoreInfoProductScreen({super.key});
+class SwapMoreInfoScreen extends StatefulWidget {
+  const SwapMoreInfoScreen({super.key});
 
   @override
-  State<SwapMoreInfoProductScreen> createState() => _SwapMoreInfoProductScreenState();
+  State<SwapMoreInfoScreen> createState() => _SwapMoreInfoScreenState();
 }
 
-class _SwapMoreInfoProductScreenState extends State<SwapMoreInfoProductScreen> {
+class _SwapMoreInfoScreenState extends State<SwapMoreInfoScreen> {
   final commentController = TextEditingController();
 
   @override
@@ -70,7 +70,7 @@ class _SwapMoreInfoProductScreenState extends State<SwapMoreInfoProductScreen> {
                       ),
                       const SizedBox(height: 28.0),
                       SwapDetailsSection(state: state,),
-                      Center(child: DefaultButtonWidget(text: 'CREATE SWAP OFFER', onPressed: (){})),
+                      Center(child: DefaultButtonWidget(text: 'CREATE SWAP OFFER', onPressed: onSendOffer)),
                     ],
                   ),
                 ),
@@ -80,5 +80,10 @@ class _SwapMoreInfoProductScreenState extends State<SwapMoreInfoProductScreen> {
         ),
       ),
     );
+  }
+
+  void onSendOffer() {
+    SwapBloc.get.add(SwapGetToTopScreenEvent());
+    SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.SENDOFFER));
   }
 }

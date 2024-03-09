@@ -7,7 +7,7 @@ class FirebaseAuthentication{
   static final firebaseAuth = FirebaseAuth.instance;
   static int? _resendToken ;
 
-  static void verifyPhoneNumber(String phoneNumber,{bool isLoginManner = false}) async{
+  static void verifyPhoneNumber(String phoneNumber,AuthManner authManner) async{
     try{
       await firebaseAuth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
@@ -16,14 +16,20 @@ class FirebaseAuthentication{
           ProgressCircleDialog.dismiss();
           ShowToastSnackBar.showSnackBars(message: error.toString());
           debugPrint("ERROR $error");
-
         },
         codeSent: (String verificationId, int? resendToken) {
+          if(authManner.isSignUpIn){
           AuthBloc.get.add(SetVerificationIdEvent(verificationId: verificationId));
+          }
+
+          if(authManner.isForgetPassword){
+          ForgetPassBloc.get.add(PutVerificationIdEvent(verificationId: verificationId));
+          }
+
           _resendToken = resendToken;
           ProgressCircleDialog.dismiss();
           ShowToastSnackBar.showSnackBars(message: 'Code sent');
-          openNewPage(const OTPScreen());
+          openNewPage(OTPScreen(authManner: authManner));
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
@@ -33,16 +39,22 @@ class FirebaseAuthentication{
     }
   }
 
-  static void verificationCompleted(String verificationId,String smsCode)async{
+  static void verificationCompleted(String verificationId,String smsCode,AuthManner authManner)async{
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 2));
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
       await firebaseAuth.signInWithCredential(credential);
       ProgressCircleDialog.dismiss();
-      AuthBloc.get.add(ActivateUserEvent());
-      user.saveUserToken;
-      openNewPage(const VerificationScreen());
+      if(authManner.isSignUpIn){
+        AuthBloc.get.add(ActivateUserEvent());
+        user.saveUserToken;
+        openNewPage(const VerificationScreen(), popPreviousPages: true);
+      }
+      if(authManner.isForgetPassword){
+        openNewPage(const VerificationCompleteScreen(), popPreviousPages: true);
+      }
+
     } catch (error) {
       ProgressCircleDialog.dismiss();
       ShowToastSnackBar.showSnackBars(message: error.toString());
