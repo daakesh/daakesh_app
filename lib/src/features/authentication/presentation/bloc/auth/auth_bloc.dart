@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../src.export.dart';
+import '../../../../../src.export.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(const AuthState()) {
@@ -16,6 +16,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ValidateSMSCodeEvent>(_validateSMSCode);
     on<ActivateUserEvent>(_activateUser);
     on<ResendSMSCodeEvent>(_resendSMSCode);
+    on<InitialValueEvent>(_initialValue);
+    on<ToggleRememberMeValueEvent>(_toggleRememberMeValueEvent);
   }
   static AuthBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
   ///Login Event,
@@ -33,10 +35,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+      saveRememberData(state.rememberMeValue,event.phoneNumber,event.password);
       UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
       user.setUserDataAndCheckIsActive(userModel);
       emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
     });
+  }
+  void saveRememberData(bool rememberMeValue,String phoneNumber,String password)async{
+    if (rememberMeValue) {
+      await getIt.get<SecureSharedPref>().write('REMEMBER_ME_EMAIL', phoneNumber);
+      await getIt.get<SecureSharedPref>().write('REMEMBER_ME_PASSWORD', password);
+    } else{
+      await getIt.get<SecureSharedPref>().write('REMEMBER_ME_EMAIL', '');
+      await getIt.get<SecureSharedPref>().write('REMEMBER_ME_PASSWORD', '');
+    }
   }
   ///Get User Data Event,
   FutureOr<void> _getUserData(GetUserDataEvent event, Emitter<AuthState> emit) async{
@@ -117,7 +129,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
   ///This event take [VerificationId] & [OTPCode] that user inserted and compare it with actual code message.
   FutureOr<void> _validateSMSCode(ValidateSMSCodeEvent event, Emitter<AuthState> emit)async{
-    FirebaseAuthentication.verificationCompleted(state.verificationId,event.smsCode);
+    FirebaseAuthentication.verificationCompleted(state.verificationId,event.smsCode,AuthManner.SIGNUPIN);
   }
   ///This event make a user account is active if the [OTPCode] is verified.
   FutureOr<void> _activateUser(ActivateUserEvent event, Emitter<AuthState> emit) async{
@@ -136,4 +148,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _resendSMSCode(ResendSMSCodeEvent event, Emitter<AuthState> emit)async {
     FirebaseAuthentication.resendSMSCode(user.userData.phoneNumber.toString());
   }
+  ///
+  FutureOr<void> _initialValue(InitialValueEvent event, Emitter<AuthState> emit)async {
+    bool rememberMeValue = prefs.getData('REMEMBER_ME_VALUE') ?? false;
+    emit(state.copyWith(rememberMeValue: rememberMeValue,));
+  }
+  ///
+  FutureOr<void> _toggleRememberMeValueEvent(ToggleRememberMeValueEvent event, Emitter<AuthState> emit) async{
+    await prefs.setBool('REMEMBER_ME_VALUE', event.rememberMeValue);
+    emit(state.copyWith(rememberMeValue: event.rememberMeValue));
+  }
+
+
 }

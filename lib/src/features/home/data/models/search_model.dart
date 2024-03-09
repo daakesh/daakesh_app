@@ -77,7 +77,7 @@ class SearchResultModel {
     city = json['City'];
     year = json['Year'];
     condition = json['Condition'];
-    price = json['Price'];
+    price = json['Price'].toInt();
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
     category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;
     brand = json['brand'] != null ? BrandItem.fromJson(json['section']) : null;

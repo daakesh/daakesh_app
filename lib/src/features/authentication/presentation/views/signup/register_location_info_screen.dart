@@ -30,99 +30,98 @@ class _RegisterLocationInfoScreenState extends State<RegisterLocationInfoScreen>
     return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
-        body: SingleChildScrollView(
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 110.0.h,),
-                Padding(
-                  padding: EdgeInsetsDirectional.only(start: 58.0.w,end: 97.0.w),
-                  child: const DaakeshLogoWidget(),
+        body: LayoutBuilderWidget(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Spacer(flex: 1,),
+              const SizedBox(height: 44.0),
+              const Center(child: DaakeshLogoWidget()),
+              const Spacer(flex: 1,),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 26.0,end: 13.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Lets Go',style: easyTheme.textTheme.headlineLarge),
+                    const SizedBox(height: 10.0,),
+                    Text('Set Your Location To Start Exploring Best Deal',style: easyTheme.textTheme.headlineMedium),
+                  ],
                 ),
-                const SizedBox(height: 60.0,),
-                Padding(
-                  padding: EdgeInsetsDirectional.only(start: 26.0.w,end: 13.0.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Lets Go',style: easyTheme.textTheme.headlineLarge),
-                      SizedBox(height: 10.0.h,),
-                      Text('Set Your Location To Start Exploring Best Deal',style: easyTheme.textTheme.headlineMedium),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 43.0.h),
-                Padding(
-                  padding: EdgeInsetsDirectional.only(start: 32.0.w,end:29.0.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Country',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.darkGray)),
-                      TextFormFieldWidget(
-                        controller: countryController,
-                        focusNode: countryFocusNode,
-                        isSuffixPrefixOn: true,
-                        suffixIcon: SizedBox(height:9.0.h ,width:16.0.w,child: Center(child: Assets.svg.arrowDropDownIcon.svg()),),
-                        prefixIcon: BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
-                          return SizedBox(
-                              width: 30.0.w,
-                              height: 30.0.h,
-                              child: Center(
-                                  child: Text(
-                                state.flagEmoji,
-                                style: TextStyle(
-                                    color: ColorName.blueGray, fontSize: 24.0.sp),
-                              )));
-                        }),
-                        onFieldSubmitted: (value)=>fieldFocusChange(context,countryFocusNode,cityFocusNode),
-                        readOnly: true,
-                        onTap: (){
-                          showCountryDialog(context);
-                        },
-                        inputFormatters: [
-                          RegExpValidator.beginWhitespace,
-                        ],
+              ),
+              const SizedBox(height: 20.0),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 32.0,end:29.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Country',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    TextFormFieldWidget(
+                      controller: countryController,
+                      focusNode: countryFocusNode,
+                      isSuffixPrefixOn: true,
+                      suffixIcon: SizedBox(height:9.0 ,width:16.0,child: Center(child: Assets.svg.arrowDropDownIcon.svg()),),
+                      prefixIcon: BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
+                        return SizedBox(
+                            width: 30.0,
+                            height: 30.0,
+                            child: Center(
+                                child: Text(
+                              state.flagEmoji,
+                              style: const TextStyle(
+                                  color: ColorName.blueGray, fontSize: 24.0),
+                            )));
+                      }),
+                      onFieldSubmitted: (value)=>fieldFocusChange(context,countryFocusNode,cityFocusNode),
+                      readOnly: true,
+                      onTap: (){
+                        showCountryDialog(context);
+                      },
+                      inputFormatters: [
+                        RegExpValidator.beginWhitespace,
+                      ],
+                    ),
+                    const SizedBox(height: 33.0),
+                    Text('City',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    TextFormFieldWidget(
+                      controller: cityController,
+                      focusNode: cityFocusNode,
+                      onFieldSubmitted: (value)=>fieldFocusChange(context,cityFocusNode,addressFocusNode),
+                      inputFormatters: [
+                        RegExpValidator.beginWhitespace,
+                      ],
+                    ),
+                    const SizedBox(height: 33.0),
+                    Text('Address',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    TextFormFieldWidget(
+                      controller: addressController,
+                      focusNode: addressFocusNode,
+                      isSuffixPrefixOn: true,
+                      inputFormatters: [
+                        RegExpValidator.beginWhitespace,
+                      ],
+                      suffixIcon: InkWell(
+                        onTap: () =>openNewPage(const MapScreen()),
+                        splashColor: ColorName.transparent,
+                        focusColor: ColorName.transparent,
+                        highlightColor: ColorName.transparent,
+                        child: SizedBox(width: 20.0,height: 20.0,child: Center(child: Assets.svg.locationPinIcon.svg())),
                       ),
-                      SizedBox(height: 33.0.h),
-                      Text('City',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.darkGray)),
-                      TextFormFieldWidget(
-                        controller: cityController,
-                        focusNode: cityFocusNode,
-                        onFieldSubmitted: (value)=>fieldFocusChange(context,cityFocusNode,addressFocusNode),
-                        inputFormatters: [
-                          RegExpValidator.beginWhitespace,
-                        ],
-                      ),
-                      SizedBox(height: 33.0.h),
-                      Text('Address',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.darkGray)),
-                      TextFormFieldWidget(
-                        controller: addressController,
-                        focusNode: addressFocusNode,
-                        isSuffixPrefixOn: true,
-                        inputFormatters: [
-                          RegExpValidator.beginWhitespace,
-                        ],
-                        suffixIcon: InkWell(
-                          onTap: () =>openNewPage(const MapScreen()),
-                          splashColor: ColorName.transparent,
-                          focusColor: ColorName.transparent,
-                          highlightColor: ColorName.transparent,
-                          child: SizedBox(width: 20.0.w,height: 20.0.h,child: Center(child: Assets.svg.locationPinIcon.svg())),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 64.0.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 21.0.w),
-                  child: DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context)),
-                ),
-                SizedBox(height: 44.0.h),
-                const AlreadyHaveAccountWidget(),
-                SizedBox(height: 55.0.h),
+              ),
+              const Spacer(flex: 1,),
+              const SizedBox(height: 43.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 21.0),
+                child: DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context)),
+              ),
+              const Spacer(flex: 1,),
+              const SizedBox(height: 20.0),
+              const AlreadyHaveAccountWidget(),
+              const SizedBox(height: 20.0),
+              const Spacer(flex: 1,),
 
 
 
@@ -130,8 +129,7 @@ class _RegisterLocationInfoScreenState extends State<RegisterLocationInfoScreen>
 
 
 
-              ],
-            ),
+            ],
           ),
         ),
       ),

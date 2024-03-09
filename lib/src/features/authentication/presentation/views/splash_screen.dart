@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
   void checkUserLogin() {
-    if (ValueConstants.token.isEmpty) {
+    if (ValueConstants.userId.isEmpty) {
       openNewPage(const WelcomeScreen(),popPreviousPages: true);
       return;
     }

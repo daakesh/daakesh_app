@@ -11,6 +11,15 @@ abstract class HomeUseCases {
   Future<Either<Failure,ValidResponse>> getBrandsData(int page);
   Future<Either<Failure,ValidResponse>> getTodayItemsData(int page);
   Future<Either<Failure,ValidResponse>> searchOnItems(String searchValue,int page,int perPage);
+  ///Comment API
+  Future<Either<Failure, ValidResponse>> addComment(int userId,int itemId,String commentDesc);
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID);
+  Future<Either<Failure, ValidResponse>> removeComments(int id);
+  Future<Either<Failure, ValidResponse>> editComments(int id,String commentDesc);
+  ///Rate API
+  Future<Either<Failure, ValidResponse>> addRate(int itemId,int userId,int catID,int rateValue);
+  Future<Either<Failure, ValidResponse>> getRateByItem(int itemId,int userId);
+  Future<Either<Failure, ValidResponse>> editRate(int id,int rateValue);
 }
 
 @dev
@@ -44,6 +53,38 @@ class HomeUseCasesImpl implements HomeUseCases {
   Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
     return await getIt.get<HomeRepository>().searchOnItems(searchValue,page,perPage);
   }
+  ///Comment API.
+  @override
+  Future<Either<Failure, ValidResponse>> addComment(int userId, int itemId, String commentDesc) async{
+    return await getIt.get<HomeRepository>().addComment(userId,itemId,commentDesc);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> editComments(int id, String commentDesc) async{
+    return await getIt.get<HomeRepository>().editComments(id,commentDesc);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async{
+    return await getIt.get<HomeRepository>().getCommentsByItem(itemID);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> removeComments(int id) async{
+    return await getIt.get<HomeRepository>().removeComments(id);
+  }
+  ///Rate API
+  @override
+  Future<Either<Failure, ValidResponse>> addRate(int itemId, int userId, int catID, int rateValue) async{
+    return await getIt.get<HomeRepository>().addRate(itemId,userId,catID,rateValue);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue) async{
+    return await getIt.get<HomeRepository>().editRate(id,rateValue);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId) async{
+    return await getIt.get<HomeRepository>().getRateByItem(itemId,userId);
+
+  }
+
 }
 
 

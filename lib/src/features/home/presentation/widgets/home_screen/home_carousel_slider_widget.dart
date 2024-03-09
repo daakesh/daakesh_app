@@ -1,13 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../src.export.dart';
 
 class HomeCarouselSliderWidget extends StatefulWidget {
-  final List<AdvItem> data;
   const HomeCarouselSliderWidget({
     super.key,
-    required this.data,
   });
 
   @override
@@ -20,6 +19,8 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<AdvBloc, AdvState>(
+  builder: (context, state) {
     return Column(
       children: [
         CarouselSlider(
@@ -35,7 +36,7 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                   _current = index;
                 });
               }),
-          items: widget.data.map((i) {
+          items: state.advListData.map((i) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14.0),
               child: Container(
@@ -83,7 +84,7 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: widget.data.asMap().entries.map((entry) {
+          children: state.advListData.asMap().entries.map((entry) {
             return InkWell(
               onTap: () => controller.animateToPage(entry.key),
               child: Container(
@@ -103,5 +104,7 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
 
       ],
     );
+  },
+);
   }
 }

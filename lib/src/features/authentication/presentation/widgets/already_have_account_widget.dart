@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
 
 class AlreadyHaveAccountWidget extends StatelessWidget {
+  final VoidCallback? onPressed;
   const AlreadyHaveAccountWidget({
     super.key,
+    this.onPressed,
   });
 
   @override
@@ -14,7 +16,7 @@ class AlreadyHaveAccountWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text('Don\'t have an Account? ', style: easyTheme.textTheme.bodyMedium,),
-        TextButtonWidget(text: 'Login', onPressed: ()=>openNewPage(const LoginScreen()),isBold: true),
+        TextButtonWidget(text: 'Login', onPressed: onPressed ?? ()=>openNewPage(const LoginScreen()),isBold: true),
       ],
     );
   }

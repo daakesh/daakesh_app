@@ -1,0 +1,8 @@
+export 'trend_deals_bloc/trend_deals_bloc.export.dart';
+export 'swap_bloc/swap_bloc_export.dart';
+export 'search_bloc/swap_search_bloc.export.dart';
+export 'sections_bloc/swap_sections_bloc.export.dart';
+export 'pass_data_bloc/swap_pass_data_bloc.export.dart';
+export 'comment_bloc/swap_comment_bloc.export.dart';
+export 'adv_bloc/swap_adv_bloc.export.dart';
+export 'rate_bloc/swap_rate_bloc.export.dart';

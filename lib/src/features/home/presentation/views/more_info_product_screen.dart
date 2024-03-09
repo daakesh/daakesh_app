@@ -57,7 +57,7 @@ class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
                           ],),
                   AddCommentRateSection(state: state,),
                   const Divider(color: ColorName.gray,),
-                  CommentsSection(state: state),
+                  const CommentsSection(),
                 ],
               );
             },

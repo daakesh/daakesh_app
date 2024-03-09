@@ -19,74 +19,75 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 186.0.h,),
-                Padding(
-                  padding: EdgeInsetsDirectional.only(start: 58.0.w,end: 100.w),
-                  child: const DaakeshLogoWidget(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Spacer(flex: 6,),
+              const SizedBox(height: 20.0,),
+              const Padding(
+                padding: EdgeInsetsDirectional.only(start: 58.0,end: 100),
+                child: DaakeshLogoWidget(),
+              ),
+              const SizedBox(height: 40.0,),
+              Padding(
+                padding:const EdgeInsetsDirectional.only(start: 26.0,end: 66.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Lets Go',style: easyTheme.textTheme.headlineLarge),
+                    const SizedBox(height: 10.0,),
+                    FittedBox(child: Text('Enter your Personal your Info',style: easyTheme.textTheme.headlineMedium)),
+                  ],
                 ),
-                SizedBox(height: 65.0.h,),
-                Padding(
-                  padding:EdgeInsetsDirectional.only(start: 26.0.w,end: 66.0.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Lets Go',style: easyTheme.textTheme.headlineLarge),
-                      SizedBox(height: 10.0.h,),
-                      Text('Enter your Personal your Info',style: easyTheme.textTheme.headlineMedium),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:EdgeInsets.symmetric(horizontal: 30.0.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                       SizedBox(height: 43.0.h),
-                      Text('Name',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.darkGray)),
-                      TextFormFieldWidget(
-                        controller: nameController,
-                        focusNode: nameFocusNode,
-                        onFieldSubmitted: (value)=>fieldFocusChange(context,nameFocusNode,emailFocusNode),
-                        inputFormatters: [
-                          RegExpValidator.beginWhitespace,
-                        ],
-                      ),
-                      SizedBox(height: 33.0.h),
-                      Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.darkGray)),
-                      TextFormFieldWidget(
-                        controller: emailController,
-                        focusNode: emailFocusNode,
-                        keyboardType: TextInputType.emailAddress,
-                        onFieldSubmitted: (value)=>fieldFocusChange(context,emailFocusNode,passwordFocusNode),
-                        inputFormatters: [
-                          RegExpValidator.clearWhitespace,
-                        ],
-                      ),
-                      SizedBox(height: 33.0.h),
-                      Text('Password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.darkGray)),
-                      TextFormFieldWidget(
-                        controller: passwordController,
-                        focusNode: passwordFocusNode,
-                        obscureText: true,
-                        maxLines: 1,
-                      ),
-                      SizedBox(height: 64.0.sp),
+              ),
+              const SizedBox(height: 40.0,),
+              Padding(
+                padding:const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Name',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    TextFormFieldWidget(
+                      controller: nameController,
+                      focusNode: nameFocusNode,
+                      onFieldSubmitted: (value)=>fieldFocusChange(context,nameFocusNode,emailFocusNode),
+                      inputFormatters: [
+                        RegExpValidator.beginWhitespace,
+                      ],
+                    ),
+                    const SizedBox(height: 33.0),
+                    Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    TextFormFieldWidget(
+                      controller: emailController,
+                      focusNode: emailFocusNode,
+                      keyboardType: TextInputType.emailAddress,
+                      onFieldSubmitted: (value)=>fieldFocusChange(context,emailFocusNode,passwordFocusNode),
+                      inputFormatters: [
+                        RegExpValidator.clearWhitespace,
+                      ],
+                    ),
+                    const SizedBox(height: 33.0),
+                    Text('Password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    TextFormFieldWidget(
+                      controller: passwordController,
+                      focusNode: passwordFocusNode,
+                      obscureText: true,
+                      maxLines: 1,
+                    ),
+                    const SizedBox(height: 60.0),
 
-                    ],
-                  ),
+                  ],
                 ),
-                DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context),padding: EdgeInsetsDirectional.symmetric(horizontal: 21.1.w),),
-                SizedBox(height: 44.0.h),
-                const AlreadyHaveAccountWidget(),
-                SizedBox(height: 55.0.h),
+              ),
+              DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context),padding: const EdgeInsetsDirectional.symmetric(horizontal: 21.1),),
+              const SizedBox(height: 40.0),
+              const AlreadyHaveAccountWidget(),
 
-              ],
-            ),
+              const Spacer(flex: 3,),
+              const SizedBox(height: 20.0),
+
+
+            ],
           ),
         ),
       ),

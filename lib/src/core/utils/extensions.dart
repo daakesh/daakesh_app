@@ -11,7 +11,7 @@ extension StringExtension on String {
 extension HomeScreenStateX on HomeScreenState{
   bool get isSearch => this == HomeScreenState.SEARCH;
   bool get isProductDetails => this == HomeScreenState.PRODUCTDETAILS;
-  bool get isSearchResult => this == HomeScreenState.SEARCHRESULT;
+  bool get isSubCategoryResult => this == HomeScreenState.SUBCATEGORYRESULT;
   bool get isCart => this == HomeScreenState.CART;
   bool get isSections => this == HomeScreenState.SECTIONS;
   bool get isShopByBrands => this == HomeScreenState.SHOPBYBRANDS;
@@ -19,6 +19,21 @@ extension HomeScreenStateX on HomeScreenState{
   bool get isHome => this == HomeScreenState.HOME;
 }
 
+extension SwapScreenStateX on SwapScreenState{
+  bool get isSearch => this == SwapScreenState.SEARCH;
+  bool get isProductDetails => this == SwapScreenState.PRODUCTDETAILS;
+  bool get isSubCategoryResult => this == SwapScreenState.SUBCATEGORYRESULT;
+  bool get isCart => this == SwapScreenState.CART;
+  bool get isSections => this == SwapScreenState.SECTIONS;
+  bool get isSendOffer => this == SwapScreenState.SENDOFFER;
+  bool get isOfferDetails => this == SwapScreenState.OFFERDETAILS;
+  bool get isHome => this == SwapScreenState.HOME;
+}
+
+extension AuthMannerX on AuthManner{
+  bool get isSignUpIn => this == AuthManner.SIGNUPIN;
+  bool get isForgetPassword => this == AuthManner.FORGETPASSWORD;
+}
 
 extension GlobalBuildContext on BuildContext{
   ThemeData get easyTheme => Theme.of(this);
@@ -35,7 +50,6 @@ extension GlobalBuildContext on BuildContext{
     GlobalCupertinoLocalizations.delegate,
   ];
 }
-
 
 extension ProductDisplayMethodX on ProductDisplayMethod{
   bool get isSale => this == ProductDisplayMethod.SALE;

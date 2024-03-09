@@ -3,14 +3,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
 class TodayDealProduct extends StatelessWidget {
-  final ScrollController scrollController;
   final bool isDaakeshTodayDeal;
   final HandmadeItem todayDealItem;
 
   const TodayDealProduct({
     super.key,
     this.isDaakeshTodayDeal = false,
-    required this.scrollController,
     required this.todayDealItem,
   });
 
@@ -18,7 +16,7 @@ class TodayDealProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+        HomeBloc.get.add(GetToTopScreenEvent());
         HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.PRODUCTDETAILS));
         HomeBloc.get.add(DetermentTodayDealEvent(isDaakeshTodayDeal:isDaakeshTodayDeal));
 

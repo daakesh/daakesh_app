@@ -23,6 +23,11 @@ class AuthState extends Equatable {
   final String phoneFlag;
   ///
   final String verificationId;
+  final bool rememberMeValue;
+  ///
+  final String emailController;
+  final String passwordController;
+
 
   const AuthState({
     this.authStateStatus = AuthStateStatus.INITIAL,
@@ -37,6 +42,9 @@ class AuthState extends Equatable {
     this.phoneCode = '962',
     this.phoneFlag = '🇯🇴',
     this.verificationId = '',
+    this.rememberMeValue = false,
+    this.emailController = '',
+    this.passwordController = '',
   });
 
   AuthState copyWith({
@@ -52,6 +60,9 @@ class AuthState extends Equatable {
     String? phoneCode,
     String? phoneFlag,
     String? verificationId,
+    bool? rememberMeValue,
+    String? emailController,
+    String? passwordController,
 
   }) {
     return AuthState(
@@ -67,6 +78,9 @@ class AuthState extends Equatable {
       phoneCode: phoneCode ?? this.phoneCode,
       phoneFlag: phoneFlag ?? this.phoneFlag,
       verificationId: verificationId ?? this.verificationId,
+      rememberMeValue: rememberMeValue ?? this.rememberMeValue,
+      emailController: emailController ?? this.emailController,
+      passwordController: passwordController ?? this.passwordController,
     );
   }
 
@@ -84,6 +98,9 @@ class AuthState extends Equatable {
         phoneCode,
         phoneFlag,
         ///
-        verificationId
+        verificationId,
+        rememberMeValue,
+        emailController,
+        passwordController,
       ];
 }

@@ -5,10 +5,9 @@ import 'package:json_theme/json_theme.dart';
 import '../../../../../src.export.dart';
 
 class HomeDataWidget extends StatefulWidget {
-  final ScrollController scrollController;
   final HomeState state;
 
-  const HomeDataWidget({super.key, required this.scrollController, required this.state});
+  const HomeDataWidget({super.key, required this.state});
 
   @override
   State<HomeDataWidget> createState() => _HomeDataWidgetState();
@@ -22,7 +21,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
       slivers: [
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
         ///Carousel slider.
-         SliverToBoxAdapter(child: HomeCarouselSliderWidget(data: widget.state.advListData),),
+         SliverToBoxAdapter(child: HomeCarouselSliderWidget(),),
         const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
         ///Popular-section.
         SliverToBoxAdapter(child: Padding(
@@ -110,7 +109,6 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                     HandmadeItem todayDealItem = state.todayDealsListData[index];
 
                       return TodayDealProduct(
-                        scrollController: widget.scrollController,
                         todayDealItem: todayDealItem,
                       );
                     },
@@ -148,7 +146,6 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                     HandmadeItem todayDealItem = state.todayDealsListData[index];
                       return TodayDealProduct(
                         isDaakeshTodayDeal: true,
-                        scrollController: widget.scrollController,
                         todayDealItem: todayDealItem,
                       );
                     },
@@ -174,17 +171,17 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         secID: secID,
         sectionIndex: sectionIndex,
         categoryTitle: categoryTitle));
-    widget.scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+    HomeBloc.get.add(GetToTopScreenEvent());
     HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SECTIONS));
   }
 
   void onShopByBrands() {
-    widget.scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+    HomeBloc.get.add(GetToTopScreenEvent());
     HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.SHOPBYBRANDS));
   }
 
   void openHandmade() {
+    HomeBloc.get.add(GetToTopScreenEvent());
     HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.HOMEMADE));
-    widget.scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
 }

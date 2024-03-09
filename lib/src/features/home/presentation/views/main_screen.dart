@@ -51,11 +51,20 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
   void getAllData(){
-    HomeBloc.get.add(GetAdvertisementDataEvent());
+    getHomeScreenData();
+    getSwapScreenData();
+  }
+  void getHomeScreenData(){
+    AdvBloc.get.add(GetAdvertisementDataEvent());
     HomeBloc.get.add(GetSectionDataEvent());
     HandmadeBloc.get.add(GetHandmadeDataEvent());
     BrandsBloc.get.add(GetBrandsDataEvent());
     TodayDealsBloc.get.add(GetToadyDealsDataEvent());
+  }
+  void getSwapScreenData(){
+    SwapAdvBloc.get.add(SwapGetAdvertisementDataEvent());
+    SwapBloc.get.add(SwapGetSectionDataEvent());
+    TrendDealsBloc.get.add(GetTrendDealsDataEvent());
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems(context) {
@@ -88,7 +97,6 @@ class _MainScreenState extends State<MainScreen> {
 
     ];
   }
-
   Widget bottomNavBarItem(
       {required String title,
         required Widget icon,}) =>
@@ -107,16 +115,6 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 
-
-
-class SwapScreen extends StatelessWidget {
-  const SwapScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Swap Screen'),));
-  }
-}
 
 
 

@@ -17,30 +17,38 @@ class _LoginScreenState extends State<LoginScreen> {
   final FocusNode emailFocusNode= FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
 
+
+  @override
+  void initState() {
+    super.initState();
+    setRememberMeValue();
+  }
+
+
+  
   @override
   Widget build(BuildContext context) {
     return  DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
-        body: SingleChildScrollView(
-          child: SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 186.0),
-                  const Padding(
-                    padding: EdgeInsetsDirectional.only(start: 30.0),
-                    child: DaakeshLogoWidget(),
-                  ),
-                  const SizedBox(height: 117.0),
-                  Text('Welcome back!',style: easyTheme.textTheme.headlineLarge,),
-                  const SizedBox(height: 22.0),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Column(
+        body: LayoutBuilderWidget(
+          child: Padding(
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Spacer(flex: 5,),
+                const Padding(
+                  padding: EdgeInsetsDirectional.only(start: 30.0),
+                  child: DaakeshLogoWidget(),
+                ),
+                const Spacer(flex: 4,),
+                Text('Welcome back!',style: easyTheme.textTheme.headlineLarge,),
+                const SizedBox(height: 22.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: 
+                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
@@ -62,32 +70,39 @@ class _LoginScreenState extends State<LoginScreen> {
                           maxLines: 1,
                         ),
                         Row(
-                          children: [
-                            Checkbox(
+                        children: [
+                          BlocBuilder<AuthBloc, AuthState>(
+                            builder: (context, state) {
+                              return Checkbox(
                                 onChanged: (bool? value) {
-                                  checkedValue = value;
+                                  AuthBloc.get.add(ToggleRememberMeValueEvent(rememberMeValue: value!));
                                 },
-                                value: checkedValue,
-                              overlayColor: MaterialStateProperty.all(ColorName.white),
-                              hoverColor: ColorName.white,
-                              side: const BorderSide(color: ColorName.darkGray),
-                            ),
-                            Text('Remember Me',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0),)
+                                value: state.rememberMeValue,
+                                overlayColor: MaterialStateProperty.all(ColorName.white),
+                                hoverColor: ColorName.white,
+                                side: const BorderSide(color: ColorName.darkGray),
+                              );
+                            },
+                          ),
+                          Text('Remember Me',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0),)
                           ],
                         ),
                       ],
-                    ),
-                  ),
-                  const SizedBox(height: 43.0),
-                  DefaultButtonWidget(text: 'LOGIN', onPressed: onLogin),
-                  const SizedBox(height: 25.0),
-                  Center(child: TextButtonWidget(text: 'Forget password ?', onPressed: forgetPassword)),
-                  const SizedBox(height: 25.0),
-                  const CreateAccountWidget(),
-                  const SizedBox(height: 25.0),
+                    
 
-                ],
-              ),
+                  ),
+
+
+                ),
+                const Spacer(flex: 1,),
+                DefaultButtonWidget(text: 'LOGIN', onPressed: onLogin),
+                const SizedBox(height: 25.0),
+                Center(child: TextButtonWidget(text: 'Forget password ?', onPressed: forgetPassword)),
+                const SizedBox(height: 25.0),
+                const CreateAccountWidget(),
+                const Spacer(flex: 1,),
+
+              ],
             ),
           ),
         ),
@@ -96,7 +111,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onLogin(){
-
     if(emailController.text.isEmpty || passwordController.text.isEmpty){
       ShowToastSnackBar.showSnackBars(message: 'Fill data firstly');
       return;
@@ -109,7 +123,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   }
 
-  void forgetPassword(){}
+  void setRememberMeValue()async{
+    String email = await getIt.get<SecureSharedPref>().read('REMEMBER_ME_EMAIL') ?? '';
+    String password = await getIt.get<SecureSharedPref>().read('REMEMBER_ME_PASSWORD') ?? '';
+    emailController.text =email.toString();
+    passwordController.text = password.toString();
+    AuthBloc.get.add(InitialValueEvent());
+  }
+
+  void forgetPassword(){
+    openNewPage(InsertCellPhoneScreen());
+  }
+
 }
 
 

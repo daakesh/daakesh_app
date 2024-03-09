@@ -1,31 +1,30 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../src.export.dart';
 
-import '../src.export.dart';
 
-class AppBarWidget extends StatefulWidget {
+class SwapAppBarWidget extends StatefulWidget {
   final TextEditingController searchController;
 
-  const AppBarWidget({super.key, required this.searchController});
+  const SwapAppBarWidget({super.key, required this.searchController});
 
   @override
-  State<AppBarWidget> createState() => _AppBarWidgetState();
+  State<SwapAppBarWidget> createState() => _SwapAppBarWidgetState();
 }
 
-class _AppBarWidgetState extends State<AppBarWidget> {
+class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
   Timer? _debounceTimer;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (_, state) {
+    return BlocBuilder<SwapBloc, SwapState>(builder: (_, state) {
       return SliverAppBar(
         backgroundColor: ColorName.blueGray,
         expandedHeight: 160.0,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
-          background: SearchBarWidget(
+          background: SwapSearchBarWidget(
             state: state,
           ),
           expandedTitleScale: 1.0,
@@ -45,7 +44,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                         width: 12.0.w,
                       ),
                       Assets.svg.searchIcon.svg(
-                          color: state.homeScreenState.isSearch
+                          color: state.swapScreenState.isSearch
                               ? ColorName.amber
                               : ColorName.charcoalGray),
                       Expanded(
@@ -58,8 +57,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                             inputFormatters: [
                               RegExpValidator.beginWhitespace,
                             ],
-                            suffixIcon: state.homeScreenState.isSearch ||
-                                state.homeScreenState.isSearchResult
+                            suffixIcon: state.swapScreenState.isSearch
                                 ? InkWell(
                                     onTap: clearText,
                                     child: const Icon(
@@ -68,7 +66,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                                     ),
                                   )
                                 : const SizedBox(),
-                            onTap: () => HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SEARCH )),
+                            onTap: () => SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState:SwapScreenState.SEARCH)),
                             style: easyTheme.textTheme.labelMedium!
                                 .copyWith(fontFamily: FontFamily.apercuRegular),
                             isUnderlineOn: true,
@@ -83,7 +81,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               SizedBox(width: 14.0.w),
               GestureDetector(
                   onTap: () {
-                  HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.CART));
+                  SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState:SwapScreenState.CART));
                   FocusScope.of(context).unfocus();
                   },
                   child: Assets.svg.cartAddIcon.svg(width: 24.0.w, height: 24.0.h)),
@@ -100,20 +98,20 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   }
 
   void onChange(String value) {
-      SearchBloc.get.add(EmptySearchEvent());
+      SwapSearchBloc.get.add(SwapEmptySearchEvent());
     _debounceTimer?.cancel();
     if (value.isEmpty) {
-      SearchBloc.get.add(EmptySearchEvent());
+      SwapSearchBloc.get.add(SwapEmptySearchEvent());
       return;
     }
     _debounceTimer = Timer(const Duration(milliseconds: 900), () {
-      SearchBloc.get.add(SearchOnItemsEvent(searchValue: value));
+      SwapSearchBloc.get.add(SwapSearchOnItemsEvent(searchValue: value));
     });
   }
   void clearText(){
     FocusScope.of(context).unfocus();
     widget.searchController.clear();
-    SearchBloc.get.add(EmptySearchEvent());
-    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
+    SwapSearchBloc.get.add(SwapEmptySearchEvent());
+    SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState:SwapScreenState.HOME));
   }
 }

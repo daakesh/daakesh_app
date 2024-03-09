@@ -95,7 +95,7 @@ class _SearchResultHandler extends StatelessWidget {
               onTap: () {
                 FocusScope.of(context).unfocus();
                 HomeBloc.get.add(SwapHomeScreenStateEvent(
-                    homeScreenState: HomeScreenState.SEARCHRESULT));
+                    homeScreenState: HomeScreenState.SUBCATEGORYRESULT));
               },
               child: SizedBox(
                 width: double.infinity,

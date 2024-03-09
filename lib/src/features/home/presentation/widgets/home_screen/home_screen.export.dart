@@ -6,3 +6,4 @@ export 'popular_categories.dart';
 export 'search_bar_widget.dart';
 export 'today_deal_product.dart';
 export 'whats_new_widget.dart';
+export 'home_app_bar_widget.dart';

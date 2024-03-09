@@ -1,8 +1,5 @@
-import 'package:daakesh/gen/fonts.gen.dart';
 import 'package:daakesh/src/src.export.dart';
 import 'package:flutter/material.dart';
-import '../../../gen/colors.gen.dart';
-
 
 /// This is class[AppTheme] to toggle between app mode.
 ///

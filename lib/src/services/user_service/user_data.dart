@@ -41,18 +41,18 @@ class UserDataImpl implements UserData {
   void setUserData(UserModel userData)=> this.userData = userData;
 
   @override
-  void get activateUser=> FirebaseAuthentication.verifyPhoneNumber(userData.phoneNumber.toString());
+  void get activateUser=> FirebaseAuthentication.verifyPhoneNumber(userData.phoneNumber.toString(),AuthManner.SIGNUPIN);
 
   @override
-  void get saveUserToken async => await prefs.setString('token', userData.token.toString());
+  void get saveUserToken async => await prefs.setString('userId', userData.id.toString());
 
   @override
   void logOut() async {
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 2));
     ProgressCircleDialog.dismiss();
-    ValueConstants.token ='';
-    prefs.removeData('token').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
+    ValueConstants.userId ='';
+    prefs.removeData('userId').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
   }
 
 
