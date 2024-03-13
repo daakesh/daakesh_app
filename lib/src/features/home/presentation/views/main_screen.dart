@@ -10,6 +10,15 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const MyProductsScreen(),
+    const SwapScreen(),
+    const MyOrderScreen(),
+    const ProfileScreen(),
+  ];
+
+  PersistentTabController controller = PersistentTabController();
 
   @override
   void initState() {
@@ -18,41 +27,40 @@ class _MainScreenState extends State<MainScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      backgroundColor: ColorName.white,
-      screens: const[
-        HomeScreen(),
-        MyProductsScreen(),
-        SwapScreen(),
-        MyOrderScreen(),
-        ProfileScreen(),
-      ],
-      items: _navBarsItems(context),
-      resizeToAvoidBottomInset: true,
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: false,
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      navBarStyle: NavBarStyle.style15,
-      padding: const NavBarPadding.only(bottom: 12.0),
-      navBarHeight: 77,
-      decoration: const NavBarDecoration(
-          boxShadow: [
-            BoxShadow(
-                offset: Offset(0, -3),
-                blurRadius: 16.0,
-                color: Color.fromRGBO(0, 0, 0, 0.16)
-            )
-          ],
-          colorBehindNavBar: ColorName.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(6.0), topRight: Radius.circular(6.0))),
+    return PopScope(
+      canPop: false,
+      child: PersistentTabView(
+        context,
+        controller:controller,
+        backgroundColor: ColorName.white,
+        screens: _screens,
+        items: _navBarsItems(context),
+        resizeToAvoidBottomInset: true,
+        stateManagement: true,
+        hideNavigationBarWhenKeyboardShows: false,
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        navBarStyle: NavBarStyle.style15,
+        padding: const NavBarPadding.only(bottom: 12.0),
+        navBarHeight: 77,
+        decoration: const NavBarDecoration(
+            boxShadow: [
+              BoxShadow(
+                  offset: Offset(0, -3),
+                  blurRadius: 16.0,
+                  color: Color.fromRGBO(0, 0, 0, 0.16)
+              )
+            ],
+            colorBehindNavBar: ColorName.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(6.0), topRight: Radius.circular(6.0))),
+      ),
     );
   }
   void getAllData(){
     getHomeScreenData();
     getSwapScreenData();
+    getMyProductScreenData();
   }
   void getHomeScreenData(){
     AdvBloc.get.add(GetAdvertisementDataEvent());
@@ -65,6 +73,10 @@ class _MainScreenState extends State<MainScreen> {
     SwapAdvBloc.get.add(SwapGetAdvertisementDataEvent());
     SwapBloc.get.add(SwapGetSectionDataEvent());
     TrendDealsBloc.get.add(GetTrendDealsDataEvent());
+  }
+  void getMyProductScreenData(){
+    MyProBloc.get.add(GetMyProductEvent());
+    MySwapProBloc.get.add(GetMySwapProEvent());
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems(context) {

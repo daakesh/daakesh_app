@@ -47,7 +47,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(
                         'SWAP',
                         textAlign: TextAlign.center,
@@ -91,7 +91,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsetsDirectional.only(end: 28.0),
                   child: Text(
-                    '${trendDealsItem.description}',
+                    '${trendDealsItem.title}\n',
                     maxLines: 2,
                     style: easyTheme.textTheme.bodyMedium!.copyWith(
                         fontSize: 14.0.sp,

@@ -1,12 +1,32 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-class AddProCategoriesScreen extends StatelessWidget {
-   AddProCategoriesScreen({super.key});
-  final productCategoriesController = TextEditingController();
-  final productBrandController = TextEditingController();
-  final productSectionController = TextEditingController();
-  final productModelYearController = TextEditingController();
+class AddProCategoriesScreen extends StatefulWidget {
+  const AddProCategoriesScreen({super.key});
+
+  @override
+  State<AddProCategoriesScreen> createState() => _AddProCategoriesScreenState();
+}
+
+class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
+  final productModelYearController = TextEditingController(text: DateTime.now().year.toString());
+    String? productSecID;
+    String? productCatID;
+    String? productSubCatID;
+    String? productBrandID;
+    String? productModelYear;
+
+  @override
+  void initState() {
+    super.initState();
+    editData();
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return  DefaultBackgroundWidget(
@@ -21,10 +41,7 @@ class AddProCategoriesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 108.0,
                 ),
-                InkWell(
-                  focusColor: ColorName.transparent,
-                  highlightColor: ColorName.transparent,
-                  splashColor: ColorName.transparent,
+                GestureDetector(
                   onTap:()=>getBack(),
                   child: Assets.svg.arrowBackIcon.svg(),
                 ),
@@ -61,58 +78,103 @@ class AddProCategoriesScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
+                        'Product Section',
+                        style: easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                      ),
+                      BlocConsumer<ProDetailsBloc, ProDetailsState>(
+                        listener: (_,state){
+                          productSecID =state.productSecID;
+                        },
+                        builder: (context, state) {
+                          return DropDownButtonWidget<String>(
+                            onChange: (value) {
+                              getProBrand(value.toString());
+                              getProCategory(value.toString());
+                              productSecID = value.toString();
+                            },
+                            value: state.productSecID,
+                            items: state.sectionListData
+                                .map((e) => DropdownMenuItem(
+                                    value: e.id.toString(),
+                                    child: Text(e.name.toString()+e.id.toString())))
+                                .toList(),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 21.0,),
+                      Text(
                         'Product Categories',
                         style: easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
-                      TextFormFieldWidget(
-                          controller: productCategoriesController,
-                          keyboardType: TextInputType.number,
-                          readOnly: true,
-                          isSuffixPrefixOn: true,
-                          suffixIcon: InkWell(
-                            onTap: () {},
-                            child: SizedBox(
-                                width: 20.0,
-                                height: 20.0,
-                                child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
-                          )),
+                      BlocConsumer<ProDetailsBloc, ProDetailsState>(
+                        listener: (_,state){
+                          productCatID =state.productCatID;
+                        },
+                        builder: (context, state) {
+                          return DropDownButtonWidget<String>(
+                            onChange: (value) {
+                              productCatID = value.toString();
+                              getProSubCategory(value.toString());
+                            },
+                            value: state.productCatID,
+                            items: state.proCategoryListData.map((e) => DropdownMenuItem(
+                                        value: e.id.toString(),
+                                        child: Text(e.name.toString()+e.id.toString())))
+                                    .toList(),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 21.0,),
+                      Text(
+                        'Sup Categories',
+                        style: easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                      ),
+                      BlocConsumer<ProDetailsBloc, ProDetailsState>(
+                        listener: (_,state){
+                          productSubCatID =state.productSubCatID;
+                        },
+                        builder: (context, state) {
+                          return DropDownButtonWidget<String>(
+                            onChange: (value) {
+                              productSubCatID = value.toString();
+                            },
+                            value: state.productSubCatID,
+                            items: state.proSubCategoryListData
+                                .map<DropdownMenuItem<String>>((e) =>
+                                    DropdownMenuItem(
+                                        value: e.id.toString(),
+                                        child: Text(e.name.toString()+e.id.toString())))
+                                .toList(),
+                          );
+                        },
+                      ),
                       const SizedBox(height: 21.0,),
                       Text(
                         'Product Brand',
                         style: easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
-                      TextFormFieldWidget(
-                          controller: productBrandController,
-                          keyboardType: TextInputType.number,
-                          readOnly: true,
-                          isSuffixPrefixOn: true,
-                          suffixIcon: InkWell(
-                            onTap: () {},
-                            child: SizedBox(
-                                width: 20.0,
-                                height: 20.0,
-                                child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
-                          )),
-                      const SizedBox(height: 21.0,),
-                      Text(
-                        'Product Section',
-                        style: easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                      BlocConsumer<ProDetailsBloc, ProDetailsState>(
+                        listener: (_,state){
+                          productBrandID =state.productBrandID;
+                        },
+                        builder: (context, state) {
+                          return DropDownButtonWidget<String>(
+                            onChange: (value) {
+                              productBrandID = value.toString();
+                            },
+                            value: state.productBrandID,
+                            items:state.proBrandListData
+                                .map((e) => DropdownMenuItem(
+                                    value: e.id.toString(),
+                                    child: Text(e.name.toString()+e.id.toString())))
+                                .toList() ,
+                          );
+                        },
                       ),
-                      TextFormFieldWidget(
-                          controller: productSectionController,
-                          keyboardType: TextInputType.number,
-                          readOnly: true,
-                          isSuffixPrefixOn: true,
-                          suffixIcon: InkWell(
-                            onTap: () {},
-                            child: SizedBox(
-                                width: 20.0,
-                                height: 20.0,
-                                child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
-                          )),
                       const SizedBox(height: 21.0,),
                       Text(
                         'Product Model Year',
@@ -120,17 +182,15 @@ class AddProCategoriesScreen extends StatelessWidget {
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
                       TextFormFieldWidget(
-                          controller: productModelYearController,
-                          keyboardType: TextInputType.number,
-                          readOnly: true,
-                          isSuffixPrefixOn: true,
-                          suffixIcon: InkWell(
-                            onTap: () {},
-                            child: SizedBox(
-                                width: 20.0,
-                                height: 20.0,
-                                child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
-                          )),
+                        controller: productModelYearController,
+                        isSuffixPrefixOn: true,
+                        readOnly: true,
+                        suffixIcon: SizedBox(
+                            width: 20.0,
+                            height: 20.0,
+                            child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
+                        onTap:()=>selectModelYear(context),
+                      ),
                       const SizedBox(height: 70.0,),
                     ],
                   ),
@@ -144,12 +204,12 @@ class AddProCategoriesScreen extends StatelessWidget {
                   height: 12.0,
                 ),
                 Center(
-                  child:
-                  OutlineButtonWidget(text:'CANCEL', onPressed: ()=>cancel()),
+                  child: OutlineButtonWidget(text:'CANCEL', onPressed: ()=>cancel()),
                 ),
                 const SizedBox(
                   height: 50.0,
                 ),
+                const Spacer(flex: 1,),
               ],
             ),
           ),
@@ -159,16 +219,59 @@ class AddProCategoriesScreen extends StatelessWidget {
   }
 
   void onNext()async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
-    ProgressCircleDialog.dismiss();
-    openNewPage(const AddProImagesScreen());
+    debugPrint('*************************************************');
+    debugPrint('$productSecID');
+    debugPrint('$productCatID');
+    debugPrint('$productSubCatID');
+    debugPrint('$productBrandID');
+    debugPrint('*************************************************');
+
+    AddProBloc.get.add(AddProCategoriesEvent(
+     productSecID: productSecID.toString(),
+     productCatID: productCatID.toString(),
+     productSubCatID: productSubCatID.toString(),
+     productBrandID: productBrandID.toString(),
+     productModelYear: productModelYearController.text,
+   ));
+   openNewPage(const AddProImagesScreen());
   }
   void cancel(){
     getBack();
     resetData();
   }
   void resetData(){}
-
+  void getProCategory(String secID){
+    ProDetailsBloc.get.add(GetProCategoryEvent(secID: secID));
+  }
+  void getProBrand(String secID) {
+    ProDetailsBloc.get.add(GetBrandsBySectionEvent(secID: secID));
+  }
+  void getProSubCategory(String catID){
+     ProDetailsBloc.get.add(GetProSubCategoryEvent(catID: catID));
+   }
+  void selectModelYear(context)async{
+     await showModalBottomSheet<int>(
+       context: context,
+       builder: (BuildContext builder) {
+         return SizedBox(
+           height: MediaQuery.of(context).copyWith().size.height / 3,
+           child: CupertinoDatePicker(
+             mode: CupertinoDatePickerMode.monthYear,
+            initialDateTime: DateTime(int.parse(productModelYearController.text)),
+            minimumYear: 1900,
+             maximumYear: 2100,
+             onDateTimeChanged: (DateTime newDateTime) {
+                 productModelYearController.text = newDateTime.year.toString();
+             },
+           ),
+         );
+       },
+     );
+   }
+  void editData(){
+    ProDetailsBloc.get.add(GetDropDownDataEvent());
+  }
 
 }
+
+

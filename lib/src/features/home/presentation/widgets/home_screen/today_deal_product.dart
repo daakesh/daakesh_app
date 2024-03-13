@@ -24,6 +24,7 @@ class TodayDealProduct extends StatelessWidget {
       child: Column(
         children: [
           Container(
+            width: double.infinity,
             decoration: BoxDecoration(
               color: ColorName.lavenderGray,
               boxShadow: const [
@@ -36,30 +37,37 @@ class TodayDealProduct extends StatelessWidget {
               borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0.r),topRight: Radius.circular(10.0.r)),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  constraints: BoxConstraints(maxWidth: 75.0.w),
-                  height: 22.0.h,
-                  margin:  const EdgeInsetsDirectional.only(top: 1.0, start: 4.0),
-                  padding:  EdgeInsets.only(top: 2.0.h),
-                  decoration: BoxDecoration(
-                    color: ColorName.red,
-                    borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0.h),
-                    child: Text(
-                      '23% OFF',
-                      textAlign: TextAlign.center,
-                      style: easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 14.0.sp, color: ColorName.white),
+                Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: 75.0.w),
+                    height: 22.0.h,
+                    margin:  const EdgeInsetsDirectional.only(top: 1.0, start: 4.0),
+                    padding:  EdgeInsets.only(top: 2.0.h),
+                    decoration: BoxDecoration(
+                      color: ColorName.red,
+                      borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.0.h),
+                      child: Text(
+                        '23% OFF',
+                        textAlign: TextAlign.center,
+                        style: easyTheme.textTheme.headlineMedium!
+                            .copyWith(fontSize: 14.0.sp, color: ColorName.white),
+                      ),
                     ),
                   ),
                 ),
                 CachedImage(
                   imageUrl: todayDealItem.itemImg.toString(),
+                  height:85.0,
+                  width: 85.0,
                 ),
+                const SizedBox(height: 12.0,),
+
               ],
             ),
           ),
@@ -86,7 +94,7 @@ class TodayDealProduct extends StatelessWidget {
                   height: 2.0.h,
                 ),
                 Text(
-                  '${todayDealItem.description}',
+                  '${todayDealItem.title}\n',
                   maxLines: 2,
                   style: easyTheme.textTheme.bodyMedium!.copyWith(
                       fontSize: 14.0.sp,

@@ -5,6 +5,11 @@ enum CardsTypes {
   AMIRICANEXPRESS,
 }
 
+enum UserType {
+  SWAP,
+  SELL,
+}
+
 enum ProductTapBar{
   SHOP,
   SWAP,
@@ -35,9 +40,9 @@ enum SwapScreenState{
   HOME,
 }
 enum ProductDisplayMethod{
-  SALE,
-  SWAP,
-  SALESWAP,
+  Sell,
+  Swap,
+  SellSwap,
 }
 
 enum AuthManner{

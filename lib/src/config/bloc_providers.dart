@@ -5,15 +5,20 @@ import '../features/features.export.dart';
 MultiBlocProvider listOfBloc({Widget? child}) {
   return MultiBlocProvider(
     providers: [
+      ///Auth Blocs
       BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
       BlocProvider<ForgetPassBloc>(create: (_) => ForgetPassBloc()),
-      ///
+      ///Profile Blocs
       BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
-      ///
+      ///My Order-Blocs
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
-      ///
-      BlocProvider<MyProductBloc>(create: (_) => MyProductBloc()),
-      ///
+      ///My Product-Blocs
+      BlocProvider<MyProBloc>(create: (_) => MyProBloc()),
+      BlocProvider<MySwapProBloc>(create: (_) => MySwapProBloc()),
+      BlocProvider<ProDetailsBloc>(create: (_) => ProDetailsBloc()),
+      BlocProvider<MyProFuncBloc>(create: (_) => MyProFuncBloc()),
+      BlocProvider<AddProBloc>(create: (_) => AddProBloc()),
+      ///Home Blocs
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
       BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
       BlocProvider<SectionsBloc>(create: (_) => SectionsBloc()),
@@ -25,7 +30,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       ///BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<RateBloc>(create: (_) => RateBloc()),
 
-      ///
+      ///Swap Blocs
       BlocProvider<SwapBloc>(create: (_) => SwapBloc()),
       BlocProvider<SwapSearchBloc>(create: (_) => SwapSearchBloc()),
       BlocProvider<SwapSectionsBloc>(create: (_) => SwapSectionsBloc()),

@@ -18,7 +18,7 @@ abstract class NetworkService{
     String baseUrl,
     String path,
     Map<String, String>? headers,
-    Map<String, String> body = const{},
+    Map<String, dynamic> body = const{},
     Map<String, dynamic>? params = const {},
     String? userToken,
 
@@ -47,8 +47,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
 
   }) async {
     try {
-      _requestHandler(headers,params,userToken);
-      final uri = Uri.https(baseUrl, path, _params);
+      final uri = Uri.https(baseUrl, path, params);
       if (!uri.isAbsolute) throw Exception('Not valid URL');
       final response = await http.get(uri, headers: _headers);
       final data = jsonDecode(response.body);
@@ -76,13 +75,12 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
       String baseUrl = NetworkConstants.baseUrl,
       String path = '',
       Map<String, String>? headers,
-      Map<String, String> body = const{},
+      Map<String, dynamic> body = const{},
       Map<String, dynamic>? params,
       String? userToken,
       }) async{
     try {
-      _requestHandler(headers,params,userToken);
-      final uri = Uri.https(baseUrl, path, _params);
+      final uri = Uri.https(baseUrl, path, params);
       if (!uri.isAbsolute) throw Exception('Not valid URL');
       final response = await http.post(uri, headers: _headers,body: body);
       final data = jsonDecode(response.body);

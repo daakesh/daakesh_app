@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class ProductTypeTabBar extends StatelessWidget {
-  final MyProductState state;
+  final MyProFuncState state;
   const ProductTypeTabBar({super.key, required this.state});
 
   @override
@@ -72,7 +72,7 @@ class ProductTypeTabBar extends StatelessWidget {
   }
 
   void swapTabBar(ProductTapBar productTapBar){
-    MyProductBloc.get.add(SwapTabBarProductTypeEvent(productTapBar: productTapBar));
+    MyProFuncBloc.get.add(SwapTabBarProductTypeEvent(productTapBar: productTapBar));
   }
 
 

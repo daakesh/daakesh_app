@@ -52,13 +52,18 @@ extension GlobalBuildContext on BuildContext{
 }
 
 extension ProductDisplayMethodX on ProductDisplayMethod{
-  bool get isSale => this == ProductDisplayMethod.SALE;
-  bool get isSwap => this == ProductDisplayMethod.SWAP;
-  bool get isSaleSwap => this == ProductDisplayMethod.SALESWAP;
+  bool get isSell => this == ProductDisplayMethod.Sell;
+  bool get isSwap => this == ProductDisplayMethod.Swap;
+  bool get isSaleSwap => this == ProductDisplayMethod.SellSwap;
 }
 
 extension MyOrderTapBarX on MyOrderTapBar{
   bool get isMyOrder => this == MyOrderTapBar.MYORDER;
   bool get isSwapRequest => this == MyOrderTapBar.SWAPREQUEST;
 }
+extension UserTypeX on UserType{
+  bool get isSwap => this == UserType.SWAP;
+  bool get isSell => this == UserType.SELL;
+}
+
 

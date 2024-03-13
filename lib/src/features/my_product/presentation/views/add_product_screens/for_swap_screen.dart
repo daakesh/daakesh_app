@@ -1,26 +1,25 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../src.export.dart';
 
 class ForSwapScreen extends StatefulWidget {
   const ForSwapScreen({super.key});
-
   @override
   State<ForSwapScreen> createState() => _ForSwapScreenState();
 }
 
 class _ForSwapScreenState extends State<ForSwapScreen> {
+  final displayProductController = TextEditingController();
   final countryController = TextEditingController();
-
+  final cityController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    setEditData();
     resetFlagData();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +84,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                         'Display the product on the store',
                         style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
-                        controller: TextEditingController(),
+                        controller: displayProductController,
                         readOnly: true,
                         isSuffixPrefixOn: true,
                         suffixIcon: InkWell(
@@ -103,7 +102,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       controller: countryController,
                       isSuffixPrefixOn: true,
                       suffixIcon: SizedBox(height:9.0.h ,width:16.0.w,child: Center(child: Assets.svg.arrowDropDownIcon.svg()),),
-                      prefixIcon: BlocBuilder<MyProductBloc, MyProductState>(builder: (_, state) {
+                      prefixIcon: BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
                         return SizedBox(
                             width: 30.0.w,
                             height: 30.0.h,
@@ -124,7 +123,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                     Text(
                         'City swap',
                         style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
-                    TextFormFieldWidget(controller: TextEditingController()),
+                    TextFormFieldWidget(controller: cityController),
                     SizedBox(height: 21.0.h,),
 
                   ],
@@ -155,30 +154,50 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
       ),
     );
   }
-
+  void setEditData()async{
+    if(getIt.get<EditProduct>().myProductItem != null){
+      var data = getIt.get<EditProduct>().myProductItem;
+      ///displayProductController.text = data!.display.toString();
+      displayProductController.text = 'Public';
+      countryController.text = data!.countrySwap.toString();
+      cityController.text = data.citySwap.toString();
+      String code = CountriesFlags.flags[data.countrySwap].toString();
+      String flag = await countryCodeToEmoji(code);
+      MyProFuncBloc.get.add(ChangeCountrySwapFlagEvent(flagEmoji: flag,),);
+    }
+    else{
+      displayProductController.text = 'Public';
+      countryController.text = 'Jordan';
+      cityController.text = 'Amman';
+    }
+  }
   void onNext()async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
-    ProgressCircleDialog.dismiss();
+    if(displayProductController.text.isEmpty || countryController.text.isEmpty || cityController.text.isEmpty){
+      ShowToastSnackBar.showSnackBars(message: 'Firstly, fill all data...');
+      return;
+    }
+    AddProBloc.get.add(AddSwapInfoEvent(
+      displayProduct: displayProductController.text,
+      swapCountry: countryController.text,
+      swapCity: cityController.text,
+    ));
     openNewPage(const ShipToScreen());
 
   }
-
   void cancel(){
     getBack();
   }
   void resetFlagData(){
     countryController.text = 'Jordan';
-    MyProductBloc.get.add(ChangeCountrySwapFlagEvent(flagEmoji: '🇯🇴',),);
+    MyProFuncBloc.get.add(ChangeCountrySwapFlagEvent(flagEmoji: '🇯🇴',),);
   }
-
   void showCountryDialog() {
     return showCountryPicker(
       context:context,
       showPhoneCode: false,
       onSelect: (Country country) {
         countryController.text = country.name;
-        MyProductBloc.get.add(ChangeCountrySwapFlagEvent(flagEmoji: country.flagEmoji.toString(),),);
+        MyProFuncBloc.get.add(ChangeCountrySwapFlagEvent(flagEmoji: country.flagEmoji.toString(),),);
       },
     );
   }

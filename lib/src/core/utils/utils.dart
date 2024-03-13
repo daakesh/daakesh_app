@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../src.export.dart';
 
@@ -24,7 +25,15 @@ Future<void> openNewPage(Widget widget, {bool popPreviousPages = false}) {
             (Route<dynamic> route) => false);
   });
 }
-
+String formatDate(String dateString) {
+  DateTime date = DateFormat('yyyy-mm-dd').parse(dateString);
+  return DateFormat('mm/dd/yyyy').format(date);
+}
+Future<String> countryCodeToEmoji(String countryCode) async{
+  final int firstLetter = countryCode.codeUnitAt(0) - 0x41 + 0x1F1E6;
+  final int secondLetter = countryCode.codeUnitAt(1) - 0x41 + 0x1F1E6;
+  return String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
+}
 Future<void> openNewPageWithNav(Widget widget, {bool withNavBar = false,}) {
   return Future<dynamic>.delayed(Duration.zero, () {
     if (!withNavBar) {
@@ -147,7 +156,7 @@ void fieldFocusChange(
 
 bool isOpenKeyboard(context) => MediaQuery.of(context).viewInsets.bottom == 0;
 
-bool getTextDirection(context) => Directionality.of(context) == TextDirection.rtl;
+//bool getTextDirection(context) => Directionality.of(context) == TextDirection.rtl;
 
 bool get isLightTheme => easyTheme.brightness == Brightness.light;
 

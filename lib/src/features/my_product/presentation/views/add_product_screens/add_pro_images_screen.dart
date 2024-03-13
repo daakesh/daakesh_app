@@ -105,7 +105,7 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                 const SizedBox(
                   height: 24.0,
                 ),
-                BlocBuilder<MyProductBloc,MyProductState>(builder: (_,state){
+                BlocBuilder<MyProFuncBloc,MyProFuncState>(builder: (_,state){
                   return Wrap(
                     children: List.generate(
                       state.imagesList.length,
@@ -222,29 +222,23 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
           );
         });
   }
-
-
   void onAddImage(List<XFile> images){
-    MyProductBloc.get.add(AddProductImageEvent(imagesList:images));
+    MyProFuncBloc.get.add(AddProductImageEvent(imagesList:images));
   }
   void onNext()async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
+    AddProBloc.get.add(AddProImagesEvent(proImages: imagesList));
     openNewPage(const SelectProMethodScreen());
   }
-
   void cancel(){
     getBack();
     resetData();
   }
-
   void resetData(){
     onAddImage([]);
   }
-
   void deleteImage(int index) {
     imagesList.removeAt(index);
     onAddImage(imagesList);
   }
+
 }

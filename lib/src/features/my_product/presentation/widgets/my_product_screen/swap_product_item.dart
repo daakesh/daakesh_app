@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class SwapProductItem extends StatelessWidget {
@@ -6,8 +7,11 @@ class SwapProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<MySwapProBloc, MySwapProState>(
+  builder: (context, state) {
     return SliverList(
         delegate: SliverChildBuilderDelegate((_, index) {
+          MyProductItem myProductItem = state.mySwapProductListData[index];
           return Container(
             width: double.infinity,
             margin:EdgeInsetsDirectional.only(
@@ -31,14 +35,17 @@ class SwapProductItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: Padding(
-                    padding:EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
-                    child: Text(
-                      'Edit',
-                      style: easyTheme.textTheme.bodyLarge!
-                          .copyWith(fontSize: 14.0.sp, color: ColorName.skyBlue),
+                GestureDetector(
+                  onTap: ()=>onEdit(myProductItem),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Padding(
+                      padding:EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
+                      child: Text(
+                        'Edit',
+                        style: easyTheme.textTheme.bodyLarge!
+                            .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
+                      ),
                     ),
                   ),
                 ),
@@ -46,16 +53,17 @@ class SwapProductItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(width: 7.0.w),
-                    Assets.png.glasses.image(height: 90.0.h, width: 90.0.w),
+                    Expanded(child: CachedImage(imageUrl: myProductItem.itemImg.toString())),
                     SizedBox(width: 18.0.w),
                     Expanded(
+                      flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.only(end: 80.0.w),
                             child: Text(
-                              'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                              '${myProductItem.description}\n',
                               style: easyTheme.textTheme.labelMedium!.copyWith(
                                   fontSize: 15.0.sp,
                                   color: ColorName.gray,
@@ -72,7 +80,7 @@ class SwapProductItem extends StatelessWidget {
                                     style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 15.0.sp,color: ColorName.gray)
                                 ),
                                 TextSpan(
-                                    text: 'Amman, Jordan',
+                                    text: '${myProductItem.countrySwap}',
                                     style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 13.0.sp,color: ColorName.black)
                                 ),
                               ],
@@ -89,7 +97,7 @@ class SwapProductItem extends StatelessWidget {
                                     style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 15.0.sp,color: ColorName.gray)
                                 ),
                                 TextSpan(
-                                    text: 'Public',
+                                    text: '${myProductItem.display}',
                                     style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 13.0.sp,color: ColorName.black)
                                 ),
                               ],
@@ -105,6 +113,15 @@ class SwapProductItem extends StatelessWidget {
               ],
             ),
           );
-        }, childCount: 20));
+        }, childCount: state.mySwapProductListData.length));
+  },
+);
+  }
+  void onEdit(MyProductItem myProductItem){
+    openNewPage(const AddProInfoScreen());
+    MyProFuncBloc.get.add(EditProductEvent(
+        myProductItem: myProductItem,
+        productDisplayMethod: ProductDisplayMethod.Swap
+    ));
   }
 }

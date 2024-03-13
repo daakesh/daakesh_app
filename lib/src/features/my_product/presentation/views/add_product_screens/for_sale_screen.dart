@@ -1,8 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import '../../../../../src.export.dart';
 
-class ForSaleScreen extends StatelessWidget {
+class ForSaleScreen extends StatefulWidget {
   const ForSaleScreen({super.key});
+  @override
+  State<ForSaleScreen> createState() => _ForSaleScreenState();
+}
+
+class _ForSaleScreenState extends State<ForSaleScreen> {
+  final productQuantityController = TextEditingController();
+  final productPriceController = TextEditingController();
+  final productDiscountController = TextEditingController();
+  final fromDateController = TextEditingController();
+  final toDateController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    setEditData();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,23 +87,18 @@ class ForSaleScreen extends StatelessWidget {
                         'Product Quantity',
                         style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
-                        controller: TextEditingController(),
+                        controller: productQuantityController,
+                      keyboardType: TextInputType.number,
                        ),
                     SizedBox(height: 22.0.h,),
                     Text(
                       'Product Price',
                       style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
-                        controller: TextEditingController(),
-                        readOnly: true,
+                        controller: productPriceController,
                         isSuffixPrefixOn: true,
-                        suffixIcon: InkWell(
-                          onTap: () {},
-                          child: SizedBox(
-                              width: 20.0,
-                              height: 20.0,
-                              child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
-                        )),
+                      keyboardType: TextInputType.number,
+                    ),
                     SizedBox(height: 21.0.h,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,9 +108,19 @@ class ForSaleScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                           Text(
-                              'Product Quantity',
+                              'Product Discount',
                               style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
-                          TextFormFieldWidget(controller: TextEditingController()),
+                          TextFormFieldWidget(
+                                controller: productDiscountController,
+                                keyboardType: TextInputType.number,
+                                maxLines: 1,
+                            inputFormatters: [
+                              //LengthLimitingTextInputFormatter(3),
+                              FilteringTextInputFormatter.digitsOnly,
+                              PercentInputFormatter(),
+                            ],
+
+                              ),
                           SizedBox(height: 22.0.h,),
                         ],),
                       ),
@@ -121,9 +146,27 @@ class ForSaleScreen extends StatelessWidget {
                     Text(
                         'Discount Date',
                         style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
-                    TextFormFieldWidget(controller: TextEditingController()),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: TextFormFieldWidget(
+                          controller: fromDateController,
+                              hintText:'From  --/--/-----',
+                              hintStyle: easyTheme.textTheme.labelMedium,
+                              readOnly: true,
+                              onTap: ()=>selectDiscountDate(context,fromDateController),
+                        )),
+                        Expanded(
+                            child: TextFormFieldWidget(
+                          controller: toDateController,
+                              hintText:'To  --/--/-----',
+                              hintStyle: easyTheme.textTheme.labelMedium,
+                              readOnly: true,
+                              onTap: ()=>selectDiscountDate(context,toDateController),
+                            )),
+                      ],
+                    ),
                     SizedBox(height: 21.0.h,),
-
                   ],
                 ),
               ),
@@ -152,10 +195,52 @@ class ForSaleScreen extends StatelessWidget {
       ),
     );
   }
+  void setEditData(){
+    if(getIt.get<EditProduct>().myProductItem != null){
+      var data = getIt.get<EditProduct>().myProductItem;
+      double price = double.parse(data!.discount.toString()) * 100 ;
+      productQuantityController.text = data.quantity.toString();
+      productPriceController.text = data.price.toString();
+      productDiscountController.text ='${price.toInt()}%';
+      fromDateController.text = data.discountFrom.toString();
+      toDateController.text = data.discountTo.toString();
+    }
+  }
+  void selectDiscountDate(context,TextEditingController controller)async{
+    await showModalBottomSheet<int>(
+      context: context,
+      builder: (BuildContext builder) {
+        return SizedBox(
+          height: MediaQuery.of(context).copyWith().size.height / 3,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.date,
+            initialDateTime: DateTime.now(),
+            minimumYear: DateTime.now().year,
+            maximumYear: 2100,
+            onDateTimeChanged: (DateTime newDateTime) {
+              controller.text = DateFormat('yyyy-MM-dd').format(newDateTime);
+            },
+          ),
+        );
+      },
+    );
+  }
   void onNext()async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
-    ProgressCircleDialog.dismiss();
+    if (productQuantityController.text.isEmpty ||
+        productPriceController.text.isEmpty ||
+        productDiscountController.text.isEmpty ||
+        fromDateController.text.isEmpty ||
+        toDateController.text.isEmpty) {
+      ShowToastSnackBar.showSnackBars(message: 'Firstly, fill all data...');
+      return;
+    }
+    AddProBloc.get.add(AddSaleInfoEvent(
+      productQuantity: productQuantityController.text,
+      productPrice:  productPriceController.text,
+      productDiscount: productDiscountController.text,
+      fromDate: fromDateController.text,
+      toDate: toDateController.text,
+    ));
     openNewPage(const ShipToScreen());
   }
   void cancel(){

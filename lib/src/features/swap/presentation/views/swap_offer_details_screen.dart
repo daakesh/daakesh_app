@@ -192,7 +192,6 @@ class SwapOfferDetailsScreen extends StatelessWidget {
             ),
           ),
           const SliverToBoxAdapter(child:SizedBox(height: 15.0,),),
-
           SliverToBoxAdapter(
             child: Center(child: DefaultButtonWidget(text: 'CONTINUE',onPressed: onContinue)),
           ),

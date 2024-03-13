@@ -6,10 +6,7 @@ class FloatingAddProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      focusColor: ColorName.transparent,
-      highlightColor: ColorName.transparent,
-      splashColor: ColorName.transparent,
+    return GestureDetector(
       onTap: ()=>openNewPage(AddProInfoScreen()),
       child: SizedBox(
         width: 120.0.w,

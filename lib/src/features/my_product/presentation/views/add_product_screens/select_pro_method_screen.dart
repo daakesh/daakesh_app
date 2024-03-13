@@ -53,37 +53,35 @@ class SelectProMethodScreen extends StatelessWidget {
                 const SizedBox(
                   height: 29.0,
                 ),
-                BlocBuilder<MyProductBloc, MyProductState>(builder: (_, state) {
+                BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
                   return  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                        MethodItem(
                         title: 'For Sale',
-                        productDisplayMethod: ProductDisplayMethod.SALE,
+                        productDisplayMethod: ProductDisplayMethod.Sell,
                         selectedMethod:state.productDisplayMethod,
                       ),
                        MethodItem(
                         title: 'For Swap',
-                        productDisplayMethod: ProductDisplayMethod.SWAP,
-                        selectedMethod:state.productDisplayMethod,
-                      ),
-                       MethodItem(
-                        title: 'For Sale & Swap',
-                        productDisplayMethod: ProductDisplayMethod.SALESWAP,
+                        productDisplayMethod: ProductDisplayMethod.Swap,
                         selectedMethod:state.productDisplayMethod,
                       ),
                        const SizedBox(
                         height: 44.0,
                       ),
-                       Center(
-                        child: DefaultButtonWidget(
-                            text:'NEXT', onPressed: ()=>onNext(state.productDisplayMethod),
-                        ),
-                      ),
                     ],
                   );
                 }),
-
+                const Spacer(flex: 1,),
+                BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
+                  return Center(
+                    child: DefaultButtonWidget(
+                      text: 'NEXT',
+                      onPressed: () => onNext(state.productDisplayMethod),
+                    ),
+                  );
+                }),
                 const SizedBox(
                   height: 12.0,
                 ),
@@ -103,10 +101,8 @@ class SelectProMethodScreen extends StatelessWidget {
   }
 
   void onNext(ProductDisplayMethod productDisplayMethod)async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
-    ProgressCircleDialog.dismiss();
-    if (productDisplayMethod.isSale) {
+    AddProBloc.get.add(AddProDisplayMethodEvent(displayMethod:productDisplayMethod));
+    if (productDisplayMethod.isSell) {
       openNewPage(const ForSaleScreen());
     }
     if (productDisplayMethod.isSwap) {
@@ -142,7 +138,7 @@ class MethodItem extends StatelessWidget {
       focusColor: ColorName.transparent,
       splashColor: ColorName.transparent,
       highlightColor: ColorName.transparent,
-      onTap: ()=>MyProductBloc.get.add(ChooseProductDisplayMethodEvent(productDisplayMethod: productDisplayMethod)),
+      onTap: ()=>MyProFuncBloc.get.add(ChooseProductDisplayMethodEvent(productDisplayMethod: productDisplayMethod)),
       child: Container(
         width: double.infinity,
         height: 51.0,

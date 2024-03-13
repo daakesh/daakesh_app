@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:json_theme/json_theme.dart';
 import '../../../../../src.export.dart';
@@ -8,16 +9,18 @@ class ShopProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-        delegate: SliverChildBuilderDelegate((_, index) {
+    return BlocBuilder<MyProBloc, MyProState>(
+      builder: (context, state) {
+        return SliverList(delegate: SliverChildBuilderDelegate((_, index) {
+          MyProductItem myProductItem = state.myProductListData[index];
           return Container(
             width: double.infinity,
             margin: EdgeInsetsDirectional.only(
-              start:15.0.w,
-              end:15.0.w,
-              bottom:13.0.h,
+              start: 15.0.w,
+              end: 15.0.w,
+              bottom: 13.0.h,
             ),
-            decoration:BoxDecoration(
+            decoration: BoxDecoration(
               color: ColorName.white,
               borderRadius: BorderRadius.all(Radius.circular(8.0.r)),
               boxShadow: const [
@@ -27,21 +30,52 @@ class ShopProductItem extends StatelessWidget {
                     blurRadius: 6.0),
               ],
             ),
-            child: Stack(
-              alignment: AlignmentDirectional.topStart,
-              fit: StackFit.loose,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 30.0.h,
+                      constraints: BoxConstraints(
+                        minWidth: 70.0.w,
+                      ),
+                      margin:
+                          EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
+                      padding:
+                          EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
+                      decoration: BoxDecoration(
+                          color: ColorName.red,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(4.0.r))),
+                      child: Center(
+                        child: Text(
+                          '23% OFF',
+                          style: easyTheme.textTheme.labelLarge!
+                              .copyWith(fontSize: 15.0.sp),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
-                        child: Text(
-                          'Edit',
-                          style: easyTheme.textTheme.bodyLarge!
-                              .copyWith(fontSize: 12.0.sp, color: ColorName.skyBlue),
+                    GestureDetector(
+                      onTap: ()=>onEdit(myProductItem),
+                      child: Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                            end: 20.0,
+                          ),
+                          child: Text(
+                            'Edit',
+                            style: easyTheme.textTheme.bodyLarge!.copyWith(
+                                fontSize: 12.0, color: ColorName.skyBlue),
+                          ),
                         ),
                       ),
                     ),
@@ -49,20 +83,25 @@ class ShopProductItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(width: 12.0.w),
-                        Assets.png.glasses.image(height: 90.0.h, width: 90.0.w),
+                        Expanded(
+                            child: CachedImage(
+                                imageUrl: myProductItem.itemImg.toString())),
                         SizedBox(width: 18.0.w),
                         Expanded(
+                          flex: 2,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.only(end: 80.0.w),
+                                padding:
+                                    EdgeInsetsDirectional.only(end: 80.0.w),
                                 child: Text(
-                                  'AquaOasis™ Cool Mist Humidefier (2.2L Water',
-                                  style: easyTheme.textTheme.labelMedium!.copyWith(
-                                      fontSize: 15.0.sp,
-                                      color: ColorName.gray,
-                                      overflow: TextOverflow.ellipsis),
+                                  '${myProductItem.description}\n',
+                                  style: easyTheme.textTheme.labelMedium!
+                                      .copyWith(
+                                          fontSize: 15.0.sp,
+                                          color: ColorName.gray,
+                                          overflow: TextOverflow.ellipsis),
                                   maxLines: 2,
                                 ),
                               ),
@@ -94,8 +133,10 @@ class ShopProductItem extends StatelessWidget {
                                   SizedBox(width: 8.0.w),
                                   Text(
                                     '(200)',
-                                    style: easyTheme.textTheme.labelMedium!.copyWith(
-                                        fontSize: 13.0.sp, color: ColorName.gray),
+                                    style: easyTheme.textTheme.labelMedium!
+                                        .copyWith(
+                                            fontSize: 13.0.sp,
+                                            color: ColorName.gray),
                                   )
                                 ],
                               ),
@@ -105,15 +146,18 @@ class ShopProductItem extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          '\$44',
-                                          style: easyTheme.textTheme.labelMedium!
+                                          '\$${myProductItem.price}',
+                                          style: easyTheme
+                                              .textTheme.labelMedium!
                                               .copyWith(fontSize: 21.0.sp),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(bottom: 2.0),
+                                          padding: const EdgeInsets.only(
+                                              bottom: 2.0),
                                           child: Row(
                                             children: [
                                               Text(
@@ -121,18 +165,19 @@ class ShopProductItem extends StatelessWidget {
                                                 style: easyTheme
                                                     .textTheme.labelMedium!
                                                     .copyWith(
-                                                    fontSize: 15.0.sp,
-                                                    color: ColorName.gray),
+                                                        fontSize: 15.0.sp,
+                                                        color: ColorName.gray),
                                               ),
                                               SizedBox(width: 8.0.w),
                                               Text(
-                                                '\$79.99',
+                                                '\$${myProductItem.discount}',
                                                 style: easyTheme
                                                     .textTheme.labelMedium!
                                                     .copyWith(
                                                   fontSize: 15.0.sp,
                                                   color: ColorName.gray,
-                                                  decoration: TextDecoration.lineThrough,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
                                                 ),
                                               ),
                                             ],
@@ -174,14 +219,16 @@ class ShopProductItem extends StatelessWidget {
                                           text: 'Entry Date : ',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray)),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.gray)),
                                       TextSpan(
-                                          text: '12/12/2012',
+                                          text: formatDate(myProductItem
+                                              .createdAt
+                                              .toString()),
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.black)),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.black)),
                                     ],
                                   ),
                                 ),
@@ -195,14 +242,15 @@ class ShopProductItem extends StatelessWidget {
                                           text: 'Categories : ',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray)),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.gray)),
                                       TextSpan(
-                                          text: 'MEN',
+                                          text:
+                                              '${myProductItem.category!.name}',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.black)),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.black)),
                                     ],
                                   ),
                                 ),
@@ -221,15 +269,14 @@ class ShopProductItem extends StatelessWidget {
                                           text: 'Quantity : ',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray)),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.gray)),
                                       TextSpan(
-                                          text: '200',
-
+                                          text: '${myProductItem.quantity}',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize:15.0.sp,
-                                              color: ColorName.black)),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.black)),
                                     ],
                                   ),
                                 ),
@@ -243,14 +290,14 @@ class ShopProductItem extends StatelessWidget {
                                           text: 'Ship To : ',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray)),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.gray)),
                                       TextSpan(
-                                          text: 'ALL',
+                                          text: '${myProductItem.country}',
                                           style: easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.black)),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.black)),
                                     ],
                                   ),
                                 ),
@@ -263,31 +310,23 @@ class ShopProductItem extends StatelessWidget {
                     SizedBox(height: 14.0.h),
                   ],
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 30.0.h,
-                      constraints: BoxConstraints(minWidth: 70.0.w,),
-                      margin:EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
-                      padding:EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
-                      decoration:BoxDecoration(
-                          color: ColorName.red,
-                          borderRadius: BorderRadius.all(Radius.circular(4.0.r))),
-                      child: Center(
-                        child: Text(
-                          '23% OFF',
-                          style: easyTheme.textTheme.labelLarge!
-                              .copyWith(fontSize: 15.0.sp),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           );
-        }, childCount: 20));
+        }, childCount: state.myProductListData.length));
+      },
+    );
   }
+  void onEdit(MyProductItem myProductItem){
+    openNewPage(const AddProInfoScreen());
+    MyProFuncBloc.get.add(EditProductEvent(
+      myProductItem: myProductItem,
+      productDisplayMethod: ProductDisplayMethod.Sell
+    ));
+  }
+
 }
+
+
+
+

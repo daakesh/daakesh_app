@@ -10,6 +10,11 @@ class SwapHomeScreenStateEvent extends HomeEvent{
 }
 class GetToTopScreenEvent extends HomeEvent{}
 
+class ChangeIndexEvent extends HomeEvent{
+  final int? index;
+  ChangeIndexEvent({this.index});
+}
+
 class DetermentTodayDealEvent extends HomeEvent{
   final bool isDaakeshTodayDeal;
   DetermentTodayDealEvent({required this.isDaakeshTodayDeal});

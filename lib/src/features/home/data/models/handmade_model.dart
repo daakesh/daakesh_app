@@ -47,8 +47,8 @@ class HandmadeItem {
   String? city;
   String? year;
   String? condition;
-  int? price;
-  String? discount;
+  dynamic price;
+  double? discount;
   String? discountFrom;
   String? discountTo;
   String? country;
@@ -90,7 +90,7 @@ class HandmadeItem {
     city = json['City'];
     year = json['Year'];
     condition = json['Condition'];
-    price = json['Price'].toInt();
+    price = json['Price'];
     discount = json['discount'];
     discountFrom = json['discount_from'];
     discountTo = json['discount_to'];

@@ -1,21 +1,19 @@
-import 'dart:io';
-
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../../../src.export.dart';
 
-import '../../../../src.export.dart';
 
-enum MyProductStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
+enum MyProFuncStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
 
-extension MyProductStateStatusX on MyProductStateStatus{
-  bool get isInitial => this == MyProductStateStatus.INITIAL;
-  bool get isSuccess => this == MyProductStateStatus.SUCCESS;
-  bool get isError => this == MyProductStateStatus.ERROR;
-  bool get isLoading => this == MyProductStateStatus.LOADING;
+extension MyProductStateStatusX on MyProFuncStateStatus{
+  bool get isInitial => this == MyProFuncStateStatus.INITIAL;
+  bool get isSuccess => this == MyProFuncStateStatus.SUCCESS;
+  bool get isError => this == MyProFuncStateStatus.ERROR;
+  bool get isLoading => this == MyProFuncStateStatus.LOADING;
 }
 
-class MyProductState extends Equatable {
-  final MyProductStateStatus myProductStateStatus;
+class MyProFuncState extends Equatable {
+  final MyProFuncStateStatus myProFuncStateStatus;
   final ProductTapBar productTapBar;
   final ProductDisplayMethod productDisplayMethod;
   final String swapFlagEmoji;
@@ -24,24 +22,26 @@ class MyProductState extends Equatable {
   final List<String> selectedShipToCountries;
   final bool isAlreadyAddedCountry;
   final List<XFile> imagesList;
+  final List<MyProductItem> myProductItem;
 
 
 
 
-  const MyProductState({
-    this.myProductStateStatus = MyProductStateStatus.INITIAL,
+  const MyProFuncState({
+    this.myProFuncStateStatus = MyProFuncStateStatus.INITIAL,
     this.productTapBar = ProductTapBar.SHOP,
-    this.productDisplayMethod = ProductDisplayMethod.SALE,
+    this.productDisplayMethod = ProductDisplayMethod.Sell,
     this.swapFlagEmoji = '🇯🇴',
     this.shipFlagEmoji = '🇯🇴',
     this.selectedShipCountry = 'Jordan',
     this.selectedShipToCountries = const [],
     this.isAlreadyAddedCountry = false,
     this.imagesList = const[],
+    this.myProductItem = const[],
   });
 
-  MyProductState copyWith({
-    MyProductStateStatus? myProductStateStatus,
+  MyProFuncState copyWith({
+    MyProFuncStateStatus? myProFuncStateStatus,
     ProductTapBar? productTapBar,
     ProductDisplayMethod? productDisplayMethod,
     String? swapFlagEmoji,
@@ -50,11 +50,12 @@ class MyProductState extends Equatable {
     List<String>? selectedShipToCountries,
     bool? isAlreadyAddedCountry,
     List<XFile>? imagesList,
+    List<MyProductItem>? myProductItem,
 
 
   }) {
-    return MyProductState(
-      myProductStateStatus: myProductStateStatus ?? this.myProductStateStatus,
+    return MyProFuncState(
+      myProFuncStateStatus: myProFuncStateStatus ?? this.myProFuncStateStatus,
       productTapBar: productTapBar ?? this.productTapBar,
       productDisplayMethod: productDisplayMethod ?? this.productDisplayMethod,
       swapFlagEmoji: swapFlagEmoji ?? this.swapFlagEmoji,
@@ -63,6 +64,7 @@ class MyProductState extends Equatable {
       selectedShipToCountries: selectedShipToCountries ?? this.selectedShipToCountries,
       isAlreadyAddedCountry: isAlreadyAddedCountry ?? this.isAlreadyAddedCountry,
       imagesList: imagesList ?? this.imagesList,
+      myProductItem: myProductItem ?? this.myProductItem,
 
 
     );
@@ -70,7 +72,7 @@ class MyProductState extends Equatable {
 
   @override
   List<Object?> get props => [
-        myProductStateStatus,
+        myProFuncStateStatus,
         productTapBar,
         productDisplayMethod,
         swapFlagEmoji,
@@ -79,5 +81,6 @@ class MyProductState extends Equatable {
         selectedShipToCountries,
         isAlreadyAddedCountry,
         imagesList,
+        myProductItem,
       ];
 }

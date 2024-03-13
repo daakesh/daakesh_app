@@ -17,7 +17,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
   @override
   void initState() {
     super.initState();
-    countryController.text = 'Jordan';
+    setEditData();
   }
 
   @override
@@ -74,7 +74,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                   ],
                 ),
               ),
-              BlocBuilder<MyProductBloc, MyProductState>(builder: (_, state) {
+              BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -95,7 +95,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                               highlightColor: ColorName.transparent,
                               onTap: state.isAlreadyAddedCountry
                                   ? () {}
-                                  : addCountries,
+                                  : ()=>addCountries(countryController.text),
                               child: Transform.scale(
                                 scale: 0.8.sp,
                                 child: Container(
@@ -200,34 +200,45 @@ class _ShipToScreenState extends State<ShipToScreen> {
     );
   }
 
+  void setEditData(){
+    if(getIt.get<EditProduct>().myProductItem != null){
+      var data = getIt.get<EditProduct>().myProductItem;
+      countryController.text =data!.country.toString();
+      addCountries(data.country.toString());
+    }
+    else{
+      countryController.text = 'Jordan';
+    }
+
+  }
   void showCountryDialog() {
     return showCountryPicker(
       context: context,
       showPhoneCode: false,
       onSelect: (Country country) {
         countryController.text = country.name;
-        MyProductBloc.get.add(CheckAlreadyAddedCountryEvent(value: country.name));
-        MyProductBloc.get.add(SelectShipToCountryEvent(shipToFlagEmoji: country.flagEmoji.toString()));
+        MyProFuncBloc.get.add(CheckAlreadyAddedCountryEvent(value: country.name));
+        MyProFuncBloc.get.add(SelectShipToCountryEvent(shipToFlagEmoji: country.flagEmoji.toString()));
         },
     );
   }
-
-  void addCountries() {
-    countriesList.add(countryController.text);
-    MyProductBloc.get.add(DeleteInsertCountriesEvent(selectedShipCountry: countriesList));
-    MyProductBloc.get.add(CheckAlreadyAddedCountryEvent(value: countryController.text));
+  void addCountries(String country) {
+    AddProBloc.get.add(AddShipToCountryEvent(shipToCountry: country));
+    countriesList.add(country);
+    MyProFuncBloc.get.add(DeleteInsertCountriesEvent(selectedShipCountry: countriesList));
+    MyProFuncBloc.get.add(CheckAlreadyAddedCountryEvent(value: country));
   }
-
   void deleteAddedCountries(int index) {
     countriesList.removeAt(index);
-    MyProductBloc.get.add(DeleteInsertCountriesEvent(selectedShipCountry: countriesList));
-    MyProductBloc.get.add(CheckAlreadyAddedCountryEvent(value: countryController.text));
+    MyProFuncBloc.get.add(DeleteInsertCountriesEvent(selectedShipCountry: countriesList));
+    MyProFuncBloc.get.add(CheckAlreadyAddedCountryEvent(value: countryController.text));
   }
   void onNext() async {
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
-    openNewPage(const ProAddSuccessScreen());
+    if(countriesList.isEmpty){
+      ShowToastSnackBar.showSnackBars(message: 'Add at least one country...');
+      return;
+    }
+    AddProBloc.get.add(AddProductEvent());
   }
   void cancel() {
     getBack();
@@ -236,7 +247,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
   void resetFlagData() {
     countriesList = [];
     countryController.text = 'Jordan';
-    MyProductBloc.get.add(ResetValuesEvent());
+    MyProFuncBloc.get.add(ResetValuesEvent());
   }
 
 }

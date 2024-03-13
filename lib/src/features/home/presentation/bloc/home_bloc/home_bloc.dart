@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -14,7 +15,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
   static HomeBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
 
+
   static ScrollController scrollController = ScrollController();
+
+
   FutureOr<void> _getToTopScreen(GetToTopScreenEvent event, Emitter<HomeState> emit) {
     scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
@@ -61,6 +65,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       isDaakeshTodayDeal: event.isDaakeshTodayDeal,
     ));
   }
+
+
 
 
 }

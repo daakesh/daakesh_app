@@ -24,8 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
     setRememberMeValue();
   }
 
-
-  
   @override
   Widget build(BuildContext context) {
     return  DefaultBackgroundWidget(

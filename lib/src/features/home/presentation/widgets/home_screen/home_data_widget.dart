@@ -21,7 +21,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
       slivers: [
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
         ///Carousel slider.
-         SliverToBoxAdapter(child: HomeCarouselSliderWidget(),),
+         const SliverToBoxAdapter(child: HomeCarouselSliderWidget(),),
         const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
         ///Popular-section.
         SliverToBoxAdapter(child: Padding(
@@ -116,7 +116,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.6,
+                      childAspectRatio: 0.65,
                       mainAxisSpacing: 8.0,
                       crossAxisSpacing: 8.0
                   )),

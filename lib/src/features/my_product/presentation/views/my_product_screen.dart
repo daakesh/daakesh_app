@@ -13,7 +13,7 @@ class MyProductsScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: ColorName.whiteSmoke,
           floatingActionButton: const FloatingAddProductWidget(),
-          body: BlocBuilder<MyProductBloc, MyProductState>(builder: (_, state) {
+          body: BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
             return CustomScrollView(
               slivers: [
                 const SliverToBoxAdapter(child: HeaderWidget(withArrowBack: false),),
@@ -50,6 +50,19 @@ class MyProductsScreen extends StatelessWidget {
                 state.productTapBar == ProductTapBar.SHOP
                     ? const ShopProductItem()
                     : const SwapProductItem(),
+                state.productTapBar == ProductTapBar.SHOP
+                    ? SliverToBoxAdapter(
+                        child: BlocBuilder<MyProBloc, MyProState>(
+                        builder: (context, state) {
+                          return seeMoreHandler(state);
+                        },
+                      ))
+                    : SliverToBoxAdapter(
+                        child: BlocBuilder<MySwapProBloc, MySwapProState>(
+                        builder: (context, state) {
+                          return seeMoreHandler(state);
+                        },
+                      )),
                 SliverPadding(padding: EdgeInsetsDirectional.only(top: 150.0.h)),
               ],
             );
@@ -57,6 +70,53 @@ class MyProductsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  Widget seeMoreHandler(state) {
+    if(state is MyProState){
+      switch (!state.isMoreData) {
+        case true:
+          switch (state.myProStateStatus) {
+            case MyProStateStatus.LOADINGMORE:
+              return const CircularProgressIndicatorWidget();
+            default:return Center(
+                child: TextButtonWidget(
+                  text: 'See More',
+                  onPressed: () => onSeeMore(state),
+                  isBold: true,
+                ));
+          }
+        default:
+          return const SizedBox();
+      }
+    }
+    if(state is MySwapProState){
+      switch (!state.isMoreData) {
+        case true:
+          switch (state.mySwapProStateStatus) {
+            case MySwapProStateStatus.LOADINGMORE:
+              return const CircularProgressIndicatorWidget();
+            default:return Center(
+                child: TextButtonWidget(
+                  text: 'See More',
+                  onPressed: () => onSeeMore(state),
+                  isBold: true,
+                ));
+          }
+        default:
+          return const SizedBox();
+      }
+    }
+    else{
+      return const SizedBox();
+    }
+  }
+  void onSeeMore(state) {
+    if(state is MyProState) {
+      MyProBloc.get.add(GetMyProductEvent(isSeeMore: true));
+    }
+    else{
+      MySwapProBloc.get.add(GetMySwapProEvent(isSeeMore: true));
+    }
   }
 }
 
