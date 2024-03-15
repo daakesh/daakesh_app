@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../src.export.dart';
@@ -15,6 +15,9 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
     on<ResetValuesEvent>(_resetValues);
     on<AddProductImageEvent>(_addProductImage);
     on<EditProductEvent>(_editProduct);
+    on<SearchOnProductEvent>(_searchOnProduct);
+    on<EmptyProductSearchEvent>(_emptyProductSearch);
+    on<OnOffDiscountEvent>(_onOffDiscount);
   }
   static MyProFuncBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
   ///Action to toggle between tow tabBar {Shop,Swap} at [MyProductsScreen]
@@ -54,7 +57,7 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
         isAlreadyAddedCountry: false,
         selectedShipToCountries: [],
         shipFlagEmoji: '🇯🇴',
-
+        discountSwitchButton:false,
       ),
     );
   }
@@ -73,5 +76,59 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
     myProductItem.add(event.myProductItem);
     emit(state.copyWith(myProFuncStateStatus:MyProFuncStateStatus.SUCCESS,myProductItem:myProductItem));
   }
+  ///Event to search on products at [MyProductsScreen]
+  FutureOr<void> _searchOnProduct(SearchOnProductEvent event, Emitter<MyProFuncState> emit) async{
+    emit(state.copyWith(searchValue: event.searchValue,));
+    if (event.isSeeMore) {
+      emit(state.copyWith(
+          currentSearchPage: state.currentSearchPage + 1,
+          myProFuncStateStatus: MyProFuncStateStatus.LOADINGMORE));
+    }
+    else{
+      emit(state.copyWith(myProFuncStateStatus: MyProFuncStateStatus.LOADING,currentSearchPage: 1));
+    }
+    final result = await getIt.get<MyProductUseCases>().searchOnProduct(
+        event.searchValue.toString(), state.currentSearchPage);
+    result.fold((l) {
+      emit(state.copyWith(myProFuncStateStatus: MyProFuncStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {if (!r.status!) {
+      ShowToastSnackBar.showSnackBars(message: r.message.toString());
+      return;
+    }
+    MyProductModel myProductModel = MyProductModel.fromJson(r.data);
+    int lastPage = myProductModel.data!.lastPage!;
+    List<MyProductItem> newResultList = myProductModel.data!.myProductListData!.toList();
+    List<MyProductItem> searchResultList = state.searchResultList.toList();
+    if(newResultList.isEmpty){
+      emit(state.copyWith(myProFuncStateStatus: MyProFuncStateStatus.NULL,
+        searchResultList: searchResultList,
+        isMoreData:lastPage == state.currentSearchPage,
+      ));
+      return;
+    }
+    searchResultList.addAll(newResultList);
+    emit(state.copyWith(myProFuncStateStatus: MyProFuncStateStatus.SUCCESS,
+      searchResultList: searchResultList,
+      isMoreData:lastPage == state.currentSearchPage,
+    ));
+    });
+  }
+  ///Event to clear search products at [MyProductsScreen]
+  FutureOr<void> _emptyProductSearch(EmptyProductSearchEvent event, Emitter<MyProFuncState> emit) {
+    emit(state.copyWith(
+        myProFuncStateStatus: MyProFuncStateStatus.SUCCESS,
+        searchResultList: [],
+        searchValue: event.value.isEmpty ? '':event.value,
+        currentSearchPage: 1,
+        isMoreData: true));
+  }
+  ///Event to turn on-off discount switch button at [ForSaleScreen]
+  FutureOr<void> _onOffDiscount(OnOffDiscountEvent event, Emitter<MyProFuncState> emit) {
+    emit(state.copyWith(discountSwitchButton:event.value));
+  }
+
+
+
 
 }

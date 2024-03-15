@@ -44,10 +44,14 @@ enum ProductDisplayMethod{
   Swap,
   SellSwap,
 }
-
 enum AuthManner{
   SIGNUPIN,
   FORGETPASSWORD,
+}
+
+enum AdjustProduct{
+  ADD,
+  EDIT
 }
 
 

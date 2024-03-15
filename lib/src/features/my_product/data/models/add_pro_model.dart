@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 
 class AddProModel{
    String? userID;
+   String? proId;
    String? title;
    String? description;
    String? secID;
@@ -22,10 +25,12 @@ class AddProModel{
    String? display;
    String? countrySwap;
    String? citySwap;
-   List<XFile>? itemImg;
+   List<XFile>? itemFileImg;
+   List<String>? itemImageList;
 
   AddProModel({
       this.userID,
+      this.proId,
       this.title,
       this.description,
       this.secID,
@@ -46,6 +51,57 @@ class AddProModel{
       this.display,
       this.countrySwap,
       this.citySwap,
-      this.itemImg
+      this.itemFileImg,
+      this.itemImageList
   });
+   Map<String, dynamic> addItemToJson() {
+     final Map<String, dynamic> data = <String, dynamic>{};
+     data['userID'] = userID.toString();
+     data['description'] = description.toString();
+     data['catID'] = catID.toString();
+     data['secID'] = secID.toString();
+     data['brandID'] = brandID.toString();
+     data['title'] = title.toString();
+     data['tradeOrSell'] = tradeOrSell.toString();
+     data['tradeFor'] = tradeFor.toString();
+     data['price'] = price.toString();
+     data['condition'] = condition.toString();
+     data['city'] = city.toString();
+     data['year'] = year.toString();
+     data['discount_from'] = discountFrom.toString();
+     data['discount_to'] = discountTo.toString();
+     data['discount'] = discount.toString();
+     data['country'] = country.toString();
+     data['quantity'] = quantity.toString();
+     data['display'] = display.toString();
+     data['country_swap'] = countrySwap.toString();
+     data['city_swap'] = citySwap.toString();
+     data['itemImg'] = itemImageList!.toList().toString();
+     return data;
+   }
+   Map<String, dynamic> editItemToJson() {
+     final Map<String, dynamic> data = <String, dynamic>{};
+     data['id'] = proId.toString();
+     data['description'] = description.toString();
+     data['catID'] = catID.toString();
+     data['secID'] = secID.toString();
+     data['brandID'] = brandID.toString();
+     data['title'] = title.toString();
+     data['tradeOrSell'] = tradeOrSell.toString();
+     data['tradeFor'] = tradeFor.toString();
+     data['price'] = price.toString();
+     data['condition'] = condition.toString();
+     data['city'] = city.toString();
+     data['year'] = year.toString();
+     data['discount_from'] = discountFrom.toString();
+     data['discount_to'] = discountTo.toString();
+     data['discount'] = discount.toString();
+     data['country'] = country.toString();
+     data['quantity'] = quantity.toString();
+     data['display'] = display.toString();
+     data['country_swap'] = countrySwap.toString();
+     data['city_swap'] = citySwap.toString();
+     data['itemImg'] = itemImageList!.toList().toString();
+     return data;
+   }
 }

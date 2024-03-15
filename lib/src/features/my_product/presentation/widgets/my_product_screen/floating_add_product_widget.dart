@@ -7,7 +7,10 @@ class FloatingAddProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=>openNewPage(AddProInfoScreen()),
+      onTap: (){
+        AddProBloc.get.add(AddEditStateEvent(adjustProduct:AdjustProduct.ADD ));
+        openNewPage(const AddProInfoScreen());
+      },
       child: SizedBox(
         width: 120.0.w,
         height: 120.0.h,

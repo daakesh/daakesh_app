@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,6 +18,7 @@ extension AddProStateStatusX on AddProStateStatus {
 
 class AddProState extends Equatable {
   final AddProStateStatus addProStateStatus;
+  final AdjustProduct adjustProduct;
   final String productName;
   final String productDescription;
   final String productSecID;
@@ -39,6 +42,7 @@ class AddProState extends Equatable {
 
   const AddProState({
     this.addProStateStatus = AddProStateStatus.INITIAL,
+    this.adjustProduct = AdjustProduct.ADD,
     this.productName='',
     this.productDescription='',
     this.productSecID='',
@@ -63,6 +67,7 @@ class AddProState extends Equatable {
 
   AddProState copyWith({
     AddProStateStatus? addProStateStatus,
+    AdjustProduct? adjustProduct,
     String? productName,
     String? productDescription,
     String? productSecID,
@@ -88,6 +93,7 @@ class AddProState extends Equatable {
   }) {
     return AddProState(
       addProStateStatus: addProStateStatus ?? this.addProStateStatus,
+      adjustProduct: adjustProduct ?? this.adjustProduct,
       productName:productName ?? this.productName,
       productDescription:productDescription ?? this.productDescription,
       productSecID:productSecID ?? this.productSecID,
@@ -115,6 +121,7 @@ class AddProState extends Equatable {
   @override
   List<Object?> get props => [
         addProStateStatus,
+        adjustProduct,
         productName,
         productDescription,
         productSecID,

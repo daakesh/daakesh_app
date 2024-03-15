@@ -3,13 +3,16 @@ import 'package:injectable/injectable.dart';
 import '../../../../src.export.dart';
 
 abstract class MyProductUseCases {
-  Future<Either<Failure,ValidResponse>> getMyProduct(int page,String type);
+  Future<Either<Failure, ValidResponse>> getMyProduct(int page,String type);
   Future<Either<Failure, ValidResponse>> getSections();
   Future<Either<Failure, ValidResponse>> getCategoryBySection(String secID);
   Future<Either<Failure, ValidResponse>> isCategoryHasSub(String catID);
   Future<Either<Failure, ValidResponse>> getSubcategoryByCategoryId(String catID);
   Future<Either<Failure, ValidResponse>> getBrandsBySection(String secID);
+  Future<Either<Failure, ValidResponse>> searchOnProduct(String searchValue,int page);
   Future<Either<Failure, ValidResponse>> addProduct(AddProModel addProModel);
+  Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel);
+
 
 }
 
@@ -45,8 +48,16 @@ class MyProductUseCasesImpl implements MyProductUseCases {
     return await getIt.get<MyProductRepository>().getBrandsBySection(secID);
   }
   @override
+  Future<Either<Failure, ValidResponse>> searchOnProduct(String searchValue,int page) async{
+    return await getIt.get<MyProductRepository>().searchOnProduct(searchValue,page);
+  }
+  @override
   Future<Either<Failure, ValidResponse>> addProduct(AddProModel addProModel) async{
     return await getIt.get<MyProductRepository>().addProduct(addProModel);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel) async{
+    return await getIt.get<MyProductRepository>().updateProduct(addProModel);
   }
 
 

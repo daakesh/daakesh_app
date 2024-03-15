@@ -5,6 +5,7 @@ import '../../../../../src.export.dart';
 
 class AddProBloc extends Bloc<AddProEvent, AddProState> {
   AddProBloc() : super(const AddProState()) {
+    on<AddEditStateEvent>(_addEditState);
     on<AddProInfoEvent>(_addProInfo);
     on<AddProCategoriesEvent>(_addProCategories);
     on<AddProImagesEvent>(_addProImages);
@@ -16,6 +17,10 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
 
   }
   static AddProBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+  FutureOr<void> _addEditState(AddEditStateEvent event, Emitter<AddProState> emit) {
+    emit(state.copyWith(adjustProduct : event.adjustProduct));
+  }
+
   FutureOr<void> _addProInfo(AddProInfoEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(
       productName:event.productName,
@@ -38,8 +43,11 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
     emit(state.copyWith(displayMethod: event.displayMethod));
   }
   FutureOr<void> _addSaleInfo(AddSaleInfoEvent event, Emitter<AddProState> emit) {
-    int productDiscount = int.parse(event.productDiscount.replaceAll('%', ''));
-    String discount = (productDiscount/100).toString();
+    String discount = '';
+    if(event.productDiscount!.isNotEmpty){
+    int productDiscount = int.parse(event.productDiscount!.replaceAll('%', ''));
+    discount = (productDiscount/100).toString();
+    }
     emit(state.copyWith(
       productQuantity:event.productQuantity,
       productPrice:event.productPrice,
@@ -59,12 +67,16 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
   FutureOr<void> _addShipToCountry(AddShipToCountryEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(shipToCountry: event.shipToCountry));
   }
-
   FutureOr<void> _addProduct(AddProductEvent event, Emitter<AddProState> emit)async {
+    String? proID;
+    if(state.adjustProduct.isEdit){
+      proID = getIt.get<EditProduct>().myProductItem!.id.toString();
+    }
     ProgressCircleDialog.show();
     AddProModel addProModel =AddProModel();
     addProModel
     ..userID =ValueConstants.userId
+     ..proId = proID
     ..title = state.productName
     ..description = state.productDescription
     ..secID =state.productSecID
@@ -82,11 +94,10 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
     ..display = state.displayProduct
     ..countrySwap =state.swapCountry
     ..citySwap = state.swapCity
-    ..itemImg = state.proImages.toList();
-    // final result = getIt.get<EditProduct>().myProductItem != null
-    //     ? await getIt.get<MyProductUseCases>().addProduct(addProModel)
-    //     : await getIt.get<MyProductUseCases>().addProduct(addProModel);
-    final result =  await getIt.get<MyProductUseCases>().addProduct(addProModel);
+    ..itemFileImg = state.proImages.toList();
+    final result = state.adjustProduct.isEdit
+        ? await getIt.get<MyProductUseCases>().updateProduct(addProModel)
+        : await getIt.get<MyProductUseCases>().addProduct(addProModel);
 
     result.fold((l) {
       ProgressCircleDialog.dismiss();
@@ -99,11 +110,13 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
         return;
       }
       ProgressCircleDialog.dismiss();
-      openNewPage(const ProAddSuccessScreen());
-
+      getIt.get<EditProduct>().clearData();
+      MyProFuncBloc.get.add(ResetValuesEvent());
+      openNewPage(const ProAddSuccessScreen(),popPreviousPages: true);
       emit(state.copyWith(addProStateStatus: AddProStateStatus.SUCCESS));
     });
   }
+
 
 
 

@@ -84,7 +84,9 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_,state){
+                          if(getIt.get<EditProduct>().myProductItem != null){
                           productSecID =state.productSecID;
+                          }
                         },
                         builder: (context, state) {
                           return DropDownButtonWidget<String>(
@@ -93,11 +95,11 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                               getProCategory(value.toString());
                               productSecID = value.toString();
                             },
-                            value: state.productSecID,
+                            value: productSecID,
                             items: state.sectionListData
                                 .map((e) => DropdownMenuItem(
                                     value: e.id.toString(),
-                                    child: Text(e.name.toString()+e.id.toString())))
+                                    child: Text(e.name.toString())))
                                 .toList(),
                           );
                         },
@@ -121,7 +123,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                             value: state.productCatID,
                             items: state.proCategoryListData.map((e) => DropdownMenuItem(
                                         value: e.id.toString(),
-                                        child: Text(e.name.toString()+e.id.toString())))
+                                        child: Text(e.name.toString())))
                                     .toList(),
                           );
                         },
@@ -146,7 +148,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                                 .map<DropdownMenuItem<String>>((e) =>
                                     DropdownMenuItem(
                                         value: e.id.toString(),
-                                        child: Text(e.name.toString()+e.id.toString())))
+                                        child: Text(e.name.toString())))
                                 .toList(),
                           );
                         },
@@ -170,7 +172,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                             items:state.proBrandListData
                                 .map((e) => DropdownMenuItem(
                                     value: e.id.toString(),
-                                    child: Text(e.name.toString()+e.id.toString())))
+                                    child: Text(e.name.toString())))
                                 .toList() ,
                           );
                         },
@@ -219,13 +221,6 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
   }
 
   void onNext()async{
-    debugPrint('*************************************************');
-    debugPrint('$productSecID');
-    debugPrint('$productCatID');
-    debugPrint('$productSubCatID');
-    debugPrint('$productBrandID');
-    debugPrint('*************************************************');
-
     AddProBloc.get.add(AddProCategoriesEvent(
      productSecID: productSecID.toString(),
      productCatID: productCatID.toString(),

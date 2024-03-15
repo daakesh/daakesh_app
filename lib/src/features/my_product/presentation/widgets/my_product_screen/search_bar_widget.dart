@@ -1,9 +1,17 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-
 import '../../../../../src.export.dart';
 
-class SearchProductBarWidget extends StatelessWidget {
+class SearchProductBarWidget extends StatefulWidget {
   const SearchProductBarWidget({super.key});
+
+  @override
+  State<SearchProductBarWidget> createState() => _SearchProductBarWidgetState();
+}
+
+class _SearchProductBarWidgetState extends State<SearchProductBarWidget> {
+  final searchController = TextEditingController();
+  Timer? _debounceTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +38,11 @@ class SearchProductBarWidget extends StatelessWidget {
                     child:Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                       child: TextFormFieldWidget(
-                        controller: TextEditingController(),
-                        onTap: () {},
-                        style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuRegular),
+                        controller: searchController,
                         isUnderlineOn: true,
+                        onChanged: onChange,
                         hintText: 'Search In Your Product',
+                        style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuRegular),
                       ),
                     ),
                   ),
@@ -42,7 +50,8 @@ class SearchProductBarWidget extends StatelessWidget {
               ),
             ),
           ),
-          InkWell(onTap: () {},
+          GestureDetector(
+            onTap: () {},
               child: Assets.png.filterIcon.image(
                 width: 38.0.w,
                 height: 38.0.h,
@@ -52,4 +61,17 @@ class SearchProductBarWidget extends StatelessWidget {
       ),
     );
   }
+
+  void onChange(String value) {
+    MyProFuncBloc.get.add(EmptyProductSearchEvent(value:value));
+    _debounceTimer?.cancel();
+    if (value.isEmpty) {
+      MyProFuncBloc.get.add(EmptyProductSearchEvent(value:value));
+      return;
+    }
+    _debounceTimer = Timer(const Duration(milliseconds: 900), () {
+      MyProFuncBloc.get.add(SearchOnProductEvent(searchValue: value));
+    });
+  }
+
 }

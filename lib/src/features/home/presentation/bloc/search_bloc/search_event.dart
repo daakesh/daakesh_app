@@ -7,9 +7,7 @@ class SearchOnItemsEvent extends SearchEvent{
   final bool isSeeMore;
   SearchOnItemsEvent({this.searchValue,this.page = 1,this.isSeeMore = false});
 }
-class EmptySearchEvent extends SearchEvent{
-
-}
+class EmptySearchEvent extends SearchEvent{}
 
 
 

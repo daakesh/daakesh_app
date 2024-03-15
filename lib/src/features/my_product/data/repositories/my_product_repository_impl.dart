@@ -33,11 +33,20 @@ class MyProductRepositoryImpl implements MyProductRepository {
   @override
   Future<Either<Failure, ValidResponse>> getBrandsBySection(String secID) async{
     return await getIt.get<MyProductDatasource>().getBrandsBySection(secID);
+  }
+   @override
+   Future<Either<Failure, ValidResponse>> searchOnProduct(String searchValue,int page)async{
+    return await getIt.get<MyProductDatasource>().searchOnProduct(searchValue,page);
+  }
 
-  }  @override
+  @override
   Future<Either<Failure, ValidResponse>> addProduct(AddProModel addProModel) async{
     return await getIt.get<MyProductDatasource>().addProduct(addProModel);
+  }
 
+  @override
+  Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel) async{
+    return await getIt.get<MyProductDatasource>().updateProduct(addProModel);
   }
 
 

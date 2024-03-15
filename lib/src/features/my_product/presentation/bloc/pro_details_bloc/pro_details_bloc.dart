@@ -14,7 +14,6 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
     on<GetDropDownDataEvent>(_getDropDownData);
   }
   static ProDetailsBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
-
   FutureOr<void> _getProSections(GetProSectionsEvent event, Emitter<ProDetailsState> emit) async{
 
     emit(state.copyWith(
@@ -23,7 +22,6 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       proSubCategoryListData: [],
       proBrandListData: [],
       productCatID: null
-
     ));
     final result = await getIt.get<HomeUseCases>().getSectionData();
     result.fold((l) {
@@ -34,7 +32,6 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-
       ProductSectionModel sectionModel = ProductSectionModel.fromJson(r.data);
       List<ProSectionItemModel> sectionListData = sectionModel.data!.data!.toList();
       if(event.isEdit){
@@ -47,15 +44,12 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         }
         return;
       }
-
       emit(state.copyWith(
         proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
         sectionListData: sectionListData,
-        productSecID: sectionListData.first.id.toString()
       ));
     });
   }
-
   FutureOr<void> _getProCategory(GetProCategoryEvent event, Emitter<ProDetailsState> emit) async{
     ProgressCircleDialog.show();
     emit(state.copyWith(
@@ -97,7 +91,6 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       ));
     });
   }
-
   FutureOr<void> _getProSubCategory(GetProSubCategoryEvent event, Emitter<ProDetailsState> emit)async {
     ProgressCircleDialog.show();
     emit(state.copyWith(proDetailsStateStatus:ProDetailsStateStatus.LOADING,productCatID: event.catID));
@@ -134,7 +127,6 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       ));
     });
   }
-
   FutureOr<void> _getBrandsBySection(GetBrandsBySectionEvent event, Emitter<ProDetailsState> emit)async {
     emit(state.copyWith(proDetailsStateStatus:ProDetailsStateStatus.LOADING));
     final result = await getIt.get<MyProductUseCases>().getBrandsBySection(event.secID);
@@ -217,10 +209,10 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
     }
 
   }
+
 }
 
 bool isEdit()=> getIt.get<EditProduct>().myProductItem != null;
-
 void getProSections(){
   ProDetailsBloc.get.add(GetProSectionsEvent(isEdit: true));
 }

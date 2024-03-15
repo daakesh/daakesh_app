@@ -40,6 +40,7 @@ class ProDetailsState extends Equatable {
 
   });
 
+
   ProDetailsState copyWith({
     ProDetailsStateStatus? proDetailsStateStatus,
     List<ProSectionItemModel>? sectionListData,
@@ -59,10 +60,10 @@ class ProDetailsState extends Equatable {
       proSubCategoryListData: proSubCategoryListData ?? this.proSubCategoryListData,
       proBrandListData: proBrandListData ?? this.proBrandListData,
       ///
-      productSecID: productSecID ?? this. productSecID,
-      productCatID: productCatID ?? this. productCatID,
-      productSubCatID: productSubCatID ?? this. productSubCatID,
-      productBrandID: productBrandID ?? this. productBrandID,
+      productSecID: productSecID ?? this.productSecID,
+      productCatID: productCatID ?? this.productCatID,
+      productSubCatID: productSubCatID ?? this.productSubCatID,
+      productBrandID: productBrandID ?? this.productBrandID,
       productModelYear: productModelYear ?? this. productModelYear,
 
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../../src.export.dart';
 
@@ -100,71 +101,105 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       keyboardType: TextInputType.number,
                     ),
                     SizedBox(height: 21.0.h,),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                      Expanded(
-                        child: Column(
+                    BlocBuilder<MyProFuncBloc, MyProFuncState>(
+                      builder: (context, state) {
+                        return Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                          Text(
-                              'Product Discount',
-                              style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
-                          TextFormFieldWidget(
-                                controller: productDiscountController,
-                                keyboardType: TextInputType.number,
-                                maxLines: 1,
-                            inputFormatters: [
-                              //LengthLimitingTextInputFormatter(3),
-                              FilteringTextInputFormatter.digitsOnly,
-                              PercentInputFormatter(),
-                            ],
-
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Product Discount',
+                                      style: easyTheme.textTheme.bodyMedium!
+                                          .copyWith(
+                                              color: ColorName.black
+                                                  .withOpacity(0.5))),
+                                  TextFormFieldWidget(
+                                    controller: productDiscountController,
+                                    keyboardType: TextInputType.number,
+                                    maxLines: 1,
+                                    enabled: state.discountSwitchButton,
+                                    inputFormatters: [
+                                      //LengthLimitingTextInputFormatter(3),
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      PercentInputFormatter(),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 22.0.h,
+                                  ),
+                                ],
                               ),
-                          SizedBox(height: 22.0.h,),
-                        ],),
-                      ),
-                      SizedBox(width: 10.0.w,),
-                      Expanded(
-                            child: Align(
-                                alignment: AlignmentDirectional.topEnd,
-                                child: Transform.scale(
-                                  scale: 0.8,
-                                  child: Switch(
-                                      value: true,
-                                      activeColor:ColorName.amber,
-                                      hoverColor: ColorName.amber,
-                                      activeTrackColor: ColorName.amber,
-                                      focusColor: ColorName.amber,
-                                      inactiveThumbColor: ColorName.white,
-                                      inactiveTrackColor: ColorName.gray,
-                                      thumbColor: MaterialStateProperty.all(ColorName.white),
-                                      onChanged: (value) {}),
-                                ))),
-                      ],),
+                            ),
+                            SizedBox(
+                              width: 10.0.w,
+                            ),
+                            Expanded(
+                                child: Align(
+                                    alignment: AlignmentDirectional.topEnd,
+                                    child: Transform.scale(
+                                      scale: 0.8,
+                                      child: Switch(
+                                          value: state.discountSwitchButton,
+                                          activeColor: ColorName.amber,
+                                          hoverColor: ColorName.amber,
+                                          activeTrackColor: ColorName.amber,
+                                          focusColor: ColorName.amber,
+                                          inactiveThumbColor: ColorName.white,
+                                          inactiveTrackColor: ColorName.gray,
+                                          thumbColor: MaterialStateProperty.all(
+                                              ColorName.white),
+                                          onChanged: (value) {
+                                            MyProFuncBloc.get.add(OnOffDiscountEvent(value: value));
+                                            if(!value){
+                                              clearDiscountData();
+                                              return;
+                                            }
+                                            getOldData();
+
+                                          }),
+                                    ))),
+                          ],
+                        );
+                      },
+                    ),
                     SizedBox(height: 22.0.h,),
-                    Text(
-                        'Discount Date',
-                        style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: TextFormFieldWidget(
-                          controller: fromDateController,
-                              hintText:'From  --/--/-----',
-                              hintStyle: easyTheme.textTheme.labelMedium,
-                              readOnly: true,
-                              onTap: ()=>selectDiscountDate(context,fromDateController),
-                        )),
-                        Expanded(
-                            child: TextFormFieldWidget(
-                          controller: toDateController,
-                              hintText:'To  --/--/-----',
-                              hintStyle: easyTheme.textTheme.labelMedium,
-                              readOnly: true,
-                              onTap: ()=>selectDiscountDate(context,toDateController),
-                            )),
-                      ],
+                    BlocBuilder<MyProFuncBloc, MyProFuncState>(
+                      builder: (context, state) {
+                        return state.discountSwitchButton
+                            ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                'Discount Date',
+                                style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: TextFormFieldWidget(
+                                  controller: fromDateController,
+                                  hintText: 'From  --/--/-----',
+                                  hintStyle: easyTheme.textTheme.labelMedium,
+                                  readOnly: true,
+                                  onTap: () => selectDiscountDate(
+                                      context, fromDateController),
+                                )),
+                                Expanded(
+                                    child: TextFormFieldWidget(
+                                  controller: toDateController,
+                                  hintText: 'To  --/--/-----',
+                                  hintStyle: easyTheme.textTheme.labelMedium,
+                                  readOnly: true,
+                                  onTap: () =>
+                                      selectDiscountDate(context, toDateController),
+                                )),
+                              ],
+                            ),
+                          ],
+                        )
+                            : const SizedBox();
+                      },
                     ),
                     SizedBox(height: 21.0.h,),
                   ],
@@ -196,15 +231,33 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
     );
   }
   void setEditData(){
+    double? discount;
     if(getIt.get<EditProduct>().myProductItem != null){
       var data = getIt.get<EditProduct>().myProductItem;
-      double price = double.parse(data!.discount.toString()) * 100 ;
+      if(data!.discount != null){
+       MyProFuncBloc.get.add(OnOffDiscountEvent(value: true));
+       discount = double.parse(data.discount.toString()) * 100 ;
+       productDiscountController.text ='${discount.toInt()}%';
+       fromDateController.text = data.discountFrom.toString();
+       toDateController.text = data.discountTo.toString();
+      }
       productQuantityController.text = data.quantity.toString();
       productPriceController.text = data.price.toString();
-      productDiscountController.text ='${price.toInt()}%';
+    }
+  }
+  void getOldData(){
+    if(getIt.get<EditProduct>().myProductItem != null){
+      var data = getIt.get<EditProduct>().myProductItem;
+      double discount = double.parse(data!.discount.toString()) * 100 ;
+      productDiscountController.text ='${discount.toInt()}%';
       fromDateController.text = data.discountFrom.toString();
       toDateController.text = data.discountTo.toString();
     }
+  }
+  void clearDiscountData(){
+    productDiscountController.clear();
+    fromDateController.clear();
+    toDateController.clear();
   }
   void selectDiscountDate(context,TextEditingController controller)async{
     await showModalBottomSheet<int>(
@@ -227,10 +280,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
   }
   void onNext()async{
     if (productQuantityController.text.isEmpty ||
-        productPriceController.text.isEmpty ||
-        productDiscountController.text.isEmpty ||
-        fromDateController.text.isEmpty ||
-        toDateController.text.isEmpty) {
+        productPriceController.text.isEmpty ) {
       ShowToastSnackBar.showSnackBars(message: 'Firstly, fill all data...');
       return;
     }

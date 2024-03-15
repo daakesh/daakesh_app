@@ -23,6 +23,11 @@ abstract class NetworkService{
     String? userToken,
 
   });
+  Future<Either<Failure, ValidResponse>> uploadImage({
+    String baseUrl,
+    required String path,
+    required File image,
+  });
 }
 
 @LazySingleton(as: NetworkService)
@@ -102,6 +107,42 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
       return Left(Failure(statusCode: 500, message: e.toString()));
     }
   }
+  @override
+  Future<Either<Failure, ValidResponse>> uploadImage({
+    String baseUrl = NetworkConstants.baseUrl,
+    required String path,
+    required File image,
+  }) async {
+    try{
+    Map<String,dynamic> data ={};
+    final url = Uri.https(baseUrl,path);
+    var request = http.MultipartRequest('POST', url);
+    var stream = http.ByteStream(image.openRead());
+    var length = await image.length();
+    String fileName = image.path.split("/").last;
+    fileName = fileName.replaceAll(" ", "_").replaceAll('-', "_").replaceAll('\'', '_').replaceAll('"', "_");
+    var multipartFile = http.MultipartFile('photo', stream, length, filename: fileName);
+    request.files.add(multipartFile);
+    var response = await request.send();
+    var responseData = await response.stream.transform(utf8.decoder).join();
+    data = jsonDecode(responseData);
+    return Right(
+      ValidResponse(
+        statusCode: response.statusCode,
+        data: data['data'],
+        message: data['error'] ?? '',
+        status: data['status'] ?? false,
+      ),
+    );
+    } on SocketException catch (e) {
+      return Left(Failure(statusCode: 500, message: e.message));
+    } on ValidResponse catch (e) {
+      return Right(ValidResponse(statusCode: e.statusCode, data: e.data, message: e.message,status: e.status));
+    } on Exception catch (e) {
+      return Left(Failure(statusCode: 500, message: e.toString()));
+    }
+  }
+
   void _requestHandler(
       Map<String, String>? headers,
       Map<String,dynamic>? params,
@@ -111,6 +152,8 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
     if (params != null) _params.addAll(params);
     if (userToken != null) _headers.addAll({"Authorization": " Bearer $userToken"});
   }
+
+
 
 }
 mixin NetworksLogs{

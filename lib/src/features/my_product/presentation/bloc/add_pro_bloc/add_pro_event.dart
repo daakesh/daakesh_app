@@ -1,9 +1,17 @@
+import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../src.export.dart';
 
 abstract class AddProEvent {}
 
+class AddEditStateEvent extends AddProEvent {
+  final AdjustProduct adjustProduct;
+  AddEditStateEvent({
+    required this.adjustProduct,
+  });
+}
 class AddProInfoEvent extends AddProEvent {
   final String productName;
   final String productDescription;
@@ -42,16 +50,16 @@ class AddProDisplayMethodEvent extends AddProEvent {
 class AddSaleInfoEvent extends AddProEvent {
   final String productQuantity;
   final String productPrice;
-  final String productDiscount;
-  final String fromDate;
-  final String toDate;
+  final String? productDiscount;
+  final String? fromDate;
+  final String? toDate;
 
   AddSaleInfoEvent({
     required this.productQuantity,
     required this.productPrice,
-    required this.productDiscount,
-    required this.fromDate,
-    required this.toDate,
+    this.productDiscount,
+    this.fromDate,
+    this.toDate,
   });
 }
 class AddSwapInfoEvent extends AddProEvent {

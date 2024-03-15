@@ -41,7 +41,7 @@ class TrendDealsData {
 class TrendDealsItem {
   int? id;
   String? description;
-  String? itemImg;
+  dynamic itemImg;
   String? date;
   String? title;
   String? type;

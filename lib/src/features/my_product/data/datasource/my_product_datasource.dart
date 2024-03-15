@@ -8,6 +8,8 @@ abstract class MyProductDatasource {
   Future<Either<Failure, ValidResponse>> isCategoryHasSub(String catID);
   Future<Either<Failure, ValidResponse>> getSubcategoryByCategoryId(String catID);
   Future<Either<Failure, ValidResponse>> getBrandsBySection(String secID);
+  Future<Either<Failure, ValidResponse>> searchOnProduct(String searchValue,int page);
   Future<Either<Failure, ValidResponse>> addProduct(AddProModel addProModel);
+  Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel);
 }
 

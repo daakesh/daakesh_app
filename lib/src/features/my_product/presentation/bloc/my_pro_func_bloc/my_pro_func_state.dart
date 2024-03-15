@@ -1,15 +1,19 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../src.export.dart';
 
 
-enum MyProFuncStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
+enum MyProFuncStateStatus { INITIAL, LOADING, SUCCESS, ERROR,LOADINGMORE,NULL }
 
 extension MyProductStateStatusX on MyProFuncStateStatus{
   bool get isInitial => this == MyProFuncStateStatus.INITIAL;
   bool get isSuccess => this == MyProFuncStateStatus.SUCCESS;
   bool get isError => this == MyProFuncStateStatus.ERROR;
   bool get isLoading => this == MyProFuncStateStatus.LOADING;
+  bool get isLoadingMore => this == MyProFuncStateStatus.LOADINGMORE;
+  bool get isNull => this == MyProFuncStateStatus.NULL;
 }
 
 class MyProFuncState extends Equatable {
@@ -23,7 +27,13 @@ class MyProFuncState extends Equatable {
   final bool isAlreadyAddedCountry;
   final List<XFile> imagesList;
   final List<MyProductItem> myProductItem;
-
+  ///Search
+  final List<MyProductItem> searchResultList;
+  final int currentSearchPage;
+  final String searchValue;
+  final bool isMoreData;
+  ///
+  final bool discountSwitchButton;
 
 
 
@@ -38,6 +48,13 @@ class MyProFuncState extends Equatable {
     this.isAlreadyAddedCountry = false,
     this.imagesList = const[],
     this.myProductItem = const[],
+    ///Search
+    this.searchResultList = const[],
+    this.currentSearchPage = 1,
+    this.searchValue = '',
+    this.isMoreData = true,
+    this.discountSwitchButton = false,
+
   });
 
   MyProFuncState copyWith({
@@ -51,6 +68,12 @@ class MyProFuncState extends Equatable {
     bool? isAlreadyAddedCountry,
     List<XFile>? imagesList,
     List<MyProductItem>? myProductItem,
+    ///Search
+    List<MyProductItem>? searchResultList,
+    int? currentSearchPage,
+    String? searchValue,
+    bool? isMoreData,
+    bool? discountSwitchButton,
 
 
   }) {
@@ -65,7 +88,11 @@ class MyProFuncState extends Equatable {
       isAlreadyAddedCountry: isAlreadyAddedCountry ?? this.isAlreadyAddedCountry,
       imagesList: imagesList ?? this.imagesList,
       myProductItem: myProductItem ?? this.myProductItem,
-
+      searchResultList: searchResultList ?? this.searchResultList,
+      currentSearchPage: currentSearchPage ?? this.currentSearchPage,
+      searchValue: searchValue ?? this.searchValue,
+      isMoreData: isMoreData ?? this.isMoreData,
+      discountSwitchButton: discountSwitchButton ?? this.discountSwitchButton,
 
     );
   }
@@ -82,5 +109,12 @@ class MyProFuncState extends Equatable {
         isAlreadyAddedCountry,
         imagesList,
         myProductItem,
+        ///
+        searchResultList,
+        currentSearchPage,
+        searchValue,
+        isMoreData,
+        ///
+        discountSwitchButton,
       ];
 }

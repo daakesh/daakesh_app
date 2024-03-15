@@ -47,22 +47,61 @@ class MyProductsScreen extends StatelessWidget {
                       style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 20.0.sp, color: ColorName.black),
                     ),
                   ),),
-                state.productTapBar == ProductTapBar.SHOP
-                    ? const ShopProductItem()
-                    : const SwapProductItem(),
-                state.productTapBar == ProductTapBar.SHOP
-                    ? SliverToBoxAdapter(
-                        child: BlocBuilder<MyProBloc, MyProState>(
-                        builder: (context, state) {
-                          return seeMoreHandler(state);
-                        },
-                      ))
-                    : SliverToBoxAdapter(
-                        child: BlocBuilder<MySwapProBloc, MySwapProState>(
-                        builder: (context, state) {
-                          return seeMoreHandler(state);
-                        },
-                      )),
+                 if(state.searchValue.isEmpty)...[
+                   state.productTapBar == ProductTapBar.SHOP
+                       ? BlocBuilder<MyProBloc, MyProState>(
+                     builder: (context, state) {
+                       return SliverList(delegate: SliverChildBuilderDelegate((_, index) {
+                         MyProductItem myProductItem = state.myProductListData[index];
+                         return ShopProductItem(myProductItem:myProductItem,);
+                       }, childCount: state.myProductListData.length));
+                     },
+                   )
+                       : BlocBuilder<MySwapProBloc, MySwapProState>(
+                     builder: (context, state) {
+                       return SliverList(
+                           delegate: SliverChildBuilderDelegate((_, index) {
+                             MyProductItem myProductItem = state.mySwapProductListData[index];
+                             return SwapProductItem(myProductItem:myProductItem);
+                           }, childCount: state.mySwapProductListData.length));
+                     },
+                   ),
+                   state.productTapBar == ProductTapBar.SHOP
+                       ? SliverToBoxAdapter(
+                       child: BlocBuilder<MyProBloc, MyProState>(
+                         builder: (context, state) {
+                           return seeMoreHandler(state);
+                         },
+                       ))
+                       : SliverToBoxAdapter(
+                       child: BlocBuilder<MySwapProBloc, MySwapProState>(
+                         builder: (context, state) {
+                           return seeMoreHandler(state);
+                         },
+                       )),
+                 ]
+                 else...[
+                   SearchProductHandler(state: state),
+                   const SliverPadding(padding: EdgeInsetsDirectional.only(top: 55.0)),
+                   SliverToBoxAdapter(
+                     child: !state.isMoreData
+                         ? !state.myProFuncStateStatus.isLoadingMore
+                         ? Center(
+                       child: InkWell(
+                         onTap: () => seeMoreSearchProduct(state.searchValue),
+                         child: Text(
+                           'See More',
+                           style: easyTheme.textTheme.bodyLarge!.copyWith(
+                             fontSize: 16.0,
+                             color: ColorName.skyBlue,
+                           ),
+                         ),
+                       ),
+                     ):
+                     const CircularProgressIndicatorWidget()
+                         : const SizedBox(),
+                   ),
+                 ],
                 SliverPadding(padding: EdgeInsetsDirectional.only(top: 150.0.h)),
               ],
             );
@@ -118,6 +157,10 @@ class MyProductsScreen extends StatelessWidget {
       MySwapProBloc.get.add(GetMySwapProEvent(isSeeMore: true));
     }
   }
+  void seeMoreSearchProduct(String searchValue) {
+    MyProFuncBloc.get.add(SearchOnProductEvent(searchValue: searchValue, isSeeMore: true));
+  }
+
 }
 
 

@@ -17,7 +17,7 @@ class ImagePickerHelper{
   static Future<XFile> openCamera() async {
     XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
-      return XFile(pickedFile.path);
+      return pickedFile;
     } else {
       debugPrint('No Image selected.');
       return Future.error('No Image selected.');

@@ -1,13 +1,8 @@
-import 'dart:convert';
+import 'dart:async';
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../src.export.dart';
-import 'dart:developer' as developer;
-import 'package:http/http.dart' as http;
-
 
 @LazySingleton(as:MyProductDatasource)
 class RemoteMyProductDatasource implements MyProductDatasource {
@@ -64,52 +59,52 @@ class RemoteMyProductDatasource implements MyProductDatasource {
     return result;
   }
   @override
-  Future<Either<Failure, ValidResponse>> addProduct(AddProModel addProModel) async {
-    final result = await getIt.get<NetworkService>().post(
-        path: 'DaakeshServices/api/item/addItem',
-      body: {
-        "userID": '${addProModel.userID}',
-        "title": "${addProModel.title}",
-        "description":'${addProModel.description}',
-        "secID": '${addProModel.secID}',
-        "catID": '${addProModel.catID}',
-        "subID": '${addProModel.subID}',
-        "brandID": '${addProModel.brandID}',
-        "year":"${addProModel.year}",
-        "quantity":'${addProModel.quantity}',
-        "discount":'${addProModel.discount}',
-        "discount_from":'${addProModel.discountFrom}',
-        "discount_to":'${addProModel.discountTo}',
-        "tradeOrSell": '${addProModel.tradeOrSell}',
-        "price": '${addProModel.price}',
-        "country":"${addProModel.country}",
-        "display":'${addProModel.display}',
-        "country_swap":"${addProModel.countrySwap}",
-        "city_swap":"${addProModel.citySwap}",
-        "city":"${addProModel.citySwap}",
-        "itemImg":['${convertImgToBas64(addProModel.itemImg!.first.path)}'].toString(),
-        "tradeFor": "TV",
-        "condition": "New"
-        }
-    );
-
-
-
-
-
+  Future<Either<Failure, ValidResponse>> searchOnProduct(String searchValue,int page) async {
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/item/SearchItems',
+        params: {
+          "name": searchValue,
+          "page": '$page',
+        });
     return result;
   }
-  // dynamic convertToBase64(File file) {
-  //   List<int> imageBytes = file.readAsBytesSync();
-  //   String base64Image = base64Encode(imageBytes);
-  //   return base64Image;
-  // }
-  Future<String> convertImgToBas64(String imagePath) async {
-    final bytes = await File(imagePath).readAsBytes();
-    final String img64 = base64Encode(bytes);
-    return img64;
+  @override
+  Future<Either<Failure, ValidResponse>> addProduct(AddProModel addProModel) async {
+    AddProModel addProData =addProModel;
+     List<String> images = <String>[];
+    if (addProModel.itemFileImg!.isNotEmpty) {
+      for (var image in addProModel.itemFileImg!) {
+        File imagePath = File(image.path);
+        final data = await getIt.get<NetworkService>().uploadImage(
+            path: 'DaakeshServices/api/item/addItemImages', image: imagePath);
+        data.fold((l) {}, (r) =>images.add(r.data.toString()),);
+      }
+    }
+    addProData.itemImageList= images;
+     final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/item/addItem',
+        body: addProData.addItemToJson()
+    );
+    return result;
   }
-
-
+  @override
+  Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel) async {
+    AddProModel addProData =addProModel;
+    List<String> images = <String>[];
+    if (addProModel.itemFileImg!.isNotEmpty) {
+      for (var image in addProModel.itemFileImg!) {
+        File imagePath = File(image.path);
+        final data = await getIt.get<NetworkService>().uploadImage(
+            path: 'DaakeshServices/api/item/addItemImages', image: imagePath);
+        data.fold((l) {}, (r) =>images.add(r.data.toString()),);
+      }
+    }
+    addProData.itemImageList= images;
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/item/updateItem',
+        body: addProModel.editItemToJson()
+    );
+    return result;
+  }
 
 }

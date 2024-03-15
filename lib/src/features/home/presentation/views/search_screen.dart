@@ -74,7 +74,7 @@ class SearchScreen extends StatelessWidget {
 
 class _SearchResultHandler extends StatelessWidget {
   final SearchState state;
-  const _SearchResultHandler({super.key, required this.state});
+  const _SearchResultHandler({required this.state});
 
   @override
   Widget build(BuildContext context) {

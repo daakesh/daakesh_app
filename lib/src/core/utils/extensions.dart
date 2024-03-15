@@ -65,5 +65,9 @@ extension UserTypeX on UserType{
   bool get isSwap => this == UserType.SWAP;
   bool get isSell => this == UserType.SELL;
 }
+extension AdjustProductX on AdjustProduct{
+  bool get isAdd => this == AdjustProduct.ADD;
+  bool get isEdit=> this == AdjustProduct.EDIT;
+}
 
 

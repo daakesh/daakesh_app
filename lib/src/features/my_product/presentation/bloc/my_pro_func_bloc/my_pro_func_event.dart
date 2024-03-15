@@ -54,7 +54,21 @@ class EditProductEvent extends MyProFuncEvent{
   EditProductEvent({required this.myProductItem,required this.productDisplayMethod});
 }
 
+class SearchOnProductEvent extends MyProFuncEvent{
+  final String? searchValue;
+  final int page;
+  final bool isSeeMore;
+  SearchOnProductEvent({this.searchValue,this.page = 1,this.isSeeMore = false});
+}
 
+class EmptyProductSearchEvent extends MyProFuncEvent{
+  final String value;
+  EmptyProductSearchEvent({required this.value});
+}
+class OnOffDiscountEvent extends MyProFuncEvent{
+  final bool value;
+  OnOffDiscountEvent({required this.value});
+}
 
 
 

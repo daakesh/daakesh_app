@@ -52,6 +52,5 @@ class SearchState extends Equatable {
     currentSearchPage,
     searchValue,
     isMoreData,
-
   ];
 }

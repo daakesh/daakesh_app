@@ -207,6 +207,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
       addCountries(data.country.toString());
     }
     else{
+      resetFlagData();
       countryController.text = 'Jordan';
     }
 
