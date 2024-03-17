@@ -106,11 +106,8 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
               padding:const EdgeInsets.symmetric(horizontal: 20.0),
               sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate((_, index) {
-                    HandmadeItem todayDealItem = state.todayDealsListData[index];
-
-                      return TodayDealProduct(
-                        todayDealItem: todayDealItem,
-                      );
+                    TodayItem todayDealItem = state.todayDealsListData[index];
+                      return TodayDealProduct(todayDealItem: todayDealItem);
                     },
                     childCount: state.todayDealsListData.length,
                   ),
@@ -143,7 +140,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
               padding:const EdgeInsets.symmetric(horizontal: 20.0),
               sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate((_, index) {
-                    HandmadeItem todayDealItem = state.todayDealsListData[index];
+                    TodayItem todayDealItem = state.todayDealsListData[index];
                       return TodayDealProduct(
                         isDaakeshTodayDeal: true,
                         todayDealItem: todayDealItem,

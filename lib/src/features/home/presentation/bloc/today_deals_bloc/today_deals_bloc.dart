@@ -5,6 +5,7 @@ import '../../../../../src.export.dart';
 class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
   TodayDealsBloc() : super(const TodayDealsState()) {
     on<GetToadyDealsDataEvent>(_getTodayDealsData);
+
   }
 
   static TodayDealsBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
@@ -33,10 +34,10 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      HandmadeModel brandModel = HandmadeModel.fromJson(r.data);
-      int lastPage = brandModel.data!.lastPage!;
-      List<HandmadeItem> newResultList = brandModel.data!.handmadeItemList!.toList();
-      List<HandmadeItem> handmadeListData = state.todayDealsListData.toList();
+      TodayItemModel todayItemModel = TodayItemModel.fromJson(r.data);
+      int lastPage = todayItemModel.data!.lastPage!;
+      List<TodayItem> newResultList = todayItemModel.data!.todayItemList!.toList();
+      List<TodayItem> todayDealsListData = state.todayDealsListData.toList();
       if(newResultList.isEmpty){
         emit(state.copyWith(
           todayDealsStateStatus: TodayDealsStateStatus.NULL,
@@ -44,10 +45,10 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
         ));
         return;
       }
-      handmadeListData.addAll(newResultList);
+      todayDealsListData.addAll(newResultList);
       emit(state.copyWith(
         todayDealsStateStatus: TodayDealsStateStatus.SUCCESS,
-        todayDealsListData:  handmadeListData,
+        todayDealsListData:  todayDealsListData,
         isMoreData:lastPage == state.currentPage,
       ));
     });

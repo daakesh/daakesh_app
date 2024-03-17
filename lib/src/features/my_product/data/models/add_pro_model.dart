@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 
 class AddProModel{
@@ -76,7 +75,7 @@ class AddProModel{
      data['display'] = display.toString();
      data['country_swap'] = countrySwap.toString();
      data['city_swap'] = citySwap.toString();
-     data['itemImg'] = itemImageList!.toList().toString();
+     data['itemImg'] = jsonEncode(itemImageList);
      return data;
    }
    Map<String, dynamic> editItemToJson() {
@@ -101,7 +100,7 @@ class AddProModel{
      data['display'] = display.toString();
      data['country_swap'] = countrySwap.toString();
      data['city_swap'] = citySwap.toString();
-     data['itemImg'] = itemImageList!.toList().toString();
+     ///data['itemImg'] = jsonEncode(itemImageList);
      return data;
    }
 }

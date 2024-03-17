@@ -17,14 +17,11 @@ class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       keyboardDismissBehavior:ScrollViewKeyboardDismissBehavior.onDrag ,
-      child: InkWell(
-        focusColor: ColorName.transparent,
-        highlightColor: ColorName.transparent,
-        splashColor: ColorName.transparent,
+      child: GestureDetector(
         onTap: ()=>context.disMissKeyboard,
         child: Padding(
           padding: const EdgeInsetsDirectional.only(start: 17.5, end: 26.0, top: 12.0),
-          child: BlocBuilder<HomeBloc, HomeState>(
+          child: BlocBuilder<PassDataBloc, PassDataState>(
             builder: (_, state) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +52,7 @@ class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
 
                                 )),
                           ],),
-                  AddCommentRateSection(state: state,),
+                  AddCommentRateSection(),
                   const Divider(color: ColorName.gray,),
                   const CommentsSection(),
                 ],

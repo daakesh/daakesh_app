@@ -54,6 +54,7 @@ class RemoteSwapDatasource implements SwapDatasource {
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/item/getTodaysItems',
       params: {
+        "type":"swap",
         "page":"$page"
       }
     );

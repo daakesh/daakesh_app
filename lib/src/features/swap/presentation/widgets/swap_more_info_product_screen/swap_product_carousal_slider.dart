@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class SwapProductCarousalSlider extends StatelessWidget {
-  final SwapState state;
+  final SwapPassDataState state;
   SwapProductCarousalSlider({super.key, required this.state});
 
   final controller = CarouselController();
@@ -28,7 +28,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
                 width: 6.0,
               ),
                Text(
-                'NF Store',
+                '${state.trendDealsListData.first.user!.name}',
                 style: easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0),
               ),
@@ -50,7 +50,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
               initialPage: 0,
               scrollDirection: Axis.horizontal,
               onPageChanged: (index, reason) {
-                SwapBloc.get.add(SwapSelectProductPropertiesEvent(productSliderIndex: index));
+                SwapPassDataBloc.get.add(ChangeProductSliderIndex(sliderIndex:index));
               }),
           items: [1, 2, 3].map((i) {
             return Builder(
@@ -71,7 +71,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
                   vertical: 8.0, horizontal: 4.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: state.productSliderIndex == entry.key
+                color: state.sliderIndex == entry.key
                     ? ColorName.lightOrange
                     : ColorName.silverGray,
               ),

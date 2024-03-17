@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:developer' as developer;
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import '../../src.export.dart';
 
@@ -126,6 +127,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
     var response = await request.send();
     var responseData = await response.stream.transform(utf8.decoder).join();
     data = jsonDecode(responseData);
+    _multiPartLog(response,data.toString());
     return Right(
       ValidResponse(
         statusCode: response.statusCode,
@@ -161,7 +163,7 @@ mixin NetworksLogs{
       developer.log('-----------------------------------------------\n'
           '|Http [RESPONSE] info ==> \n'
           '|ENVIRONMENT: \n'
-          '|BASE_URL: http://${response.request!.url.authority}\n'
+          '|BASE_URL: https://${response.request!.url.authority}\n'
           '|PATH: ${response.request!.url.path}\n'
           '|FULL_URL: ${response.request!.url}\n'
           '|Method: ${response.request!.method}\n'
@@ -174,11 +176,29 @@ mixin NetworksLogs{
           '|Header: ${response.headers}\n'
           '|[END] -----------------------------------------------\n\n');
 
+  void _multiPartLog(StreamedResponse response,String body) =>
+      developer.log('-----------------------------------------------\n'
+          '- Http [RESPONSE] info ==> \n'
+          '- ENVIROMENT: \n'
+          '- BASE_URL: https://${response.request!.url.authority}\n'
+          '- PATH: ${response.request!.url.path}\n'
+          '- FULL_URL: ${response.request!.url}\n'
+          '- Method: ${response.request!.method}\n'
+          '- Params: ${response.request!.url.queryParameters}\n'
+          '- Host: ${response.request!.url.host}\n'
+          '- statusCode: ${response.statusCode}\n'
+          '- Scheme: ${response.request!.url.scheme}\n'
+          '- Body: ${response.request!.url.data}\n'
+          '- Header: ${response.headers}\n'
+          '- RESPONSE:$body\n'
+          '- [END] -----------------------------------------------\n');
+
+
   void traceError(http.Response response,String body) =>
       developer.log('🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫\n'
           '| Http [ERROR] info ==> \n'
           '| ENVIRONMENT: \n'
-          '| BASE_URL: http://${response.request!.url.authority}\n'
+          '| BASE_URL: https://${response.request!.url.authority}\n'
           '| PATH: ${response.request!.url.path}\n'
           '| FULL_URL: ${response.request!.url}\n'
           '| Method: ${response.request!.method}\n'

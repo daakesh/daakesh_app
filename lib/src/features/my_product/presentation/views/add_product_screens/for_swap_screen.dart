@@ -18,7 +18,6 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
   void initState() {
     super.initState();
     setEditData();
-    resetFlagData();
   }
 
   @override

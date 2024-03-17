@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -9,15 +8,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<SwapHomeScreenStateEvent>(_swapHomeScreenState);
     on<GetToTopScreenEvent>(_getToTopScreen);
     on<SetFilterDataEvent>(_setFilterDataEvent);
-    on<SelectProductPropertiesEvent>(_selectProductProperties);
     on<GetSectionDataEvent>(_getSectionData);
-    on<DetermentTodayDealEvent>(_determentTodayDeal);
   }
   static HomeBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
-
-
   static ScrollController scrollController = ScrollController();
-
 
   FutureOr<void> _getToTopScreen(GetToTopScreenEvent event, Emitter<HomeState> emit) {
     scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
@@ -51,20 +45,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       productTypeIndex: event.productTypeIndex,
     ));
   }
-  ///Event to select product properties such as {Size, preview images ...etc}.
-  FutureOr<void> _selectProductProperties(SelectProductPropertiesEvent event, Emitter<HomeState> emit) {
-    emit(state.copyWith(
-      productSliderIndex: event.productSliderIndex,
-      productSizeIndex:event.productSizeIndex,
-    ));
-  }
-  ///In [HomeDataWidget], Specify today deal is [DaakeshTodayDealProduct] or [TodayDealProduct]
-  /// by passing [isDaakeshTodayDeal] flag.
-  FutureOr<void> _determentTodayDeal(DetermentTodayDealEvent event, Emitter<HomeState> emit) {
-    emit(state.copyWith(
-      isDaakeshTodayDeal: event.isDaakeshTodayDeal,
-    ));
-  }
+
 
 
 

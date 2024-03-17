@@ -79,10 +79,6 @@ class CommentsSection extends StatelessWidget {
                           ),
                           const SizedBox(width: 6.0,),
                           Text('4.5',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize:14.0,fontWeight: FontWeight.w600),),
-
-
-
-
                         ],),
                       ),
                       const SizedBox(height: 16.0,),

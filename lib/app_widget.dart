@@ -25,7 +25,7 @@ class AppWidget extends StatelessWidget {
               localizationsDelegates: context.localizationsDelegates,
               supportedLocales: context.supportedLocales,
               navigatorKey: navigatorKey,
-              home: const SplashScreen(),
+              home:  SplashScreen(),
             );
           }
       ),

@@ -77,7 +77,7 @@ class RemoteMyProductDatasource implements MyProductDatasource {
         File imagePath = File(image.path);
         final data = await getIt.get<NetworkService>().uploadImage(
             path: 'DaakeshServices/api/item/addItemImages', image: imagePath);
-        data.fold((l) {}, (r) =>images.add(r.data.toString()),);
+        data.fold((l) {}, (r) =>images.add("${r.data}"),);
       }
     }
     addProData.itemImageList= images;

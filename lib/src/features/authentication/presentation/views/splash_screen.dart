@@ -2,23 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../src.export.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashScreen extends StatelessWidget {
+  SplashScreen({super.key}){
+    checkLogin();
+  }
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-
-
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-      const Duration(seconds: 2),
-    ).then((value) => checkUserLogin());
-
+  void checkLogin() async {
+    await Future.delayed(const Duration(seconds: 3)).then((value) => checkUserLogin());
   }
 
   @override
@@ -48,11 +38,19 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
   void checkUserLogin() {
     if (ValueConstants.userId.isEmpty) {
       openNewPage(const WelcomeScreen(),popPreviousPages: true);
       return;
     }
+    getUserData();
     openNewPage(const MainScreen(),popPreviousPages: true);
   }
+
+  void getUserData(){
+    AuthBloc.get.add(GetUserDataEvent());
+  }
 }
+
+

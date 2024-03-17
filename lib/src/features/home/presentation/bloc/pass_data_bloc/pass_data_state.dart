@@ -12,25 +12,47 @@ extension PassDataStateStatusX on PassDataStateStatus{
 
 class PassDataState extends Equatable {
   final PassDataStateStatus passDataStateStatus;
+  final List<TodayItem> todayItem;
   final List<CategoryItem> categoriesListData;
   final List<SubCategory> subCategoryListData;
 
+  final int productSliderIndex;
+  final int productSizeIndex;
+  ///
+  final bool isDaakeshTodayDeal;
+
   const PassDataState({
     this.passDataStateStatus = PassDataStateStatus.INITIAL,
+    this.todayItem = const[],
     this.categoriesListData = const[],
     this.subCategoryListData = const[],
+    ///
+    this.productSliderIndex = 0,
+    this.productSizeIndex = 0,
+    ///
+    this.isDaakeshTodayDeal = false,
 
   });
 
   PassDataState copyWith({
     PassDataStateStatus? passDataStateStatus,
+    List<TodayItem>? todayItem,
     List<CategoryItem>? categoriesListData,
     List<SubCategory>? subCategoryListData,
+    ///
+    int? productSliderIndex,
+    int? productSizeIndex,
+    bool? isDaakeshTodayDeal,
   }) {
     return PassDataState(
       passDataStateStatus: passDataStateStatus ?? this.passDataStateStatus,
+      todayItem: todayItem ?? this.todayItem,
       categoriesListData: categoriesListData ?? this.categoriesListData,
       subCategoryListData: subCategoryListData ?? this.subCategoryListData,
+      productSliderIndex: productSliderIndex ?? this.productSliderIndex,
+      productSizeIndex: productSizeIndex ?? this.productSizeIndex,
+      ///
+      isDaakeshTodayDeal: isDaakeshTodayDeal ?? this.isDaakeshTodayDeal,
 
     );
   }
@@ -38,8 +60,12 @@ class PassDataState extends Equatable {
   @override
   List<Object?> get props => [
     passDataStateStatus,
+    todayItem,
     categoriesListData,
     subCategoryListData,
-
+    productSliderIndex,
+    productSizeIndex,
+    ///
+    isDaakeshTodayDeal
   ];
 }

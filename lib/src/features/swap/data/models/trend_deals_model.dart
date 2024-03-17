@@ -41,7 +41,7 @@ class TrendDealsData {
 class TrendDealsItem {
   int? id;
   String? description;
-  dynamic itemImg;
+  List<String>? itemImg;
   String? date;
   String? title;
   String? type;
@@ -54,6 +54,8 @@ class TrendDealsItem {
   String? discountFrom;
   String? discountTo;
   String? country;
+  String? countrySwap;
+  String? citySwap;
   SectionItemModel? section;
   UserModel? user;
   CategoryItem? category;
@@ -84,7 +86,6 @@ class TrendDealsItem {
   TrendDealsItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
-    itemImg = json['itemImg'];
     date = json['date'];
     title = json['Title'];
     type = json['Type'];
@@ -97,6 +98,8 @@ class TrendDealsItem {
     discountFrom = json['discount_from'];
     discountTo = json['discount_to'];
     country = json['country'];
+    countrySwap = json['country_swap'];
+    citySwap = json['city_swap'];
     section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
     category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;

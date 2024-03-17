@@ -4,7 +4,7 @@ import '../../../../../src.export.dart';
 
 class TodayDealProduct extends StatelessWidget {
   final bool isDaakeshTodayDeal;
-  final HandmadeItem todayDealItem;
+  final TodayItem todayDealItem;
 
   const TodayDealProduct({
     super.key,
@@ -16,9 +16,10 @@ class TodayDealProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+        PassDataBloc.get.add(PassTodayDealDataEvent(todayDealItem:todayDealItem));
+        PassDataBloc.get.add(DetermentTodayDealEvent(isDaakeshTodayDeal:isDaakeshTodayDeal));
         HomeBloc.get.add(GetToTopScreenEvent());
         HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.PRODUCTDETAILS));
-        HomeBloc.get.add(DetermentTodayDealEvent(isDaakeshTodayDeal:isDaakeshTodayDeal));
 
       },
       child: Column(
@@ -62,7 +63,7 @@ class TodayDealProduct extends StatelessWidget {
                   ),
                 ),
                 CachedImage(
-                  imageUrl: todayDealItem.itemImg.toString(),
+                  imageUrl: todayDealItem.itemImg!.first.toString(),
                   height:85.0,
                   width: 85.0,
                 ),

@@ -14,6 +14,7 @@ class SwapTrendDealProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+        SwapPassDataBloc.get.add(PassTrendingDealDataEvent(trendDealsItem: trendDealsItem));
         SwapBloc.get.add(SwapGetToTopScreenEvent());
         SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState:SwapScreenState.PRODUCTDETAILS));
       },

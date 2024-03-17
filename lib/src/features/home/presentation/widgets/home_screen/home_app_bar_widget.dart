@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-
 class HomeAppBarWidget extends StatefulWidget {
   final TextEditingController searchController;
 
@@ -81,8 +80,8 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
               SizedBox(width: 14.0.w),
               GestureDetector(
                   onTap: () {
-                  HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.CART));
-                  FocusScope.of(context).unfocus();
+                    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.CART));
+                    FocusScope.of(context).unfocus();
                   },
                   child: Assets.svg.cartAddIcon.svg(width: 24.0.w, height: 24.0.h)),
             ],
@@ -96,7 +95,6 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
       );
     });
   }
-
   void onChange(String value) {
       SearchBloc.get.add(EmptySearchEvent());
     _debounceTimer?.cancel();

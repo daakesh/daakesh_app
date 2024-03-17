@@ -108,7 +108,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                   SizedBox(width: 12.0.w),
                   Expanded(
                       child: CachedImage(
-                          imageUrl: widget.myProductItem.itemImg.toString())),
+                          imageUrl: widget.myProductItem.itemImg!.first,height: 80.0,)),
                   SizedBox(width: 18.0.w),
                   Expanded(
                     flex: 2,

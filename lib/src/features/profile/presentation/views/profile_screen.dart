@@ -28,8 +28,8 @@ class ProfileScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                Text('Khalil Ahmad',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 22.0),),
-                Text('Khalilahmad@hotmail.com',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.grayishBlue),),
+                Text(user.userData.name.toString(),style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 22.0),),
+                Text(user.userData.email.toString(),style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.grayishBlue),),
 
               ],),
             ],),

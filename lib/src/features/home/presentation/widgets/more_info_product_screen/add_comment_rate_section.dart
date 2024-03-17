@@ -3,15 +3,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
 class AddCommentRateSection extends StatelessWidget {
-  final HomeState state;
-  AddCommentRateSection({super.key, required this.state,});
+  AddCommentRateSection({super.key,});
   final commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-
       children: [
         const SizedBox(height: 30.0,),
         Text('Rate',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 22.0),),
@@ -64,9 +62,6 @@ class AddCommentRateSection extends StatelessWidget {
                   maxLines: 5,
                 ),
               ),
-
-
-
             ],
           ),
         ),

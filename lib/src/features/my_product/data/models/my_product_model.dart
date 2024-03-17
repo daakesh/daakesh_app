@@ -39,7 +39,7 @@ class MyProductData {
 class MyProductItem {
   int? id;
   String? description;
-  dynamic itemImg;
+  List<String>? itemImg;
   String? date;
   String? title;
   String? type;
@@ -95,7 +95,21 @@ class MyProductItem {
   MyProductItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
-    itemImg = json['itemImg'];
+    if(json['itemImg'] != null){
+      itemImg = <String>[];
+      if (json['itemImg'] is String){
+        String data = json['itemImg'];
+        itemImg = data
+            .substring(1, data.length - 1) // Remove square brackets
+            .split(',') // Split by commas
+            .map((String str) => str.trim()) // Trim whitespace
+            .toList();
+      }
+      else{
+        itemImg = (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+      }
+
+    }
     date = json['date'];
     title = json['Title'];
     type = json['Type'];

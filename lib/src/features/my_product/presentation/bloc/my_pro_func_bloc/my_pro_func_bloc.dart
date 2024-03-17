@@ -58,6 +58,8 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
         selectedShipToCountries: [],
         shipFlagEmoji: '🇯🇴',
         discountSwitchButton:false,
+        imagesList: [],
+        productDisplayMethod:ProductDisplayMethod.Sell,
       ),
     );
   }

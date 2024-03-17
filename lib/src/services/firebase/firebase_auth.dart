@@ -41,7 +41,7 @@ class FirebaseAuthentication{
 
   static void verificationCompleted(String verificationId,String smsCode,AuthManner authManner)async{
     ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
       await firebaseAuth.signInWithCredential(credential);

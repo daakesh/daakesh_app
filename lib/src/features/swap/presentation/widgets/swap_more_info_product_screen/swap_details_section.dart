@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class SwapDetailsSection extends StatelessWidget {
-  final SwapState state;
+  final SwapPassDataState state;
   const SwapDetailsSection({super.key, required this.state});
 
   @override
@@ -16,7 +16,7 @@ class SwapDetailsSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('Brand:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
-          Text('Mac Cosmetics',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
+          Text('${state.trendDealsListData.first.brand!.brandName}',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
         ],
       ),
       const SizedBox(height: 13.0,),
@@ -32,7 +32,7 @@ class SwapDetailsSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('Category:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
-          Text('Accessories',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
+          Text('${state.trendDealsListData.first.category!.name}',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
         ],
       ),
       const SizedBox(height: 13.0,),
@@ -40,13 +40,13 @@ class SwapDetailsSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('Year:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
-          Text('2022',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
+          Text('${state.trendDealsListData.first.year}',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
         ],
       ),
       const SizedBox(height: 13.0,),
       Text('description:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
       const SizedBox(height: 13.0,),
-      Text('AquaOasis™ Cool Mist Humidefier (2.2L WaterAquaOasis™ Cool Mist Humidefier (2.2L Water:',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
+      Text('${state.trendDealsListData.first.description}',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
       const SizedBox(height: 29.0,),
 
     ],);

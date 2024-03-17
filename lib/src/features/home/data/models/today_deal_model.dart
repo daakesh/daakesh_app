@@ -1,45 +1,45 @@
 import 'package:daakesh/src/features/features.export.dart';
 
-class HandmadeModel {
+class TodayItemModel {
   bool? status;
   String? error;
-  HandmadeData? data;
+  TodayItemData? data;
 
-  HandmadeModel({
+  TodayItemModel({
     this.status,
     this.error,
     this.data,
   });
 
-  HandmadeModel.fromJson(Map<String, dynamic> json) {
+  TodayItemModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     error = json['error'];
-    data = json['data'] != null ? HandmadeData.fromJson(json['data']) : null;
+    data = json['data'] != null ? TodayItemData.fromJson(json['data']) : null;
   }
 }
 
-class HandmadeData {
+class TodayItemData {
   int? lastPage;
-  List<HandmadeItem>? handmadeItemList;
+  List<TodayItem>? todayItemList;
 
-  HandmadeData({
+  TodayItemData({
     this.lastPage,
-    this.handmadeItemList,
+    this.todayItemList,
   });
 
-  HandmadeData.fromJson(Map<String, dynamic> json) {
+  TodayItemData.fromJson(Map<String, dynamic> json) {
     lastPage = json['last_page'];
     if (json['data'] != null) {
-      handmadeItemList = <HandmadeItem>[];
-      handmadeItemList = (json['data'] as List<dynamic>).map((e) => HandmadeItem.fromJson(e)).toList();
+      todayItemList = <TodayItem>[];
+      todayItemList = (json['data'] as List<dynamic>).map((e) => TodayItem.fromJson(e)).toList();
     }
   }
 }
 
-class HandmadeItem {
+class TodayItem {
   int? id;
   String? description;
-  dynamic itemImg;
+  List<String>? itemImg;
   String? date;
   String? title;
   String? type;
@@ -57,7 +57,7 @@ class HandmadeItem {
   CategoryItem? category;
   BrandItem? brand;
   SubCategory? subcategory;
-  HandmadeItem(
+  TodayItem(
       {this.id,
       this.description,
       this.itemImg,
@@ -79,10 +79,18 @@ class HandmadeItem {
       this.brand,
       this.subcategory});
 
-  HandmadeItem.fromJson(Map<String, dynamic> json) {
+  TodayItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
-    itemImg = json['itemImg'];
+    if(json['itemImg'] != null){
+    itemImg = <String>[];
+    String data = json['itemImg'];
+    itemImg = data
+        .substring(1, data.length - 1) // Remove square brackets
+        .split(',') // Split by commas
+        .map((String str) => str.trim()) // Trim whitespace
+        .toList();
+    }
     date = json['date'];
     title = json['Title'];
     type = json['Type'];

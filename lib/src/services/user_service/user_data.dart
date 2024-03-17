@@ -17,9 +17,6 @@ abstract class UserData {
 
 @Singleton(as: UserData)
 class UserDataImpl implements UserData {
-  UserDataImpl(){
-    ///lang = prefs.getData('lang') ?? 'en';
-  }
 
   @override
   UserModel userData = UserModel();
@@ -31,7 +28,8 @@ class UserDataImpl implements UserData {
       activateUser;
       return;
     }
-    ProgressCircleDialog.dismiss();
+    ValueConstants.userId =userData.id.toString();
+    ValueConstants.token =userData.token.toString();
     saveUserToken;
     openNewPage(const MainScreen(),popPreviousPages: true);
 
@@ -44,7 +42,10 @@ class UserDataImpl implements UserData {
   void get activateUser=> FirebaseAuthentication.verifyPhoneNumber(userData.phoneNumber.toString(),AuthManner.SIGNUPIN);
 
   @override
-  void get saveUserToken async => await prefs.setString('userId', userData.id.toString());
+  void get saveUserToken async => await Future.wait<void>([
+    prefs.setString('token', userData.token.toString()),
+    prefs.setString('userId', userData.id.toString())],
+  );
 
   @override
   void logOut() async {
@@ -52,7 +53,7 @@ class UserDataImpl implements UserData {
     await Future.delayed(const Duration(seconds: 2));
     ProgressCircleDialog.dismiss();
     ValueConstants.userId ='';
-    prefs.removeData('userId').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
+    prefs.removeData('userId').then((value) => openNewPage(SplashScreen(), popPreviousPages: true));
   }
 
 

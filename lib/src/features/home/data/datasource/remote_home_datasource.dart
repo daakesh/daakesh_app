@@ -54,6 +54,7 @@ class RemoteHomeDatasource implements HomeDatasource {
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/item/getTodaysItems',
       params: {
+        "type":"sell",
         "page":"$page"
       }
     );

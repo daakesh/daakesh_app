@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class SizeSection extends StatelessWidget {
-  final HomeState state;
+  final PassDataState state;
   const SizeSection({super.key, required this.state});
 
   @override
@@ -20,11 +20,8 @@ class SizeSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             slivers: [
               SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-                return InkWell(
-                  splashColor: ColorName.transparent,
-                  focusColor: ColorName.transparent,
-                  highlightColor: ColorName.transparent,
-                  onTap: ()=>HomeBloc.get.add(SelectProductPropertiesEvent(productSizeIndex: index)),
+                return GestureDetector(
+                  onTap: ()=>PassDataBloc.get.add(SelectProductPropertiesEvent(productSizeIndex: index)),
                   child: Container(
                     width: 121.0,
                     height: 54.0,

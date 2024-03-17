@@ -39,8 +39,7 @@ class SwapProductItem extends StatelessWidget {
                 padding:EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
                 child: Text(
                   'Edit',
-                  style: easyTheme.textTheme.bodyLarge!
-                      .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
+                  style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 14.0, color: ColorName.skyBlue),
                 ),
               ),
             ),
@@ -49,7 +48,7 @@ class SwapProductItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(width: 7.0.w),
-              Expanded(child: CachedImage(imageUrl: myProductItem.itemImg.toString())),
+              Expanded(child: CachedImage(imageUrl: myProductItem.itemImg!.first.toString())),
               SizedBox(width: 18.0.w),
               Expanded(
                 flex: 2,

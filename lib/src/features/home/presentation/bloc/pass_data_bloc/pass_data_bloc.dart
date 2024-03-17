@@ -6,10 +6,31 @@ import '../../../../../src.export.dart';
 
 class PassDataBloc extends Bloc<PassDataEvent, PassDataState> {
   PassDataBloc() : super(const PassDataState()) {
+    on<PassTodayDealDataEvent>(_passTodayDealData);
     on<PassSectionSubCategoriesEvent>(_passSectionSubCategories);
     on<PreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
+    on<SelectProductPropertiesEvent>(_selectProductProperties);
+    on<DetermentTodayDealEvent>(_determentTodayDeal);
   }
   static PassDataBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+
+  FutureOr<void> _passTodayDealData(PassTodayDealDataEvent event, Emitter<PassDataState> emit) {
+    List<TodayItem> todayItem =<TodayItem>[];
+    todayItem.add(event.todayDealItem);
+    emit(state.copyWith(todayItem:todayItem));
+  }
+  ///Event to select product properties such as {Size, preview images ...etc}.
+  FutureOr<void> _selectProductProperties(SelectProductPropertiesEvent event, Emitter<PassDataState> emit) {
+    emit(state.copyWith(
+      productSliderIndex: event.productSliderIndex,
+      productSizeIndex:event.productSizeIndex,
+    ));
+  }
+  ///In [HomeDataWidget], Specify today deal is [DaakeshTodayDealProduct] or [TodayDealProduct]
+  /// by passing [isDaakeshTodayDeal] flag.
+  FutureOr<void> _determentTodayDeal(DetermentTodayDealEvent event, Emitter<PassDataState> emit) {
+    emit(state.copyWith(isDaakeshTodayDeal: event.isDaakeshTodayDeal,));
+  }
 
   FutureOr<void> _passSectionSubCategories(PassSectionSubCategoriesEvent event, Emitter<PassDataState> emit){
     emit(state.copyWith(categoriesListData: event.categoriesListData));
@@ -20,5 +41,11 @@ class PassDataBloc extends Bloc<PassDataEvent, PassDataState> {
     subCategoryListData = state.categoriesListData.elementAt(event.index).subCategoryList!.toList();
     emit(state.copyWith(subCategoryListData: subCategoryListData));
   }
+
+
+
+
+
+
 
 }

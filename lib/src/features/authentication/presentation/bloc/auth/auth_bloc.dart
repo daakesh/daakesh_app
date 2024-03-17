@@ -35,6 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+      ProgressCircleDialog.dismiss();
       saveRememberData(state.rememberMeValue,event.phoneNumber,event.password);
       UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
       user.setUserDataAndCheckIsActive(userModel);
@@ -53,15 +54,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ///Get User Data Event,
   FutureOr<void> _getUserData(GetUserDataEvent event, Emitter<AuthState> emit) async{
     emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
-    ProgressCircleDialog.show();
     final result = await getIt.get<AuthUseCases>().getUserData();
     result.fold((l) {
       emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-      ProgressCircleDialog.dismiss();
     }, (r) async{
       if(!r.status!){
-        ProgressCircleDialog.dismiss();
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
@@ -111,6 +109,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+      ProgressCircleDialog.dismiss();
+
       UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
       user.setUserDataAndCheckIsActive(userModel);
       emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
