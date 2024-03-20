@@ -7,6 +7,7 @@ class PassTodayDealDataEvent extends PassDataEvent{
   final TodayItem todayDealItem;
   PassTodayDealDataEvent({required this.todayDealItem});
 }
+class ZoomInOutEvent extends PassDataEvent{}
 class SelectProductPropertiesEvent extends PassDataEvent{
   final int? productSliderIndex;
   final int? productSizeIndex;

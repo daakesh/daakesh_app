@@ -2,9 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class MyProductsScreen extends StatelessWidget {
+class MyProductsScreen extends StatefulWidget {
   const MyProductsScreen({super.key});
 
+  @override
+  State<MyProductsScreen> createState() => _MyProductsScreenState();
+}
+
+class _MyProductsScreenState extends State<MyProductsScreen> {
+  final searchController = TextEditingController();
+
+@override
+  void initState() {
+    super.initState();
+    getMyProductScreenData();
+  }
+
+  void getMyProductScreenData(){
+    MyProBloc.get.add(GetMyProductEvent());
+    MySwapProBloc.get.add(GetMySwapProEvent());
+    SellerInfoBloc.get.add(GetSellerInfoEvent());
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,7 +30,7 @@ class MyProductsScreen extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: ColorName.whiteSmoke,
-          floatingActionButton: const FloatingAddProductWidget(),
+          floatingActionButton:  FloatingAddProductWidget(searchController:searchController ),
           body: BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
             return CustomScrollView(
               slivers: [
@@ -32,7 +50,7 @@ class MyProductsScreen extends StatelessWidget {
                         children: [
                           ProductTypeTabBar(state:state),
                           SizedBox(height: 17.0.h,),
-                          const SearchProductBarWidget(),
+                          SearchProductBarWidget(searchController:searchController),
                         ],
                       ),
                     ),
@@ -47,7 +65,7 @@ class MyProductsScreen extends StatelessWidget {
                       style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 20.0.sp, color: ColorName.black),
                     ),
                   ),),
-                 if(state.searchValue.isEmpty)...[
+                if(state.searchValue.isEmpty)...[
                    state.productTapBar == ProductTapBar.SHOP
                        ? BlocBuilder<MyProBloc, MyProState>(
                      builder: (context, state) {
@@ -87,7 +105,7 @@ class MyProductsScreen extends StatelessWidget {
                      child: !state.isMoreData
                          ? !state.myProFuncStateStatus.isLoadingMore
                          ? Center(
-                       child: InkWell(
+                       child: GestureDetector(
                          onTap: () => seeMoreSearchProduct(state.searchValue),
                          child: Text(
                            'See More',
@@ -110,6 +128,7 @@ class MyProductsScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget seeMoreHandler(state) {
     if(state is MyProState){
       switch (!state.isMoreData) {
@@ -149,6 +168,7 @@ class MyProductsScreen extends StatelessWidget {
       return const SizedBox();
     }
   }
+
   void onSeeMore(state) {
     if(state is MyProState) {
       MyProBloc.get.add(GetMyProductEvent(isSeeMore: true));
@@ -157,10 +177,10 @@ class MyProductsScreen extends StatelessWidget {
       MySwapProBloc.get.add(GetMySwapProEvent(isSeeMore: true));
     }
   }
+
   void seeMoreSearchProduct(String searchValue) {
     MyProFuncBloc.get.add(SearchOnProductEvent(searchValue: searchValue, isSeeMore: true));
   }
-
 }
 
 

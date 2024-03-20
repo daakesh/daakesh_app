@@ -35,12 +35,19 @@ class SwapProductCarousalSlider extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              Align(
-                alignment: AlignmentDirectional.bottomEnd,
-                child: Assets.svg.zoomInIcon.svg(),
+              GestureDetector(
+                onTap: ()=>SwapPassDataBloc.get.add(SwapZoomInOutEvent()),
+                child: Align(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  child: Assets.svg.zoomInIcon.svg(),
+                ),
               ),
+
             ],
           ),
+        ),
+        const SizedBox(
+          height: 6.0,
         ),
         CarouselSlider(
           carouselController: controller,
@@ -52,10 +59,12 @@ class SwapProductCarousalSlider extends StatelessWidget {
               onPageChanged: (index, reason) {
                 SwapPassDataBloc.get.add(ChangeProductSliderIndex(sliderIndex:index));
               }),
-          items: [1, 2, 3].map((i) {
+          items: state.trendDealsListData.first.itemImg!.map((i) {
             return Builder(
               builder: (BuildContext context) {
-                return Assets.png.glasses.image();
+                return Transform.scale(
+                    scale: state.scale,
+                    child: CachedImage(imageUrl: i.toString()));
               },
             );
           }).toList(),
@@ -63,7 +72,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
         const SizedBox(height: 30.0,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [1, 2, 3].asMap().entries.map((entry) {
+          children: state.trendDealsListData.first.itemImg!.asMap().entries.map((entry) {
             return Container(
               width: 12.0,
               height: 12.0,

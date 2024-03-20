@@ -5,10 +5,10 @@ import 'package:image_picker/image_picker.dart';
 class ImagePickerHelper{
 
   static final picker = ImagePicker();
-  static Future<File> getGalleryImage() async {
+  static Future<XFile> getGalleryImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      return  File(pickedFile.path);
+      return  pickedFile;
     } else {
       debugPrint('No Image selected.');
       return Future.error('No Image selected.');

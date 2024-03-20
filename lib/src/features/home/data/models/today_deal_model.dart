@@ -83,13 +83,8 @@ class TodayItem {
     id = json['id'];
     description = json['description'];
     if(json['itemImg'] != null){
-    itemImg = <String>[];
-    String data = json['itemImg'];
-    itemImg = data
-        .substring(1, data.length - 1) // Remove square brackets
-        .split(',') // Split by commas
-        .map((String str) => str.trim()) // Trim whitespace
-        .toList();
+      itemImg = <String>[];
+      itemImg = (json['itemImg']as List<dynamic>).map((e) => e.toString()).toList();
     }
     date = json['date'];
     title = json['Title'];

@@ -14,25 +14,46 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const HeaderWidget(withArrowBack: false),
             const SizedBox(height: 21.0,),
-            Row(children: [
-              const SizedBox(width: 25.0,),
-              Container(
-                width: 53.0,
-                height: 53.0,
-                decoration: const BoxDecoration(
-                  color: ColorName.amber,
-                  shape: BoxShape.circle
-                ),
-              ),
-              const SizedBox(width: 20.0,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                Text(user.userData.name.toString(),style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 22.0),),
-                Text(user.userData.email.toString(),style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.grayishBlue),),
+            BlocBuilder<UserDataBloc, UserDataState>(
+              builder: (context, state) {
+                return  Row(children: [
+                  const SizedBox(width: 25.0,),
+                  Hero(
+                    tag: 'profileImage',
+                    child: Container(
+                      width: 53.0,
+                      height: 53.0,
+                      decoration: const BoxDecoration(
+                          color: ColorName.gray,
+                          shape: BoxShape.circle
+                      ),
+                      child: CachedImage(
+                        imageUrl: state.userModelData.first.img.toString(),
+                        borderRadius: BorderRadius.circular(100.0),
+                        errorWidget: (_, __, error) {
+                          return Container(
+                            width: 53.0,
+                            height: 53.0,
+                            decoration: const BoxDecoration(
+                                color: ColorName.gray,
+                                shape: BoxShape.circle),
+                            child: const Center(child: Icon(Icons.person)),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20.0,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(state.userModelData.first.name.toString(),style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 22.0),),
+                      Text(state.userModelData.first.email.toString(),style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.grayishBlue),),
 
-              ],),
-            ],),
+                    ],),
+                ],);
+              },
+            ),
             const SizedBox(height: 31.0,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),

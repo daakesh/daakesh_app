@@ -48,6 +48,15 @@ class MyProductRepositoryImpl implements MyProductRepository {
   Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel) async{
     return await getIt.get<MyProductDatasource>().updateProduct(addProModel);
   }
+  @override
+  Future<Either<Failure, ValidResponse>> getSellerInfo() async{
+    return await getIt.get<MyProductDatasource>().getSellerInfo();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> updateSellerInfo(String phoneNumber, String userName, String whatsappNumber) async{
+    return await getIt.get<MyProductDatasource>().updateSellerInfo(phoneNumber,userName,whatsappNumber);
+  }
 
 
 

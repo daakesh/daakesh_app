@@ -8,6 +8,7 @@ class CachedImage extends StatelessWidget {
   final BoxFit fit;
   final BorderRadiusGeometry borderRadius;
   final Alignment alignment;
+  final LoadingErrorWidgetBuilder? errorWidget;
 
   const CachedImage(
       {super.key,
@@ -17,6 +18,7 @@ class CachedImage extends StatelessWidget {
       this.fit = BoxFit.cover,
       this.borderRadius = BorderRadius.zero,
       this.alignment = Alignment.center,
+      this.errorWidget,
       });
 
   @override
@@ -34,8 +36,8 @@ class CachedImage extends StatelessWidget {
         placeholder: (_, __) {
           return const SizedBox();
         },
-        errorWidget: (_, __, error) {
-          return Center(
+        errorWidget: errorWidget ?? (_, __, error) {
+          return  Center(
             child: Assets.svg.emptyImageIcon.svg(height: 20.0, width: 20.0),
           );
         },

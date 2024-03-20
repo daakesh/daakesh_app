@@ -12,6 +12,9 @@ abstract class MyProductUseCases {
   Future<Either<Failure, ValidResponse>> searchOnProduct(String searchValue,int page);
   Future<Either<Failure, ValidResponse>> addProduct(AddProModel addProModel);
   Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel);
+  Future<Either<Failure, ValidResponse>> getSellerInfo();
+  Future<Either<Failure, ValidResponse>> updateSellerInfo(String phoneNumber,String userName,String whatsappNumber);
+
 
 
 }
@@ -58,6 +61,15 @@ class MyProductUseCasesImpl implements MyProductUseCases {
   @override
   Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel) async{
     return await getIt.get<MyProductRepository>().updateProduct(addProModel);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSellerInfo() async{
+    return await getIt.get<MyProductRepository>().getSellerInfo();
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> updateSellerInfo(String phoneNumber,String userName,String whatsappNumber) async{
+    return await getIt.get<MyProductRepository>().updateSellerInfo(phoneNumber,userName,whatsappNumber);
   }
 
 

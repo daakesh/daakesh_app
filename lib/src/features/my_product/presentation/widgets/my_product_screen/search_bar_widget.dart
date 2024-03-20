@@ -3,15 +3,23 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class SearchProductBarWidget extends StatefulWidget {
-  const SearchProductBarWidget({super.key});
+  final TextEditingController searchController;
+  const SearchProductBarWidget({super.key, required this.searchController});
 
   @override
   State<SearchProductBarWidget> createState() => _SearchProductBarWidgetState();
 }
 
 class _SearchProductBarWidgetState extends State<SearchProductBarWidget> {
-  final searchController = TextEditingController();
   Timer? _debounceTimer;
+
+
+  @override
+  void dispose() {
+    widget.searchController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,7 @@ class _SearchProductBarWidgetState extends State<SearchProductBarWidget> {
                     child:Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                       child: TextFormFieldWidget(
-                        controller: searchController,
+                        controller: widget.searchController,
                         isUnderlineOn: true,
                         onChanged: onChange,
                         hintText: 'Search In Your Product',

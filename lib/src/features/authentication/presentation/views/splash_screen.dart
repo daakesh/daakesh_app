@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../src.export.dart';
 
-class SplashScreen extends StatelessWidget {
-  SplashScreen({super.key}){
-    checkLogin();
-  }
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
-  void checkLogin() async {
-    await Future.delayed(const Duration(seconds: 3)).then((value) => checkUserLogin());
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
   }
 
   @override
@@ -38,7 +43,9 @@ class SplashScreen extends StatelessWidget {
       ),
     );
   }
-
+  void checkLogin() async {
+    await Future.delayed(const Duration(seconds: 3)).then((value) => checkUserLogin());
+  }
   void checkUserLogin() {
     if (ValueConstants.userId.isEmpty) {
       openNewPage(const WelcomeScreen(),popPreviousPages: true);
@@ -47,9 +54,8 @@ class SplashScreen extends StatelessWidget {
     getUserData();
     openNewPage(const MainScreen(),popPreviousPages: true);
   }
-
   void getUserData(){
-    AuthBloc.get.add(GetUserDataEvent());
+    UserDataBloc.get.add(GetUserDataEvent());
   }
 }
 

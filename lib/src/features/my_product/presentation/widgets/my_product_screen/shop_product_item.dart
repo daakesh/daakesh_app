@@ -20,7 +20,6 @@ class _ShopProductItemState extends State<ShopProductItem> {
     super.initState();
     priceHandler();
   }
-
   void priceHandler(){
     if(widget.myProductItem.discount == null){
       return;

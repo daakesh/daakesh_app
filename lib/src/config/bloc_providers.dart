@@ -8,8 +8,10 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       ///Auth Blocs
       BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
       BlocProvider<ForgetPassBloc>(create: (_) => ForgetPassBloc()),
+      BlocProvider<UserDataBloc>(create: (_) => UserDataBloc()),
       ///Profile Blocs
       BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
+      BlocProvider<PersonalInfoBloc>(create: (_) => PersonalInfoBloc()),
       ///My Order-Blocs
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
       ///My Product-Blocs
@@ -18,6 +20,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<ProDetailsBloc>(create: (_) => ProDetailsBloc()),
       BlocProvider<MyProFuncBloc>(create: (_) => MyProFuncBloc()),
       BlocProvider<AddProBloc>(create: (_) => AddProBloc()),
+      BlocProvider<SellerInfoBloc>(create: (_) => SellerInfoBloc()),
       ///Home Blocs
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
       BlocProvider<SearchBloc>(create: (_) => SearchBloc()),

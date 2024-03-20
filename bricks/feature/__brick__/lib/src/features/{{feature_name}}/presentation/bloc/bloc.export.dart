@@ -1,0 +1,1 @@
+export '{{feature_name}}_bloc/{{feature_name}}_bloc.export.dart';

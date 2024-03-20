@@ -75,32 +75,32 @@ class AddProModel{
      data['display'] = display.toString();
      data['country_swap'] = countrySwap.toString();
      data['city_swap'] = citySwap.toString();
-     data['itemImg'] = jsonEncode(itemImageList);
+     data['itemImg'] = itemImageList!.join(',');
      return data;
    }
    Map<String, dynamic> editItemToJson() {
      final Map<String, dynamic> data = <String, dynamic>{};
      data['id'] = proId.toString();
      data['description'] = description.toString();
-     data['catID'] = catID.toString();
-     data['secID'] = secID.toString();
-     data['brandID'] = brandID.toString();
+   // data['catID'] = catID.toString();
+   // data['secID'] = secID.toString();
+   //data['brandID'] = brandID.toString();
      data['title'] = title.toString();
      data['tradeOrSell'] = tradeOrSell.toString();
      data['tradeFor'] = tradeFor.toString();
-     data['price'] = price.toString();
+     data['price'] = '123';
      data['condition'] = condition.toString();
      data['city'] = city.toString();
      data['year'] = year.toString();
-     data['discount_from'] = discountFrom.toString();
-     data['discount_to'] = discountTo.toString();
-     data['discount'] = discount.toString();
-     data['country'] = country.toString();
-     data['quantity'] = quantity.toString();
-     data['display'] = display.toString();
-     data['country_swap'] = countrySwap.toString();
-     data['city_swap'] = citySwap.toString();
-     ///data['itemImg'] = jsonEncode(itemImageList);
+   //  data['discount_from'] = discountFrom.toString();
+   //  data['discount_to'] = discountTo.toString();
+   //  data['discount'] = discount.toString();
+   //  data['country'] = country.toString();
+   //  data['quantity'] = quantity.toString();
+   // data['display'] = display.toString();
+   //  data['country_swap'] = countrySwap.toString();
+   //  data['city_swap'] = citySwap.toString();
+     data['itemImg'] = itemImageList!.join(',');
      return data;
    }
 }

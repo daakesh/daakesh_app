@@ -78,6 +78,9 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
     ..userID =ValueConstants.userId
      ..proId = proID
     ..title = state.productName
+    ..tradeFor ='TV'
+    ..condition = 'NEW'
+    ..city = 'Amman'
     ..description = state.productDescription
     ..secID =state.productSecID
     ..catID = state.productCatID
@@ -113,7 +116,27 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       getIt.get<EditProduct>().clearData();
       MyProFuncBloc.get.add(ResetValuesEvent());
       openNewPage(const ProAddSuccessScreen(),popPreviousPages: true);
-      emit(state.copyWith(addProStateStatus: AddProStateStatus.SUCCESS));
+      emit(state.copyWith(
+        addProStateStatus: AddProStateStatus.SUCCESS,
+        productSecID: '',
+        productName: '',
+        productDescription: '',
+        productCatID: '',
+        productSubCatID: '',
+        productBrandID: '',
+        productModelYear: '',
+        proImages: [],
+        displayMethod: ProductDisplayMethod.Sell,
+        productQuantity:'',
+        productPrice:'',
+        productDiscount:'',
+        fromDate:'',
+        toDate:'',
+        displayProduct:'',
+        swapCountry:'Jordan',
+        swapCity:'Amman',
+        shipToCountry:'',
+      ));
     });
   }
 

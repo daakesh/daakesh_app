@@ -7,6 +7,7 @@ import '../../../../../src.export.dart';
 class PassDataBloc extends Bloc<PassDataEvent, PassDataState> {
   PassDataBloc() : super(const PassDataState()) {
     on<PassTodayDealDataEvent>(_passTodayDealData);
+    on<ZoomInOutEvent>(_zoomInOut);
     on<PassSectionSubCategoriesEvent>(_passSectionSubCategories);
     on<PreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
     on<SelectProductPropertiesEvent>(_selectProductProperties);
@@ -48,4 +49,13 @@ class PassDataBloc extends Bloc<PassDataEvent, PassDataState> {
 
 
 
+
+  FutureOr<void> _zoomInOut(ZoomInOutEvent event, Emitter<PassDataState> emit) {
+    double scale = state.scale;
+    if(scale == 3){
+      scale = 0;
+    }
+    scale++;
+    emit(state.copyWith(scale:scale));
+  }
 }

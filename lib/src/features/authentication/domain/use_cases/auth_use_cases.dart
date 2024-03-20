@@ -10,6 +10,8 @@ abstract class AuthUseCases {
   Future<Either<Failure, ValidResponse>> isPhoneNumberExist(String phoneNumber);
   Future<Either<Failure, ValidResponse>> updatePassword(String phoneNumber,String password);
   Future<Either<Failure, ValidResponse>> getUserData();
+  Future<Either<Failure, ValidResponse>> logout();
+
 }
 
 @dev
@@ -41,6 +43,10 @@ class AuthUseCasesImpl implements AuthUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getUserData()async{
     return await getIt.get<AuthRepository>().getUserData();
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> logout()async{
+    return await getIt.get<AuthRepository>().logout();
   }
 
 }

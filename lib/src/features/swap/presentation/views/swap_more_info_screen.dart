@@ -17,10 +17,7 @@ class _SwapMoreInfoScreenState extends State<SwapMoreInfoScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       keyboardDismissBehavior:ScrollViewKeyboardDismissBehavior.onDrag ,
-      child: InkWell(
-        focusColor: ColorName.transparent,
-        highlightColor: ColorName.transparent,
-        splashColor: ColorName.transparent,
+      child: GestureDetector(
         onTap: ()=>context.disMissKeyboard,
         child: BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
           builder: (_, state) {

@@ -20,7 +20,6 @@ class TodayDealProduct extends StatelessWidget {
         PassDataBloc.get.add(DetermentTodayDealEvent(isDaakeshTodayDeal:isDaakeshTodayDeal));
         HomeBloc.get.add(GetToTopScreenEvent());
         HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.PRODUCTDETAILS));
-
       },
       child: Column(
         children: [
@@ -194,7 +193,7 @@ class TodayDealProduct extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text('By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp, color: ColorName.gray)),
-                            Flexible(child: Text('NF Store',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp,overflow: TextOverflow.ellipsis))),
+                            Flexible(child: Text('${todayDealItem.user!.name}',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp,overflow: TextOverflow.ellipsis))),
                              SizedBox(width: 8.0.w,),
                           ],
                         ),

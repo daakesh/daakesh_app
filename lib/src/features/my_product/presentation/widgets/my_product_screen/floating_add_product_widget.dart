@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class FloatingAddProductWidget extends StatelessWidget {
-  const FloatingAddProductWidget({super.key});
+  final TextEditingController searchController;
+  const FloatingAddProductWidget({super.key, required this.searchController});
 
   @override
   Widget build(BuildContext context) {
@@ -10,6 +11,8 @@ class FloatingAddProductWidget extends StatelessWidget {
       onTap: (){
         AddProBloc.get.add(AddEditStateEvent(adjustProduct:AdjustProduct.ADD ));
         openNewPage(const AddProInfoScreen());
+        MyProFuncBloc.get.add(EmptyProductSearchEvent(value: ''));
+        searchController.clear();
       },
       child: SizedBox(
         width: 120.0.w,

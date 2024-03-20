@@ -16,6 +16,7 @@ class SwapPassDataState extends Equatable {
   final List<SwapSubCategory> swapSubCategoryListData;
   final List<TrendDealsItem> trendDealsListData;
   final int sliderIndex;
+  final double scale;
 
   const SwapPassDataState({
     this.swapPassDataStatus = SwapPassDataStateStatus.INITIAL,
@@ -23,6 +24,7 @@ class SwapPassDataState extends Equatable {
     this.swapSubCategoryListData = const[],
     this.trendDealsListData = const[],
     this.sliderIndex = 0,
+    this.scale = 1.0,
 
   });
 
@@ -32,6 +34,7 @@ class SwapPassDataState extends Equatable {
     List<SwapSubCategory>? swapSubCategoryListData,
     List<TrendDealsItem>? trendDealsListData,
     int? sliderIndex,
+    double? scale,
   }) {
     return SwapPassDataState(
       swapPassDataStatus: swapPassDataStatus ?? this.swapPassDataStatus,
@@ -39,6 +42,7 @@ class SwapPassDataState extends Equatable {
       swapSubCategoryListData: swapSubCategoryListData ?? this.swapSubCategoryListData,
       trendDealsListData: trendDealsListData ?? this.trendDealsListData,
       sliderIndex: sliderIndex ?? this.sliderIndex,
+      scale: scale ?? this.scale,
 
     );
   }
@@ -50,5 +54,6 @@ class SwapPassDataState extends Equatable {
     swapSubCategoryListData,
     trendDealsListData,
     sliderIndex,
+    scale,
   ];
 }

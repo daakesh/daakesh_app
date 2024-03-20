@@ -63,6 +63,7 @@ class RemoteMyProductDatasource implements MyProductDatasource {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/item/SearchItems',
         params: {
+          "id":ValueConstants.userId,
           "name": searchValue,
           "page": '$page',
         });
@@ -106,5 +107,29 @@ class RemoteMyProductDatasource implements MyProductDatasource {
     );
     return result;
   }
+  @override
+  Future<Either<Failure, ValidResponse>> getSellerInfo() async {
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/user/getSellerInfo',
+      params: {
+          "id":ValueConstants.userId,
+      }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> updateSellerInfo(String phoneNumber,String userName,String whatsappNumber) async {
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/user/UpdateSellerInfo',
+      body: {
+          "userID":ValueConstants.userId,
+          "phoneNumber":phoneNumber,
+          "userName":userName,
+          "whatsappNumber":whatsappNumber,
+      }
+    );
+    return result;
+  }
+
 
 }

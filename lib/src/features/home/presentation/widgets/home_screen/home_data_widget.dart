@@ -150,9 +150,9 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.6,
+                      childAspectRatio: 0.65,
                       mainAxisSpacing: 8.0,
-                      crossAxisSpacing: 10.0
+                      crossAxisSpacing: 8.0
                   )),
             );
           },

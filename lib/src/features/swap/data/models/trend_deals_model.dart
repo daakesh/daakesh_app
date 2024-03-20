@@ -85,6 +85,10 @@ class TrendDealsItem {
 
   TrendDealsItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    if(json['itemImg'] != null){
+      itemImg = <String>[];
+      itemImg = (json['itemImg']as List<dynamic>).map((e) => e.toString()).toList();
+    }
     description = json['description'];
     date = json['date'];
     title = json['Title'];

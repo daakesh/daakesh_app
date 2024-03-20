@@ -72,6 +72,16 @@ class RemoteAuthDatasource implements AuthDatasource {
     );
     return result;
   }
+  @override
+  Future<Either<Failure, ValidResponse>> logout() async{
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/user/logout',
+      params: {
+        "id":user.userData.id
+      },
+    );
+    return result;
+  }
 
 
 

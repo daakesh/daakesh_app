@@ -1,7 +1,6 @@
 import 'package:daakesh/src/src.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>(debugLabel: 'Key to navigate without context');
 ThemeData get easyTheme => Theme.of(navigatorKey.currentState!.context);
 
@@ -25,7 +24,7 @@ class AppWidget extends StatelessWidget {
               localizationsDelegates: context.localizationsDelegates,
               supportedLocales: context.supportedLocales,
               navigatorKey: navigatorKey,
-              home:  SplashScreen(),
+              home:  const SplashScreen(),
             );
           }
       ),

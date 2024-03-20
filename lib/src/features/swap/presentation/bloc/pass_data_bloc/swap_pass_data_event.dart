@@ -22,3 +22,4 @@ class SwapPreviewSectionSubCategoriesEvent extends SwapPassDataEvent{
   final int index;
   SwapPreviewSectionSubCategoriesEvent({required this.index});
 }
+class SwapZoomInOutEvent extends SwapPassDataEvent{}

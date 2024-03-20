@@ -20,6 +20,7 @@ class PassDataState extends Equatable {
   final int productSizeIndex;
   ///
   final bool isDaakeshTodayDeal;
+  final double scale;
 
   const PassDataState({
     this.passDataStateStatus = PassDataStateStatus.INITIAL,
@@ -31,6 +32,7 @@ class PassDataState extends Equatable {
     this.productSizeIndex = 0,
     ///
     this.isDaakeshTodayDeal = false,
+    this.scale = 1.0,
 
   });
 
@@ -43,6 +45,7 @@ class PassDataState extends Equatable {
     int? productSliderIndex,
     int? productSizeIndex,
     bool? isDaakeshTodayDeal,
+    double? scale,
   }) {
     return PassDataState(
       passDataStateStatus: passDataStateStatus ?? this.passDataStateStatus,
@@ -53,6 +56,7 @@ class PassDataState extends Equatable {
       productSizeIndex: productSizeIndex ?? this.productSizeIndex,
       ///
       isDaakeshTodayDeal: isDaakeshTodayDeal ?? this.isDaakeshTodayDeal,
+      scale: scale ?? this.scale,
 
     );
   }
@@ -66,6 +70,7 @@ class PassDataState extends Equatable {
     productSliderIndex,
     productSizeIndex,
     ///
-    isDaakeshTodayDeal
+    isDaakeshTodayDeal,
+    scale,
   ];
 }

@@ -49,11 +49,14 @@ class UserDataImpl implements UserData {
 
   @override
   void logOut() async {
+    UserDataBloc.get.add(LogoutUserEvent());
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 2));
     ProgressCircleDialog.dismiss();
+    ValueConstants.token ='';
     ValueConstants.userId ='';
-    prefs.removeData('userId').then((value) => openNewPage(SplashScreen(), popPreviousPages: true));
+    await prefs.removeData('token');
+    prefs.removeData('userId').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
   }
 
 

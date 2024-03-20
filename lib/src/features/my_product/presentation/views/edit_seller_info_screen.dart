@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
 
-class EditSellerInfoScreen extends StatelessWidget {
-   EditSellerInfoScreen({super.key});
+class EditSellerInfoScreen extends StatefulWidget {
+  final SellerInfoData sellerInfoData;
+   const EditSellerInfoScreen({super.key, required this.sellerInfoData});
 
+  @override
+  State<EditSellerInfoScreen> createState() => _EditSellerInfoScreenState();
+}
+
+class _EditSellerInfoScreenState extends State<EditSellerInfoScreen> {
   final nameSellerController = TextEditingController();
   final phoneController = TextEditingController();
   final whatsAppController = TextEditingController();
-
   final FocusNode nameSellerFocusNode= FocusNode();
   final FocusNode phoneFocusNode = FocusNode();
   final FocusNode whatsAppFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    nameSellerController.text = widget.sellerInfoData.userName.toString();
+    phoneController.text = widget.sellerInfoData.usedPhone.toString();
+    whatsAppController.text = widget.sellerInfoData.usedPhone.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,16 +118,15 @@ class EditSellerInfoScreen extends StatelessWidget {
   }
 
   void onMakeEdit()async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
-    ProgressCircleDialog.dismiss();
-    getBack();
+    SellerInfoBloc.get.add(EditSellerInfoEvent(
+      userName: nameSellerController.text,
+      phoneNumber: phoneController.text,
+      whatsappNumber: whatsAppController.text,
+    ));
   }
-  void cancel(){
-    getBack();
-    resetData();
-  }
-  void resetData(){}
 
+  void cancel(){
+    Navigator.pop(context);
+  }
 
 }

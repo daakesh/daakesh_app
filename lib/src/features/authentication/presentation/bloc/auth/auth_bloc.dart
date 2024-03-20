@@ -6,7 +6,6 @@ import '../../../../../src.export.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(const AuthState()) {
     on<OnLoginEvent>(_onLogin);
-    on<GetUserDataEvent>(_getUserData);
     on<EnterPersonalInfoEvent>(_enterPersonalInfo);
     on<EnterLocationInfoEvent>(_enterLocationInfo);
     on<ChangeFlagEvent>(_changeCountryFlag);
@@ -30,16 +29,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
       ProgressCircleDialog.dismiss();
     }, (r) async{
-      if(!r.status!){
         ProgressCircleDialog.dismiss();
+      if(!r.status!){
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      ProgressCircleDialog.dismiss();
       saveRememberData(state.rememberMeValue,event.phoneNumber,event.password);
       UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
       user.setUserDataAndCheckIsActive(userModel);
-      emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
+      emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS,));
     });
   }
   void saveRememberData(bool rememberMeValue,String phoneNumber,String password)async{
@@ -51,23 +49,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await getIt.get<SecureSharedPref>().write('REMEMBER_ME_PASSWORD', '');
     }
   }
-  ///Get User Data Event,
-  FutureOr<void> _getUserData(GetUserDataEvent event, Emitter<AuthState> emit) async{
-    emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
-    final result = await getIt.get<AuthUseCases>().getUserData();
-    result.fold((l) {
-      emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
-        return;
-      }
-      UserModel userModel =UserModel.fromJson(r.data['data'] as Map<String,dynamic>);
-      user.setUserData(userModel);
-      emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
-    });
-  }
+
   ///Insert Personal info such as {Name, Email, Password}.
   FutureOr<void> _enterPersonalInfo(EnterPersonalInfoEvent event, Emitter<AuthState> emit)async {
     emit(state.copyWith(

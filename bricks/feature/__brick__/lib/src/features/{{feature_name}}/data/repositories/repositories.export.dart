@@ -1,0 +1,1 @@
+export '{{feature_name}}_repository_impl.dart';

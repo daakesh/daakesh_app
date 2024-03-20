@@ -15,6 +15,16 @@ class _SwapScreenState extends State<SwapScreen> {
 
 
   @override
+  void initState() {
+    super.initState();
+    getSwapScreenData();
+  }
+  void getSwapScreenData(){
+    SwapAdvBloc.get.add(SwapGetAdvertisementDataEvent());
+    SwapBloc.get.add(SwapGetSectionDataEvent());
+    TrendDealsBloc.get.add(GetTrendDealsDataEvent());
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(

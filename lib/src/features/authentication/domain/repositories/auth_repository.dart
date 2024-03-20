@@ -7,6 +7,7 @@ abstract class AuthRepository {
   Future<Either<Failure, ValidResponse>> activateUser(String id);
   Future<Either<Failure, ValidResponse>> isPhoneNumberExist(String phoneNumber);
   Future<Either<Failure, ValidResponse>> updatePassword(String phoneNumber,String password);
-
   Future<Either<Failure, ValidResponse>> getUserData();
+  Future<Either<Failure, ValidResponse>> logout();
+
 }

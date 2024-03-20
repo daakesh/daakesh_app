@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class AddProInfoScreen extends StatefulWidget {
@@ -151,6 +150,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
       productDescriptionController.text = getIt.get<EditProduct>().myProductItem!.description.toString();
     }
   }
-  void resetData(){}
+  void resetData(){
+  }
 
 }

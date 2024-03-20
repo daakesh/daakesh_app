@@ -8,6 +8,7 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
     on<ChangeProductSliderIndex>(_changeProductSliderIndex);
     on<SwapPassSectionSubCategoriesEvent>(_passSectionSubCategories);
     on<SwapPreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
+    on<SwapZoomInOutEvent>(_zoomInOut);
   }
   static SwapPassDataBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
 
@@ -27,6 +28,14 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
     List<SwapSubCategory> swapSubCategoryListData = <SwapSubCategory>[];
     swapSubCategoryListData = state.swapCategoriesListData.elementAt(event.index).swapSubCategoryList!.toList();
     emit(state.copyWith(swapSubCategoryListData: swapSubCategoryListData));
+  }
+  FutureOr<void> _zoomInOut(SwapZoomInOutEvent event, Emitter<SwapPassDataState> emit) {
+    double scale = state.scale;
+    if(scale == 3){
+      scale = 0;
+    }
+    scale++;
+    emit(state.copyWith(scale:scale));
   }
 
 }

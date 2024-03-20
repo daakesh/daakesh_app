@@ -5,7 +5,8 @@ import '../../../../../src.export.dart';
 
 class ProductCarousalSlider extends StatelessWidget {
   final PassDataState state;
-  ProductCarousalSlider({super.key, required this.state});
+   ProductCarousalSlider({super.key, required this.state});
+
   final controller = CarouselController();
 
   @override
@@ -36,20 +37,22 @@ class ProductCarousalSlider extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              Align(
-                alignment: AlignmentDirectional.bottomEnd,
-                child: Assets.svg.zoomInIcon.svg(),
+              GestureDetector(
+                onTap: ()=>PassDataBloc.get.add(ZoomInOutEvent()),
+                child: Align(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  child: Assets.svg.zoomInIcon.svg(),
+                ),
               ),
             ],
           ),
         ),
         const SizedBox(height: 12.0,),
-
         CarouselSlider(
           carouselController: controller,
           options: CarouselOptions(
-              height: 250.0,
               viewportFraction: 1,
+              height: 250.0,
               initialPage: 0,
               scrollDirection: Axis.horizontal,
               onPageChanged: (index, reason) {
@@ -57,9 +60,14 @@ class ProductCarousalSlider extends StatelessWidget {
               }),
           items: state.todayItem.first.itemImg!.map((i) {
             return Builder(
-              builder: (BuildContext context) {
-                return CachedImage(imageUrl: i.toString());
-              },
+              builder: (context) {
+                return Transform.scale(
+                  scale: state.scale,
+                  child: CachedImage(
+                    imageUrl: i.toString(),
+                  ),
+                );
+              }
             );
           }).toList(),
         ),
@@ -81,6 +89,8 @@ class ProductCarousalSlider extends StatelessWidget {
             );
           }).toList(),
         ),
+
+
       ],
     );
   }

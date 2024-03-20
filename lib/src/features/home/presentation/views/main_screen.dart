@@ -23,8 +23,16 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    getAllData();
+    getHomeScreenData();
   }
+  void getHomeScreenData(){
+    AdvBloc.get.add(GetAdvertisementDataEvent());
+    HomeBloc.get.add(GetSectionDataEvent());
+    HandmadeBloc.get.add(GetHandmadeDataEvent());
+    BrandsBloc.get.add(GetBrandsDataEvent());
+    TodayDealsBloc.get.add(GetToadyDealsDataEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -56,27 +64,6 @@ class _MainScreenState extends State<MainScreen> {
                 topLeft: Radius.circular(6.0), topRight: Radius.circular(6.0))),
       ),
     );
-  }
-  void getAllData(){
-    getHomeScreenData();
-    getSwapScreenData();
-    getMyProductScreenData();
-  }
-  void getHomeScreenData(){
-    AdvBloc.get.add(GetAdvertisementDataEvent());
-    HomeBloc.get.add(GetSectionDataEvent());
-    HandmadeBloc.get.add(GetHandmadeDataEvent());
-    BrandsBloc.get.add(GetBrandsDataEvent());
-    TodayDealsBloc.get.add(GetToadyDealsDataEvent());
-  }
-  void getSwapScreenData(){
-    SwapAdvBloc.get.add(SwapGetAdvertisementDataEvent());
-    SwapBloc.get.add(SwapGetSectionDataEvent());
-    TrendDealsBloc.get.add(GetTrendDealsDataEvent());
-  }
-  void getMyProductScreenData(){
-    MyProBloc.get.add(GetMyProductEvent());
-    MySwapProBloc.get.add(GetMySwapProEvent());
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems(context) {

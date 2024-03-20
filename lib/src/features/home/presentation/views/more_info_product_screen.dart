@@ -17,6 +17,7 @@ class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       keyboardDismissBehavior:ScrollViewKeyboardDismissBehavior.onDrag ,
+
       child: GestureDetector(
         onTap: ()=>context.disMissKeyboard,
         child: Padding(

@@ -59,7 +59,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                   ),
                 ),
                 CachedImage(
-                  imageUrl: trendDealsItem.itemImg.toString(),
+                  imageUrl: trendDealsItem.itemImg!.first.toString(),
                   height: 85.0,
                   width: 85.0,
                 ),
@@ -111,38 +111,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                       overflow: TextOverflow.ellipsis),
                 ),
                 const SizedBox(
-                  height: 2.0,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Flexible(
-                        child: Text(
-                      '\$${trendDealsItem.price}',
-                      style: easyTheme.textTheme.bodyMedium!
-                          .copyWith(fontSize: 20.0,fontWeight: FontWeight.w600,),
-                      overflow: TextOverflow.ellipsis,
-                    )),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4.0),
-                      child: Row(
-                        children: [
-                          Text('99 ',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 12.0, color: ColorName.gray,),),
-                          Text(
-                            '\$79.99',
-                            style: easyTheme.textTheme.headlineMedium!.copyWith(
-                                fontSize: 14.0.sp,
-                                decoration: TextDecoration.lineThrough,
-                                color: ColorName.gray,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 9.0,
+                  height: 11.0,
                 ),
                 FittedBox(
                   fit: BoxFit.scaleDown,
@@ -175,7 +144,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text('By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp, color: ColorName.gray)),
-                            Flexible(child: Text('JAMSE ALFA',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp,overflow: TextOverflow.ellipsis))),
+                            Flexible(child: Text('${trendDealsItem.user!.name}',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp,overflow: TextOverflow.ellipsis))),
                              SizedBox(width: 8.0.w,),
                           ],
                         ),

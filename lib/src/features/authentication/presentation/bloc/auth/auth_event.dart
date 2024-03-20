@@ -10,8 +10,7 @@ class OnLoginEvent extends AuthEvent {
     required this.password,
   });
 }
-///Get user data
-class GetUserDataEvent extends AuthEvent {}
+
 ///SignUp Events
 class EnterPersonalInfoEvent extends AuthEvent{
   final String name;
