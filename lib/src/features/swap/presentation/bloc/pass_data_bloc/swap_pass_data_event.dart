@@ -23,3 +23,19 @@ class SwapPreviewSectionSubCategoriesEvent extends SwapPassDataEvent{
   SwapPreviewSectionSubCategoriesEvent({required this.index});
 }
 class SwapZoomInOutEvent extends SwapPassDataEvent{}
+
+class PassMySwapProductListEvent extends SwapPassDataEvent{
+  final List<MyProductItem> mySwapProductData;
+  PassMySwapProductListEvent({ this.mySwapProductData = const[]});
+}
+
+class PassMySwapProductDataEvent extends SwapPassDataEvent{
+  final int index;
+  PassMySwapProductDataEvent({ this.index = 0});
+}
+
+class PassSwapCommentEvent extends SwapPassDataEvent{
+  final String comment;
+  PassSwapCommentEvent({required this.comment});
+}
+

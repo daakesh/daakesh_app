@@ -88,6 +88,7 @@ class _SwapMoreInfoScreenState extends State<SwapMoreInfoScreen> {
   }
 
   void onSendOffer() {
+    SwapProBloc.get.add(GetSwapProductEvent());
     SwapBloc.get.add(SwapGetToTopScreenEvent());
     SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.SENDOFFER));
   }

@@ -30,6 +30,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<TodayDealsBloc>(create: (_) => TodayDealsBloc()),
       BlocProvider<PassDataBloc>(create: (_) => PassDataBloc()),
       BlocProvider<AdvBloc>(create: (_) => AdvBloc()),
+      BlocProvider<ShippingBloc>(create: (_) => ShippingBloc()),
       ///BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<RateBloc>(create: (_) => RateBloc()),
 
@@ -40,6 +41,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<TrendDealsBloc>(create: (_) => TrendDealsBloc()),
       BlocProvider<SwapPassDataBloc>(create: (_) => SwapPassDataBloc()),
       BlocProvider<SwapAdvBloc>(create: (_) => SwapAdvBloc()),
+      BlocProvider<SwapProBloc>(create: (_) => SwapProBloc()),
       ///BlocProvider<SwapCommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<SwapRateBloc>(create: (_) => RateBloc()),
 

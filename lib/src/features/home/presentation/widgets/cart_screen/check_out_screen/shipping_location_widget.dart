@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../../src.export.dart';
 
 class ShippingLocationWidget extends StatelessWidget {
@@ -32,16 +33,15 @@ class ShippingLocationWidget extends StatelessWidget {
                 const Icon(Icons.location_on,color: ColorName.amber,),
                 Text('Shipping',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 22.0),),
                 const Spacer(flex: 1,),
-                isWithEdit ? InkWell(
-                    focusColor: ColorName.transparent,
-                    highlightColor: ColorName.transparent,
-                    splashColor: ColorName.transparent,
-                    onTap: (){},
+                isWithEdit
+                    ? GestureDetector(
+                    onTap: ()=>editShipping(context),
                     child: Text(
                       'Edit',
                       style: easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
-                    )):const SizedBox(),
+                    ))
+                    : const SizedBox(),
                 const SizedBox(width: 10.0,)
               ],
             ),
@@ -108,4 +108,13 @@ class ShippingLocationWidget extends StatelessWidget {
       ),
     );
   }
+
+  void editShipping(context) {
+    PersistentNavBarNavigator.pushNewScreen(
+      context,
+      screen:  AdjustShippingScreen(),
+      withNavBar: true, // OPTIONAL VALUE. True by default.
+    );
+  }
+
 }

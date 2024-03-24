@@ -77,9 +77,6 @@ class CartScreen extends StatelessWidget {
     );
   }
   void openCheckOutScreen(context)async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: const CheckOutScreen(),

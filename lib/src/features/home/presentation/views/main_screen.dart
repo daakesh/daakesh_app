@@ -43,14 +43,14 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: ColorName.white,
         screens: _screens,
         items: _navBarsItems(context),
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         stateManagement: true,
-        hideNavigationBarWhenKeyboardShows: false,
+        hideNavigationBarWhenKeyboardShows: true,
         popAllScreensOnTapOfSelectedTab: true,
         popActionScreens: PopActionScreensType.all,
         navBarStyle: NavBarStyle.style15,
         padding: const NavBarPadding.only(bottom: 12.0),
-        navBarHeight: 77,
+        navBarHeight:isOpenKeyboard(context ) ? 77: 0.0,
         decoration: const NavBarDecoration(
             boxShadow: [
               BoxShadow(

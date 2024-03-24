@@ -32,6 +32,10 @@ class SwapRepositoryImpl implements SwapRepository {
   Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
     return await getIt.get<SwapDatasource>().searchOnItems(searchValue,page,perPage);
   }
+  @override
+  Future<Either<Failure, ValidResponse>> getMySwapProduct(int page) async {
+    return await getIt.get<SwapDatasource>().getMySwapProduct(page);
+  }
   ///Comment API.
   @override
   Future<Either<Failure, ValidResponse>> addComment(int userId, int itemId, String commentDesc) async{

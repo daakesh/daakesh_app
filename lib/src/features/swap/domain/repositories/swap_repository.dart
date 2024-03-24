@@ -9,6 +9,7 @@ abstract class SwapRepository {
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getTodayItemsData(int page);
   Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage);
+  Future<Either<Failure, ValidResponse>> getMySwapProduct(int page);
   ///Comment API
   Future<Either<Failure, ValidResponse>> addComment(int userId,int itemId,String commentDesc);
   Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID);

@@ -33,11 +33,8 @@ class YourCartItemWidget extends StatelessWidget {
                 const Icon(Icons.shopping_cart_outlined,color: ColorName.amber,),
                 Text('Your Cart',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 22.0),),
                 const Spacer(flex: 1,),
-                isWithEdit ? InkWell(
-                  focusColor: ColorName.transparent,
-                  highlightColor: ColorName.transparent,
-                  splashColor: ColorName.transparent,
-                  onTap: (){},
+                isWithEdit ? GestureDetector(
+                  onTap: ()=>Navigator.pop(context),
                     child: Text(
                   'Edit',
                   style: easyTheme.textTheme.headlineMedium!

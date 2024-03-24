@@ -42,7 +42,7 @@ class _SwapScreenState extends State<SwapScreen> {
              case SwapScreenState.CART: return const SwapCartScreen();
              case SwapScreenState.SECTIONS: return SwapSectionScreen(swapState: state,);
              case SwapScreenState.PRODUCTDETAILS: return const SwapMoreInfoScreen();
-             case SwapScreenState.SENDOFFER: return const SendOfferScreen();
+             case SwapScreenState.SENDOFFER: return  SendOfferScreen();
              case SwapScreenState.OFFERDETAILS: return const SwapOfferDetailsScreen();
              default:return SwapDataWidget(state: state);
            }

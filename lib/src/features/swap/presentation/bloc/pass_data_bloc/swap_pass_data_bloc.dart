@@ -9,6 +9,9 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
     on<SwapPassSectionSubCategoriesEvent>(_passSectionSubCategories);
     on<SwapPreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
     on<SwapZoomInOutEvent>(_zoomInOut);
+    on<PassMySwapProductDataEvent>(_passMySwapProductData);
+    on<PassSwapCommentEvent>(_passSwapComment);
+    on<PassMySwapProductListEvent>(_passMySwapProductList);
   }
   static SwapPassDataBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
 
@@ -20,7 +23,6 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
   FutureOr<void> _changeProductSliderIndex(ChangeProductSliderIndex event, Emitter<SwapPassDataState> emit) {
     emit(state.copyWith(sliderIndex:event.sliderIndex));
   }
-
   FutureOr<void> _passSectionSubCategories(SwapPassSectionSubCategoriesEvent event, Emitter<SwapPassDataState> emit){
     emit(state.copyWith(swapCategoriesListData: event.swapCategoriesListData));
   }
@@ -37,5 +39,18 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
     scale++;
     emit(state.copyWith(scale:scale));
   }
+  FutureOr<void> _passMySwapProductData(PassMySwapProductDataEvent event, Emitter<SwapPassDataState> emit) {
+    List<MyProductItem> mySwapProductData = state.mySwapProductData.toList();
+    List<MyProductItem> itemSelected = <MyProductItem>[];
+    MyProductItem item =mySwapProductData.elementAt(event.index) ;
+    itemSelected.add(item);
+    emit(state.copyWith(itemSelected: itemSelected));
+  }
+  FutureOr<void> _passSwapComment(PassSwapCommentEvent event, Emitter<SwapPassDataState> emit) {
+    emit(state.copyWith(comment: event.comment));
+  }
 
+  FutureOr<void> _passMySwapProductList(PassMySwapProductListEvent event, Emitter<SwapPassDataState> emit) {
+    emit(state.copyWith(mySwapProductData: event.mySwapProductData));
+  }
 }
