@@ -7,3 +7,4 @@ export 'home_data_model.dart';
 export 'section_model.dart';
 export 'sub_category_model.dart';
 export 'today_deal_model.dart';
+export 'cart_model.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../src.export.dart';
 
@@ -46,65 +47,60 @@ class YourCartItemWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 3.0,),
-          Padding(
+          BlocBuilder<CartBloc, CartState>(
+  builder: (context, state) {
+    return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 19.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('(2) Item',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 19.0,color: ColorName.dimGray),),
+                Text('(${state.cartItemsList.length}) Item',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 19.0,color: ColorName.dimGray),),
                 const SizedBox(height: 6.0,),
-                Row(
-                  children: [
-                  Flexible(
-                    flex: 3,
-                      child: Text(
-                        'AquaOasis™ Cool Mist... Humidefier (2.2L Water',
-                        style: easyTheme.textTheme.bodyMedium!
-                            .copyWith(fontSize: 15.0, color: ColorName.dimGray),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                Column(
+                  children: List.generate(
+                    state.cartItemsList.length,
+                    (index) => Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            '${state.cartItemsList[index].item!.title}',
+                            style: easyTheme.textTheme.bodyMedium!.copyWith(
+                                fontSize: 15.0, color: ColorName.dimGray),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 12.0,),
+                        Expanded(
+                          child: Text(
+                            '${state.cartItemsList[index].item!.count}',
+                            style: easyTheme.textTheme.bodyMedium!.copyWith(
+                                fontSize: 15.0, color: ColorName.dimGray),
+                          ),
+                        ),
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: '\$${state.cartItemsList[index].item!.count! * state.cartItemsList[index].item!.price}',
+                                  style: easyTheme.textTheme.labelLarge!
+                                      .copyWith(
+                                          fontSize: 17.0,
+                                          color: ColorName.black)),
+                              TextSpan(
+                                  text: '99',
+                                  style: easyTheme.textTheme.labelLarge!
+                                      .copyWith(
+                                          fontSize: 12.0,
+                                          color: ColorName.gray))
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  const Spacer(flex: 1,),
-                  Text('1',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 15.0,color: ColorName.dimGray),),
-                  const Spacer(flex: 1,),
-                  Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(text: '\$44',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 17.0,color: ColorName.black)),
-                          TextSpan(text: '99',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 12.0,color: ColorName.gray))
-
-
-                        ],
-                      ),
-                    ),
-                  ],),
+                  ),
+                ),
                 const SizedBox(height: 6.0,),
-                Row(
-                  children: [
-                  Flexible(
-                    flex: 3,
-                      child: Text(
-                        'AquaOasis™ Cool Mist... Humidefier (2.2L Water',
-                        style: easyTheme.textTheme.bodyMedium!
-                            .copyWith(fontSize: 15.0, color: ColorName.dimGray),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  const Spacer(flex: 1,),
-                  Text('1',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 15.0,color: ColorName.dimGray),),
-                  const Spacer(flex: 1,),
-                  Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(text: '\$44',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 17.0,color: ColorName.black)),
-                          TextSpan(text: '99',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 12.0,color: ColorName.gray))
-
-
-                        ],
-                      ),
-                    ),
-                  ],),
-                const SizedBox(height: 9.0,),
                 const Divider(color: ColorName.gray,),
                 Row(
                   children: [
@@ -115,7 +111,9 @@ class YourCartItemWidget extends StatelessWidget {
                 const SizedBox(height: 14.0,),
               ],
             ),
-          ),
+          );
+  },
+),
         ],
       ),
     );

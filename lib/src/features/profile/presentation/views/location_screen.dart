@@ -75,7 +75,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     controller: countryController,
                     focusNode: countryFocusNode,
                     isSuffixPrefixOn: true,
-                    enabled: state.isUpdateActive,
+                    enabled: state.isUpdatePersonalActive,
                     suffixIcon: SizedBox(height:9.0 ,width:16.0,child: Center(child: Assets.svg.arrowDropDownIcon.svg()),),
                     prefixIcon: SizedBox(
                           width: 30.0,
@@ -100,7 +100,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   TextFormFieldWidget(
                     controller: cityController,
                     focusNode: cityFocusNode,
-                    enabled: state.isUpdateActive,
+                    enabled: state.isUpdatePersonalActive,
 
                     onFieldSubmitted: (value)=>fieldFocusChange(context,cityFocusNode,addressFocusNode),
                     inputFormatters: [
@@ -112,7 +112,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   TextFormFieldWidget(
                     controller: addressController,
                     focusNode: addressFocusNode,
-                    enabled: state.isUpdateActive,
+                    enabled: state.isUpdatePersonalActive,
                     isSuffixPrefixOn: true,
                     inputFormatters: [
                       RegExpValidator.beginWhitespace,
@@ -133,14 +133,14 @@ class _LocationScreenState extends State<LocationScreen> {
                   const Spacer(flex: 1,),
                   Center(
                     child: DefaultButtonWidget(
-                        text: !state.isUpdateActive ? 'MAKE EDIT':'SAVE', onPressed: ()=>onMakeEdit(state.isUpdateActive)),
+                        text: !state.isUpdatePersonalActive ? 'MAKE EDIT':'SAVE', onPressed: ()=>onMakeEdit(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(
                     height: 12.0,
                   ),
                   Center(
                     child:
-                    OutlineButtonWidget(text: !state.isUpdateActive ? 'Cancel':'RESET AND CANCEL', onPressed: ()=>cancel(state.isUpdateActive)),
+                    OutlineButtonWidget(text: !state.isUpdatePersonalActive ? 'Cancel':'RESET AND CANCEL', onPressed: ()=>cancel(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(
                     height: 50.0,

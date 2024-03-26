@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
              case HomeScreenState.SEARCH: return const SearchScreen();
              case HomeScreenState.SUBCATEGORYRESULT: return const ResultsScreen();
              case HomeScreenState.CART: return const CartScreen();
-             case HomeScreenState.PRODUCTDETAILS: return const MoreInfoProductScreen();
+             case HomeScreenState.PRODUCTDETAILS: return MoreInfoProductScreen();
              case HomeScreenState.SECTIONS: return SectionScreen(homeState: state,);
              case HomeScreenState.SHOPBYBRANDS: return const ShopByBrandsScreen();
              case HomeScreenState.HOMEMADE: return const HomemadeScreen();

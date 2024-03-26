@@ -43,6 +43,47 @@ class RemoteProfileDatasource implements ProfileDatasource {
     );
     return result;
   }
-
-
+  @override
+  Future<Either<Failure, ValidResponse>> addComplaints(String complaintType, String sellerName, String subject, String remark) async {
+    final result = await getIt.get<NetworkService>().post(
+        baseUrl: NetworkConstants.baseUrl,
+        path: 'DaakeshServices/api/complaints/addComplaints',
+        body: {
+          "user_id":ValueConstants.userId,
+          "type": complaintType,
+          "seller_name": sellerName,
+          "subject": subject,
+          "remark": remark,
+        });
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getAllComplaints() async {
+    final result = await getIt.get<NetworkService>().get(
+        baseUrl: NetworkConstants.baseUrl,
+        path: 'DaakeshServices/api/complaints/getAllComplaints'
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getContactInfo() async {
+    final result = await getIt.get<NetworkService>().get(
+        baseUrl: NetworkConstants.baseUrl,
+        path: 'DaakeshServices/api/contactInfos/getContactInfosByUser',
+        params: {"user_id": ValueConstants.userId});
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> addContactInfo() async {
+    final result = await getIt.get<NetworkService>().post(
+        baseUrl: NetworkConstants.baseUrl,
+        path: 'DaakeshServices/api/contactInfos/addContactInfo',
+        body: {
+          "user_id": ValueConstants.userId,
+          "personal_phone_number": '',
+          "commercial_phone_number": '',
+          "whatsapp_commercial_phone_number": '',
+        });
+    return result;
+  }
 }

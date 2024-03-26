@@ -64,6 +64,20 @@ class HomeRepositoryImpl implements HomeRepository {
     return await getIt.get<HomeDatasource>().editRate(id,rateValue);
   }
 
+  @override
+  Future<Either<Failure, ValidResponse>> addToCart(String itemID) async{
+    return await getIt.get<HomeDatasource>().addToCart(itemID);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getCartItemsByUser() async{
+    return await getIt.get<HomeDatasource>().getCartItemsByUser();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeCartItem(String itemID) async{
+    return await getIt.get<HomeDatasource>().removeCartItem(itemID);
+  }
+
 
 
 

@@ -31,7 +31,10 @@ class _MainScreenState extends State<MainScreen> {
     HandmadeBloc.get.add(GetHandmadeDataEvent());
     BrandsBloc.get.add(GetBrandsDataEvent());
     TodayDealsBloc.get.add(GetToadyDealsDataEvent());
+    CartBloc.get.add(GetCartItemsEvent());
+    ContactInfoBloc.get.add(GetContactInfoEvent());
   }
+
 
   @override
   Widget build(BuildContext context) {

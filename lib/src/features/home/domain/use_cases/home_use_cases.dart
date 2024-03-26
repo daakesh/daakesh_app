@@ -20,6 +20,13 @@ abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> addRate(int itemId,int userId,int catID,int rateValue);
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId,int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id,int rateValue);
+  ///Cart API
+  Future<Either<Failure,ValidResponse>> addToCart(String itemID);
+  Future<Either<Failure,ValidResponse>> getCartItemsByUser();
+  Future<Either<Failure,ValidResponse>> removeCartItem(String itemID);
+
+
+
 }
 
 @dev
@@ -84,6 +91,22 @@ class HomeUseCasesImpl implements HomeUseCases {
     return await getIt.get<HomeRepository>().getRateByItem(itemId,userId);
 
   }
+  ///Cart APIs.
+  @override
+  Future<Either<Failure, ValidResponse>> addToCart(String itemID) async{
+    return await getIt.get<HomeRepository>().addToCart(itemID);
+  }
+
+  @override
+  Future<Either<Failure,ValidResponse>> getCartItemsByUser()async{
+    return await getIt.get<HomeRepository>().getCartItemsByUser();
+  }
+
+  @override
+  Future<Either<Failure,ValidResponse>> removeCartItem(String itemID)async{
+    return await getIt.get<HomeRepository>().removeCartItem(itemID);
+  }
+
 
 }
 

@@ -7,11 +7,11 @@ import '../../../../src.export.dart';
 @LazySingleton(as:AuthDatasource)
 class RemoteAuthDatasource implements AuthDatasource {
   @override
-  Future<Either<Failure, ValidResponse>> onLogin(String phoneNumber,String passwordNumber) async {
+  Future<Either<Failure, ValidResponse>> onLogin(String email,String passwordNumber) async {
     final result = await getIt.get<NetworkService>().post(
       path: 'DaakeshServices/api/user/login',
       body: {
-          "phoneNumber": phoneNumber.toString(),
+          "email": email.toString(),
           "password": passwordNumber.toString(),
       }
     );

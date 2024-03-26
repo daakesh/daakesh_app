@@ -4,7 +4,7 @@ import '../../../../src.export.dart';
 
 
 abstract class AuthUseCases {
-  Future<Either<Failure,ValidResponse>> onLogin(String phoneNumber,String passwordNumber);
+  Future<Either<Failure,ValidResponse>> onLogin(String email,String passwordNumber);
   Future<Either<Failure, ValidResponse>> addUser(String name,String email,String password,String phoneNumber,String userType);
   Future<Either<Failure, ValidResponse>> activateUser(String id);
   Future<Either<Failure, ValidResponse>> isPhoneNumberExist(String phoneNumber);
@@ -19,8 +19,8 @@ abstract class AuthUseCases {
 class AuthUseCasesImpl implements AuthUseCases {
 
   @override
-  Future<Either<Failure, ValidResponse>> onLogin(String phoneNumber,String passwordNumber) async {
-    return await getIt.get<AuthRepository>().onLogin(phoneNumber,passwordNumber);
+  Future<Either<Failure, ValidResponse>> onLogin(String email,String passwordNumber) async {
+    return await getIt.get<AuthRepository>().onLogin(email,passwordNumber);
   }
 
   @override

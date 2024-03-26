@@ -64,8 +64,8 @@ class MyProductItem {
   SubCategory? subcategory;
   SectionItemModel? section;
 
-  MyProductItem(
-      {this.id,
+  MyProductItem({
+        this.id,
         this.description,
         this.itemImg,
         this.date,

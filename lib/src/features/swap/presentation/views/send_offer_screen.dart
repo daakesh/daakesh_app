@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../src.export.dart';
 class SendOfferScreen extends StatelessWidget {
-   SendOfferScreen({super.key});
+    SendOfferScreen({super.key});
   final commentController = TextEditingController();
   int itemIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -322,6 +321,4 @@ class SendOfferScreen extends StatelessWidget {
     SwapBloc.get.add(SwapGetToTopScreenEvent());
     SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.OFFERDETAILS));
   }
-
-
 }

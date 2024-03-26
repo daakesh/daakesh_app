@@ -84,7 +84,7 @@ class AddProModel{
      data['description'] = description.toString();
    // data['catID'] = catID.toString();
    // data['secID'] = secID.toString();
-   //data['brandID'] = brandID.toString();
+   // data['brandID'] = brandID.toString();
      data['title'] = title.toString();
      data['tradeOrSell'] = tradeOrSell.toString();
      data['tradeFor'] = tradeFor.toString();
@@ -97,7 +97,7 @@ class AddProModel{
    //  data['discount'] = discount.toString();
    //  data['country'] = country.toString();
    //  data['quantity'] = quantity.toString();
-   // data['display'] = display.toString();
+   //  data['display'] = display.toString();
    //  data['country_swap'] = countrySwap.toString();
    //  data['city_swap'] = citySwap.toString();
      data['itemImg'] = itemImageList!.join(',');

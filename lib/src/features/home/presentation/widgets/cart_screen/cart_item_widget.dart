@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
 class CartItemWidget extends StatelessWidget {
-  const CartItemWidget({super.key});
+  final CartData cartItem;
+  final int index;
+  const CartItemWidget({super.key, required this.cartItem, required this.index,});
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +46,22 @@ class CartItemWidget extends StatelessWidget {
             const SizedBox(width: 12.0,),
 
           ],),
+          const SizedBox(height: 12.0,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(width: 12.0,),
-              Assets.png.glasses.image(height: 90.0,width: 90.0),
+              Expanded(child: CachedImage(imageUrl: cartItem.item!.itemImg!.first.toString())),
               const SizedBox(width: 18.0,),
               Expanded(
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.only(end: 80.0),
                       child: Text(
-                        'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                        '${cartItem.item!.title}\n\n',
                         style: easyTheme.textTheme.labelMedium!.copyWith(
                             fontSize: 14.0,
                             color: ColorName.gray,
@@ -125,25 +130,41 @@ class CartItemWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      height: 28.0,
-                      width: 34.0,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft:Radius.circular(10.0),bottomLeft:Radius.circular(10.0)),
-                          color: ColorName.lightSilver
+                    GestureDetector(
+                      onTap: (){
+                        CartBloc.get.add(DecreaseItemCountEvent(index: index));
+                       // setState(() {});
+                      },
+                      child: Container(
+                        height: 28.0,
+                        width: 34.0,
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(topLeft:Radius.circular(10.0),bottomLeft:Radius.circular(10.0)),
+                            color: ColorName.lightSilver
+                        ),
+                        child: Center(child: Assets.svg.deleteIcon.svg()),
                       ),
-                      child: Center(child: Assets.svg.deleteIcon.svg()),
                     ),
-                    Text('1',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 21.0),),
-                    Container(
-                      height: 28.0,
-                      width: 34.0,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(topRight:Radius.circular(10.0),bottomRight:Radius.circular(10.0)),
-                          color: ColorName.lightSilver
-                      ),
-                      child: Center(child: Assets.svg.plusIcon.svg()),
+                    Text(
+                      '${cartItem.item!.count}',
+                      style: easyTheme.textTheme.labelMedium!
+                          .copyWith(fontSize: 21.0),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        CartBloc.get.add(IncreaseItemCountEvent(index: index));
 
+                      },
+                      child: Container(
+                        height: 28.0,
+                        width: 34.0,
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(topRight:Radius.circular(10.0),bottomRight:Radius.circular(10.0)),
+                            color: ColorName.lightSilver
+                        ),
+                        child: Center(child: Assets.svg.plusIcon.svg()),
+
+                      ),
                     ),
                   ],
                 ),
@@ -153,7 +174,7 @@ class CartItemWidget extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(text: 'Price :',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 21.0)),
-                    TextSpan(text: '\$44',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 21.0)),
+                    TextSpan(text: '\$${cartItem.item!.price *cartItem.item!.count}',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 21.0)),
                     TextSpan(text: '99',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 14.0,color: ColorName.gray)),
                   ],
                 ),
@@ -162,7 +183,6 @@ class CartItemWidget extends StatelessWidget {
 
 
             ],),
-
           const SizedBox(height: 16.0,),
 
 

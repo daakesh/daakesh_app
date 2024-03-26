@@ -61,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 31.0,),
             CategoryItemWidget(onTap: ()=>openNewPage(const PersonalInfoScreen()),title:'Personal Info',icon: Assets.svg.personIcon.svg(),),
-            CategoryItemWidget(onTap: ()=>openNewPage(const ContactInfoScreen()),title:'Contact Info',icon: Assets.svg.profilePhoneIcon.svg(),),
+            CategoryItemWidget(onTap: ()=>openNewPage(ContactInfoScreen()),title:'Contact Info',icon: Assets.svg.profilePhoneIcon.svg(),),
             CategoryItemWidget(onTap: ()=>openNewPage(const CardAndAccountScreen()),title:'Card and Accounts',icon: Assets.svg.profileCreditCardIcon.svg(),),
             CategoryItemWidget(onTap: ()=>openNewPage(const LocationScreen()),title:'Location',icon: Assets.svg.locationPinIcon.svg(),),
             Padding(
@@ -69,7 +69,7 @@ class ProfileScreen extends StatelessWidget {
               child: Text('Support',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize:20.0 ),),
             ),
             const SizedBox(height: 29.0,),
-            CategoryItemWidget(onTap: ()=>openNewPage(const ComplaintScreen()),title:'Complaint',icon: Assets.svg.commentIcon.svg(),),
+            CategoryItemWidget(onTap: ()=>openNewPage( ComplaintScreen()),title:'Complaint',icon: Assets.svg.commentIcon.svg(),),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text('Setting',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize:20.0 ),),
@@ -111,7 +111,6 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
 }
 
 

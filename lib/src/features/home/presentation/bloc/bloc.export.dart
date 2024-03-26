@@ -9,3 +9,4 @@ export 'comment_bloc/comment_bloc.export.dart';
 export 'adv_bloc/adv_bloc.export.dart';
 export 'rate_bloc/rate_bloc.export.dart';
 export 'shipping_bloc/shipping_bloc.export.dart';
+export 'cart_bloc/cart_bloc.export.dart';

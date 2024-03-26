@@ -25,7 +25,7 @@ class SwapCartScreen extends StatelessWidget {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (_, index) {
-                  return const CartItemWidget();
+                  return const SwapCartItemWidget();
                 },
                 childCount: 2,
               ),

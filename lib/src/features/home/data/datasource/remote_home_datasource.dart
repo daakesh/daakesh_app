@@ -145,6 +145,39 @@ class RemoteHomeDatasource implements HomeDatasource {
     return result;
   }
 
+  @override
+  Future<Either<Failure, ValidResponse>> addToCart(String itemID) async{
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/favorite/addFavorite',
+        body: {
+          "userID":ValueConstants.userId,
+          "itemID":itemID,
+        }
+    );
+    return result;
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> removeCartItem(String itemID) async{
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/favorite/removeFavorite',
+        params: {
+          "userID":ValueConstants.userId,
+          "itemID":itemID,
+        }
+    );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCartItemsByUser() async{
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/favorite/getFavoriteForUser',
+        params: {
+          "userID":ValueConstants.userId,
+        }
+    );
+    return result;
+  }
 
 
 

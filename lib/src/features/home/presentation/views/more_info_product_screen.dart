@@ -3,21 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class MoreInfoProductScreen extends StatefulWidget {
-  const MoreInfoProductScreen({super.key});
+class MoreInfoProductScreen extends StatelessWidget {
+   MoreInfoProductScreen({super.key});
 
-  @override
-  State<MoreInfoProductScreen> createState() => _MoreInfoProductScreenState();
-}
-
-class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
   final commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       keyboardDismissBehavior:ScrollViewKeyboardDismissBehavior.onDrag ,
-
       child: GestureDetector(
         onTap: ()=>context.disMissKeyboard,
         child: Padding(
@@ -30,9 +24,9 @@ class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
                   ProductCarousalSlider(state: state),
                   PriceRateSection(state: state),
                   SizeSection(state:state),
-                  DetailsSection(state: state,),
+                  DetailsSection(state: state),
                   !state.isDaakeshTodayDeal
-                      ? Center(child: DefaultButtonWidget(text: 'ADD TO CART', onPressed: (){}))
+                      ? Center(child: DefaultButtonWidget(text: 'ADD TO CART', onPressed: ()=>addToCart(state.todayItem.first.id.toString())))
                       : Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -64,4 +58,10 @@ class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
       ),
     );
   }
+
+  void addToCart(String itemID){
+    CartBloc.get.add(AddToCartEvent(itemID: itemID));
+
+  }
+
 }

@@ -13,6 +13,22 @@ class ProfileRepositoryImpl implements ProfileRepository {
   Future<Either<Failure, ValidResponse>> updateUserPassword(String password,String phoneNumber) async {
     return await getIt.get<ProfileDatasource>().updateUserPassword(password,phoneNumber);
   }
+  @override
+  Future<Either<Failure, ValidResponse>> addComplaints(String complaintType,String sellerName, String subject, String remark) async {
+    return await getIt.get<ProfileDatasource>().addComplaints(complaintType,sellerName,subject,remark);
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getAllComplaints() async {
+    return await getIt.get<ProfileDatasource>().getAllComplaints();
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> getContactInfo() async {
+    return await getIt.get<ProfileDatasource>().getContactInfo();
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> addContactInfo() async {
+    return await getIt.get<ProfileDatasource>().addContactInfo();
+  }
 
 
 

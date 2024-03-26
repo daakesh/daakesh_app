@@ -12,6 +12,8 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       ///Profile Blocs
       BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
       BlocProvider<PersonalInfoBloc>(create: (_) => PersonalInfoBloc()),
+      BlocProvider<ComplaintBloc>(create: (_) => ComplaintBloc()),
+      BlocProvider<ContactInfoBloc>(create: (_) => ContactInfoBloc()),
       ///My Order-Blocs
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
       ///My Product-Blocs
@@ -31,6 +33,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<PassDataBloc>(create: (_) => PassDataBloc()),
       BlocProvider<AdvBloc>(create: (_) => AdvBloc()),
       BlocProvider<ShippingBloc>(create: (_) => ShippingBloc()),
+      BlocProvider<CartBloc>(create: (_) => CartBloc()),
       ///BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<RateBloc>(create: (_) => RateBloc()),
 

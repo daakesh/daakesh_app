@@ -10,9 +10,6 @@ abstract class UserData {
   void get activateUser;
   void get saveUserToken;
   void logOut();
-
-
-
 }
 
 @Singleton(as: UserData)
@@ -44,9 +41,7 @@ class UserDataImpl implements UserData {
   @override
   void get saveUserToken async => await Future.wait<void>([
     prefs.setString('token', userData.token.toString()),
-    prefs.setString('userId', userData.id.toString())],
-  );
-
+    prefs.setString('userId', userData.id.toString())]);
   @override
   void logOut() async {
     UserDataBloc.get.add(LogoutUserEvent());
@@ -58,6 +53,8 @@ class UserDataImpl implements UserData {
     await prefs.removeData('token');
     prefs.removeData('userId').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
   }
+
+
 
 
 

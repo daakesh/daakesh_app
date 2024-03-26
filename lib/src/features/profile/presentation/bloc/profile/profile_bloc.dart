@@ -5,7 +5,6 @@ import '../../../../../src.export.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(const ProfileState()){
     on<ActivateUpdateEvent>(_activateUpdate);
-    on<EditContactInfoEvent>(_editContactInfoEvent);
     on<ChangeLocationFlagEvent>(_changeLocationFlag);
     on<ChangeLangEvent>(_changeLang);
   }
@@ -15,26 +14,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(state.copyWith(
       isUpdatePersonalActive: event.isUpdatePersonalActive,
       ///TODO:return to make it according the BackEnd Data.
-      personalPhoneFlagEmoji : '🇯🇴',
-      personalPhoneCode : '962',
-      commercialPhoneFlagEmoji : '🇯🇴',
-      commercialPhoneCode : '962',
-      whatsAppPhoneFlagEmoji : '🇯🇴',
-      whatsAppPhoneCode : '962',
       locationFlagEmoji : '🇯🇴',
     ));
   }
-  ///This event allows user to change the {Flag, Country code} of contact info at [ContactInfoScreen].
-  FutureOr<void> _editContactInfoEvent(EditContactInfoEvent event, Emitter<ProfileState> emit) {
-    emit(state.copyWith(
-      personalPhoneFlagEmoji: event.personalPhoneFlagEmoji,
-      personalPhoneCode: event.personalPhoneCode,
-      commercialPhoneFlagEmoji: event.commercialPhoneFlagEmoji,
-      commercialPhoneCode: event.commercialPhoneCode,
-      whatsAppPhoneFlagEmoji: event.whatsAppPhoneFlagEmoji,
-      whatsAppPhoneCode: event.whatsAppPhoneCode
-    ));
-  }
+
   ///This event allows user to change the {Country Flag} of Location as [LocationScreen].
   FutureOr<void> _changeLocationFlag(ChangeLocationFlagEvent event, Emitter<ProfileState> emit) {
     emit(state.copyWith(locationFlagEmoji: event.flagEmoji));

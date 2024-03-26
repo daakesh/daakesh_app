@@ -41,7 +41,7 @@ class CardAndAccountScreen extends StatelessWidget {
                     style: easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 16.0),
                   ),
-                  state.isUpdateActive
+                  state.isUpdatePersonalActive
                       ? Padding(
                         padding: const EdgeInsets.only(top: 29.0),
                         child: Text(
@@ -57,7 +57,7 @@ class CardAndAccountScreen extends StatelessWidget {
                   CardItem(title: 'XXXX- 1236', index: 1, activeIndex: 1, onTap: () {},cardType: CardsTypes.VISA),
                   const SizedBox(height: 14.0,),
                   CardItem(title: 'XXXX- 1236', index: 2, activeIndex: 1, onTap: () {},cardType: CardsTypes.MASTERCARD),
-                  state.isUpdateActive
+                  state.isUpdatePersonalActive
                       ? InkWell(
                           splashColor: ColorName.transparent,
                           highlightColor: ColorName.transparent,
@@ -99,14 +99,14 @@ class CardAndAccountScreen extends StatelessWidget {
                   ),
                   Center(
                     child: DefaultButtonWidget(
-                        text: !state.isUpdateActive ? 'MAKE EDIT':'DELETE', onPressed: ()=>onMakeEdit(state.isUpdateActive)),
+                        text: !state.isUpdatePersonalActive ? 'MAKE EDIT':'DELETE', onPressed: ()=>onMakeEdit(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(
                     height: 12.0,
                   ),
                   Center(
                     child:
-                    OutlineButtonWidget(text: 'Cancel', onPressed: ()=>cancel(state.isUpdateActive)),
+                    OutlineButtonWidget(text: 'Cancel', onPressed: ()=>cancel(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(
                     height: 50.0,

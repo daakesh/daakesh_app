@@ -22,19 +22,4 @@ class EditProductImpl implements EditProduct {
   void clearData(){
     myProductItem = null;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
