@@ -16,6 +16,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<ContactInfoBloc>(create: (_) => ContactInfoBloc()),
       ///My Order-Blocs
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
+      BlocProvider<SellOrderBloc>(create: (_) => SellOrderBloc()),
       ///My Product-Blocs
       BlocProvider<MyProBloc>(create: (_) => MyProBloc()),
       BlocProvider<MySwapProBloc>(create: (_) => MySwapProBloc()),

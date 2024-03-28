@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'src/src.export.dart';
@@ -9,7 +8,7 @@ void main() async {
   await Firebase.initializeApp();
   configureDependencies(env: ValueConstants.dev);
   runApp(const AppWidget());
-  //runApp(DevicePreview(builder: (BuildContext context) =>const AppWidget()));
+  ///runApp(DevicePreview(builder: (BuildContext context) =>const AppWidget()));
   Bloc.observer = MyBlocObserver();
 
 }

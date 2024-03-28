@@ -1,4 +1,4 @@
-import 'dart:io';
+// ignore_for_file: constant_identifier_names
 
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';

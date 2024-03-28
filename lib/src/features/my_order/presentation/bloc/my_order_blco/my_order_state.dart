@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../../src.export.dart';
+import '../../../../../src.export.dart';
 
 enum MyOrderStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
 

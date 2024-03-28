@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../src.export.dart';
+// ignore: must_be_immutable
 class SendOfferScreen extends StatelessWidget {
     SendOfferScreen({super.key});
   final commentController = TextEditingController();

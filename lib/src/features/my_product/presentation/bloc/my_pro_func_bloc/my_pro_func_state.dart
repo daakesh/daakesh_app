@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../src.export.dart';
-
 
 enum MyProFuncStateStatus { INITIAL, LOADING, SUCCESS, ERROR,LOADINGMORE,NULL }
 

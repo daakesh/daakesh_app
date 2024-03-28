@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../src.export.dart';
-
 enum SwapRateStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
 
 extension SwapRateStateStatusX on SwapRateStateStatus{

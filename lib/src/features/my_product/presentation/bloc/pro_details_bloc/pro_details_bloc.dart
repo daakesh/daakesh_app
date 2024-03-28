@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:daakesh/src/features/my_product/presentation/bloc/pro_details_bloc/pro_details_bloc.export.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../src.export.dart';
 
 class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {

@@ -1,4 +1,3 @@
-import '../../../../src.export.dart';
 
 class ProCategoryModel {
   bool? status;

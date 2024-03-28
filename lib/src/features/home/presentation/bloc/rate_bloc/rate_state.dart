@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../src.export.dart';
 
+// ignore: constant_identifier_names
 enum RateStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
 
 extension RateStateStatusX on RateStateStatus{

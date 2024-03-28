@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:json_theme/json_theme.dart';
 import '../../../../../src.export.dart';
 
 class ShopProductItem extends StatefulWidget {
@@ -107,7 +105,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                   SizedBox(width: 12.0.w),
                   Expanded(
                       child: CachedImage(
-                          imageUrl: widget.myProductItem.itemImg!.first,height: 80.0,)),
+                          imageUrl:   widget.myProductItem.itemImg != null ? widget.myProductItem.itemImg!.first.toString():'',height: 80.0,)),
                   SizedBox(width: 18.0.w),
                   Expanded(
                     flex: 2,

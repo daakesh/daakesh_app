@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../src.export.dart';
-
 enum SwapCommentStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
 
 extension SwapCommentStateStatusX on SwapCommentStateStatus{

@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../src.export.dart';
-
 enum AuthStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
 
 extension AuthStateStatusX on AuthStateStatus{

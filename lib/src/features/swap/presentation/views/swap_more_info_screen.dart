@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
@@ -41,6 +40,7 @@ class _SwapMoreInfoScreenState extends State<SwapMoreInfoScreen> {
                       ),
                       const SizedBox(height: 18.0),
                       Row(children: [
+                        // ignore: deprecated_member_use_from_same_package
                         Assets.svg.locationPinIcon.svg(height: 21.0,width: 21.0,color: ColorName.amber),
                         const SizedBox(width: 6.5,),
                           Text.rich(

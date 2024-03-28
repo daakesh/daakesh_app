@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+// ignore_for_file: constant_identifier_names
 
-import '../../../../../src.export.dart';
+import 'package:equatable/equatable.dart';
 
 enum CommentStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
 

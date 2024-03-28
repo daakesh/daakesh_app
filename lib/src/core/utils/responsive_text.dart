@@ -1,8 +1,5 @@
 import 'dart:ui';
 
-import 'package:daakesh/app_widget.dart';
-import 'package:flutter/material.dart';
-
 class ResponsiveText{
 
   static double getResponsiveFontSize({required double fontSize}){

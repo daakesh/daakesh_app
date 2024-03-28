@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:json_theme/json_theme.dart';
-
 import '../../../../../src.export.dart';
 
 class HomeDataWidget extends StatefulWidget {
