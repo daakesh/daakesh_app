@@ -24,7 +24,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
   Widget build(BuildContext context) {
     return DefaultBackgroundWidget(
       child: Scaffold(
-        backgroundColor:ColorName.transparent,
+        backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +41,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       focusColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
                       splashColor: ColorName.transparent,
-                      onTap:()=>getBack(),
+                      onTap: () => Navigator.pop(context),
                       child: Assets.svg.arrowBackIcon.svg(),
                     ),
                     SizedBox(
@@ -49,7 +49,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                     ),
                     Text(
                       'Add Product',
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 36.0.sp),
                     ),
                     SizedBox(
@@ -57,7 +57,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                     ),
                     Text(
                       'Swap!',
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.0.sp),
                     ),
                     SizedBox(
@@ -65,7 +65,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                     ),
                     Text(
                       'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                      style: easyTheme.textTheme.bodyMedium!
+                      style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 16.0.sp),
                     ),
                     SizedBox(
@@ -79,9 +79,9 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                        'Display the product on the store',
-                        style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
+                    Text('Display the product on the store',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
                         controller: displayProductController,
                         readOnly: true,
@@ -91,58 +91,73 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                           child: SizedBox(
                               width: 20.0,
                               height: 20.0,
-                              child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
+                              child: Center(
+                                  child: Assets.svg.arrowDropDownIcon.svg())),
                         )),
-                    SizedBox(height: 22.0.h,),
-                    Text(
-                        'Country swap',
-                        style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
+                    SizedBox(
+                      height: 22.0.h,
+                    ),
+                    Text('Country swap',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
                       controller: countryController,
                       isSuffixPrefixOn: true,
-                      suffixIcon: SizedBox(height:9.0.h ,width:16.0.w,child: Center(child: Assets.svg.arrowDropDownIcon.svg()),),
-                      prefixIcon: BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
+                      suffixIcon: SizedBox(
+                        height: 9.0.h,
+                        width: 16.0.w,
+                        child:
+                            Center(child: Assets.svg.arrowDropDownIcon.svg()),
+                      ),
+                      prefixIcon: BlocBuilder<MyProFuncBloc, MyProFuncState>(
+                          builder: (_, state) {
                         return SizedBox(
                             width: 30.0.w,
                             height: 30.0.h,
                             child: Center(
                                 child: Text(
-                                  state.swapFlagEmoji,
-                                  style: TextStyle(
-                                      color: ColorName.blueGray, fontSize: 24.0.sp),
-                                )));
+                              state.swapFlagEmoji,
+                              style: TextStyle(
+                                  color: ColorName.blueGray, fontSize: 24.0.sp),
+                            )));
                       }),
                       readOnly: true,
-                      onTap: ()=>showCountryDialog(),
+                      onTap: () => showCountryDialog(),
                       inputFormatters: [
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    SizedBox(height: 21.0.h,),
-                    Text(
-                        'City swap',
-                        style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
+                    SizedBox(
+                      height: 21.0.h,
+                    ),
+                    Text('City swap',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(controller: cityController),
-                    SizedBox(height: 21.0.h,),
-
+                    SizedBox(
+                      height: 21.0.h,
+                    ),
                   ],
                 ),
               ),
               SizedBox(
                 height: 77.0.h,
               ),
-              const Spacer(flex: 1,),
+              const Spacer(
+                flex: 1,
+              ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
-                    text:'NEXT', onPressed: ()=>onNext()),
+                    text: 'NEXT', onPressed: () => onNext()),
               ),
               SizedBox(
                 height: 12.0.h,
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 21.0.w),
-                child: OutlineButtonWidget(text:'CANCEL', onPressed: ()=>cancel()),
+                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                child: OutlineButtonWidget(
+                    text: 'CANCEL', onPressed: () => cancel()),
               ),
               SizedBox(
                 height: 50.0.h,
@@ -153,25 +168,33 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
       ),
     );
   }
-  void setEditData()async{
-    if(getIt.get<EditProduct>().myProductItem != null){
+
+  void setEditData() async {
+    if (getIt.get<EditProduct>().myProductItem != null) {
       var data = getIt.get<EditProduct>().myProductItem;
+
       ///displayProductController.text = data!.display.toString();
       displayProductController.text = 'Public';
       countryController.text = data!.countrySwap.toString();
       cityController.text = data.citySwap.toString();
       String code = CountriesFlags.flags[data.countrySwap].toString();
-      String flag = await countryCodeToEmoji(code);
-      MyProFuncBloc.get.add(ChangeCountrySwapFlagEvent(flagEmoji: flag,),);
-    }
-    else{
+      String flag = await Utils.countryCodeToEmoji(code);
+      MyProFuncBloc.get.add(
+        ChangeCountrySwapFlagEvent(
+          flagEmoji: flag,
+        ),
+      );
+    } else {
       displayProductController.text = 'Public';
       countryController.text = 'Jordan';
       cityController.text = 'Amman';
     }
   }
-  void onNext()async{
-    if(displayProductController.text.isEmpty || countryController.text.isEmpty || cityController.text.isEmpty){
+
+  void onNext() async {
+    if (displayProductController.text.isEmpty ||
+        countryController.text.isEmpty ||
+        cityController.text.isEmpty) {
       ShowToastSnackBar.showSnackBars(message: 'Firstly, fill all data...');
       return;
     }
@@ -180,23 +203,33 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
       swapCountry: countryController.text,
       swapCity: cityController.text,
     ));
-    openNewPage(const ShipToScreen());
+    Utils.openNewPage(const ShipToScreen());
+  }
 
+  void cancel() {
+    Utils.getBack();
   }
-  void cancel(){
-    getBack();
-  }
-  void resetFlagData(){
+
+  void resetFlagData() {
     countryController.text = 'Jordan';
-    MyProFuncBloc.get.add(ChangeCountrySwapFlagEvent(flagEmoji: '🇯🇴',),);
+    MyProFuncBloc.get.add(
+      ChangeCountrySwapFlagEvent(
+        flagEmoji: '🇯🇴',
+      ),
+    );
   }
+
   void showCountryDialog() {
     return showCountryPicker(
-      context:context,
+      context: context,
       showPhoneCode: false,
       onSelect: (Country country) {
         countryController.text = country.name;
-        MyProFuncBloc.get.add(ChangeCountrySwapFlagEvent(flagEmoji: country.flagEmoji.toString(),),);
+        MyProFuncBloc.get.add(
+          ChangeCountrySwapFlagEvent(
+            flagEmoji: country.flagEmoji.toString(),
+          ),
+        );
       },
     );
   }

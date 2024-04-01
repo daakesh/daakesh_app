@@ -16,7 +16,6 @@ class _TrendingDealsToSwapState extends State<TrendingDealsToSwap> {
     const TrendingItemWidget(),
     const TrendingItemWidget(),
     const TrendingItemWidget(),
-
   ];
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _TrendingDealsToSwapState extends State<TrendingDealsToSwap> {
         children: [
           Text(
             'Trending Deals To Swap',
-            style: easyTheme.textTheme.headlineSmall,
+            style: context.easyTheme.textTheme.headlineSmall,
           ),
           const SizedBox(
             height: 20.0,
@@ -36,9 +35,9 @@ class _TrendingDealsToSwapState extends State<TrendingDealsToSwap> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             staggeredTileBuilder: (int index) =>
-            index == data.length - 1 && data.length.isOdd
-                ? const StaggeredTile.count(2, 1)
-                : const StaggeredTile.count(1, 1),
+                index == data.length - 1 && data.length.isOdd
+                    ? const StaggeredTile.count(2, 1)
+                    : const StaggeredTile.count(1, 1),
             crossAxisCount: 2,
             mainAxisSpacing: 8.0,
             crossAxisSpacing: 8.0,
@@ -47,7 +46,6 @@ class _TrendingDealsToSwapState extends State<TrendingDealsToSwap> {
               return data[index];
             },
           ),
-
         ],
       ),
     );
@@ -63,15 +61,14 @@ class TrendingItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 194.0,
-      decoration: const BoxDecoration(
-          boxShadow: [
+      decoration: const BoxDecoration(boxShadow: [
         BoxShadow(
             offset: Offset(0, 3),
             blurRadius: 6.0,
             color: Color.fromRGBO(0, 0, 0, 0.16)),
       ]),
       child: Column(
-        crossAxisAlignment:CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: 108.0,
@@ -86,22 +83,19 @@ class TrendingItemWidget extends StatelessWidget {
               children: [
                 Center(child: Assets.png.glasses.image()),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.only(start: 2.0),
+                  padding: const EdgeInsetsDirectional.only(start: 2.0),
                   child: Container(
                     width: 66.0,
                     height: 22.0,
                     decoration: const BoxDecoration(
                       color: ColorName.red,
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(4.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
                     ),
                     child: Center(
                         child: Text(
                       'SWAP',
-                      style: easyTheme.textTheme.headlineMedium!
-                          .copyWith(
-                              fontSize: 14.0, color: ColorName.white),
+                      style: context.easyTheme.textTheme.headlineMedium!
+                          .copyWith(fontSize: 14.0, color: ColorName.white),
                     )),
                   ),
                 ),
@@ -128,7 +122,7 @@ class TrendingItemWidget extends StatelessWidget {
                   child: Text(
                     'AquaOasis™ Cool Mist Humidefier (2.2L Water',
                     maxLines: 2,
-                    style: easyTheme.textTheme.bodyMedium!.copyWith(
+                    style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                         fontSize: 14.0,
                         color: ColorName.gray,
                         overflow: TextOverflow.ellipsis),
@@ -140,24 +134,23 @@ class TrendingItemWidget extends StatelessWidget {
                 Text(
                   'Amman, Jordan',
                   overflow: TextOverflow.ellipsis,
-                  style: easyTheme.textTheme.bodyMedium!.copyWith(
-                      fontSize: 14.0, color: ColorName.mediumSilver),
+                  style: context.easyTheme.textTheme.bodyMedium!
+                      .copyWith(fontSize: 14.0, color: ColorName.mediumSilver),
                 ),
                 const SizedBox(
                   height: 9.0,
                 ),
                 RichText(
                   text: TextSpan(
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 15.0),
                       children: [
                         const TextSpan(text: '('),
                         TextSpan(
                             text: '25',
-                            style: easyTheme.textTheme.headlineMedium!
+                            style: context.easyTheme.textTheme.headlineMedium!
                                 .copyWith(
-                                    fontSize: 15.0,
-                                    color: ColorName.red)),
+                                    fontSize: 15.0, color: ColorName.red)),
                         const TextSpan(text: ')  '),
                         const TextSpan(text: 'Offers Submitted'),
                       ]),
@@ -175,8 +168,7 @@ class TrendingItemWidget extends StatelessWidget {
                     ),
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.only(
-                            end: 6.5),
+                        padding: const EdgeInsetsDirectional.only(end: 6.5),
                         child: SizedBox(
                           width: 100.0,
                           child: RichText(
@@ -184,16 +176,14 @@ class TrendingItemWidget extends StatelessWidget {
                             text: TextSpan(children: [
                               TextSpan(
                                   text: 'By ',
-                                  style: easyTheme
-                                      .textTheme.bodyMedium!
+                                  style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
                                     fontSize: 13.0,
                                     color: ColorName.gray,
                                   )),
                               TextSpan(
                                   text: 'JAMSE ALFA',
-                                  style: easyTheme
-                                      .textTheme.bodyMedium!
+                                  style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
                                     fontSize: 14.0,
                                   )),
@@ -215,4 +205,3 @@ class TrendingItemWidget extends StatelessWidget {
     );
   }
 }
-

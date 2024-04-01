@@ -21,28 +21,27 @@ class SwapProductCarousalSlider extends StatelessWidget {
             children: [
               Text(
                 'By',
-                style: easyTheme.textTheme.bodyMedium!
+                style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0, color: ColorName.gray),
               ),
               const SizedBox(
                 width: 6.0,
               ),
-               Text(
+              Text(
                 '${state.trendDealsListData.first.user!.name}',
-                style: easyTheme.textTheme.bodyMedium!
+                style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0),
               ),
               const Spacer(
                 flex: 1,
               ),
               GestureDetector(
-                onTap: ()=>SwapPassDataBloc.get.add(SwapZoomInOutEvent()),
+                onTap: () => SwapPassDataBloc.get.add(SwapZoomInOutEvent()),
                 child: Align(
                   alignment: AlignmentDirectional.bottomEnd,
                   child: Assets.svg.zoomInIcon.svg(),
                 ),
               ),
-
             ],
           ),
         ),
@@ -57,7 +56,8 @@ class SwapProductCarousalSlider extends StatelessWidget {
               initialPage: 0,
               scrollDirection: Axis.horizontal,
               onPageChanged: (index, reason) {
-                SwapPassDataBloc.get.add(ChangeProductSliderIndex(sliderIndex:index));
+                SwapPassDataBloc.get
+                    .add(ChangeProductSliderIndex(sliderIndex: index));
               }),
           items: state.trendDealsListData.first.itemImg!.map((i) {
             return Builder(
@@ -69,15 +69,20 @@ class SwapProductCarousalSlider extends StatelessWidget {
             );
           }).toList(),
         ),
-        const SizedBox(height: 30.0,),
+        const SizedBox(
+          height: 30.0,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: state.trendDealsListData.first.itemImg!.asMap().entries.map((entry) {
+          children: state.trendDealsListData.first.itemImg!
+              .asMap()
+              .entries
+              .map((entry) {
             return Container(
               width: 12.0,
               height: 12.0,
-              margin: const EdgeInsets.symmetric(
-                  vertical: 8.0, horizontal: 4.0),
+              margin:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: state.sliderIndex == entry.key

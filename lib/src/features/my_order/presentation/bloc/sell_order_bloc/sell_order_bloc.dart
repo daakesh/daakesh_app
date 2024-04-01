@@ -7,7 +7,7 @@ class SellOrderBloc extends Bloc<SellOrderEvent, SellOrderState> {
     on<GetMyOrderEvent>(_getMyOrder);
   }
   static SellOrderBloc get get =>
-      BlocProvider.of(navigatorKey.currentState!.context);
+      BlocProvider.of(Utils.navigatorKey.currentState!.context);
 
   FutureOr<void> _getMyOrder(
       GetMyOrderEvent event, Emitter<SellOrderState> emit) async {
@@ -23,7 +23,9 @@ class SellOrderBloc extends Bloc<SellOrderEvent, SellOrderState> {
       }
       MyOrderModel myOrderModel = MyOrderModel.fromJson(r.data);
       List<MyOrderData> myOrderDataList = myOrderModel.data!.toList();
-      emit(state.copyWith(sellOrderStateStatus: SellOrderStateStatus.SUCCESS,myOrderDataList: myOrderDataList));
+      emit(state.copyWith(
+          sellOrderStateStatus: SellOrderStateStatus.SUCCESS,
+          myOrderDataList: myOrderDataList));
     });
   }
 }

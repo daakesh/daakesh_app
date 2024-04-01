@@ -11,51 +11,82 @@ class SwapSizeSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      Text('Size:',style: easyTheme.textTheme.labelMedium,),
-      const SizedBox(height: 10.0,),
-      SizedBox(
-          height: 60.0,
-          width: double.infinity,
-          child: CustomScrollView(
-            scrollDirection: Axis.horizontal,
-            slivers: [
-              SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-                return InkWell(
-                  splashColor: ColorName.transparent,
-                  focusColor: ColorName.transparent,
-                  highlightColor: ColorName.transparent,
-                  onTap: ()=>SwapBloc.get.add(SwapSelectProductPropertiesEvent(productSizeIndex: index)),
-                  child: Container(
-                    width: 121.0,
-                    height: 54.0,
-                    margin: const EdgeInsetsDirectional.only(end: 10.0),
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                      border: Border.all(color:state.productSizeIndex == index ? ColorName.amber:ColorName.gray,width: 2.0),
-
+        Text(
+          'Size:',
+          style: context.easyTheme.textTheme.labelMedium,
+        ),
+        const SizedBox(
+          height: 10.0,
+        ),
+        SizedBox(
+            height: 60.0,
+            width: double.infinity,
+            child: CustomScrollView(
+              scrollDirection: Axis.horizontal,
+              slivers: [
+                SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                  return InkWell(
+                    splashColor: ColorName.transparent,
+                    focusColor: ColorName.transparent,
+                    highlightColor: ColorName.transparent,
+                    onTap: () => SwapBloc.get.add(
+                        SwapSelectProductPropertiesEvent(
+                            productSizeIndex: index)),
+                    child: Container(
+                      width: 121.0,
+                      height: 54.0,
+                      margin: const EdgeInsetsDirectional.only(end: 10.0),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
+                        border: Border.all(
+                            color: state.productSizeIndex == index
+                                ? ColorName.amber
+                                : ColorName.gray,
+                            width: 2.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '20L',
+                            style: context.easyTheme.textTheme.bodyLarge!
+                                .copyWith(
+                                    height: 0.7,
+                                    color: ColorName.blueGray.withOpacity(0.5)),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '\$44.',
+                                style: context.easyTheme.textTheme.labelLarge!
+                                    .copyWith(
+                                        fontSize: 18.0, color: ColorName.black),
+                              ),
+                              Text(
+                                '99 ',
+                                style: context.easyTheme.textTheme.labelLarge!
+                                    .copyWith(
+                                  fontSize: 14.0,
+                                  color: ColorName.gray,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('20L',style: easyTheme.textTheme.bodyLarge!.copyWith(height: 0.7,color: ColorName.blueGray.withOpacity(0.5)),),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('\$44.',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 18.0,color: ColorName.black),),
-                            Text('99 ',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 14.0, color: ColorName.gray,),),
-                          ],
-                        ),
-
-
-                      ],
-                    ),
-                  ),
-                );
-              },childCount: 5)),
-            ],
-          )),
-      const SizedBox(height: 14.0,),
-    ],);
+                  );
+                }, childCount: 5)),
+              ],
+            )),
+        const SizedBox(
+          height: 14.0,
+        ),
+      ],
+    );
   }
 }

@@ -1,0 +1,8 @@
+{
+    "files.autoSave": "onWindowChange",
+    "workbench.colorTheme": "Tokyo Night",
+    "workbench.preferredHighContrastColorTheme": "Default High Contrast",
+    "workbench.preferredDarkColorTheme": "Default Dark Modern",
+    "workbench.preferredHighContrastLightColorTheme": "Default High Contrast Light",
+    "workbench.iconTheme": "easy-icons"
+}

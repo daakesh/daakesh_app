@@ -9,23 +9,23 @@ class ReceiveDoneDealItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsetsDirectional.only(start: 15.0.w,end: 15.0.w,bottom: 11.0.h),
+      margin: EdgeInsetsDirectional.only(
+          start: 15.0.w, end: 15.0.w, bottom: 11.0.h),
       decoration: BoxDecoration(
           color: ColorName.white,
           borderRadius: BorderRadius.all(Radius.circular(11.0.r)),
           boxShadow: const [
             BoxShadow(
-                offset: Offset(0,3),
+                offset: Offset(0, 3),
                 blurRadius: 3.0,
-                color: Color.fromRGBO(0, 0, 0, 0.16)
-            )
-          ]
-
-      ),
+                color: Color.fromRGBO(0, 0, 0, 0.16))
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 19.0.h,),
+          SizedBox(
+            height: 19.0.h,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,10 +40,11 @@ class ReceiveDoneDealItem extends StatelessWidget {
                       padding: EdgeInsetsDirectional.only(end: 80.0.w),
                       child: Text(
                         'AquaOasis™ Cool Mist Humidefier (2.2L Water',
-                        style: easyTheme.textTheme.labelMedium!.copyWith(
-                            fontSize: 15.0.sp,
-                            color: ColorName.gray,
-                            overflow: TextOverflow.ellipsis),
+                        style: context.easyTheme.textTheme.labelMedium!
+                            .copyWith(
+                                fontSize: 15.0.sp,
+                                color: ColorName.gray,
+                                overflow: TextOverflow.ellipsis),
                         maxLines: 2,
                       ),
                     ),
@@ -52,7 +53,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                     ),
                     Text(
                       'Amman, Jordan',
-                      style: easyTheme.textTheme.bodyMedium!.copyWith(
+                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                         fontSize: 13.0.sp,
                         color: ColorName.mediumSilver,
                       ),
@@ -63,91 +64,121 @@ class ReceiveDoneDealItem extends StatelessWidget {
                     Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: 'You Made A Deal With ',style:easyTheme.textTheme.labelLarge!.copyWith(color: ColorName.springGreen,fontSize: 16.0.sp)),
-                          TextSpan(text: 'NF Store',style:easyTheme.textTheme.labelLarge!.copyWith(color: ColorName.black,fontSize: 15.0.sp)),
-
-                        ],),),
-
+                          TextSpan(
+                              text: 'You Made A Deal With ',
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      color: ColorName.springGreen,
+                                      fontSize: 16.0.sp)),
+                          TextSpan(
+                              text: 'NF Store',
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      color: ColorName.black,
+                                      fontSize: 15.0.sp)),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
-          SizedBox(height: 18.0.h,),
+          SizedBox(
+            height: 18.0.h,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 15.0.w),
-                child: Text('Swap Product',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 15.0.sp,color: ColorName.black)),
+                child: Text('Swap Product',
+                    style: context.easyTheme.textTheme.labelLarge!
+                        .copyWith(fontSize: 15.0.sp, color: ColorName.black)),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.only(end:15.0.w ),
+                padding: EdgeInsetsDirectional.only(end: 15.0.w),
                 child: TextButtonWidget(
                   text: 'See Offer Details',
-                  style: easyTheme.textTheme.bodyMedium!.copyWith(
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                     fontSize: 14.0.sp,
                     color: ColorName.skyBlue,
-                    fontFamily: FontFamily.apercuBold,),
-                  onPressed: (){},
+                    fontFamily: FontFamily.apercuBold,
+                  ),
+                  onPressed: () {},
                   isBold: true,
                 ),
               ),
-
-
-            ],),
-          SizedBox(height: 3.0.h,),
+            ],
+          ),
+          SizedBox(
+            height: 3.0.h,
+          ),
           Container(
             width: double.infinity,
             height: 42.0.h,
             color: ColorName.lightGrayishBlue,
-            child: Row(children: [
-              SizedBox(width: 14.0.w),
-              Assets.png.glasses.image(width: 32.0.w, height: 32.0.h),
-              SizedBox(width: 15.0.w),
-              Flexible(
-                child: Text(
-                  'AquaOasis™ Cool Mist Humidefier (2.2L Water',
-                  overflow: TextOverflow.ellipsis,
-                  style: easyTheme.textTheme.bodyMedium!
-                      .copyWith(fontSize: 14.0.sp,color: ColorName.gray),
+            child: Row(
+              children: [
+                SizedBox(width: 14.0.w),
+                Assets.png.glasses.image(width: 32.0.w, height: 32.0.h),
+                SizedBox(width: 15.0.w),
+                Flexible(
+                  child: Text(
+                    'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                    overflow: TextOverflow.ellipsis,
+                    style: context.easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontSize: 14.0.sp, color: ColorName.gray),
+                  ),
                 ),
-              ),
-              SizedBox(width: 15.0.w),
-              Text(
-                'Product',
-                overflow: TextOverflow.ellipsis,
-                style: easyTheme.textTheme.bodyMedium!
-                    .copyWith(fontSize: 14.0.sp,color: ColorName.burgundy),
-              ),
-              SizedBox(width: 16.0.w),
-
-            ],
+                SizedBox(width: 15.0.w),
+                Text(
+                  'Product',
+                  overflow: TextOverflow.ellipsis,
+                  style: context.easyTheme.textTheme.bodyMedium!
+                      .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
+                ),
+                SizedBox(width: 16.0.w),
+              ],
             ),
           ),
-          SizedBox(height: 17.0.h,),
-          Divider(color: ColorName.gray,indent: 15.0.w,endIndent: 15.0.w,),
-          Row(children: [
-            SizedBox(width: 17.0.w,),
-            Expanded(child: DefaultButtonWidget(text: 'CALL', onPressed: (){})),
-            SizedBox(width: 9.0.w,),
-            Expanded(
-              child: DefaultButtonWidget(
-                text: 'WhatsApp',
-                onPressed: () {},
-                style: easyTheme.elevatedButtonTheme.style!.copyWith(
-                    backgroundColor: MaterialStateProperty.all(ColorName.amber)
+          SizedBox(
+            height: 17.0.h,
+          ),
+          Divider(
+            color: ColorName.gray,
+            indent: 15.0.w,
+            endIndent: 15.0.w,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 17.0.w,
+              ),
+              Expanded(
+                  child: DefaultButtonWidget(text: 'CALL', onPressed: () {})),
+              SizedBox(
+                width: 9.0.w,
+              ),
+              Expanded(
+                child: DefaultButtonWidget(
+                  text: 'WhatsApp',
+                  onPressed: () {},
+                  style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
+                      backgroundColor:
+                          MaterialStateProperty.all(ColorName.amber)),
                 ),
               ),
-            ),
-            SizedBox(width: 17.0.w,),
-
-          ],),
-          SizedBox(height: 16.0.h,),
+              SizedBox(
+                width: 17.0.w,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 16.0.h,
+          ),
         ],
       ),
     );
   }
-
-
 }

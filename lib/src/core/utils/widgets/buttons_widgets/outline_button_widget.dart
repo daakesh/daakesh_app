@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
 
-
 class OutlineButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
@@ -22,7 +21,7 @@ class OutlineButtonWidget extends StatelessWidget {
       padding: padding ?? EdgeInsets.zero,
       child: OutlinedButton(
         onPressed: onPressed,
-        style: style ?? easyTheme.outlinedButtonTheme.style,
+        style: style ?? context.easyTheme.outlinedButtonTheme.style,
         child: Text(
           text,
         ),

@@ -1,8 +1,6 @@
 import 'package:injectable/injectable.dart';
 import '../../src.export.dart';
 
-final editProduct = getIt.get<EditProduct>();
-
 abstract class EditProduct {
   MyProductItem? myProductItem;
   void setData(MyProductItem myProductItem);
@@ -15,11 +13,12 @@ class EditProductImpl implements EditProduct {
   MyProductItem? myProductItem;
 
   @override
-  void setData(MyProductItem myProductItem){
+  void setData(MyProductItem myProductItem) {
     this.myProductItem = myProductItem;
   }
+
   @override
-  void clearData(){
+  void clearData() {
     myProductItem = null;
   }
 }

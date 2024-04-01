@@ -22,68 +22,82 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   @override
   void initState() {
     super.initState();
-    userImage = user.userData.img!;
-    nameController.text = user.userData.name ?? '';
-    emailController.text = user.userData.email?? '';
+    userImage = GetItUtils.user.userData.img ?? '';
+    nameController.text = GetItUtils.user.userData.name ?? '';
+    emailController.text = GetItUtils.user.userData.email ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: true,
-      onPopInvoked: (value){
-        PersonalInfoBloc.get.add(ActivateUpdatePersonalInfoEvent(isUpdateActive:  false));
+      onPopInvoked: (value) {
+        PersonalInfoBloc.get
+            .add(ActivateUpdatePersonalInfoEvent(isUpdateActive: false));
       },
       child: DefaultBackgroundWidget(
         child: Scaffold(
-          backgroundColor:ColorName.transparent,
+          backgroundColor: ColorName.transparent,
           body: LayoutBuilderWidget(
             child: SizedBox(
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                child: BlocBuilder<PersonalInfoBloc,PersonalInfoState>(builder: (_,state){
+                child: BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
+                    builder: (_, state) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Spacer(flex: 1,),
-                      const SizedBox(height: 70.0,),
-                      Text('Personal Info',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize:36.0),),
-                      const SizedBox(height: 39.0,),
+                      const Spacer(
+                        flex: 1,
+                      ),
+                      const SizedBox(
+                        height: 70.0,
+                      ),
+                      Text(
+                        'Personal Info',
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(fontSize: 36.0),
+                      ),
+                      const SizedBox(
+                        height: 39.0,
+                      ),
                       state.image.isEmpty
                           ? GestureDetector(
-                        onTap: () => state.isUpdateActive ? pickImage() : () {},
-                        child: Center(
-                          child: Container(
-                              width: 108.0,
-                              height: 108.0,
-                              decoration: const BoxDecoration(
-                                color: ColorName.gainsboro,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Hero(
-                                tag: 'profileImage',
-                                child: CachedImage(
-                                  imageUrl: userImage,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(100.0)),
-                                  errorWidget: (_, __, error) {
-                                    return const Center(
-                                      child: Icon(
-                                        Icons.person_outline,
-                                        size: 50.0,
-                                        color: ColorName.white,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )),
-                        ),
-                      )
-                          : GestureDetector(
-                              onTap: () => state.isUpdateActive ? pickImage() : () {},
+                              onTap: () =>
+                                  state.isUpdateActive ? pickImage() : () {},
                               child: Center(
-                              child: Container(
+                                child: Container(
+                                    width: 108.0,
+                                    height: 108.0,
+                                    decoration: const BoxDecoration(
+                                      color: ColorName.gainsboro,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Hero(
+                                      tag: 'profileImage',
+                                      child: CachedImage(
+                                        imageUrl: userImage,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(100.0)),
+                                        errorWidget: (_, __, error) {
+                                          return const Center(
+                                            child: Icon(
+                                              Icons.person_outline,
+                                              size: 50.0,
+                                              color: ColorName.white,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    )),
+                              ),
+                            )
+                          : GestureDetector(
+                              onTap: () =>
+                                  state.isUpdateActive ? pickImage() : () {},
+                              child: Center(
+                                child: Container(
                                     width: 108.0,
                                     height: 108.0,
                                     decoration: const BoxDecoration(
@@ -96,31 +110,60 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                         child: Image.file(File(state.image),
                                             fit: BoxFit.cover))),
                               ),
-                          ),
-                      const SizedBox(height: 14.0,),
-                      Center(child: Text('Change Photo',style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5)),)),
-                      const SizedBox(height: 23.0,),
-                      Text('Name',style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5)),),
+                            ),
+                      const SizedBox(
+                        height: 14.0,
+                      ),
+                      Center(
+                          child: Text(
+                        'Change Photo',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                      )),
+                      const SizedBox(
+                        height: 23.0,
+                      ),
+                      Text(
+                        'Name',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                      ),
                       TextFormFieldWidget(
                         controller: nameController,
                         enabled: state.isUpdateActive,
                       ),
-                      const SizedBox(height: 40.0,),
-                      Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5)),),
+                      const SizedBox(
+                        height: 40.0,
+                      ),
+                      Text(
+                        'Email',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                      ),
                       TextFormFieldWidget(
                         controller: emailController,
                         enabled: state.isUpdateActive,
                       ),
-                      const SizedBox(height: 40.0,),
-                      Text('Password',style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5)),),
+                      const SizedBox(
+                        height: 40.0,
+                      ),
+                      Text(
+                        'Password',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                      ),
                       TextFormFieldWidget(
                         controller: passwordController,
                         enabled: state.isUpdateActive,
                         obscureText: true,
                         maxLines: 1,
                       ),
-                      const SizedBox(height: 40.0,),
-                      const Spacer(flex: 1,),
+                      const SizedBox(
+                        height: 40.0,
+                      ),
+                      const Spacer(
+                        flex: 1,
+                      ),
                       Center(
                         child: DefaultButtonWidget(
                             text: !state.isUpdateActive ? 'MAKE EDIT' : 'SAVE',
@@ -132,12 +175,18 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         height: 12.0,
                       ),
                       Center(
-                        child:
-                        OutlineButtonWidget(text: !state.isUpdateActive ? 'Cancel':'RESET AND CANCEL', onPressed: ()=>cancel()),
+                        child: OutlineButtonWidget(
+                            text: !state.isUpdateActive
+                                ? 'Cancel'
+                                : 'RESET AND CANCEL',
+                            onPressed: () => cancel()),
                       ),
-                      const Spacer(flex: 2,),
-                      const SizedBox(height: 40.0,),
-
+                      const Spacer(
+                        flex: 2,
+                      ),
+                      const SizedBox(
+                        height: 40.0,
+                      ),
                     ],
                   );
                 }),
@@ -149,25 +198,27 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     );
   }
 
-
-  void pickImage()async{
+  void pickImage() async {
     image = await ImagePickerHelper.getGalleryImage();
-    PersonalInfoBloc.get.add(SelectProfileImageEvent(path:  image!.path.toString()));
+    PersonalInfoBloc.get
+        .add(SelectProfileImageEvent(path: image!.path.toString()));
   }
-  void onMakeEdit(){
-    PersonalInfoBloc.get.add(ActivateUpdatePersonalInfoEvent(isUpdateActive:  true));
+
+  void onMakeEdit() {
+    PersonalInfoBloc.get
+        .add(ActivateUpdatePersonalInfoEvent(isUpdateActive: true));
   }
-  void onSave(){
+
+  void onSave() {
     PersonalInfoBloc.get.add(UpdatePersonalInfoEvent(
         name: nameController.text,
         image: image,
         password: passwordController.text));
   }
-  void cancel(){
+
+  void cancel() {
     Navigator.pop(context);
-    PersonalInfoBloc.get.add(ActivateUpdatePersonalInfoEvent(isUpdateActive:  false));
+    PersonalInfoBloc.get
+        .add(ActivateUpdatePersonalInfoEvent(isUpdateActive: false));
   }
-
-
-
 }

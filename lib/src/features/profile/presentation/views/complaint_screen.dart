@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class ComplaintScreen extends StatelessWidget {
-   ComplaintScreen({super.key});
+  ComplaintScreen({super.key});
   final complaintTypeController = TextEditingController();
   final sellerNameController = TextEditingController();
   final subjectController = TextEditingController();
   final remarkController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return  DefaultBackgroundWidget(
+    return DefaultBackgroundWidget(
       child: Scaffold(
-        backgroundColor:ColorName.transparent,
+        backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26.0),
@@ -24,7 +24,7 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 Text(
                   'Complaint',
-                  style: easyTheme.textTheme.headlineMedium!
+                  style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 36.0),
                 ),
                 const SizedBox(
@@ -32,7 +32,7 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 Text(
                   'Location info',
-                  style: easyTheme.textTheme.headlineMedium!
+                  style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
                 const SizedBox(
@@ -40,7 +40,7 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 Text(
                   'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                  style: easyTheme.textTheme.bodyMedium!
+                  style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 16.0),
                 ),
                 const SizedBox(
@@ -48,31 +48,32 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 Text(
                   'Complaint Type',
-                  style: easyTheme.textTheme.bodyMedium!
+                  style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
                 BlocBuilder<ComplaintBloc, ComplaintState>(
-  builder: (context, state) {
-    return TextFormFieldWidget(
-                    controller: complaintTypeController,
-                    keyboardType: TextInputType.number,
-                    readOnly: true,
-                    isSuffixPrefixOn: true,
-                    suffixIcon: InkWell(
-                      onTap: () {},
-                      child: SizedBox(
-                          width: 20.0,
-                          height: 20.0,
-                          child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
-                    ));
-  },
-),
+                  builder: (context, state) {
+                    return TextFormFieldWidget(
+                        controller: complaintTypeController,
+                        keyboardType: TextInputType.number,
+                        readOnly: true,
+                        isSuffixPrefixOn: true,
+                        suffixIcon: InkWell(
+                          onTap: () {},
+                          child: SizedBox(
+                              width: 20.0,
+                              height: 20.0,
+                              child: Center(
+                                  child: Assets.svg.arrowDropDownIcon.svg())),
+                        ));
+                  },
+                ),
                 const SizedBox(
                   height: 25.0,
                 ),
                 Text(
                   'Seller Name',
-                  style: easyTheme.textTheme.bodyMedium!
+                  style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
                 TextFormFieldWidget(
@@ -83,7 +84,7 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 Text(
                   'Subject',
-                  style: easyTheme.textTheme.bodyMedium!
+                  style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
                 TextFormFieldWidget(
@@ -94,7 +95,7 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 Text(
                   'Remark',
-                  style: easyTheme.textTheme.bodyMedium!
+                  style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
                 TextFormFieldWidget(
@@ -116,8 +117,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 12.0,
                 ),
                 Center(
-                  child:
-                  OutlineButtonWidget(text: 'Cancel', onPressed:cancel),
+                  child: OutlineButtonWidget(text: 'Cancel', onPressed: cancel),
                 ),
                 const SizedBox(
                   height: 50.0,
@@ -130,8 +130,11 @@ class ComplaintScreen extends StatelessWidget {
     );
   }
 
-  void cancel(){getBack();}
-  void onSend(){
+  void cancel() {
+    Utils.getBack();
+  }
+
+  void onSend() {
     ComplaintBloc.get.add(AddComplaintEvent(
       complaintType: complaintTypeController.text,
       sellerName: sellerNameController.text,
@@ -139,6 +142,4 @@ class ComplaintScreen extends StatelessWidget {
       remark: remarkController.text,
     ));
   }
-
-
 }

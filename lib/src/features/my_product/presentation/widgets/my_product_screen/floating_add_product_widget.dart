@@ -8,9 +8,9 @@ class FloatingAddProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        AddProBloc.get.add(AddEditStateEvent(adjustProduct:AdjustProduct.ADD ));
-        openNewPage(const AddProInfoScreen());
+      onTap: () {
+        AddProBloc.get.add(AddEditStateEvent(adjustProduct: AdjustProduct.ADD));
+        Utils.openNewPage(const AddProInfoScreen());
         MyProFuncBloc.get.add(EmptyProductSearchEvent(value: ''));
         searchController.clear();
       },
@@ -31,8 +31,7 @@ class FloatingAddProductWidget extends StatelessWidget {
                   BoxShadow(
                       offset: Offset(0, 3),
                       blurRadius: 6.0,
-                      color: Color.fromRGBO(0, 0, 0, 0.16)
-                  )
+                      color: Color.fromRGBO(0, 0, 0, 0.16))
                 ],
               ),
               child: Center(
@@ -48,7 +47,7 @@ class FloatingAddProductWidget extends StatelessWidget {
             ),
             Text(
               'Add Product',
-              style: easyTheme.textTheme.bodyLarge!.copyWith(
+              style: context.easyTheme.textTheme.bodyLarge!.copyWith(
                   fontSize: 18.0.sp, color: ColorName.black.withOpacity(0.36)),
             ),
           ],
@@ -57,4 +56,3 @@ class FloatingAddProductWidget extends StatelessWidget {
     );
   }
 }
-

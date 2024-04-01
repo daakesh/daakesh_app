@@ -8,46 +8,52 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.bottomCenter,
-      children: [
-        CustomScrollView(
-          slivers: [
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 15.0)),
-            SliverToBoxAdapter(
-              child: Center(
-                child: Text(
-                  'Your Cart Details',
-                  style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 22.0),
+    return Scaffold(
+      body: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          CustomScrollView(
+            slivers: [
+              const HomeAppBarWidget(isCart: true),
+              const SliverPadding(
+                  padding: EdgeInsetsDirectional.only(top: 15.0)),
+              SliverToBoxAdapter(
+                child: Center(
+                  child: Text(
+                    'Your Cart Details',
+                    style: context.easyTheme.textTheme.headlineMedium!
+                        .copyWith(fontSize: 22.0),
+                  ),
                 ),
               ),
-            ),
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 11.0)),
-            BlocBuilder<CartBloc, CartState>(
-              builder: (context, state) {
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (_, index) {
-                      return state.cartItemsList.isNotEmpty
-                          ? CartItemWidget(
-                              cartItem: state.cartItemsList[index],
-                              index: index,)
-                          : const SizedBox();
-                    },
-                    childCount: state.cartItemsList.length,
-                  ),
-                );
-              },
-            ),
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 200.0)),
-
-          ],
-        ),
-        Container(
-          height: 200.0,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            color: ColorName.white,
+              const SliverPadding(
+                  padding: EdgeInsetsDirectional.only(top: 11.0)),
+              BlocBuilder<CartBloc, CartState>(
+                builder: (context, state) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (_, index) {
+                        return state.cartItemsList.isNotEmpty
+                            ? CartItemWidget(
+                                cartItem: state.cartItemsList[index],
+                                index: index,
+                              )
+                            : const SizedBox();
+                      },
+                      childCount: state.cartItemsList.length,
+                    ),
+                  );
+                },
+              ),
+              const SliverPadding(
+                  padding: EdgeInsetsDirectional.only(top: 200.0)),
+            ],
+          ),
+          Container(
+            height: 200.0,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: ColorName.white,
               boxShadow: [
                 BoxShadow(
                   offset: Offset(0, 3),
@@ -56,43 +62,69 @@ class CartScreen extends StatelessWidget {
                 ),
               ],
               borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16.0),
-              topRight: Radius.circular(16.0),
+                topLeft: Radius.circular(16.0),
+                topRight: Radius.circular(16.0),
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              const SizedBox(height: 24.0,),
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(text: 'Total :',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 28.0)),
-                    TextSpan(text: '\$88.6',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 28.0)),
-                  ],
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 24.0,
                 ),
-              ),
-              const SizedBox(height: 6.0,),
-              Text('(2) Item',style: easyTheme.textTheme.labelMedium!.copyWith(fontSize: 22.0,color: ColorName.dimGray),),
-              const SizedBox(height: 14.0,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 21.5),
-                child: Center(child: DefaultButtonWidget(text: 'CHECKOUT', onPressed: ()=>openCheckOutScreen(context))),
-              ),
-
-            ],
-          ),
-        )
-      ],
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                          text: 'Total :',
+                          style: context.easyTheme.textTheme.labelMedium!
+                              .copyWith(fontSize: 28.0)),
+                      TextSpan(
+                          text: '\$88.6',
+                          style: context.easyTheme.textTheme.labelMedium!
+                              .copyWith(fontSize: 28.0)),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 6.0,
+                ),
+                Text(
+                  '(2) Item',
+                  style: context.easyTheme.textTheme.labelMedium!
+                      .copyWith(fontSize: 22.0, color: ColorName.dimGray),
+                ),
+                const SizedBox(
+                  height: 14.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 21.5),
+                  child: Center(
+                      child: DefaultButtonWidget(
+                          text: 'CHECKOUT',
+                          onPressed: () => openCheckOutScreen(context))),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
-  void openCheckOutScreen(context)async{
+
+  void openCheckOutScreen(context) async {
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: const CheckOutScreen(),
       withNavBar: true, // OPTIONAL VALUE. True by default.
     );
+  }
 
-
+  void openCartScreen(context) {
+    FocusScope.of(context).unfocus();
+    PersistentNavBarNavigator.pushNewScreen(
+      context,
+      screen: const SearchScreen(),
+      withNavBar: true,
+    );
   }
 }
-

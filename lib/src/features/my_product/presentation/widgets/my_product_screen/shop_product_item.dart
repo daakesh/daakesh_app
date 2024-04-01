@@ -11,23 +11,23 @@ class ShopProductItem extends StatefulWidget {
 }
 
 class _ShopProductItemState extends State<ShopProductItem> {
-   String price = '';
+  String price = '';
 
   @override
   void initState() {
     super.initState();
     priceHandler();
   }
-  void priceHandler(){
-    if(widget.myProductItem.discount == null){
+
+  void priceHandler() {
+    if (widget.myProductItem.discount == null) {
       return;
     }
     double unFormattedPrice = widget.myProductItem.discount!.toDouble();
     unFormattedPrice = unFormattedPrice * 100;
-    int formattedPrice =unFormattedPrice.toInt() ;
+    int formattedPrice = unFormattedPrice.toInt();
     price = int.parse(formattedPrice.toString()).toString();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,34 +57,36 @@ class _ShopProductItemState extends State<ShopProductItem> {
             children: [
               price.isNotEmpty
                   ? Container(
-                height: 30.0.h,
-                constraints: BoxConstraints(
-                  minWidth: 70.0.w,
-                ),
-                margin:
-                EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
-                padding:
-                EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
-                decoration: BoxDecoration(
-                    color: ColorName.red,
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(4.0.r))),
-                child: Center(
-                  child: Text(
-                    '$price% OFF',
-                    style: easyTheme.textTheme.labelLarge!
-                        .copyWith(fontSize: 15.0.sp),
-                  ),
-                ),
-              )
-                  : const SizedBox(height: 30.0,),
+                      height: 30.0.h,
+                      constraints: BoxConstraints(
+                        minWidth: 70.0.w,
+                      ),
+                      margin:
+                          EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
+                      padding:
+                          EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
+                      decoration: BoxDecoration(
+                          color: ColorName.red,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(4.0.r))),
+                      child: Center(
+                        child: Text(
+                          '$price% OFF',
+                          style: context.easyTheme.textTheme.labelLarge!
+                              .copyWith(fontSize: 15.0.sp),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(
+                      height: 30.0,
+                    ),
             ],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: ()=>onEdit(widget.myProductItem),
+                onTap: () => onEdit(widget.myProductItem),
                 child: Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: Padding(
@@ -93,8 +95,8 @@ class _ShopProductItemState extends State<ShopProductItem> {
                     ),
                     child: Text(
                       'Edit',
-                      style: easyTheme.textTheme.bodyLarge!.copyWith(
-                          fontSize: 12.0, color: ColorName.skyBlue),
+                      style: context.easyTheme.textTheme.bodyLarge!
+                          .copyWith(fontSize: 12.0, color: ColorName.skyBlue),
                     ),
                   ),
                 ),
@@ -105,7 +107,11 @@ class _ShopProductItemState extends State<ShopProductItem> {
                   SizedBox(width: 12.0.w),
                   Expanded(
                       child: CachedImage(
-                          imageUrl:   widget.myProductItem.itemImg != null ? widget.myProductItem.itemImg!.first.toString():'',height: 80.0,)),
+                    imageUrl: widget.myProductItem.itemImg != null
+                        ? widget.myProductItem.itemImg!.first.toString()
+                        : '',
+                    height: 80.0,
+                  )),
                   SizedBox(width: 18.0.w),
                   Expanded(
                     flex: 2,
@@ -113,15 +119,14 @@ class _ShopProductItemState extends State<ShopProductItem> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding:
-                          EdgeInsetsDirectional.only(end: 80.0.w),
+                          padding: EdgeInsetsDirectional.only(end: 80.0.w),
                           child: Text(
                             '${widget.myProductItem.title}\n',
-                            style: easyTheme.textTheme.labelMedium!
+                            style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(
-                                fontSize: 15.0.sp,
-                                color: ColorName.gray,
-                                overflow: TextOverflow.ellipsis),
+                                    fontSize: 15.0.sp,
+                                    color: ColorName.gray,
+                                    overflow: TextOverflow.ellipsis),
                             maxLines: 2,
                           ),
                         ),
@@ -147,16 +152,15 @@ class _ShopProductItemState extends State<ShopProductItem> {
                             SizedBox(width: 8.0.w),
                             Text(
                               '5.9',
-                              style: easyTheme.textTheme.labelMedium!
+                              style: context.easyTheme.textTheme.labelMedium!
                                   .copyWith(fontSize: 15.0.sp),
                             ),
                             SizedBox(width: 8.0.w),
                             Text(
                               '(200)',
-                              style: easyTheme.textTheme.labelMedium!
+                              style: context.easyTheme.textTheme.labelMedium!
                                   .copyWith(
-                                  fontSize: 13.0.sp,
-                                  color: ColorName.gray),
+                                      fontSize: 13.0.sp, color: ColorName.gray),
                             )
                           ],
                         ),
@@ -166,38 +170,36 @@ class _ShopProductItemState extends State<ShopProductItem> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
                                     '\$${widget.myProductItem.price}',
-                                    style: easyTheme
-                                        .textTheme.labelMedium!
+                                    style: context
+                                        .easyTheme.textTheme.labelMedium!
                                         .copyWith(fontSize: 21.0.sp),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 2.0),
+                                    padding: const EdgeInsets.only(bottom: 2.0),
                                     child: Row(
                                       children: [
                                         Text(
                                           '99',
-                                          style: easyTheme
-                                              .textTheme.labelMedium!
+                                          style: context
+                                              .easyTheme.textTheme.labelMedium!
                                               .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray),
+                                                  fontSize: 15.0.sp,
+                                                  color: ColorName.gray),
                                         ),
                                         SizedBox(width: 8.0.w),
                                         Text(
                                           '\$${widget.myProductItem.discount}',
-                                          style: easyTheme
-                                              .textTheme.labelMedium!
+                                          style: context
+                                              .easyTheme.textTheme.labelMedium!
                                               .copyWith(
                                             fontSize: 15.0.sp,
                                             color: ColorName.gray,
-                                            decoration: TextDecoration
-                                                .lineThrough,
+                                            decoration:
+                                                TextDecoration.lineThrough,
                                           ),
                                         ),
                                       ],
@@ -237,18 +239,20 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               children: [
                                 TextSpan(
                                     text: 'Entry Date : ',
-                                    style: easyTheme.textTheme.bodyMedium!
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.gray)),
+                                            fontSize: 15.0.sp,
+                                            color: ColorName.gray)),
                                 TextSpan(
-                                    text: formatDate(widget.myProductItem
-                                        .createdAt
+                                    text: Utils.formatDate(widget
+                                        .myProductItem.createdAt
                                         .toString()),
-                                    style: easyTheme.textTheme.bodyMedium!
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.black)),
+                                            fontSize: 15.0.sp,
+                                            color: ColorName.black)),
                               ],
                             ),
                           ),
@@ -260,17 +264,19 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               children: [
                                 TextSpan(
                                     text: 'Categories : ',
-                                    style: easyTheme.textTheme.bodyMedium!
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.gray)),
+                                            fontSize: 15.0.sp,
+                                            color: ColorName.gray)),
                                 TextSpan(
                                     text:
-                                    '${widget.myProductItem.category!.name}',
-                                    style: easyTheme.textTheme.bodyMedium!
+                                        '${widget.myProductItem.category!.name}',
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.black)),
+                                            fontSize: 15.0.sp,
+                                            color: ColorName.black)),
                               ],
                             ),
                           ),
@@ -287,16 +293,18 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               children: [
                                 TextSpan(
                                     text: 'Quantity : ',
-                                    style: easyTheme.textTheme.bodyMedium!
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.gray)),
+                                            fontSize: 15.0.sp,
+                                            color: ColorName.gray)),
                                 TextSpan(
                                     text: '${widget.myProductItem.quantity}',
-                                    style: easyTheme.textTheme.bodyMedium!
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.black)),
+                                            fontSize: 15.0.sp,
+                                            color: ColorName.black)),
                               ],
                             ),
                           ),
@@ -308,16 +316,18 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               children: [
                                 TextSpan(
                                     text: 'Ship To : ',
-                                    style: easyTheme.textTheme.bodyMedium!
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.gray)),
+                                            fontSize: 15.0.sp,
+                                            color: ColorName.gray)),
                                 TextSpan(
                                     text: '${widget.myProductItem.country}',
-                                    style: easyTheme.textTheme.bodyMedium!
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.black)),
+                                            fontSize: 15.0.sp,
+                                            color: ColorName.black)),
                               ],
                             ),
                           ),
@@ -335,18 +345,11 @@ class _ShopProductItemState extends State<ShopProductItem> {
     );
   }
 
-  void onEdit(MyProductItem myProductItem){
+  void onEdit(MyProductItem myProductItem) {
     AddProBloc.get.add(AddEditStateEvent(adjustProduct: AdjustProduct.EDIT));
-    openNewPage(const AddProInfoScreen());
+    Utils.openNewPage(const AddProInfoScreen());
     MyProFuncBloc.get.add(EditProductEvent(
-      myProductItem: myProductItem,
-      productDisplayMethod: ProductDisplayMethod.Sell
-    ));
+        myProductItem: myProductItem,
+        productDisplayMethod: ProductDisplayMethod.Sell));
   }
-
-
 }
-
-
-
-

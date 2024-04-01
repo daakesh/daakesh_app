@@ -24,12 +24,11 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
     setEditData();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return DefaultBackgroundWidget(
       child: Scaffold(
-        backgroundColor:ColorName.transparent,
+        backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +45,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       focusColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
                       splashColor: ColorName.transparent,
-                      onTap:()=>getBack(),
+                      onTap: () => Navigator.pop(context),
                       child: Assets.svg.arrowBackIcon.svg(),
                     ),
                     SizedBox(
@@ -54,7 +53,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                     ),
                     Text(
                       'Add Product',
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 36.0.sp),
                     ),
                     SizedBox(
@@ -62,7 +61,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                     ),
                     Text(
                       'For Sale Info',
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.0.sp),
                     ),
                     SizedBox(
@@ -70,7 +69,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                     ),
                     Text(
                       'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                      style: easyTheme.textTheme.bodyMedium!
+                      style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 16.0.sp),
                     ),
                     SizedBox(
@@ -84,23 +83,27 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                        'Product Quantity',
-                        style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
+                    Text('Product Quantity',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
-                        controller: productQuantityController,
-                      keyboardType: TextInputType.number,
-                       ),
-                    SizedBox(height: 22.0.h,),
-                    Text(
-                      'Product Price',
-                      style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
-                    TextFormFieldWidget(
-                        controller: productPriceController,
-                        isSuffixPrefixOn: true,
+                      controller: productQuantityController,
                       keyboardType: TextInputType.number,
                     ),
-                    SizedBox(height: 21.0.h,),
+                    SizedBox(
+                      height: 22.0.h,
+                    ),
+                    Text('Product Price',
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5))),
+                    TextFormFieldWidget(
+                      controller: productPriceController,
+                      isSuffixPrefixOn: true,
+                      keyboardType: TextInputType.number,
+                    ),
+                    SizedBox(
+                      height: 21.0.h,
+                    ),
                     BlocBuilder<MyProFuncBloc, MyProFuncState>(
                       builder: (context, state) {
                         return Row(
@@ -111,7 +114,8 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('Product Discount',
-                                      style: easyTheme.textTheme.bodyMedium!
+                                      style: context
+                                          .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
                                               color: ColorName.black
                                                   .withOpacity(0.5))),
@@ -151,75 +155,88 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                                           thumbColor: MaterialStateProperty.all(
                                               ColorName.white),
                                           onChanged: (value) {
-                                            MyProFuncBloc.get.add(OnOffDiscountEvent(value: value));
-                                            if(!value){
+                                            MyProFuncBloc.get.add(
+                                                OnOffDiscountEvent(
+                                                    value: value));
+                                            if (!value) {
                                               clearDiscountData();
                                               return;
                                             }
                                             getOldData();
-
                                           }),
                                     ))),
                           ],
                         );
                       },
                     ),
-                    SizedBox(height: 22.0.h,),
+                    SizedBox(
+                      height: 22.0.h,
+                    ),
                     BlocBuilder<MyProFuncBloc, MyProFuncState>(
                       builder: (context, state) {
                         return state.discountSwitchButton
                             ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                                'Discount Date',
-                                style: easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.black.withOpacity(0.5))),
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: TextFormFieldWidget(
-                                  controller: fromDateController,
-                                  hintText: 'From  --/--/-----',
-                                  hintStyle: easyTheme.textTheme.labelMedium,
-                                  readOnly: true,
-                                  onTap: () => selectDiscountDate(
-                                      context, fromDateController),
-                                )),
-                                Expanded(
-                                    child: TextFormFieldWidget(
-                                  controller: toDateController,
-                                  hintText: 'To  --/--/-----',
-                                  hintStyle: easyTheme.textTheme.labelMedium,
-                                  readOnly: true,
-                                  onTap: () =>
-                                      selectDiscountDate(context, toDateController),
-                                )),
-                              ],
-                            ),
-                          ],
-                        )
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Discount Date',
+                                      style: context
+                                          .easyTheme.textTheme.bodyMedium!
+                                          .copyWith(
+                                              color: ColorName.black
+                                                  .withOpacity(0.5))),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          child: TextFormFieldWidget(
+                                        controller: fromDateController,
+                                        hintText: 'From  --/--/-----',
+                                        hintStyle: context
+                                            .easyTheme.textTheme.labelMedium,
+                                        readOnly: true,
+                                        onTap: () => selectDiscountDate(
+                                            context, fromDateController),
+                                      )),
+                                      Expanded(
+                                          child: TextFormFieldWidget(
+                                        controller: toDateController,
+                                        hintText: 'To  --/--/-----',
+                                        hintStyle: context
+                                            .easyTheme.textTheme.labelMedium,
+                                        readOnly: true,
+                                        onTap: () => selectDiscountDate(
+                                            context, toDateController),
+                                      )),
+                                    ],
+                                  ),
+                                ],
+                              )
                             : const SizedBox();
                       },
                     ),
-                    SizedBox(height: 21.0.h,),
+                    SizedBox(
+                      height: 21.0.h,
+                    ),
                   ],
                 ),
               ),
               SizedBox(
                 height: 77.0.h,
               ),
-              const Spacer(flex: 1,),
+              const Spacer(
+                flex: 1,
+              ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
-                    text:'NEXT', onPressed: ()=>onNext()),
+                    text: 'NEXT', onPressed: () => onNext()),
               ),
               SizedBox(
                 height: 12.0.h,
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 21.0.w),
-                child: OutlineButtonWidget(text:'CANCEL', onPressed: ()=>cancel()),
+                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                child: OutlineButtonWidget(
+                    text: 'CANCEL', onPressed: () => cancel()),
               ),
               SizedBox(
                 height: 50.0.h,
@@ -230,36 +247,40 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
       ),
     );
   }
-  void setEditData(){
+
+  void setEditData() {
     double? discount;
-    if(getIt.get<EditProduct>().myProductItem != null){
+    if (getIt.get<EditProduct>().myProductItem != null) {
       var data = getIt.get<EditProduct>().myProductItem;
-      if(data!.discount != null){
-       MyProFuncBloc.get.add(OnOffDiscountEvent(value: true));
-       discount = double.parse(data.discount.toString()) * 100 ;
-       productDiscountController.text ='${discount.toInt()}%';
-       fromDateController.text = data.discountFrom.toString();
-       toDateController.text = data.discountTo.toString();
+      if (data!.discount != null) {
+        MyProFuncBloc.get.add(OnOffDiscountEvent(value: true));
+        discount = double.parse(data.discount.toString()) * 100;
+        productDiscountController.text = '${discount.toInt()}%';
+        fromDateController.text = data.discountFrom.toString();
+        toDateController.text = data.discountTo.toString();
       }
       productQuantityController.text = data.quantity.toString();
       productPriceController.text = data.price.toString();
     }
   }
-  void getOldData(){
-    if(getIt.get<EditProduct>().myProductItem != null){
+
+  void getOldData() {
+    if (getIt.get<EditProduct>().myProductItem != null) {
       var data = getIt.get<EditProduct>().myProductItem;
-      double discount = double.parse(data!.discount.toString()) * 100 ;
-      productDiscountController.text ='${discount.toInt()}%';
+      double discount = double.parse(data!.discount.toString()) * 100;
+      productDiscountController.text = '${discount.toInt()}%';
       fromDateController.text = data.discountFrom.toString();
       toDateController.text = data.discountTo.toString();
     }
   }
-  void clearDiscountData(){
+
+  void clearDiscountData() {
     productDiscountController.clear();
     fromDateController.clear();
     toDateController.clear();
   }
-  void selectDiscountDate(context,TextEditingController controller)async{
+
+  void selectDiscountDate(context, TextEditingController controller) async {
     await showModalBottomSheet<int>(
       context: context,
       builder: (BuildContext builder) {
@@ -278,22 +299,24 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
       },
     );
   }
-  void onNext()async{
+
+  void onNext() async {
     if (productQuantityController.text.isEmpty ||
-        productPriceController.text.isEmpty ) {
+        productPriceController.text.isEmpty) {
       ShowToastSnackBar.showSnackBars(message: 'Firstly, fill all data...');
       return;
     }
     AddProBloc.get.add(AddSaleInfoEvent(
       productQuantity: productQuantityController.text,
-      productPrice:  productPriceController.text,
+      productPrice: productPriceController.text,
       productDiscount: productDiscountController.text,
       fromDate: fromDateController.text,
       toDate: toDateController.text,
     ));
-    openNewPage(const ShipToScreen());
+    Utils.openNewPage(const ShipToScreen());
   }
-  void cancel(){
-    getBack();
+
+  void cancel() {
+    Utils.getBack();
   }
 }

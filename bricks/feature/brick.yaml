@@ -29,9 +29,4 @@ vars:
   feature_name:
     type: string
     description: Your name
-    prompt: What is your name?
-
-  uses_state_management:
-    type: boolean
-    description: Your name
-    prompt: Does this feature require state management classes?
+    prompt: What is your feature name?

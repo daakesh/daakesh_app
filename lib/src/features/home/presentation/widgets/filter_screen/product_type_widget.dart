@@ -9,8 +9,7 @@ class ProductTypeWidget extends StatefulWidget {
 }
 
 class _ProductTypeWidgetState extends State<ProductTypeWidget> {
-
-  List<String> data = ['All','Daakesh','Other Stores'];
+  List<String> data = ['All', 'Daakesh', 'Other Stores'];
 
   @override
   Widget build(BuildContext context) {
@@ -18,27 +17,33 @@ class _ProductTypeWidgetState extends State<ProductTypeWidget> {
       return Wrap(
         children: List.generate(
             data.length,
-                (index) => InkWell(
-              highlightColor: ColorName.transparent,
-              splashColor: ColorName.transparent,
-              focusColor: ColorName.transparent,
-              onTap: () =>HomeBloc.get.add(SetFilterDataEvent(productTypeIndex: index)),
-              child: Container(
-                height: 38.0,
-                margin: const EdgeInsetsDirectional.only(end: 8.0, bottom: 8.0),
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 7.0),
-                constraints: const BoxConstraints(minWidth: 56.0),
-                decoration: BoxDecoration(
-                    color: state.productTypeIndex == index ? ColorName.amber:ColorName.sliver,
-                    borderRadius: const BorderRadius.all(Radius.circular(10.0))),
-                child: Text(
-                  data[index],
-                  textAlign: TextAlign.center,
-                  style: easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 18.0),
-                ),
-              ),
-            )),
+            (index) => InkWell(
+                  highlightColor: ColorName.transparent,
+                  splashColor: ColorName.transparent,
+                  focusColor: ColorName.transparent,
+                  onTap: () => HomeBloc.get
+                      .add(SetFilterDataEvent(productTypeIndex: index)),
+                  child: Container(
+                    height: 38.0,
+                    margin:
+                        const EdgeInsetsDirectional.only(end: 8.0, bottom: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 7.0),
+                    constraints: const BoxConstraints(minWidth: 56.0),
+                    decoration: BoxDecoration(
+                        color: state.productTypeIndex == index
+                            ? ColorName.amber
+                            : ColorName.sliver,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10.0))),
+                    child: Text(
+                      data[index],
+                      textAlign: TextAlign.center,
+                      style: context.easyTheme.textTheme.headlineMedium!
+                          .copyWith(fontSize: 18.0),
+                    ),
+                  ),
+                )),
       );
     });
   }

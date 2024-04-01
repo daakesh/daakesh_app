@@ -41,7 +41,8 @@ class MyOrderItem extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: 'Order ID :',
-                                style: easyTheme.textTheme.headlineMedium!
+                                style: context
+                                    .easyTheme.textTheme.headlineMedium!
                                     .copyWith(
                                   fontSize:
                                       ResponsiveText.getResponsiveFontSize(
@@ -51,7 +52,8 @@ class MyOrderItem extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: '#${myOrderData.orderId!}',
-                                style: easyTheme.textTheme.headlineMedium!
+                                style: context
+                                    .easyTheme.textTheme.headlineMedium!
                                     .copyWith(
                                   fontSize:
                                       ResponsiveText.getResponsiveFontSize(
@@ -67,7 +69,8 @@ class MyOrderItem extends StatelessWidget {
                         ),
                         Text(
                           'On The Way',
-                          style: easyTheme.textTheme.headlineMedium!.copyWith(
+                          style: context.easyTheme.textTheme.headlineMedium!
+                              .copyWith(
                             fontSize: ResponsiveText.getResponsiveFontSize(
                                 fontSize: 12.0),
                             color: ColorName.ceruleanBlue,
@@ -77,7 +80,7 @@ class MyOrderItem extends StatelessWidget {
                     ),
                     Text(
                       'Poced In: 12/12/2012',
-                      style: easyTheme.textTheme.labelLarge!.copyWith(
+                      style: context.easyTheme.textTheme.labelLarge!.copyWith(
                         fontSize: ResponsiveText.getResponsiveFontSize(
                             fontSize: 14.0),
                         color: ColorName.gray,
@@ -90,14 +93,14 @@ class MyOrderItem extends StatelessWidget {
                 children: [
                   Text(
                     '\$${myOrderData.totalPrice!}',
-                    style: easyTheme.textTheme.labelLarge!.copyWith(
+                    style: context.easyTheme.textTheme.labelLarge!.copyWith(
                         fontSize: ResponsiveText.getResponsiveFontSize(
                             fontSize: 21.0),
                         color: ColorName.black),
                   ),
                   Text(
                     'Total Price',
-                    style: easyTheme.textTheme.labelLarge!.copyWith(
+                    style: context.easyTheme.textTheme.labelLarge!.copyWith(
                       fontSize:
                           ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
                       color: ColorName.gray,
@@ -125,8 +128,7 @@ class MyOrderItem extends StatelessWidget {
                   children: [
                     const SizedBox(width: 14.0),
                     Expanded(
-                      child: CachedImage(
-                          imageUrl: myOrderItems.itemImg!.first),
+                      child: CachedImage(imageUrl: myOrderItems.itemImg!.first),
                     ),
                     const SizedBox(width: 12.0),
                     Expanded(
@@ -134,7 +136,7 @@ class MyOrderItem extends StatelessWidget {
                       child: Text(
                         myOrderItems.title!,
                         overflow: TextOverflow.ellipsis,
-                        style: easyTheme.textTheme.bodyMedium!.copyWith(
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: ResponsiveText.getResponsiveFontSize(
                                 fontSize: 14.0),
                             color: ColorName.gray),
@@ -144,7 +146,7 @@ class MyOrderItem extends StatelessWidget {
                     Text(
                       '1 Item',
                       overflow: TextOverflow.ellipsis,
-                      style: easyTheme.textTheme.bodyMedium!.copyWith(
+                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                           fontSize: ResponsiveText.getResponsiveFontSize(
                               fontSize: 14.0),
                           color: ColorName.gray),
@@ -166,13 +168,13 @@ class MyOrderItem extends StatelessWidget {
             child: Text.rich(TextSpan(children: [
               TextSpan(
                   text: 'Shipping to : ',
-                  style: easyTheme.textTheme.bodyMedium!.copyWith(
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                     fontSize:
                         ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
                   )),
               TextSpan(
                   text: 'Jordan , Amman , Tla Ali ,29.',
-                  style: easyTheme.textTheme.bodyMedium!.copyWith(
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                       fontSize:
                           ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
                       color: ColorName.gray)),

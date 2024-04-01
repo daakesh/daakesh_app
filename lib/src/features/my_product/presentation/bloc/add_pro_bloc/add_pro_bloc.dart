@@ -13,100 +13,115 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
     on<AddSwapInfoEvent>(_addSwapInfo);
     on<AddShipToCountryEvent>(_addShipToCountry);
     on<AddProductEvent>(_addProduct);
-
   }
-  static AddProBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
-  FutureOr<void> _addEditState(AddEditStateEvent event, Emitter<AddProState> emit) {
-    emit(state.copyWith(adjustProduct : event.adjustProduct));
+  static AddProBloc get get =>
+      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  FutureOr<void> _addEditState(
+      AddEditStateEvent event, Emitter<AddProState> emit) {
+    emit(state.copyWith(adjustProduct: event.adjustProduct));
   }
 
   FutureOr<void> _addProInfo(AddProInfoEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(
-      productName:event.productName,
-      productDescription:event.productDescription,
+      productName: event.productName,
+      productDescription: event.productDescription,
     ));
   }
-  FutureOr<void> _addProCategories(AddProCategoriesEvent event, Emitter<AddProState> emit) {
+
+  FutureOr<void> _addProCategories(
+      AddProCategoriesEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(
-      productSecID:event.productSecID,
-      productCatID:event.productCatID,
-      productSubCatID:event.productSubCatID,
-      productBrandID:event.productBrandID,
-      productModelYear:event.productModelYear,
+      productSecID: event.productSecID,
+      productCatID: event.productCatID,
+      productSubCatID: event.productSubCatID,
+      productBrandID: event.productBrandID,
+      productModelYear: event.productModelYear,
     ));
   }
-  FutureOr<void> _addProImages(AddProImagesEvent event, Emitter<AddProState> emit) {
+
+  FutureOr<void> _addProImages(
+      AddProImagesEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(proImages: event.proImages));
   }
-  FutureOr<void> _addProDisplayMethod(AddProDisplayMethodEvent event, Emitter<AddProState> emit) {
+
+  FutureOr<void> _addProDisplayMethod(
+      AddProDisplayMethodEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(displayMethod: event.displayMethod));
   }
-  FutureOr<void> _addSaleInfo(AddSaleInfoEvent event, Emitter<AddProState> emit) {
+
+  FutureOr<void> _addSaleInfo(
+      AddSaleInfoEvent event, Emitter<AddProState> emit) {
     String discount = '';
-    if(event.productDiscount!.isNotEmpty){
-    int productDiscount = int.parse(event.productDiscount!.replaceAll('%', ''));
-    discount = (productDiscount/100).toString();
+    if (event.productDiscount!.isNotEmpty) {
+      int productDiscount =
+          int.parse(event.productDiscount!.replaceAll('%', ''));
+      discount = (productDiscount / 100).toString();
     }
     emit(state.copyWith(
-      productQuantity:event.productQuantity,
-      productPrice:event.productPrice,
-      productDiscount:discount,
-      fromDate:event.fromDate,
-      toDate:event.toDate,
+      productQuantity: event.productQuantity,
+      productPrice: event.productPrice,
+      productDiscount: discount,
+      fromDate: event.fromDate,
+      toDate: event.toDate,
     ));
+  }
 
-  }
-  FutureOr<void> _addSwapInfo(AddSwapInfoEvent event, Emitter<AddProState> emit) {
+  FutureOr<void> _addSwapInfo(
+      AddSwapInfoEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(
-      displayProduct:event.displayProduct,
-      swapCountry:event.swapCountry,
-      swapCity:event.swapCity,
+      displayProduct: event.displayProduct,
+      swapCountry: event.swapCountry,
+      swapCity: event.swapCity,
     ));
   }
-  FutureOr<void> _addShipToCountry(AddShipToCountryEvent event, Emitter<AddProState> emit) {
+
+  FutureOr<void> _addShipToCountry(
+      AddShipToCountryEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(shipToCountry: event.shipToCountry));
   }
-  FutureOr<void> _addProduct(AddProductEvent event, Emitter<AddProState> emit)async {
+
+  FutureOr<void> _addProduct(
+      AddProductEvent event, Emitter<AddProState> emit) async {
     String? proID;
-    if(state.adjustProduct.isEdit){
+    if (state.adjustProduct.isEdit) {
       proID = getIt.get<EditProduct>().myProductItem!.id.toString();
     }
     ProgressCircleDialog.show();
-    AddProModel addProModel =AddProModel();
+    AddProModel addProModel = AddProModel();
     addProModel
-    ..userID =ValueConstants.userId
-     ..proId = proID
-    ..title = state.productName
-    ..tradeFor ='TV'
-    ..condition = 'NEW'
-    ..city = 'Amman'
-    ..description = state.productDescription
-    ..secID =state.productSecID
-    ..catID = state.productCatID
-    ..subID = state.productSubCatID
-    ..brandID = state.productBrandID
-    ..year = state.productModelYear
-    ..tradeOrSell = state.displayMethod.name
-    ..quantity = state.productQuantity
-    ..price = state.productPrice
-    ..discount = state.productDiscount
-    ..discountFrom = state.fromDate
-    ..discountTo = state.toDate
-    ..country = state.shipToCountry
-    ..display = state.displayProduct
-    ..countrySwap =state.swapCountry
-    ..citySwap = state.swapCity
-    ..itemFileImg = state.proImages.toList();
+      ..userID = ValueConstants.userId
+      ..proId = proID
+      ..title = state.productName
+      ..tradeFor = 'TV'
+      ..condition = 'NEW'
+      ..city = 'Amman'
+      ..description = state.productDescription
+      ..secID = state.productSecID
+      ..catID = state.productCatID
+      ..subID = state.productSubCatID
+      ..brandID = state.productBrandID
+      ..year = state.productModelYear
+      ..tradeOrSell = state.displayMethod.name
+      ..quantity = state.productQuantity
+      ..price = state.productPrice
+      ..discount = state.productDiscount
+      ..discountFrom = state.fromDate
+      ..discountTo = state.toDate
+      ..country = state.shipToCountry
+      ..display = state.displayProduct
+      ..countrySwap = state.swapCountry
+      ..citySwap = state.swapCity
+      ..itemFileImg = state.proImages.toList();
     final result = state.adjustProduct.isEdit
         ? await getIt.get<MyProductUseCases>().updateProduct(addProModel)
         : await getIt.get<MyProductUseCases>().addProduct(addProModel);
 
     result.fold((l) {
       ProgressCircleDialog.dismiss();
-      emit(state.copyWith(addProStateStatus:  AddProStateStatus.ERROR));
+      emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ProgressCircleDialog.dismiss();
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
@@ -114,7 +129,7 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       ProgressCircleDialog.dismiss();
       getIt.get<EditProduct>().clearData();
       MyProFuncBloc.get.add(ResetValuesEvent());
-      openNewPage(const ProAddSuccessScreen(),popPreviousPages: true);
+      Utils.openNewPage(const ProAddSuccessScreen(), popPreviousPages: true);
       emit(state.copyWith(
         addProStateStatus: AddProStateStatus.SUCCESS,
         productSecID: '',
@@ -126,22 +141,16 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
         productModelYear: '',
         proImages: [],
         displayMethod: ProductDisplayMethod.Sell,
-        productQuantity:'',
-        productPrice:'',
-        productDiscount:'',
-        fromDate:'',
-        toDate:'',
-        displayProduct:'',
-        swapCountry:'Jordan',
-        swapCity:'Amman',
-        shipToCountry:'',
+        productQuantity: '',
+        productPrice: '',
+        productDiscount: '',
+        fromDate: '',
+        toDate: '',
+        displayProduct: '',
+        swapCountry: 'Jordan',
+        swapCity: 'Amman',
+        shipToCountry: '',
       ));
     });
   }
-
-
-
-
-
-
 }

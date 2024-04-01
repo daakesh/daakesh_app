@@ -1,8 +1,6 @@
 import 'package:injectable/injectable.dart';
 import '../../src.export.dart';
 
-final user = getIt.get<UserData>();
-
 abstract class UserData {
   UserModel userData = UserModel();
   void setUserDataAndCheckIsActive(UserModel userModel);
@@ -14,56 +12,44 @@ abstract class UserData {
 
 @Singleton(as: UserData)
 class UserDataImpl implements UserData {
-
   @override
   UserModel userData = UserModel();
 
   @override
   void setUserDataAndCheckIsActive(UserModel userData) {
     this.userData = userData;
-    if(userData.active == 0){
+    if (userData.active == 0) {
       activateUser;
       return;
     }
-    ValueConstants.userId =userData.id.toString();
-    ValueConstants.token =userData.token.toString();
+    ValueConstants.userId = userData.id.toString();
+    ValueConstants.token = userData.token.toString();
     saveUserToken;
-    openNewPage(const MainScreen(),popPreviousPages: true);
-
+    UserDataBloc.get.add(SetUserDataEvent(userData: userData));
+    Utils.openNewPage(const MainScreen(), popPreviousPages: true);
   }
 
   @override
-  void setUserData(UserModel userData)=> this.userData = userData;
+  void setUserData(UserModel userData) => this.userData = userData;
 
   @override
-  void get activateUser=> FirebaseAuthentication.verifyPhoneNumber(userData.phoneNumber.toString(),AuthManner.SIGNUPIN);
+  void get activateUser => FirebaseAuthentication.verifyPhoneNumber(
+      userData.phoneNumber.toString(), AuthManner.SIGNUPIN);
 
   @override
   void get saveUserToken async => await Future.wait<void>([
-    prefs.setString('token', userData.token.toString()),
-    prefs.setString('userId', userData.id.toString())]);
+        GetItUtils.prefs
+            .setString(SharedPrefKeys.token, userData.token.toString()),
+        GetItUtils.prefs
+            .setString(SharedPrefKeys.userID, userData.id.toString())
+      ]);
   @override
   void logOut() async {
     UserDataBloc.get.add(LogoutUserEvent());
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
-    ProgressCircleDialog.dismiss();
-    ValueConstants.token ='';
-    ValueConstants.userId ='';
-    await prefs.removeData('token');
-    prefs.removeData('userId').then((value) => openNewPage(const SplashScreen(), popPreviousPages: true));
+    ValueConstants.token = '';
+    ValueConstants.userId = '';
+    await GetItUtils.prefs.removeData(SharedPrefKeys.token);
+    GetItUtils.prefs.removeData(SharedPrefKeys.userID).then((value) =>
+        Utils.openNewPage(const SplashScreen(), popPreviousPages: true));
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

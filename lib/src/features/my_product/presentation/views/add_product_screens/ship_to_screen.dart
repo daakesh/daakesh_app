@@ -49,7 +49,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                     ),
                     Text(
                       'Add Product',
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 36.0.sp),
                     ),
                     SizedBox(
@@ -57,7 +57,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                     ),
                     Text(
                       'Ship To',
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.0.sp),
                     ),
                     SizedBox(
@@ -65,7 +65,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                     ),
                     Text(
                       'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                      style: easyTheme.textTheme.bodyMedium!
+                      style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 16.0.sp),
                     ),
                     SizedBox(
@@ -84,8 +84,9 @@ class _ShipToScreenState extends State<ShipToScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Country',
-                              style: easyTheme.textTheme.bodyMedium!.copyWith(
-                                  color: ColorName.black.withOpacity(0.5))),
+                              style: context.easyTheme.textTheme.bodyMedium!
+                                  .copyWith(
+                                      color: ColorName.black.withOpacity(0.5))),
                           TextFormFieldWidget(
                             controller: countryController,
                             isSuffixPrefixOn: true,
@@ -95,7 +96,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                               highlightColor: ColorName.transparent,
                               onTap: state.isAlreadyAddedCountry
                                   ? () {}
-                                  : ()=>addCountries(countryController.text),
+                                  : () => addCountries(countryController.text),
                               child: Transform.scale(
                                 scale: 0.8.sp,
                                 child: Container(
@@ -144,9 +145,15 @@ class _ShipToScreenState extends State<ShipToScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Container(
-                                        constraints: BoxConstraints(minHeight: 38.0.h,minWidth: 120.0.w,maxWidth: 140.0.w),
-                                        margin: EdgeInsetsDirectional.only(end: 10.0.w, bottom: 10.0.h),
-                                        padding: EdgeInsetsDirectional.symmetric(horizontal: 10.0.w),
+                                        constraints: BoxConstraints(
+                                            minHeight: 38.0.h,
+                                            minWidth: 120.0.w,
+                                            maxWidth: 140.0.w),
+                                        margin: EdgeInsetsDirectional.only(
+                                            end: 10.0.w, bottom: 10.0.h),
+                                        padding:
+                                            EdgeInsetsDirectional.symmetric(
+                                                horizontal: 10.0.w),
                                         decoration: BoxDecoration(
                                           color: ColorName.paleGray,
                                           borderRadius: BorderRadius.all(
@@ -158,10 +165,17 @@ class _ShipToScreenState extends State<ShipToScreen> {
                                             Expanded(
                                               child: Center(
                                                 child: Text(
-                                                    state.selectedShipToCountries[index],
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: easyTheme.textTheme.bodyLarge!
-                                                        .copyWith(fontSize: 18.0.sp,overflow: TextOverflow.ellipsis)),
+                                                    state.selectedShipToCountries[
+                                                        index],
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: context.easyTheme
+                                                        .textTheme.bodyLarge!
+                                                        .copyWith(
+                                                            fontSize: 18.0.sp,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis)),
                                               ),
                                             ),
                                           ],
@@ -200,55 +214,63 @@ class _ShipToScreenState extends State<ShipToScreen> {
     );
   }
 
-  void setEditData(){
-    if(getIt.get<EditProduct>().myProductItem != null){
+  void setEditData() {
+    if (getIt.get<EditProduct>().myProductItem != null) {
       var data = getIt.get<EditProduct>().myProductItem;
-      countryController.text =data!.country.toString();
+      countryController.text = data!.country.toString();
       addCountries(data.country.toString());
-    }
-    else{
+    } else {
       resetFlagData();
       countryController.text = 'Jordan';
     }
-
   }
+
   void showCountryDialog() {
     return showCountryPicker(
       context: context,
       showPhoneCode: false,
       onSelect: (Country country) {
         countryController.text = country.name;
-        MyProFuncBloc.get.add(CheckAlreadyAddedCountryEvent(value: country.name));
-        MyProFuncBloc.get.add(SelectShipToCountryEvent(shipToFlagEmoji: country.flagEmoji.toString()));
-        },
+        MyProFuncBloc.get
+            .add(CheckAlreadyAddedCountryEvent(value: country.name));
+        MyProFuncBloc.get.add(SelectShipToCountryEvent(
+            shipToFlagEmoji: country.flagEmoji.toString()));
+      },
     );
   }
+
   void addCountries(String country) {
     AddProBloc.get.add(AddShipToCountryEvent(shipToCountry: country));
     countriesList.add(country);
-    MyProFuncBloc.get.add(DeleteInsertCountriesEvent(selectedShipCountry: countriesList));
+    MyProFuncBloc.get
+        .add(DeleteInsertCountriesEvent(selectedShipCountry: countriesList));
     MyProFuncBloc.get.add(CheckAlreadyAddedCountryEvent(value: country));
   }
+
   void deleteAddedCountries(int index) {
     countriesList.removeAt(index);
-    MyProFuncBloc.get.add(DeleteInsertCountriesEvent(selectedShipCountry: countriesList));
-    MyProFuncBloc.get.add(CheckAlreadyAddedCountryEvent(value: countryController.text));
+    MyProFuncBloc.get
+        .add(DeleteInsertCountriesEvent(selectedShipCountry: countriesList));
+    MyProFuncBloc.get
+        .add(CheckAlreadyAddedCountryEvent(value: countryController.text));
   }
+
   void onNext() async {
-    if(countriesList.isEmpty){
+    if (countriesList.isEmpty) {
       ShowToastSnackBar.showSnackBars(message: 'Add at least one country...');
       return;
     }
     AddProBloc.get.add(AddProductEvent());
   }
+
   void cancel() {
-    getBack();
+    Utils.getBack();
     resetFlagData();
   }
+
   void resetFlagData() {
     countriesList = [];
     countryController.text = 'Jordan';
     MyProFuncBloc.get.add(ResetValuesEvent());
   }
-
 }

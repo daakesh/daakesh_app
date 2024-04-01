@@ -6,7 +6,10 @@ class SwapPopularCategoriesWidget extends StatelessWidget {
   final int? secIndex;
   final int? index;
   const SwapPopularCategoriesWidget({
-    super.key, required this.data, this.index, this.secIndex,
+    super.key,
+    required this.data,
+    this.index,
+    this.secIndex,
   });
 
   @override
@@ -17,8 +20,8 @@ class SwapPopularCategoriesWidget extends StatelessWidget {
       child: Container(
         width: 115.0,
         height: 130.0,
-        decoration:  const BoxDecoration(
-          color:ColorName.white,
+        decoration: const BoxDecoration(
+          color: ColorName.white,
           borderRadius: BorderRadius.all(Radius.circular(18.0)),
           boxShadow: [
             BoxShadow(
@@ -31,13 +34,16 @@ class SwapPopularCategoriesWidget extends StatelessWidget {
         child: Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            CachedImage(imageUrl: data.secImg.toString(),),
+            CachedImage(
+              imageUrl: data.secImg.toString(),
+            ),
             Align(
               alignment: AlignmentDirectional.topStart,
               child: Padding(
                 padding: const EdgeInsetsDirectional.only(start: 11.0),
-                child: Text(data.name.toString(), style: easyTheme.textTheme.bodyMedium!
-                          .copyWith(fontSize: 15.0)),
+                child: Text(data.name.toString(),
+                    style: context.easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontSize: 15.0)),
               ),
             ),
           ],
@@ -46,5 +52,3 @@ class SwapPopularCategoriesWidget extends StatelessWidget {
     );
   }
 }
-
-

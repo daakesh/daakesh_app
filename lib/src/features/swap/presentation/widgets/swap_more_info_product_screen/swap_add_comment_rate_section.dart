@@ -4,18 +4,28 @@ import '../../../../../src.export.dart';
 
 class SwapAddCommentRateSection extends StatelessWidget {
   final SwapState state;
-  SwapAddCommentRateSection({super.key, required this.state,});
+  SwapAddCommentRateSection({
+    super.key,
+    required this.state,
+  });
   final commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-
       children: [
-        const SizedBox(height: 30.0,),
-        Text('Rate',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 22.0),),
-        const SizedBox(height: 14.0,),
+        const SizedBox(
+          height: 30.0,
+        ),
+        Text(
+          'Rate',
+          style: context.easyTheme.textTheme.headlineMedium!
+              .copyWith(fontSize: 22.0),
+        ),
+        const SizedBox(
+          height: 14.0,
+        ),
         Container(
           width: double.infinity,
           height: 185.0,
@@ -24,9 +34,11 @@ class SwapAddCommentRateSection extends StatelessWidget {
             color: ColorName.silverSand,
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
-          child:  Column(
+          child: Column(
             children: [
-              const SizedBox(height: 22.0,),
+              const SizedBox(
+                height: 22.0,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -44,19 +56,21 @@ class SwapAddCommentRateSection extends StatelessWidget {
                     onRatingUpdate: (rating) {
                       context.disMissKeyboard;
                     },
-
                   ),
-                  Assets.svg.sendIcon.svg(width: 27.0,height: 27.0),
-                ],),
-              const SizedBox(height: 18.0,),
+                  Assets.svg.sendIcon.svg(width: 27.0, height: 27.0),
+                ],
+              ),
+              const SizedBox(
+                height: 18.0,
+              ),
               Container(
                 height: 103.0,
                 width: double.infinity,
-                padding: const EdgeInsetsDirectional.only(start: 10.0,end:10,top: 7.0),
+                padding: const EdgeInsetsDirectional.only(
+                    start: 10.0, end: 10, top: 7.0),
                 decoration: const BoxDecoration(
                     color: ColorName.white,
-                    borderRadius: BorderRadius.all(Radius.circular(6.0))
-                ),
+                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
                 child: TextFormFieldWidget(
                   controller: commentController,
                   hintText: 'Comment',
@@ -64,13 +78,12 @@ class SwapAddCommentRateSection extends StatelessWidget {
                   maxLines: 5,
                 ),
               ),
-
-
-
             ],
           ),
         ),
-        const SizedBox(height: 12.0,),
+        const SizedBox(
+          height: 12.0,
+        ),
       ],
     );
   }

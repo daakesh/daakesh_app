@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../src.export.dart';
 
-
 class RegisterPersonalInfoScreen extends StatelessWidget {
   RegisterPersonalInfoScreen({super.key});
 
@@ -22,52 +21,74 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Spacer(flex: 6,),
-              const SizedBox(height: 20.0,),
+              const Spacer(
+                flex: 6,
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
               const Padding(
-                padding: EdgeInsetsDirectional.only(start: 58.0,end: 100),
+                padding: EdgeInsetsDirectional.only(start: 58.0, end: 100),
                 child: DaakeshLogoWidget(),
               ),
-              const SizedBox(height: 40.0,),
+              const SizedBox(
+                height: 40.0,
+              ),
               Padding(
-                padding:const EdgeInsetsDirectional.only(start: 26.0,end: 66.0),
+                padding:
+                    const EdgeInsetsDirectional.only(start: 26.0, end: 66.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Lets Go',style: easyTheme.textTheme.headlineLarge),
-                    const SizedBox(height: 10.0,),
-                    FittedBox(child: Text('Enter your Personal your Info',style: easyTheme.textTheme.headlineMedium)),
+                    Text('Lets Go',
+                        style: context.easyTheme.textTheme.headlineLarge),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    FittedBox(
+                        child: Text('Enter your Personal your Info',
+                            style: context.easyTheme.textTheme.headlineMedium)),
                   ],
                 ),
               ),
-              const SizedBox(height: 40.0,),
+              const SizedBox(
+                height: 40.0,
+              ),
               Padding(
-                padding:const EdgeInsets.symmetric(horizontal: 30.0),
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Name',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    Text('Name',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: nameController,
                       focusNode: nameFocusNode,
-                      onFieldSubmitted: (value)=>fieldFocusChange(context,nameFocusNode,emailFocusNode),
+                      onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                          context, nameFocusNode, emailFocusNode),
                       inputFormatters: [
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
                     const SizedBox(height: 33.0),
-                    Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    Text('Email',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: emailController,
                       focusNode: emailFocusNode,
                       keyboardType: TextInputType.emailAddress,
-                      onFieldSubmitted: (value)=>fieldFocusChange(context,emailFocusNode,passwordFocusNode),
+                      onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                          context, emailFocusNode, passwordFocusNode),
                       inputFormatters: [
                         RegExpValidator.clearWhitespace,
                       ],
                     ),
                     const SizedBox(height: 33.0),
-                    Text('Password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    Text('Password',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: passwordController,
                       focusNode: passwordFocusNode,
@@ -75,18 +96,21 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
                       maxLines: 1,
                     ),
                     const SizedBox(height: 60.0),
-
                   ],
                 ),
               ),
-              DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context),padding: const EdgeInsetsDirectional.symmetric(horizontal: 21.1),),
+              DefaultButtonWidget(
+                text: 'NEXT',
+                onPressed: () => onNext(context),
+                padding:
+                    const EdgeInsetsDirectional.symmetric(horizontal: 21.1),
+              ),
               const SizedBox(height: 40.0),
               const AlreadyHaveAccountWidget(),
-
-              const Spacer(flex: 3,),
+              const Spacer(
+                flex: 3,
+              ),
               const SizedBox(height: 20.0),
-
-
             ],
           ),
         ),
@@ -94,7 +118,7 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
     );
   }
 
-  void onNext(context)async{
+  void onNext(context) async {
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty) {
@@ -104,12 +128,12 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
 
     ProgressCircleDialog.show();
     AuthBloc.get.add(EnterPersonalInfoEvent(
-          name: nameController.text,
-          email: emailController.text.trim(),
-          password: passwordController.text,
-        ));
+      name: nameController.text,
+      email: emailController.text.trim(),
+      password: passwordController.text,
+    ));
     await Future.delayed(const Duration(seconds: 1));
     ProgressCircleDialog.dismiss();
-    openNewPage(const RegisterLocationInfoScreen());
+    Utils.openNewPage(const RegisterLocationInfoScreen());
   }
 }

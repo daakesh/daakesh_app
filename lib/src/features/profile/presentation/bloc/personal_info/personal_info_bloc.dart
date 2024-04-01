@@ -7,25 +7,31 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     on<ActivateUpdatePersonalInfoEvent>(_activateUpdatePersonalInfo);
     on<SelectProfileImageEvent>(_selectProfileImage);
     on<UpdatePersonalInfoEvent>(_updatePersonalInfo);
-
   }
-  static PersonalInfoBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+  static PersonalInfoBloc get get =>
+      BlocProvider.of(Utils.navigatorKey.currentState!.context);
 
-  FutureOr<void> _activateUpdatePersonalInfo(ActivateUpdatePersonalInfoEvent event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(isUpdateActive: event.isUpdateActive,image: ''));
+  FutureOr<void> _activateUpdatePersonalInfo(
+      ActivateUpdatePersonalInfoEvent event, Emitter<PersonalInfoState> emit) {
+    emit(state.copyWith(isUpdateActive: event.isUpdateActive, image: ''));
   }
-  FutureOr<void> _selectProfileImage(SelectProfileImageEvent event, Emitter<PersonalInfoState> emit) {
+
+  FutureOr<void> _selectProfileImage(
+      SelectProfileImageEvent event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(image: event.path));
   }
 
-  FutureOr<void> _updatePersonalInfo(UpdatePersonalInfoEvent event, Emitter<PersonalInfoState> emit) async {
+  FutureOr<void> _updatePersonalInfo(
+      UpdatePersonalInfoEvent event, Emitter<PersonalInfoState> emit) async {
     ProgressCircleDialog.show();
     emit(state.copyWith(profileStateStatus: PersonalInfoStateStatus.LOADING));
 
-    if(event.password!.isNotEmpty){
+    if (event.password!.isNotEmpty) {
       _updatePassword(event.password.toString());
     }
-    final result = await getIt.get<ProfileUseCases>().updateUserData(event.name, event.image);
+    final result = await getIt
+        .get<ProfileUseCases>()
+        .updateUserData(event.name, event.image);
     result.fold(
       (l) {
         ProgressCircleDialog.dismiss();
@@ -40,18 +46,20 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
           return;
         }
         UserDataBloc.get.add(GetUserDataEvent());
-        emit(state.copyWith(profileStateStatus: PersonalInfoStateStatus.SUCCESS));
-
-        },
+        emit(state.copyWith(
+            profileStateStatus: PersonalInfoStateStatus.SUCCESS));
+      },
     );
   }
+
   void _updatePassword(String password) async {
-    final result = await getIt.get<ProfileUseCases>().updateUserPassword(password, user.userData.phoneNumber.toString());
+    final result = await getIt.get<ProfileUseCases>().updateUserPassword(
+        password, GetItUtils.user.userData.phoneNumber.toString());
     result.fold(
-          (l) {
+      (l) {
         ShowToastSnackBar.showSnackBars(message: l.message.toString());
       },
-          (r) {
+      (r) {
         if (!r.status!) {
           ShowToastSnackBar.showSnackBars(message: r.message.toString());
           return;
@@ -59,5 +67,4 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       },
     );
   }
-
 }

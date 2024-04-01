@@ -9,18 +9,21 @@ class HomemadeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HandmadeBloc, HandmadeState>(
       builder: (context, state) {
-        return CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
-            SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-              HandmadeItem handmadeItem = state.handmadeListData[index];
-              return  HandmadeItemWidget(handmadeItem:handmadeItem);
-            }, childCount: state.handmadeListData.length)),
-            const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
-            SliverToBoxAdapter(child: seeMoreHandler(state)),
-            const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
-
-          ],
+        return Scaffold(
+          body: CustomScrollView(
+            slivers: [
+              const HomeAppBarWidget(),
+              const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+              SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                HandmadeItem handmadeItem = state.handmadeListData[index];
+                return HandmadeItemWidget(handmadeItem: handmadeItem);
+              }, childCount: state.handmadeListData.length)),
+              const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
+              SliverToBoxAdapter(child: seeMoreHandler(state)),
+              const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
+            ],
+          ),
         );
       },
     );
@@ -39,17 +42,13 @@ class HomemadeScreen extends StatelessWidget {
           default:
             return Center(
                 child: TextButtonWidget(
-                  text: 'See More',
-                  onPressed: () => onSeeMore(),
-                  isBold: true,
-                ));
+              text: 'See More',
+              onPressed: () => onSeeMore(),
+              isBold: true,
+            ));
         }
       default:
         return const SizedBox();
     }
   }
 }
-
-
-
-

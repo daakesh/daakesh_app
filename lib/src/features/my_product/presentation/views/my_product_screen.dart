@@ -12,17 +12,18 @@ class MyProductsScreen extends StatefulWidget {
 class _MyProductsScreenState extends State<MyProductsScreen> {
   final searchController = TextEditingController();
 
-@override
+  @override
   void initState() {
     super.initState();
     getMyProductScreenData();
   }
 
-  void getMyProductScreenData(){
+  void getMyProductScreenData() {
     MyProBloc.get.add(GetMyProductEvent());
     MySwapProBloc.get.add(GetMySwapProEvent());
     SellerInfoBloc.get.add(GetSellerInfoEvent());
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,97 +31,123 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: ColorName.whiteSmoke,
-          floatingActionButton:  FloatingAddProductWidget(searchController:searchController ),
+          floatingActionButton:
+              FloatingAddProductWidget(searchController: searchController),
           body: BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
             return CustomScrollView(
               slivers: [
-                const SliverToBoxAdapter(child: HeaderWidget(withArrowBack: false),),
+                const SliverToBoxAdapter(
+                  child: HeaderWidget(withArrowBack: false),
+                ),
                 SliverPadding(padding: EdgeInsetsDirectional.only(top: 16.0.h)),
                 const SliverToBoxAdapter(child: SellerInfoCard()),
                 SliverPadding(padding: EdgeInsetsDirectional.only(top: 8.0.h)),
                 SliverAppBar(
                   backgroundColor: ColorName.whiteSmoke,
                   pinned: true,
-                  bottom: PreferredSize(preferredSize:Size.fromHeight(90.h) , child: const SizedBox(),),
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(90.h),
+                    child: const SizedBox(),
+                  ),
                   surfaceTintColor: ColorName.whiteSmoke,
                   flexibleSpace: FlexibleSpaceBar(
                     title: SizedBox(
                       height: 130.0.h,
                       child: Column(
                         children: [
-                          ProductTypeTabBar(state:state),
-                          SizedBox(height: 17.0.h,),
-                          SearchProductBarWidget(searchController:searchController),
+                          ProductTypeTabBar(state: state),
+                          SizedBox(
+                            height: 17.0.h,
+                          ),
+                          SearchProductBarWidget(
+                              searchController: searchController),
                         ],
                       ),
                     ),
-                    titlePadding: EdgeInsetsDirectional.symmetric(vertical: 5.0.h),
+                    titlePadding:
+                        EdgeInsetsDirectional.symmetric(vertical: 5.0.h),
                   ),
                 ),
                 SliverPadding(padding: EdgeInsetsDirectional.only(top: 30.0.h)),
-                SliverToBoxAdapter(child:Padding(
-                  padding: EdgeInsetsDirectional.only(start: 28.0.w,bottom: 13.0.h),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(
+                        start: 28.0.w, bottom: 13.0.h),
                     child: Text(
                       'My Product',
-                      style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 20.0.sp, color: ColorName.black),
+                      style: context.easyTheme.textTheme.headlineMedium!
+                          .copyWith(fontSize: 20.0.sp, color: ColorName.black),
                     ),
-                  ),),
-                if(state.searchValue.isEmpty)...[
-                   state.productTapBar == ProductTapBar.SHOP
-                       ? BlocBuilder<MyProBloc, MyProState>(
-                     builder: (context, state) {
-                       return SliverList(delegate: SliverChildBuilderDelegate((_, index) {
-                         MyProductItem myProductItem = state.myProductListData[index];
-                         return ShopProductItem(myProductItem:myProductItem,);
-                       }, childCount: state.myProductListData.length));
-                     },
-                   )
-                       : BlocBuilder<MySwapProBloc, MySwapProState>(
-                     builder: (context, state) {
-                       return SliverList(
-                           delegate: SliverChildBuilderDelegate((_, index) {
-                             MyProductItem myProductItem = state.mySwapProductListData[index];
-                             return SwapProductItem(myProductItem:myProductItem);
-                           }, childCount: state.mySwapProductListData.length));
-                     },
-                   ),
-                   state.productTapBar == ProductTapBar.SHOP
-                       ? SliverToBoxAdapter(
-                       child: BlocBuilder<MyProBloc, MyProState>(
-                         builder: (context, state) {
-                           return seeMoreHandler(state);
-                         },
-                       ))
-                       : SliverToBoxAdapter(
-                       child: BlocBuilder<MySwapProBloc, MySwapProState>(
-                         builder: (context, state) {
-                           return seeMoreHandler(state);
-                         },
-                       )),
-                 ]
-                 else...[
-                   SearchProductHandler(state: state),
-                   const SliverPadding(padding: EdgeInsetsDirectional.only(top: 55.0)),
-                   SliverToBoxAdapter(
-                     child: !state.isMoreData
-                         ? !state.myProFuncStateStatus.isLoadingMore
-                         ? Center(
-                       child: GestureDetector(
-                         onTap: () => seeMoreSearchProduct(state.searchValue),
-                         child: Text(
-                           'See More',
-                           style: easyTheme.textTheme.bodyLarge!.copyWith(
-                             fontSize: 16.0,
-                             color: ColorName.skyBlue,
-                           ),
-                         ),
-                       ),
-                     ):
-                     const CircularProgressIndicatorWidget()
-                         : const SizedBox(),
-                   ),
-                 ],
-                SliverPadding(padding: EdgeInsetsDirectional.only(top: 150.0.h)),
+                  ),
+                ),
+                if (state.searchValue.isEmpty) ...[
+                  state.productTapBar == ProductTapBar.SHOP
+                      ? BlocBuilder<MyProBloc, MyProState>(
+                          builder: (context, state) {
+                            return SliverList(
+                                delegate:
+                                    SliverChildBuilderDelegate((_, index) {
+                              MyProductItem myProductItem =
+                                  state.myProductListData[index];
+                              return ShopProductItem(
+                                myProductItem: myProductItem,
+                              );
+                            }, childCount: state.myProductListData.length));
+                          },
+                        )
+                      : BlocBuilder<MySwapProBloc, MySwapProState>(
+                          builder: (context, state) {
+                            return SliverList(
+                                delegate:
+                                    SliverChildBuilderDelegate((_, index) {
+                              MyProductItem myProductItem =
+                                  state.mySwapProductListData[index];
+                              return SwapProductItem(
+                                  myProductItem: myProductItem);
+                            }, childCount: state.mySwapProductListData.length));
+                          },
+                        ),
+                  state.productTapBar == ProductTapBar.SHOP
+                      ? SliverToBoxAdapter(
+                          child: BlocBuilder<MyProBloc, MyProState>(
+                          builder: (context, state) {
+                            return seeMoreHandler(state);
+                          },
+                        ))
+                      : SliverToBoxAdapter(
+                          child: BlocBuilder<MySwapProBloc, MySwapProState>(
+                          builder: (context, state) {
+                            return seeMoreHandler(state);
+                          },
+                        )),
+                ] else ...[
+                  SearchProductHandler(state: state),
+                  const SliverPadding(
+                      padding: EdgeInsetsDirectional.only(top: 55.0)),
+                  SliverToBoxAdapter(
+                    child: !state.isMoreData
+                        ? !state.myProFuncStateStatus.isLoadingMore
+                            ? Center(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      seeMoreSearchProduct(state.searchValue),
+                                  child: Text(
+                                    'See More',
+                                    style: context
+                                        .easyTheme.textTheme.bodyLarge!
+                                        .copyWith(
+                                      fontSize: 16.0,
+                                      color: ColorName.skyBlue,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : const CircularProgressIndicatorWidget()
+                        : const SizedBox(),
+                  ),
+                ],
+                SliverPadding(
+                    padding: EdgeInsetsDirectional.only(top: 150.0.h)),
               ],
             );
           }),
@@ -130,57 +157,56 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
   }
 
   Widget seeMoreHandler(state) {
-    if(state is MyProState){
+    if (state is MyProState) {
       switch (!state.isMoreData) {
         case true:
           switch (state.myProStateStatus) {
             case MyProStateStatus.LOADINGMORE:
               return const CircularProgressIndicatorWidget();
-            default:return Center(
-                child: TextButtonWidget(
-                  text: 'See More',
-                  onPressed: () => onSeeMore(state),
-                  isBold: true,
-                ));
+            default:
+              return Center(
+                  child: TextButtonWidget(
+                text: 'See More',
+                onPressed: () => onSeeMore(state),
+                isBold: true,
+              ));
           }
         default:
           return const SizedBox();
       }
     }
-    if(state is MySwapProState){
+    if (state is MySwapProState) {
       switch (!state.isMoreData) {
         case true:
           switch (state.mySwapProStateStatus) {
             case MySwapProStateStatus.LOADINGMORE:
               return const CircularProgressIndicatorWidget();
-            default:return Center(
-                child: TextButtonWidget(
-                  text: 'See More',
-                  onPressed: () => onSeeMore(state),
-                  isBold: true,
-                ));
+            default:
+              return Center(
+                  child: TextButtonWidget(
+                text: 'See More',
+                onPressed: () => onSeeMore(state),
+                isBold: true,
+              ));
           }
         default:
           return const SizedBox();
       }
-    }
-    else{
+    } else {
       return const SizedBox();
     }
   }
 
   void onSeeMore(state) {
-    if(state is MyProState) {
+    if (state is MyProState) {
       MyProBloc.get.add(GetMyProductEvent(isSeeMore: true));
-    }
-    else{
+    } else {
       MySwapProBloc.get.add(GetMySwapProEvent(isSeeMore: true));
     }
   }
 
   void seeMoreSearchProduct(String searchValue) {
-    MyProFuncBloc.get.add(SearchOnProductEvent(searchValue: searchValue, isSeeMore: true));
+    MyProFuncBloc.get
+        .add(SearchOnProductEvent(searchValue: searchValue, isSeeMore: true));
   }
 }
-
-

@@ -8,13 +8,16 @@ class MyOrderBloc extends Bloc<MyOrderEvent, MyOrderState> {
     on<ToggleMyOrderTabBarEvent>(_toggleMyOrderTabBar);
     on<SendReceiveSwitchEvent>(_sendReceiveSwitch);
   }
-  static MyOrderBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+  static MyOrderBloc get get =>
+      BlocProvider.of(Utils.navigatorKey.currentState!.context);
 
-  FutureOr<void> _toggleMyOrderTabBar(ToggleMyOrderTabBarEvent event, Emitter<MyOrderState> emit) {
-    emit(state.copyWith(myOrderTapBar:event.myOrderTapBar));
+  FutureOr<void> _toggleMyOrderTabBar(
+      ToggleMyOrderTabBarEvent event, Emitter<MyOrderState> emit) {
+    emit(state.copyWith(myOrderTapBar: event.myOrderTapBar));
   }
 
-  FutureOr<void> _sendReceiveSwitch(SendReceiveSwitchEvent event, Emitter<MyOrderState> emit) {
-    emit(state.copyWith(sendReceiveFlag:event.sendReceiveFlag));
+  FutureOr<void> _sendReceiveSwitch(
+      SendReceiveSwitchEvent event, Emitter<MyOrderState> emit) {
+    emit(state.copyWith(sendReceiveFlag: event.sendReceiveFlag));
   }
 }

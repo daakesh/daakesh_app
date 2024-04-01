@@ -5,23 +5,21 @@ import '../../../../../src.export.dart';
 
 class OTPScreen extends StatefulWidget {
   final AuthManner authManner;
-   const OTPScreen({super.key, required this.authManner});
+  const OTPScreen({super.key, required this.authManner});
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-
   final firstDigitController = TextEditingController();
-  final secondDigitController =TextEditingController();
+  final secondDigitController = TextEditingController();
   final thirdDigitController = TextEditingController();
   final fourthDigitController = TextEditingController();
   final fifthDigitController = TextEditingController();
   final sixthDigitController = TextEditingController();
 
-
-  final FocusNode firstTextField= FocusNode();
+  final FocusNode firstTextField = FocusNode();
   final FocusNode secondTextField = FocusNode();
   final FocusNode thirdTextField = FocusNode();
   final FocusNode fourthTextField = FocusNode();
@@ -39,34 +37,47 @@ class _OTPScreenState extends State<OTPScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 110.0.h,),
+                SizedBox(
+                  height: 110.0.h,
+                ),
                 Padding(
-                  padding: EdgeInsetsDirectional.only(start: 56.0.w,end: 97.0.w),
+                  padding:
+                      EdgeInsetsDirectional.only(start: 56.0.w, end: 97.0.w),
                   child: const DaakeshLogoWidget(),
                 ),
-                SizedBox(height: 60.0.h,),
+                SizedBox(
+                  height: 60.0.h,
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.only(start: 26.0.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Lets Go',style: easyTheme.textTheme.headlineLarge),
-                      SizedBox(height: 8.0.h,),
-                      Text('Verify Your Identity',style: easyTheme.textTheme.headlineMedium),
+                      Text('Lets Go',
+                          style: context.easyTheme.textTheme.headlineLarge),
+                      SizedBox(
+                        height: 8.0.h,
+                      ),
+                      Text('Verify Your Identity',
+                          style: context.easyTheme.textTheme.headlineMedium),
                       SizedBox(height: 19.0.h),
                       widget.authManner.isSignUpIn
-                          ? BlocBuilder<AuthBloc,AuthState>(
-                        builder: (context, state) {
-                          return Text(
-                              'We Send You A Code To +${state.phoneCode+state.phone} Phone Number Please Enter The Code To Create Account',
-                              style: easyTheme.textTheme.bodyMedium);
-                        },)
-                          : BlocBuilder<ForgetPassBloc,ForgetPassState>(
-                        builder: (context, state) {
-                          return Text(
-                              'We Send You A Code To +${state.phoneCode+state.phone} Phone Number Please Enter The Code To Create Account',
-                              style: easyTheme.textTheme.bodyMedium);
-                        },),
+                          ? BlocBuilder<AuthBloc, AuthState>(
+                              builder: (context, state) {
+                                return Text(
+                                    'We Send You A Code To +${state.phoneCode + state.phone} Phone Number Please Enter The Code To Create Account',
+                                    style:
+                                        context.easyTheme.textTheme.bodyMedium);
+                              },
+                            )
+                          : BlocBuilder<ForgetPassBloc, ForgetPassState>(
+                              builder: (context, state) {
+                                return Text(
+                                    'We Send You A Code To +${state.phoneCode + state.phone} Phone Number Please Enter The Code To Create Account',
+                                    style:
+                                        context.easyTheme.textTheme.bodyMedium);
+                              },
+                            ),
                     ],
                   ),
                 ),
@@ -76,109 +87,156 @@ class _OTPScreenState extends State<OTPScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Phone Number',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp,color: ColorName.darkGray)),
-                      Row(children: [
-                        Expanded(child: TextFormFieldWidget(
-                          style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuBold,fontSize: 27.0),
-                          controller: firstDigitController,
-                          focusNode:firstTextField,
-                          inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          onChanged: (text)=>otpCursorHandler(text,firstTextField,nextFocus:secondTextField ,isFirst: true),
-                        ),),
-                        const SizedBox(width: 16.0,),
-                        Expanded(child: TextFormFieldWidget(
-                          controller: secondDigitController,
-                          style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuBold,fontSize: 27.0),
-                          inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                          focusNode:secondTextField,
-
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          onChanged: (text)=> otpCursorHandler(text,secondTextField,previousFocus:firstTextField,nextFocus:thirdTextField),
-
-                        )),
-                        const SizedBox(width: 16.0,),
-                        Expanded(
-                              child: TextFormFieldWidget(
-                            controller: thirdDigitController,
-                                style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuBold,fontSize: 27.0),
-
-                                focusNode:thirdTextField,
-
-                                inputFormatters: [
-                              LengthLimitingTextInputFormatter(1),
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            keyboardType: TextInputType.number,
-                                textAlign: TextAlign.center,
-                                onChanged: (text) =>otpCursorHandler(text,thirdTextField,previousFocus:secondTextField,nextFocus:fourthTextField ),
-
-                              )),
-                        const SizedBox(width: 16.0,),
-                        Expanded(
-                              child: TextFormFieldWidget(
-                                style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuBold,fontSize: 27.0),
-
-                                focusNode:fourthTextField,
-
-                                controller: fourthDigitController,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(1),
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            keyboardType: TextInputType.number,
-                                textAlign: TextAlign.center,
-                                onChanged: (text)=>otpCursorHandler(text,fourthTextField,previousFocus: thirdTextField,nextFocus:fifthTextField ),
-
-                              )),
-                        const SizedBox(width: 16.0,),
-                        Expanded(
-                              child: TextFormFieldWidget(
-                                style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuBold,fontSize: 27.0),
-                                focusNode:fifthTextField,
-                                controller: fifthDigitController,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(1),
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            keyboardType: TextInputType.number,
-                                textAlign: TextAlign.center,
-                                onChanged: (text)=>otpCursorHandler(text,fifthTextField,nextFocus: sixthTextField,previousFocus:fourthTextField),
-
-                              )),
-                        const SizedBox(width: 16.0,),
-                        Expanded(
+                      Text('Phone Number',
+                          style: context.easyTheme.textTheme.bodyMedium!
+                              .copyWith(
+                                  fontSize: 18.0.sp,
+                                  color: ColorName.darkGray)),
+                      Row(
+                        children: [
+                          Expanded(
                             child: TextFormFieldWidget(
-                              style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuBold,fontSize: 27.0),
-                              focusNode:sixthTextField,
-                              controller: sixthDigitController,
+                              style: context.easyTheme.textTheme.labelMedium!
+                                  .copyWith(
+                                      fontFamily: FontFamily.apercuBold,
+                                      fontSize: 27.0),
+                              controller: firstDigitController,
+                              focusNode: firstTextField,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(1),
                                 FilteringTextInputFormatter.digitsOnly,
                               ],
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.center,
-                              onChanged: (text)=>otpCursorHandler(text,sixthTextField,previousFocus:fifthTextField,isLast: true),
-
-                            )),
-                      ],),
+                              onChanged: (text) => otpCursorHandler(
+                                  text, firstTextField,
+                                  nextFocus: secondTextField, isFirst: true),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+                          Expanded(
+                              child: TextFormFieldWidget(
+                            controller: secondDigitController,
+                            style: context.easyTheme.textTheme.labelMedium!
+                                .copyWith(
+                                    fontFamily: FontFamily.apercuBold,
+                                    fontSize: 27.0),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(1),
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            focusNode: secondTextField,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            onChanged: (text) => otpCursorHandler(
+                                text, secondTextField,
+                                previousFocus: firstTextField,
+                                nextFocus: thirdTextField),
+                          )),
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+                          Expanded(
+                              child: TextFormFieldWidget(
+                            controller: thirdDigitController,
+                            style: context.easyTheme.textTheme.labelMedium!
+                                .copyWith(
+                                    fontFamily: FontFamily.apercuBold,
+                                    fontSize: 27.0),
+                            focusNode: thirdTextField,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(1),
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            onChanged: (text) => otpCursorHandler(
+                                text, thirdTextField,
+                                previousFocus: secondTextField,
+                                nextFocus: fourthTextField),
+                          )),
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+                          Expanded(
+                              child: TextFormFieldWidget(
+                            style: context.easyTheme.textTheme.labelMedium!
+                                .copyWith(
+                                    fontFamily: FontFamily.apercuBold,
+                                    fontSize: 27.0),
+                            focusNode: fourthTextField,
+                            controller: fourthDigitController,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(1),
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            onChanged: (text) => otpCursorHandler(
+                                text, fourthTextField,
+                                previousFocus: thirdTextField,
+                                nextFocus: fifthTextField),
+                          )),
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+                          Expanded(
+                              child: TextFormFieldWidget(
+                            style: context.easyTheme.textTheme.labelMedium!
+                                .copyWith(
+                                    fontFamily: FontFamily.apercuBold,
+                                    fontSize: 27.0),
+                            focusNode: fifthTextField,
+                            controller: fifthDigitController,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(1),
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            onChanged: (text) => otpCursorHandler(
+                                text, fifthTextField,
+                                nextFocus: sixthTextField,
+                                previousFocus: fourthTextField),
+                          )),
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+                          Expanded(
+                              child: TextFormFieldWidget(
+                            style: context.easyTheme.textTheme.labelMedium!
+                                .copyWith(
+                                    fontFamily: FontFamily.apercuBold,
+                                    fontSize: 27.0),
+                            focusNode: sixthTextField,
+                            controller: sixthDigitController,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(1),
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            onChanged: (text) => otpCursorHandler(
+                                text, sixthTextField,
+                                previousFocus: fifthTextField, isLast: true),
+                          )),
+                        ],
+                      ),
                       const SizedBox(height: 39.0),
-                      TextButtonWidget(text: 'Send code again', onPressed: resendSMSCode),
+                      TextButtonWidget(
+                          text: 'Send code again', onPressed: resendSMSCode),
                     ],
                   ),
                 ),
-                SizedBox(height: 100.h,),
+                SizedBox(
+                  height: 100.h,
+                ),
                 Padding(
-                  padding:EdgeInsets.symmetric(horizontal: 21.0.w),
-                  child: DefaultButtonWidget(text: 'VALIDATE', onPressed: onValidate),
+                  padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                  child: DefaultButtonWidget(
+                      text: 'VALIDATE', onPressed: onValidate),
                 ),
                 SizedBox(height: 44.0.h),
                 const AlreadyHaveAccountWidget(),
@@ -205,56 +263,53 @@ class _OTPScreenState extends State<OTPScreen> {
         return;
       }
 
-      fieldFocusChange(context, currentFocus, nextFocus!);
+      Utils.fieldFocusChange(context, currentFocus, nextFocus!);
     }
     if (text.isEmpty) {
       if (isFirst) {
         currentFocus.unfocus();
         return;
       }
-      fieldFocusChange(context, currentFocus, previousFocus!);
+      Utils.fieldFocusChange(context, currentFocus, previousFocus!);
     }
   }
 
   void onValidate() {
-    if(firstDigitController.text.isEmpty ||
+    if (firstDigitController.text.isEmpty ||
         secondDigitController.text.isEmpty ||
         thirdDigitController.text.isEmpty ||
         fourthDigitController.text.isEmpty ||
         fifthDigitController.text.isEmpty ||
-        sixthDigitController.text.isEmpty){
-
+        sixthDigitController.text.isEmpty) {
       ShowToastSnackBar.showSnackBars(message: 'Insert full sms code');
       return;
     }
 
-   String smsCode = firstDigitController.text +
-           secondDigitController.text +
-           thirdDigitController.text +
-           fourthDigitController.text +
-           fifthDigitController.text +
-           sixthDigitController.text;
+    String smsCode = firstDigitController.text +
+        secondDigitController.text +
+        thirdDigitController.text +
+        fourthDigitController.text +
+        fifthDigitController.text +
+        sixthDigitController.text;
 
-   checkManner(smsCode);
+    checkManner(smsCode);
   }
-  void resendSMSCode(){
-    if(widget.authManner.isSignUpIn){
+
+  void resendSMSCode() {
+    if (widget.authManner.isSignUpIn) {
       AuthBloc.get.add(ResendSMSCodeEvent());
     }
-    if(widget.authManner.isForgetPassword){
+    if (widget.authManner.isForgetPassword) {
       ForgetPassBloc.get.add(ResendCodeEvent());
     }
   }
-  void checkManner(String smsCode){
-    if(widget.authManner.isSignUpIn){
-      AuthBloc.get.add(ValidateSMSCodeEvent(smsCode:smsCode));
-    }
-    if(widget.authManner.isForgetPassword){
-      ForgetPassBloc.get.add(VerifySMSCodeEvent(smsCode:smsCode));
-    }
 
+  void checkManner(String smsCode) {
+    if (widget.authManner.isSignUpIn) {
+      AuthBloc.get.add(ValidateSMSCodeEvent(smsCode: smsCode));
+    }
+    if (widget.authManner.isForgetPassword) {
+      ForgetPassBloc.get.add(VerifySMSCodeEvent(smsCode: smsCode));
+    }
   }
-
-
-
 }

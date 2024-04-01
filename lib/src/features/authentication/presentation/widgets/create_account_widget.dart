@@ -12,8 +12,13 @@ class CreateAccountWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('Don\'t have an Account? ', style: easyTheme.textTheme.bodyMedium,),
-        TextButtonWidget(text: 'Create one', onPressed: ()=>openNewPage(RegisterPersonalInfoScreen())),
+        Text(
+          'Don\'t have an Account? ',
+          style: context.easyTheme.textTheme.bodyMedium,
+        ),
+        TextButtonWidget(
+            text: 'Create one',
+            onPressed: () => Utils.openNewPage(RegisterPersonalInfoScreen())),
       ],
     );
   }

@@ -5,3 +5,4 @@ export 'extensions.dart';
 export 'responsive_text.dart';
 export 'regexp/regexp_validator.dart';
 export 'utils.dart';
+export 'get_it_utils.dart';

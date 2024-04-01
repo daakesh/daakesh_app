@@ -19,42 +19,66 @@ class SwapResultItemWidget extends StatelessWidget {
               offset: Offset(0, 3),
               blurRadius: 10.0,
             )
-          ]
-      ),
+          ]),
       child: Column(
         children: [
           Row(
             children: [
               Container(
-                constraints: const BoxConstraints(minWidth: 70.0,maxHeight: 25.0),
-                margin: const EdgeInsetsDirectional.only(start: 4.0) ,
+                constraints:
+                    const BoxConstraints(minWidth: 70.0, maxHeight: 25.0),
+                margin: const EdgeInsetsDirectional.only(start: 4.0),
                 padding: const EdgeInsetsDirectional.symmetric(horizontal: 6.0),
                 decoration: const BoxDecoration(
                     color: ColorName.red,
-                    borderRadius: BorderRadius.all(Radius.circular(4.0))
+                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
+                child: Center(
+                  child: Text(
+                    'Swap',
+                    style: context.easyTheme.textTheme.labelLarge!
+                        .copyWith(fontSize: 14.0),
+                  ),
                 ),
-                child: Center(child: Text('Swap',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 14.0),),),
               ),
-              const Spacer(flex: 1,),
-              Text('By',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0,color: ColorName.gray),),
-              const SizedBox(width: 5.0,),
-              Text('JAMSE ALFA',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0,color: ColorName.black),),
-              const SizedBox(width: 12.0,),
-
+              const Spacer(
+                flex: 1,
+              ),
+              Text(
+                'By',
+                style: context.easyTheme.textTheme.bodyMedium!
+                    .copyWith(fontSize: 14.0, color: ColorName.gray),
+              ),
+              const SizedBox(
+                width: 5.0,
+              ),
+              Text(
+                'JAMSE ALFA',
+                style: context.easyTheme.textTheme.bodyMedium!
+                    .copyWith(fontSize: 13.0, color: ColorName.black),
+              ),
+              const SizedBox(
+                width: 12.0,
+              ),
             ],
           ),
-          const SizedBox(height: 2.0,),
+          const SizedBox(
+            height: 2.0,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(width: 12.0,),
+              const SizedBox(
+                width: 12.0,
+              ),
               CachedImage(
                 imageUrl: swapSubCategory.subImg.toString(),
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 height: 90.0,
                 width: 90.0,
               ),
-              const SizedBox(width: 18.0,),
+              const SizedBox(
+                width: 18.0,
+              ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,24 +87,48 @@ class SwapResultItemWidget extends StatelessWidget {
                       padding: const EdgeInsetsDirectional.only(end: 80.0),
                       child: Text(
                         '${swapSubCategory.description}',
-                        style: easyTheme.textTheme.labelMedium!.copyWith(
-                            fontSize: 15.0,
-                            color: ColorName.gray,
-                            overflow: TextOverflow.ellipsis
-                        ),
+                        style: context.easyTheme.textTheme.labelMedium!
+                            .copyWith(
+                                fontSize: 15.0,
+                                color: ColorName.gray,
+                                overflow: TextOverflow.ellipsis),
                         maxLines: 2,
                       ),
                     ),
-                    const SizedBox(height: 2.0,),
-                    Text('Amman, Jordan',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13,color: ColorName.mediumSilver),),
-                    const SizedBox(height: 8.0,),
+                    const SizedBox(
+                      height: 2.0,
+                    ),
+                    Text(
+                      'Amman, Jordan',
+                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                          fontSize: 13, color: ColorName.mediumSilver),
+                    ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
                     Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: '(',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 16.0,color: ColorName.gray)),
-                          TextSpan(text: '25',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 16.0,color: ColorName.red)),
-                          TextSpan(text: ')',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 16.0,color: ColorName.gray)),
-                          TextSpan(text: ' Offers Submitted',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 16.0,color: ColorName.black)),
+                          TextSpan(
+                              text: '(',
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      fontSize: 16.0, color: ColorName.gray)),
+                          TextSpan(
+                              text: '25',
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      fontSize: 16.0, color: ColorName.red)),
+                          TextSpan(
+                              text: ')',
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      fontSize: 16.0, color: ColorName.gray)),
+                          TextSpan(
+                              text: ' Offers Submitted',
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      fontSize: 16.0, color: ColorName.black)),
                         ],
                       ),
                     ),
@@ -97,8 +145,11 @@ class SwapResultItemWidget extends StatelessWidget {
                   ],
                 ),
               ),
-            ],),
-          const SizedBox(height: 15.0,),
+            ],
+          ),
+          const SizedBox(
+            height: 15.0,
+          ),
         ],
       ),
     );

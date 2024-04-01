@@ -8,20 +8,23 @@ class RateBloc extends Bloc<RateEvent, RateState> {
     on<GetRateByItemEvent>(_getRateByItem);
     on<EditRateEvent>(_editRate);
   }
-  static RateBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+  static RateBloc get get =>
+      BlocProvider.of(Utils.navigatorKey.currentState!.context);
 
-  FutureOr<void> _addRate(AddRateEvent event, Emitter<RateState> emit)async {
+  FutureOr<void> _addRate(AddRateEvent event, Emitter<RateState> emit) async {
     int itemId = event.itemId;
     int userId = event.userId;
     int catID = event.catID;
     int rateValue = event.rateValue;
-    emit(state.copyWith(rateStateStatus:RateStateStatus.LOADING));
-    final result = await getIt.get<HomeUseCases>().addRate(itemId, userId, catID,rateValue);
+    emit(state.copyWith(rateStateStatus: RateStateStatus.LOADING));
+    final result = await getIt
+        .get<HomeUseCases>()
+        .addRate(itemId, userId, catID, rateValue);
     result.fold((l) {
       emit(state.copyWith(rateStateStatus: RateStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
@@ -29,16 +32,18 @@ class RateBloc extends Bloc<RateEvent, RateState> {
     });
   }
 
-  FutureOr<void> _getRateByItem(GetRateByItemEvent event, Emitter<RateState> emit)async {
+  FutureOr<void> _getRateByItem(
+      GetRateByItemEvent event, Emitter<RateState> emit) async {
     int itemID = event.itemId;
     int userId = event.userId;
-    emit(state.copyWith(rateStateStatus:RateStateStatus.LOADING));
-    final result = await getIt.get<HomeUseCases>().getRateByItem(itemID,userId);
+    emit(state.copyWith(rateStateStatus: RateStateStatus.LOADING));
+    final result =
+        await getIt.get<HomeUseCases>().getRateByItem(itemID, userId);
     result.fold((l) {
       emit(state.copyWith(rateStateStatus: RateStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
@@ -46,22 +51,20 @@ class RateBloc extends Bloc<RateEvent, RateState> {
     });
   }
 
-  FutureOr<void> _editRate(EditRateEvent event, Emitter<RateState> emit)async {
+  FutureOr<void> _editRate(EditRateEvent event, Emitter<RateState> emit) async {
     int id = event.id;
     int rateValue = event.rateValue;
-    emit(state.copyWith(rateStateStatus:RateStateStatus.LOADING));
-    final result = await getIt.get<HomeUseCases>().editRate(id,rateValue);
+    emit(state.copyWith(rateStateStatus: RateStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().editRate(id, rateValue);
     result.fold((l) {
       emit(state.copyWith(rateStateStatus: RateStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
       emit(state.copyWith(rateStateStatus: RateStateStatus.SUCCESS));
     });
   }
-
-
 }

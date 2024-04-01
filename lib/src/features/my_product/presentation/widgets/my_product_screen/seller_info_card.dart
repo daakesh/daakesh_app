@@ -9,7 +9,7 @@ class SellerInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SellerInfoBloc, SellerInfoState>(
-  builder: (context, state) {
+      builder: (context, state) {
         return state.sellerInfoModel.isNotEmpty
             ? Container(
                 width: double.infinity,
@@ -33,7 +33,7 @@ class SellerInfoCard extends StatelessWidget {
                         Expanded(
                             child: Text(
                           'Seller Info',
-                          style: easyTheme.textTheme.headlineMedium!
+                          style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(fontSize: 19.0.sp),
                         )),
                         InkWell(
@@ -41,8 +41,10 @@ class SellerInfoCard extends StatelessWidget {
                               onEditSellerInfo(state.sellerInfoModel.first),
                           child: Text(
                             'Edit',
-                            style: easyTheme.textTheme.headlineMedium!.copyWith(
-                                fontSize: 14.0.sp, color: ColorName.skyBlue),
+                            style: context.easyTheme.textTheme.headlineMedium!
+                                .copyWith(
+                                    fontSize: 14.0.sp,
+                                    color: ColorName.skyBlue),
                           ),
                         ),
                       ],
@@ -60,16 +62,17 @@ class SellerInfoCard extends StatelessWidget {
                             children: [
                               Text(
                                 'USED NAME',
-                                style: easyTheme.textTheme.bodySmall!.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13.0.sp),
+                                style: context.easyTheme.textTheme.bodySmall!
+                                    .copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 13.0.sp),
                               ),
                               SizedBox(
                                 height: 2.0.h,
                               ),
                               Text(
                                 '${state.sellerInfoModel.first.userName}',
-                                style: easyTheme.textTheme.bodyMedium!
+                                style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(fontSize: 14.0.sp),
                               ),
                             ],
@@ -81,16 +84,17 @@ class SellerInfoCard extends StatelessWidget {
                             children: [
                               Text(
                                 'USED PHONE',
-                                style: easyTheme.textTheme.bodySmall!.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13.0.sp),
+                                style: context.easyTheme.textTheme.bodySmall!
+                                    .copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 13.0.sp),
                               ),
                               SizedBox(
                                 height: 2.0.h,
                               ),
                               Text(
                                 '${state.sellerInfoModel.first.usedPhone}',
-                                style: easyTheme.textTheme.bodyMedium!
+                                style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(fontSize: 14.0.sp),
                               ),
                             ],
@@ -105,8 +109,9 @@ class SellerInfoCard extends StatelessWidget {
                       children: [
                         Text(
                           'Your Store Rate:',
-                          style: easyTheme.textTheme.bodyMedium!.copyWith(
-                              fontSize: 13.0.sp, color: ColorName.grayish),
+                          style: context.easyTheme.textTheme.bodyMedium!
+                              .copyWith(
+                                  fontSize: 13.0.sp, color: ColorName.grayish),
                         ),
                         SizedBox(
                           width: 8.0.w,
@@ -133,14 +138,16 @@ class SellerInfoCard extends StatelessWidget {
                         Expanded(
                             child: Text(
                           '${state.sellerInfoModel.first.storeRate!.toDouble()}',
-                          style: easyTheme.textTheme.labelLarge!.copyWith(
-                              fontSize: 13.0.sp, color: ColorName.black),
+                          style: context.easyTheme.textTheme.labelLarge!
+                              .copyWith(
+                                  fontSize: 13.0.sp, color: ColorName.black),
                         )),
                         Text(
                           state.sellerInfoModel.first.active == 1
                               ? 'Active'
                               : 'inActive',
-                          style: easyTheme.textTheme.labelMedium!.copyWith(
+                          style:
+                              context.easyTheme.textTheme.labelMedium!.copyWith(
                             fontSize: 16.0.sp,
                             color: state.sellerInfoModel.first.active == 1
                                 ? ColorName.darkGreen
@@ -154,9 +161,12 @@ class SellerInfoCard extends StatelessWidget {
               )
             : const SizedBox();
       },
-);
+    );
   }
+
   void onEditSellerInfo(SellerInfoData sellerInfoData) {
-    openNewPage(EditSellerInfoScreen(sellerInfoData: sellerInfoData,));
+    Utils.openNewPage(EditSellerInfoScreen(
+      sellerInfoData: sellerInfoData,
+    ));
   }
 }

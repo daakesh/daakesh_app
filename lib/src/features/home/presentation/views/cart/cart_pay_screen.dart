@@ -13,49 +13,64 @@ class CartPayScreen extends StatelessWidget {
         child: Column(
           children: [
             const HeaderWidget(),
-            const SizedBox(height: 25.0,),
+            const SizedBox(
+              height: 25.0,
+            ),
             const YourCartItemWidget(isWithEdit: false),
-            const SizedBox(height: 14.0,),
+            const SizedBox(
+              height: 14.0,
+            ),
             const ShippingLocationWidget(isWithEdit: false),
-            const SizedBox(height: 25.0,),
+            const SizedBox(
+              height: 25.0,
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 27.0),
+              padding: const EdgeInsets.symmetric(horizontal: 27.0),
               child: Row(
                 children: [
                   Text(
                     'Total : ',
-                    style: easyTheme.textTheme.labelLarge!
+                    style: context.easyTheme.textTheme.labelLarge!
                         .copyWith(fontSize: 28.0, color: ColorName.black),
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const Spacer(flex: 1,),
-                  Text('\$88.6',style: easyTheme.textTheme.labelLarge!.copyWith(fontSize: 28.0,color: ColorName.black),),
-                ],),
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Text(
+                    '\$88.6',
+                    style: context.easyTheme.textTheme.labelLarge!
+                        .copyWith(fontSize: 28.0, color: ColorName.black),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 12.0,),
-            const Spacer(flex: 1,),
+            const SizedBox(
+              height: 12.0,
+            ),
+            const Spacer(
+              flex: 1,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21.5),
-              child: DefaultButtonWidget(text: 'PAYMENT', onPressed: ()=>openPaymentMethodScreen(context)),
+              child: DefaultButtonWidget(
+                  text: 'PAYMENT',
+                  onPressed: () => openPaymentMethodScreen(context)),
             ),
-            const SizedBox(height: 50.0,),
+            const SizedBox(
+              height: 50.0,
+            ),
           ],
         ),
       ),
     );
   }
-  void openPaymentMethodScreen(context)async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
+
+  void openPaymentMethodScreen(context) async {
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: const PaymentMethodScreen(),
       withNavBar: true, // OPTIONAL VALUE. True by default.
     );
   }
-
 }
-
-

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
 
-
 class TextButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
@@ -26,9 +25,13 @@ class TextButtonWidget extends StatelessWidget {
         onTap: onPressed,
         child: Text(
           text,
-          style: style ?? (!isBold
-              ? easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.skyBlue)
-              : easyTheme.textTheme.bodyMedium!.copyWith(color: ColorName.skyBlue,fontFamily: FontFamily.apercuBold)),
+          style: style ??
+              (!isBold
+                  ? context.easyTheme.textTheme.bodyMedium!
+                      .copyWith(color: ColorName.skyBlue)
+                  : context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      color: ColorName.skyBlue,
+                      fontFamily: FontFamily.apercuBold)),
         ),
       ),
     );

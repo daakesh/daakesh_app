@@ -35,7 +35,7 @@ class SwapProductItem extends StatelessWidget {
                 padding: EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
                 child: Text(
                   'Edit',
-                  style: easyTheme.textTheme.bodyLarge!
+                  style: context.easyTheme.textTheme.bodyLarge!
                       .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
                 ),
               ),
@@ -62,10 +62,11 @@ class SwapProductItem extends StatelessWidget {
                       padding: EdgeInsetsDirectional.only(end: 80.0.w),
                       child: Text(
                         '${myProductItem.title!}\n',
-                        style: easyTheme.textTheme.labelMedium!.copyWith(
-                            fontSize: 15.0.sp,
-                            color: ColorName.gray,
-                            overflow: TextOverflow.ellipsis),
+                        style: context.easyTheme.textTheme.labelMedium!
+                            .copyWith(
+                                fontSize: 15.0.sp,
+                                color: ColorName.gray,
+                                overflow: TextOverflow.ellipsis),
                         maxLines: 2,
                       ),
                     ),
@@ -75,12 +76,16 @@ class SwapProductItem extends StatelessWidget {
                         children: [
                           TextSpan(
                               text: 'Swap In :',
-                              style: easyTheme.textTheme.labelLarge!.copyWith(
-                                  fontSize: 15.0.sp, color: ColorName.gray)),
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      fontSize: 15.0.sp,
+                                      color: ColorName.gray)),
                           TextSpan(
                               text: '${myProductItem.countrySwap}',
-                              style: easyTheme.textTheme.labelLarge!.copyWith(
-                                  fontSize: 13.0.sp, color: ColorName.black)),
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      fontSize: 13.0.sp,
+                                      color: ColorName.black)),
                         ],
                       ),
                     ),
@@ -92,12 +97,16 @@ class SwapProductItem extends StatelessWidget {
                         children: [
                           TextSpan(
                               text: 'Display:',
-                              style: easyTheme.textTheme.labelLarge!.copyWith(
-                                  fontSize: 15.0.sp, color: ColorName.gray)),
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      fontSize: 15.0.sp,
+                                      color: ColorName.gray)),
                           TextSpan(
                               text: '${myProductItem.display}',
-                              style: easyTheme.textTheme.labelLarge!.copyWith(
-                                  fontSize: 13.0.sp, color: ColorName.black)),
+                              style: context.easyTheme.textTheme.labelLarge!
+                                  .copyWith(
+                                      fontSize: 13.0.sp,
+                                      color: ColorName.black)),
                         ],
                       ),
                     ),
@@ -114,7 +123,7 @@ class SwapProductItem extends StatelessWidget {
 
   void onEdit(MyProductItem myProductItem) {
     AddProBloc.get.add(AddEditStateEvent(adjustProduct: AdjustProduct.EDIT));
-    openNewPage(const AddProInfoScreen());
+    Utils.openNewPage(const AddProInfoScreen());
     MyProFuncBloc.get.add(EditProductEvent(
         myProductItem: myProductItem,
         productDisplayMethod: ProductDisplayMethod.Swap));

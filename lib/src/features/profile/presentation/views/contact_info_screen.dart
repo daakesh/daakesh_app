@@ -5,27 +5,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class ContactInfoScreen extends StatelessWidget {
-   ContactInfoScreen({super.key});
+  ContactInfoScreen({super.key});
 
-  final personPhoneController = TextEditingController(text: getIt.get<ContactInfoService>().contactInfoNumber.phoneNumber);
-  final commercialPhoneController = TextEditingController(text: getIt.get<ContactInfoService>().contactInfoNumber.commercialNumber);
-  final whatsAppPhoneController = TextEditingController(text: getIt.get<ContactInfoService>().contactInfoNumber.whatsAppNumber);
+  final personPhoneController = TextEditingController(
+      text: getIt.get<ContactInfoService>().contactInfoNumber.phoneNumber);
+  final commercialPhoneController = TextEditingController(
+      text: getIt.get<ContactInfoService>().contactInfoNumber.commercialNumber);
+  final whatsAppPhoneController = TextEditingController(
+      text: getIt.get<ContactInfoService>().contactInfoNumber.whatsAppNumber);
 
   @override
   Widget build(BuildContext context) {
-    return  PopScope(
+    return PopScope(
       canPop: true,
-      onPopInvoked: (value){
-        ContactInfoBloc.get.add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: false));
+      onPopInvoked: (value) {
+        ContactInfoBloc.get
+            .add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: false));
       },
-
       child: DefaultBackgroundWidget(
         child: Scaffold(
-          backgroundColor:ColorName.transparent,
+          backgroundColor: ColorName.transparent,
           body: LayoutBuilderWidget(
             child: BlocBuilder<ContactInfoBloc, ContactInfoState>(
                 builder: (_, state) {
-                  return Padding(
+              return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +38,7 @@ class ContactInfoScreen extends StatelessWidget {
                     ),
                     Text(
                       'Contact Info',
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 36.0),
                     ),
                     const SizedBox(
@@ -43,7 +46,7 @@ class ContactInfoScreen extends StatelessWidget {
                     ),
                     Text(
                       'Change your Contact info',
-                      style: easyTheme.textTheme.headlineMedium!
+                      style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.0),
                     ),
                     const SizedBox(
@@ -51,7 +54,7 @@ class ContactInfoScreen extends StatelessWidget {
                     ),
                     Text(
                       'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                      style: easyTheme.textTheme.bodyMedium!
+                      style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 16.0),
                     ),
                     const SizedBox(
@@ -59,7 +62,7 @@ class ContactInfoScreen extends StatelessWidget {
                     ),
                     Text(
                       'Personal Phone Number',
-                      style: easyTheme.textTheme.bodyMedium!
+                      style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(color: ColorName.black.withOpacity(0.5)),
                     ),
                     TextFormFieldWidget(
@@ -68,7 +71,7 @@ class ContactInfoScreen extends StatelessWidget {
                       isSuffixPrefixOn: true,
                       enabled: state.isUpdatePersonalActive,
                       suffixIcon: InkWell(
-                        onTap: () => selectCountry(context,(Country country) {
+                        onTap: () => selectCountry(context, (Country country) {
                           ContactInfoBloc.get.add(EditContactInfoEvent(
                             personalPhoneCode: country.phoneCode,
                             personalPhoneFlagEmoji: country.flagEmoji,
@@ -83,7 +86,9 @@ class ContactInfoScreen extends StatelessWidget {
                                 style: const TextStyle(
                                     color: ColorName.blueGray, fontSize: 24.0),
                               ),
-                              const SizedBox(width: 10.0,),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
                               Assets.svg.arrowDropDownIcon.svg(),
                             ],
                           ),
@@ -99,7 +104,7 @@ class ContactInfoScreen extends StatelessWidget {
                     ),
                     Text(
                       'Commercial Phone Number',
-                      style: easyTheme.textTheme.bodyMedium!
+                      style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(color: ColorName.black.withOpacity(0.5)),
                     ),
                     TextFormFieldWidget(
@@ -108,13 +113,13 @@ class ContactInfoScreen extends StatelessWidget {
                       isSuffixPrefixOn: true,
                       enabled: state.isUpdatePersonalActive,
                       suffixIcon: InkWell(
-                        onTap: () => selectCountry(context,(Country country) {
+                        onTap: () => selectCountry(context, (Country country) {
                           ContactInfoBloc.get.add(EditContactInfoEvent(
-                          commercialPhoneCode: country.phoneCode,
-                          commercialPhoneFlagEmoji: country.flagEmoji,
-                        ));
+                            commercialPhoneCode: country.phoneCode,
+                            commercialPhoneFlagEmoji: country.flagEmoji,
+                          ));
                         }),
-                        child:  SizedBox(
+                        child: SizedBox(
                           width: 65.0,
                           child: Row(
                             children: [
@@ -123,7 +128,9 @@ class ContactInfoScreen extends StatelessWidget {
                                 style: const TextStyle(
                                     color: ColorName.blueGray, fontSize: 24.0),
                               ),
-                              const SizedBox(width: 10.0,),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
                               Assets.svg.arrowDropDownIcon.svg(),
                             ],
                           ),
@@ -139,7 +146,7 @@ class ContactInfoScreen extends StatelessWidget {
                     ),
                     Text(
                       'WhatsApp Commercial Phone Number',
-                      style: easyTheme.textTheme.bodyMedium!
+                      style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(color: ColorName.black.withOpacity(0.5)),
                     ),
                     TextFormFieldWidget(
@@ -148,13 +155,13 @@ class ContactInfoScreen extends StatelessWidget {
                       isSuffixPrefixOn: true,
                       enabled: state.isUpdatePersonalActive,
                       suffixIcon: InkWell(
-                        onTap: () => selectCountry(context,(Country country) {
+                        onTap: () => selectCountry(context, (Country country) {
                           ContactInfoBloc.get.add(EditContactInfoEvent(
-                          whatsAppPhoneCode: country.phoneCode,
-                          whatsAppPhoneFlagEmoji: country.flagEmoji,
-                        ));
+                            whatsAppPhoneCode: country.phoneCode,
+                            whatsAppPhoneFlagEmoji: country.flagEmoji,
+                          ));
                         }),
-                        child:  SizedBox(
+                        child: SizedBox(
                           width: 65.0,
                           child: Row(
                             children: [
@@ -163,7 +170,9 @@ class ContactInfoScreen extends StatelessWidget {
                                 style: const TextStyle(
                                     color: ColorName.blueGray, fontSize: 24.0),
                               ),
-                              const SizedBox(width: 10.0,),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
                               Assets.svg.arrowDropDownIcon.svg(),
                             ],
                           ),
@@ -182,14 +191,22 @@ class ContactInfoScreen extends StatelessWidget {
                     ),
                     Center(
                       child: DefaultButtonWidget(
-                          text: !state.isUpdatePersonalActive ? 'MAKE EDIT':'SAVE', onPressed: ()=>onMakeEdit(state.isUpdatePersonalActive)),
+                          text: !state.isUpdatePersonalActive
+                              ? 'MAKE EDIT'
+                              : 'SAVE',
+                          onPressed: () =>
+                              onMakeEdit(state.isUpdatePersonalActive)),
                     ),
                     const SizedBox(
                       height: 12.0,
                     ),
                     Center(
-                      child:
-                          OutlineButtonWidget(text: !state.isUpdatePersonalActive ? 'Cancel':'RESET AND CANCEL', onPressed: ()=>cancel(context,state.isUpdatePersonalActive)),
+                      child: OutlineButtonWidget(
+                          text: !state.isUpdatePersonalActive
+                              ? 'Cancel'
+                              : 'RESET AND CANCEL',
+                          onPressed: () =>
+                              cancel(context, state.isUpdatePersonalActive)),
                     ),
                     const SizedBox(
                       height: 50.0,
@@ -204,17 +221,20 @@ class ContactInfoScreen extends StatelessWidget {
     );
   }
 
-  void onMakeEdit(bool isUpdateActive){
-    ContactInfoBloc.get.add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: true));
-  }
-  void cancel(context,bool isUpdateActive){
-    Navigator.pop(context);
-    ContactInfoBloc.get.add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: false));
+  void onMakeEdit(bool isUpdateActive) {
+    ContactInfoBloc.get
+        .add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: true));
   }
 
-  void selectCountry(context,ValueChanged<Country> onSelect){
+  void cancel(context, bool isUpdateActive) {
+    Navigator.pop(context);
+    ContactInfoBloc.get
+        .add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: false));
+  }
+
+  void selectCountry(context, ValueChanged<Country> onSelect) {
     return showCountryPicker(
-      context:context,
+      context: context,
       showPhoneCode: true,
       onSelect: onSelect,
     );

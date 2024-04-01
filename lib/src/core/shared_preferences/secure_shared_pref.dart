@@ -6,41 +6,24 @@ abstract class SecureSharedPref {
   Future<String?> read(String key);
 }
 
-
 @Singleton(as: SecureSharedPref)
-class ImplSecureSharedPref implements SecureSharedPref{
+class ImplSecureSharedPref implements SecureSharedPref {
   FlutterSecureStorage? storage;
-  ImplSecureSharedPref(){
+  ImplSecureSharedPref() {
     inti();
   }
 
-  void inti(){
+  void inti() {
     storage = const FlutterSecureStorage();
   }
 
   @override
-  Future<void> write(String key,String value)async{
-    await storage!.write(key: key, value:value);
+  Future<void> write(String key, String value) async {
+    await storage!.write(key: key, value: value);
   }
 
   @override
-  Future<String?> read(String key)async{
+  Future<String?> read(String key) async {
     return await storage!.read(key: key);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

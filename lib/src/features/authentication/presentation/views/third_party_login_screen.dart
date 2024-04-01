@@ -7,14 +7,14 @@ class ThirdPartyLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DefaultBackgroundWidget(
+    return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
         body: SingleChildScrollView(
           child: SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsetsDirectional.only(start: 16.0,end: 22.0),
+              padding: const EdgeInsetsDirectional.only(start: 16.0, end: 22.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -24,24 +24,29 @@ class ThirdPartyLoginScreen extends StatelessWidget {
                     child: DaakeshLogoWidget(),
                   ),
                   const SizedBox(height: 190.0),
-                  Text('LOGIN',style: easyTheme.textTheme.headlineLarge,),
+                  Text(
+                    'LOGIN',
+                    style: context.easyTheme.textTheme.headlineLarge,
+                  ),
                   const SizedBox(height: 20.0),
-                  Text('Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',style: easyTheme.textTheme.bodyMedium,),
+                  Text(
+                    'Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',
+                    style: context.easyTheme.textTheme.bodyMedium,
+                  ),
                   const SizedBox(height: 70.0),
-                  DefaultButtonWidget(text: 'EMAIL', onPressed: (){}),
+                  DefaultButtonWidget(text: 'EMAIL', onPressed: () {}),
                   const SizedBox(height: 25.0),
-                  Center(child: Text('OR',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0),)),
+                  Center(
+                      child: Text(
+                    'OR',
+                    style: context.easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontSize: 18.0),
+                  )),
                   const SizedBox(height: 25.0),
                   const ThirdPartyAuthenticationWidget(),
                   const SizedBox(height: 25.0),
                   const CreateAccountWidget(),
                   const SizedBox(height: 55.0),
-
-
-
-
-
-
                 ],
               ),
             ),

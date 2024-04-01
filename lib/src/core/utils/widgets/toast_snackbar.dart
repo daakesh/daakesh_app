@@ -1,6 +1,6 @@
-import 'package:daakesh/app_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../core.export.dart';
 
 class ShowToastSnackBar {
   static Future<bool?> displayToast({
@@ -16,16 +16,16 @@ class ShowToastSnackBar {
         textColor: Colors.white,
         backgroundColor: const Color(0xff7A3FE1),
         fontSize: 14.0);
-
   }
 
-  static void showSnackBars({
-        required String? message,
-        bool isError = false,
-        bool isSuccess = false,
-        Duration? duration,
-        SnackBarAction? snackBarAction}) {
-    ScaffoldMessenger.of(navigatorKey.currentState!.context).showSnackBar(SnackBar(
+  static void showSnackBars(
+      {required String? message,
+      bool isError = false,
+      bool isSuccess = false,
+      Duration? duration,
+      SnackBarAction? snackBarAction}) {
+    ScaffoldMessenger.of(Utils.navigatorKey.currentState!.context)
+        .showSnackBar(SnackBar(
       content: Text(
         message!,
       ),
@@ -34,8 +34,8 @@ class ShowToastSnackBar {
       backgroundColor: isError
           ? Colors.red[800]
           : isSuccess
-          ? Colors.green[800]
-          : null,
+              ? Colors.green[800]
+              : null,
     ));
   }
 }

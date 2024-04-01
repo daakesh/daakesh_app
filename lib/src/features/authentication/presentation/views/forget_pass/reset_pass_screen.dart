@@ -11,11 +11,11 @@ class ResetPassScreen extends StatefulWidget {
 class _ResetPassScreenState extends State<ResetPassScreen> {
   final newPassController = TextEditingController();
   final confirmPassController = TextEditingController();
-  final FocusNode newPassFocusNode= FocusNode();
+  final FocusNode newPassFocusNode = FocusNode();
   final FocusNode confirmPassFocusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
-    return  DefaultBackgroundWidget(
+    return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
@@ -24,33 +24,57 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Spacer(flex: 2,),
+                const Spacer(
+                  flex: 2,
+                ),
                 const Center(child: DaakeshLogoWidget()),
-                const Spacer(flex: 1,),
-                Text('Reset password',style: easyTheme.textTheme.headlineLarge,),
+                const Spacer(
+                  flex: 1,
+                ),
+                Text(
+                  'Reset password',
+                  style: context.easyTheme.textTheme.headlineLarge,
+                ),
                 const SizedBox(height: 4.0),
-                FittedBox(fit: BoxFit.scaleDown,child: Text('Make Sure You Will Remember It',style: easyTheme.textTheme.headlineLarge!.copyWith(fontSize: 25.0),)),
-                const Spacer(flex: 1,),
+                FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'Make Sure You Will Remember It',
+                      style: context.easyTheme.textTheme.headlineLarge!
+                          .copyWith(fontSize: 25.0),
+                    )),
+                const Spacer(
+                  flex: 1,
+                ),
                 const SizedBox(height: 22.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('New password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
+                      Text(
+                        'New password',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0, color: ColorName.darkGray),
+                      ),
                       TextFormFieldWidget(
                         controller: newPassController,
                         focusNode: newPassFocusNode,
                         obscureText: true,
                         maxLines: 1,
-                        onFieldSubmitted: (value)=>fieldFocusChange(context, newPassFocusNode, confirmPassFocusNode),
+                        onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                            context, newPassFocusNode, confirmPassFocusNode),
                         keyboardType: TextInputType.emailAddress,
                         inputFormatters: [
                           RegExpValidator.clearWhitespace,
                         ],
                       ),
                       const SizedBox(height: 33.0),
-                      Text('Confirm password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
+                      Text(
+                        'Confirm password',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0, color: ColorName.darkGray),
+                      ),
                       TextFormFieldWidget(
                         controller: confirmPassController,
                         focusNode: confirmPassFocusNode,
@@ -60,10 +84,13 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     ],
                   ),
                 ),
-                const Spacer(flex: 1,),
+                const Spacer(
+                  flex: 1,
+                ),
                 DefaultButtonWidget(text: 'RESET', onPressed: resetPassword),
-                const Spacer(flex: 1,),
-
+                const Spacer(
+                  flex: 1,
+                ),
               ],
             ),
           ),
@@ -73,15 +100,11 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
   }
 
   void resetPassword() {
-    if(newPassController.text != confirmPassController.text){
+    if (newPassController.text != confirmPassController.text) {
       ShowToastSnackBar.showSnackBars(message: 'Password confirmation failed');
       return;
     }
-    ForgetPassBloc.get.add(ResetPasswordEvent(password: confirmPassController.text));
-
-
-
-
-
+    ForgetPassBloc.get
+        .add(ResetPasswordEvent(password: confirmPassController.text));
   }
 }

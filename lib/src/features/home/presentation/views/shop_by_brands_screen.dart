@@ -9,18 +9,21 @@ class ShopByBrandsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BrandsBloc, BrandsState>(
       builder: (context, state) {
-        return CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
-            SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-              BrandItem brandItem = state.brandListData[index];
-              return  BrandItemWidget(brandItem:brandItem);
-            }, childCount: state.brandListData.length)),
-            const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
-            SliverToBoxAdapter(child: seeMoreHandler(state)),
-            const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
-
-          ],
+        return Scaffold(
+          body: CustomScrollView(
+            slivers: [
+              const HomeAppBarWidget(),
+              const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+              SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                BrandItem brandItem = state.brandListData[index];
+                return BrandItemWidget(brandItem: brandItem);
+              }, childCount: state.brandListData.length)),
+              const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
+              SliverToBoxAdapter(child: seeMoreHandler(state)),
+              const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
+            ],
+          ),
         );
       },
     );
@@ -29,7 +32,6 @@ class ShopByBrandsScreen extends StatelessWidget {
   void onSeeMore() {
     BrandsBloc.get.add(GetBrandsDataEvent(isSeeMore: true));
   }
-
 
   Widget seeMoreHandler(BrandsState state) {
     switch (!state.isMoreData) {
@@ -50,6 +52,3 @@ class ShopByBrandsScreen extends StatelessWidget {
     }
   }
 }
-
-
-

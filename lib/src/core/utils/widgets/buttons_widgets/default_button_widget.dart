@@ -1,6 +1,5 @@
+import 'package:daakesh/src/core/core.export.dart';
 import 'package:flutter/material.dart';
-import '../../../../src.export.dart';
-
 
 class DefaultButtonWidget extends StatelessWidget {
   final String text;
@@ -22,7 +21,7 @@ class DefaultButtonWidget extends StatelessWidget {
       padding: padding ?? EdgeInsets.zero,
       child: ElevatedButton(
         onPressed: onPressed,
-        style: style ?? easyTheme.elevatedButtonTheme.style,
+        style: style ?? context.easyTheme.elevatedButtonTheme.style,
         child: Text(
           text,
         ),

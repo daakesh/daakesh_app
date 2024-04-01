@@ -7,9 +7,9 @@ class SelectProMethodScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DefaultBackgroundWidget(
+    return DefaultBackgroundWidget(
       child: Scaffold(
-        backgroundColor:ColorName.transparent,
+        backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26.0),
@@ -23,7 +23,7 @@ class SelectProMethodScreen extends StatelessWidget {
                   focusColor: ColorName.transparent,
                   highlightColor: ColorName.transparent,
                   splashColor: ColorName.transparent,
-                  onTap:()=>getBack(),
+                  onTap: () => Navigator.pop(context),
                   child: Assets.svg.arrowBackIcon.svg(),
                 ),
                 const SizedBox(
@@ -31,7 +31,7 @@ class SelectProMethodScreen extends StatelessWidget {
                 ),
                 Text(
                   'Add Product',
-                  style: easyTheme.textTheme.headlineMedium!
+                  style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 36.0),
                 ),
                 const SizedBox(
@@ -39,7 +39,7 @@ class SelectProMethodScreen extends StatelessWidget {
                 ),
                 Text(
                   'Choose a product display method',
-                  style: easyTheme.textTheme.headlineMedium!
+                  style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
                 const SizedBox(
@@ -47,33 +47,35 @@ class SelectProMethodScreen extends StatelessWidget {
                 ),
                 Text(
                   'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                  style: easyTheme.textTheme.bodyMedium!
+                  style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 16.0),
                 ),
                 const SizedBox(
                   height: 29.0,
                 ),
                 BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
-                  return  Column(
+                  return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       MethodItem(
+                      MethodItem(
                         title: 'For Sale',
                         productDisplayMethod: ProductDisplayMethod.Sell,
-                        selectedMethod:state.productDisplayMethod,
+                        selectedMethod: state.productDisplayMethod,
                       ),
-                       MethodItem(
+                      MethodItem(
                         title: 'For Swap',
                         productDisplayMethod: ProductDisplayMethod.Swap,
-                        selectedMethod:state.productDisplayMethod,
+                        selectedMethod: state.productDisplayMethod,
                       ),
-                       const SizedBox(
+                      const SizedBox(
                         height: 44.0,
                       ),
                     ],
                   );
                 }),
-                const Spacer(flex: 1,),
+                const Spacer(
+                  flex: 1,
+                ),
                 BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
                   return Center(
                     child: DefaultButtonWidget(
@@ -86,8 +88,8 @@ class SelectProMethodScreen extends StatelessWidget {
                   height: 12.0,
                 ),
                 Center(
-                  child:
-                  OutlineButtonWidget(text:'CANCEL', onPressed: ()=>cancel()),
+                  child: OutlineButtonWidget(
+                      text: 'CANCEL', onPressed: () => cancel()),
                 ),
                 const SizedBox(
                   height: 50.0,
@@ -100,25 +102,26 @@ class SelectProMethodScreen extends StatelessWidget {
     );
   }
 
-  void onNext(ProductDisplayMethod productDisplayMethod)async{
-    AddProBloc.get.add(AddProDisplayMethodEvent(displayMethod:productDisplayMethod));
+  void onNext(ProductDisplayMethod productDisplayMethod) async {
+    AddProBloc.get
+        .add(AddProDisplayMethodEvent(displayMethod: productDisplayMethod));
     if (productDisplayMethod.isSell) {
-      openNewPage(const ForSaleScreen());
+      Utils.openNewPage(const ForSaleScreen());
     }
     if (productDisplayMethod.isSwap) {
-      openNewPage(const ForSwapScreen());
+      Utils.openNewPage(const ForSwapScreen());
     }
     if (productDisplayMethod.isSaleSwap) {
-      openNewPage(const ForSaleSwapScreen());
+      Utils.openNewPage(const ForSaleSwapScreen());
     }
   }
-  void cancel(){
-    getBack();
+
+  void cancel() {
+    Utils.getBack();
     resetData();
   }
-  void resetData(){}
 
-
+  void resetData() {}
 }
 
 class MethodItem extends StatelessWidget {
@@ -138,7 +141,8 @@ class MethodItem extends StatelessWidget {
       focusColor: ColorName.transparent,
       splashColor: ColorName.transparent,
       highlightColor: ColorName.transparent,
-      onTap: ()=>MyProFuncBloc.get.add(ChooseProductDisplayMethodEvent(productDisplayMethod: productDisplayMethod)),
+      onTap: () => MyProFuncBloc.get.add(ChooseProductDisplayMethodEvent(
+          productDisplayMethod: productDisplayMethod)),
       child: Container(
         width: double.infinity,
         height: 51.0,
@@ -148,30 +152,40 @@ class MethodItem extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           boxShadow: [
             BoxShadow(
-              offset: Offset(0,3),
+              offset: Offset(0, 3),
               blurRadius: 3.0,
               color: Color.fromRGBO(0, 0, 0, 0.16),
             ),
-
           ],
-
         ),
         child: Row(
           children: [
-          const SizedBox(width: 13.0,),
-          Container(
-          width: 20.0,
-          height: 20.0,
-          decoration: BoxDecoration(
-            color: productDisplayMethod == selectedMethod? ColorName.amber:ColorName.transparent,
-            shape: BoxShape.circle,
-            border: Border.all(color: ColorName.gray,),
-          ),),
-          const SizedBox(width: 11.0,),
-          Text(title,style: easyTheme.textTheme.bodyMedium,),
-        ],),
+            const SizedBox(
+              width: 13.0,
+            ),
+            Container(
+              width: 20.0,
+              height: 20.0,
+              decoration: BoxDecoration(
+                color: productDisplayMethod == selectedMethod
+                    ? ColorName.amber
+                    : ColorName.transparent,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: ColorName.gray,
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 11.0,
+            ),
+            Text(
+              title,
+              style: context.easyTheme.textTheme.bodyMedium,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
