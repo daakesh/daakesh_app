@@ -3,7 +3,7 @@ import '../../../../../src.export.dart';
 
 enum CartStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
 
-extension CartStateStatusX on CartStateStatus{
+extension CartStateStatusX on CartStateStatus {
   bool get isInitial => this == CartStateStatus.INITIAL;
   bool get isSuccess => this == CartStateStatus.SUCCESS;
   bool get isError => this == CartStateStatus.ERROR;
@@ -12,27 +12,26 @@ extension CartStateStatusX on CartStateStatus{
 
 class CartState extends Equatable {
   final CartStateStatus cartStateStatus;
-  final List<CartData> cartItemsList;
+  final List<CartItem> cartItemsList;
   const CartState({
     this.cartStateStatus = CartStateStatus.INITIAL,
-    this.cartItemsList = const[],
+    this.cartItemsList = const [],
   });
 
   CartState copyWith({
-     CartStateStatus? cartStateStatus,
-     List<CartData>? cartItemsList,
-     int? counter,
+    CartStateStatus? cartStateStatus,
+    List<CartItem>? cartItemsList,
+    int? counter,
   }) {
     return CartState(
       cartStateStatus: cartStateStatus ?? this.cartStateStatus,
       cartItemsList: cartItemsList ?? this.cartItemsList,
-
     );
   }
 
   @override
   List<Object?> get props => [
-    cartStateStatus,
-    cartItemsList,
-  ];
+        cartStateStatus,
+        cartItemsList,
+      ];
 }

@@ -87,7 +87,7 @@ class YourCartItemWidget extends StatelessWidget {
                             Expanded(
                               flex: 2,
                               child: Text(
-                                '${state.cartItemsList[index].item!.title}sssssssssssssssssssssssssssss',
+                                '${state.cartItemsList[index].item!.title}',
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 15.0,
@@ -101,7 +101,7 @@ class YourCartItemWidget extends StatelessWidget {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                '${state.cartItemsList[index].item!.count}',
+                                '${state.cartItemsList[index].quantity}',
                                 textAlign: TextAlign.center,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
@@ -111,7 +111,7 @@ class YourCartItemWidget extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                  '\$${state.cartItemsList[index].item!.count! * state.cartItemsList[index].item!.price}',
+                                  '\$${state.cartItemsList[index].quantity! * state.cartItemsList[index].item!.priceAfterDiscount}',
                                   textAlign: TextAlign.end,
                                   style: context.easyTheme.textTheme.labelLarge!
                                       .copyWith(

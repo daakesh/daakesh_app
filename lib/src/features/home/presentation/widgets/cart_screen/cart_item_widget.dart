@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
 class CartItemWidget extends StatelessWidget {
-  final CartData cartItem;
+  final CartItem cartItem;
   final int index;
   const CartItemWidget({
     super.key,
@@ -42,13 +42,15 @@ class CartItemWidget extends StatelessWidget {
                 decoration: const BoxDecoration(
                     color: ColorName.red,
                     borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                child: Center(
-                  child: Text(
-                    '23% OFF',
-                    style: context.easyTheme.textTheme.labelLarge!
-                        .copyWith(fontSize: 14.0),
-                  ),
-                ),
+                child: cartItem.item!.discountPercentage != '0%'
+                    ? Center(
+                        child: Text(
+                          '${cartItem.item!.discountPercentage} OFF',
+                          style: context.easyTheme.textTheme.labelLarge!
+                              .copyWith(fontSize: 14.0),
+                        ),
+                      )
+                    : const SizedBox(),
               ),
               const Spacer(
                 flex: 1,
@@ -141,10 +143,7 @@ class CartItemWidget extends StatelessWidget {
                     const SizedBox(
                       height: 12.0,
                     ),
-                    InkWell(
-                        focusColor: ColorName.transparent,
-                        highlightColor: ColorName.transparent,
-                        splashColor: ColorName.transparent,
+                    GestureDetector(
                         onTap: () {},
                         child: Text(
                           'See Details',
@@ -181,10 +180,8 @@ class CartItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        CartBloc.get.add(DecreaseItemCountEvent(index: index));
-                        // setState(() {});
-                      },
+                      onTap: () => CartBloc.get
+                          .add(DecreaseItemCountEvent(index: index)),
                       child: Container(
                         height: 28.0,
                         width: 34.0,
@@ -197,14 +194,13 @@ class CartItemWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${cartItem.item!.count}',
+                      '${cartItem.quantity}',
                       style: context.easyTheme.textTheme.labelMedium!
                           .copyWith(fontSize: 21.0),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        CartBloc.get.add(IncreaseItemCountEvent(index: index));
-                      },
+                      onTap: () => CartBloc.get
+                          .add(IncreaseItemCountEvent(index: index)),
                       child: Container(
                         height: 28.0,
                         width: 34.0,
@@ -231,13 +227,9 @@ class CartItemWidget extends StatelessWidget {
                             .copyWith(fontSize: 21.0)),
                     TextSpan(
                         text:
-                            '\$${cartItem.item!.price * cartItem.item!.count}',
+                            '\$${cartItem.item!.priceAfterDiscount * cartItem.quantity}',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(fontSize: 21.0)),
-                    TextSpan(
-                        text: '99',
-                        style: context.easyTheme.textTheme.labelMedium!
-                            .copyWith(fontSize: 14.0, color: ColorName.gray)),
                   ],
                 ),
               ),

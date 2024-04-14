@@ -3,23 +3,37 @@ import '../../../../src.export.dart';
 class CartModel {
   bool? status;
   String? error;
-  List<CartData>? data;
+  CartData? data;
 
   CartModel({this.status, this.error, this.data});
 
   CartModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     error = json['error'];
-    if (json['data'] != null) {
-      data = <CartData>[];
-      data = (json['data'] as List<dynamic>)
-          .map((v) => CartData.fromJson(v))
+    data = json['data'] != null ? CartData.fromJson(json['data']) : null;
+  }
+}
+
+class CartData {
+  dynamic totalPrice;
+  List<CartItem>? cart;
+  CartData({
+    this.totalPrice,
+    this.cart,
+  });
+
+  CartData.fromJson(Map<String, dynamic> json) {
+    totalPrice = json['total_price'];
+    if (json['cart'] != null) {
+      cart = <CartItem>[];
+      cart = (json['cart'] as List<dynamic>)
+          .map((v) => CartItem.fromJson(v))
           .toList();
     }
   }
 }
 
-class CartData {
+class CartItem {
   int? id;
   int? quantity;
   String? country;
@@ -27,13 +41,13 @@ class CartData {
   UserModel? user;
   MyCartItem? item;
 
-  CartData({
+  CartItem({
     this.id,
     this.user,
     this.item,
   });
 
-  CartData.fromJson(Map<String, dynamic> json) {
+  CartItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     quantity = json['quantity'];
     country = json['country'];
@@ -48,7 +62,6 @@ class MyCartItem {
   String? description;
   List<String>? itemImg;
   String? date;
-  int? count;
   String? title;
   String? type;
   String? swapFor;
@@ -56,6 +69,7 @@ class MyCartItem {
   String? year;
   String? condition;
   dynamic price;
+  dynamic priceAfterDiscount;
   double? discount;
   String? discountFrom;
   String? discountTo;
@@ -66,6 +80,7 @@ class MyCartItem {
   String? display;
   String? countrySwap;
   String? citySwap;
+  String? discountPercentage;
 
   MyCartItem({
     this.id,
@@ -74,7 +89,6 @@ class MyCartItem {
     this.date,
     this.title,
     this.type,
-    this.count,
     this.swapFor,
     this.city,
     this.year,
@@ -90,6 +104,8 @@ class MyCartItem {
     this.display,
     this.countrySwap,
     this.citySwap,
+    this.discountPercentage,
+    this.priceAfterDiscount,
   });
 
   MyCartItem.fromJson(Map<String, dynamic> json) {
@@ -99,7 +115,6 @@ class MyCartItem {
       itemImg =
           (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
     }
-    count = 1;
     description = json['description'];
     date = json['date'];
     title = json['Title'];
@@ -119,5 +134,7 @@ class MyCartItem {
     display = json['display'];
     countrySwap = json['country_swap'];
     citySwap = json['city_swap'];
+    discountPercentage = json['discount_percentage'];
+    priceAfterDiscount = json['price_after_discount'];
   }
 }

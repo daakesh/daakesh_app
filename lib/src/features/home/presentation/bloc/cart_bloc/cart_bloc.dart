@@ -45,7 +45,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         return;
       }
       CartModel cartModel = CartModel.fromJson(r.data);
-      List<CartData> cartItemsList = cartModel.data!.toList();
+      List<CartItem> cartItemsList = cartModel.data!.cart!.toList();
 
       emit(state.copyWith(
         cartStateStatus: CartStateStatus.SUCCESS,
@@ -56,21 +56,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   FutureOr<void> _increaseItemCount(
       IncreaseItemCountEvent event, Emitter<CartState> emit) {
-    List<CartData> cartItemsList = state.cartItemsList.toList();
-    cartItemsList[event.index].item!.count =
-        cartItemsList[event.index].item!.count! + 1;
+    List<CartItem> cartItemsList = state.cartItemsList.toList();
+    cartItemsList[event.index].quantity =
+        cartItemsList[event.index].quantity! + 1;
     emit(state.copyWith(cartItemsList: []));
     emit(state.copyWith(cartItemsList: cartItemsList.toList()));
   }
 
   FutureOr<void> _decreaseItemCount(
       DecreaseItemCountEvent event, Emitter<CartState> emit) {
-    List<CartData> cartItemsList = state.cartItemsList.toList();
-    if (cartItemsList[event.index].item!.count == 1) {
+    List<CartItem> cartItemsList = state.cartItemsList.toList();
+    if (cartItemsList[event.index].quantity == 1) {
       cartItemsList.removeAt(event.index);
     } else {
-      cartItemsList[event.index].item!.count =
-          cartItemsList[event.index].item!.count! - 1;
+      cartItemsList[event.index].quantity =
+          cartItemsList[event.index].quantity! - 1;
     }
     emit(state.copyWith(cartItemsList: []));
     emit(state.copyWith(cartItemsList: cartItemsList));

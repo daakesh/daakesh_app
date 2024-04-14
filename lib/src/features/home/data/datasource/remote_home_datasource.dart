@@ -197,8 +197,8 @@ class RemoteHomeDatasource implements HomeDatasource {
   Future<Either<Failure, ValidResponse>> getCartItemsByUser() async {
     final result = await getIt
         .get<NetworkService>()
-        .get(path: 'DaakeshServices/api/favorite/getFavoriteForUser', params: {
-      "userID": ValueConstants.userId,
+        .get(path: 'DaakeshServices/api/cart/getMyCart', params: {
+      "user_id": ValueConstants.userId,
     });
     return result;
   }
