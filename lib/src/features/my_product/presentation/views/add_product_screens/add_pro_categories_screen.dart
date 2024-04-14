@@ -89,9 +89,10 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         builder: (context, state) {
                           return DropDownButtonWidget<String>(
                             onChange: (value) {
+                              debugPrint(value.toString());
+                              productSecID = value.toString();
                               getProBrand(value.toString());
                               getProCategory(value.toString());
-                              productSecID = value.toString();
                             },
                             value: productSecID,
                             items: state.sectionListData

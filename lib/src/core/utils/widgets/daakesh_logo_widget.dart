@@ -16,7 +16,7 @@ class DaakeshLogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return !isLight
-        ? Assets.svg.daakeshLogo.svg(width:width ?? 272.0)
-        : Assets.svg.lightDaakeshLogo.svg(width:width ?? 272.0);
+        ? Assets.svg.daakeshLogo.svg(width: width ?? 272.0.w)
+        : Assets.svg.lightDaakeshLogo.svg(width: width ?? 272.0.w);
   }
 }

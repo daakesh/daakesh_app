@@ -16,31 +16,31 @@ class SwapSelectRateWidget extends StatelessWidget {
           Radius.circular(4.0),
         ),
       ),
-      child: const Row(
+      child: Row(
         children: [
           SwapStarTypeWidget(
-            index: 1,
+            index: FilterRate.ALL.index,
             title: 'All',
             isAllType: true,
           ),
-          SwapVerticalDividerWidget(),
+          const SwapVerticalDividerWidget(),
           SwapStarTypeWidget(
-            index: 2,
+            index: FilterRate.TOWSTARS.index,
             title: '2.0',
           ),
-          SwapVerticalDividerWidget(),
+          const SwapVerticalDividerWidget(),
           SwapStarTypeWidget(
-            index: 3,
+            index: FilterRate.THREESTARS.index,
             title: '3.0',
           ),
-          SwapVerticalDividerWidget(),
+          const SwapVerticalDividerWidget(),
           SwapStarTypeWidget(
-            index: 4,
+            index: FilterRate.FOURSTARS.index,
             title: '4.0',
           ),
-          SwapVerticalDividerWidget(),
+          const SwapVerticalDividerWidget(),
           SwapStarTypeWidget(
-            index: 5,
+            index: FilterRate.FIVESTARS.index,
             title: '5.0',
           ),
         ],
@@ -63,16 +63,17 @@ class SwapStarTypeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+    return BlocBuilder<SwapFilterBloc, SwapFilterState>(
+        builder: (context, state) {
       return isAllType
           ? Expanded(
               child: GestureDetector(
                 onTap: () =>
-                    HomeBloc.get.add(SetFilterDataEvent(rateTypeIndex: index)),
+                    SwapFilterBloc.get.add(SwapSetFilterDataEvent(rate: index)),
                 child: Container(
                   width: 50.0,
                   decoration: BoxDecoration(
-                      color: index == state.rateIndex
+                      color: index == state.rate
                           ? ColorName.amber
                           : ColorName.sliver,
                       borderRadius:
@@ -91,11 +92,11 @@ class SwapStarTypeWidget extends StatelessWidget {
           : Expanded(
               child: GestureDetector(
                 onTap: () =>
-                    HomeBloc.get.add(SetFilterDataEvent(rateTypeIndex: index)),
+                    SwapFilterBloc.get.add(SwapSetFilterDataEvent(rate: index)),
                 child: Container(
                   width: 50.0,
                   decoration: BoxDecoration(
-                      color: index == state.rateIndex
+                      color: index == state.rate
                           ? ColorName.amber
                           : ColorName.sliver,
                       borderRadius:
@@ -105,7 +106,7 @@ class SwapStarTypeWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.star,
-                            color: index == state.rateIndex
+                            color: index == state.rate
                                 ? ColorName.white
                                 : ColorName.amber),
                         const SizedBox(

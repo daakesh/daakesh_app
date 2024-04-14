@@ -7,8 +7,7 @@ class SellerInfoBloc extends Bloc<SellerInfoEvent, SellerInfoState> {
     on<GetSellerInfoEvent>(_getSellerInfo);
     on<EditSellerInfoEvent>(_editSellerInfo);
   }
-  static SellerInfoBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static SellerInfoBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _getSellerInfo(
       GetSellerInfoEvent event, Emitter<SellerInfoState> emit) async {

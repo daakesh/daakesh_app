@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../../src.export.dart';
 
 class ReceiveDoneDealItem extends StatelessWidget {
-  const ReceiveDoneDealItem({super.key});
+  final SendReceiveSwapReqItem receiveSwapReqItem;
+  const ReceiveDoneDealItem({super.key, required this.receiveSwapReqItem});
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +30,22 @@ class ReceiveDoneDealItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(width: 12.0.w),
-              Assets.png.glasses.image(height: 90.0.h, width: 90.0.w),
+              Expanded(
+                child: CachedImage(
+                    imageUrl: receiveSwapReqItem.sourceItems!.itemImg != null
+                        ? receiveSwapReqItem.sourceItems!.itemImg!.first
+                        : ''),
+              ),
               SizedBox(width: 18.0.w),
               Expanded(
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.only(end: 80.0.w),
                       child: Text(
-                        'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                        '${receiveSwapReqItem.offerItems!.title}\n',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(
                                 fontSize: 15.0.sp,
@@ -52,7 +58,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                       height: 1.0.h,
                     ),
                     Text(
-                      'Amman, Jordan',
+                      '${receiveSwapReqItem.offerItems!.citySwap}, ${receiveSwapReqItem.offerItems!.countrySwap}',
                       style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                         fontSize: 13.0.sp,
                         color: ColorName.mediumSilver,
@@ -71,7 +77,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                                       color: ColorName.springGreen,
                                       fontSize: 16.0.sp)),
                           TextSpan(
-                              text: 'NF Store',
+                              text: '${receiveSwapReqItem.offerUser!.name}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.black,
@@ -121,11 +127,17 @@ class ReceiveDoneDealItem extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(width: 14.0.w),
-                Assets.png.glasses.image(width: 32.0.w, height: 32.0.h),
+                Expanded(
+                  child: CachedImage(
+                      imageUrl: receiveSwapReqItem.sourceItems!.itemImg != null
+                          ? receiveSwapReqItem.sourceItems!.itemImg!.first
+                          : ''),
+                ),
                 SizedBox(width: 15.0.w),
-                Flexible(
+                Expanded(
+                  flex: 4,
                   child: Text(
-                    'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                    '${receiveSwapReqItem.sourceItems!.title}',
                     overflow: TextOverflow.ellipsis,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 14.0.sp, color: ColorName.gray),

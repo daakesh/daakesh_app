@@ -14,11 +14,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   FutureOr<void> _addToCart(
       AddToCartEvent event, Emitter<CartState> emit) async {
     emit(state.copyWith(cartStateStatus: CartStateStatus.LOADING));
-    final result = await getIt.get<HomeUseCases>().addToCart(event.itemID);
+    ProgressCircleDialog.show();
+    final result = await getIt
+        .get<HomeUseCases>()
+        .addToCart(event.itemID, event.country, event.address);
     result.fold((l) {
+      ProgressCircleDialog.dismiss();
       emit(state.copyWith(cartStateStatus: CartStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
+      ProgressCircleDialog.dismiss();
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;

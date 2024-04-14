@@ -9,7 +9,9 @@ class MyOrderRepositoryImpl implements MyOrderRepository {
     return await getIt.get<MyOrderDatasource>().getMyOrders();
   }
 
-
-
-
+  @override
+  Future<Either<Failure, ValidResponse>> getSendReceiveSwapRequest(
+      String type) async {
+    return await getIt.get<MyOrderDatasource>().getSendReceiveSwapRequest(type);
+  }
 }

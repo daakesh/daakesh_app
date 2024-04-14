@@ -9,8 +9,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ChangeLangEvent>(_changeLang);
     on<SetValueLangEvent>(_setValueLang);
   }
-  static ProfileBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static ProfileBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///The initial value is disabled for editing data, This event allows users to make edits when desired for all screens.
   FutureOr<void> _activateUpdate(

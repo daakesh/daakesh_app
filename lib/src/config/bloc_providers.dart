@@ -19,6 +19,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       ///My Order-Blocs
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
       BlocProvider<SellOrderBloc>(create: (_) => SellOrderBloc()),
+      BlocProvider<MySwapOrderBloc>(create: (_) => MySwapOrderBloc()),
 
       ///My Product-Blocs
       BlocProvider<MyProBloc>(create: (_) => MyProBloc()),
@@ -39,6 +40,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<AdvBloc>(create: (_) => AdvBloc()),
       BlocProvider<ShippingBloc>(create: (_) => ShippingBloc()),
       BlocProvider<CartBloc>(create: (_) => CartBloc()),
+      BlocProvider<FilterBloc>(create: (_) => FilterBloc()),
 
       ///BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<RateBloc>(create: (_) => RateBloc()),
@@ -51,6 +53,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<SwapPassDataBloc>(create: (_) => SwapPassDataBloc()),
       BlocProvider<SwapAdvBloc>(create: (_) => SwapAdvBloc()),
       BlocProvider<SwapProBloc>(create: (_) => SwapProBloc()),
+      BlocProvider<SwapFilterBloc>(create: (_) => SwapFilterBloc()),
 
       ///BlocProvider<SwapCommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<SwapRateBloc>(create: (_) => RateBloc()),

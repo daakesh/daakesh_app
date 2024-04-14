@@ -6,8 +6,7 @@ class SellOrderBloc extends Bloc<SellOrderEvent, SellOrderState> {
   SellOrderBloc() : super(const SellOrderState()) {
     on<GetMyOrderEvent>(_getMyOrder);
   }
-  static SellOrderBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static SellOrderBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _getMyOrder(
       GetMyOrderEvent event, Emitter<SellOrderState> emit) async {

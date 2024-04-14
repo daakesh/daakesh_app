@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
 class SwapSectionScreen extends StatelessWidget {
@@ -80,7 +79,10 @@ class SwapSectionScreen extends StatelessWidget {
                       delegate: SliverChildBuilderDelegate(
                       (context, index) => GestureDetector(
                         onTap: () => openSubCategories(
-                            context, state.swapCategoriesListData, index),
+                          context,
+                          state.swapCategoriesListData,
+                          state.swapCategoriesListData[index].id!,
+                        ),
                         child: SwapSectionCategoryItem(
                             swapCategoryItem:
                                 state.swapCategoriesListData[index]),
@@ -109,20 +111,11 @@ class SwapSectionScreen extends StatelessWidget {
       .add(SwapGetCategoryBySectionIDEvent(isSeeMore: true));
 
   void openSubCategories(
-      context, List<SwapCategoryItem> swapCategoriesListData, index) {
-    SwapPassDataBloc.get.add(SwapPassSectionSubCategoriesEvent(
-        swapCategoriesListData: swapCategoriesListData));
-    SwapPassDataBloc.get
-        .add(SwapPreviewSectionSubCategoriesEvent(index: index));
-    openSubCategoriesResultScreen(context);
-  }
-
-  void openSubCategoriesResultScreen(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const SwapResultsScreen(),
-      withNavBar: true,
-    );
+      context, List<SwapCategoryItem> swapCategoriesListData, int catID) {
+    SwapFilterBloc.get.add(SwapPreviewSectionSubCategoriesEvent(
+        catID: catID, isFilterActive: false));
+    Utils.openNavNewPage(context,
+        SwapResultsScreen(swapCategoriesListData: swapCategoriesListData));
   }
 
   Widget seeMoreHandler(SwapSectionsState state) {

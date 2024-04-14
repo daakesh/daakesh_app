@@ -29,68 +29,63 @@ class RegisterCardInfoScreen extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22.0),
+              padding: EdgeInsets.symmetric(horizontal: 22.0.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   isLoggedIn
-                      ? const SizedBox(
-                          height: 58.0,
+                      ? SizedBox(
+                          height: 58.0.h,
                         )
-                      : const SizedBox(
-                          height: 110.0,
+                      : SizedBox(
+                          height: 110.0.h,
                         ),
                   isLoggedIn
                       ? const SizedBox()
-                      : const Padding(
-                          padding: EdgeInsetsDirectional.only(
-                            start: 38.0,
-                          ),
-                          child: Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: DaakeshLogoWidget()),
-                        ),
+                      : const Center(child: DaakeshLogoWidget()),
                   const SizedBox(
                     height: 38.0,
                   ),
                   Text('Add Payment Card',
                       style: context.easyTheme.textTheme.headlineLarge!
-                          .copyWith(fontSize: 36)),
+                          .copyWith(fontSize: 36.sp)),
                   const SizedBox(
                     height: 9.0,
                   ),
                   Text('Enter Card Information',
-                      style: context.easyTheme.textTheme.headlineMedium),
+                      style: context.easyTheme.textTheme.headlineMedium!
+                          .copyWith(fontSize: 25.sp)),
                   const SizedBox(
                     height: 19.0,
                   ),
                   Row(
                     children: [
-                      Assets.png.visaIcon.image(height: 42.0, width: 42.0),
-                      const SizedBox(
-                        width: 10.0,
+                      Assets.png.visaIcon.image(height: 42.0.h, width: 42.0.w),
+                      SizedBox(
+                        width: 10.0.w,
                       ),
                       Assets.png.mastercardIcon
-                          .image(height: 42.0, width: 42.0),
-                      const SizedBox(
-                        width: 10.0,
+                          .image(height: 42.0.h, width: 42.0.w),
+                      SizedBox(
+                        width: 10.0.w,
                       ),
                       Assets.png.americanExpressIcon
-                          .image(height: 42.0, width: 42.0),
+                          .image(height: 42.0.h, width: 42.0.w),
                     ],
                   ),
-                  const SizedBox(
-                    height: 30.0,
+                  SizedBox(
+                    height: 30.0.h,
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.only(start: 10.0),
+                    padding: EdgeInsetsDirectional.only(start: 10.0.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Card Number',
                             style: context.easyTheme.textTheme.bodyMedium!
                                 .copyWith(
-                                    fontSize: 18, color: ColorName.darkGray)),
+                                    fontSize: 18.sp,
+                                    color: ColorName.darkGray)),
                         TextFormFieldWidget(
                           controller: cardNumberController,
                           focusNode: cardNumberFocus,
@@ -103,7 +98,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                           onFieldSubmitted: (value) => Utils.fieldFocusChange(
                               context, cardNumberFocus, expiryDateFocus),
                         ),
-                        const SizedBox(height: 33.0),
+                        SizedBox(height: 33.0.h),
                         Row(
                           children: [
                             Expanded(
@@ -114,7 +109,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
-                                              fontSize: 18,
+                                              fontSize: 18.sp,
                                               color: ColorName.darkGray)),
                                   TextFormFieldWidget(
                                     controller: expiryDateController,
@@ -136,19 +131,19 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                         highlightColor: ColorName.transparent,
                                         splashColor: ColorName.transparent,
                                         child: SizedBox(
-                                            width: 22.0,
-                                            height: 22.0,
+                                            width: 22.0.w,
+                                            height: 22.0.h,
                                             child: Center(
                                                 child: Assets
                                                     .svg.furtherInfoIcon
                                                     .svg(
-                                                        height: 22.0,
-                                                        width: 22.0)))),
+                                                        height: 22.0.w,
+                                                        width: 22.0.h)))),
                                   ),
                                 ],
                               ),
                             ),
-                            const SizedBox(width: 34.0),
+                            SizedBox(width: 34.0.w),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +152,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
-                                              fontSize: 18,
+                                              fontSize: 18.sp,
                                               color: ColorName.darkGray)),
                                   TextFormFieldWidget(
                                     controller: cvvController,
@@ -177,25 +172,26 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                         highlightColor: ColorName.transparent,
                                         splashColor: ColorName.transparent,
                                         child: SizedBox(
-                                            width: 22.0,
-                                            height: 22.0,
+                                            width: 22.0.w,
+                                            height: 22.0.h,
                                             child: Center(
                                                 child: Assets
                                                     .svg.furtherInfoIcon
                                                     .svg(
-                                                        height: 22.0,
-                                                        width: 22.0)))),
+                                                        height: 22.0.h,
+                                                        width: 22.0.w)))),
                                   ),
                                 ],
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 33.0),
+                        SizedBox(height: 33.0.h),
                         Text('Nickname (optional)',
                             style: context.easyTheme.textTheme.bodyMedium!
                                 .copyWith(
-                                    fontSize: 18, color: ColorName.darkGray)),
+                                    fontSize: 18.sp,
+                                    color: ColorName.darkGray)),
                         TextFormFieldWidget(
                           controller: nicknameController,
                           focusNode: nicknameFocus,
@@ -208,6 +204,9 @@ class RegisterCardInfoScreen extends StatelessWidget {
                   const Spacer(
                     flex: 1,
                   ),
+                  SizedBox(
+                    height: 20.0.h,
+                  ),
                   isLoggedIn
                       ? Column(
                           children: [
@@ -216,8 +215,8 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                     text: 'ADD CARD',
                                     onPressed: () =>
                                         onAddCard(context, isLoggedIn))),
-                            const SizedBox(
-                              height: 12.0,
+                            SizedBox(
+                              height: 12.0.h,
                             ),
                             Center(
                                 child: OutlineButtonWidget(
@@ -228,8 +227,8 @@ class RegisterCardInfoScreen extends StatelessWidget {
                           child: DefaultButtonWidget(
                               text: 'ADD CARD',
                               onPressed: () => onAddCard(context, isLoggedIn))),
-                  const SizedBox(
-                    height: 50.0,
+                  SizedBox(
+                    height: 50.0.h,
                   ),
                 ],
               ),

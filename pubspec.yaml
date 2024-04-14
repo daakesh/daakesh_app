@@ -22,6 +22,7 @@ dependencies:
   get_it: ^7.6.7
   #http
   http: ^1.2.1
+  dio: ^5.4.2+1
   #Comparing objects
   equatable: ^2.0.5
   #Json theme
@@ -76,7 +77,15 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   bloc_test: ^9.1.5
   injectable_generator: ^2.4.1
+  flutter_launcher_icons: ^0.13.1
 
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets\png\swap_icon.png
+  min_sdk_android: 21
+  
 flutter_gen:
   colors:
     inputs:

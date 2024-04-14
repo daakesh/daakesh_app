@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter/widgets.dart';
 import '../../../../../../src.export.dart';
 
-class ReceiveSwapItem extends StatelessWidget {
-  const ReceiveSwapItem({super.key});
+class ReceiveSwapWaitingItem extends StatelessWidget {
+  final SendReceiveSwapReqItem sendReceiveSwapReqItem;
+  const ReceiveSwapWaitingItem(
+      {super.key, required this.sendReceiveSwapReqItem});
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +40,22 @@ class ReceiveSwapItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(width: 12.0.w),
-              Assets.png.glasses.image(height: 90.0.h, width: 90.0.w),
+              Expanded(
+                  child: CachedImage(
+                      imageUrl: sendReceiveSwapReqItem.offerItems!.itemImg !=
+                              null
+                          ? sendReceiveSwapReqItem.offerItems!.itemImg!.first
+                          : '')),
               SizedBox(width: 18.0.w),
               Expanded(
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.only(end: 80.0.w),
                       child: Text(
-                        'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                        '${sendReceiveSwapReqItem.offerItems!.title}\n',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(
                                 fontSize: 15.0.sp,
@@ -110,7 +118,9 @@ class ReceiveSwapItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.0.w),
             child: Center(
                 child: DefaultButtonWidget(
-                    text: 'START SWAP', onPressed: () => onStartSwap(context))),
+                    text: 'START SWAP',
+                    onPressed: () =>
+                        onStartSwap(context, sendReceiveSwapReqItem))),
           ),
           SizedBox(
             height: 16.0.h,
@@ -120,11 +130,11 @@ class ReceiveSwapItem extends StatelessWidget {
     );
   }
 
-  void onStartSwap(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const StartSwapScreen(),
-      withNavBar: true, // OPTIONAL VALUE. True by default.
-    );
+  void onStartSwap(context, SendReceiveSwapReqItem sendReceiveSwapReqItem) {
+    Utils.openNavNewPage(
+        context,
+        StartSwapScreen(
+          sendReceiveSwapReqItem: sendReceiveSwapReqItem,
+        ));
   }
 }

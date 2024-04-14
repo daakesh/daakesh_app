@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../src.export.dart';
@@ -30,34 +31,32 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 20.0.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Spacer(
                   flex: 5,
                 ),
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(start: 30.0),
-                  child: DaakeshLogoWidget(),
-                ),
+                const Center(child: DaakeshLogoWidget()),
                 const Spacer(
                   flex: 4,
                 ),
                 Text(
                   'Welcome back!',
-                  style: context.easyTheme.textTheme.headlineLarge,
+                  style: context.easyTheme.textTheme.headlineLarge!
+                      .copyWith(fontSize: 40.0.sp),
                 ),
-                const SizedBox(height: 22.0),
+                SizedBox(height: 22.0.h),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Email',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray),
+                            fontSize: 18.0.sp, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: emailController,
@@ -69,11 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           RegExpValidator.clearWhitespace,
                         ],
                       ),
-                      const SizedBox(height: 33.0),
+                      SizedBox(height: 33.0.h),
                       Text(
                         'Password',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray),
+                            fontSize: 18.0.sp, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: passwordController,
@@ -85,24 +84,35 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           BlocBuilder<AuthBloc, AuthState>(
                             builder: (context, state) {
-                              return Checkbox(
-                                onChanged: (bool? value) {
-                                  AuthBloc.get.add(ToggleRememberMeValueEvent(
-                                      rememberMeValue: value!));
-                                },
-                                value: state.rememberMeValue,
-                                overlayColor:
-                                    MaterialStateProperty.all(ColorName.white),
-                                hoverColor: ColorName.white,
-                                side:
-                                    const BorderSide(color: ColorName.darkGray),
+                              return Transform.scale(
+                                scale: 1.1.w,
+                                child: Checkbox(
+                                  onChanged: (bool? value) {
+                                    AuthBloc.get.add(ToggleRememberMeValueEvent(
+                                        rememberMeValue: value!));
+                                  },
+                                  value: state.rememberMeValue,
+                                  overlayColor: MaterialStateProperty.all(
+                                      ColorName.transparent),
+                                  hoverColor: ColorName.white,
+                                  side: const BorderSide(
+                                      color: ColorName.darkGray),
+                                  activeColor: ColorName.amber,
+                                ),
                               );
                             },
                           ),
-                          Text(
-                            'Remember Me',
-                            style: context.easyTheme.textTheme.bodyMedium!
-                                .copyWith(fontSize: 18.0),
+                          SizedBox(
+                            width: 2.0.w,
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Remember Me',
+                              style: context.easyTheme.textTheme.bodyMedium!
+                                  .copyWith(
+                                      fontSize: 18.0.sp,
+                                      overflow: TextOverflow.ellipsis),
+                            ),
                           )
                         ],
                       ),
@@ -112,8 +122,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Spacer(
                   flex: 1,
                 ),
-                DefaultButtonWidget(text: 'LOGIN', onPressed: onLogin),
-                const SizedBox(height: 25.0),
+                Center(
+                    child:
+                        DefaultButtonWidget(text: 'LOGIN', onPressed: onLogin)),
+                SizedBox(height: 25.0.h),
                 Center(
                     child: TextButtonWidget(
                         text: 'Forget password ?', onPressed: forgetPassword)),

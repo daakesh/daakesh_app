@@ -59,20 +59,25 @@ class TodayDealProduct extends StatelessWidget {
                       color: ColorName.red,
                       borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.0.h),
-                      child: Text(
-                        '23% OFF',
-                        textAlign: TextAlign.center,
-                        style: context.easyTheme.textTheme.headlineMedium!
-                            .copyWith(
-                                fontSize: 14.0.sp, color: ColorName.white),
-                      ),
-                    ),
+                    child: todayDealItem.discountPercentage != '0%'
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.0.h),
+                            child: Text(
+                              '${todayDealItem.discountPercentage} OFF',
+                              textAlign: TextAlign.center,
+                              style: context.easyTheme.textTheme.headlineMedium!
+                                  .copyWith(
+                                      fontSize: 14.0.sp,
+                                      color: ColorName.white),
+                            ),
+                          )
+                        : const SizedBox(),
                   ),
                 ),
                 CachedImage(
-                  imageUrl: todayDealItem.itemImg!.first.toString(),
+                  imageUrl: todayDealItem.itemImg != null
+                      ? todayDealItem.itemImg!.first
+                      : '',
                   height: 85.0,
                   width: 85.0,
                 ),
@@ -160,34 +165,43 @@ class TodayDealProduct extends StatelessWidget {
                 SizedBox(
                   height: 2.0.h,
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                        child: Text(
-                      '\$${todayDealItem.price}',
-                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                          fontSize: 20.0, fontWeight: FontWeight.w600),
-                      overflow: TextOverflow.ellipsis,
-                    )),
-                    Text(
-                      '99 ',
-                      style:
-                          context.easyTheme.textTheme.headlineMedium!.copyWith(
-                        fontSize: 12.0,
-                        color: ColorName.gray,
+                todayDealItem.discountPercentage == '0%'
+                    ? Text(
+                        '\$${todayDealItem.priceAfterDiscount} ',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 20.0, fontWeight: FontWeight.w600),
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    : Row(
+                        children: [
+                          Flexible(
+                              child: Text(
+                            '\$${todayDealItem.priceAfterDiscount} ',
+                            style: context.easyTheme.textTheme.bodyMedium!
+                                .copyWith(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w600),
+                            overflow: TextOverflow.ellipsis,
+                          )),
+                          // Text(
+                          //   '99 ',
+                          //   style:
+                          //       context.easyTheme.textTheme.headlineMedium!.copyWith(
+                          //     fontSize: 12.0,
+                          //     color: ColorName.gray,
+                          //   ),
+                          // ),
+                          Text(
+                            '\$${todayDealItem.price}',
+                            style: context.easyTheme.textTheme.headlineMedium!
+                                .copyWith(
+                              fontSize: 14.0.sp,
+                              decoration: TextDecoration.lineThrough,
+                              color: ColorName.gray,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      '\$79.99',
-                      style:
-                          context.easyTheme.textTheme.headlineMedium!.copyWith(
-                        fontSize: 14.0.sp,
-                        decoration: TextDecoration.lineThrough,
-                        color: ColorName.gray,
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(
                   height: 10.0,
                 ),

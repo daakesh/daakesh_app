@@ -10,8 +10,7 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     on<SetUserDataEvent>(_setUserData);
   }
 
-  static UserDataBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static UserDataBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Get User Data Event,
   FutureOr<void> _getUserData(
@@ -49,6 +48,7 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+
       emit(state.copyWith(userDataStateStatus: UserDataStateStatus.SUCCESS));
     });
   }

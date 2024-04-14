@@ -139,7 +139,6 @@ class SwapMoreInfoScreen extends StatelessWidget {
 
   void onSendOffer(context) {
     SwapProBloc.get.add(GetSwapProductEvent());
-    SwapBloc.get.add(SwapGetToTopScreenEvent());
     openSendOfferScreen(context);
   }
 

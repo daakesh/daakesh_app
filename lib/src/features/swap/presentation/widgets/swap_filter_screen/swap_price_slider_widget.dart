@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../src.export.dart';
 
@@ -14,8 +15,6 @@ class SwapPriceSliderWidget extends StatefulWidget {
 }
 
 class _SwapPriceSliderWidgetState extends State<SwapPriceSliderWidget> {
-  double _currentStartValue = 0.0;
-  double _currentEndValue = 400.0;
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
@@ -24,20 +23,28 @@ class _SwapPriceSliderWidgetState extends State<SwapPriceSliderWidget> {
         showValueIndicator: ShowValueIndicator.always,
         thumbColor: const Color(0xffAE6905),
       ),
-      child: RangeSlider(
-        min: widget.minValue,
-        max: widget.maxValue,
-        labels: RangeLabels(
-            '\$${_currentStartValue.round()}', '\$${_currentEndValue.round()}'),
-        activeColor: ColorName.amber,
-        inactiveColor: ColorName.sliver,
-        onChanged: (value) {
-          _currentStartValue = value.start;
-          _currentEndValue = value.end;
-          setState(() {});
+      child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
+        builder: (context, state) {
+          return RangeSlider(
+            divisions: 10,
+            min: widget.minValue,
+            max: widget.maxValue,
+            labels: RangeLabels(
+                '\$${state.fromPrice.round()}', '\$${state.toPrice.round()}'),
+            activeColor: ColorName.amber,
+            inactiveColor: ColorName.sliver,
+            onChanged: (value) {
+              setPrice(value.start, value.end);
+            },
+            values: RangeValues(state.fromPrice, state.toPrice),
+          );
         },
-        values: RangeValues(_currentStartValue, _currentEndValue),
       ),
     );
+  }
+
+  void setPrice(double fromPrice, double toPrice) {
+    SwapFilterBloc.get
+        .add(SwapSetFilterDataEvent(fromPrice: fromPrice, toPrice: toPrice));
   }
 }

@@ -56,14 +56,10 @@ class SearchBarWidget extends StatelessWidget {
 
   void onBack(HomeState state) {
     if (state.homeScreenState.isSubCategoryResult) {
-      HomeBloc.get.add(
-          SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.SECTIONS));
       return;
     }
     if (state.homeScreenState.isSections) {
       SectionsBloc.get.add(ResetVarEvent());
     }
-    HomeBloc.get
-        .add(SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.HOME));
   }
 }

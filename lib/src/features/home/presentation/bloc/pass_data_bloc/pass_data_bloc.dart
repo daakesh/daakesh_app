@@ -8,13 +8,10 @@ class PassDataBloc extends Bloc<PassDataEvent, PassDataState> {
   PassDataBloc() : super(const PassDataState()) {
     on<PassTodayDealDataEvent>(_passTodayDealData);
     on<ZoomInOutEvent>(_zoomInOut);
-    on<PassSectionSubCategoriesEvent>(_passSectionSubCategories);
-    on<PreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
     on<SelectProductPropertiesEvent>(_selectProductProperties);
     on<DetermentTodayDealEvent>(_determentTodayDeal);
   }
-  static PassDataBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static PassDataBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _passTodayDealData(
       PassTodayDealDataEvent event, Emitter<PassDataState> emit) {
@@ -39,21 +36,6 @@ class PassDataBloc extends Bloc<PassDataEvent, PassDataState> {
     emit(state.copyWith(
       isDaakeshTodayDeal: event.isDaakeshTodayDeal,
     ));
-  }
-
-  FutureOr<void> _passSectionSubCategories(
-      PassSectionSubCategoriesEvent event, Emitter<PassDataState> emit) {
-    emit(state.copyWith(categoriesListData: event.categoriesListData));
-  }
-
-  FutureOr<void> _previewSectionSubCategories(
-      PreviewSectionSubCategoriesEvent event, Emitter<PassDataState> emit) {
-    List<SubCategory> subCategoryListData = <SubCategory>[];
-    subCategoryListData = state.categoriesListData
-        .elementAt(event.index)
-        .subCategoryList!
-        .toList();
-    emit(state.copyWith(subCategoryListData: subCategoryListData));
   }
 
   FutureOr<void> _zoomInOut(ZoomInOutEvent event, Emitter<PassDataState> emit) {

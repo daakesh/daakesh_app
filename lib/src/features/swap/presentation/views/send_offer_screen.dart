@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import '../../../../src.export.dart';
 
 // ignore: must_be_immutable
@@ -381,10 +379,6 @@ class SendOfferScreen extends StatelessWidget {
   }
 
   void openSwapOfferDetailsScreen(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const SwapOfferDetailsScreen(),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, const SwapOfferDetailsScreen());
   }
 }

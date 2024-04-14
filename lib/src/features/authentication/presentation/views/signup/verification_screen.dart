@@ -14,7 +14,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
     super.initState();
     Future.delayed(
       const Duration(seconds: 2),
-    ).then((value) => Utils.openNewPage(const AddPaymentCardScreen()));
+    ).then((value) => Utils.openNewPage(const AddPaymentCardScreen(),
+        popPreviousPages: true));
   }
 
   @override
@@ -28,14 +29,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 110.0.h,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.only(start: 56.0.w, end: 97.0.w),
-                  child: const DaakeshLogoWidget(),
-                ),
+                const Spacer(flex: 1),
+                const Center(child: DaakeshLogoWidget()),
                 const Spacer(
                   flex: 1,
                 ),
@@ -56,7 +51,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   height: 9.0.h,
                 ),
                 Text('Now You Can Start And Find Best Deals',
-                    style: context.easyTheme.textTheme.bodyMedium),
+                    style: context.easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontSize: 18.0.sp)),
                 const Spacer(
                   flex: 1,
                 ),

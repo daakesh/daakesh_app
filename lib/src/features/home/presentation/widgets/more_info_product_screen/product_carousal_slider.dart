@@ -62,16 +62,18 @@ class ProductCarousalSlider extends StatelessWidget {
                   PassDataBloc.get.add(
                       SelectProductPropertiesEvent(productSliderIndex: index));
                 }),
-            items: state.todayItem.first.itemImg!.map((i) {
-              return Builder(builder: (context) {
-                return Transform.scale(
-                  scale: state.scale,
-                  child: CachedImage(
-                    imageUrl: i.toString(),
-                  ),
-                );
-              });
-            }).toList(),
+            items: state.todayItem.first.itemImg != null
+                ? state.todayItem.first.itemImg!.map((i) {
+                    return Builder(builder: (context) {
+                      return Transform.scale(
+                        scale: state.scale,
+                        child: CachedImage(
+                          imageUrl: i.toString(),
+                        ),
+                      );
+                    });
+                  }).toList()
+                : [const SizedBox()],
           ),
         ),
         const SizedBox(
@@ -79,20 +81,31 @@ class ProductCarousalSlider extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: state.todayItem.first.itemImg!.asMap().entries.map((entry) {
-            return Container(
-              width: 12.0,
-              height: 12.0,
-              margin:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: state.productSliderIndex == entry.key
-                    ? ColorName.lightOrange
-                    : ColorName.silverGray,
-              ),
-            );
-          }).toList(),
+          children: state.todayItem.first.itemImg != null
+              ? state.todayItem.first.itemImg!.asMap().entries.map((entry) {
+                  return Container(
+                    width: 12.0,
+                    height: 12.0,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: state.productSliderIndex == entry.key
+                          ? ColorName.lightOrange
+                          : ColorName.silverGray,
+                    ),
+                  );
+                }).toList()
+              : [
+                  Container(
+                    width: 12.0,
+                    height: 12.0,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 4.0),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: ColorName.lightOrange),
+                  )
+                ],
         ),
       ],
     );

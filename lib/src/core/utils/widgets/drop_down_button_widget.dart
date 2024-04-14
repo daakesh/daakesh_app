@@ -18,8 +18,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
-
-      focusColor: ColorName.gray,
+      focusColor: ColorName.transparent,
       dropdownColor: ColorName.whiteSmoke,
       icon: Padding(
         padding: const EdgeInsetsDirectional.only(end: 12.0),
@@ -29,9 +28,9 @@ class DropDownButtonWidget<T> extends StatelessWidget {
             child: Center(child: Assets.svg.arrowDropDownIcon.svg())),
       ),
       value: value,
-      items:items,
+      items: items,
       onChanged: onChange,
-      onTap:onTap ?? (){} ,
+      onTap: onTap ?? () {},
     );
   }
 }

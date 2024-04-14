@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class SwapFilterScreen extends StatefulWidget {
@@ -123,7 +124,7 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                       const SizedBox(
                         height: 12.0,
                       ),
-                      const SelectRateWidget(),
+                      const SwapSelectRateWidget(),
                       const SizedBox(
                         height: 34.0,
                       ),
@@ -136,7 +137,8 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                       const SizedBox(
                         height: 12.0,
                       ),
-                      const PriceSliderWidget(minValue: 0.0, maxValue: 1000.0),
+                      const SwapPriceSliderWidget(
+                          minValue: 0.0, maxValue: 1000.0),
                       const SizedBox(
                         height: 34.0,
                       ),
@@ -155,7 +157,7 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 22.0),
                   child: SizedBox(
-                      width: double.infinity, child: ProductTypeWidget()),
+                      width: double.infinity, child: SwapProductTypeWidget()),
                 ),
                 const SizedBox(
                   height: 65.0,
@@ -165,11 +167,19 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                       const EdgeInsetsDirectional.only(start: 23.0, end: 19.0),
                   child: Column(
                     children: [
-                      DefaultButtonWidget(text: 'APPLY', onPressed: () {}),
+                      DefaultButtonWidget(
+                          text: 'APPLY', onPressed: () => apply(context)),
                       const SizedBox(
                         height: 14.0,
                       ),
-                      OutlineButtonWidget(text: 'CLEAR', onPressed: () {}),
+                      BlocBuilder<SwapFilterBloc, SwapFilterState>(
+                        builder: (context, state) {
+                          return OutlineButtonWidget(
+                              text: 'CLEAR',
+                              onPressed: () =>
+                                  clear(context, state.isFilterActive));
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -182,5 +192,23 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
         ),
       ),
     );
+  }
+
+  void apply(context) {
+    SwapFilterBloc.get
+        .add(SwapPreviewSectionSubCategoriesEvent(isFilterActive: true));
+    Navigator.pop(context);
+  }
+
+  void clear(context, bool filterIsActive) {
+    if (!filterIsActive) {
+      Navigator.pop(context);
+      SwapFilterBloc.get.add(SwapClearFilterDataEvent());
+      return;
+    }
+    SwapFilterBloc.get
+        .add(SwapPreviewSectionSubCategoriesEvent(isFilterActive: false));
+    SwapFilterBloc.get.add(SwapClearFilterDataEvent());
+    Navigator.pop(context);
   }
 }

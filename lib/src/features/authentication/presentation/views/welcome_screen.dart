@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Spacer(
                 flex: 3,
@@ -28,21 +28,22 @@ class WelcomeScreen extends StatelessWidget {
                 flex: 3,
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.only(start: 16.0, end: 26.0),
+                padding: EdgeInsetsDirectional.only(start: 16.0.w, end: 26.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Welcome',
-                      style: context.easyTheme.textTheme.headlineLarge,
+                      style: context.easyTheme.textTheme.headlineLarge!
+                          .copyWith(fontSize: 40.0.sp),
                     ),
-                    const SizedBox(
-                      height: 20.86,
+                    SizedBox(
+                      height: 20.86.h,
                     ),
                     Text(
                       'Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',
-                      style: context.easyTheme.textTheme.bodyMedium,
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 18.0.sp),
                     ),
                   ],
                 ),
@@ -53,17 +54,20 @@ class WelcomeScreen extends StatelessWidget {
               Center(
                   child: DefaultButtonWidget(
                 onPressed: () =>
-                    Utils.openNewPage(RegisterPersonalInfoScreen()),
+                    Utils.openNewPage(const RegisterPersonalInfoScreen()),
                 text: 'CREATE ACCOUNT',
               )),
               const Spacer(
                 flex: 1,
               ),
               const ThirdPartyAuthenticationWidget(),
-              const SizedBox(
-                height: 44.0,
+              SizedBox(
+                height: 44.0.h,
               ),
-              AlreadyHaveAccountWidget(onPressed: onLogin),
+              AlreadyHaveAccountWidget(
+                onPressed: onLogin,
+                screen: const LoginMannerScreen(),
+              ),
               const Spacer(
                 flex: 1,
               ),

@@ -20,10 +20,7 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
               const Spacer(
                 flex: 2,
               ),
-              const Padding(
-                padding: EdgeInsetsDirectional.only(start: 58.0, end: 97.0),
-                child: DaakeshLogoWidget(),
-              ),
+              const Center(child: DaakeshLogoWidget()),
               const Spacer(
                 flex: 1,
               ),
@@ -33,12 +30,14 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Lets Go',
-                        style: context.easyTheme.textTheme.headlineLarge),
+                        style: context.easyTheme.textTheme.headlineLarge!
+                            .copyWith(fontSize: 40.0.sp)),
                     const SizedBox(
                       height: 10.0,
                     ),
                     Text('Enter Phone Number',
-                        style: context.easyTheme.textTheme.headlineMedium),
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(fontSize: 25.0.sp)),
                   ],
                 ),
               ),
@@ -50,7 +49,7 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                   children: [
                     Text('Phone Number',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray)),
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: phoneNumberController,
                       keyboardType: TextInputType.number,
@@ -60,19 +59,19 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                         return InkWell(
                           onTap: () => selectCountry(context),
                           child: SizedBox(
-                            width: 65.0,
+                            width: 65.0.w,
                             child: Row(
                               children: [
                                 Text(
                                   state.phoneFlag,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: ColorName.blueGray,
-                                      fontSize: 24.0),
+                                      fontSize: 24.0.sp),
                                 ),
-                                const Icon(
+                                Icon(
                                   Icons.arrow_drop_down_outlined,
                                   color: ColorName.blueGray,
-                                  size: 35.0,
+                                  size: 35.0.sp,
                                 ),
                               ],
                             ),
@@ -92,12 +91,14 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 21.0),
-                child: DefaultButtonWidget(
-                    text: 'NEXT', onPressed: () => onNext(context)),
+                child: Center(
+                  child: DefaultButtonWidget(
+                      text: 'NEXT', onPressed: () => onNext(context)),
+                ),
               ),
-              const SizedBox(height: 44.0),
+              SizedBox(height: 44.0.h),
               const AlreadyHaveAccountWidget(),
-              const SizedBox(height: 55.0),
+              SizedBox(height: 55.0.h),
             ],
           ),
         ),

@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
+// ignore: must_be_immutable
 class ComplaintScreen extends StatelessWidget {
   ComplaintScreen({super.key});
   final complaintTypeController = TextEditingController();
   final sellerNameController = TextEditingController();
   final subjectController = TextEditingController();
   final remarkController = TextEditingController();
+  final FocusNode sellerNameFocusNode = FocusNode();
+  final FocusNode subjectFocusNode = FocusNode();
+  final FocusNode remarkFocusNode = FocusNode();
+  final List<ComplaintType> complaintTypeList = [
+    ComplaintType.User,
+    ComplaintType.Seller,
+  ];
+
+  String? complaintValue;
+
   @override
   Widget build(BuildContext context) {
     return DefaultBackgroundWidget(
@@ -51,22 +61,16 @@ class ComplaintScreen extends StatelessWidget {
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
-                BlocBuilder<ComplaintBloc, ComplaintState>(
-                  builder: (context, state) {
-                    return TextFormFieldWidget(
-                        controller: complaintTypeController,
-                        keyboardType: TextInputType.number,
-                        readOnly: true,
-                        isSuffixPrefixOn: true,
-                        suffixIcon: InkWell(
-                          onTap: () {},
-                          child: SizedBox(
-                              width: 20.0,
-                              height: 20.0,
-                              child: Center(
-                                  child: Assets.svg.arrowDropDownIcon.svg())),
-                        ));
+                DropDownButtonWidget<String>(
+                  onChange: (value) {
+                    complaintTypeController.text = value.toString();
                   },
+                  value: complaintValue,
+                  items: complaintTypeList
+                      .map((e) => DropdownMenuItem(
+                          value: e.index.toString(),
+                          child: Text(e.name.toString())))
+                      .toList(),
                 ),
                 const SizedBox(
                   height: 25.0,
@@ -78,6 +82,9 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 TextFormFieldWidget(
                   controller: sellerNameController,
+                  focusNode: sellerNameFocusNode,
+                  onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                      context, sellerNameFocusNode, subjectFocusNode),
                 ),
                 const SizedBox(
                   height: 25.0,
@@ -89,6 +96,9 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 TextFormFieldWidget(
                   controller: subjectController,
+                  focusNode: subjectFocusNode,
+                  onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                      context, subjectFocusNode, remarkFocusNode),
                 ),
                 const SizedBox(
                   height: 25.0,
@@ -100,6 +110,7 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 TextFormFieldWidget(
                   controller: remarkController,
+                  focusNode: remarkFocusNode,
                 ),
                 const SizedBox(
                   height: 44.0,
@@ -135,6 +146,13 @@ class ComplaintScreen extends StatelessWidget {
   }
 
   void onSend() {
+    if (complaintTypeController.text.isEmpty ||
+        sellerNameController.text.isEmpty ||
+        subjectController.text.isEmpty ||
+        remarkController.text.isEmpty) {
+      ShowToastSnackBar.showSnackBars(message: 'Fill all data firstly');
+      return;
+    }
     ComplaintBloc.get.add(AddComplaintEvent(
       complaintType: complaintTypeController.text,
       sellerName: sellerNameController.text,

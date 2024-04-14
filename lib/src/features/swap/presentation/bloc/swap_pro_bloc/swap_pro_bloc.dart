@@ -6,8 +6,7 @@ class SwapProBloc extends Bloc<SwapProEvent, SwapProState> {
   SwapProBloc() : super(const SwapProState()) {
     on<GetSwapProductEvent>(_getSwapProductEvent);
   }
-  static SwapProBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static SwapProBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _getSwapProductEvent(
       GetSwapProductEvent event, Emitter<SwapProState> emit) async {

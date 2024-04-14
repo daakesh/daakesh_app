@@ -1,30 +1,15 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
-    on<SwapHomeScreenStateEvent>(_swapHomeScreenState);
-    on<GetToTopScreenEvent>(_getToTopScreen);
-    on<SetFilterDataEvent>(_setFilterDataEvent);
     on<GetSectionDataEvent>(_getSectionData);
   }
   static HomeBloc get get => BlocProvider.of(Utils.currentContext);
-  static ScrollController scrollController = ScrollController();
-
-  FutureOr<void> _getToTopScreen(
-      GetToTopScreenEvent event, Emitter<HomeState> emit) {
-    scrollController.animateTo(0.0,
-        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-  }
 
   ///Event to swap between home screen states with widget like:
   /// [HomeDataWidget],[SearchScreen],[ResultsScreen],[CartScreen],[MoreInfoProductScreen]
-  FutureOr<void> _swapHomeScreenState(
-      SwapHomeScreenStateEvent event, Emitter<HomeState> emit) {
-    emit(state.copyWith(homeScreenState: event.homeScreenState));
-  }
 
   ///Event to get Categories data at [HomeDataWidget]
   FutureOr<void> _getSectionData(
@@ -46,14 +31,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           homeStateStatus: HomeStateStatus.SUCCESS,
           sectionListData: sectionListData));
     });
-  }
-
-  ///Event to insert [FilterScreen] data.
-  FutureOr<void> _setFilterDataEvent(
-      SetFilterDataEvent event, Emitter<HomeState> emit) {
-    emit(state.copyWith(
-      rateIndex: event.rateTypeIndex,
-      productTypeIndex: event.productTypeIndex,
-    ));
   }
 }

@@ -71,7 +71,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               BorderRadius.all(Radius.circular(4.0.r))),
                       child: Center(
                         child: Text(
-                          '$price% OFF',
+                          '${widget.myProductItem.discountPercentage} OFF',
                           style: context.easyTheme.textTheme.labelLarge!
                               .copyWith(fontSize: 15.0.sp),
                         ),
@@ -164,52 +164,35 @@ class _ShopProductItemState extends State<ShopProductItem> {
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: 38.0.h,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                        widget.myProductItem.discountPercentage! != '0%'
+                            ? Row(
                                 children: [
                                   Text(
-                                    '\$${widget.myProductItem.price}',
+                                    '\$${widget.myProductItem.priceAfterDiscount}',
                                     style: context
                                         .easyTheme.textTheme.labelMedium!
                                         .copyWith(fontSize: 21.0.sp),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 2.0),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          '99',
-                                          style: context
-                                              .easyTheme.textTheme.labelMedium!
-                                              .copyWith(
-                                                  fontSize: 15.0.sp,
-                                                  color: ColorName.gray),
-                                        ),
-                                        SizedBox(width: 8.0.w),
-                                        Text(
-                                          '\$${widget.myProductItem.discount}',
-                                          style: context
-                                              .easyTheme.textTheme.labelMedium!
-                                              .copyWith(
-                                            fontSize: 15.0.sp,
-                                            color: ColorName.gray,
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                          ),
-                                        ),
-                                      ],
+                                  const SizedBox(
+                                    width: 6.0,
+                                  ),
+                                  Text(
+                                    '\$${widget.myProductItem.price}',
+                                    style: context
+                                        .easyTheme.textTheme.labelMedium!
+                                        .copyWith(
+                                      fontSize: 15.0.sp,
+                                      color: ColorName.gray,
+                                      decoration: TextDecoration.lineThrough,
                                     ),
                                   ),
                                 ],
+                              )
+                            : Text(
+                                '\$${widget.myProductItem.price}',
+                                style: context.easyTheme.textTheme.labelMedium!
+                                    .copyWith(fontSize: 21.0.sp),
                               ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),

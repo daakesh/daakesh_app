@@ -14,9 +14,9 @@ class _VerificationCompleteScreenState
   @override
   void initState() {
     super.initState();
-    Future.delayed(
-      const Duration(seconds: 2),
-    ).then((value) => Utils.openNewPage(const ResetPassScreen()));
+    // Future.delayed(
+    //   const Duration(seconds: 2),
+    // ).then((value) => Utils.openNewPage(const ResetPassScreen()));
   }
 
   @override
@@ -33,26 +33,23 @@ class _VerificationCompleteScreenState
                 const Spacer(
                   flex: 1,
                 ),
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(start: 56.0, end: 97.0),
-                  child: DaakeshLogoWidget(),
-                ),
+                const Center(child: DaakeshLogoWidget()),
                 const Spacer(
                   flex: 1,
                 ),
                 Container(
-                  width: 150.0,
-                  height: 150.0,
+                  width: 150.0.w,
+                  height: 150.0.h,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(Assets.png.checkIcon.path))),
                 ),
-                const SizedBox(
-                  height: 19.0,
+                SizedBox(
+                  height: 19.0.h,
                 ),
                 Text('Verification Complete!',
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 32.0)),
+                        .copyWith(fontSize: 32.0.sp)),
                 const Spacer(
                   flex: 2,
                 ),

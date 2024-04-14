@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import '../../../../../src.export.dart';
 
 class ResultItemWidget extends StatelessWidget {
-  final SubCategory subCategory;
+  final FilterResultModel subCategory;
   const ResultItemWidget({super.key, required this.subCategory});
 
   @override
@@ -25,22 +24,27 @@ class ResultItemWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                constraints:
-                    const BoxConstraints(minWidth: 70.0, maxHeight: 25.0),
-                margin: const EdgeInsetsDirectional.only(start: 4.0),
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 6.0),
-                decoration: const BoxDecoration(
-                    color: ColorName.red,
-                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                child: Center(
-                  child: Text(
-                    '23% OFF',
-                    style: context.easyTheme.textTheme.labelLarge!
-                        .copyWith(fontSize: 14.0),
-                  ),
-                ),
-              ),
+              subCategory.discount != null
+                  ? Container(
+                      constraints:
+                          const BoxConstraints(minWidth: 70.0, maxHeight: 25.0),
+                      margin: const EdgeInsetsDirectional.only(start: 4.0),
+                      padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: 6.0),
+                      decoration: const BoxDecoration(
+                          color: ColorName.red,
+                          borderRadius: BorderRadius.all(Radius.circular(4.0))),
+                      child: Center(
+                        child: Text(
+                          '${subCategory.discountPercentage} OFF',
+                          style: context.easyTheme.textTheme.labelLarge!
+                              .copyWith(fontSize: 14.0),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(
+                      height: 25,
+                    ),
               const Spacer(
                 flex: 1,
               ),
@@ -52,13 +56,22 @@ class ResultItemWidget extends StatelessWidget {
               const SizedBox(
                 width: 5.0,
               ),
-              DaakeshLogoWidget(
-                width: 68.0.w,
-              ),
+              subCategory.user != null
+                  ? Text(
+                      '${subCategory.user!.name}',
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 13.0),
+                    )
+                  : DaakeshLogoWidget(
+                      width: 68.0.w,
+                    ),
               const SizedBox(
                 width: 12.0,
               ),
             ],
+          ),
+          const SizedBox(
+            height: 4.0,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +80,9 @@ class ResultItemWidget extends StatelessWidget {
                 width: 12.0,
               ),
               CachedImage(
-                imageUrl: subCategory.subImg.toString(),
+                imageUrl: subCategory.itemImg != null
+                    ? subCategory.itemImg!.first.toString()
+                    : '',
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 height: 90.0,
                 width: 90.0,
@@ -82,7 +97,7 @@ class ResultItemWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.only(end: 80.0),
                       child: Text(
-                        '${subCategory.description}',
+                        '${subCategory.title}',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(
                                 fontSize: 14.0,
@@ -131,55 +146,37 @@ class ResultItemWidget extends StatelessWidget {
                     SizedBox(
                       height: 38.0,
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '\$44',
-                                style: context.easyTheme.textTheme.labelMedium!
-                                    .copyWith(fontSize: 21.0),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      '99',
-                                      style: context
-                                          .easyTheme.textTheme.labelMedium!
-                                          .copyWith(
-                                              fontSize: 12.0,
-                                              color: ColorName.gray),
-                                    ),
-                                    const SizedBox(
-                                      width: 8.0,
-                                    ),
-                                    Text(
-                                      '\$79.99',
-                                      style: context
-                                          .easyTheme.textTheme.labelMedium!
-                                          .copyWith(
-                                        fontSize: 13.0,
-                                        color: ColorName.gray,
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          Text(
+                            '\$${subCategory.priceAfterDiscount} ',
+                            style: context.easyTheme.textTheme.labelMedium!
+                                .copyWith(fontSize: 21.0),
                           ),
+                          subCategory.discount != null
+                              ? Text(
+                                  '\$${subCategory.price}',
+                                  style: context
+                                      .easyTheme.textTheme.labelMedium!
+                                      .copyWith(
+                                    fontSize: 13.0,
+                                    color: ColorName.gray,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                )
+                              : const SizedBox(),
                           const Spacer(
                             flex: 1,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 18.0, vertical: 6.0),
-                            child: Align(
-                                alignment: AlignmentDirectional.bottomEnd,
-                                child: Assets.svg.creditCardIcon.svg()),
+                            padding: const EdgeInsetsDirectional.only(
+                                end: 18.0, top: 16.0),
+                            child: subCategory.user != null
+                                ? const Icon(
+                                    Icons.phone,
+                                    color: ColorName.silverChalice,
+                                  )
+                                : Assets.svg.creditCardIcon.svg(),
                           ),
                         ],
                       ),

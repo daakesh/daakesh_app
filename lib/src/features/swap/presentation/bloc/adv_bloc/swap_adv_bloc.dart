@@ -6,8 +6,7 @@ class SwapAdvBloc extends Bloc<SwapAdvEvent, SwapAdvState> {
   SwapAdvBloc() : super(const SwapAdvState()) {
     on<SwapGetAdvertisementDataEvent>(_getAdvertisementData);
   }
-  static SwapAdvBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static SwapAdvBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _getAdvertisementData(
       SwapGetAdvertisementDataEvent event, Emitter<SwapAdvState> emit) async {

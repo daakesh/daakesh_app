@@ -4,5 +4,14 @@
     "workbench.preferredHighContrastColorTheme": "Default High Contrast",
     "workbench.preferredDarkColorTheme": "Default Dark Modern",
     "workbench.preferredHighContrastLightColorTheme": "Default High Contrast Light",
-    "workbench.iconTheme": "easy-icons"
+    "editor.codeActionsOnSave":{
+        "source.fixAll": "explicit"
+    },
+    "workbench.iconTheme": "easy-icons",
+    "cSpell.words": [
+        "Daakesh",
+        "dartz",
+        "Datasource",
+        "unfocus"
+    ]
 }

@@ -19,7 +19,7 @@ abstract class NetworkService {
     String baseUrl,
     String path,
     Map<String, String>? headers,
-    Map<String, dynamic> body = const {},
+    Object? body,
     Map<String, dynamic>? params = const {},
     String? userToken,
   });
@@ -48,7 +48,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
     try {
       final uri = Uri.https(baseUrl, path, params);
       if (!uri.isAbsolute) throw Exception('Not valid URL');
-      final response = await http.get(uri, headers: _headers);
+      final response = await http.get(uri, headers: headers ?? _headers);
       final data = jsonDecode(response.body);
       final str = utf8.decode(response.bodyBytes);
       _networkLog(response, 'null');
@@ -80,14 +80,15 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
     String baseUrl = NetworkConstants.baseUrl,
     String path = '',
     Map<String, String>? headers,
-    Map<String, dynamic> body = const {},
+    Object? body,
     Map<String, dynamic>? params,
     String? userToken,
   }) async {
     try {
       final uri = Uri.https(baseUrl, path, params);
       if (!uri.isAbsolute) throw Exception('Not valid URL');
-      final response = await http.post(uri, headers: _headers, body: body);
+      final response =
+          await http.post(uri, headers: headers ?? _headers, body: body);
       final data = jsonDecode(response.body);
       final str = utf8.decode(response.bodyBytes);
       _networkLog(response, body.toString());
@@ -208,7 +209,7 @@ mixin NetworksLogs {
           '- [END] -----------------------------------------------\n');
 
   void traceError(String path, String method, Map<String, dynamic> params,
-          Map<String, dynamic> body, String response) =>
+          Object? body, String response) =>
       developer.log('-----------------------------------------------\n'
           '| Http [ERROR] info ==> \n'
           '| ENVIRONMENT: \n'

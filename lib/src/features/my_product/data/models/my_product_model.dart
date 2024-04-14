@@ -12,7 +12,6 @@ class MyProductModel {
     error = json['error'];
     data = json['data'] != null ? MyProductData.fromJson(json['data']) : null;
   }
-
 }
 
 class MyProductData {
@@ -32,8 +31,6 @@ class MyProductData {
           .toList();
     }
   }
-
-
 }
 
 class MyProductItem {
@@ -42,6 +39,8 @@ class MyProductItem {
   List<String>? itemImg;
   String? date;
   String? title;
+  dynamic priceAfterDiscount;
+  String? discountPercentage;
   String? type;
   String? swapFor;
   String? city;
@@ -64,40 +63,45 @@ class MyProductItem {
   SubCategory? subcategory;
   SectionItemModel? section;
 
-  MyProductItem({
-        this.id,
-        this.description,
-        this.itemImg,
-        this.date,
-        this.title,
-        this.type,
-        this.swapFor,
-        this.city,
-        this.year,
-        this.condition,
-        this.price,
-        this.discount,
-        this.discountFrom,
-        this.discountTo,
-        this.country,
-        this.createdAt,
-        this.updatedAt,
-        this.quantity,
-        this.display,
-        this.countrySwap,
-        this.citySwap,
-        this.user,
-        this.category,
-        this.brand,
-        this.subcategory,
-        this.section});
+  MyProductItem(
+      {this.id,
+      this.description,
+      this.itemImg,
+      this.date,
+      this.title,
+      this.type,
+      this.swapFor,
+      this.city,
+      this.year,
+      this.condition,
+      this.price,
+      this.discount,
+      this.discountFrom,
+      this.discountTo,
+      this.country,
+      this.createdAt,
+      this.updatedAt,
+      this.quantity,
+      this.display,
+      this.countrySwap,
+      this.priceAfterDiscount,
+      this.discountPercentage,
+      this.citySwap,
+      this.user,
+      this.category,
+      this.brand,
+      this.subcategory,
+      this.section});
 
   MyProductItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    if(json['itemImg'] != null){
+    if (json['itemImg'] != null) {
       itemImg = <String>[];
-      itemImg = (json['itemImg']as List<dynamic>).map((e) => e.toString()).toList();
+      itemImg =
+          (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
     }
+    priceAfterDiscount = json['price_after_discount'];
+    discountPercentage = json['discount_percentage'];
     description = json['description'];
     date = json['date'];
     title = json['Title'];
@@ -118,15 +122,18 @@ class MyProductItem {
     countrySwap = json['country_swap'];
     citySwap = json['city_swap'];
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    category = json['category'] != null ? MyProductCategory.fromJson(json['category']) : null;
+    category = json['category'] != null
+        ? MyProductCategory.fromJson(json['category'])
+        : null;
     brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
-    subcategory = json['subcategory'] != null ?  SubCategory.fromJson(json['brand']) : null;
-    section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
+    subcategory = json['subcategory'] != null
+        ? SubCategory.fromJson(json['brand'])
+        : null;
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : null;
   }
-
-
 }
-
 
 class MyProductCategory {
   int? id;
@@ -139,12 +146,12 @@ class MyProductCategory {
 
   MyProductCategory(
       {this.id,
-        this.name,
-        this.description,
-        this.catImg,
-        this.date,
-        this.secID,
-        this.arName});
+      this.name,
+      this.description,
+      this.catImg,
+      this.date,
+      this.secID,
+      this.arName});
 
   MyProductCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -156,4 +163,3 @@ class MyProductCategory {
     arName = json['arName'];
   }
 }
-

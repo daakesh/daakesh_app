@@ -9,20 +9,21 @@ class SwapProductTypeWidget extends StatefulWidget {
 }
 
 class _SwapProductTypeWidgetState extends State<SwapProductTypeWidget> {
-  List<String> data = ['All', 'Daakesh', 'Other Stores'];
+  List<FilterProductType> data = [
+    FilterProductType.All,
+    FilterProductType.Daakesh,
+    FilterProductType.Other
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (_, state) {
+    return BlocBuilder<SwapFilterBloc, SwapFilterState>(builder: (_, state) {
       return Wrap(
         children: List.generate(
             data.length,
-            (index) => InkWell(
-                  highlightColor: ColorName.transparent,
-                  splashColor: ColorName.transparent,
-                  focusColor: ColorName.transparent,
-                  onTap: () => HomeBloc.get
-                      .add(SetFilterDataEvent(productTypeIndex: index)),
+            (index) => GestureDetector(
+                  onTap: () => SwapFilterBloc.get
+                      .add(SwapSetFilterDataEvent(productType: data[index])),
                   child: Container(
                     height: 38.0,
                     margin:
@@ -31,13 +32,13 @@ class _SwapProductTypeWidgetState extends State<SwapProductTypeWidget> {
                         horizontal: 20.0, vertical: 7.0),
                     constraints: const BoxConstraints(minWidth: 56.0),
                     decoration: BoxDecoration(
-                        color: state.productTypeIndex == index
+                        color: state.type == data[index]
                             ? ColorName.amber
                             : ColorName.sliver,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10.0))),
                     child: Text(
-                      data[index],
+                      data[index].name,
                       textAlign: TextAlign.center,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 18.0),

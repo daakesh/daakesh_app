@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -25,31 +24,14 @@ class SearchScreen extends StatelessWidget {
                   padding: EdgeInsetsDirectional.only(top: 21.0)),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding:
-                      const EdgeInsetsDirectional.only(start: 31.0, end: 23.0),
-                  child: SizedBox(
-                    height: 45.0,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            child: Align(
-                                alignment: AlignmentDirectional.bottomStart,
-                                child: Text(
-                                  'Search',
-                                  style: context
-                                      .easyTheme.textTheme.headlineMedium!
-                                      .copyWith(
-                                          color: ColorName.black
-                                              .withOpacity(0.57)),
-                                ))),
-                        GestureDetector(
-                            onTap: () => openFilterScreen(context),
-                            child: Assets.png.filterIcon
-                                .image(width: 38.0, height: 38.0)),
-                      ],
-                    ),
-                  ),
+                  padding: const EdgeInsetsDirectional.only(start: 31.0),
+                  child: Align(
+                      alignment: AlignmentDirectional.bottomStart,
+                      child: Text(
+                        'Search',
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.57)),
+                      )),
                 ),
               ),
               const SliverPadding(
@@ -82,15 +64,6 @@ class SearchScreen extends StatelessWidget {
           );
         }),
       ),
-    );
-  }
-
-  void openFilterScreen(context) {
-    FocusScope.of(context).unfocus();
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const FilterScreen(),
-      withNavBar: true,
     );
   }
 
@@ -127,9 +100,6 @@ class _SearchResultHandler extends StatelessWidget {
                       focusColor: ColorName.transparent,
                       onTap: () {
                         FocusScope.of(context).unfocus();
-                        HomeBloc.get.add(SwapHomeScreenStateEvent(
-                            homeScreenState:
-                                HomeScreenState.SUBCATEGORYRESULT));
                       },
                       child: SizedBox(
                         width: double.infinity,

@@ -14,8 +14,7 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
     on<AddShipToCountryEvent>(_addShipToCountry);
     on<AddProductEvent>(_addProduct);
   }
-  static AddProBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static AddProBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _addEditState(
       AddEditStateEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(adjustProduct: event.adjustProduct));

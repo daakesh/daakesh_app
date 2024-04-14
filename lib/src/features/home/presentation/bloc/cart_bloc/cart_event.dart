@@ -1,17 +1,24 @@
-abstract class CartEvent{}
+abstract class CartEvent {}
 
-class AddToCartEvent extends CartEvent{
+class AddToCartEvent extends CartEvent {
   final String itemID;
-  AddToCartEvent({required this.itemID});
+  final String country;
+  final String address;
+  AddToCartEvent({
+    required this.itemID,
+    required this.country,
+    required this.address,
+  });
 }
 
-class GetCartItemsEvent extends CartEvent{}
+class GetCartItemsEvent extends CartEvent {}
 
-class IncreaseItemCountEvent extends CartEvent{
+class IncreaseItemCountEvent extends CartEvent {
   final int index;
   IncreaseItemCountEvent({required this.index});
 }
-class DecreaseItemCountEvent extends CartEvent{
+
+class DecreaseItemCountEvent extends CartEvent {
   final int index;
   DecreaseItemCountEvent({required this.index});
 }

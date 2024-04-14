@@ -9,7 +9,6 @@ class SwapSearchBarWidget extends StatelessWidget {
     required this.state,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,11 +16,10 @@ class SwapSearchBarWidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: ColorName.blueGray,
-        image:DecorationImage(
+        image: DecorationImage(
           image: AssetImage(Assets.png.authScreensBackground.path),
           alignment: AlignmentDirectional.centerEnd,
         ),
-
       ),
       child: Padding(
         padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
@@ -40,41 +38,34 @@ class SwapSearchBarWidget extends StatelessWidget {
             state.swapScreenState.isProductDetails ||
                     state.swapScreenState.isCart ||
                     state.swapScreenState.isSections ||
-                state.swapScreenState.isSubCategoryResult ||
-                state.swapScreenState.isSendOffer ||
-                state.swapScreenState.isOfferDetails
-
+                    state.swapScreenState.isSubCategoryResult ||
+                    state.swapScreenState.isSendOffer ||
+                    state.swapScreenState.isOfferDetails
                 ? IconButton(
-                onPressed: () =>onBack(state),
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: ColorName.white,
-                ))
+                    onPressed: () => onBack(state),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: ColorName.white,
+                    ))
                 : const SizedBox(),
-
           ],
         ),
       ),
     );
   }
 
-  void onBack(SwapState state){
-    if(state.swapScreenState.isOfferDetails){
-      SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.SENDOFFER));
+  void onBack(SwapState state) {
+    if (state.swapScreenState.isOfferDetails) {
       return;
     }
-    if(state.swapScreenState.isSendOffer){
-      SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.PRODUCTDETAILS));
+    if (state.swapScreenState.isSendOffer) {
       return;
     }
-    if(state.swapScreenState.isSubCategoryResult){
-      SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.SECTIONS));
+    if (state.swapScreenState.isSubCategoryResult) {
       return;
     }
-    if(state.swapScreenState.isSections){
+    if (state.swapScreenState.isSections) {
       SwapSectionsBloc.get.add(SwapResetVarEvent());
     }
-    SwapBloc.get.add(ToggleSwapScreenStateEvent(swapScreenState:SwapScreenState.HOME));
   }
-
 }

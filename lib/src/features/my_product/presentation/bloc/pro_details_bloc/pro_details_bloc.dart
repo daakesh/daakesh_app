@@ -13,8 +13,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
     on<GetBrandsBySectionEvent>(_getBrandsBySection);
     on<GetDropDownDataEvent>(_getDropDownData);
   }
-  static ProDetailsBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static ProDetailsBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _getProSections(
       GetProSectionsEvent event, Emitter<ProDetailsState> emit) async {
     emit(state.copyWith(
@@ -60,6 +59,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       proDetailsStateStatus: ProDetailsStateStatus.LOADING,
       proCategoryListData: [],
       proSubCategoryListData: [],
+      productSecID: event.secID,
     ));
     final result =
         await getIt.get<MyProductUseCases>().getCategoryBySection(event.secID);
@@ -181,7 +181,9 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       emit(state.copyWith(
         proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
         proBrandListData: proBrandListData,
-        productBrandID: proBrandListData.first.id.toString(),
+        productBrandID: proBrandListData.isNotEmpty
+            ? proBrandListData.first.id.toString()
+            : null,
       ));
     });
   }

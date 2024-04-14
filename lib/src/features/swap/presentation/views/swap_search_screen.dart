@@ -120,9 +120,6 @@ class _SearchResultHandler extends StatelessWidget {
                       focusColor: ColorName.transparent,
                       onTap: () {
                         FocusScope.of(context).unfocus();
-                        HomeBloc.get.add(SwapHomeScreenStateEvent(
-                            homeScreenState:
-                                HomeScreenState.SUBCATEGORYRESULT));
                       },
                       child: SizedBox(
                         width: double.infinity,

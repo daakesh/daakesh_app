@@ -39,57 +39,57 @@ class _RegisterLocationInfoScreenState
               const Spacer(
                 flex: 1,
               ),
-              const SizedBox(height: 44.0),
+              SizedBox(height: 44.0.h),
               const Center(child: DaakeshLogoWidget()),
               const Spacer(
                 flex: 1,
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.only(start: 26.0, end: 13.0),
+                padding: EdgeInsetsDirectional.only(start: 26.0.w, end: 13.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Lets Go',
-                        style: context.easyTheme.textTheme.headlineLarge),
-                    const SizedBox(
-                      height: 10.0,
+                        style: context.easyTheme.textTheme.headlineLarge!
+                            .copyWith(fontSize: 40.0.sp)),
+                    SizedBox(
+                      height: 10.0.h,
                     ),
                     Text('Set Your Location To Start Exploring Best Deal',
-                        style: context.easyTheme.textTheme.headlineMedium),
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(fontSize: 25.0.sp)),
                   ],
                 ),
               ),
-              const SizedBox(height: 20.0),
+              SizedBox(height: 20.0.h),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.only(start: 32.0, end: 29.0),
+                padding: EdgeInsetsDirectional.only(start: 32.0.w, end: 29.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Country',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray)),
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: countryController,
                       focusNode: countryFocusNode,
                       isSuffixPrefixOn: true,
                       suffixIcon: SizedBox(
-                        height: 9.0,
-                        width: 16.0,
+                        height: 9.0.h,
+                        width: 16.0.w,
                         child:
                             Center(child: Assets.svg.arrowDropDownIcon.svg()),
                       ),
                       prefixIcon:
                           BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
                         return SizedBox(
-                            width: 30.0,
-                            height: 30.0,
+                            width: 30.0.w,
+                            height: 30.0.h,
                             child: Center(
                                 child: Text(
                               state.flagEmoji,
-                              style: const TextStyle(
-                                  color: ColorName.blueGray, fontSize: 24.0),
+                              style: TextStyle(
+                                  color: ColorName.blueGray, fontSize: 24.0.sp),
                             )));
                       }),
                       onFieldSubmitted: (value) => Utils.fieldFocusChange(
@@ -102,10 +102,10 @@ class _RegisterLocationInfoScreenState
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    const SizedBox(height: 33.0),
+                    SizedBox(height: 33.0.h),
                     Text('City',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray)),
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: cityController,
                       focusNode: cityFocusNode,
@@ -115,10 +115,10 @@ class _RegisterLocationInfoScreenState
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    const SizedBox(height: 33.0),
+                    SizedBox(height: 33.0.h),
                     Text('Address',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray)),
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: addressController,
                       focusNode: addressFocusNode,
@@ -132,8 +132,8 @@ class _RegisterLocationInfoScreenState
                         focusColor: ColorName.transparent,
                         highlightColor: ColorName.transparent,
                         child: SizedBox(
-                            width: 20.0,
-                            height: 20.0,
+                            width: 20.0.w,
+                            height: 20.0.h,
                             child: Center(
                                 child: Assets.svg.locationPinIcon.svg())),
                       ),
@@ -144,21 +144,19 @@ class _RegisterLocationInfoScreenState
               const Spacer(
                 flex: 1,
               ),
-              const SizedBox(height: 43.0),
+              SizedBox(height: 43.0.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 21.0),
+                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
                     text: 'NEXT', onPressed: () => onNext(context)),
               ),
               const Spacer(
                 flex: 1,
               ),
-              const SizedBox(height: 20.0),
+              SizedBox(height: 20.0.h),
               const AlreadyHaveAccountWidget(),
-              const SizedBox(height: 20.0),
-              const Spacer(
-                flex: 1,
-              ),
+              SizedBox(height: 20.0.h),
+              const Spacer(flex: 1),
             ],
           ),
         ),

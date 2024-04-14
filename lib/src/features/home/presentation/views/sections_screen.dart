@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
 class SectionScreen extends StatelessWidget {
@@ -80,7 +79,9 @@ class SectionScreen extends StatelessWidget {
                       delegate: SliverChildBuilderDelegate(
                       (context, index) => GestureDetector(
                         onTap: () => openSubCategories(
-                            context, state.categoriesListData, index),
+                            context,
+                            state.categoriesListData,
+                            state.categoriesListData[index].id!),
                         child: SectionCategoryItem(
                             categoryItem: state.categoriesListData[index]),
                       ),
@@ -110,16 +111,11 @@ class SectionScreen extends StatelessWidget {
   void openSubCategories(
     BuildContext context,
     List<CategoryItem> categoriesListData,
-    index,
+    int catID,
   ) {
-    PassDataBloc.get.add(
-        PassSectionSubCategoriesEvent(categoriesListData: categoriesListData));
-    PassDataBloc.get.add(PreviewSectionSubCategoriesEvent(index: index));
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const ResultsScreen(),
-      withNavBar: true,
-    );
+    FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
+    Utils.openNavNewPage(
+        context, ResultsScreen(categoriesListData: categoriesListData));
   }
 
   Widget seeMoreHandler(SectionsState state) {

@@ -6,8 +6,7 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
   MyProBloc() : super(const MyProState()) {
     on<GetMyProductEvent>(_getMyProduct);
   }
-  static MyProBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static MyProBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _getMyProduct(
       GetMyProductEvent event, Emitter<MyProState> emit) async {
     if (event.isSeeMore) {

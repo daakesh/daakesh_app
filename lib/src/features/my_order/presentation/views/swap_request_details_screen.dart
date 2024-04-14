@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../../../src.export.dart';
 
 class SwapRequestDetailsScreen extends StatelessWidget {
-  const SwapRequestDetailsScreen({super.key});
+  final SendReceiveSwapReqItem sendSwapReqItem;
+  const SwapRequestDetailsScreen({super.key, required this.sendSwapReqItem});
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +46,21 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                       SizedBox(
                         width: 11.0.w,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 32.0.h),
-                        child: Assets.png.glasses
-                            .image(height: 126.0.h, width: 126.0.w),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 32.0.h),
+                          child: CachedImage(
+                            imageUrl: sendSwapReqItem
+                                .sourceItems!.itemImg!.first
+                                .toString(),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         width: 18.0.w,
                       ),
                       Expanded(
+                        flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -64,7 +70,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                             Padding(
                               padding: EdgeInsetsDirectional.only(end: 45.0.w),
                               child: Text(
-                                'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                                '${sendSwapReqItem.sourceItems!.title}',
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 20.0.sp,
@@ -87,7 +93,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'Swap In Amman, Jordan',
+                                  'Swap In ${sendSwapReqItem.sourceItems!.citySwap}, ${sendSwapReqItem.sourceItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0.sp),
                                   overflow: TextOverflow.fade,
@@ -110,7 +116,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                                 fontSize: 20.0.sp,
                                                 color: ColorName.gray)),
                                     TextSpan(
-                                        text: 'NF Store',
+                                        text:
+                                            '${sendSwapReqItem.sourceUser!.name}',
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
                                             .copyWith(fontSize: 20.0.sp)),
@@ -171,15 +178,20 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                           SizedBox(
                             width: 11.0.w,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 32.0.h),
-                            child: Assets.png.glasses
-                                .image(height: 126.0.h, width: 126.0.w),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 32.0.h),
+                              child: CachedImage(
+                                  imageUrl: sendSwapReqItem
+                                      .offerItems!.itemImg!.first
+                                      .toString()),
+                            ),
                           ),
                           SizedBox(
                             width: 18.0.w,
                           ),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -190,7 +202,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                   padding:
                                       EdgeInsetsDirectional.only(end: 45.0.w),
                                   child: Text(
-                                    'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                                    '${sendSwapReqItem.offerItems!.title}\n',
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
@@ -214,7 +226,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Text(
-                                      'Swap In Amman, Jordan',
+                                      'Swap In ${sendSwapReqItem.offerItems!.citySwap}, ${sendSwapReqItem.offerItems!.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(fontSize: 16.0.sp),
@@ -275,7 +287,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                         padding: EdgeInsetsDirectional.only(
                             start: 22.0.w, end: 14.0.w, bottom: 20.0.h),
                         child: Text(
-                          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore',
+                          '${sendSwapReqItem.note}\n',
                           style:
                               context.easyTheme.textTheme.bodyLarge!.copyWith(
                             fontSize: 14.0.sp,

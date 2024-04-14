@@ -7,8 +7,7 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
     on<GetCategoryBySectionIDEvent>(_getCategoryBySectionID);
     on<ResetVarEvent>(_resetVarEvent);
   }
-  static SectionsBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static SectionsBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Event to get sections categories at [SectionScreen].
   FutureOr<void> _getCategoryBySectionID(

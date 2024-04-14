@@ -2,14 +2,26 @@ import 'package:flutter/material.dart';
 
 import '../../../../../src.export.dart';
 
-class RegisterPersonalInfoScreen extends StatelessWidget {
-  RegisterPersonalInfoScreen({super.key});
+class RegisterPersonalInfoScreen extends StatefulWidget {
+  const RegisterPersonalInfoScreen({super.key});
 
+  @override
+  State<RegisterPersonalInfoScreen> createState() =>
+      _RegisterPersonalInfoScreenState();
+}
+
+class _RegisterPersonalInfoScreenState
+    extends State<RegisterPersonalInfoScreen> {
   final nameController = TextEditingController();
+
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final FocusNode nameFocusNode = FocusNode();
+
   final FocusNode emailFocusNode = FocusNode();
+
   final FocusNode passwordFocusNode = FocusNode();
 
   @override
@@ -24,44 +36,42 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
               const Spacer(
                 flex: 6,
               ),
-              const SizedBox(
-                height: 20.0,
+              SizedBox(
+                height: 20.0.h,
               ),
-              const Padding(
-                padding: EdgeInsetsDirectional.only(start: 58.0, end: 100),
-                child: DaakeshLogoWidget(),
-              ),
-              const SizedBox(
-                height: 40.0,
+              const Center(child: DaakeshLogoWidget()),
+              SizedBox(
+                height: 40.0.h,
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.only(start: 26.0, end: 66.0),
+                padding: EdgeInsetsDirectional.only(start: 26.0.w, end: 66.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Lets Go',
-                        style: context.easyTheme.textTheme.headlineLarge),
+                        style: context.easyTheme.textTheme.headlineLarge!
+                            .copyWith(fontSize: 40.0.sp)),
                     const SizedBox(
                       height: 10.0,
                     ),
                     FittedBox(
                         child: Text('Enter your Personal your Info',
-                            style: context.easyTheme.textTheme.headlineMedium)),
+                            style: context.easyTheme.textTheme.headlineMedium!
+                                .copyWith(fontSize: 25.0.sp))),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 40.0,
+              SizedBox(
+                height: 40.0.h,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                padding: EdgeInsets.symmetric(horizontal: 30.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Name',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray)),
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: nameController,
                       focusNode: nameFocusNode,
@@ -71,10 +81,10 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    const SizedBox(height: 33.0),
+                    SizedBox(height: 33.0.h),
                     Text('Email',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray)),
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: emailController,
                       focusNode: emailFocusNode,
@@ -85,32 +95,31 @@ class RegisterPersonalInfoScreen extends StatelessWidget {
                         RegExpValidator.clearWhitespace,
                       ],
                     ),
-                    const SizedBox(height: 33.0),
+                    SizedBox(height: 33.0.h),
                     Text('Password',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray)),
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: passwordController,
                       focusNode: passwordFocusNode,
                       obscureText: true,
                       maxLines: 1,
                     ),
-                    const SizedBox(height: 60.0),
+                    SizedBox(height: 60.0.h),
                   ],
                 ),
               ),
               DefaultButtonWidget(
                 text: 'NEXT',
                 onPressed: () => onNext(context),
-                padding:
-                    const EdgeInsetsDirectional.symmetric(horizontal: 21.1),
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 21.1.w),
               ),
-              const SizedBox(height: 40.0),
+              SizedBox(height: 40.0.h),
               const AlreadyHaveAccountWidget(),
               const Spacer(
                 flex: 3,
               ),
-              const SizedBox(height: 20.0),
+              SizedBox(height: 20.0.h),
             ],
           ),
         ),

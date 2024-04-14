@@ -79,16 +79,15 @@ class YourCartItemWidget extends StatelessWidget {
                     const SizedBox(
                       height: 6.0,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: List.generate(
-                              state.cartItemsList.length,
-                              (index) => Text(
-                                '${state.cartItemsList[index].item!.title}',
+                    Column(
+                      children: List.generate(
+                        state.cartItemsList.length,
+                        (index) => Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                '${state.cartItemsList[index].item!.title}sssssssssssssssssssssssssssss',
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 15.0,
@@ -96,55 +95,32 @@ class YourCartItemWidget extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          ),
+                            const SizedBox(
+                              width: 12.0,
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Text(
+                                '${state.cartItemsList[index].item!.count}',
+                                textAlign: TextAlign.center,
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(
+                                        fontSize: 15.0,
+                                        color: ColorName.dimGray),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                  '\$${state.cartItemsList[index].item!.count! * state.cartItemsList[index].item!.price}',
+                                  textAlign: TextAlign.end,
+                                  style: context.easyTheme.textTheme.labelLarge!
+                                      .copyWith(
+                                          fontSize: 17.0,
+                                          color: ColorName.black)),
+                            )
+                          ],
                         ),
-                        const SizedBox(
-                          width: 12.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: List.generate(
-                              state.cartItemsList.length,
-                              (index) => Text(
-                                    '${state.cartItemsList[index].item!.count}',
-                                    textAlign: TextAlign.center,
-                                    style: context
-                                        .easyTheme.textTheme.bodyMedium!
-                                        .copyWith(
-                                            fontSize: 15.0,
-                                            color: ColorName.dimGray),
-                                  )),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: List.generate(
-                                state.cartItemsList.length,
-                                (index) => Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(
-                                              text:
-                                                  '\$${state.cartItemsList[index].item!.count! * state.cartItemsList[index].item!.price}',
-                                              style: context.easyTheme.textTheme
-                                                  .labelLarge!
-                                                  .copyWith(
-                                                      fontSize: 17.0,
-                                                      color: ColorName.black)),
-                                          TextSpan(
-                                              text: '99',
-                                              style: context.easyTheme.textTheme
-                                                  .labelLarge!
-                                                  .copyWith(
-                                                      fontSize: 12.0,
-                                                      color: ColorName.gray))
-                                        ],
-                                      ),
-                                    )),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const SizedBox(
                       height: 6.0,

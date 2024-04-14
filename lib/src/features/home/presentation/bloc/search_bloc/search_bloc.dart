@@ -7,8 +7,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<SearchOnItemsEvent>(_searchOnItems);
     on<EmptySearchEvent>(_emptySearch);
   }
-  static SearchBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static SearchBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Action to search on items.
   FutureOr<void> _searchOnItems(

@@ -32,29 +32,26 @@ class _ResetPassSuccessScreenState extends State<ResetPassSuccessScreen> {
                 const Spacer(
                   flex: 1,
                 ),
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(start: 56.0, end: 97.0),
-                  child: DaakeshLogoWidget(),
-                ),
+                const Center(child: DaakeshLogoWidget()),
                 const Spacer(
                   flex: 1,
                 ),
                 Container(
-                  width: 150.0,
-                  height: 150.0,
+                  width: 150.0.w,
+                  height: 150.0.h,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(Assets.png.checkIcon.path))),
                 ),
-                const SizedBox(
-                  height: 19.0,
+                SizedBox(
+                  height: 19.0.h,
                 ),
                 Text('Reset Complete!',
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 32.0)),
+                        .copyWith(fontSize: 32.0.sp)),
                 Text('Now You Can Start And Find Best Deals',
                     style: context.easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontSize: 17.0)),
+                        .copyWith(fontSize: 17.0.sp)),
                 const Spacer(
                   flex: 2,
                 ),

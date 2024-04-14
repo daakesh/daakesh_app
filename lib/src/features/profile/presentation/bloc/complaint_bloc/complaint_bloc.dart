@@ -7,8 +7,7 @@ class ComplaintBloc extends Bloc<ComplaintEvent, ComplaintState> {
     on<GetAllComplaintEvent>(_getAllComplaint);
     on<AddComplaintEvent>(_addComplaint);
   }
-  static ComplaintBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static ComplaintBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _getAllComplaint(
       GetAllComplaintEvent event, Emitter<ComplaintState> emit) async {
@@ -33,13 +32,16 @@ class ComplaintBloc extends Bloc<ComplaintEvent, ComplaintState> {
     String sellerName = event.sellerName;
     String subject = event.subject;
     String remark = event.remark;
+    ProgressCircleDialog.show();
     final result = await getIt
         .get<ProfileUseCases>()
         .addComplaints(complaintType, sellerName, subject, remark);
     result.fold((l) {
+      ProgressCircleDialog.dismiss();
       emit(state.copyWith(complaintStateStatus: ComplaintStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
+      ProgressCircleDialog.dismiss();
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;

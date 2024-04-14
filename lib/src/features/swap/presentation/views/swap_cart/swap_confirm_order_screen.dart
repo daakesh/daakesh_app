@@ -74,8 +74,6 @@ class SwapConfirmOrderScreen extends StatelessWidget {
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 1));
     ProgressCircleDialog.dismiss();
-    HomeBloc.get
-        .add(SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.HOME));
     Utils.openNewPage(const MainScreen(), popPreviousPages: true);
   }
 }

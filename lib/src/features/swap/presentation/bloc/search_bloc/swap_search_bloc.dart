@@ -9,8 +9,7 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
     on<SwapEmptySearchEvent>(_emptySearch);
   }
 
-  static SwapSearchBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static SwapSearchBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Action to search on items.
   FutureOr<void> _searchOnItems(

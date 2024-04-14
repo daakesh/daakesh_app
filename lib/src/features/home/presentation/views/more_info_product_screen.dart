@@ -51,7 +51,10 @@ class MoreInfoProductScreen extends StatelessWidget {
                           child: DefaultButtonWidget(
                               text: 'ADD TO CART',
                               onPressed: () => addToCart(
-                                  state.todayItem.first.id.toString())))
+                                  state.todayItem.first.id.toString(),
+                                  state.todayItem.first.country.toString(),
+                                  state.todayItem.first.city.toString())),
+                        )
                       : Padding(
                           padding: const EdgeInsetsDirectional.only(
                               start: 17.5, end: 26.0),
@@ -139,7 +142,8 @@ class MoreInfoProductScreen extends StatelessWidget {
     );
   }
 
-  void addToCart(String itemID) {
-    CartBloc.get.add(AddToCartEvent(itemID: itemID));
+  void addToCart(String itemID, String country, String address) {
+    CartBloc.get.add(
+        AddToCartEvent(itemID: itemID, country: country, address: address));
   }
 }

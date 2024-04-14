@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import '../../../../src.export.dart';
 
 abstract class MyOrderUseCases {
-  Future<Either<Failure,ValidResponse>> getMyOrders();
-
+  Future<Either<Failure, ValidResponse>> getMyOrders();
+  Future<Either<Failure, ValidResponse>> getSendReceiveSwapRequest(String type);
 }
 
 @dev
@@ -15,8 +15,9 @@ class MyOrderUseCasesImpl implements MyOrderUseCases {
     return await getIt.get<MyOrderRepository>().getMyOrders();
   }
 
-
+  @override
+  Future<Either<Failure, ValidResponse>> getSendReceiveSwapRequest(
+      String type) async {
+    return await getIt.get<MyOrderRepository>().getSendReceiveSwapRequest(type);
+  }
 }
-
-
-

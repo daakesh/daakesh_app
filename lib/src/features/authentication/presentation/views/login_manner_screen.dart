@@ -22,21 +22,22 @@ class LoginMannerScreen extends StatelessWidget {
                 flex: 6,
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.only(start: 16.0, end: 26.0),
+                padding: EdgeInsetsDirectional.only(start: 16.0.w, end: 26.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'LOGIN',
-                      style: context.easyTheme.textTheme.headlineLarge,
+                      style: context.easyTheme.textTheme.headlineLarge!
+                          .copyWith(fontSize: 40.0.sp),
                     ),
-                    const SizedBox(
-                      height: 20.86,
+                    SizedBox(
+                      height: 20.86.h,
                     ),
                     Text(
                       'Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',
-                      style: context.easyTheme.textTheme.bodyMedium,
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 18.0.sp),
                     ),
                   ],
                 ),
@@ -55,7 +56,8 @@ class LoginMannerScreen extends StatelessWidget {
               Center(
                 child: Text(
                   'OR',
-                  style: context.easyTheme.textTheme.bodyMedium,
+                  style: context.easyTheme.textTheme.bodyMedium!
+                      .copyWith(fontSize: 18.0.sp),
                 ),
               ),
               const Spacer(

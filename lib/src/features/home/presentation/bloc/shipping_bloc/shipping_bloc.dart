@@ -7,8 +7,7 @@ class ShippingBloc extends Bloc<ShippingEvent, ShippingState> {
     on<SelectShippingCountryFlagEvent>(_changeShippingFlag);
     on<SelectShippingPhoneNumberEvent>(_selectShippingPhoneNumber);
   }
-  static ShippingBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static ShippingBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _changeShippingFlag(
       SelectShippingCountryFlagEvent event, Emitter<ShippingState> emit) {

@@ -31,7 +31,9 @@ class TodayItemData {
     lastPage = json['last_page'];
     if (json['data'] != null) {
       todayItemList = <TodayItem>[];
-      todayItemList = (json['data'] as List<dynamic>).map((e) => TodayItem.fromJson(e)).toList();
+      todayItemList = (json['data'] as List<dynamic>)
+          .map((e) => TodayItem.fromJson(e))
+          .toList();
     }
   }
 }
@@ -41,6 +43,8 @@ class TodayItem {
   String? description;
   List<String>? itemImg;
   String? date;
+  dynamic priceAfterDiscount;
+  String? discountPercentage;
   String? title;
   String? type;
   String? swapFor;
@@ -82,10 +86,13 @@ class TodayItem {
   TodayItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
-    if(json['itemImg'] != null){
+    if (json['itemImg'] != null) {
       itemImg = <String>[];
-      itemImg = (json['itemImg']as List<dynamic>).map((e) => e.toString()).toList();
+      itemImg =
+          (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
     }
+    priceAfterDiscount = json['price_after_discount'];
+    discountPercentage = json['discount_percentage'];
     date = json['date'];
     title = json['Title'];
     type = json['Type'];
@@ -98,10 +105,16 @@ class TodayItem {
     discountFrom = json['discount_from'];
     discountTo = json['discount_to'];
     country = json['country'];
-    section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : null;
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;
+    category = json['category'] != null
+        ? CategoryItem.fromJson(json['category'])
+        : null;
     brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
-    subcategory = json['subcategory'] != null ? SubCategory.fromJson(json['subcategory']) : null;
+    subcategory = json['subcategory'] != null
+        ? SubCategory.fromJson(json['subcategory'])
+        : null;
   }
 }

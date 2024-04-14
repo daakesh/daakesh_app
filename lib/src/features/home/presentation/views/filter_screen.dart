@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
+class FilterScreen extends StatelessWidget {
+  FilterScreen({super.key});
 
-  @override
-  State<FilterScreen> createState() => _FilterScreenState();
-}
-
-class _FilterScreenState extends State<FilterScreen> {
-  final countryController = TextEditingController();
-  final cityController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    countryController.text = 'Jordan';
-    cityController.text = 'Amman';
-  }
+  final countryController = TextEditingController(text: 'Jordan');
+  final cityController = TextEditingController(text: 'Amman');
 
   @override
   Widget build(BuildContext context) {
@@ -165,11 +154,19 @@ class _FilterScreenState extends State<FilterScreen> {
                       const EdgeInsetsDirectional.only(start: 23.0, end: 19.0),
                   child: Column(
                     children: [
-                      DefaultButtonWidget(text: 'APPLY', onPressed: () {}),
+                      DefaultButtonWidget(
+                          text: 'APPLY', onPressed: () => apply(context)),
                       const SizedBox(
                         height: 14.0,
                       ),
-                      OutlineButtonWidget(text: 'CLEAR', onPressed: () {}),
+                      BlocBuilder<FilterBloc, FilterState>(
+                        builder: (context, state) {
+                          return OutlineButtonWidget(
+                              text: 'CLEAR',
+                              onPressed: () =>
+                                  clear(context, state.isFilterActive));
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -182,5 +179,21 @@ class _FilterScreenState extends State<FilterScreen> {
         ),
       ),
     );
+  }
+
+  void apply(context) {
+    FilterBloc.get.add(PreviewSectionSubCategoriesEvent(isFilterActive: true));
+    Navigator.pop(context);
+  }
+
+  void clear(context, bool filterIsActive) {
+    if (!filterIsActive) {
+      Navigator.pop(context);
+      FilterBloc.get.add(ClearFilterDataEvent());
+      return;
+    }
+    FilterBloc.get.add(PreviewSectionSubCategoriesEvent(isFilterActive: false));
+    FilterBloc.get.add(ClearFilterDataEvent());
+    Navigator.pop(context);
   }
 }

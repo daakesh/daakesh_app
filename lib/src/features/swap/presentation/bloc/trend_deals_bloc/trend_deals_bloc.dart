@@ -7,8 +7,7 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
     on<GetTrendDealsDataEvent>(_getTodayDealsData);
   }
 
-  static TrendDealsBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static TrendDealsBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Event to get Brands data at [HomeDataWidget]
   FutureOr<void> _getTodayDealsData(

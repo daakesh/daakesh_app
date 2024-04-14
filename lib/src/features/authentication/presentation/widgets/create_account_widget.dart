@@ -1,9 +1,16 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
 
 class CreateAccountWidget extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final bool isBold;
+  final Widget screen;
   const CreateAccountWidget({
     super.key,
+    this.onPressed,
+    this.isBold = true,
+    this.screen = const RegisterPersonalInfoScreen(),
   });
 
   @override
@@ -12,13 +19,27 @@ class CreateAccountWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          'Don\'t have an Account? ',
-          style: context.easyTheme.textTheme.bodyMedium,
+        Expanded(
+          child: Text.rich(
+              textAlign: TextAlign.center,
+              TextSpan(children: [
+                TextSpan(
+                    text: 'Don\'t have an Account? ',
+                    style: context.easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontSize: 17.0.sp)),
+                TextSpan(
+                    text: 'Create One',
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Utils.openNewPage(screen),
+                    style: isBold
+                        ? context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            color: ColorName.skyBlue,
+                            fontSize: 17.0.sp,
+                            fontWeight: FontWeight.bold)
+                        : context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            color: ColorName.skyBlue, fontSize: 17.0.sp))
+              ])),
         ),
-        TextButtonWidget(
-            text: 'Create one',
-            onPressed: () => Utils.openNewPage(RegisterPersonalInfoScreen())),
       ],
     );
   }

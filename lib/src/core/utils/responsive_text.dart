@@ -1,14 +1,12 @@
 import 'dart:ui';
 
-class ResponsiveText{
-
-  static double getResponsiveFontSize({required double fontSize}){
+class ResponsiveText {
+  static double getResponsiveFontSize({required double fontSize}) {
     double scaleFactor = getScaleFactor();
     double responsiveFontSize = fontSize * scaleFactor;
     double lowerLimit = fontSize * 0.8;
-    double upperLimit = fontSize * 1.2;
+    double upperLimit = fontSize * 1.6;
     return responsiveFontSize.clamp(lowerLimit, upperLimit);
-
   }
 
   static double getScaleFactor() {

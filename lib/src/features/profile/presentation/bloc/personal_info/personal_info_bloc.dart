@@ -8,8 +8,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     on<SelectProfileImageEvent>(_selectProfileImage);
     on<UpdatePersonalInfoEvent>(_updatePersonalInfo);
   }
-  static PersonalInfoBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static PersonalInfoBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _activateUpdatePersonalInfo(
       ActivateUpdatePersonalInfoEvent event, Emitter<PersonalInfoState> emit) {

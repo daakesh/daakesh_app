@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../src.export.dart';
 
 class SwapOfferDetailsScreen extends StatelessWidget {
@@ -304,7 +303,16 @@ class SwapOfferDetailsScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Center(
                     child: DefaultButtonWidget(
-                        text: 'CONTINUE', onPressed: onContinue)),
+                        text: 'CONTINUE',
+                        onPressed: () => onContinue(
+                              context,
+                              state.trendDealsListData.first.id.toString(),
+                              state.mySwapProductData.first.id.toString(),
+                              state.comment.toString(),
+                              state.trendDealsListData.first.user!.id
+                                  .toString(),
+                              ValueConstants.userId,
+                            ))),
               ),
               const SliverToBoxAdapter(
                 child: SizedBox(
@@ -318,7 +326,21 @@ class SwapOfferDetailsScreen extends StatelessWidget {
     );
   }
 
-  void onContinue() {
-    Utils.openNewPage(const ExchangeOfferScreen());
+  void onContinue(
+    BuildContext context,
+    String sourceItem,
+    String offerItem,
+    String comment,
+    String sourceUser,
+    String offerUser,
+  ) {
+    SwapBloc.get.add(SendOfferEvent(
+      context: context,
+      sourceItem: sourceItem,
+      offerItem: offerItem,
+      comment: comment,
+      sourceUser: sourceUser,
+      offerUser: offerUser,
+    ));
   }
 }

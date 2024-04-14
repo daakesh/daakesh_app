@@ -74,14 +74,10 @@ class ExchangeOfferScreen extends StatelessWidget {
   }
 
   void createOtherSwapOffer(context) {
-    SwapBloc.get.add(
-        ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.SENDOFFER));
-    Navigator.pop(context);
+    Utils.openNewPage(const MainScreen());
   }
 
   void backToStore(context) {
-    SwapBloc.get
-        .add(ToggleSwapScreenStateEvent(swapScreenState: SwapScreenState.HOME));
-    Navigator.pop(context);
+    Utils.openNewPage(const MainScreen());
   }
 }

@@ -73,16 +73,9 @@ class PriceRateSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '\$${state.todayItem.first.price}.',
+              '\$${state.todayItem.first.priceAfterDiscount}',
               style: context.easyTheme.textTheme.labelLarge!
                   .copyWith(fontSize: 30.0, color: ColorName.black),
-            ),
-            Text(
-              '99 ',
-              style: context.easyTheme.textTheme.labelLarge!.copyWith(
-                fontSize: 25.0,
-                color: ColorName.gray,
-              ),
             ),
             const Spacer(
               flex: 1,

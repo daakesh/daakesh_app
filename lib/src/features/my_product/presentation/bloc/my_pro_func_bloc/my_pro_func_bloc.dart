@@ -18,8 +18,7 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
     on<EmptyProductSearchEvent>(_emptyProductSearch);
     on<OnOffDiscountEvent>(_onOffDiscount);
   }
-  static MyProFuncBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static MyProFuncBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Action to toggle between tow tabBar {Shop,Swap} at [MyProductsScreen]
   Future<FutureOr<void>> _swapTabBarProductType(

@@ -12,16 +12,17 @@ enum UserType {
   SELL,
 }
 
-enum ProductTapBar{
+enum ProductTapBar {
   SHOP,
   SWAP,
 }
-enum MyOrderTapBar{
+
+enum MyOrderTapBar {
   MYORDER,
   SWAPREQUEST,
 }
 
-enum HomeScreenState{
+enum HomeScreenState {
   SEARCH,
   PRODUCTDETAILS,
   SUBCATEGORYRESULT,
@@ -31,7 +32,8 @@ enum HomeScreenState{
   HOMEMADE,
   HOME,
 }
-enum SwapScreenState{
+
+enum SwapScreenState {
   SEARCH,
   PRODUCTDETAILS,
   SUBCATEGORYRESULT,
@@ -41,19 +43,41 @@ enum SwapScreenState{
   OFFERDETAILS,
   HOME,
 }
-enum ProductDisplayMethod{
+
+enum ProductDisplayMethod {
   Sell,
   Swap,
   SellSwap,
 }
-enum AuthManner{
+
+enum AuthManner {
   SIGNUPIN,
   FORGETPASSWORD,
 }
 
-enum AdjustProduct{
-  ADD,
-  EDIT
+enum AdjustProduct { ADD, EDIT }
+
+enum SwapRequestType {
+  send,
+  receive,
 }
 
+enum FilterRate {
+  ALL,
+  NONE,
+  TOWSTARS,
+  THREESTARS,
+  FOURSTARS,
+  FIVESTARS,
+}
 
+enum FilterProductType {
+  All,
+  Daakesh,
+  Other,
+}
+
+enum ComplaintType {
+  User,
+  Seller,
+}

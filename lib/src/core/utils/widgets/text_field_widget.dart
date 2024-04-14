@@ -65,7 +65,9 @@ class TextFormFieldWidget extends StatelessWidget {
         controller: controller,
         textCapitalization: textCapitalization,
         textAlignVertical: textAlignVertical,
-        style: style ?? context.easyTheme.textTheme.labelMedium,
+        style: style ??
+            context.easyTheme.textTheme.labelMedium!
+                .copyWith(fontSize: 18.0.sp),
         inputFormatters: inputFormatters,
         obscureText: obscureText,
         textAlign: textAlign,
@@ -93,16 +95,17 @@ class TextFormFieldWidget extends StatelessWidget {
                 focusedBorder: InputBorder.none,
                 isCollapsed: true,
                 hintText: hintText,
-                hintStyle: context.easyTheme.textTheme.labelMedium!
-                    .copyWith(color: ColorName.black.withOpacity(0.3)),
+                hintStyle: context.easyTheme.textTheme.labelMedium!.copyWith(
+                    color: ColorName.black.withOpacity(0.3), fontSize: 18.0.sp),
                 suffixIcon: suffixIcon,
                 prefixIcon: prefixIcon,
               )
             : !isSuffixPrefixOn
                 ? InputDecoration(
                     hintText: hintText,
-                    hintStyle:
-                        hintStyle ?? context.easyTheme.textTheme.labelMedium,
+                    hintStyle: hintStyle ??
+                        context.easyTheme.textTheme.labelMedium!
+                            .copyWith(fontSize: 18.0.sp),
                     enabledBorder: const UnderlineInputBorder(
                       borderSide:
                           BorderSide(color: ColorName.darkGray, width: 1.5),
@@ -116,7 +119,8 @@ class TextFormFieldWidget extends StatelessWidget {
                   )
                 : InputDecoration(
                     hintText: hintText,
-                    hintStyle: context.easyTheme.textTheme.labelMedium,
+                    hintStyle: context.easyTheme.textTheme.labelMedium!
+                        .copyWith(fontSize: 18.0.sp),
                     enabledBorder: const UnderlineInputBorder(
                       borderSide:
                           BorderSide(color: ColorName.darkGray, width: 1.5),

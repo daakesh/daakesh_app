@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../../src.export.dart';
 
 class SendSwapWaitingItem extends StatelessWidget {
-  const SendSwapWaitingItem({super.key});
+  final SendReceiveSwapReqItem sendSwapReqItem;
+  const SendSwapWaitingItem({super.key, required this.sendSwapReqItem});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class SendSwapWaitingItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.0.w),
             child: Text(
-              'Request In: 12/12/2012',
+              'Request In: ${Utils.formatDate(sendSwapReqItem.createdAt.toString())}',
               style: context.easyTheme.textTheme.labelLarge!.copyWith(
                 fontSize: 14.0.sp,
                 color: ColorName.gray,
@@ -76,11 +76,17 @@ class SendSwapWaitingItem extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(width: 14.0.w),
-                Assets.png.glasses.image(width: 32.0.w, height: 32.0.h),
+                Expanded(
+                    child: CachedImage(
+                  imageUrl: sendSwapReqItem.sourceItems!.itemImg != null
+                      ? sendSwapReqItem.sourceItems!.itemImg!.first
+                      : '',
+                )),
                 SizedBox(width: 15.0.w),
-                Flexible(
+                Expanded(
+                  flex: 4,
                   child: Text(
-                    'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                    sendSwapReqItem.sourceItems!.title.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 14.0.sp, color: ColorName.gray),
@@ -105,11 +111,17 @@ class SendSwapWaitingItem extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(width: 14.0.w),
-                Assets.png.glasses.image(width: 32.0.w, height: 32.0.h),
+                Expanded(
+                    child: CachedImage(
+                  imageUrl: sendSwapReqItem.offerItems!.itemImg!.isNotEmpty
+                      ? sendSwapReqItem.offerItems!.itemImg!.first
+                      : '',
+                )),
                 SizedBox(width: 15.0.w),
-                Flexible(
+                Expanded(
+                  flex: 4,
                   child: Text(
-                    'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                    sendSwapReqItem.offerItems!.title.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 14.0.sp, color: ColorName.gray),
@@ -126,11 +138,12 @@ class SendSwapWaitingItem extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 4.0.h),
           Padding(
             padding: EdgeInsetsDirectional.only(start: 60.0.w),
             child: TextButtonWidget(
               text: 'See All Details',
-              onPressed: () => seeAllDetails(context),
+              onPressed: () => seeAllDetails(context, sendSwapReqItem),
               isBold: true,
             ),
           ),
@@ -187,11 +200,11 @@ class SendSwapWaitingItem extends StatelessWidget {
     );
   }
 
-  void seeAllDetails(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const SwapRequestDetailsScreen(),
-      withNavBar: true,
-    );
+  void seeAllDetails(context, SendReceiveSwapReqItem sendSwapReqItem) {
+    Utils.openNavNewPage(
+        context,
+        SwapRequestDetailsScreen(
+          sendSwapReqItem: sendSwapReqItem,
+        ));
   }
 }

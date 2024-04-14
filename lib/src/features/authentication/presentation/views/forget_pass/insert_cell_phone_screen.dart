@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -23,30 +24,29 @@ class InsertCellPhoneScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.only(
-                      start: 31.0, bottom: 20.0),
+                  padding:
+                      EdgeInsetsDirectional.only(start: 31.0.w, bottom: 20.0.h),
                   child: Assets.svg.arrowBackIcon.svg(),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsetsDirectional.only(start: 58.0, end: 97.0),
-                child: DaakeshLogoWidget(),
-              ),
+              const Center(child: DaakeshLogoWidget()),
               const Spacer(
                 flex: 1,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 21.0),
+                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Forgot Password',
-                        style: context.easyTheme.textTheme.headlineLarge),
-                    const SizedBox(
-                      height: 10.0,
+                        style: context.easyTheme.textTheme.headlineLarge!
+                            .copyWith(fontSize: 40.0.sp)),
+                    SizedBox(
+                      height: 10.0.h,
                     ),
                     Text('Enter Your Phone Number',
-                        style: context.easyTheme.textTheme.headlineMedium),
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(fontSize: 25.0.sp)),
                   ],
                 ),
               ),
@@ -61,7 +61,7 @@ class InsertCellPhoneScreen extends StatelessWidget {
                   children: [
                     Text('Phone Number',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray)),
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: phoneNumberController,
                       keyboardType: TextInputType.number,
@@ -71,19 +71,23 @@ class InsertCellPhoneScreen extends StatelessWidget {
                         return GestureDetector(
                           onTap: () => selectCountry(context),
                           child: SizedBox(
-                            width: 65.0,
+                            width: 65.0.w,
                             child: Row(
                               children: [
-                                Text(
-                                  state.flagEmoji,
-                                  style: const TextStyle(
-                                      color: ColorName.blueGray,
-                                      fontSize: 24.0),
+                                Expanded(
+                                  child: Text(
+                                    state.flagEmoji,
+                                    style: TextStyle(
+                                        color: ColorName.blueGray,
+                                        fontSize: 24.0.sp),
+                                  ),
                                 ),
-                                const Icon(
-                                  Icons.arrow_drop_down_outlined,
-                                  color: ColorName.blueGray,
-                                  size: 35.0,
+                                Expanded(
+                                  child: Icon(
+                                    Icons.arrow_drop_down_outlined,
+                                    color: ColorName.blueGray,
+                                    size: 35.0.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -101,8 +105,7 @@ class InsertCellPhoneScreen extends StatelessWidget {
               const Spacer(
                 flex: 6,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 21.0),
+              Center(
                 child: DefaultButtonWidget(
                     text: 'NEXT', onPressed: () => onNext(context)),
               ),

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
 
 class StartSwapScreen extends StatelessWidget {
-  const StartSwapScreen({super.key});
+  final SendReceiveSwapReqItem sendReceiveSwapReqItem;
+
+  const StartSwapScreen({super.key, required this.sendReceiveSwapReqItem});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +47,14 @@ class StartSwapScreen extends StatelessWidget {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 32.0),
-                          child: Assets.png.glasses.image(),
+                          child: CachedImage(
+                            imageUrl:
+                                sendReceiveSwapReqItem.offerItems!.itemImg !=
+                                        null
+                                    ? sendReceiveSwapReqItem
+                                        .offerItems!.itemImg!.first
+                                    : '',
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -62,7 +71,7 @@ class StartSwapScreen extends StatelessWidget {
                             Padding(
                               padding: EdgeInsetsDirectional.only(end: 45.0.w),
                               child: Text(
-                                'AquaOasis™ Cool Mist Humidefier (2.2L Water',
+                                '${sendReceiveSwapReqItem.offerItems!.title}\n',
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 20.0.sp,
@@ -85,7 +94,7 @@ class StartSwapScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'Swap In Amman, Jordan',
+                                  'Swap In ${sendReceiveSwapReqItem.offerItems!.citySwap}, ${sendReceiveSwapReqItem.offerItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0.sp),
                                   overflow: TextOverflow.fade,

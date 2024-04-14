@@ -12,8 +12,7 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
     on<ResetPasswordEvent>(_resetPassword);
   }
 
-  static ForgetPassBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static ForgetPassBloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _checkIsPasswordExist(
       CheckIsPasswordExistEvent event, Emitter<ForgetPassState> emit) async {

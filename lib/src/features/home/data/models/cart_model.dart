@@ -1,4 +1,4 @@
-import 'package:daakesh/src/features/authentication/authentication.export.dart';
+import '../../../../src.export.dart';
 
 class CartModel {
   bool? status;
@@ -12,18 +12,20 @@ class CartModel {
     error = json['error'];
     if (json['data'] != null) {
       data = <CartData>[];
-      data = (json['data'] as List<dynamic>).map((v) => CartData.fromJson(v)).toList();
+      data = (json['data'] as List<dynamic>)
+          .map((v) => CartData.fromJson(v))
+          .toList();
     }
   }
-
-
 }
 
 class CartData {
   int? id;
+  int? quantity;
+  String? country;
+  String? address;
   UserModel? user;
   MyCartItem? item;
-
 
   CartData({
     this.id,
@@ -33,8 +35,11 @@ class CartData {
 
   CartData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    user = json['user'] != null ?  UserModel.fromJson(json['user']) : null;
-    item = json['item'] != null ?  MyCartItem.fromJson(json['item']) : null;
+    quantity = json['quantity'];
+    country = json['country'];
+    address = json['address'];
+    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
+    item = json['item'] != null ? MyCartItem.fromJson(json['item']) : null;
   }
 }
 
@@ -61,7 +66,6 @@ class MyCartItem {
   String? display;
   String? countrySwap;
   String? citySwap;
-
 
   MyCartItem({
     this.id,
@@ -90,9 +94,10 @@ class MyCartItem {
 
   MyCartItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    if(json['itemImg'] != null){
+    if (json['itemImg'] != null) {
       itemImg = <String>[];
-      itemImg = (json['itemImg']as List<dynamic>).map((e) => e.toString()).toList();
+      itemImg =
+          (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
     }
     count = 1;
     description = json['description'];
@@ -115,6 +120,4 @@ class MyCartItem {
     countrySwap = json['country_swap'];
     citySwap = json['city_swap'];
   }
-
-
 }

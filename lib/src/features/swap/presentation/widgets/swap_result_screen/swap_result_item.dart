@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class SwapResultItemWidget extends StatelessWidget {
-  final SwapSubCategory swapSubCategory;
-  const SwapResultItemWidget({super.key, required this.swapSubCategory});
+  final FilterResultModel filterResultModel;
+  const SwapResultItemWidget({super.key, required this.filterResultModel});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,9 @@ class SwapResultItemWidget extends StatelessWidget {
                 width: 12.0,
               ),
               CachedImage(
-                imageUrl: swapSubCategory.subImg.toString(),
+                imageUrl: filterResultModel.itemImg != null
+                    ? filterResultModel.itemImg!.first
+                    : '',
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 height: 90.0,
                 width: 90.0,
@@ -86,7 +88,7 @@ class SwapResultItemWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.only(end: 80.0),
                       child: Text(
-                        '${swapSubCategory.description}',
+                        '${filterResultModel.description}',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(
                                 fontSize: 15.0,

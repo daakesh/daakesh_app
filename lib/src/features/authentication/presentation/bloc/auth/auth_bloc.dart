@@ -17,8 +17,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<InitialValueEvent>(_initialValue);
     on<ToggleRememberMeValueEvent>(_toggleRememberMeValueEvent);
   }
-  static AuthBloc get get =>
-      BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  static AuthBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Login Event,
   FutureOr<void> _onLogin(OnLoginEvent event, Emitter<AuthState> emit) async {
@@ -32,8 +31,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
       ProgressCircleDialog.dismiss();
     }, (r) async {
-      ProgressCircleDialog.dismiss();
-      if (!r.status!) {
+      // ProgressCircleDialog.dismiss();
+      // if (!r.status!) {
+      //   ShowToastSnackBar.showSnackBars(message: r.message.toString());
+      //   return;
+      // }
+      if (r.data['data'] == null) {
+        ProgressCircleDialog.dismiss();
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
@@ -43,8 +47,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
       GetItUtils.user.setUserDataAndCheckIsActive(userModel);
       emit(state.copyWith(
-        authStateStatus: AuthStateStatus.SUCCESS,
-      ));
+          authStateStatus: AuthStateStatus.SUCCESS,
+          phone: userModel.phoneNumber));
     });
   }
 
@@ -113,7 +117,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       UserModel userModel =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
       GetItUtils.user.setUserDataAndCheckIsActive(userModel);
-      emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
+      emit(state.copyWith(
+          authStateStatus: AuthStateStatus.SUCCESS,
+          phone: userModel.phoneNumber));
     });
   }
 
@@ -150,6 +156,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+      UserModel userData =
+          UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
+      GetItUtils.user.setUserDataAndCheckIsActive(userData);
       emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
     });
   }

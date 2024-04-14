@@ -6,7 +6,7 @@ class {{bloc.pascalCase()}}Bloc extends Bloc<{{bloc.pascalCase()}}Event, {{bloc.
   {{bloc.pascalCase()}}Bloc() : super(const {{bloc.pascalCase()}}State()) {
     on<{{bloc.pascalCase()}}Event>(_{{bloc}});
   }
-  static {{bloc.pascalCase()}}Bloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+  static {{bloc.pascalCase()}}Bloc get get => BlocProvider.of(Utils.currentContext);
 
   FutureOr<void> _{{bloc}}({{bloc.pascalCase()}}Event event, Emitter<{{bloc.pascalCase()}}State> emit) async{
     emit(state.copyWith({{bloc}}StateStatus:  {{bloc.pascalCase()}}StateStatus.LOADING));

@@ -33,7 +33,8 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 ),
                 Text(
                   'Reset password',
-                  style: context.easyTheme.textTheme.headlineLarge,
+                  style: context.easyTheme.textTheme.headlineLarge!
+                      .copyWith(fontSize: 40.0.sp),
                 ),
                 const SizedBox(height: 4.0),
                 FittedBox(
@@ -41,21 +42,21 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     child: Text(
                       'Make Sure You Will Remember It',
                       style: context.easyTheme.textTheme.headlineLarge!
-                          .copyWith(fontSize: 25.0),
+                          .copyWith(fontSize: 25.0.sp),
                     )),
                 const Spacer(
                   flex: 1,
                 ),
-                const SizedBox(height: 22.0),
+                SizedBox(height: 22.0.h),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'New password',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray),
+                            fontSize: 18.0.sp, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: newPassController,
@@ -69,11 +70,11 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                           RegExpValidator.clearWhitespace,
                         ],
                       ),
-                      const SizedBox(height: 33.0),
+                      SizedBox(height: 33.0.h),
                       Text(
                         'Confirm password',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0, color: ColorName.darkGray),
+                            fontSize: 18.0.sp, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: confirmPassController,
@@ -84,10 +85,18 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 20.0.sp,
+                ),
                 const Spacer(
                   flex: 1,
                 ),
-                DefaultButtonWidget(text: 'RESET', onPressed: resetPassword),
+                Center(
+                    child: DefaultButtonWidget(
+                        text: 'RESET', onPressed: resetPassword)),
+                SizedBox(
+                  height: 20.0.sp,
+                ),
                 const Spacer(
                   flex: 1,
                 ),

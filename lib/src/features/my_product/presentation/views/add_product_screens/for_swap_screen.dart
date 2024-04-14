@@ -170,15 +170,14 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
   }
 
   void setEditData() async {
-    if (getIt.get<EditProduct>().myProductItem != null) {
-      var data = getIt.get<EditProduct>().myProductItem;
+    if (GetItUtils.editProduct.myProductItem != null) {
+      var data = GetItUtils.editProduct.myProductItem;
 
       ///displayProductController.text = data!.display.toString();
       displayProductController.text = 'Public';
       countryController.text = data!.countrySwap.toString();
       cityController.text = data.citySwap.toString();
-      String code = CountriesFlags.flags[data.countrySwap].toString();
-      String flag = await Utils.countryCodeToEmoji(code);
+      String flag = await Utils.countryCodeToEmoji(data.countrySwap.toString());
       MyProFuncBloc.get.add(
         ChangeCountrySwapFlagEvent(
           flagEmoji: flag,
