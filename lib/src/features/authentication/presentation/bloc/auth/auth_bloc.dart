@@ -23,9 +23,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _onLogin(OnLoginEvent event, Emitter<AuthState> emit) async {
     emit(state.copyWith(authStateStatus: AuthStateStatus.LOADING));
     ProgressCircleDialog.show();
-    final result = await getIt
-        .get<AuthUseCases>()
-        .onLogin(event.phoneNumber, event.password);
+    final result =
+        await getIt.get<AuthUseCases>().onLogin(event.email, event.password);
     result.fold((l) {
       emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -41,11 +40,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      saveRememberData(
-          state.rememberMeValue, event.phoneNumber, event.password);
+      saveRememberData(state.rememberMeValue, event.email, event.password);
       UserModel userModel =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
-      GetItUtils.user.setUserDataAndCheckIsActive(userModel);
+      GetItUtils.user.setUserDataAndCheckIsActive(userModel, event.context);
       emit(state.copyWith(
           authStateStatus: AuthStateStatus.SUCCESS,
           phone: userModel.phoneNumber));
@@ -96,7 +94,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       EnterPhoneEvent event, Emitter<AuthState> emit) async {
     emit(state.copyWith(phone: event.phoneNumber));
     ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
     final result = await getIt.get<AuthUseCases>().addUser(
           state.name,
           state.email,
@@ -107,16 +104,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold((l) {
       emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
     }, (r) {
+      ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ProgressCircleDialog.dismiss();
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      ProgressCircleDialog.dismiss();
-
+      saveRememberData(state.rememberMeValue, state.email, state.password);
       UserModel userModel =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
-      GetItUtils.user.setUserDataAndCheckIsActive(userModel);
+      GetItUtils.user.setUserDataAndCheckIsActive(userModel, event.context);
       emit(state.copyWith(
           authStateStatus: AuthStateStatus.SUCCESS,
           phone: userModel.phoneNumber));
@@ -139,8 +135,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ///This event take [VerificationId] & [OTPCode] that user inserted and compare it with actual code message.
   FutureOr<void> _validateSMSCode(
       ValidateSMSCodeEvent event, Emitter<AuthState> emit) async {
-    FirebaseAuthentication.verificationCompleted(
-        state.verificationId, event.smsCode, AuthManner.SIGNUPIN);
+    FirebaseAuthentication.verificationCompleted(state.verificationId,
+        event.smsCode, AuthManner.SIGNUPIN, event.context);
   }
 
   ///This event make a user account is active if the [OTPCode] is verified.
@@ -158,7 +154,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
       UserModel userData =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
-      GetItUtils.user.setUserDataAndCheckIsActive(userData);
+      //ValueConstants.userId = userData.id.toString();
+      //ValueConstants.token = userData.token.toString();
+      GetItUtils.user.setUserData(userData);
       emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
     });
   }
@@ -167,7 +165,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _resendSMSCode(
       ResendSMSCodeEvent event, Emitter<AuthState> emit) async {
     FirebaseAuthentication.resendSMSCode(
-        GetItUtils.user.userData.phoneNumber.toString());
+        GetItUtils.user.userData.phoneNumber.toString(), event.context);
   }
 
   ///

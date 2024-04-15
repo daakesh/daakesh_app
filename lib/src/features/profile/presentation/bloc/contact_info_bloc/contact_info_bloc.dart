@@ -36,14 +36,13 @@ class ContactInfoBloc extends Bloc<ContactInfoEvent, ContactInfoState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      if (r.data['data'] == []) {
+      ContactInfoModel contactInfoModel = ContactInfoModel.fromJson(r.data);
+      if (contactInfoModel.data!.isEmpty) {
         emit(state.copyWith(
             contactInfoStateStatus: ContactInfoStateStatus.SUCCESS));
         return;
       }
-      ContactInfoModel contactInfoModel = ContactInfoModel.fromJson(r.data);
       ContactInfoData contactInfoData = contactInfoModel.data!.first;
-
       getIt.get<ContactInfoService>().setContactInfo(
           contactInfoData.personalPhoneNumber.toString(),
           contactInfoData.commercialPhoneNumber.toString(),

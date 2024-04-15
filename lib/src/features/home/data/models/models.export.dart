@@ -10,3 +10,4 @@ export 'today_deal_model.dart';
 export 'cart_model.dart';
 export 'filter_data_model.dart';
 export 'filter_model.dart';
+export 'add_order_model.dart';

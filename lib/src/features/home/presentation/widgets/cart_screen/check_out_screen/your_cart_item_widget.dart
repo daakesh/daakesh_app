@@ -111,7 +111,7 @@ class YourCartItemWidget extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                  '\$${state.cartItemsList[index].quantity! * state.cartItemsList[index].item!.priceAfterDiscount}',
+                                  '\$${state.cartItemsList[index].quantity!.toInt() * state.cartItemsList[index].item!.priceAfterDiscount.toInt()}',
                                   textAlign: TextAlign.end,
                                   style: context.easyTheme.textTheme.labelLarge!
                                       .copyWith(
@@ -140,7 +140,7 @@ class YourCartItemWidget extends StatelessWidget {
                           flex: 1,
                         ),
                         Text(
-                          '\$88.6',
+                          '\$${state.totalPrice}',
                           style: context.easyTheme.textTheme.bodyMedium!
                               .copyWith(fontSize: 18.0, color: ColorName.black),
                         ),

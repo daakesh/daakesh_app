@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import '../../src.export.dart';
 
 abstract class UserData {
   UserModel userData = UserModel();
-  void setUserDataAndCheckIsActive(UserModel userModel);
+  void setUserDataAndCheckIsActive(UserModel userModel, BuildContext context);
   void setUserData(UserModel userData);
-  void get activateUser;
+  void activateUser(BuildContext context);
   void get saveUserToken;
   void logOut();
 }
@@ -16,10 +17,10 @@ class UserDataImpl implements UserData {
   UserModel userData = UserModel();
 
   @override
-  void setUserDataAndCheckIsActive(UserModel userData) {
+  void setUserDataAndCheckIsActive(UserModel userData, BuildContext context) {
     this.userData = userData;
     if (userData.active == 0) {
-      activateUser;
+      activateUser(context);
       return;
     }
     ValueConstants.userId = userData.id.toString();
@@ -33,8 +34,10 @@ class UserDataImpl implements UserData {
   void setUserData(UserModel userData) => this.userData = userData;
 
   @override
-  void get activateUser => FirebaseAuthentication.verifyPhoneNumber(
-      userData.phoneNumber.toString(), AuthManner.SIGNUPIN);
+  void activateUser(BuildContext context) {
+    FirebaseAuthentication.verifyPhoneNumber(
+        userData.phoneNumber.toString(), AuthManner.SIGNUPIN, context);
+  }
 
   @override
   void get saveUserToken async => await Future.wait<void>([

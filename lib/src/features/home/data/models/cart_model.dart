@@ -23,7 +23,7 @@ class CartData {
   });
 
   CartData.fromJson(Map<String, dynamic> json) {
-    totalPrice = json['total_price'];
+    totalPrice = json['TotalPrice'];
     if (json['cart'] != null) {
       cart = <CartItem>[];
       cart = (json['cart'] as List<dynamic>)

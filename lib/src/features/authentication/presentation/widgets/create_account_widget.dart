@@ -24,11 +24,11 @@ class CreateAccountWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               TextSpan(children: [
                 TextSpan(
-                    text: 'Don\'t have an Account? ',
+                    text: context.locale.have_an_account_title,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 17.0.sp)),
                 TextSpan(
-                    text: 'Create One',
+                    text: context.locale.create_one_text_button_title,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => Utils.openNewPage(screen),
                     style: isBold

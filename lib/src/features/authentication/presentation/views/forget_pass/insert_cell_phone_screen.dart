@@ -1,7 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -38,13 +37,13 @@ class InsertCellPhoneScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Forgot Password',
+                    Text(context.locale.forget_password_title,
                         style: context.easyTheme.textTheme.headlineLarge!
                             .copyWith(fontSize: 40.0.sp)),
                     SizedBox(
                       height: 10.0.h,
                     ),
-                    Text('Enter Your Phone Number',
+                    Text(context.locale.forget_instruction_title,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(fontSize: 25.0.sp)),
                   ],
@@ -59,7 +58,7 @@ class InsertCellPhoneScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Phone Number',
+                    Text(context.locale.forget_phone_number_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
@@ -107,7 +106,8 @@ class InsertCellPhoneScreen extends StatelessWidget {
               ),
               Center(
                 child: DefaultButtonWidget(
-                    text: 'NEXT', onPressed: () => onNext(context)),
+                    text: context.locale.forget_next_button_title,
+                    onPressed: () => onNext(context)),
               ),
               const Spacer(
                 flex: 2,
@@ -119,16 +119,15 @@ class InsertCellPhoneScreen extends StatelessWidget {
     );
   }
 
-  void onNext(context) async {
+  void onNext(BuildContext context) async {
     if (phoneNumberController.text.isEmpty) {
       ShowToastSnackBar.showSnackBars(
-          message: 'Firstly, fill cell phone number');
+          message: context.locale.forget_snack_bar_title);
       return;
     }
     ForgetPassBloc.get.add(
       CheckIsPasswordExistEvent(
-        phoneNumber: phoneNumberController.text.trim(),
-      ),
+          phoneNumber: phoneNumberController.text.trim(), context: context),
     );
   }
 

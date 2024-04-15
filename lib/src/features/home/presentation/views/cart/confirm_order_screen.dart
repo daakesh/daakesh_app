@@ -71,9 +71,6 @@ class ConfirmOrderScreen extends StatelessWidget {
   }
 
   void backShopping() async {
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
     Utils.openNewPage(const MainScreen(), popPreviousPages: true);
   }
 }

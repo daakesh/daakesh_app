@@ -31,7 +31,9 @@ class ProfileScreen extends StatelessWidget {
                         decoration: const BoxDecoration(
                             color: ColorName.gray, shape: BoxShape.circle),
                         child: CachedImage(
-                          imageUrl: state.userModelData.first.img.toString(),
+                          imageUrl: state.userModelData.isNotEmpty
+                              ? state.userModelData.first.img.toString()
+                              : '',
                           borderRadius: BorderRadius.circular(100.0),
                           errorWidget: (_, __, error) {
                             return Container(
@@ -53,12 +55,16 @@ class ProfileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          state.userModelData.first.name.toString(),
+                          state.userModelData.isNotEmpty
+                              ? state.userModelData.first.name.toString()
+                              : '',
                           style: context.easyTheme.textTheme.bodyMedium!
                               .copyWith(fontSize: 22.0),
                         ),
                         Text(
-                          state.userModelData.first.email.toString(),
+                          state.userModelData.isNotEmpty
+                              ? state.userModelData.first.email.toString()
+                              : '',
                           style: context.easyTheme.textTheme.bodyMedium!
                               .copyWith(
                                   fontSize: 18.0, color: ColorName.grayishBlue),

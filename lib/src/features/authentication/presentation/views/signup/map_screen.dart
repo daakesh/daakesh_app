@@ -7,7 +7,7 @@ class MapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Column(
-        children: [],
+        children: [Text('')],
       ),
     );
   }

@@ -19,7 +19,7 @@ class MyOrderModel {
 
 class MyOrderData {
   String? orderId;
-  int? totalPrice;
+  dynamic totalPrice;
   List<MyOrderItems>? items;
 
   MyOrderData({this.orderId, this.totalPrice, this.items});
@@ -48,13 +48,13 @@ class MyOrderItems {
   String? year;
   String? condition;
   dynamic price;
-  String? discount;
+  dynamic discount;
   String? discountFrom;
   String? discountTo;
   String? country;
   String? createdAt;
   String? updatedAt;
-  String? quantity;
+  int? quantity;
   String? display;
   String? countrySwap;
   String? citySwap;
@@ -89,12 +89,12 @@ class MyOrderItems {
     description = json['description'];
     if (json['itemImg'] != null) {
       itemImg = <String>[];
-      itemImg = (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
-    }
-    else{
+      itemImg =
+          (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+    } else {
       itemImg = [''];
     }
-      date = json['date'];
+    date = json['date'];
     title = json['Title'];
     type = json['Type'];
     swapFor = json['Swap For'];

@@ -23,8 +23,12 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     }, (r) async {
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        if (r.data["data"] == null) {
+          GetItUtils.user.logOut();
+        }
         return;
       }
+
       List<UserModel> userModelData = <UserModel>[];
       UserModel userModel =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);

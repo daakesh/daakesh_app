@@ -27,7 +27,7 @@ class LoginMannerScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'LOGIN',
+                      context.locale.login_manner_title,
                       style: context.easyTheme.textTheme.headlineLarge!
                           .copyWith(fontSize: 40.0.sp),
                     ),
@@ -35,7 +35,7 @@ class LoginMannerScreen extends StatelessWidget {
                       height: 20.86.h,
                     ),
                     Text(
-                      'Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',
+                      context.locale.login_manner_instruction,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0.sp),
                     ),
@@ -48,14 +48,14 @@ class LoginMannerScreen extends StatelessWidget {
               Center(
                   child: DefaultButtonWidget(
                 onPressed: onLoginWithEmail,
-                text: 'EMAIL',
+                text: context.locale.login_manner_button_title,
               )),
               const Spacer(
                 flex: 1,
               ),
               Center(
                 child: Text(
-                  'OR',
+                  context.locale.or_text_title,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 18.0.sp),
                 ),

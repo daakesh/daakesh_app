@@ -29,13 +29,13 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Lets Go',
+                    Text(context.locale.phone_number_title,
                         style: context.easyTheme.textTheme.headlineLarge!
                             .copyWith(fontSize: 40.0.sp)),
                     const SizedBox(
                       height: 10.0,
                     ),
-                    Text('Enter Phone Number',
+                    Text(context.locale.phone_number_instruction,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(fontSize: 25.0.sp)),
                   ],
@@ -47,7 +47,7 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Phone Number',
+                    Text(context.locale.phone_number_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
@@ -93,7 +93,8 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 21.0),
                 child: Center(
                   child: DefaultButtonWidget(
-                      text: 'NEXT', onPressed: () => onNext(context)),
+                      text: context.locale.phone_number_next_button_title,
+                      onPressed: () => onNext(context)),
                 ),
               ),
               SizedBox(height: 44.0.h),
@@ -106,13 +107,15 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
     );
   }
 
-  void onNext(context) async {
+  void onNext(BuildContext context) async {
     if (phoneNumberController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Fill location data firstly');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.fill_phone_number_data_snack_bars);
       return;
     }
-    AuthBloc.get
-        .add(EnterPhoneEvent(phoneNumber: phoneNumberController.text.trim()));
+    AuthBloc.get.add(InitialValueEvent());
+    AuthBloc.get.add(EnterPhoneEvent(
+        phoneNumber: phoneNumberController.text.trim(), context: context));
   }
 
   void selectCountry(context) {

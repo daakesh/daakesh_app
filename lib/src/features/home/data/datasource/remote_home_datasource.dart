@@ -184,12 +184,8 @@ class RemoteHomeDatasource implements HomeDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> removeCartItem(String itemID) async {
-    final result = await getIt
-        .get<NetworkService>()
-        .get(path: 'DaakeshServices/api/favorite/removeFavorite', params: {
-      "userID": ValueConstants.userId,
-      "itemID": itemID,
-    });
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/cart/deleteCart', params: {"id": itemID});
     return result;
   }
 
@@ -200,6 +196,33 @@ class RemoteHomeDatasource implements HomeDatasource {
         .get(path: 'DaakeshServices/api/cart/getMyCart', params: {
       "user_id": ValueConstants.userId,
     });
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> updateCartItem(
+      String id, String userID, String itemID, String quantity) async {
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/cart/updateCart',
+        body: {
+          "id": id,
+          "user_id": userID,
+          "item_id": itemID,
+          "quantity": quantity
+        });
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> addOrder(
+      List<Map<String, dynamic>> orderList) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/orders/addOrders',
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(orderList),
+        );
     return result;
   }
 }

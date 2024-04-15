@@ -13,15 +13,10 @@ class RegisterPersonalInfoScreen extends StatefulWidget {
 class _RegisterPersonalInfoScreenState
     extends State<RegisterPersonalInfoScreen> {
   final nameController = TextEditingController();
-
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
-
   final FocusNode nameFocusNode = FocusNode();
-
   final FocusNode emailFocusNode = FocusNode();
-
   final FocusNode passwordFocusNode = FocusNode();
 
   @override
@@ -48,14 +43,14 @@ class _RegisterPersonalInfoScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Lets Go',
+                    Text(context.locale.lets_go_title,
                         style: context.easyTheme.textTheme.headlineLarge!
                             .copyWith(fontSize: 40.0.sp)),
                     const SizedBox(
                       height: 10.0,
                     ),
                     FittedBox(
-                        child: Text('Enter your Personal your Info',
+                        child: Text(context.locale.enter_personal_info_title,
                             style: context.easyTheme.textTheme.headlineMedium!
                                 .copyWith(fontSize: 25.0.sp))),
                   ],
@@ -69,7 +64,7 @@ class _RegisterPersonalInfoScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Name',
+                    Text(context.locale.name_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
@@ -82,7 +77,7 @@ class _RegisterPersonalInfoScreenState
                       ],
                     ),
                     SizedBox(height: 33.0.h),
-                    Text('Email',
+                    Text(context.locale.email_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
@@ -96,7 +91,7 @@ class _RegisterPersonalInfoScreenState
                       ],
                     ),
                     SizedBox(height: 33.0.h),
-                    Text('Password',
+                    Text(context.locale.password_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
@@ -110,7 +105,7 @@ class _RegisterPersonalInfoScreenState
                 ),
               ),
               DefaultButtonWidget(
-                text: 'NEXT',
+                text: context.locale.next_button_title,
                 onPressed: () => onNext(context),
                 padding: EdgeInsetsDirectional.symmetric(horizontal: 21.1.w),
               ),
@@ -127,22 +122,19 @@ class _RegisterPersonalInfoScreenState
     );
   }
 
-  void onNext(context) async {
+  void onNext(BuildContext context) async {
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Fill personal data firstly');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.fill_personal_data_snack_bars);
       return;
     }
-
-    ProgressCircleDialog.show();
     AuthBloc.get.add(EnterPersonalInfoEvent(
       name: nameController.text,
       email: emailController.text.trim(),
       password: passwordController.text,
     ));
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
     Utils.openNewPage(const RegisterLocationInfoScreen());
   }
 }

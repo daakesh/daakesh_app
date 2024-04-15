@@ -22,3 +22,5 @@ class DecreaseItemCountEvent extends CartEvent {
   final int index;
   DecreaseItemCountEvent({required this.index});
 }
+
+class AddOrderEvent extends CartEvent {}

@@ -8,7 +8,7 @@ class FirebaseAuthentication {
   static int? _resendToken;
 
   static void verifyPhoneNumber(
-      String phoneNumber, AuthManner authManner) async {
+      String phoneNumber, AuthManner authManner, BuildContext context) async {
     try {
       await firebaseAuth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
@@ -31,7 +31,9 @@ class FirebaseAuthentication {
 
           _resendToken = resendToken;
           ProgressCircleDialog.dismiss();
-          ShowToastSnackBar.showSnackBars(message: 'Code sent');
+          Future.delayed(Duration.zero).then((value) =>
+              ShowToastSnackBar.showSnackBars(
+                  message: context.locale.code_sent_title));
           Utils.openNewPage(OTPScreen(authManner: authManner));
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
@@ -42,8 +44,8 @@ class FirebaseAuthentication {
     }
   }
 
-  static void verificationCompleted(
-      String verificationId, String smsCode, AuthManner authManner) async {
+  static void verificationCompleted(String verificationId, String smsCode,
+      AuthManner authManner, BuildContext context) async {
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 1));
     try {
@@ -52,7 +54,8 @@ class FirebaseAuthentication {
       await firebaseAuth.signInWithCredential(credential);
       ProgressCircleDialog.dismiss();
       if (authManner.isSignUpIn) {
-        AuthBloc.get.add(ActivateUserEvent());
+        Future.delayed(Duration.zero).then(
+            (value) => AuthBloc.get.add(ActivateUserEvent(context: context)));
         GetItUtils.user.saveUserToken;
         Utils.openNewPage(const VerificationScreen(), popPreviousPages: true);
       }
@@ -67,7 +70,7 @@ class FirebaseAuthentication {
     }
   }
 
-  static void resendSMSCode(String phoneNumber) async {
+  static void resendSMSCode(String phoneNumber, BuildContext context) async {
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 2));
     try {
@@ -80,7 +83,9 @@ class FirebaseAuthentication {
         forceResendingToken: _resendToken,
       );
       ProgressCircleDialog.dismiss();
-      ShowToastSnackBar.showSnackBars(message: 'Code resent');
+      Future.delayed(Duration.zero).then((value) =>
+          ShowToastSnackBar.showSnackBars(
+              message: context.locale.code_resent_title));
     } catch (error) {
       ProgressCircleDialog.dismiss();
       debugPrint(error.toString());

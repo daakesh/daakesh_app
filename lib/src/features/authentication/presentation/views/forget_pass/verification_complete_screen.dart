@@ -14,9 +14,9 @@ class _VerificationCompleteScreenState
   @override
   void initState() {
     super.initState();
-    // Future.delayed(
-    //   const Duration(seconds: 2),
-    // ).then((value) => Utils.openNewPage(const ResetPassScreen()));
+    Future.delayed(
+      const Duration(seconds: 2),
+    ).then((value) => Utils.openNewPage(const ResetPassScreen()));
   }
 
   @override
@@ -47,7 +47,7 @@ class _VerificationCompleteScreenState
                 SizedBox(
                   height: 19.0.h,
                 ),
-                Text('Verification Complete!',
+                Text(context.locale.verification_complete_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 32.0.sp)),
                 const Spacer(

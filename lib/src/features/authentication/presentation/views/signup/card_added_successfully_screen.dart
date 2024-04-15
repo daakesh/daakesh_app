@@ -23,7 +23,7 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
                   Assets.png.checkIcon.image(),
                   SizedBox(height: 19.0.h),
                   Text(
-                    'The payment card has been added successfully',
+                    context.locale.add_payment_success_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 26.0.sp),
                     textAlign: TextAlign.center,
@@ -32,7 +32,8 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
                   const Spacer(flex: 1),
                   Center(
                       child: DefaultButtonWidget(
-                          text: 'START SHOPPING', onPressed: onStartShopping)),
+                          text: context.locale.start_shopping_button_title,
+                          onPressed: onStartShopping)),
                   SizedBox(height: 72.0.h),
                 ],
               ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../src.export.dart';
@@ -43,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   flex: 4,
                 ),
                 Text(
-                  'Welcome back!',
+                  context.locale.login_title,
                   style: context.easyTheme.textTheme.headlineLarge!
                       .copyWith(fontSize: 40.0.sp),
                 ),
@@ -54,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Email',
+                        context.locale.login_email_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray),
                       ),
@@ -70,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: 33.0.h),
                       Text(
-                        'Password',
+                        context.locale.login_password_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray),
                       ),
@@ -107,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Expanded(
                             child: Text(
-                              'Remember Me',
+                              context.locale.remember_me_title,
                               style: context.easyTheme.textTheme.bodyMedium!
                                   .copyWith(
                                       fontSize: 18.0.sp,
@@ -123,12 +122,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   flex: 1,
                 ),
                 Center(
-                    child:
-                        DefaultButtonWidget(text: 'LOGIN', onPressed: onLogin)),
+                    child: DefaultButtonWidget(
+                        text: context.locale.login_button_title,
+                        onPressed: () => onLogin(context))),
                 SizedBox(height: 25.0.h),
                 Center(
                     child: TextButtonWidget(
-                        text: 'Forget password ?', onPressed: forgetPassword)),
+                        text: context.locale.forget_password_text_button,
+                        onPressed: forgetPassword)),
                 const SizedBox(height: 25.0),
                 const CreateAccountWidget(),
                 const Spacer(
@@ -142,16 +143,17 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void onLogin() {
+  void onLogin(BuildContext context) {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Fill data firstly');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.login_snack_bar_title);
       return;
     }
 
     AuthBloc.get.add(OnLoginEvent(
-      phoneNumber: emailController.text.trim(),
-      password: passwordController.text,
-    ));
+        email: emailController.text.trim(),
+        password: passwordController.text,
+        context: context));
   }
 
   void setRememberMeValue() async {

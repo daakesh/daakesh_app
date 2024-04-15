@@ -115,4 +115,18 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, ValidResponse>> removeCartItem(String itemID) async {
     return await getIt.get<HomeDatasource>().removeCartItem(itemID);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> updateCartItem(
+      String id, String userID, String itemID, String quantity) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .updateCartItem(id, userID, itemID, quantity);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> addOrder(
+      List<Map<String, dynamic>> orderList) async {
+    return await getIt.get<HomeDatasource>().addOrder(orderList);
+  }
 }

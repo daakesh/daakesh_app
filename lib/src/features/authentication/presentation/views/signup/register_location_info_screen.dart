@@ -23,12 +23,12 @@ class _RegisterLocationInfoScreenState
   @override
   void initState() {
     super.initState();
-    countryController.text = 'Jordan';
     resetFlag();
   }
 
   @override
   Widget build(BuildContext context) {
+    countryController.text = context.locale.location_country_init_value;
     return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
@@ -49,13 +49,13 @@ class _RegisterLocationInfoScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Lets Go',
+                    Text(context.locale.location_title,
                         style: context.easyTheme.textTheme.headlineLarge!
                             .copyWith(fontSize: 40.0.sp)),
                     SizedBox(
                       height: 10.0.h,
                     ),
-                    Text('Set Your Location To Start Exploring Best Deal',
+                    Text(context.locale.location_instruction,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(fontSize: 25.0.sp)),
                   ],
@@ -67,7 +67,7 @@ class _RegisterLocationInfoScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Country',
+                    Text(context.locale.country_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
@@ -103,7 +103,7 @@ class _RegisterLocationInfoScreenState
                       ],
                     ),
                     SizedBox(height: 33.0.h),
-                    Text('City',
+                    Text(context.locale.city_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
@@ -116,7 +116,7 @@ class _RegisterLocationInfoScreenState
                       ],
                     ),
                     SizedBox(height: 33.0.h),
-                    Text('Address',
+                    Text(context.locale.address_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
@@ -126,11 +126,8 @@ class _RegisterLocationInfoScreenState
                       inputFormatters: [
                         RegExpValidator.beginWhitespace,
                       ],
-                      suffixIcon: InkWell(
+                      suffixIcon: GestureDetector(
                         onTap: () => Utils.openNewPage(const MapScreen()),
-                        splashColor: ColorName.transparent,
-                        focusColor: ColorName.transparent,
-                        highlightColor: ColorName.transparent,
                         child: SizedBox(
                             width: 20.0.w,
                             height: 20.0.h,
@@ -148,7 +145,8 @@ class _RegisterLocationInfoScreenState
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
-                    text: 'NEXT', onPressed: () => onNext(context)),
+                    text: context.locale.location_next_button_title,
+                    onPressed: () => onNext(context)),
               ),
               const Spacer(
                 flex: 1,
@@ -164,22 +162,19 @@ class _RegisterLocationInfoScreenState
     );
   }
 
-  void onNext(context) async {
+  void onNext(BuildContext context) async {
     if (countryController.text.isEmpty ||
         cityController.text.isEmpty ||
         addressController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Fill location data firstly');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.fill_location_data_snack_bars);
       return;
     }
-
-    ProgressCircleDialog.show();
     AuthBloc.get.add(EnterLocationInfoEvent(
       country: countryController.text,
       city: cityController.text,
       address: addressController.text,
     ));
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
     Utils.openNewPage(RegisterPhoneNumberScreen());
   }
 

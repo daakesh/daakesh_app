@@ -22,7 +22,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   Widget build(BuildContext context) {
     return DefaultBackgroundWidget(
       child: Scaffold(
-        backgroundColor: ColorName.transparent,
+        backgroundColor: const Color.fromARGB(0, 70, 21, 21),
         body: LayoutBuilderWidget(
           child: SizedBox(
             width: double.infinity,
@@ -44,13 +44,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 SizedBox(
                   height: 19.0.h,
                 ),
-                Text('Verification Complete!',
+                Text(context.locale.verification_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 32.0.sp)),
                 SizedBox(
                   height: 9.0.h,
                 ),
-                Text('Now You Can Start And Find Best Deals',
+                Text(context.locale.verification_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 18.0.sp)),
                 const Spacer(

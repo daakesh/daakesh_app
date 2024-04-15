@@ -24,13 +24,13 @@ class AddPaymentCardScreen extends StatelessWidget {
                 SizedBox(
                   height: 35.0.h,
                 ),
-                Text('Add Your Payment Card',
+                Text(context.locale.add_payment_card_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 28.0.sp)),
                 SizedBox(
                   height: 9.0.h,
                 ),
-                Text('Shop With A Variety Of Products From Daakesh',
+                Text(context.locale.add_payment_card_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                       fontSize: 15.0.sp,
                     )),
@@ -38,11 +38,14 @@ class AddPaymentCardScreen extends StatelessWidget {
                   flex: 1,
                 ),
                 DefaultButtonWidget(
-                    text: 'ADD PAYMENT CARD', onPressed: addPaymentCard),
+                    text: context.locale.add_payment_button_title,
+                    onPressed: addPaymentCard),
                 SizedBox(
                   height: 9.0.h,
                 ),
-                OutlineButtonWidget(text: 'LATER', onPressed: onLater),
+                OutlineButtonWidget(
+                    text: context.locale.later_button_title,
+                    onPressed: onLater),
                 SizedBox(
                   height: 72.0.h,
                 ),

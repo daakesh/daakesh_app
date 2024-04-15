@@ -1,3 +1,124 @@
 {
-  "log_in_button_title": "تسجيل الدخول"
-}
+  "welcomeScreen": "*********WelcomeScreen*********",
+  "welcome_title": "Welcome",
+  "welcome_body_title":"Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet",
+  "create_account_title":"CREATE ACCOUNT",
+  "already_have_an_account":"Already have an Account? ",
+  "login_text_button_title":"Login",
+
+  "registerScreen": "*********RegisterScreen*********",
+  "lets_go_title":"Lets Go",
+  "enter_personal_info_title":"Enter your Personal your Info",
+  "name_text_field":"Name",
+  "email_text_field":"Email",
+  "password_text_field":"Password",
+  "next_button_title":"Next",
+  "fill_personal_data_snack_bars":"Fill personal data firstly",
+  
+  "insertCellPhoneScreen": "*********InsertCellPhoneScreen*********",
+  "forget_password_title":"Forgot Password",
+  "forget_instruction_title":"Enter Your Phone Number",
+  "forget_phone_number_text_field":"Phone Number",
+  "forget_next_button_title":"NEXT",
+  "forget_snack_bar_title":"Firstly, fill cell phone number",
+
+
+  "resetPassScreen": "*********ResetPassScreen*********",
+  "reset_pass_title":"Reset password",
+  "reset_pass_instruction":"Make Sure You Will Remember It",
+  "new_pass_text_field":"New password",
+  "confirm_pass_text_field":"Confirm password",
+  "reset_button_title":"RESET",
+  "password_confirmation_failed":"Password confirmation failed",
+  
+  "resetPassSuccessScreen": "*********ResetPassSuccessScreen*********",
+  "reset_pass_success_title":"Reset Complete!",
+  "reset_pass_success_instruction":"Now You Can Start And Find Best Deals",
+  
+  "verificationCompleteScreen": "*********VerificationCompleteScreen*********",
+  "verification_complete_title":"Verification Complete!",
+  
+  "addPaymentCardScreen": "*********AddPaymentCardScreen*********",
+  "add_payment_card_title":"Add Your Payment Card",
+  "add_payment_card_instruction":"Shop With A Variety Of Products From Daakesh",
+  "add_payment_button_title":"ADD PAYMENT CARD",
+  "later_button_title":"LATER",
+  
+  "cardAddedSuccessfullyScreen": "*********CardAddedSuccessfullyScreen*********",
+  "add_payment_success_title":"The payment card has been added successfully",
+  "start_shopping_button_title":"START SHOPPING",
+  
+  "otpScreen": "*********OTPScreen*********",
+  "otp_title":"Lets Go",
+  "otp_instruction":"Verify Your Identity",
+  "text_button_send_code_again":"Send code again",
+  "validate_button_title":"VALIDATE",
+  "insert_full_code_snack_bar":"Insert full sms code",
+  "otp_body_text": "We Send You A Code To {unite} Phone Number Please Enter The Code To Create Account",
+  "@otp_body_text": {
+    "description": "insert Phone Number",
+    "placeholders": {
+      "unite": {
+        "type": "String",
+        "example": "+962123456789"
+      }
+    }
+  },
+  "code_sent_title":"تم ارسال الكود",
+  "code_resent_title":"تم إعادة إرسال الرمز",
+  
+  "registerCardInfoScreen": "*********RegisterCardInfoScreen*********",
+  "add_card_title":"Add Payment Card",
+  "add_card_instruction":"Enter Card Information",
+  "card_number_text_field":"Card Number",
+  "expiry_date_text_field":"Expiry Date",
+  "expiry_date_text_field_hint":"MM/YY",
+  "cvv_text_field":"CVV",
+  "nickname_text_field":"Nickname (optional)",
+  "add_card_button_title":"ADD CARD",
+  "cancel_add_card_button_title":"CANCEL",
+  
+  "registerLocationInfoScreen": "*********RegisterLocationInfoScreen*********",
+  "location_country_init_value":"Jordan",
+  "location_title":"Lets Go",
+  "location_instruction":"Set Your Location To Start Exploring Best Deal",
+  "country_text_field":"Country",
+  "city_text_field":"City",
+  "address_text_field":"Address",
+  "location_next_button_title":"NEXT",
+  "fill_location_data_snack_bars":"Fill location data firstly",
+
+  "registerPhoneNumberScreen": "*********RegisterPhoneNumberScreen*********",
+  "phone_number_title":"Lets Go",
+  "phone_number_instruction":"Enter Phone Number",
+  "phone_number_text_field":"Phone Number",
+  "phone_number_next_button_title":"NEXT",
+  "fill_phone_number_data_snack_bars":"Fill phone number data firstly",
+
+  "verificationScreen": "*********VerificationScreen*********",
+  "verification_title":"Verification Complete!",
+  "verification_instruction":"Now You Can Start And Find Best Deals",
+  
+  "loginMannerScreen": "*********LoginMannerScreen*********",
+  "login_manner_title":"LOGIN",
+  "login_manner_instruction":"Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet",
+  "login_manner_button_title":"EMAIL",
+  "or_text_title":"OR",
+  "have_an_account_title":"Don't have an Account? ",
+  "create_one_text_button_title":"Create One",
+
+  "loginScreen": "*********LoginScreen*********",
+  "login_title":"Welcome back!",
+  "login_email_text_field":"Email",
+  "login_password_text_field":"Password",
+  "remember_me_title":"Remember Me",
+  "login_button_title":"LOGIN",
+  "forget_password_text_button":"Forget password ?",
+  "login_snack_bar_title":"Fill data firstly"
+
+
+
+
+
+
+  }

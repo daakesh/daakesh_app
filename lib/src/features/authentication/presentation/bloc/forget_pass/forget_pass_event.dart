@@ -1,17 +1,19 @@
+import 'package:flutter/material.dart';
 
 abstract class ForgetPassEvent {}
 
-class CheckIsPasswordExistEvent extends ForgetPassEvent{
+class CheckIsPasswordExistEvent extends ForgetPassEvent {
+  final BuildContext context;
   final String phoneNumber;
-  CheckIsPasswordExistEvent({required this.phoneNumber});
+  CheckIsPasswordExistEvent({required this.phoneNumber, required this.context});
 }
 
-class PutVerificationIdEvent extends ForgetPassEvent{
+class PutVerificationIdEvent extends ForgetPassEvent {
   final String verificationId;
   PutVerificationIdEvent({required this.verificationId});
 }
 
-class ChangeCountryFlagCodeEvent extends ForgetPassEvent{
+class ChangeCountryFlagCodeEvent extends ForgetPassEvent {
   final String phoneCode;
   final String phoneFlag;
 
@@ -20,13 +22,19 @@ class ChangeCountryFlagCodeEvent extends ForgetPassEvent{
     required this.phoneFlag,
   });
 }
-class VerifySMSCodeEvent extends ForgetPassEvent{
-  final String smsCode;
-  VerifySMSCodeEvent({required this.smsCode});
-}
-class ResendCodeEvent extends ForgetPassEvent{}
 
-class ResetPasswordEvent extends ForgetPassEvent{
+class VerifySMSCodeEvent extends ForgetPassEvent {
+  final String smsCode;
+  final BuildContext context;
+  VerifySMSCodeEvent({required this.smsCode, required this.context});
+}
+
+class ResendCodeEvent extends ForgetPassEvent {
+  final BuildContext context;
+  ResendCodeEvent({required this.context});
+}
+
+class ResetPasswordEvent extends ForgetPassEvent {
   final String password;
   ResetPasswordEvent({required this.password});
 }

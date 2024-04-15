@@ -46,13 +46,13 @@ class RegisterCardInfoScreen extends StatelessWidget {
                   const SizedBox(
                     height: 38.0,
                   ),
-                  Text('Add Payment Card',
+                  Text(context.locale.add_card_title,
                       style: context.easyTheme.textTheme.headlineLarge!
                           .copyWith(fontSize: 36.sp)),
                   const SizedBox(
                     height: 9.0,
                   ),
-                  Text('Enter Card Information',
+                  Text(context.locale.add_card_instruction,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.sp)),
                   const SizedBox(
@@ -81,7 +81,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Card Number',
+                        Text(context.locale.card_number_text_field,
                             style: context.easyTheme.textTheme.bodyMedium!
                                 .copyWith(
                                     fontSize: 18.sp,
@@ -105,7 +105,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Expiry Date',
+                                  Text(context.locale.expiry_date_text_field,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -124,7 +124,8 @@ class RegisterCardInfoScreen extends StatelessWidget {
                                       LengthLimitingTextInputFormatter(4),
                                       CardMonthInputFormatter(),
                                     ],
-                                    hintText: 'MM/YY',
+                                    hintText: context
+                                        .locale.expiry_date_text_field_hint,
                                     suffixIcon: InkWell(
                                         onTap: () {},
                                         focusColor: ColorName.transparent,
@@ -148,7 +149,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('CVV',
+                                  Text(context.locale.cvv_text_field,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -187,7 +188,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 33.0.h),
-                        Text('Nickname (optional)',
+                        Text(context.locale.nickname_text_field,
                             style: context.easyTheme.textTheme.bodyMedium!
                                 .copyWith(
                                     fontSize: 18.sp,
@@ -212,7 +213,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                           children: [
                             Center(
                                 child: DefaultButtonWidget(
-                                    text: 'ADD CARD',
+                                    text: context.locale.add_card_button_title,
                                     onPressed: () =>
                                         onAddCard(context, isLoggedIn))),
                             SizedBox(
@@ -220,12 +221,14 @@ class RegisterCardInfoScreen extends StatelessWidget {
                             ),
                             Center(
                                 child: OutlineButtonWidget(
-                                    text: 'CANCEL', onPressed: onCancel))
+                                    text: context
+                                        .locale.cancel_add_card_button_title,
+                                    onPressed: onCancel))
                           ],
                         )
                       : Center(
                           child: DefaultButtonWidget(
-                              text: 'ADD CARD',
+                              text: context.locale.add_card_button_title,
                               onPressed: () => onAddCard(context, isLoggedIn))),
                   SizedBox(
                     height: 50.0.h,
@@ -240,9 +243,6 @@ class RegisterCardInfoScreen extends StatelessWidget {
   }
 
   void onAddCard(context, bool isLoggedIn) async {
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
     if (isLoggedIn) {
       Utils.getBack();
       return;

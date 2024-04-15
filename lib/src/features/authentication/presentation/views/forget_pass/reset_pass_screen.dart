@@ -32,7 +32,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                   flex: 1,
                 ),
                 Text(
-                  'Reset password',
+                  context.locale.reset_pass_title,
                   style: context.easyTheme.textTheme.headlineLarge!
                       .copyWith(fontSize: 40.0.sp),
                 ),
@@ -40,7 +40,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      'Make Sure You Will Remember It',
+                      context.locale.reset_pass_instruction,
                       style: context.easyTheme.textTheme.headlineLarge!
                           .copyWith(fontSize: 25.0.sp),
                     )),
@@ -54,7 +54,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'New password',
+                        context.locale.new_pass_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray),
                       ),
@@ -72,7 +72,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                       ),
                       SizedBox(height: 33.0.h),
                       Text(
-                        'Confirm password',
+                        context.locale.confirm_pass_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0.sp, color: ColorName.darkGray),
                       ),
@@ -93,7 +93,8 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 ),
                 Center(
                     child: DefaultButtonWidget(
-                        text: 'RESET', onPressed: resetPassword)),
+                        text: context.locale.reset_button_title,
+                        onPressed: () => resetPassword(context))),
                 SizedBox(
                   height: 20.0.sp,
                 ),
@@ -108,9 +109,10 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
     );
   }
 
-  void resetPassword() {
+  void resetPassword(BuildContext context) {
     if (newPassController.text != confirmPassController.text) {
-      ShowToastSnackBar.showSnackBars(message: 'Password confirmation failed');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.password_confirmation_failed);
       return;
     }
     ForgetPassBloc.get

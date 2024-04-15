@@ -110,9 +110,6 @@ class PaymentMethodScreen extends StatelessWidget {
   }
 
   void makePay() async {
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
-    ProgressCircleDialog.dismiss();
-    Utils.openNewPage(const ConfirmOrderScreen());
+    CartBloc.get.add(AddOrderEvent());
   }
 }

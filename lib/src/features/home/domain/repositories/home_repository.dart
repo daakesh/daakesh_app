@@ -33,4 +33,8 @@ abstract class HomeRepository {
       String itemID, String country, String address);
   Future<Either<Failure, ValidResponse>> getCartItemsByUser();
   Future<Either<Failure, ValidResponse>> removeCartItem(String itemID);
+  Future<Either<Failure, ValidResponse>> updateCartItem(
+      String id, String userID, String itemID, String quantity);
+  Future<Either<Failure, ValidResponse>> addOrder(
+      List<Map<String, dynamic>> orderList);
 }

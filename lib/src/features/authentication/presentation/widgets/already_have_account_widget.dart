@@ -24,11 +24,11 @@ class AlreadyHaveAccountWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               TextSpan(children: [
                 TextSpan(
-                    text: 'Already have an Account? ',
+                    text: context.locale.already_have_an_account,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 17.0.sp)),
                 TextSpan(
-                    text: 'Login',
+                    text: context.locale.login_text_button_title,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => Utils.openNewPage(screen),
                     style: isBold

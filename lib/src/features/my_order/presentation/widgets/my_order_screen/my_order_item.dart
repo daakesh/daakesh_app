@@ -79,7 +79,7 @@ class MyOrderItem extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      'Poced In: 12/12/2012',
+                      'Poced In: ${Utils.formatDate(myOrderData.items!.first.createdAt.toString())}',
                       style: context.easyTheme.textTheme.labelLarge!.copyWith(
                         fontSize: ResponsiveText.getResponsiveFontSize(
                             fontSize: 14.0),
@@ -92,7 +92,7 @@ class MyOrderItem extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '\$${myOrderData.totalPrice!}',
+                    '\$${myOrderData.totalPrice.toInt()}',
                     style: context.easyTheme.textTheme.labelLarge!.copyWith(
                         fontSize: ResponsiveText.getResponsiveFontSize(
                             fontSize: 21.0),

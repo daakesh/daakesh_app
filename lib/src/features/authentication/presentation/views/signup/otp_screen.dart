@@ -45,13 +45,13 @@ class _OTPScreenState extends State<OTPScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Lets Go',
+                      Text(context.locale.otp_title,
                           style: context.easyTheme.textTheme.headlineLarge!
                               .copyWith(fontSize: 40.0.sp)),
                       SizedBox(
                         height: 8.0.h,
                       ),
-                      Text('Verify Your Identity',
+                      Text(context.locale.otp_instruction,
                           style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(fontSize: 25.0.sp)),
                       SizedBox(height: 19.0.h),
@@ -59,7 +59,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           ? BlocBuilder<AuthBloc, AuthState>(
                               builder: (context, state) {
                                 return Text(
-                                    'We Send You A Code To ${state.phone} Phone Number Please Enter The Code To Create Account',
+                                    context.locale.otp_body_text(state.phone),
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(fontSize: 18.0.sp));
@@ -68,7 +68,8 @@ class _OTPScreenState extends State<OTPScreen> {
                           : BlocBuilder<ForgetPassBloc, ForgetPassState>(
                               builder: (context, state) {
                                 return Text(
-                                    'We Send You A Code To +${state.phoneCode + state.phone} Phone Number Please Enter The Code To Create Account',
+                                    context.locale.otp_body_text(
+                                        '+${state.phoneCode + state.phone}'),
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(fontSize: 18.0.sp));
@@ -83,11 +84,6 @@ class _OTPScreenState extends State<OTPScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Phone Number',
-                          style: context.easyTheme.textTheme.bodyMedium!
-                              .copyWith(
-                                  fontSize: 18.0.sp,
-                                  color: ColorName.darkGray)),
                       Row(
                         children: [
                           Expanded(
@@ -222,7 +218,8 @@ class _OTPScreenState extends State<OTPScreen> {
                       ),
                       SizedBox(height: 39.0.h),
                       TextButtonWidget(
-                          text: 'Send code again', onPressed: resendSMSCode),
+                          text: context.locale.text_button_send_code_again,
+                          onPressed: resendSMSCode),
                     ],
                   ),
                 ),
@@ -232,7 +229,8 @@ class _OTPScreenState extends State<OTPScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                   child: DefaultButtonWidget(
-                      text: 'VALIDATE', onPressed: onValidate),
+                      text: context.locale.validate_button_title,
+                      onPressed: () => onValidate(context)),
                 ),
                 SizedBox(height: 44.0.h),
                 const AlreadyHaveAccountWidget(),
@@ -270,14 +268,15 @@ class _OTPScreenState extends State<OTPScreen> {
     }
   }
 
-  void onValidate() {
+  void onValidate(BuildContext context) {
     if (firstDigitController.text.isEmpty ||
         secondDigitController.text.isEmpty ||
         thirdDigitController.text.isEmpty ||
         fourthDigitController.text.isEmpty ||
         fifthDigitController.text.isEmpty ||
         sixthDigitController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Insert full sms code');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.insert_full_code_snack_bar);
       return;
     }
 
@@ -293,19 +292,21 @@ class _OTPScreenState extends State<OTPScreen> {
 
   void resendSMSCode() {
     if (widget.authManner.isSignUpIn) {
-      AuthBloc.get.add(ResendSMSCodeEvent());
+      AuthBloc.get.add(ResendSMSCodeEvent(context: context));
     }
     if (widget.authManner.isForgetPassword) {
-      ForgetPassBloc.get.add(ResendCodeEvent());
+      ForgetPassBloc.get.add(ResendCodeEvent(context: context));
     }
   }
 
   void checkManner(String smsCode) {
     if (widget.authManner.isSignUpIn) {
-      AuthBloc.get.add(ValidateSMSCodeEvent(smsCode: smsCode));
+      AuthBloc.get
+          .add(ValidateSMSCodeEvent(smsCode: smsCode, context: context));
     }
     if (widget.authManner.isForgetPassword) {
-      ForgetPassBloc.get.add(VerifySMSCodeEvent(smsCode: smsCode));
+      ForgetPassBloc.get
+          .add(VerifySMSCodeEvent(smsCode: smsCode, context: context));
     }
   }
 }

@@ -46,10 +46,10 @@ class _ResetPassSuccessScreenState extends State<ResetPassSuccessScreen> {
                 SizedBox(
                   height: 19.0.h,
                 ),
-                Text('Reset Complete!',
+                Text(context.locale.reset_pass_success_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 32.0.sp)),
-                Text('Now You Can Start And Find Best Deals',
+                Text(context.locale.reset_pass_success_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 17.0.sp)),
                 const Spacer(

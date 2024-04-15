@@ -37,7 +37,9 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
         return;
       }
       FirebaseAuthentication.verifyPhoneNumber(
-          '+${state.phoneCode}$phoneNumber', AuthManner.FORGETPASSWORD);
+          '+${state.phoneCode}$phoneNumber',
+          AuthManner.FORGETPASSWORD,
+          event.context);
       emit(
           state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.SUCCESS));
     });
@@ -56,13 +58,14 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
 
   FutureOr<void> _verifySMSCode(
       VerifySMSCodeEvent event, Emitter<ForgetPassState> emit) {
-    FirebaseAuthentication.verificationCompleted(
-        state.verificationId, event.smsCode, AuthManner.FORGETPASSWORD);
+    FirebaseAuthentication.verificationCompleted(state.verificationId,
+        event.smsCode, AuthManner.FORGETPASSWORD, event.context);
   }
 
   FutureOr<void> _resendSMSCode(
       ResendCodeEvent event, Emitter<ForgetPassState> emit) async {
-    FirebaseAuthentication.resendSMSCode('+${state.phoneCode + state.phone}');
+    FirebaseAuthentication.resendSMSCode(
+        '+${state.phoneCode + state.phone}', event.context);
   }
 
   FutureOr<void> _resetPassword(

@@ -13,25 +13,25 @@ extension CartStateStatusX on CartStateStatus {
 class CartState extends Equatable {
   final CartStateStatus cartStateStatus;
   final List<CartItem> cartItemsList;
+  final String totalPrice;
   const CartState({
     this.cartStateStatus = CartStateStatus.INITIAL,
     this.cartItemsList = const [],
+    this.totalPrice = '',
   });
 
   CartState copyWith({
     CartStateStatus? cartStateStatus,
     List<CartItem>? cartItemsList,
-    int? counter,
+    String? totalPrice,
   }) {
     return CartState(
       cartStateStatus: cartStateStatus ?? this.cartStateStatus,
       cartItemsList: cartItemsList ?? this.cartItemsList,
+      totalPrice: totalPrice ?? this.totalPrice,
     );
   }
 
   @override
-  List<Object?> get props => [
-        cartStateStatus,
-        cartItemsList,
-      ];
+  List<Object?> get props => [cartStateStatus, cartItemsList, totalPrice];
 }

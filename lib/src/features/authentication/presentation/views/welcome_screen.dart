@@ -33,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Welcome',
+                      context.locale.welcome_title,
                       style: context.easyTheme.textTheme.headlineLarge!
                           .copyWith(fontSize: 40.0.sp),
                     ),
@@ -41,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
                       height: 20.86.h,
                     ),
                     Text(
-                      'Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',
+                      context.locale.welcome_body_title,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0.sp),
                     ),
@@ -55,7 +55,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: DefaultButtonWidget(
                 onPressed: () =>
                     Utils.openNewPage(const RegisterPersonalInfoScreen()),
-                text: 'CREATE ACCOUNT',
+                text: context.locale.create_account_title,
               )),
               const Spacer(
                 flex: 1,
