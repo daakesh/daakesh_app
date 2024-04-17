@@ -12,7 +12,7 @@ class _SwapProductTypeWidgetState extends State<SwapProductTypeWidget> {
   List<FilterProductType> data = [
     FilterProductType.All,
     FilterProductType.Daakesh,
-    FilterProductType.Other
+    FilterProductType.Other,
   ];
   List<String> dataTitle = <String>[
     Utils.locale.swap_filter_all_type,
