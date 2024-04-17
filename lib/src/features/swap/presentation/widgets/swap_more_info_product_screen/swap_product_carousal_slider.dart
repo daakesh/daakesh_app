@@ -20,7 +20,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'By',
+                context.locale.swap_more_info_by_title,
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0, color: ColorName.gray),
               ),

@@ -34,7 +34,7 @@ class SwapResultItemWidget extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(4.0))),
                 child: Center(
                   child: Text(
-                    'Swap',
+                    context.locale.swap_result_item_tag,
                     style: context.easyTheme.textTheme.labelLarge!
                         .copyWith(fontSize: 14.0),
                   ),
@@ -44,7 +44,7 @@ class SwapResultItemWidget extends StatelessWidget {
                 flex: 1,
               ),
               Text(
-                'By',
+                context.locale.swap_result_item_by_title,
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 14.0, color: ColorName.gray),
               ),
@@ -52,7 +52,7 @@ class SwapResultItemWidget extends StatelessWidget {
                 width: 5.0,
               ),
               Text(
-                'JAMSE ALFA',
+                filterResultModel.user!.name.toString(),
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 13.0, color: ColorName.black),
               ),
@@ -101,7 +101,7 @@ class SwapResultItemWidget extends StatelessWidget {
                       height: 2.0,
                     ),
                     Text(
-                      'Amman, Jordan',
+                      '${filterResultModel.city}, ${filterResultModel.city}',
                       style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                           fontSize: 13, color: ColorName.mediumSilver),
                     ),
@@ -122,12 +122,13 @@ class SwapResultItemWidget extends StatelessWidget {
                                   .copyWith(
                                       fontSize: 16.0, color: ColorName.red)),
                           TextSpan(
-                              text: ')',
+                              text: ') ',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       fontSize: 16.0, color: ColorName.gray)),
                           TextSpan(
-                              text: ' Offers Submitted',
+                              text: context
+                                  .locale.swap_result_item_offers_submitted,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       fontSize: 16.0, color: ColorName.black)),

@@ -14,6 +14,11 @@ class _SwapProductTypeWidgetState extends State<SwapProductTypeWidget> {
     FilterProductType.Daakesh,
     FilterProductType.Other
   ];
+  List<String> dataTitle = <String>[
+    Utils.locale.swap_filter_all_type,
+    Utils.locale.swap_filter_daakesh_type,
+    Utils.locale.swap_filter_other_type,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class _SwapProductTypeWidgetState extends State<SwapProductTypeWidget> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10.0))),
                     child: Text(
-                      data[index].name,
+                      dataTitle[index],
                       textAlign: TextAlign.center,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 18.0),

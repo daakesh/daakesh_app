@@ -27,9 +27,7 @@ class _SwapScreenState extends State<SwapScreen> {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            const SwapAppBarWidget(),
-          ];
+          return [const SwapAppBarWidget()];
         },
         body: BlocBuilder<SwapBloc, SwapState>(builder: (ctx, state) {
           return SwapDataWidget(state: state);

@@ -14,11 +14,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
           return CustomScrollView(
             slivers: [
               const SwapAppBarWidget(),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 8.0,
-                ),
-              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
               SliverToBoxAdapter(
                 child: state.trendDealsListData.isNotEmpty
                     ? Container(
@@ -39,9 +35,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(
-                              width: 11.0,
-                            ),
+                            const SizedBox(width: 11.0),
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 32.0),
@@ -74,9 +68,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                               overflow: TextOverflow.fade),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 10.0,
-                                  ),
+                                  const SizedBox(height: 10.0),
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -90,7 +82,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                           child: Text(
-                                        'Swap In ${state.trendDealsListData.first.citySwap}, ${state.trendDealsListData.first.countrySwap}',
+                                        '${context.locale.swap_offer_swap_in_title} ${state.trendDealsListData.first.citySwap}, ${state.trendDealsListData.first.countrySwap}',
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
                                             .copyWith(fontSize: 16.0),
@@ -108,7 +100,8 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                       TextSpan(
                                         children: [
                                           TextSpan(
-                                              text: 'By ',
+                                              text: context
+                                                  .locale.swap_offer_by_title,
                                               style: context.easyTheme.textTheme
                                                   .bodyMedium!
                                                   .copyWith(
@@ -130,7 +123,8 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                     child: Align(
                                       alignment: AlignmentDirectional.centerEnd,
                                       child: TextButtonWidget(
-                                        text: 'See Details',
+                                        text: context.locale
+                                            .swap_see_details_text_button,
                                         onPressed: () {},
                                       ),
                                     ),
@@ -240,7 +234,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            'SWAP',
+                                            context.locale.swap_offer_tag_title,
                                             textAlign: TextAlign.center,
                                             style: context.easyTheme.textTheme
                                                 .headlineMedium!
@@ -265,7 +259,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Your Comment',
+                                  context.locale.swap_offer_your_comment_title,
                                   style: context.easyTheme.textTheme.bodyLarge!
                                       .copyWith(
                                           fontSize: 20.0,
@@ -303,7 +297,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Center(
                     child: DefaultButtonWidget(
-                        text: 'CONTINUE',
+                        text: context.locale.swap_offer_continue_button_title,
                         onPressed: () => onContinue(
                               context,
                               state.trendDealsListData.first.id.toString(),

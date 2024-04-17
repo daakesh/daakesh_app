@@ -90,7 +90,7 @@ class SendOfferScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'Swap In ${state.trendDealsListData.first.citySwap}, ${state.trendDealsListData.first.countrySwap}',
+                                  '${context.locale.swap_in_title} ${state.trendDealsListData.first.citySwap}, ${state.trendDealsListData.first.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0),
                                   overflow: TextOverflow.fade,
@@ -107,7 +107,8 @@ class SendOfferScreen extends StatelessWidget {
                                 TextSpan(
                                   children: [
                                     TextSpan(
-                                        text: 'By ',
+                                        text:
+                                            '${context.locale.swap_by_title} ',
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
                                             .copyWith(
@@ -129,7 +130,7 @@ class SendOfferScreen extends StatelessWidget {
                               child: Align(
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
-                                  text: 'See Details',
+                                  text: context.locale.see_details_title,
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
                                           fontSize: 14.0,
@@ -159,7 +160,7 @@ class SendOfferScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Text(
-                'Choose From Your Products What You Want To Exchange',
+                context.locale.swap_offer_instruction,
                 textAlign: TextAlign.center,
                 style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                   fontSize: 22.0,
@@ -257,7 +258,7 @@ class SendOfferScreen extends StatelessWidget {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            'SWAP',
+                                            context.locale.swap_tag_title,
                                             textAlign: TextAlign.center,
                                             style: context.easyTheme.textTheme
                                                 .headlineMedium!
@@ -271,7 +272,8 @@ class SendOfferScreen extends StatelessWidget {
                                         height: 6.0,
                                       ),
                                       TextButtonWidget(
-                                        text: 'See Details',
+                                        text: context
+                                            .locale.see_details_my_swap_product,
                                         onPressed: () {},
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
@@ -323,7 +325,7 @@ class SendOfferScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'You can Make offer Better',
+                    context.locale.comment_instruction_title,
                     style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                         fontSize: 18.0,
                         color: ColorName.black.withOpacity(0.5)),
@@ -338,7 +340,7 @@ class SendOfferScreen extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(6.0))),
                     child: TextFormFieldWidget(
                       controller: commentController,
-                      hintText: 'Comment',
+                      hintText: context.locale.add_swap_comment_hint,
                       isUnderlineOn: true,
                       maxLines: 5,
                     ),
@@ -355,7 +357,8 @@ class SendOfferScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Center(
                 child: DefaultButtonWidget(
-                    text: 'SEND OFFER', onPressed: () => sendOffer(context))),
+                    text: context.locale.send_offer_button_title,
+                    onPressed: () => sendOffer(context))),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
         ],
@@ -363,9 +366,10 @@ class SendOfferScreen extends StatelessWidget {
     );
   }
 
-  void sendOffer(context) {
+  void sendOffer(BuildContext context) {
     if (commentController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Add comment please...');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.add_comment_snack_bar);
       return;
     }
     passAllData(context);

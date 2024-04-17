@@ -2,23 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class SwapFilterScreen extends StatefulWidget {
-  const SwapFilterScreen({super.key});
-
-  @override
-  State<SwapFilterScreen> createState() => _SwapFilterScreenState();
-}
-
-class _SwapFilterScreenState extends State<SwapFilterScreen> {
-  final countryController = TextEditingController();
-  final cityController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    countryController.text = 'Jordan';
-    cityController.text = 'Amman';
-  }
+class SwapFilterScreen extends StatelessWidget {
+  SwapFilterScreen({super.key});
+  final countryController = TextEditingController(text: 'Jordan');
+  final cityController = TextEditingController(text: 'Amman');
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +28,7 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                       ),
                       Center(
                           child: Text(
-                        'Filter',
+                        context.locale.swap_filter_title,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(fontSize: 31.0),
                       )),
@@ -55,7 +42,7 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                         height: 39.0,
                       ),
                       Text(
-                        'Available ship country',
+                        context.locale.swap_filter_available_ship_country,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -90,7 +77,7 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                         height: 33.0,
                       ),
                       Text(
-                        'City',
+                        context.locale.swap_filter_available_ship_city,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -116,7 +103,7 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                         height: 40.0,
                       ),
                       Text(
-                        'Rate',
+                        context.locale.swap_filter_rate_title,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -129,7 +116,7 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                         height: 34.0,
                       ),
                       Text(
-                        'Price',
+                        context.locale.swap_filter_price_slider,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -143,7 +130,7 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                         height: 34.0,
                       ),
                       Text(
-                        'Product type',
+                        context.locale.swap_filter_product_type,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -168,14 +155,15 @@ class _SwapFilterScreenState extends State<SwapFilterScreen> {
                   child: Column(
                     children: [
                       DefaultButtonWidget(
-                          text: 'APPLY', onPressed: () => apply(context)),
+                          text: context.locale.swap_filter_apply_button,
+                          onPressed: () => apply(context)),
                       const SizedBox(
                         height: 14.0,
                       ),
                       BlocBuilder<SwapFilterBloc, SwapFilterState>(
                         builder: (context, state) {
                           return OutlineButtonWidget(
-                              text: 'CLEAR',
+                              text: context.locale.swap_filter_clear_button,
                               onPressed: () =>
                                   clear(context, state.isFilterActive));
                         },

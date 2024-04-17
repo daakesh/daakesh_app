@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../src.export.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Utils {
   static Future<void> openNewPage(Widget widget,
@@ -41,6 +42,8 @@ class Utils {
       GlobalKey<NavigatorState>(debugLabel: 'Key to navigate without context');
 
   static BuildContext currentContext = navigatorKey.currentState!.context;
+
+  static AppLocalizations get locale => AppLocalizations.of(currentContext)!;
 
   static String formatDate(String dateString) {
     DateTime date = DateFormat('yyyy-mm-dd').parse(dateString);

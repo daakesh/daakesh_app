@@ -19,7 +19,7 @@ class SwapSectionScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 17.0),
                   child: Text(
-                    'Sections',
+                    context.locale.swap_section_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 18.0, color: ColorName.black),
                   ),
@@ -65,7 +65,7 @@ class SwapSectionScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 31.0),
                   child: Text(
-                    '${state.categoryTitle} Category',
+                    '${state.categoryTitle} ${context.locale.swap_category_title}',
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                       fontSize: 24.0,
                       color: ColorName.black.withOpacity(0.57),
@@ -91,7 +91,7 @@ class SwapSectionScreen extends StatelessWidget {
                     ))
                   : const SliverToBoxAdapter(child: SizedBox()),
               const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
-              SliverToBoxAdapter(child: seeMoreHandler(state)),
+              SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
             ],
           ),
@@ -118,7 +118,7 @@ class SwapSectionScreen extends StatelessWidget {
         SwapResultsScreen(swapCategoriesListData: swapCategoriesListData));
   }
 
-  Widget seeMoreHandler(SwapSectionsState state) {
+  Widget seeMoreHandler(SwapSectionsState state, BuildContext context) {
     switch (!state.isMoreData) {
       case true:
         switch (state.swapSectionsStateStatus) {
@@ -127,7 +127,7 @@ class SwapSectionScreen extends StatelessWidget {
           default:
             return Center(
                 child: TextButtonWidget(
-              text: 'See More',
+              text: context.locale.swap_see_more_text_button,
               onPressed: () => onSeeMore(),
               isBold: true,
             ));

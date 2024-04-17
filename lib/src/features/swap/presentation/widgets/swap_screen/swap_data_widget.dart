@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class SwapDataWidget extends StatelessWidget {
@@ -21,7 +20,7 @@ class SwapDataWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              'Popular Swap Sections',
+              context.locale.swap_popular_swap_sections,
               style: context.easyTheme.textTheme.headlineSmall,
             ),
           ),
@@ -57,7 +56,7 @@ class SwapDataWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              'Trending Deals To Swap',
+              context.locale.swap_trending_deals_to_swap,
               style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                 fontSize: 18.0,
               ),
@@ -102,10 +101,6 @@ class SwapDataWidget extends StatelessWidget {
   }
 
   void openSectionScreen(context, SwapState state) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: SwapSectionScreen(swapState: state),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, SwapSectionScreen(swapState: state));
   }
 }

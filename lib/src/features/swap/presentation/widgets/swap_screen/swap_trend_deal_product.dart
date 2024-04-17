@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class SwapTrendDealProduct extends StatelessWidget {
   final TrendDealsItem trendDealsItem;
 
-  const SwapTrendDealProduct({
-    super.key,
-    required this.trendDealsItem,
-  });
+  const SwapTrendDealProduct({super.key, required this.trendDealsItem});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +49,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(
-                        'SWAP',
+                        context.locale.swap_trend_product_tag,
                         textAlign: TextAlign.center,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
@@ -112,7 +108,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                   height: 2.0.h,
                 ),
                 Text(
-                  'Amman, Jordan',
+                  '${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap} ',
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                       fontSize: 14.0,
                       color: ColorName.mediumSilver,
@@ -139,12 +135,13 @@ class SwapTrendDealProduct extends StatelessWidget {
                                   .copyWith(
                                       fontSize: 15.0, color: ColorName.red)),
                           TextSpan(
-                              text: ')',
+                              text: ') ',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       fontSize: 15.0, color: ColorName.gray)),
                           TextSpan(
-                              text: ' Offers Submitted',
+                              text: context
+                                  .locale.swap_trend_product_offer_submit,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       fontSize: 15.0, color: ColorName.black)),
@@ -173,7 +170,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text('By ',
+                            Text(context.locale.swap_trend_product_by_title,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 13.0.sp,
@@ -205,11 +202,6 @@ class SwapTrendDealProduct extends StatelessWidget {
     );
   }
 
-  void openMoreInfoProductScreen(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: SwapMoreInfoScreen(),
-      withNavBar: true,
-    );
-  }
+  void openMoreInfoProductScreen(context) =>
+      Utils.openNavNewPage(context, SwapMoreInfoScreen());
 }

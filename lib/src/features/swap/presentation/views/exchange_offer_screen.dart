@@ -27,7 +27,7 @@ class ExchangeOfferScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: FittedBox(
                   child: Text(
-                    'Your Exchange Offer Has Been Sent',
+                    context.locale.exchange_offer_title,
                     textAlign: TextAlign.center,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 21.0),
@@ -40,7 +40,7 @@ class ExchangeOfferScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
-                  'If Your Offer Is Approved, This Will Be Shown To\nYou On The My Orders Page',
+                  context.locale.exchange_offer_instruction,
                   textAlign: TextAlign.center,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 15.0),
@@ -52,7 +52,7 @@ class ExchangeOfferScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 23.0),
                 child: DefaultButtonWidget(
-                    text: 'CREATE OTHER SWAP OFFER',
+                    text: context.locale.exchange_offer_create_button_title,
                     onPressed: () => createOtherSwapOffer(context)),
               ),
               const SizedBox(
@@ -61,7 +61,7 @@ class ExchangeOfferScreen extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 23.0),
                   child: OutlineButtonWidget(
-                      text: 'BACK TO STORE',
+                      text: context.locale.exchange_offer_back_button_title,
                       onPressed: () => backToStore(context))),
               const Spacer(
                 flex: 1,

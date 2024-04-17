@@ -83,7 +83,8 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
                                   .copyWith(
                                       fontFamily: FontFamily.apercuRegular),
                               isUnderlineOn: true,
-                              hintText: 'Search',
+                              hintText:
+                                  context.locale.swap_search_text_field_hint,
                             ),
                           ),
                         ),
@@ -128,6 +129,6 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
   }
 
   void openCartScreen() {
-    Utils.openNavNewPage(context, const SwapCartScreen());
+    //Utils.openNavNewPage(context, const SwapCartScreen());
   }
 }

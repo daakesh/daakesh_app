@@ -236,7 +236,87 @@
   "no_information_available_title":"No information available...",
   
   "shopByBrandsScreen": "*********ShopByBrandsScreen*********",
-  "shop_by_brands_title_see_more":"See More"
+  "shop_by_brands_title_see_more":"See More",
+  
+  
+  "exchangeOfferScreen": "*********ExchangeOfferScreen*********",
+  "exchange_offer_title":"Your Exchange Offer Has Been Sent",
+  "exchange_offer_instruction":"If Your Offer Is Approved, This Will Be Shown To You On The My Orders Page",
+  "exchange_offer_create_button_title":"CREATE OTHER SWAP OFFER",
+  "exchange_offer_back_button_title":"BACK TO STORE",
+  
+  "sendOfferScreen": "*********SendOfferScreen*********",
+  "swap_in_title":"Swap In",
+  "swap_by_title":"By",
+  "see_details_title":"See Details",
+  "swap_offer_instruction":"Choose From Your Products What You Want To Exchange",
+  "swap_tag_title":"SWAP",
+  "see_details_my_swap_product":"See Details",
+  "comment_instruction_title":"You can Make offer Better",
+  "add_swap_comment_hint":"Add Comment",
+  "send_offer_button_title":"SEND OFFER",
+  "add_comment_snack_bar":"Add comment please...",
+  
+  "swapFilterScreen": "*********SwapFilterScreen*********",
+  "swap_filter_title":"Filter",
+  "swap_filter_available_ship_country":"Available ship country",
+  "swap_filter_available_ship_city":"City",
+  "swap_filter_rate_title":"Rate",
+  "swap_filter_price_slider":"price",
+  "swap_filter_product_type":"Product type",
+  "swap_filter_all_type":"الكل",
+  "swap_filter_daakesh_type":"داكش",
+  "swap_filter_other_type":"الاخرون",
+  "swap_filter_apply_button":"APPLY",
+  "swap_filter_clear_button":"CLEAR",
+  
+  "swapMoreInfoScreen": "*********SwapMoreInfoScreen*********",
+  "swap_more_info_by_title":"By",
+  "swap_more_info_swap_in_title":"Swap In ",
+  "offer_submitted_title":"Offers Submitted",
+  "swap_offer_details_title":"Details:",
+  "swap_offer_brand_title":"Brand",
+  "swap_offer_model_title":"Model Name:",
+  "swap_offer_category_title":"Category",
+  "swap_offer_year_title":"Year",
+  "swap_offer_description_title":"description",
+  "swap_offer_create_button":"CREATE SWAP OFFER",
+  
+  "swapOfferDetailsScreen": "*********SwapOfferDetailsScreen*********",
+  "swap_offer_swap_in_title":"Swap In",
+  "swap_offer_by_title":"By ",
+  "swap_see_details_text_button":"See Details",
+  "swap_offer_tag_title":"SWAP",
+  "swap_offer_your_comment_title":"Your Comment",
+  "swap_offer_continue_button_title":"CONTINUE",
+  
+  
+  "swapSearchScreen": "*********SwapSearchScreen*********",
+  "swap_search_title":"Search",
+  "see_more_search":"See More",
+  "swap_search_no_information_available":"No information available...",
+  
+  
+  "swapScreen": "*********SwapScreen*********",
+  "swap_search_text_field_hint":"Search",
+  "swap_popular_swap_sections":"Popular Swap Sections",
+  "swap_trending_deals_to_swap":"Trending Deals To Swap",
+  "swap_trend_product_tag":"SWAP",
+  "swap_trend_product_offer_submit":"Offers Submitted",
+  "swap_trend_product_by_title":"By ",
+  
+  "swapSectionScreen": "*********SwapSectionScreen*********",
+  "swap_section_title":"Sections",
+  "swap_category_title":"Category",
+  "swap_see_more_text_button":"See More",
+  
+  "swapResultsScreen": "*********SwapResultsScreen*********",
+  "swap_results_title":"Results",
+  "swap_result_item_tag":"Swap",
+  "swap_result_item_by_title":"By",
+  "swap_result_item_offers_submitted":"Offers Submitted",
+  "swap_results_see_more_text_button":"See More",
+  "swap_results_no_data":"No Data..."
 
 
 

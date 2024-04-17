@@ -74,7 +74,7 @@ class SwapSectionCategoryItem extends StatelessWidget {
                 style: context.easyTheme.textTheme.labelLarge!
                     .copyWith(fontSize: 16.0, color: ColorName.gray),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
 class SwapSearchScreen extends StatelessWidget {
@@ -31,7 +30,7 @@ class SwapSearchScreen extends StatelessWidget {
                           child: Align(
                               alignment: AlignmentDirectional.bottomStart,
                               child: Text(
-                                'Search',
+                                context.locale.swap_search_title,
                                 style: context
                                     .easyTheme.textTheme.headlineMedium!
                                     .copyWith(
@@ -57,7 +56,7 @@ class SwapSearchScreen extends StatelessWidget {
                           child: InkWell(
                             onTap: () => seeMore(state.searchValue),
                             child: Text(
-                              'See More',
+                              context.locale.see_more_search,
                               style: context.easyTheme.textTheme.bodyLarge!
                                   .copyWith(
                                 fontSize: 16.0,
@@ -78,11 +77,7 @@ class SwapSearchScreen extends StatelessWidget {
 
   void openFilterScreen(context) {
     FocusScope.of(context).unfocus();
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const SwapFilterScreen(),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, SwapFilterScreen());
   }
 
   void seeMore(String searchValue) {
@@ -102,8 +97,10 @@ class _SearchResultHandler extends StatelessWidget {
         return const SliverToBoxAdapter(
             child: CircularProgressIndicatorWidget());
       case SwapSearchStateStatus.NULL:
-        return const SliverToBoxAdapter(
-            child: Center(child: Text('No information available...')));
+        return SliverToBoxAdapter(
+            child: Center(
+                child:
+                    Text(context.locale.swap_search_no_information_available)));
       default:
         return SliverList(
           delegate: SliverChildBuilderDelegate((_, index) {

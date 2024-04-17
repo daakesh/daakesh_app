@@ -81,7 +81,7 @@ class SwapResultsScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child: Text('Results',
+                child: Text(context.locale.swap_results_title,
                     style: context.easyTheme.textTheme.headlineMedium),
               ),
             ),
@@ -108,7 +108,7 @@ class SwapResultsScreen extends StatelessWidget {
             SliverToBoxAdapter(
                 child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
               builder: (context, state) {
-                return seeMoreHandler(state);
+                return seeMoreHandler(state, context);
               },
             )),
             const SliverPadding(padding: EdgeInsets.only(top: 60.0)),
@@ -118,7 +118,7 @@ class SwapResultsScreen extends StatelessWidget {
     );
   }
 
-  Widget seeMoreHandler(SwapFilterState state) {
+  Widget seeMoreHandler(SwapFilterState state, BuildContext context) {
     switch (!state.isMoreData) {
       case true:
         switch (state.swapFilterStateStatus) {
@@ -127,21 +127,21 @@ class SwapResultsScreen extends StatelessWidget {
           default:
             return Center(
                 child: TextButtonWidget(
-              text: 'See More',
+              text: context.locale.swap_results_see_more_text_button,
               onPressed: () => onSeeMore(),
               isBold: true,
             ));
         }
       default:
         return state.swapFilterStateStatus.isNull
-            ? const Center(child: Text('No Data...'))
+            ? Center(child: Text(context.locale.swap_results_no_data))
             : const SizedBox();
     }
   }
 
   void openSwapFilterScreen(context) {
     FocusScope.of(context).unfocus();
-    Utils.openNavNewPage(context, const SwapFilterScreen());
+    Utils.openNavNewPage(context, SwapFilterScreen());
   }
 
   void onSeeMore() {

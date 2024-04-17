@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
 class SwapMoreInfoScreen extends StatelessWidget {
@@ -22,8 +21,7 @@ class SwapMoreInfoScreen extends StatelessWidget {
                           start: 17.5, end: 26.0, top: 12.0),
                       child: SwapProductCarousalSlider(state: state))),
               const SliverToBoxAdapter(
-                child: Divider(color: ColorName.gray, thickness: 3.0),
-              ),
+                  child: Divider(color: ColorName.gray, thickness: 3.0)),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(
@@ -53,8 +51,9 @@ class SwapMoreInfoScreen extends StatelessWidget {
                                 fontSize: 16.0,
                               ),
                               children: [
-                                const TextSpan(
-                                  text: 'Swap In ',
+                                TextSpan(
+                                  text: context
+                                      .locale.swap_more_info_swap_in_title,
                                 ),
                                 TextSpan(
                                   text:
@@ -92,14 +91,15 @@ class SwapMoreInfoScreen extends StatelessWidget {
                                               fontSize: 23.0,
                                               color: ColorName.red)),
                                   TextSpan(
-                                      text: ')',
+                                      text: ') ',
                                       style: context
                                           .easyTheme.textTheme.labelLarge!
                                           .copyWith(
                                               fontSize: 23.0,
                                               color: ColorName.gray)),
                                   TextSpan(
-                                      text: ' Offers Submitted',
+                                      text:
+                                          context.locale.offer_submitted_title,
                                       style: context
                                           .easyTheme.textTheme.labelLarge!
                                           .copyWith(
@@ -124,7 +124,7 @@ class SwapMoreInfoScreen extends StatelessWidget {
                       ),
                       Center(
                           child: DefaultButtonWidget(
-                              text: 'CREATE SWAP OFFER',
+                              text: context.locale.swap_offer_create_button,
                               onPressed: () => onSendOffer(context))),
                     ],
                   ),
@@ -142,11 +142,6 @@ class SwapMoreInfoScreen extends StatelessWidget {
     openSendOfferScreen(context);
   }
 
-  void openSendOfferScreen(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: SendOfferScreen(),
-      withNavBar: true,
-    );
-  }
+  void openSendOfferScreen(context) =>
+      Utils.openNavNewPage(context, SendOfferScreen());
 }
