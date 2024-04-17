@@ -92,9 +92,7 @@ class PriceRateSection extends StatelessWidget {
                   ),
           ],
         ),
-        const SizedBox(
-          height: 17.0,
-        ),
+        const SizedBox(height: 17.0),
       ],
     );
   }

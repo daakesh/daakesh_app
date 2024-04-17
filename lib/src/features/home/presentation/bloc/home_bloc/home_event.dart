@@ -13,3 +13,5 @@ class SelectProductSizeIndex extends HomeEvent {
 }
 
 class GetSectionDataEvent extends HomeEvent {}
+
+class GetHomeScreenData extends HomeEvent {}

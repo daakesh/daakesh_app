@@ -16,26 +16,17 @@ class ConfirmOrderScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 130.0,
-                ),
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(end: 30.0),
-                  child: DaakeshLogoWidget(),
-                ),
-                const SizedBox(
-                  height: 70.0,
-                ),
+                const Spacer(flex: 1),
+                const Center(child: DaakeshLogoWidget()),
+                const Spacer(flex: 1),
                 Assets.svg.creditCardLogoIcon.svg(),
-                const SizedBox(
-                  height: 30.0,
-                ),
+                const SizedBox(height: 30.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 29.0),
                   child: Column(
                     children: [
                       Text(
-                        'Your Order Has Been Confirmed',
+                        context.locale.confirm_order_title,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(fontSize: 22),
                       ),
@@ -43,7 +34,7 @@ class ConfirmOrderScreen extends StatelessWidget {
                         height: 15.0,
                       ),
                       Text(
-                        'This Will Be Shown To You On The My Orders Page',
+                        context.locale.confirm_order_instruction,
                         style: context.easyTheme.textTheme.bodyMedium,
                         textAlign: TextAlign.center,
                       )
@@ -57,7 +48,8 @@ class ConfirmOrderScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Center(
                       child: DefaultButtonWidget(
-                          text: 'BACK SHOPPING', onPressed: backShopping)),
+                          text: context.locale.confirm_order_button_title,
+                          onPressed: backShopping)),
                 ),
                 const Spacer(
                   flex: 1,

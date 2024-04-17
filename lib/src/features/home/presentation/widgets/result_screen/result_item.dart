@@ -36,7 +36,7 @@ class ResultItemWidget extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(4.0))),
                       child: Center(
                         child: Text(
-                          '${subCategory.discountPercentage} OFF',
+                          '${subCategory.discountPercentage} ${context.locale.results_off_title}',
                           style: context.easyTheme.textTheme.labelLarge!
                               .copyWith(fontSize: 14.0),
                         ),
@@ -49,7 +49,7 @@ class ResultItemWidget extends StatelessWidget {
                 flex: 1,
               ),
               Text(
-                'By',
+                context.locale.results_by_title,
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 14.0, color: ColorName.gray),
               ),

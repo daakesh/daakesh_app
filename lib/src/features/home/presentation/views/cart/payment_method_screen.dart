@@ -18,7 +18,7 @@ class PaymentMethodScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21.0),
               child: Text(
-                'Choose Payment Method',
+                context.locale.choose_payment_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 22.0),
               ),
@@ -27,13 +27,16 @@ class PaymentMethodScreen extends StatelessWidget {
               height: 18.0,
             ),
             TypePaymentMethod(
-                index: 1, title: 'Credit Card', activeIndex: 1, onTap: () {}),
+                index: 1,
+                title: context.locale.credit_card_title,
+                activeIndex: 1,
+                onTap: () {}),
             const SizedBox(
               height: 12.0,
             ),
             TypePaymentMethod(
                 index: 2,
-                title: 'Cash Upon Delivery',
+                title: context.locale.cash_on_delivery_title,
                 activeIndex: 1,
                 onTap: () {},
                 isCreditCard: false),
@@ -43,7 +46,7 @@ class PaymentMethodScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21.0),
               child: Text(
-                'Cards',
+                context.locale.cards_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 22.0),
               ),
@@ -82,7 +85,7 @@ class PaymentMethodScreen extends StatelessWidget {
                     size: 30,
                   ),
                   Text(
-                    'Add Payment Card',
+                    context.locale.add_payment_card_text_button,
                     style: context.easyTheme.textTheme.bodyLarge!.copyWith(
                         fontSize: 18.0,
                         color: ColorName.black.withOpacity(0.55)),
@@ -98,7 +101,8 @@ class PaymentMethodScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21.0),
-              child: DefaultButtonWidget(text: 'PAY', onPressed: makePay),
+              child: DefaultButtonWidget(
+                  text: context.locale.pay_button_title, onPressed: makePay),
             ),
             const SizedBox(
               height: 50.0,

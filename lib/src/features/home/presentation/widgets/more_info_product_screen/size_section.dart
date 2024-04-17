@@ -12,7 +12,7 @@ class SizeSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Size:',
+          context.locale.more_info_product_size,
           style: context.easyTheme.textTheme.labelMedium,
         ),
         const SizedBox(

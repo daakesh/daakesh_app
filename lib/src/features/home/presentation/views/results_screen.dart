@@ -82,7 +82,7 @@ class ResultsScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child: Text('Results',
+                child: Text(context.locale.results_title,
                     style: context.easyTheme.textTheme.headlineMedium),
               ),
             ),
@@ -107,7 +107,7 @@ class ResultsScreen extends StatelessWidget {
             const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
             SliverToBoxAdapter(child: BlocBuilder<FilterBloc, FilterState>(
               builder: (context, state) {
-                return seeMoreHandler(state);
+                return seeMoreHandler(state, context);
               },
             )),
             const SliverPadding(padding: EdgeInsets.only(top: 60.0)),
@@ -122,7 +122,7 @@ class ResultsScreen extends StatelessWidget {
     Utils.openNavNewPage(context, FilterScreen());
   }
 
-  Widget seeMoreHandler(FilterState state) {
+  Widget seeMoreHandler(FilterState state, BuildContext context) {
     switch (!state.isMoreData) {
       case true:
         switch (state.filterStateStatus) {
@@ -131,14 +131,14 @@ class ResultsScreen extends StatelessWidget {
           default:
             return Center(
                 child: TextButtonWidget(
-              text: 'See More',
+              text: context.locale.see_more_results_title,
               onPressed: () => onSeeMore(),
               isBold: true,
             ));
         }
       default:
         return state.filterStateStatus.isNull
-            ? const Center(child: Text('No Data...'))
+            ? Center(child: Text(context.locale.results_no_data))
             : const SizedBox();
     }
   }

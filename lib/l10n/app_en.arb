@@ -114,7 +114,129 @@
   "remember_me_title":"Remember Me",
   "login_button_title":"LOGIN",
   "forget_password_text_button":"Forget password ?",
-  "login_snack_bar_title":"Fill data firstly"
+  "login_snack_bar_title":"Fill data firstly",
+  
+  "adjustShippingScreen": "*********AdjustShippingScreen*********",
+  "adjust_shipping_title":"Shipping Address",
+  "shipping_country_text_field":"Country",
+  "shipping_city_text_field":"City",
+  "shipping_address_text_field":"Address",
+  "shipping_apartment_text_field":"Apartment/Building Number",
+  "shipping_phone_number_text_field":"Phone Number",
+  "shipping_edit_button_title":"EDIT ADDRESS",
+  "shipping_clear_button_title":"CLEAR",
+  
+  
+  "cartPayScreen": "*********CartPayScreen*********",
+  "cart_item_title":"Your Cart",
+  "cart_item_edit_button":"Edit",
+  "cart_item_count_title":"Item",
+  "cart_item_cost_title":"Cost",
+  "shipping_item_title":"Shipping",
+  "shipping_item_edit_button":"Edit",
+  "shipping_item_country_title":"Country",
+  "shipping_item_address_title":"Address",
+  "shipping_item_phone_number_title":"Phone Number",
+  "shipping_item_delivery_fee":"Delivery Fee",
+  "total_title":"Total : ",
+  "payment_button_title":"PAYMENT",
+  
+  
+  "cartScreen": "*********CartScreen*********",
+  "cart_title":"Your Cart Details",
+  "cart_off_title":"OFF",
+  "by_title":"By",
+  "see_details_text_button":"See Details",
+  "cart_item_price_title":"Price :",
+  "cart_total_title":"Total :",
+  "cart_total_item_title":"Item",
+  "checkout_button_title":"CHECKOUT",
+
+
+  "checkOutScreen": "*********CheckOutScreen*********",
+  "check_out_total_title":"Total : ",
+  "check_out_pay_button":"PAY",
+  
+  "confirmOrderScreen": "*********ConfirmOrderScreen*********",
+  "confirm_order_title":"Your Order Has Been Confirmed",
+  "confirm_order_instruction":"This Will Be Shown To You On The My Orders Page",
+  "confirm_order_button_title":"BACK SHOPPING",
+  
+  "paymentMethodScreen": "*********PaymentMethodScreen*********",
+  "choose_payment_title":"Choose Payment Method",
+  "credit_card_title":"Credit Card",
+  "cash_on_delivery_title":"Cash Upon Delivery",
+  "cards_title":"Cards",
+  "add_payment_card_text_button":"Add Payment Card",
+  "pay_button_title":"PAY",
+  
+  "filterScreen": "*********FilterScreen*********",
+  "filter_title":"Filter",
+  "filter_available_ship_country":"Available ship country",
+  "filter_available_ship_city":"City",
+  "filter_rate":"Rate",
+  "filter_price_slider":"Price",
+  "filter_product_type":"Product type",
+  "filter_apply_button":"APPLY",
+  "filter_clear_button":"CLEAR",
+  
+  
+  "homeScreen": "*********HomeScreen*********",
+  "search_hint_text_field":"Search",
+  "home_popular_sections_title":"Popular Sections",
+  "home_whats_new_section_title":"What's New",
+  "home_shop_by_brands_section_title":"Shop By Brands",
+  "home_handmade_section_title":"Handmade",
+  "home_daakesh_today_deals_title":"Daakesh Today's Deals",
+  "home_today_deals_title":"Today's Deals",
+  "home_off_title":"OFF",
+  "home_by_title":"By ",
+  
+  "sectionScreen": "*********SectionScreen*********",
+  "section_screen_title":"Sections",
+  "category_title":"Category",
+  "see_more_category_title":"See More",
+  
+  "resultsScreen": "*********ResultsScreen*********",
+  "results_title":"Results",
+  "see_more_results_title":"See More",
+  "results_no_data":"No Data...",
+  "results_off_title":"OFF",
+  "results_by_title":"By",
+  
+  "homemadeScreen": "*********HomemadeScreen*********",
+  "homemade_title_see_more":"See More",
+  
+  
+  "mainScreen": "*********MainScreen*********",
+  "home_bottom_nav_tab":"Home",
+  "my_product_bottom_nav_tab":"My Product",
+  "my_order_bottom_nav_tab":"My Order",
+  "profile_bottom_nav_tab":"Profile",
+  
+  "moreInfoProductScreen": "*********MoreInfoProductScreen*********",
+  "more_info_product_by_title":"By",
+  "more_info_product_size":"Size:",
+  "more_info_product_details_title":"Details:",
+  "more_info_product_brand_title":"Brand:",
+  "more_info_product_model_title":"Model Name:",
+  "more_info_product_category_title":"Category",
+  "more_info_product_year_title":"Year:",
+  "more_info_product_description_title":"description",
+  "more_info_product_add_to_cart":"ADD TO CART",
+  "more_info_product_call":"CALL",
+  "more_info_product_whatsapp":"WhatsApp",
+  "more_info_product_rate":"Rate",
+  "more_info_product_comment":"Comment",
+  "more_info_product_comments":"Comments",
+  
+  "searchScreen": "*********SearchScreen*********",
+  "search_title":"Search",
+  "see_more_text_button":"See More",
+  "no_information_available_title":"No information available...",
+  
+  "shopByBrandsScreen": "*********ShopByBrandsScreen*********",
+  "shop_by_brands_title_see_more":"See More"
 
 
 

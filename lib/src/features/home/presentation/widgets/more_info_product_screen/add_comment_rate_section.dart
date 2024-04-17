@@ -17,7 +17,7 @@ class AddCommentRateSection extends StatelessWidget {
           height: 30.0,
         ),
         Text(
-          'Rate',
+          context.locale.more_info_product_rate,
           style: context.easyTheme.textTheme.headlineMedium!
               .copyWith(fontSize: 22.0),
         ),
@@ -71,7 +71,7 @@ class AddCommentRateSection extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(6.0))),
                 child: TextFormFieldWidget(
                   controller: commentController,
-                  hintText: 'Comment',
+                  hintText: context.locale.more_info_product_comment,
                   isUnderlineOn: true,
                   maxLines: 5,
                 ),

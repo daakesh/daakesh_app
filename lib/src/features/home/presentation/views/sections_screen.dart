@@ -19,7 +19,7 @@ class SectionScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 17.0),
                   child: Text(
-                    'Sections',
+                    context.locale.section_screen_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 18.0, color: ColorName.black),
                   ),
@@ -65,7 +65,7 @@ class SectionScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 31.0),
                   child: Text(
-                    '${state.categoryTitle} Category',
+                    '${state.categoryTitle} ${context.locale.category_title}',
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                       fontSize: 24.0,
                       color: ColorName.black.withOpacity(0.57),
@@ -89,7 +89,7 @@ class SectionScreen extends StatelessWidget {
                     ))
                   : const SliverToBoxAdapter(child: SizedBox()),
               const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
-              SliverToBoxAdapter(child: seeMoreHandler(state)),
+              SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
             ],
           ),
@@ -109,16 +109,13 @@ class SectionScreen extends StatelessWidget {
       SectionsBloc.get.add(GetCategoryBySectionIDEvent(isSeeMore: true));
 
   void openSubCategories(
-    BuildContext context,
-    List<CategoryItem> categoriesListData,
-    int catID,
-  ) {
+      BuildContext context, List<CategoryItem> categoriesListData, int catID) {
     FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
     Utils.openNavNewPage(
         context, ResultsScreen(categoriesListData: categoriesListData));
   }
 
-  Widget seeMoreHandler(SectionsState state) {
+  Widget seeMoreHandler(SectionsState state, BuildContext context) {
     switch (!state.isMoreData) {
       case true:
         switch (state.sectionsStateStatus) {
@@ -127,7 +124,7 @@ class SectionScreen extends StatelessWidget {
           default:
             return Center(
                 child: TextButtonWidget(
-              text: 'See More',
+              text: context.locale.see_more_category_title,
               onPressed: () => onSeeMore(),
               isBold: true,
             ));

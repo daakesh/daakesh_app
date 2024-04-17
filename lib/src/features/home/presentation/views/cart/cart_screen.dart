@@ -19,7 +19,7 @@ class CartScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Center(
                   child: Text(
-                    'Your Cart Details',
+                    context.locale.cart_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 22.0),
                   ),
@@ -75,7 +75,7 @@ class CartScreen extends StatelessWidget {
                     TextSpan(
                       children: [
                         TextSpan(
-                            text: 'Total :',
+                            text: context.locale.cart_total_title,
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(fontSize: 28.0)),
                         TextSpan(
@@ -89,7 +89,7 @@ class CartScreen extends StatelessWidget {
                     height: 6.0,
                   ),
                   Text(
-                    '(${state.cartItemsList.length}) Item',
+                    '(${state.cartItemsList.length}) ${context.locale.cart_total_item_title}',
                     style: context.easyTheme.textTheme.labelMedium!
                         .copyWith(fontSize: 22.0, color: ColorName.dimGray),
                   ),
@@ -100,7 +100,7 @@ class CartScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 21.5),
                     child: Center(
                         child: DefaultButtonWidget(
-                            text: 'CHECKOUT',
+                            text: context.locale.checkout_button_title,
                             onPressed: () => openCheckOutScreen(context))),
                   ),
                 ],

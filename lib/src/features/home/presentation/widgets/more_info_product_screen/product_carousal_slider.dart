@@ -20,7 +20,7 @@ class ProductCarousalSlider extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'By',
+                context.locale.more_info_product_by_title,
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0, color: ColorName.gray),
               ),

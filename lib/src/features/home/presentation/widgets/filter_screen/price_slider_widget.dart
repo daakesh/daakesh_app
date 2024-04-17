@@ -46,8 +46,6 @@ class _PriceSliderWidgetState extends State<PriceSliderWidget> {
     );
   }
 
-  void setPrice(double fromPrice, double toPrice) {
-    FilterBloc.get
-        .add(SetFilterDataEvent(fromPrice: fromPrice, toPrice: toPrice));
-  }
+  void setPrice(double fromPrice, double toPrice) => FilterBloc.get
+      .add(SetFilterDataEvent(fromPrice: fromPrice, toPrice: toPrice));
 }

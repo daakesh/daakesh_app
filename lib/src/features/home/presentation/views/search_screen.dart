@@ -28,7 +28,7 @@ class SearchScreen extends StatelessWidget {
                   child: Align(
                       alignment: AlignmentDirectional.bottomStart,
                       child: Text(
-                        'Search',
+                        context.locale.search_title,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.57)),
                       )),
@@ -46,7 +46,7 @@ class SearchScreen extends StatelessWidget {
                             child: InkWell(
                               onTap: () => seeMore(state.searchValue),
                               child: Text(
-                                'See More',
+                                context.locale.see_more_text_button,
                                 style: context.easyTheme.textTheme.bodyLarge!
                                     .copyWith(
                                   fontSize: 16.0,
@@ -84,8 +84,9 @@ class _SearchResultHandler extends StatelessWidget {
         return const SliverToBoxAdapter(
             child: CircularProgressIndicatorWidget());
       case SearchStateStatus.NULL:
-        return const SliverToBoxAdapter(
-            child: Center(child: Text('No information available...')));
+        return SliverToBoxAdapter(
+            child: Center(
+                child: Text(context.locale.no_information_available_title)));
       default:
         return SliverList(
           delegate: SliverChildBuilderDelegate((_, index) {

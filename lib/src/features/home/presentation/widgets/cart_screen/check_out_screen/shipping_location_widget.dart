@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../../src.export.dart';
 
 class ShippingLocationWidget extends StatelessWidget {
@@ -38,7 +37,7 @@ class ShippingLocationWidget extends StatelessWidget {
                   color: ColorName.amber,
                 ),
                 Text(
-                  'Shipping',
+                  context.locale.shipping_item_title,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 22.0),
                 ),
@@ -49,7 +48,7 @@ class ShippingLocationWidget extends StatelessWidget {
                     ? GestureDetector(
                         onTap: () => editShipping(context),
                         child: Text(
-                          'Edit',
+                          context.locale.shipping_item_edit_button,
                           style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(
                                   fontSize: 14.0, color: ColorName.skyBlue),
@@ -75,7 +74,7 @@ class ShippingLocationWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Country',
+                      context.locale.shipping_item_country_title,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 15.0, color: ColorName.dimGray),
                       overflow: TextOverflow.ellipsis,
@@ -96,7 +95,7 @@ class ShippingLocationWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Address',
+                      context.locale.shipping_item_address_title,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 15.0, color: ColorName.dimGray),
                       overflow: TextOverflow.ellipsis,
@@ -117,7 +116,7 @@ class ShippingLocationWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Phone Number',
+                      context.locale.shipping_item_phone_number_title,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 15.0, color: ColorName.dimGray),
                       overflow: TextOverflow.ellipsis,
@@ -141,7 +140,7 @@ class ShippingLocationWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Delivery Fee',
+                      context.locale.shipping_item_delivery_fee,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 19.0, color: ColorName.dimGray),
                     ),
@@ -167,10 +166,6 @@ class ShippingLocationWidget extends StatelessWidget {
   }
 
   void editShipping(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: AdjustShippingScreen(),
-      withNavBar: true, // OPTIONAL VALUE. True by default.
-    );
+    Utils.openNavNewPage(context, AdjustShippingScreen());
   }
 }

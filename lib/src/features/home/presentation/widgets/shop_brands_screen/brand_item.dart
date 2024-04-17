@@ -28,11 +28,10 @@ class BrandItemWidget extends StatelessWidget {
           children: [
             const SizedBox(width: 11.0),
             CachedImage(
-              imageUrl: brandItem.brandImg.toString(),
-              fit: BoxFit.fill,
-              width: 65.0,
-              height: 65.0,
-            ),
+                imageUrl: brandItem.brandImg.toString(),
+                fit: BoxFit.fill,
+                width: 65.0,
+                height: 65.0),
             const SizedBox(
               width: 12.0,
             ),

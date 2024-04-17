@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class HomeAppBarWidget extends StatefulWidget {
@@ -65,7 +64,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                               RegExpValidator.beginWhitespace,
                             ],
                             suffixIcon: widget.isActive
-                                ? InkWell(
+                                ? GestureDetector(
                                     onTap: clearText,
                                     child: const Icon(
                                       Icons.clear_outlined,
@@ -78,7 +77,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(fontFamily: FontFamily.apercuRegular),
                             isUnderlineOn: true,
-                            hintText: 'Search',
+                            hintText: context.locale.search_hint_text_field,
                           ),
                         ),
                       ),
@@ -117,11 +116,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
 
   void openCartScreen() {
     FocusScope.of(context).unfocus();
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const CartScreen(),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, const CartScreen());
   }
 
   void clearText() {
@@ -132,10 +127,6 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
 
   void openSearchScreen() {
     FocusScope.of(context).unfocus();
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const SearchScreen(),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, const SearchScreen());
   }
 }

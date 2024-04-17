@@ -20,7 +20,7 @@ class ShopByBrandsScreen extends StatelessWidget {
                 return BrandItemWidget(brandItem: brandItem);
               }, childCount: state.brandListData.length)),
               const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
-              SliverToBoxAdapter(child: seeMoreHandler(state)),
+              SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
             ],
           ),
@@ -33,7 +33,7 @@ class ShopByBrandsScreen extends StatelessWidget {
     BrandsBloc.get.add(GetBrandsDataEvent(isSeeMore: true));
   }
 
-  Widget seeMoreHandler(BrandsState state) {
+  Widget seeMoreHandler(BrandsState state, BuildContext context) {
     switch (!state.isMoreData) {
       case true:
         switch (state.brandsStateStatus) {
@@ -42,7 +42,7 @@ class ShopByBrandsScreen extends StatelessWidget {
           default:
             return Center(
                 child: TextButtonWidget(
-              text: 'See More',
+              text: context.locale.shop_by_brands_title_see_more,
               onPressed: () => onSeeMore(),
               isBold: true,
             ));

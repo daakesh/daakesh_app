@@ -29,7 +29,7 @@ class FilterScreen extends StatelessWidget {
                       ),
                       Center(
                           child: Text(
-                        'Filter',
+                        context.locale.filter_title,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(fontSize: 31.0),
                       )),
@@ -43,7 +43,7 @@ class FilterScreen extends StatelessWidget {
                         height: 39.0,
                       ),
                       Text(
-                        'Available ship country',
+                        context.locale.filter_available_ship_country,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -78,7 +78,7 @@ class FilterScreen extends StatelessWidget {
                         height: 33.0,
                       ),
                       Text(
-                        'City',
+                        context.locale.filter_available_ship_city,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -104,7 +104,7 @@ class FilterScreen extends StatelessWidget {
                         height: 40.0,
                       ),
                       Text(
-                        'Rate',
+                        context.locale.filter_rate,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -117,7 +117,7 @@ class FilterScreen extends StatelessWidget {
                         height: 34.0,
                       ),
                       Text(
-                        'Price',
+                        context.locale.filter_price_slider,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -130,7 +130,7 @@ class FilterScreen extends StatelessWidget {
                         height: 34.0,
                       ),
                       Text(
-                        'Product type',
+                        context.locale.filter_product_type,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
@@ -155,14 +155,15 @@ class FilterScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       DefaultButtonWidget(
-                          text: 'APPLY', onPressed: () => apply(context)),
+                          text: context.locale.filter_apply_button,
+                          onPressed: () => apply(context)),
                       const SizedBox(
                         height: 14.0,
                       ),
                       BlocBuilder<FilterBloc, FilterState>(
                         builder: (context, state) {
                           return OutlineButtonWidget(
-                              text: 'CLEAR',
+                              text: context.locale.filter_clear_button,
                               onPressed: () =>
                                   clear(context, state.isFilterActive));
                         },

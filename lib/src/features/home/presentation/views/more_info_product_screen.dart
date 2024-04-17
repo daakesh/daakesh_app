@@ -49,7 +49,8 @@ class MoreInfoProductScreen extends StatelessWidget {
                   child: !state.isDaakeshTodayDeal
                       ? Center(
                           child: DefaultButtonWidget(
-                              text: 'ADD TO CART',
+                              text:
+                                  context.locale.more_info_product_add_to_cart,
                               onPressed: () => addToCart(
                                   state.todayItem.first.id.toString(),
                                   state.todayItem.first.country.toString(),
@@ -65,12 +66,15 @@ class MoreInfoProductScreen extends StatelessWidget {
                               Expanded(
                                   flex: 1,
                                   child: DefaultButtonWidget(
-                                      text: 'CALL', onPressed: () {})),
+                                      text:
+                                          context.locale.more_info_product_call,
+                                      onPressed: () {})),
                               const SizedBox(
                                 width: 8.0,
                               ),
                               DefaultButtonWidget(
-                                  text: 'WhatsApp',
+                                  text:
+                                      context.locale.more_info_product_whatsapp,
                                   onPressed: () {},
                                   style: context
                                       .easyTheme.elevatedButtonTheme.style!
@@ -109,7 +113,7 @@ class MoreInfoProductScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Comments',
+                              context.locale.more_info_product_comments,
                               style: context.easyTheme.textTheme.bodyLarge!
                                   .copyWith(fontSize: 18.0),
                             ),

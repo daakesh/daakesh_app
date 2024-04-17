@@ -38,7 +38,7 @@ class AdjustShippingScreen extends StatelessWidget {
                   const SizedBox(height: 40.0),
                   Center(
                       child: Text(
-                    'Shipping Address',
+                    context.locale.adjust_shipping_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 31.0),
                   )),
@@ -47,7 +47,7 @@ class AdjustShippingScreen extends StatelessWidget {
                       onTap: () => clear(context),
                       child: Assets.svg.arrowBackIcon.svg()),
                   const SizedBox(height: 37.0),
-                  Text('Country',
+                  Text(context.locale.shipping_country_text_field,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   BlocBuilder<ShippingBloc, ShippingState>(
@@ -82,7 +82,7 @@ class AdjustShippingScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 33.0),
-                  Text('City',
+                  Text(context.locale.shipping_city_text_field,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
@@ -95,7 +95,7 @@ class AdjustShippingScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 33.0),
-                  Text('Address',
+                  Text(context.locale.shipping_address_text_field,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
@@ -118,7 +118,7 @@ class AdjustShippingScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 33.0),
-                  Text('Apartment/Building Number',
+                  Text(context.locale.shipping_apartment_text_field,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
@@ -129,7 +129,7 @@ class AdjustShippingScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 33.0),
-                  Text('Phone Number',
+                  Text(context.locale.shipping_phone_number_text_field,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
@@ -167,14 +167,16 @@ class AdjustShippingScreen extends StatelessWidget {
                   const SizedBox(height: 33.0),
                   Center(
                     child: DefaultButtonWidget(
-                        text: 'EDIT ADDRESS', onPressed: editAddress),
+                        text: context.locale.shipping_edit_button_title,
+                        onPressed: editAddress),
                   ),
                   const SizedBox(
                     height: 12.0,
                   ),
                   Center(
                     child: OutlineButtonWidget(
-                        text: 'CLEAR', onPressed: () => clear(context)),
+                        text: context.locale.shipping_clear_button_title,
+                        onPressed: () => clear(context)),
                   ),
                   const Spacer(
                     flex: 1,

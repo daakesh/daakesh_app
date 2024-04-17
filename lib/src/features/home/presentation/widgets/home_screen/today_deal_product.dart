@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class TodayDealProduct extends StatelessWidget {
@@ -21,11 +20,7 @@ class TodayDealProduct extends StatelessWidget {
             .add(PassTodayDealDataEvent(todayDealItem: todayDealItem));
         PassDataBloc.get.add(
             DetermentTodayDealEvent(isDaakeshTodayDeal: isDaakeshTodayDeal));
-        PersistentNavBarNavigator.pushNewScreen(
-          context,
-          screen: MoreInfoProductScreen(),
-          withNavBar: true,
-        );
+        Utils.openNavNewPage(context, MoreInfoProductScreen());
       },
       child: Column(
         children: [
@@ -63,7 +58,7 @@ class TodayDealProduct extends StatelessWidget {
                         ? Padding(
                             padding: EdgeInsets.symmetric(horizontal: 5.0.h),
                             child: Text(
-                              '${todayDealItem.discountPercentage} OFF',
+                              '${todayDealItem.discountPercentage} ${context.locale.home_off_title}',
                               textAlign: TextAlign.center,
                               style: context.easyTheme.textTheme.headlineMedium!
                                   .copyWith(
@@ -183,14 +178,6 @@ class TodayDealProduct extends StatelessWidget {
                                     fontWeight: FontWeight.w600),
                             overflow: TextOverflow.ellipsis,
                           )),
-                          // Text(
-                          //   '99 ',
-                          //   style:
-                          //       context.easyTheme.textTheme.headlineMedium!.copyWith(
-                          //     fontSize: 12.0,
-                          //     color: ColorName.gray,
-                          //   ),
-                          // ),
                           Text(
                             '\$${todayDealItem.price}',
                             style: context.easyTheme.textTheme.headlineMedium!
@@ -213,7 +200,7 @@ class TodayDealProduct extends StatelessWidget {
                           Assets.svg.creditCardIcon.svg(),
                           Row(
                             children: [
-                              Text('By ',
+                              Text(context.locale.home_by_title,
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
                                           fontSize: 13.0.sp,
@@ -243,7 +230,7 @@ class TodayDealProduct extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text('By ',
+                                  Text(context.locale.home_by_title,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(

@@ -16,15 +16,7 @@ class _MainScreenState extends State<MainScreen> {
     getHomeScreenData();
   }
 
-  void getHomeScreenData() {
-    AdvBloc.get.add(GetAdvertisementDataEvent());
-    HomeBloc.get.add(GetSectionDataEvent());
-    HandmadeBloc.get.add(GetHandmadeDataEvent());
-    BrandsBloc.get.add(GetBrandsDataEvent());
-    TodayDealsBloc.get.add(GetToadyDealsDataEvent());
-    CartBloc.get.add(GetCartItemsEvent());
-    ContactInfoBloc.get.add(GetContactInfoEvent());
-  }
+  void getHomeScreenData() => HomeBloc.get.add(GetHomeScreenData());
 
   @override
   Widget build(BuildContext context) {

@@ -45,7 +45,7 @@ class CartItemWidget extends StatelessWidget {
                 child: cartItem.item!.discountPercentage != '0%'
                     ? Center(
                         child: Text(
-                          '${cartItem.item!.discountPercentage} OFF',
+                          '${cartItem.item!.discountPercentage} ${context.locale.cart_off_title}',
                           style: context.easyTheme.textTheme.labelLarge!
                               .copyWith(fontSize: 14.0),
                         ),
@@ -56,7 +56,7 @@ class CartItemWidget extends StatelessWidget {
                 flex: 1,
               ),
               Text(
-                'By',
+                context.locale.by_title,
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 14.0, color: ColorName.gray),
               ),
@@ -146,7 +146,7 @@ class CartItemWidget extends StatelessWidget {
                     GestureDetector(
                         onTap: () {},
                         child: Text(
-                          'See Details',
+                          context.locale.see_details_text_button,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(fontSize: 14, color: ColorName.skyBlue),
                         )),
@@ -222,7 +222,7 @@ class CartItemWidget extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                        text: 'Price :',
+                        text: context.locale.cart_item_price_title,
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(fontSize: 21.0)),
                     TextSpan(

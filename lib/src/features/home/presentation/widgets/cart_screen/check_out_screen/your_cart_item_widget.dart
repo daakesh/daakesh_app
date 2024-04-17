@@ -38,7 +38,7 @@ class YourCartItemWidget extends StatelessWidget {
                   color: ColorName.amber,
                 ),
                 Text(
-                  'Your Cart',
+                  context.locale.cart_item_title,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 22.0),
                 ),
@@ -49,7 +49,7 @@ class YourCartItemWidget extends StatelessWidget {
                     ? GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: Text(
-                          'Edit',
+                          context.locale.cart_item_edit_button,
                           style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(
                                   fontSize: 14.0, color: ColorName.skyBlue),
@@ -72,7 +72,7 @@ class YourCartItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '(${state.cartItemsList.length}) Item',
+                      '(${state.cartItemsList.length}) ${context.locale.cart_item_count_title}',
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 19.0, color: ColorName.dimGray),
                     ),
@@ -131,7 +131,7 @@ class YourCartItemWidget extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Cost',
+                          context.locale.cart_item_cost_title,
                           style: context.easyTheme.textTheme.bodyMedium!
                               .copyWith(
                                   fontSize: 19.0, color: ColorName.dimGray),

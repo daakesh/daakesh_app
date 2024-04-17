@@ -17,10 +17,9 @@ class SectionCategoryItem extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             boxShadow: [
               BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.16),
-                offset: Offset(0, -0.5),
-                blurRadius: 3.0,
-              )
+                  color: Color.fromRGBO(0, 0, 0, 0.16),
+                  offset: Offset(0, -0.5),
+                  blurRadius: 3.0)
             ]),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

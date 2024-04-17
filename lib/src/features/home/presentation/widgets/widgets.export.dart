@@ -4,7 +4,6 @@ export 'home_screen/home_screen.export.dart';
 export 'more_info_product_screen/more_info_product_screen.export.dart';
 export 'result_screen/result_item.dart';
 export 'sections_screen/sections_screen.export.dart';
-export 'swap_screen/swap_screen.export.dart';
 export 'shop_brands_screen/shop_brands_screen.export.dart';
 export 'handmade_screen/handmade_screen.export.dart';
 export 'main_screen/main_screen.export.dart';

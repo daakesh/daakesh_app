@@ -81,8 +81,9 @@ class StarTypeWidget extends StatelessWidget {
                     child: Text(
                       title,
                       style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                          fontSize: 18.0,
-                          color: ColorName.black.withOpacity(0.5)),
+                        fontSize: 18.0,
+                        color: ColorName.black.withOpacity(0.5),
+                      ),
                     ),
                   ),
                 ),

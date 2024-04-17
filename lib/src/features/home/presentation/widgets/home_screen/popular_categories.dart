@@ -25,10 +25,9 @@ class PopularCategoriesWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(18.0)),
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 3),
-              blurRadius: 6,
-              color: Color.fromRGBO(0, 0, 0, 0.16),
-            ),
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                color: Color.fromRGBO(0, 0, 0, 0.16)),
           ],
         ),
         child: Stack(

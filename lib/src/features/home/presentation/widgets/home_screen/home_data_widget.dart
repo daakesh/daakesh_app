@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomeDataWidget extends StatelessWidget {
   final HomeState state;
@@ -23,7 +22,7 @@ class HomeDataWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              'Popular Categories',
+              context.locale.home_popular_sections_title,
               style: context.easyTheme.textTheme.headlineSmall,
             ),
           ),
@@ -57,7 +56,7 @@ class HomeDataWidget extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text('What\'s New',
+            child: Text(context.locale.home_whats_new_section_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 18.0)),
           ),
@@ -71,8 +70,8 @@ class HomeDataWidget extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () => onShopByBrands(context),
-                    child: const WhatsNewWidget(
-                      title: 'Shop By Brands',
+                    child: WhatsNewWidget(
+                      title: context.locale.home_shop_by_brands_section_title,
                     ),
                   ),
                 ),
@@ -82,8 +81,8 @@ class HomeDataWidget extends StatelessWidget {
                 Expanded(
                     child: GestureDetector(
                         onTap: () => openHandmade(context),
-                        child: const WhatsNewWidget(
-                          title: 'Handmade',
+                        child: WhatsNewWidget(
+                          title: context.locale.home_handmade_section_title,
                         ))),
               ],
             ),
@@ -96,7 +95,7 @@ class HomeDataWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              'Daakesh Today\'s Deals',
+              context.locale.home_daakesh_today_deals_title,
               style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                 fontSize: 18.0,
               ),
@@ -131,7 +130,7 @@ class HomeDataWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              'Today\'s Deals',
+              context.locale.home_today_deals_title,
               style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                 fontSize: 18.0,
               ),
@@ -173,31 +172,14 @@ class HomeDataWidget extends StatelessWidget {
         secID: secID,
         sectionIndex: sectionIndex,
         categoryTitle: categoryTitle));
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: SectionScreen(
-        homeState: state,
-      ),
-      withNavBar: true,
-    );
-
-    ///HomeBloc.get.add(GetToTopScreenEvent());
-    ///HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState: HomeScreenState.SECTIONS));
+    Utils.openNavNewPage(context, SectionScreen(homeState: state));
   }
 
   void onShopByBrands(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const ShopByBrandsScreen(),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, const ShopByBrandsScreen());
   }
 
   void openHandmade(context) {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const HomemadeScreen(),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, const HomemadeScreen());
   }
 }

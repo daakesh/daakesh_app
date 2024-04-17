@@ -5,6 +5,7 @@ import '../../../../../src.export.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
     on<GetSectionDataEvent>(_getSectionData);
+    on<GetHomeScreenData>(_getHomeScreenData);
   }
   static HomeBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -31,5 +32,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           homeStateStatus: HomeStateStatus.SUCCESS,
           sectionListData: sectionListData));
     });
+  }
+
+  FutureOr<void> _getHomeScreenData(
+      GetHomeScreenData event, Emitter<HomeState> emit) {
+    AdvBloc.get.add(GetAdvertisementDataEvent());
+    HomeBloc.get.add(GetSectionDataEvent());
+    HandmadeBloc.get.add(GetHandmadeDataEvent());
+    BrandsBloc.get.add(GetBrandsDataEvent());
+    TodayDealsBloc.get.add(GetToadyDealsDataEvent());
+    CartBloc.get.add(GetCartItemsEvent());
+    ContactInfoBloc.get.add(GetContactInfoEvent());
   }
 }

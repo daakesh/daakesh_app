@@ -19,9 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
             const HomeAppBarWidget(),
           ];
         },
-        body: BlocBuilder<HomeBloc, HomeState>(builder: (ctx, state) {
-          return HomeDataWidget(state: state);
-        }),
+        body: BlocBuilder<HomeBloc, HomeState>(
+          builder: (ctx, state) {
+            return HomeDataWidget(state: state);
+          },
+        ),
       ),
     );
   }

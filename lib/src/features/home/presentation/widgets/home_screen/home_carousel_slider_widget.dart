@@ -113,11 +113,10 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                     margin: const EdgeInsets.symmetric(
                         vertical: 8.0, horizontal: 4.0),
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _current == entry.key
-                          ? ColorName.lightOrange
-                          : ColorName.silverGray,
-                    ),
+                        shape: BoxShape.circle,
+                        color: _current == entry.key
+                            ? ColorName.lightOrange
+                            : ColorName.silverGray),
                   ),
                 );
               }).toList(),

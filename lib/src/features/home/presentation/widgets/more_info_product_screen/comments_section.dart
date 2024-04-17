@@ -39,9 +39,7 @@ class CommentsSection extends StatelessWidget {
                     width: 40.0,
                     height: 40.0,
                     decoration: const BoxDecoration(
-                      color: ColorName.amber,
-                      shape: BoxShape.circle,
-                    ),
+                        color: ColorName.amber, shape: BoxShape.circle),
                   ),
                   const SizedBox(
                     width: 12.0,

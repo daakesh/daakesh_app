@@ -26,9 +26,7 @@ class SearchBarWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 53.0,
-            ),
+            const SizedBox(height: 53.0),
             Center(
               child: DaakeshLogoWidget(
                 isLight: true,

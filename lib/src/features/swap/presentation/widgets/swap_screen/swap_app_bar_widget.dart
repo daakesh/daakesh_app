@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class SwapAppBarWidget extends StatefulWidget {
@@ -36,9 +35,7 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
           leading: const SizedBox(),
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
-            background: SwapSearchBarWidget(
-              state: state,
-            ),
+            background: SwapSearchBarWidget(state: state),
             expandedTitleScale: 1.0,
             title: Row(
               children: [
@@ -71,7 +68,7 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
                                 RegExpValidator.beginWhitespace,
                               ],
                               suffixIcon: widget.isActive
-                                  ? InkWell(
+                                  ? GestureDetector(
                                       onTap: clearText,
                                       child: const Icon(
                                         Icons.clear_outlined,
@@ -94,11 +91,6 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
                     ),
                   ),
                 ),
-                SizedBox(width: 14.0.w),
-                GestureDetector(
-                    onTap: () => !widget.isCart ? openCartScreen() : () {},
-                    child: Assets.svg.cartAddIcon
-                        .svg(width: 24.0.w, height: 24.0.h)),
               ],
             ),
             titlePadding: const EdgeInsetsDirectional.only(
@@ -132,18 +124,10 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
 
   void openSearchScreen() {
     FocusScope.of(context).unfocus();
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const SwapSearchScreen(),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, const SwapSearchScreen());
   }
 
   void openCartScreen() {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const SwapCartScreen(),
-      withNavBar: true,
-    );
+    Utils.openNavNewPage(context, const SwapCartScreen());
   }
 }

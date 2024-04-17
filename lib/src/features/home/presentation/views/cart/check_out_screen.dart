@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class CheckOutScreen extends StatelessWidget {
@@ -28,7 +27,7 @@ class CheckOutScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'Total : ',
+                    context.locale.check_out_total_title,
                     style: context.easyTheme.textTheme.labelLarge!
                         .copyWith(fontSize: 28.0, color: ColorName.black),
                     overflow: TextOverflow.ellipsis,
@@ -53,7 +52,8 @@ class CheckOutScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21.5),
               child: DefaultButtonWidget(
-                  text: 'PAY', onPressed: () => openCartPayScreen(context)),
+                  text: context.locale.check_out_pay_button,
+                  onPressed: () => openCartPayScreen(context)),
             ),
             const SizedBox(
               height: 50.0,
@@ -65,10 +65,6 @@ class CheckOutScreen extends StatelessWidget {
   }
 
   void openCartPayScreen(context) async {
-    PersistentNavBarNavigator.pushNewScreen(
-      context,
-      screen: const CartPayScreen(),
-      withNavBar: true, // OPTIONAL VALUE. True by default.
-    );
+    Utils.openNavNewPage(context, const CartPayScreen());
   }
 }

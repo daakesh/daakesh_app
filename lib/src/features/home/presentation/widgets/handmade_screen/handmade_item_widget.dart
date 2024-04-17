@@ -33,9 +33,7 @@ class HandmadeItemWidget extends StatelessWidget {
               width: 65.0,
               height: 65.0,
             ),
-            const SizedBox(
-              width: 12.0,
-            ),
+            const SizedBox(width: 12.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

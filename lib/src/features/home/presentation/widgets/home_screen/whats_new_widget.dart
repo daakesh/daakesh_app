@@ -15,10 +15,9 @@ class WhatsNewWidget extends StatelessWidget {
           child: Text(
             title,
             style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-              color: ColorName.white,
-              overflow: TextOverflow.fade,
-              fontSize: 25.0,
-            ),
+                color: ColorName.white,
+                overflow: TextOverflow.fade,
+                fontSize: 25.0),
           ),
         ),
       ],

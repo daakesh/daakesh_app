@@ -35,8 +35,9 @@ class _ProductTypeWidgetState extends State<ProductTypeWidget> {
                         color: state.type == data[index]
                             ? ColorName.amber
                             : ColorName.sliver,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10.0))),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10.0),
+                        )),
                     child: Text(
                       data[index].name,
                       textAlign: TextAlign.center,
