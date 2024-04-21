@@ -70,7 +70,7 @@ class MainScreenWidget {
                   width: 26.0,
                   height: 26.0,
                 )),
-            title: context.locale.profile_bottom_nav_tab),
+            title: context.locale.my_order_bottom_nav_tab),
       ),
       PersistentBottomNavBarItem(
         icon: bottomNavBarItem(

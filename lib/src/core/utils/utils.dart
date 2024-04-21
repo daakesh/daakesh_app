@@ -50,11 +50,30 @@ class Utils {
     return DateFormat('mm/dd/yyyy').format(date);
   }
 
-  static Future<String> countryCodeToEmoji(String country) async {
+  static String countryCodeToEmoji(String country) {
     String code = CountriesFlags.flags[country].toString();
     final int firstLetter = code.codeUnitAt(0) - 0x41 + 0x1F1E6;
     final int secondLetter = code.codeUnitAt(1) - 0x41 + 0x1F1E6;
     return String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
+  }
+
+  static String handleCountry(countryCode) {
+    switch (countryCode) {
+      case '+962':
+        return countryCodeToEmoji('Jordan');
+      case '+964':
+        return countryCodeToEmoji('Iraq');
+      case '+966':
+        return countryCodeToEmoji('Saudi Arabia');
+      case '+20':
+        return countryCodeToEmoji('Egypt');
+      case '+971':
+        return countryCodeToEmoji('United Arab Emirates');
+      case '+213':
+        return countryCodeToEmoji('Algeria');
+      default:
+        return countryCodeToEmoji('Jordan');
+    }
   }
 
   static Future<void> getBack() {

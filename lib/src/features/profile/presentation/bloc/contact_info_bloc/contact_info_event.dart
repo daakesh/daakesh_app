@@ -1,11 +1,21 @@
-abstract class ContactInfoEvent{}
+abstract class ContactInfoEvent {}
 
-class GetContactInfoEvent extends ContactInfoEvent{}
-class ResetContactInfoEvent extends ContactInfoEvent{}
+class GetContactInfoEvent extends ContactInfoEvent {}
 
-class AddContactInfoEvent extends ContactInfoEvent{}
+class ResetContactInfoEvent extends ContactInfoEvent {}
 
-class EditContactInfoEvent extends ContactInfoEvent{
+class AddContactInfoEvent extends ContactInfoEvent {
+  final String personalPhone;
+  final String commercialPhone;
+  final String whatsAppPhone;
+
+  AddContactInfoEvent(
+      {required this.personalPhone,
+      required this.commercialPhone,
+      required this.whatsAppPhone});
+}
+
+class EditContactInfoEvent extends ContactInfoEvent {
   final String? personalPhoneFlagEmoji;
   final String? personalPhoneCode;
   final String? commercialPhoneFlagEmoji;
@@ -22,7 +32,8 @@ class EditContactInfoEvent extends ContactInfoEvent{
     this.whatsAppPhoneCode,
   });
 }
-class ActivateUpdateContactInfoEvent extends ContactInfoEvent{
+
+class ActivateUpdateContactInfoEvent extends ContactInfoEvent {
   final bool isUpdatePersonalActive;
   ActivateUpdateContactInfoEvent({required this.isUpdatePersonalActive});
 }

@@ -8,11 +8,14 @@ class ContactInfoScreen extends StatelessWidget {
   ContactInfoScreen({super.key});
 
   final personPhoneController = TextEditingController(
-      text: getIt.get<ContactInfoService>().contactInfoNumber.phoneNumber);
+      text: GetItUtils.contactInfo.contactInfoNumber.phoneNumber);
   final commercialPhoneController = TextEditingController(
-      text: getIt.get<ContactInfoService>().contactInfoNumber.commercialNumber);
+      text: GetItUtils.contactInfo.contactInfoNumber.commercialNumber);
   final whatsAppPhoneController = TextEditingController(
-      text: getIt.get<ContactInfoService>().contactInfoNumber.whatsAppNumber);
+      text: GetItUtils.contactInfo.contactInfoNumber.whatsAppNumber);
+  final personPhoneCountryCodeController = TextEditingController();
+  final commercialPhoneCountryCodeController = TextEditingController();
+  final whatsAppPhoneCountryCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,7 @@ class ContactInfoScreen extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       isSuffixPrefixOn: true,
                       enabled: state.isUpdatePersonalActive,
-                      suffixIcon: InkWell(
+                      suffixIcon: GestureDetector(
                         onTap: () => selectCountry(context, (Country country) {
                           ContactInfoBloc.get.add(EditContactInfoEvent(
                             personalPhoneCode: country.phoneCode,
@@ -190,13 +193,14 @@ class ContactInfoScreen extends StatelessWidget {
                       flex: 1,
                     ),
                     Center(
-                      child: DefaultButtonWidget(
-                          text: !state.isUpdatePersonalActive
-                              ? 'MAKE EDIT'
-                              : 'SAVE',
-                          onPressed: () =>
-                              onMakeEdit(state.isUpdatePersonalActive)),
-                    ),
+                        child: DefaultButtonWidget(
+                            text: !state.isUpdatePersonalActive
+                                ? 'MAKE EDIT'
+                                : 'SAVE',
+                            onPressed: () => !state.isUpdatePersonalActive
+                                ? onMakeEdit()
+                                : onSave()) //onMakeEdit()),
+                        ),
                     const SizedBox(
                       height: 12.0,
                     ),
@@ -221,7 +225,7 @@ class ContactInfoScreen extends StatelessWidget {
     );
   }
 
-  void onMakeEdit(bool isUpdateActive) {
+  void onMakeEdit() {
     ContactInfoBloc.get
         .add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: true));
   }
@@ -230,6 +234,20 @@ class ContactInfoScreen extends StatelessWidget {
     Navigator.pop(context);
     ContactInfoBloc.get
         .add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: false));
+  }
+
+  void onSave() {
+    if (personPhoneController.text.isEmpty &&
+        commercialPhoneController.text.isEmpty &&
+        whatsAppPhoneController.text.isEmpty) {
+      ShowToastSnackBar.showSnackBars(message: 'Fill data firstly...');
+      return;
+    }
+    ContactInfoBloc.get.add(AddContactInfoEvent(
+      personalPhone: personPhoneController.text,
+      commercialPhone: commercialPhoneController.text,
+      whatsAppPhone: whatsAppPhoneController.text,
+    ));
   }
 
   void selectCountry(context, ValueChanged<Country> onSelect) {
