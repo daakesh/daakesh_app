@@ -4,8 +4,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
 class PriceRateSection extends StatelessWidget {
-  final PassDataState state;
-  const PriceRateSection({super.key, required this.state});
+  final TodayItem todayDealItem;
+  final bool isDaakeshTodayDeal;
+  const PriceRateSection(
+      {super.key,
+      required this.todayDealItem,
+      required this.isDaakeshTodayDeal});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class PriceRateSection extends StatelessWidget {
           height: 30.0,
         ),
         Text(
-          state.todayItem.first.title.toString(),
+          todayDealItem.title.toString(),
           style: context.easyTheme.textTheme.bodyMedium!
               .copyWith(fontSize: 24.0, color: ColorName.gray),
         ),
@@ -73,14 +77,14 @@ class PriceRateSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '\$${state.todayItem.first.priceAfterDiscount}',
+              '\$${todayDealItem.priceAfterDiscount}',
               style: context.easyTheme.textTheme.labelLarge!
                   .copyWith(fontSize: 30.0, color: ColorName.black),
             ),
             const Spacer(
               flex: 1,
             ),
-            !state.isDaakeshTodayDeal
+            !isDaakeshTodayDeal
                 ? Assets.svg.creditCardIcon.svg(
                     width: 30.0,
                     height: 22.0,

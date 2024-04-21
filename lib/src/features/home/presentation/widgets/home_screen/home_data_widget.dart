@@ -110,10 +110,12 @@ class HomeDataWidget extends StatelessWidget {
               sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate(
                     (_, index) {
-                      TodayItem todayDealItem = state.todayDealsListData[index];
-                      return TodayDealProduct(todayDealItem: todayDealItem);
+                      TodayItem daakeshTodayDealItem =
+                          state.daakeshTodayDealsListData[index];
+                      return TodayDealProduct(
+                          todayDealItem: daakeshTodayDealItem);
                     },
-                    childCount: state.todayDealsListData.length,
+                    childCount: state.daakeshTodayDealsListData.length,
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -161,6 +163,29 @@ class HomeDataWidget extends StatelessWidget {
             );
           },
         ),
+        const SliverPadding(padding: EdgeInsets.only(top: 25.0)),
+
+        BlocBuilder<TodayDealsBloc, TodayDealsState>(builder: (context, state) {
+          return SliverToBoxAdapter(
+            child: !state.isMoreData
+                ? !state.todayDealsStateStatus.isLoadingMore
+                    ? Center(
+                        child: GestureDetector(
+                          onTap: () => seeMoreHandler(state),
+                          child: Text(
+                            'See More',
+                            style:
+                                context.easyTheme.textTheme.bodyLarge!.copyWith(
+                              fontSize: 16.0,
+                              color: ColorName.skyBlue,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const CircularProgressIndicatorWidget()
+                : const SizedBox(),
+          );
+        }),
         const SliverPadding(padding: EdgeInsets.only(top: 50.0)),
       ],
     );
@@ -181,5 +206,28 @@ class HomeDataWidget extends StatelessWidget {
 
   void openHandmade(context) {
     Utils.openNavNewPage(context, const HomemadeScreen());
+  }
+
+  Widget seeMoreHandler(TodayDealsState state) {
+    switch (!state.isMoreData) {
+      case true:
+        switch (state.todayDealsStateStatus) {
+          case TodayDealsStateStatus.LOADINGMORE:
+            return const CircularProgressIndicatorWidget();
+          default:
+            return Center(
+                child: TextButtonWidget(
+              text: 'See More',
+              onPressed: () => onSeeMore(),
+              isBold: true,
+            ));
+        }
+      default:
+        return const SizedBox();
+    }
+  }
+
+  void onSeeMore() {
+    TodayDealsBloc.get.add(GetToadyDealsDataEvent(isSeeMore: true));
   }
 }

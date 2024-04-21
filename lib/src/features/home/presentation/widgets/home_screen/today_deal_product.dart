@@ -15,13 +15,12 @@ class TodayDealProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        PassDataBloc.get
-            .add(PassTodayDealDataEvent(todayDealItem: todayDealItem));
-        PassDataBloc.get.add(
-            DetermentTodayDealEvent(isDaakeshTodayDeal: isDaakeshTodayDeal));
-        Utils.openNavNewPage(context, MoreInfoProductScreen());
-      },
+      onTap: () => Utils.openNavNewPage(
+          context,
+          MoreInfoProductScreen(
+            todayDealItem: todayDealItem,
+            isDaakeshTodayDeal: isDaakeshTodayDeal,
+          )),
       child: Column(
         children: [
           Container(

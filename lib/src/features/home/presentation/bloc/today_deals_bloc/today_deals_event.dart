@@ -1,9 +1,11 @@
-
 abstract class TodayDealsEvent {}
 
-
-class GetToadyDealsDataEvent extends TodayDealsEvent{
+class GetToadyDaakeshDealsDataEvent extends TodayDealsEvent {
   final bool isSeeMore;
-  GetToadyDealsDataEvent({this.isSeeMore= false});
+  GetToadyDaakeshDealsDataEvent({this.isSeeMore = false});
 }
 
+class GetToadyDealsDataEvent extends TodayDealsEvent {
+  final bool isSeeMore;
+  GetToadyDealsDataEvent({this.isSeeMore = false});
+}

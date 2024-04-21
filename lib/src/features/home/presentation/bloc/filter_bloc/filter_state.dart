@@ -14,7 +14,7 @@ extension FilterStateStatusX on FilterStateStatus {
 
 class FilterState extends Equatable {
   final FilterStateStatus filterStateStatus;
-  final List<FilterResultModel> subCategoryListData;
+  final List<TodayItem> subCategoryListData;
   final int catID;
   final String country;
   final String city;
@@ -45,7 +45,7 @@ class FilterState extends Equatable {
 
   FilterState copyWith({
     FilterStateStatus? filterStateStatus,
-    List<FilterResultModel>? subCategoryListData,
+    List<TodayItem>? subCategoryListData,
     int? catID,
     String? country,
     String? city,

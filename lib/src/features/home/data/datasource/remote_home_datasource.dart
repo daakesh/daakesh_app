@@ -67,10 +67,11 @@ class RemoteHomeDatasource implements HomeDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      HomeTodayItemType type, int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/item/getTodaysItems',
-        params: {"type": "sell", "page": "$page"});
+        params: {"type": type.name, "page": "$page"});
     return result;
   }
 

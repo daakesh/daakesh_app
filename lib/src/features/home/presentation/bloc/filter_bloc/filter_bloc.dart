@@ -70,12 +70,11 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      FilterModel filterModel =
-          FilterModel.fromJson(r.data as Map<String, dynamic>);
-      List<FilterResultModel> newResultList = filterModel.data!.data!.toList();
+      TodayItemModel filterModel =
+          TodayItemModel.fromJson(r.data as Map<String, dynamic>);
+      List<TodayItem> newResultList = filterModel.data!.todayItemList!.toList();
       int lastPage = filterModel.data!.lastPage!;
-      List<FilterResultModel> subCategoryListData =
-          state.subCategoryListData.toList();
+      List<TodayItem> subCategoryListData = state.subCategoryListData.toList();
 
       if (newResultList.isEmpty) {
         emit(state.copyWith(

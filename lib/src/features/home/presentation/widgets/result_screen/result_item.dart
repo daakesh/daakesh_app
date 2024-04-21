@@ -3,8 +3,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
 class ResultItemWidget extends StatelessWidget {
-  final FilterResultModel subCategory;
-  const ResultItemWidget({super.key, required this.subCategory});
+  final TodayItem todayItem;
+  const ResultItemWidget({super.key, required this.todayItem});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ResultItemWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              subCategory.discount != null
+              todayItem.discount != null
                   ? Container(
                       constraints:
                           const BoxConstraints(minWidth: 70.0, maxHeight: 25.0),
@@ -36,7 +36,7 @@ class ResultItemWidget extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(4.0))),
                       child: Center(
                         child: Text(
-                          '${subCategory.discountPercentage} ${context.locale.results_off_title}',
+                          '${todayItem.discountPercentage} ${context.locale.results_off_title}',
                           style: context.easyTheme.textTheme.labelLarge!
                               .copyWith(fontSize: 14.0),
                         ),
@@ -56,9 +56,9 @@ class ResultItemWidget extends StatelessWidget {
               const SizedBox(
                 width: 5.0,
               ),
-              subCategory.user != null
+              todayItem.user != null
                   ? Text(
-                      '${subCategory.user!.name}',
+                      '${todayItem.user!.name}',
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 13.0),
                     )
@@ -80,8 +80,8 @@ class ResultItemWidget extends StatelessWidget {
                 width: 12.0,
               ),
               CachedImage(
-                imageUrl: subCategory.itemImg != null
-                    ? subCategory.itemImg!.first.toString()
+                imageUrl: todayItem.itemImg != null
+                    ? todayItem.itemImg!.first.toString()
                     : '',
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 height: 90.0,
@@ -97,7 +97,7 @@ class ResultItemWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.only(end: 80.0),
                       child: Text(
-                        '${subCategory.title}',
+                        '${todayItem.title}',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(
                                 fontSize: 14.0,
@@ -149,13 +149,13 @@ class ResultItemWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            '\$${subCategory.priceAfterDiscount} ',
+                            '\$${todayItem.priceAfterDiscount} ',
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(fontSize: 21.0),
                           ),
-                          subCategory.discount != null
+                          todayItem.discount != null
                               ? Text(
-                                  '\$${subCategory.price}',
+                                  '\$${todayItem.price}',
                                   style: context
                                       .easyTheme.textTheme.labelMedium!
                                       .copyWith(
@@ -171,7 +171,7 @@ class ResultItemWidget extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsetsDirectional.only(
                                 end: 18.0, top: 16.0),
-                            child: subCategory.user != null
+                            child: todayItem.user != null
                                 ? const Icon(
                                     Icons.phone,
                                     color: ColorName.silverChalice,

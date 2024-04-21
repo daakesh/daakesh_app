@@ -92,12 +92,19 @@ class ResultsScreen extends StatelessWidget {
                 return SliverList(
                     delegate: SliverChildBuilderDelegate(
                   (_, index) {
-                    FilterResultModel subCategoryItem =
-                        state.subCategoryListData[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 17),
-                      child: ResultItemWidget(subCategory: subCategoryItem),
+                    TodayItem todayItem = state.subCategoryListData[index];
+                    return GestureDetector(
+                      onTap: () => Utils.openNavNewPage(
+                          context,
+                          MoreInfoProductScreen(
+                            todayDealItem: todayItem,
+                            isDaakeshTodayDeal: true,
+                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 17),
+                        child: ResultItemWidget(todayItem: todayItem),
+                      ),
                     );
                   },
                   childCount: state.subCategoryListData.length,
