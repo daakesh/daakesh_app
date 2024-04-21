@@ -1,14 +1,29 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-
 import '../../../../../src.export.dart';
 
-class SearchProductBarWidget extends StatelessWidget {
-  const SearchProductBarWidget({super.key});
+class SearchProductBarWidget extends StatefulWidget {
+  final TextEditingController searchController;
+  const SearchProductBarWidget({super.key, required this.searchController});
+
+  @override
+  State<SearchProductBarWidget> createState() => _SearchProductBarWidgetState();
+}
+
+class _SearchProductBarWidgetState extends State<SearchProductBarWidget> {
+  Timer? _debounceTimer;
+
+  @override
+  void dispose() {
+    widget.searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsetsDirectional.only(start: 16.0.w,end: 13.0.w,bottom: 0.0),
+      padding:
+          EdgeInsetsDirectional.only(start: 16.0.w, end: 13.0.w, bottom: 0.0),
       child: Row(
         children: [
           Expanded(
@@ -25,16 +40,20 @@ class SearchProductBarWidget extends StatelessWidget {
                   SizedBox(
                     width: 20.0.w,
                   ),
-                  Assets.svg.searchIcon.svg(color:  ColorName.charcoalGray,width:20.0.w ,height: 20.0.h),
+                  Assets.svg.searchIcon.svg(
+                      color: ColorName.charcoalGray,
+                      width: 20.0.w,
+                      height: 20.0.h),
                   Expanded(
-                    child:Padding(
+                    child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                       child: TextFormFieldWidget(
-                        controller: TextEditingController(),
-                        onTap: () {},
-                        style: easyTheme.textTheme.labelMedium!.copyWith(fontFamily: FontFamily.apercuRegular),
+                        controller: widget.searchController,
                         isUnderlineOn: true,
+                        onChanged: onChange,
                         hintText: 'Search In Your Product',
+                        style: context.easyTheme.textTheme.labelMedium!
+                            .copyWith(fontFamily: FontFamily.apercuRegular),
                       ),
                     ),
                   ),
@@ -42,14 +61,27 @@ class SearchProductBarWidget extends StatelessWidget {
               ),
             ),
           ),
-          InkWell(onTap: () {},
-              child: Assets.png.filterIcon.image(
-                width: 38.0.w,
-                height: 38.0.h,
-              ),
+          GestureDetector(
+            onTap: () {},
+            child: Assets.png.filterIcon.image(
+              width: 38.0.w,
+              height: 38.0.h,
+            ),
           ),
         ],
       ),
     );
+  }
+
+  void onChange(String value) {
+    MyProFuncBloc.get.add(EmptyProductSearchEvent(value: value));
+    _debounceTimer?.cancel();
+    if (value.isEmpty) {
+      MyProFuncBloc.get.add(EmptyProductSearchEvent(value: value));
+      return;
+    }
+    _debounceTimer = Timer(const Duration(milliseconds: 900), () {
+      MyProFuncBloc.get.add(SearchOnProductEvent(searchValue: value));
+    });
   }
 }

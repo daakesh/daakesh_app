@@ -6,3 +6,5 @@ export 'pass_data_bloc/swap_pass_data_bloc.export.dart';
 export 'comment_bloc/swap_comment_bloc.export.dart';
 export 'adv_bloc/swap_adv_bloc.export.dart';
 export 'rate_bloc/swap_rate_bloc.export.dart';
+export 'swap_pro_bloc/swap_pro_bloc.export.dart';
+export 'swap_filter_bloc/swap_filter_bloc.export.dart';

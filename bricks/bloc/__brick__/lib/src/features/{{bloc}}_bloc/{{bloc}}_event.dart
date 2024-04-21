@@ -1,0 +1,1 @@
+abstract class {{bloc.pascalCase()}}Event{}

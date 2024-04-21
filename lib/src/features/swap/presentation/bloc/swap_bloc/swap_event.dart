@@ -1,31 +1,25 @@
+import 'package:flutter/material.dart';
 
-import '../../../../../src.export.dart';
+abstract class SwapEvent {}
 
-abstract class SwapEvent{}
+class SwapGetToTopScreenEvent extends SwapEvent {}
 
-
-class ToggleSwapScreenStateEvent extends SwapEvent{
-  final SwapScreenState swapScreenState;
-  ToggleSwapScreenStateEvent({required this.swapScreenState});
-}
-class SwapGetToTopScreenEvent extends SwapEvent{}
-
-class SwapDetermentTodayDealEvent extends SwapEvent{
+class SwapDetermentTodayDealEvent extends SwapEvent {
   final bool isDaakeshTodayDeal;
   SwapDetermentTodayDealEvent({required this.isDaakeshTodayDeal});
 }
 
-class SwapSetFilterDataEvent extends SwapEvent{
-  final int? rateTypeIndex;
-  final int? productTypeIndex;
+// class SwapSetFilterDataEvent extends SwapEvent {
+//   final int? rateTypeIndex;
+//   final int? productTypeIndex;
 
-  SwapSetFilterDataEvent({
-    this.rateTypeIndex,
-    this.productTypeIndex,
-  });
-}
+//   SwapSetFilterDataEvent({
+//     this.rateTypeIndex,
+//     this.productTypeIndex,
+//   });
+// }
 
-class SwapSelectProductPropertiesEvent extends SwapEvent{
+class SwapSelectProductPropertiesEvent extends SwapEvent {
   final int? productSliderIndex;
   final int? productSizeIndex;
 
@@ -34,25 +28,30 @@ class SwapSelectProductPropertiesEvent extends SwapEvent{
     this.productSizeIndex,
   });
 }
-class SwapSelectProductSizeIndex extends SwapEvent{
+
+class SwapSelectProductSizeIndex extends SwapEvent {
   final int productSizeIndex;
   SwapSelectProductSizeIndex({required this.productSizeIndex});
 }
-class SwapGetSectionDataEvent extends SwapEvent{}
 
-class SwapGetTodayItemsDataEvent extends SwapEvent{}
+class SwapGetSectionDataEvent extends SwapEvent {}
 
-class SwapGetDaakeshTodayItemsDataEvent extends SwapEvent{}
+class SwapGetTodayItemsDataEvent extends SwapEvent {}
 
+class SendOfferEvent extends SwapEvent {
+  final BuildContext context;
+  final String sourceItem;
+  final String offerItem;
+  final String comment;
+  final String sourceUser;
+  final String offerUser;
 
-
-
-
-
-
-
-
-
-
-
-
+  SendOfferEvent({
+    required this.context,
+    required this.sourceItem,
+    required this.offerItem,
+    required this.comment,
+    required this.sourceUser,
+    required this.offerUser,
+  });
+}

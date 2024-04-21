@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class ProductTypeTabBar extends StatelessWidget {
-  final MyProductState state;
+  final MyProFuncState state;
   const ProductTypeTabBar({super.key, required this.state});
 
   @override
@@ -14,66 +14,63 @@ class ProductTypeTabBar extends StatelessWidget {
       margin: EdgeInsetsDirectional.symmetric(horizontal: 13.0.h),
       decoration: BoxDecoration(
           color: ColorName.paleGray,
-          borderRadius: BorderRadius.all(Radius.circular(8.0.r))
-      ),
-      child: Row(children: [
-        Expanded(
-          child: GestureDetector(
-
-            onTap: ()=>swapTabBar(ProductTapBar.SHOP),
-            child: Container(
-              width: double.infinity,
-              height: 50.0.h,
-              decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+      child: Row(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () => swapTabBar(ProductTapBar.SHOP),
+              child: Container(
+                width: double.infinity,
+                height: 50.0.h,
+                decoration: BoxDecoration(
                     color: state.productTapBar == ProductTapBar.SHOP
                         ? ColorName.amber
                         : ColorName.paleGray,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0.r))
-              ),
-              child: Center(
-                  child: Text(
-                    'Shop',
-                    style: easyTheme.textTheme.headlineMedium!.copyWith(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+                child: Center(
+                    child: Text(
+                  'Shop',
+                  style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                       fontSize: 18.0.sp,
                       color: state.productTapBar == ProductTapBar.SHOP
                           ? ColorName.white
                           : ColorName.blueGray),
                 )),
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: GestureDetector(
-            onTap: ()=>swapTabBar(ProductTapBar.SWAP),
-            child: Container(
-              width: double.infinity,
-              height: 50.0.h,
-              decoration: BoxDecoration(
+          Expanded(
+            child: GestureDetector(
+              onTap: () => swapTabBar(ProductTapBar.SWAP),
+              child: Container(
+                width: double.infinity,
+                height: 50.0.h,
+                decoration: BoxDecoration(
                     color: state.productTapBar == ProductTapBar.SWAP
                         ? ColorName.amber
                         : ColorName.paleGray,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0.r))
-              ),
-              child: Center(
-                  child: Text(
-                    'Swap',
-                    style: easyTheme.textTheme.headlineMedium!.copyWith(
-                      fontSize: 18.0.sp,
-                      color: state.productTapBar == ProductTapBar.SWAP
-                          ? ColorName.white
-                          : ColorName.blueGray,),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+                child: Center(
+                    child: Text(
+                  'Swap',
+                  style: context.easyTheme.textTheme.headlineMedium!.copyWith(
+                    fontSize: 18.0.sp,
+                    color: state.productTapBar == ProductTapBar.SWAP
+                        ? ColorName.white
+                        : ColorName.blueGray,
+                  ),
                 )),
-
+              ),
             ),
           ),
-        ),
-      ],),
+        ],
+      ),
     );
   }
 
-  void swapTabBar(ProductTapBar productTapBar){
-    MyProductBloc.get.add(SwapTabBarProductTypeEvent(productTapBar: productTapBar));
+  void swapTabBar(ProductTapBar productTapBar) {
+    MyProFuncBloc.get
+        .add(SwapTabBarProductTypeEvent(productTapBar: productTapBar));
   }
-
-
 }

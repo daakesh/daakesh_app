@@ -14,40 +14,63 @@ class LoginMannerScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Spacer(flex: 5,),
+              const Spacer(
+                flex: 5,
+              ),
               const Center(child: DaakeshLogoWidget()),
-              const Spacer(flex: 6,),
+              const Spacer(
+                flex: 6,
+              ),
               Padding(
-                padding: const EdgeInsetsDirectional.only(start: 16.0,end:26.0 ),
+                padding: EdgeInsetsDirectional.only(start: 16.0.w, end: 26.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'LOGIN',
-                      style: easyTheme.textTheme.headlineLarge,
+                      context.locale.login_manner_title,
+                      style: context.easyTheme.textTheme.headlineLarge!
+                          .copyWith(fontSize: 40.0.sp),
                     ),
-                    const SizedBox(height: 20.86,),
+                    SizedBox(
+                      height: 20.86.h,
+                    ),
                     Text(
-                      'Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',
-                      style: easyTheme.textTheme.bodyMedium,
+                      context.locale.login_manner_instruction,
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 18.0.sp),
                     ),
                   ],
                 ),
               ),
-              const Spacer(flex: 3,),
-              Center(child: DefaultButtonWidget(onPressed: onLoginWithEmail, text: 'EMAIL',)),
-              const Spacer(flex: 1,),
+              const Spacer(
+                flex: 3,
+              ),
+              Center(
+                  child: DefaultButtonWidget(
+                onPressed: onLoginWithEmail,
+                text: context.locale.login_manner_button_title,
+              )),
+              const Spacer(
+                flex: 1,
+              ),
               Center(
                 child: Text(
-                  'OR',
-                  style: easyTheme.textTheme.bodyMedium,
+                  context.locale.or_text_title,
+                  style: context.easyTheme.textTheme.bodyMedium!
+                      .copyWith(fontSize: 18.0.sp),
                 ),
               ),
-              const Spacer(flex: 1,),
+              const Spacer(
+                flex: 1,
+              ),
               const ThirdPartyAuthenticationWidget(),
-              const Spacer(flex: 1,),
+              const Spacer(
+                flex: 1,
+              ),
               const CreateAccountWidget(),
-              const Spacer(flex: 2,),
+              const Spacer(
+                flex: 2,
+              ),
             ],
           ),
         ),
@@ -55,8 +78,5 @@ class LoginMannerScreen extends StatelessWidget {
     );
   }
 
-  void onLoginWithEmail()=>openNewPage(const LoginScreen());
-
-
-
+  void onLoginWithEmail() => Utils.openNewPage(const LoginScreen());
 }

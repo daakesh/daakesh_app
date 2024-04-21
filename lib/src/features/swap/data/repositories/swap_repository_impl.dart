@@ -8,64 +8,110 @@ class SwapRepositoryImpl implements SwapRepository {
   Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
     return await getIt.get<SwapDatasource>().getAdvertisementData();
   }
+
   @override
   Future<Either<Failure, ValidResponse>> getSectionData() async {
     return await getIt.get<SwapDatasource>().getSectionData();
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(int secID,int page) async {
-    return await getIt.get<SwapDatasource>().getCategoryBySectionID(secID,page);
+  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
+      int secID, int page) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .getCategoryBySectionID(secID, page);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
+      int catID, SwapFilterDataModel swapFilterDataModel, int page) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .getSubCategoryByCatID(catID, swapFilterDataModel, page);
+  }
+
   @override
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
     return await getIt.get<SwapDatasource>().getHandmadeData(page);
   }
+
   @override
   Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
     return await getIt.get<SwapDatasource>().getBrandsData(page);
   }
+
   @override
   Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
     return await getIt.get<SwapDatasource>().getTodayItemsData(page);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
-    return await getIt.get<SwapDatasource>().searchOnItems(searchValue,page,perPage);
+  Future<Either<Failure, ValidResponse>> searchOnItems(
+      String searchValue, int page, int perPage) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .searchOnItems(searchValue, page, perPage);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getMySwapProduct(int page) async {
+    return await getIt.get<SwapDatasource>().getMySwapProduct(page);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> sendOffer(
+      String sourceItem,
+      String offerItem,
+      String comment,
+      String sourceUser,
+      String offerUser) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .sendOffer(sourceItem, offerItem, comment, sourceUser, offerUser);
+  }
+
   ///Comment API.
   @override
-  Future<Either<Failure, ValidResponse>> addComment(int userId, int itemId, String commentDesc) async{
-    return await getIt.get<SwapDatasource>().addComment(userId,itemId,commentDesc);
+  Future<Either<Failure, ValidResponse>> addComment(
+      int userId, int itemId, String commentDesc) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .addComment(userId, itemId, commentDesc);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> editComments(int id, String commentDesc) async{
-    return await getIt.get<SwapDatasource>().editComments(id,commentDesc);
+  Future<Either<Failure, ValidResponse>> editComments(
+      int id, String commentDesc) async {
+    return await getIt.get<SwapDatasource>().editComments(id, commentDesc);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async{
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
     return await getIt.get<SwapDatasource>().getCommentsByItem(itemID);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> removeComments(int id) async{
+  Future<Either<Failure, ValidResponse>> removeComments(int id) async {
     return await getIt.get<SwapDatasource>().removeComments(id);
   }
+
   ///Rate API
   @override
-  Future<Either<Failure, ValidResponse>> addRate(int itemId,int userId,int catID,int rateValue) async{
-    return await getIt.get<SwapDatasource>().addRate(itemId,userId,catID,rateValue);
+  Future<Either<Failure, ValidResponse>> addRate(
+      int itemId, int userId, int catID, int rateValue) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .addRate(itemId, userId, catID, rateValue);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> getRateByItem(int itemId,int userId) async{
-    return await getIt.get<SwapDatasource>().getRateByItem(itemId,userId);
-
+  Future<Either<Failure, ValidResponse>> getRateByItem(
+      int itemId, int userId) async {
+    return await getIt.get<SwapDatasource>().getRateByItem(itemId, userId);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> editRate(int id,int rateValue) async{
-    return await getIt.get<SwapDatasource>().editRate(id,rateValue);
+  Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue) async {
+    return await getIt.get<SwapDatasource>().editRate(id, rateValue);
   }
-
-
-
-
-
 }

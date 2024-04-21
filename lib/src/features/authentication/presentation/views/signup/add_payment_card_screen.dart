@@ -15,23 +15,40 @@ class AddPaymentCardScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 110.0,),
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(start: 38.0),
-                  child: Align(alignment: AlignmentDirectional.centerStart,child: DaakeshLogoWidget()),
+                const Spacer(flex: 1),
+                const DaakeshLogoWidget(),
+                const Spacer(
+                  flex: 1,
                 ),
-                const Spacer(flex: 1,),
-                Assets.svg.creditCardLogoIcon.svg(height:167.0 ,width:216.0,),
-                const SizedBox(height: 35.0,),
-                Text('Add Your Payment Card',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 28.0)),
-                const SizedBox(height: 9.0,),
-                Text('Shop With A Variety Of Products From Daakesh',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 15,)),
-                const Spacer(flex: 1,),
-                DefaultButtonWidget(text: 'ADD PAYMENT CARD', onPressed: addPaymentCard),
-                const SizedBox(height: 9.0,),
-                OutlineButtonWidget(text: 'LATER', onPressed: onLater),
-                const SizedBox(height: 72.0,),
-
+                Assets.svg.creditCardLogoIcon.svg(),
+                SizedBox(
+                  height: 35.0.h,
+                ),
+                Text(context.locale.add_payment_card_title,
+                    style: context.easyTheme.textTheme.headlineMedium!
+                        .copyWith(fontSize: 28.0.sp)),
+                SizedBox(
+                  height: 9.0.h,
+                ),
+                Text(context.locale.add_payment_card_instruction,
+                    style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 15.0.sp,
+                    )),
+                const Spacer(
+                  flex: 1,
+                ),
+                DefaultButtonWidget(
+                    text: context.locale.add_payment_button_title,
+                    onPressed: addPaymentCard),
+                SizedBox(
+                  height: 9.0.h,
+                ),
+                OutlineButtonWidget(
+                    text: context.locale.later_button_title,
+                    onPressed: onLater),
+                SizedBox(
+                  height: 72.0.h,
+                ),
               ],
             ),
           ),
@@ -39,11 +56,12 @@ class AddPaymentCardScreen extends StatelessWidget {
       ),
     );
   }
-  void addPaymentCard(){
-    openNewPage(RegisterCardInfoScreen());
-  }
-  void onLater(){
-    openNewPage(const MainScreen(),popPreviousPages: true);
 
+  void addPaymentCard() {
+    Utils.openNewPage(RegisterCardInfoScreen());
+  }
+
+  void onLater() {
+    Utils.openNewPage(const MainScreen(), popPreviousPages: true);
   }
 }

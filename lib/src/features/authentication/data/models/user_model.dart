@@ -13,20 +13,20 @@ class UserModel {
   String? city;
   String? address;
   UserModel({
-        this.id,
-        this.name,
-        this.phoneNumber,
-        this.password,
-        this.active,
-        this.userType,
-        this.token,
-        this.email,
-        this.img,
-        this.deviceToken,
-        this.country,
-        this.city,
-        this.address,
-      });
+    this.id,
+    this.name,
+    this.phoneNumber,
+    this.password,
+    this.active,
+    this.userType,
+    this.token,
+    this.email,
+    this.img,
+    this.deviceToken,
+    this.country,
+    this.city,
+    this.address,
+  });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -43,5 +43,4 @@ class UserModel {
     deviceToken = json['city'];
     deviceToken = json['address'];
   }
-
 }

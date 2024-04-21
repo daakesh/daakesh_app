@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 enum AuthStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
 
-extension AuthStateStatusX on AuthStateStatus{
+extension AuthStateStatusX on AuthStateStatus {
   bool get isInitial => this == AuthStateStatus.INITIAL;
   bool get isSuccess => this == AuthStateStatus.SUCCESS;
   bool get isError => this == AuthStateStatus.ERROR;
@@ -21,13 +21,14 @@ class AuthState extends Equatable {
   final String flagEmoji;
   final String phoneCode;
   final String phoneFlag;
+
   ///
   final String verificationId;
   final bool rememberMeValue;
+
   ///
   final String emailController;
   final String passwordController;
-
 
   const AuthState({
     this.authStateStatus = AuthStateStatus.INITIAL,
@@ -63,7 +64,6 @@ class AuthState extends Equatable {
     bool? rememberMeValue,
     String? emailController,
     String? passwordController,
-
   }) {
     return AuthState(
       authStateStatus: authStateStatus ?? this.authStateStatus,
@@ -97,6 +97,7 @@ class AuthState extends Equatable {
         flagEmoji,
         phoneCode,
         phoneFlag,
+
         ///
         verificationId,
         rememberMeValue,

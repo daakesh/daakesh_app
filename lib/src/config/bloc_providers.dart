@@ -5,15 +5,31 @@ import '../features/features.export.dart';
 MultiBlocProvider listOfBloc({Widget? child}) {
   return MultiBlocProvider(
     providers: [
+      ///Auth Blocs
       BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
       BlocProvider<ForgetPassBloc>(create: (_) => ForgetPassBloc()),
-      ///
+      BlocProvider<UserDataBloc>(create: (_) => UserDataBloc()),
+
+      ///Profile Blocs
       BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
-      ///
+      BlocProvider<PersonalInfoBloc>(create: (_) => PersonalInfoBloc()),
+      BlocProvider<ComplaintBloc>(create: (_) => ComplaintBloc()),
+      BlocProvider<ContactInfoBloc>(create: (_) => ContactInfoBloc()),
+
+      ///My Order-Blocs
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
-      ///
-      BlocProvider<MyProductBloc>(create: (_) => MyProductBloc()),
-      ///
+      BlocProvider<SellOrderBloc>(create: (_) => SellOrderBloc()),
+      BlocProvider<MySwapOrderBloc>(create: (_) => MySwapOrderBloc()),
+
+      ///My Product-Blocs
+      BlocProvider<MyProBloc>(create: (_) => MyProBloc()),
+      BlocProvider<MySwapProBloc>(create: (_) => MySwapProBloc()),
+      BlocProvider<ProDetailsBloc>(create: (_) => ProDetailsBloc()),
+      BlocProvider<MyProFuncBloc>(create: (_) => MyProFuncBloc()),
+      BlocProvider<AddProBloc>(create: (_) => AddProBloc()),
+      BlocProvider<SellerInfoBloc>(create: (_) => SellerInfoBloc()),
+
+      ///Home Blocs
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
       BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
       BlocProvider<SectionsBloc>(create: (_) => SectionsBloc()),
@@ -22,21 +38,26 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<TodayDealsBloc>(create: (_) => TodayDealsBloc()),
       BlocProvider<PassDataBloc>(create: (_) => PassDataBloc()),
       BlocProvider<AdvBloc>(create: (_) => AdvBloc()),
+      BlocProvider<ShippingBloc>(create: (_) => ShippingBloc()),
+      BlocProvider<CartBloc>(create: (_) => CartBloc()),
+      BlocProvider<FilterBloc>(create: (_) => FilterBloc()),
+
       ///BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<RateBloc>(create: (_) => RateBloc()),
 
-      ///
+      ///Swap Blocs
       BlocProvider<SwapBloc>(create: (_) => SwapBloc()),
       BlocProvider<SwapSearchBloc>(create: (_) => SwapSearchBloc()),
       BlocProvider<SwapSectionsBloc>(create: (_) => SwapSectionsBloc()),
       BlocProvider<TrendDealsBloc>(create: (_) => TrendDealsBloc()),
       BlocProvider<SwapPassDataBloc>(create: (_) => SwapPassDataBloc()),
       BlocProvider<SwapAdvBloc>(create: (_) => SwapAdvBloc()),
+      BlocProvider<SwapProBloc>(create: (_) => SwapProBloc()),
+      BlocProvider<SwapFilterBloc>(create: (_) => SwapFilterBloc()),
+
       ///BlocProvider<SwapCommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<SwapRateBloc>(create: (_) => RateBloc()),
-
     ],
     child: child!,
   );
 }
-

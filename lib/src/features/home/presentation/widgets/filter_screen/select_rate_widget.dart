@@ -11,22 +11,38 @@ class SelectRateWidget extends StatelessWidget {
       width: double.infinity,
       height: 42.0,
       decoration: const BoxDecoration(
-          color: ColorName.sliver,
-          borderRadius: BorderRadius.all(
+        color: ColorName.sliver,
+        borderRadius: BorderRadius.all(
           Radius.circular(4.0),
         ),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          StarTypeWidget(index: 1, title: 'All',isAllType: true,),
-          VerticalDividerWidget(),
-          StarTypeWidget(index: 2, title: '2.0',),
-          VerticalDividerWidget(),
-          StarTypeWidget(index: 3, title: '3.0',),
-          VerticalDividerWidget(),
-          StarTypeWidget(index: 4, title: '4.0',),
-          VerticalDividerWidget(),
-          StarTypeWidget(index: 5, title: '5.0',),
+          StarTypeWidget(
+            index: FilterRate.ALL.index,
+            title: 'All',
+            isAllType: true,
+          ),
+          const VerticalDividerWidget(),
+          StarTypeWidget(
+            index: FilterRate.TOWSTARS.index,
+            title: '2.0',
+          ),
+          const VerticalDividerWidget(),
+          StarTypeWidget(
+            index: FilterRate.THREESTARS.index,
+            title: '3.0',
+          ),
+          const VerticalDividerWidget(),
+          StarTypeWidget(
+            index: FilterRate.FOURSTARS.index,
+            title: '4.0',
+          ),
+          const VerticalDividerWidget(),
+          StarTypeWidget(
+            index: FilterRate.FIVESTARS.index,
+            title: '5.0',
+          ),
         ],
       ),
     );
@@ -47,15 +63,16 @@ class StarTypeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+    return BlocBuilder<FilterBloc, FilterState>(builder: (context, state) {
       return isAllType
           ? Expanded(
               child: GestureDetector(
-                onTap: ()=>HomeBloc.get.add(SetFilterDataEvent(rateTypeIndex: index)),
+                onTap: () =>
+                    FilterBloc.get.add(SetFilterDataEvent(rate: index)),
                 child: Container(
                   width: 50.0,
                   decoration: BoxDecoration(
-                      color: index == state.rateIndex
+                      color: index == state.rate
                           ? ColorName.amber
                           : ColorName.sliver,
                       borderRadius:
@@ -63,9 +80,10 @@ class StarTypeWidget extends StatelessWidget {
                   child: Center(
                     child: Text(
                       title,
-                      style: easyTheme.textTheme.bodyMedium!.copyWith(
-                          fontSize: 18.0,
-                          color: ColorName.black.withOpacity(0.5)),
+                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                        fontSize: 18.0,
+                        color: ColorName.black.withOpacity(0.5),
+                      ),
                     ),
                   ),
                 ),
@@ -73,11 +91,12 @@ class StarTypeWidget extends StatelessWidget {
             )
           : Expanded(
               child: GestureDetector(
-                onTap: ()=>HomeBloc.get.add(SetFilterDataEvent(rateTypeIndex: index)),
+                onTap: () =>
+                    FilterBloc.get.add(SetFilterDataEvent(rate: index)),
                 child: Container(
                   width: 50.0,
                   decoration: BoxDecoration(
-                      color: index == state.rateIndex
+                      color: index == state.rate
                           ? ColorName.amber
                           : ColorName.sliver,
                       borderRadius:
@@ -87,7 +106,7 @@ class StarTypeWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.star,
-                            color: index == state.rateIndex
+                            color: index == state.rate
                                 ? ColorName.white
                                 : ColorName.amber),
                         const SizedBox(
@@ -95,9 +114,10 @@ class StarTypeWidget extends StatelessWidget {
                         ),
                         Text(
                           title,
-                          style: easyTheme.textTheme.bodyMedium!.copyWith(
-                              fontSize: 18.0,
-                              color: ColorName.black.withOpacity(0.5)),
+                          style: context.easyTheme.textTheme.bodyMedium!
+                              .copyWith(
+                                  fontSize: 18.0,
+                                  color: ColorName.black.withOpacity(0.5)),
                         ),
                       ],
                     ),

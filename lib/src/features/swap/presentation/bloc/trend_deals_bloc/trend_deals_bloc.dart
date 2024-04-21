@@ -7,16 +7,17 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
     on<GetTrendDealsDataEvent>(_getTodayDealsData);
   }
 
-  static TrendDealsBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+  static TrendDealsBloc get get => BlocProvider.of(Utils.currentContext);
+
   ///Event to get Brands data at [HomeDataWidget]
-  FutureOr<void> _getTodayDealsData(GetTrendDealsDataEvent event, Emitter<TrendDealsState> emit) async{
+  FutureOr<void> _getTodayDealsData(
+      GetTrendDealsDataEvent event, Emitter<TrendDealsState> emit) async {
     if (event.isSeeMore) {
       emit(state.copyWith(
         currentPage: state.currentPage + 1,
-        swapTodayDealsStateStatus:SwapTodayDealsStateStatus.LOADINGMORE,
+        swapTodayDealsStateStatus: SwapTodayDealsStateStatus.LOADINGMORE,
       ));
-    }
-    else{
+    } else {
       emit(state.copyWith(
         swapTodayDealsStateStatus: SwapTodayDealsStateStatus.LOADING,
         trendDealsListData: [],
@@ -24,36 +25,36 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
       ));
     }
 
-    final result = await getIt.get<SwapUseCases>().getTodayItemsData(state.currentPage);
+    final result =
+        await getIt.get<SwapUseCases>().getTodayItemsData(state.currentPage);
     result.fold((l) {
-      emit(state.copyWith(swapTodayDealsStateStatus: SwapTodayDealsStateStatus.ERROR));
+      emit(state.copyWith(
+          swapTodayDealsStateStatus: SwapTodayDealsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
       TrendDealsModel trendDealsModel = TrendDealsModel.fromJson(r.data);
       int lastPage = trendDealsModel.data!.lastPage!;
-      List<TrendDealsItem> newResultList = trendDealsModel.data!.handmadeItemList!.toList();
-      List<TrendDealsItem> trendDealListData = state.trendDealsListData.toList();
-      if(newResultList.isEmpty){
+      List<TrendDealsItem> newResultList =
+          trendDealsModel.data!.handmadeItemList!.toList();
+      List<TrendDealsItem> trendDealListData =
+          state.trendDealsListData.toList();
+      if (newResultList.isEmpty) {
         emit(state.copyWith(
           swapTodayDealsStateStatus: SwapTodayDealsStateStatus.NULL,
-          isMoreData:lastPage == state.currentPage,
+          isMoreData: lastPage == state.currentPage,
         ));
         return;
       }
       trendDealListData.addAll(newResultList);
       emit(state.copyWith(
         swapTodayDealsStateStatus: SwapTodayDealsStateStatus.SUCCESS,
-        trendDealsListData:  trendDealListData,
-        isMoreData:lastPage == state.currentPage,
+        trendDealsListData: trendDealListData,
+        isMoreData: lastPage == state.currentPage,
       ));
     });
-
   }
-
 }
-
-

@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../../src.export.dart';
 
-class FirebaseAuthentication{
+class FirebaseAuthentication {
   static final firebaseAuth = FirebaseAuth.instance;
-  static int? _resendToken ;
+  static int? _resendToken;
 
-  static void verifyPhoneNumber(String phoneNumber,AuthManner authManner) async{
-    try{
+  static void verifyPhoneNumber(
+      String phoneNumber, AuthManner authManner, BuildContext context) async {
+    try {
       await firebaseAuth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
@@ -18,43 +19,50 @@ class FirebaseAuthentication{
           debugPrint("ERROR $error");
         },
         codeSent: (String verificationId, int? resendToken) {
-          if(authManner.isSignUpIn){
-          AuthBloc.get.add(SetVerificationIdEvent(verificationId: verificationId));
+          if (authManner.isSignUpIn) {
+            AuthBloc.get
+                .add(SetVerificationIdEvent(verificationId: verificationId));
           }
 
-          if(authManner.isForgetPassword){
-          ForgetPassBloc.get.add(PutVerificationIdEvent(verificationId: verificationId));
+          if (authManner.isForgetPassword) {
+            ForgetPassBloc.get
+                .add(PutVerificationIdEvent(verificationId: verificationId));
           }
 
           _resendToken = resendToken;
           ProgressCircleDialog.dismiss();
-          ShowToastSnackBar.showSnackBars(message: 'Code sent');
-          openNewPage(OTPScreen(authManner: authManner));
+          Future.delayed(Duration.zero).then((value) =>
+              ShowToastSnackBar.showSnackBars(
+                  message: context.locale.code_sent_title));
+          Utils.openNewPage(OTPScreen(authManner: authManner));
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
-    }catch(error){
+    } catch (error) {
       ProgressCircleDialog.dismiss();
       ShowToastSnackBar.showSnackBars(message: error.toString());
     }
   }
 
-  static void verificationCompleted(String verificationId,String smsCode,AuthManner authManner)async{
+  static void verificationCompleted(String verificationId, String smsCode,
+      AuthManner authManner, BuildContext context) async {
     ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     try {
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: smsCode);
       await firebaseAuth.signInWithCredential(credential);
       ProgressCircleDialog.dismiss();
-      if(authManner.isSignUpIn){
-        AuthBloc.get.add(ActivateUserEvent());
-        user.saveUserToken;
-        openNewPage(const VerificationScreen(), popPreviousPages: true);
+      if (authManner.isSignUpIn) {
+        Future.delayed(Duration.zero).then(
+            (value) => AuthBloc.get.add(ActivateUserEvent(context: context)));
+        GetItUtils.user.saveUserToken;
+        Utils.openNewPage(const VerificationScreen(), popPreviousPages: true);
       }
-      if(authManner.isForgetPassword){
-        openNewPage(const VerificationCompleteScreen(), popPreviousPages: true);
+      if (authManner.isForgetPassword) {
+        Utils.openNewPage(const VerificationCompleteScreen(),
+            popPreviousPages: true);
       }
-
     } catch (error) {
       ProgressCircleDialog.dismiss();
       ShowToastSnackBar.showSnackBars(message: error.toString());
@@ -62,10 +70,10 @@ class FirebaseAuthentication{
     }
   }
 
-  static void resendSMSCode(String phoneNumber) async{
+  static void resendSMSCode(String phoneNumber, BuildContext context) async {
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 2));
-    try{
+    try {
       await firebaseAuth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
@@ -75,12 +83,12 @@ class FirebaseAuthentication{
         forceResendingToken: _resendToken,
       );
       ProgressCircleDialog.dismiss();
-      ShowToastSnackBar.showSnackBars(message: 'Code resent');
-
-    }catch(error){
+      Future.delayed(Duration.zero).then((value) =>
+          ShowToastSnackBar.showSnackBars(
+              message: context.locale.code_resent_title));
+    } catch (error) {
       ProgressCircleDialog.dismiss();
       debugPrint(error.toString());
     }
   }
-
 }

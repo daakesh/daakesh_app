@@ -8,64 +8,125 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
     return await getIt.get<HomeDatasource>().getAdvertisementData();
   }
+
   @override
   Future<Either<Failure, ValidResponse>> getSectionData() async {
     return await getIt.get<HomeDatasource>().getSectionData();
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(int secID,int page) async {
-    return await getIt.get<HomeDatasource>().getCategoryBySectionID(secID,page);
+  Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
+      int secID, int page) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getCategoryBySectionID(secID, page);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
+      int catID, FilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getSubCategoryByCatID(catID, filterDataModel, page);
+  }
+
   @override
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
     return await getIt.get<HomeDatasource>().getHandmadeData(page);
   }
+
   @override
   Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
     return await getIt.get<HomeDatasource>().getBrandsData(page);
   }
+
   @override
   Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
     return await getIt.get<HomeDatasource>().getTodayItemsData(page);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> searchOnItems(String searchValue,int page,int perPage) async {
-    return await getIt.get<HomeDatasource>().searchOnItems(searchValue,page,perPage);
+  Future<Either<Failure, ValidResponse>> searchOnItems(
+      String searchValue, int page, int perPage) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .searchOnItems(searchValue, page, perPage);
   }
+
   ///Comment API.
   @override
-  Future<Either<Failure, ValidResponse>> addComment(int userId, int itemId, String commentDesc) async{
-    return await getIt.get<HomeDatasource>().addComment(userId,itemId,commentDesc);
+  Future<Either<Failure, ValidResponse>> addComment(
+      int userId, int itemId, String commentDesc) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .addComment(userId, itemId, commentDesc);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> editComments(int id, String commentDesc) async{
-    return await getIt.get<HomeDatasource>().editComments(id,commentDesc);
+  Future<Either<Failure, ValidResponse>> editComments(
+      int id, String commentDesc) async {
+    return await getIt.get<HomeDatasource>().editComments(id, commentDesc);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async{
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
     return await getIt.get<HomeDatasource>().getCommentsByItem(itemID);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> removeComments(int id) async{
+  Future<Either<Failure, ValidResponse>> removeComments(int id) async {
     return await getIt.get<HomeDatasource>().removeComments(id);
   }
+
   ///Rate API
   @override
-  Future<Either<Failure, ValidResponse>> addRate(int itemId,int userId,int catID,int rateValue) async{
-    return await getIt.get<HomeDatasource>().addRate(itemId,userId,catID,rateValue);
+  Future<Either<Failure, ValidResponse>> addRate(
+      int itemId, int userId, int catID, int rateValue) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .addRate(itemId, userId, catID, rateValue);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> getRateByItem(int itemId,int userId) async{
-    return await getIt.get<HomeDatasource>().getRateByItem(itemId,userId);
-
+  Future<Either<Failure, ValidResponse>> getRateByItem(
+      int itemId, int userId) async {
+    return await getIt.get<HomeDatasource>().getRateByItem(itemId, userId);
   }
+
   @override
-  Future<Either<Failure, ValidResponse>> editRate(int id,int rateValue) async{
-    return await getIt.get<HomeDatasource>().editRate(id,rateValue);
+  Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue) async {
+    return await getIt.get<HomeDatasource>().editRate(id, rateValue);
   }
 
+  @override
+  Future<Either<Failure, ValidResponse>> addToCart(
+      String itemID, String country, String address) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .addToCart(itemID, country, address);
+  }
 
+  @override
+  Future<Either<Failure, ValidResponse>> getCartItemsByUser() async {
+    return await getIt.get<HomeDatasource>().getCartItemsByUser();
+  }
 
+  @override
+  Future<Either<Failure, ValidResponse>> removeCartItem(String itemID) async {
+    return await getIt.get<HomeDatasource>().removeCartItem(itemID);
+  }
 
+  @override
+  Future<Either<Failure, ValidResponse>> updateCartItem(
+      String id, String userID, String itemID, String quantity) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .updateCartItem(id, userID, itemID, quantity);
+  }
 
+  @override
+  Future<Either<Failure, ValidResponse>> addOrder(
+      List<Map<String, dynamic>> orderList) async {
+    return await getIt.get<HomeDatasource>().addOrder(orderList);
+  }
 }

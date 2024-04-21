@@ -1,4 +1,4 @@
-class SubCategory {
+class SubCategory  {
   int? id;
   String? name;
   String? description;

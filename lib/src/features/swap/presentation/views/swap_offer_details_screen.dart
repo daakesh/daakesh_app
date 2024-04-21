@@ -1,6 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class SwapOfferDetailsScreen extends StatelessWidget {
@@ -10,199 +9,332 @@ class SwapOfferDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorName.whiteSmoke,
-      body: CustomScrollView(
-        slivers: [
-          const SliverToBoxAdapter(child:SizedBox(height: 8.0,),),
-          SliverToBoxAdapter(child:Container(
-            width: double.infinity,
-            margin: const EdgeInsetsDirectional.symmetric(horizontal: 21.0),
-            decoration: const BoxDecoration(
-                color: ColorName.white,
-                borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.16),
-                    offset: Offset(0,3),
-                    blurRadius: 6.0,
-                  )
-                ]
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(width: 11.0,),
-                Expanded(
-                  child: Padding(
-                    padding:  const EdgeInsets.only(top: 32.0),
-                    child: Assets.png.glasses.image(),
-                  ),
-                ),
-                const SizedBox(width: 18.0,),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20.0,),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 20.0),
-                        child: Text('AquaOasis™ Cool Mist Humidefier (2.2L Water',
-                          style: easyTheme.textTheme.bodyMedium!.copyWith(
-                              fontSize: 20.0,
-                              color: ColorName.gray,
-                              overflow: TextOverflow.fade
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10.0,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Assets.svg.locationPinIcon.svg(color: ColorName.amber,height: 22.0,width: 15.0),
-                          const SizedBox(width: 6.0,),
-                          Expanded(child: Text('Swap In Amman, Jordan',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize:16.0),overflow:TextOverflow.fade ,)),
-                        ],),
-                      const SizedBox(height: 15.0,),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 6.0),
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(text: 'By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 20.0,color: ColorName.gray)),
-                              TextSpan(text: 'NF Store',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 20.0)),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 13.0),
-                        child: Align(
-                          alignment: AlignmentDirectional.centerEnd,
-                          child: TextButtonWidget(
-                            text: 'See Details',
-                            onPressed: () {},
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
-                    ],),
-                ),
-              ],),
-          ),),
-          const SliverToBoxAdapter(child:SizedBox(height: 8.0,),),
-          SliverToBoxAdapter(child: Center(child: Assets.png.swapIcon.image(width: 40.0,height: 40.0),),),
-          const SliverToBoxAdapter(child:SizedBox(height: 15.0,),),
-          SliverToBoxAdapter(
-            child: Container(
-              margin: const EdgeInsetsDirectional.only(start: 21.0,end: 21.0,bottom: 44.0),
-              padding: const EdgeInsetsDirectional.only(start: 22.0,bottom: 27.0,),
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                  color: ColorName.white,
-                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.16),
-                      offset: Offset(0, 3),
-                      blurRadius: 6.0,
-                    )
-                  ]),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        width: 11.0,
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 32.0),
-                          child:
-                          Assets.png.glasses.image(),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 18.0,
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Column(
+      body: BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
+        builder: (context, state) {
+          return CustomScrollView(
+            slivers: [
+              const SwapAppBarWidget(),
+              const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+              SliverToBoxAdapter(
+                child: state.trendDealsListData.isNotEmpty
+                    ? Container(
+                        width: double.infinity,
+                        margin: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 21.0),
+                        decoration: const BoxDecoration(
+                            color: ColorName.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.16),
+                                offset: Offset(0, 3),
+                                blurRadius: 6.0,
+                              )
+                            ]),
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.only(end: 30.0),
-                              child: Text(
-                                'AquaOasis™ Cool Mist Humidefier (2.2L Water',
-                                maxLines: 3,
-                                style: easyTheme.textTheme.bodyMedium!.copyWith(
-                                    fontSize: 20.0,
-                                    color: ColorName.gray,
-                                    overflow: TextOverflow.ellipsis),
+                            const SizedBox(width: 11.0),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 32.0),
+                                child: CachedImage(
+                                    imageUrl: state.trendDealsListData.first
+                                        .itemImg!.first),
                               ),
                             ),
                             const SizedBox(
-                              height: 10.0,
+                              width: 18.0,
                             ),
-                            Container(
-                              constraints: const BoxConstraints(maxWidth: 66.0),
-                              decoration: BoxDecoration(
-                                color: ColorName.red,
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(4.0.r)),
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.only(
+                                        end: 20.0),
+                                    child: Text(
+                                      '${state.trendDealsListData.first.title}',
+                                      style: context
+                                          .easyTheme.textTheme.bodyMedium!
+                                          .copyWith(
+                                              fontSize: 20.0,
+                                              color: ColorName.gray,
+                                              overflow: TextOverflow.fade),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Assets.svg.locationPinIcon.svg(
+                                          color: ColorName.amber,
+                                          height: 22.0,
+                                          width: 15.0),
+                                      const SizedBox(
+                                        width: 6.0,
+                                      ),
+                                      Expanded(
+                                          child: Text(
+                                        '${context.locale.swap_offer_swap_in_title} ${state.trendDealsListData.first.citySwap}, ${state.trendDealsListData.first.countrySwap}',
+                                        style: context
+                                            .easyTheme.textTheme.bodyMedium!
+                                            .copyWith(fontSize: 16.0),
+                                        overflow: TextOverflow.fade,
+                                      )),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.only(
+                                        start: 6.0),
+                                    child: Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                              text: context
+                                                  .locale.swap_offer_by_title,
+                                              style: context.easyTheme.textTheme
+                                                  .bodyMedium!
+                                                  .copyWith(
+                                                      fontSize: 20.0,
+                                                      color: ColorName.gray)),
+                                          TextSpan(
+                                              text:
+                                                  '${state.trendDealsListData.first.user!.name}',
+                                              style: context.easyTheme.textTheme
+                                                  .bodyMedium!
+                                                  .copyWith(fontSize: 20.0)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.only(
+                                        end: 13.0),
+                                    child: Align(
+                                      alignment: AlignmentDirectional.centerEnd,
+                                      child: TextButtonWidget(
+                                        text: context.locale
+                                            .swap_see_details_text_button,
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 12.0,
+                                  ),
+                                ],
                               ),
-                              child: Center(
-                                child: Text(
-                                  'SWAP',
-                                  textAlign: TextAlign.center,
-                                  style: easyTheme.textTheme.headlineMedium!
-                                      .copyWith(
-                                      fontSize: 14.0, color: ColorName.white),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 6.0,
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 34.0,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Your Comment',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 20.0,color: ColorName.black.withOpacity(0.5)),),
-                      const SizedBox(height: 13.0,),
-                       Padding(
-                         padding: const EdgeInsetsDirectional.only(end: 14.0),
-                         child: Text('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores',
-                         style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0,fontWeight: FontWeight.normal,color: ColorName.blueGray),
-                                               ),
-                       ),
-                  ],)
-                ],
+                      )
+                    : const SizedBox(),
               ),
-            ),
-          ),
-          const SliverToBoxAdapter(child:SizedBox(height: 15.0,),),
-
-          SliverToBoxAdapter(
-            child: Center(child: DefaultButtonWidget(text: 'CONTINUE',onPressed: onContinue)),
-          ),
-          const SliverToBoxAdapter(child:SizedBox(height: 50.0,),),
-        ],
+              const SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 8.0,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Center(
+                  child: Assets.png.swapIcon.image(width: 40.0, height: 40.0),
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 15.0,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: state.itemSelected.isNotEmpty
+                    ? Container(
+                        margin: const EdgeInsetsDirectional.only(
+                            start: 21.0, end: 21.0, bottom: 44.0),
+                        padding: const EdgeInsetsDirectional.only(
+                          start: 22.0,
+                          bottom: 27.0,
+                        ),
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            color: ColorName.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.16),
+                                offset: Offset(0, 3),
+                                blurRadius: 6.0,
+                              )
+                            ]),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  width: 11.0,
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 32.0),
+                                    child: CachedImage(
+                                        imageUrl: state
+                                            .itemSelected.first.itemImg!.first),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 18.0,
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 20.0,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsetsDirectional.only(
+                                                end: 30.0),
+                                        child: Text(
+                                          '${state.itemSelected.first.title}',
+                                          maxLines: 3,
+                                          style: context
+                                              .easyTheme.textTheme.bodyMedium!
+                                              .copyWith(
+                                                  fontSize: 20.0,
+                                                  color: ColorName.gray,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Container(
+                                        constraints: const BoxConstraints(
+                                            maxWidth: 66.0),
+                                        decoration: BoxDecoration(
+                                          color: ColorName.red,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(4.0.r)),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            context.locale.swap_offer_tag_title,
+                                            textAlign: TextAlign.center,
+                                            style: context.easyTheme.textTheme
+                                                .headlineMedium!
+                                                .copyWith(
+                                                    fontSize: 14.0,
+                                                    color: ColorName.white),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 6.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 34.0,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  context.locale.swap_offer_your_comment_title,
+                                  style: context.easyTheme.textTheme.bodyLarge!
+                                      .copyWith(
+                                          fontSize: 20.0,
+                                          color:
+                                              ColorName.black.withOpacity(0.5)),
+                                ),
+                                const SizedBox(
+                                  height: 13.0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.only(
+                                      end: 14.0),
+                                  child: Text(
+                                    state.comment.toString(),
+                                    style: context
+                                        .easyTheme.textTheme.bodyMedium!
+                                        .copyWith(
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.normal,
+                                            color: ColorName.blueGray),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    : const SizedBox(),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 15.0,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Center(
+                    child: DefaultButtonWidget(
+                        text: context.locale.swap_offer_continue_button_title,
+                        onPressed: () => onContinue(
+                              context,
+                              state.trendDealsListData.first.id.toString(),
+                              state.mySwapProductData.first.id.toString(),
+                              state.comment.toString(),
+                              state.trendDealsListData.first.user!.id
+                                  .toString(),
+                              ValueConstants.userId,
+                            ))),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 50.0,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  void onContinue() {
-    openNewPage(const ExchangeOfferScreen());
+  void onContinue(
+    BuildContext context,
+    String sourceItem,
+    String offerItem,
+    String comment,
+    String sourceUser,
+    String offerUser,
+  ) {
+    SwapBloc.get.add(SendOfferEvent(
+      context: context,
+      sourceItem: sourceItem,
+      offerItem: offerItem,
+      comment: comment,
+      sourceUser: sourceUser,
+      offerUser: offerUser,
+    ));
   }
 }

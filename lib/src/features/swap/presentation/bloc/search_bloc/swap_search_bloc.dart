@@ -9,8 +9,7 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
     on<SwapEmptySearchEvent>(_emptySearch);
   }
 
-  static SwapSearchBloc get get =>
-      BlocProvider.of(navigatorKey.currentState!.context);
+  static SwapSearchBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Action to search on items.
   FutureOr<void> _searchOnItems(
@@ -39,8 +38,10 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
       }
       SwapSearchModel searchModel = SwapSearchModel.fromJson(r.data);
       int lastPage = searchModel.data!.lastPage!;
-      List<SwapSearchResultModel> newResultList = searchModel.data!.data!.toList();
-      List<SwapSearchResultModel> swapSearchResultList = state.swapSearchResultList.toList();
+      List<SwapSearchResultModel> newResultList =
+          searchModel.data!.data!.toList();
+      List<SwapSearchResultModel> swapSearchResultList =
+          state.swapSearchResultList.toList();
       if (newResultList.isEmpty) {
         emit(state.copyWith(
           swapSearchStateStatus: SwapSearchStateStatus.NULL,

@@ -39,7 +39,7 @@ class HandmadeData {
 class HandmadeItem {
   int? id;
   String? description;
-  String? itemImg;
+  dynamic itemImg;
   String? date;
   String? title;
   String? type;
@@ -47,8 +47,8 @@ class HandmadeItem {
   String? city;
   String? year;
   String? condition;
-  int? price;
-  String? discount;
+  dynamic price;
+  double? discount;
   String? discountFrom;
   String? discountTo;
   String? country;
@@ -90,7 +90,7 @@ class HandmadeItem {
     city = json['City'];
     year = json['Year'];
     condition = json['Condition'];
-    price = json['Price'].toInt();
+    price = json['Price'];
     discount = json['discount'];
     discountFrom = json['discount_from'];
     discountTo = json['discount_to'];
@@ -100,9 +100,5 @@ class HandmadeItem {
     category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;
     brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
     subcategory = json['subcategory'] != null ? SubCategory.fromJson(json['subcategory']) : null;
-
-
-
-
   }
 }

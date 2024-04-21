@@ -5,8 +5,8 @@ import '../../../../src.export.dart';
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
   @override
-  Future<Either<Failure, ValidResponse>> onLogin(String phoneNumber,String passwordNumber) async {
-    return await getIt.get<AuthDatasource>().onLogin(phoneNumber,passwordNumber);
+  Future<Either<Failure, ValidResponse>> onLogin(String email,String passwordNumber) async {
+    return await getIt.get<AuthDatasource>().onLogin(email,passwordNumber);
   }
 
   @override
@@ -29,6 +29,11 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, ValidResponse>> getUserData() async{
     return await getIt.get<AuthDatasource>().getUserData();
+
+  }
+  @override
+  Future<Either<Failure, ValidResponse>> logout() async{
+    return await getIt.get<AuthDatasource>().logout();
 
   }
 

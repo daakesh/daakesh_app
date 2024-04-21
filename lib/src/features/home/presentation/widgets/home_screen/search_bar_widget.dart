@@ -9,7 +9,6 @@ class SearchBarWidget extends StatelessWidget {
     required this.state,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,20 +16,17 @@ class SearchBarWidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: ColorName.blueGray,
-        image:DecorationImage(
+        image: DecorationImage(
           image: AssetImage(Assets.png.authScreensBackground.path),
           alignment: AlignmentDirectional.centerEnd,
         ),
-
       ),
       child: Padding(
         padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 53.0,
-            ),
+            const SizedBox(height: 53.0),
             Center(
               child: DaakeshLogoWidget(
                 isLight: true,
@@ -40,33 +36,28 @@ class SearchBarWidget extends StatelessWidget {
             state.homeScreenState.isProductDetails ||
                     state.homeScreenState.isCart ||
                     state.homeScreenState.isSections ||
-                state.homeScreenState.isShopByBrands ||
-                state.homeScreenState.isHomemade ||
-                state.homeScreenState.isSubCategoryResult
-
+                    state.homeScreenState.isShopByBrands ||
+                    state.homeScreenState.isHomemade ||
+                    state.homeScreenState.isSubCategoryResult
                 ? IconButton(
-                onPressed: () =>onBack(state),
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: ColorName.white,
-                ))
+                    onPressed: () => onBack(state),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: ColorName.white,
+                    ))
                 : const SizedBox(),
-
           ],
         ),
       ),
     );
   }
 
-  void onBack(HomeState state){
-    if(state.homeScreenState.isSubCategoryResult){
-      HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SECTIONS));
+  void onBack(HomeState state) {
+    if (state.homeScreenState.isSubCategoryResult) {
       return;
     }
-    if(state.homeScreenState.isSections){
+    if (state.homeScreenState.isSections) {
       SectionsBloc.get.add(ResetVarEvent());
     }
-    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
   }
-
 }

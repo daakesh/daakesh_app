@@ -4,7 +4,7 @@ import '../../../../../src.export.dart';
 
 class TodayDealProduct extends StatelessWidget {
   final bool isDaakeshTodayDeal;
-  final HandmadeItem todayDealItem;
+  final TodayItem todayDealItem;
 
   const TodayDealProduct({
     super.key,
@@ -15,15 +15,17 @@ class TodayDealProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        HomeBloc.get.add(GetToTopScreenEvent());
-        HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.PRODUCTDETAILS));
-        HomeBloc.get.add(DetermentTodayDealEvent(isDaakeshTodayDeal:isDaakeshTodayDeal));
-
+      onTap: () {
+        PassDataBloc.get
+            .add(PassTodayDealDataEvent(todayDealItem: todayDealItem));
+        PassDataBloc.get.add(
+            DetermentTodayDealEvent(isDaakeshTodayDeal: isDaakeshTodayDeal));
+        Utils.openNavNewPage(context, MoreInfoProductScreen());
       },
       child: Column(
         children: [
           Container(
+            width: double.infinity,
             decoration: BoxDecoration(
               color: ColorName.lavenderGray,
               boxShadow: const [
@@ -33,39 +35,56 @@ class TodayDealProduct extends StatelessWidget {
                   color: Color.fromRGBO(0, 0, 0, 0.16),
                 ),
               ],
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0.r),topRight: Radius.circular(10.0.r)),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.0.r),
+                  topRight: Radius.circular(10.0.r)),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  constraints: BoxConstraints(maxWidth: 75.0.w),
-                  height: 22.0.h,
-                  margin:  const EdgeInsetsDirectional.only(top: 1.0, start: 4.0),
-                  padding:  EdgeInsets.only(top: 2.0.h),
-                  decoration: BoxDecoration(
-                    color: ColorName.red,
-                    borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0.h),
-                    child: Text(
-                      '23% OFF',
-                      textAlign: TextAlign.center,
-                      style: easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 14.0.sp, color: ColorName.white),
+                Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: 75.0.w),
+                    height: 22.0.h,
+                    margin:
+                        const EdgeInsetsDirectional.only(top: 1.0, start: 4.0),
+                    padding: EdgeInsets.only(top: 2.0.h),
+                    decoration: BoxDecoration(
+                      color: ColorName.red,
+                      borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
                     ),
+                    child: todayDealItem.discountPercentage != '0%'
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.0.h),
+                            child: Text(
+                              '${todayDealItem.discountPercentage} ${context.locale.home_off_title}',
+                              textAlign: TextAlign.center,
+                              style: context.easyTheme.textTheme.headlineMedium!
+                                  .copyWith(
+                                      fontSize: 14.0.sp,
+                                      color: ColorName.white),
+                            ),
+                          )
+                        : const SizedBox(),
                   ),
                 ),
                 CachedImage(
-                  imageUrl: todayDealItem.itemImg.toString(),
+                  imageUrl: todayDealItem.itemImg != null
+                      ? todayDealItem.itemImg!.first
+                      : '',
+                  height: 85.0,
+                  width: 85.0,
+                ),
+                const SizedBox(
+                  height: 12.0,
                 ),
               ],
             ),
           ),
           Container(
-            padding:EdgeInsetsDirectional.only(start: 16.0.w),
-            decoration:  BoxDecoration(
+            padding: EdgeInsetsDirectional.only(start: 16.0.w),
+            decoration: BoxDecoration(
               color: ColorName.white,
               boxShadow: const [
                 BoxShadow(
@@ -86,9 +105,9 @@ class TodayDealProduct extends StatelessWidget {
                   height: 2.0.h,
                 ),
                 Text(
-                  '${todayDealItem.description}',
+                  '${todayDealItem.title}\n',
                   maxLines: 2,
-                  style: easyTheme.textTheme.bodyMedium!.copyWith(
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                       fontSize: 14.0.sp,
                       color: ColorName.gray,
                       overflow: TextOverflow.ellipsis),
@@ -117,7 +136,10 @@ class TodayDealProduct extends StatelessWidget {
                     Flexible(
                       child: Text(
                         '5.9',
-                        style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 14.0.sp,overflow:TextOverflow.ellipsis ),
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(
+                                fontSize: 14.0.sp,
+                                overflow: TextOverflow.ellipsis),
                       ),
                     ),
                     SizedBox(
@@ -126,8 +148,11 @@ class TodayDealProduct extends StatelessWidget {
                     Flexible(
                       child: Text(
                         '(200)',
-                        style: easyTheme.textTheme.headlineMedium!
-                            .copyWith(fontSize: 13.0.sp, color: ColorName.gray,overflow:TextOverflow.ellipsis),
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(
+                                fontSize: 13.0.sp,
+                                color: ColorName.gray,
+                                overflow: TextOverflow.ellipsis),
                       ),
                     ),
                   ],
@@ -135,67 +160,103 @@ class TodayDealProduct extends StatelessWidget {
                 SizedBox(
                   height: 2.0.h,
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                        child: Text(
-                      '\$${todayDealItem.price}',
-                      style: easyTheme.textTheme.bodyMedium!
-                          .copyWith(fontSize: 20.0,fontWeight: FontWeight.w600),
-                      overflow: TextOverflow.ellipsis,
-                    )),
-                    Text('99 ',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 12.0, color: ColorName.gray,),),
-                    Text(
-                      '\$79.99',
-                      style: easyTheme.textTheme.headlineMedium!.copyWith(
-                          fontSize: 14.0.sp,
-                          decoration: TextDecoration.lineThrough,
-                          color: ColorName.gray,
+                todayDealItem.discountPercentage == '0%'
+                    ? Text(
+                        '\$${todayDealItem.priceAfterDiscount} ',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 20.0, fontWeight: FontWeight.w600),
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    : Row(
+                        children: [
+                          Flexible(
+                              child: Text(
+                            '\$${todayDealItem.priceAfterDiscount} ',
+                            style: context.easyTheme.textTheme.bodyMedium!
+                                .copyWith(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w600),
+                            overflow: TextOverflow.ellipsis,
+                          )),
+                          Text(
+                            '\$${todayDealItem.price}',
+                            style: context.easyTheme.textTheme.headlineMedium!
+                                .copyWith(
+                              fontSize: 14.0.sp,
+                              decoration: TextDecoration.lineThrough,
+                              color: ColorName.gray,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
                 const SizedBox(
                   height: 10.0,
                 ),
                 !isDaakeshTodayDeal
                     ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Assets.svg.creditCardIcon.svg(),
-                    Row(
-                      children: [
-                        Text('By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp, color: ColorName.gray)),
-                        DaakeshLogoWidget(width: 63.0.w,),
-                        SizedBox(width: 8.0.w),
-                      ],
-                    ),
-                  ],
-                )
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Assets.svg.creditCardIcon.svg(),
+                          Row(
+                            children: [
+                              Text(context.locale.home_by_title,
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                          fontSize: 13.0.sp,
+                                          color: ColorName.gray)),
+                              DaakeshLogoWidget(
+                                width: 63.0.w,
+                              ),
+                              SizedBox(width: 8.0.w),
+                            ],
+                          ),
+                        ],
+                      )
                     : Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.phone,color: ColorName.silverChalice,size: 20.0.sp,),
-                    SizedBox(width: 10.0.sp,),
-                    Expanded(
-                      child: SizedBox(
-                        width: 100.0.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('By ',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp, color: ColorName.gray)),
-                            Flexible(child: Text('NF Store',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 13.0.sp,overflow: TextOverflow.ellipsis))),
-                             SizedBox(width: 8.0.w,),
-                          ],
-                        ),
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: ColorName.silverChalice,
+                            size: 20.0.sp,
+                          ),
+                          SizedBox(
+                            width: 10.0.sp,
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              width: 100.0.w,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(context.locale.home_by_title,
+                                      style: context
+                                          .easyTheme.textTheme.bodyMedium!
+                                          .copyWith(
+                                              fontSize: 13.0.sp,
+                                              color: ColorName.gray)),
+                                  Flexible(
+                                      child: Text('${todayDealItem.user!.name}',
+                                          style: context
+                                              .easyTheme.textTheme.bodyMedium!
+                                              .copyWith(
+                                                  fontSize: 13.0.sp,
+                                                  overflow:
+                                                      TextOverflow.ellipsis))),
+                                  SizedBox(
+                                    width: 8.0.w,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10.0,)
+                const SizedBox(
+                  height: 10.0,
+                )
               ],
-
             ),
           ),
         ],
@@ -203,4 +264,3 @@ class TodayDealProduct extends StatelessWidget {
     );
   }
 }
-

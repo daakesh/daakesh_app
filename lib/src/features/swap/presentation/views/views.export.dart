@@ -1,5 +1,4 @@
 export 'send_offer_screen.dart';
-export 'swap_cart/swap_cart.export.dart';
 export 'swap_filter_screen.dart';
 export 'swap_screen.dart';
 export 'swap_more_info_screen.dart';

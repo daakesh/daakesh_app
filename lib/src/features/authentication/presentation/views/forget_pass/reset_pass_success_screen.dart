@@ -9,14 +9,15 @@ class ResetPassSuccessScreen extends StatefulWidget {
 }
 
 class _ResetPassSuccessScreenState extends State<ResetPassSuccessScreen> {
-
   @override
   void initState() {
     super.initState();
     Future.delayed(
       const Duration(seconds: 2),
-    ).then((value) => openNewPage(const LoginScreen(),popPreviousPages: true));
+    ).then((value) =>
+        Utils.openNewPage(const LoginScreen(), popPreviousPages: true));
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultBackgroundWidget(
@@ -28,23 +29,32 @@ class _ResetPassSuccessScreenState extends State<ResetPassSuccessScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Spacer(flex: 1,),
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(start: 56.0,end: 97.0),
-                  child: DaakeshLogoWidget(),
+                const Spacer(
+                  flex: 1,
                 ),
-                const Spacer(flex: 1,),
+                const Center(child: DaakeshLogoWidget()),
+                const Spacer(
+                  flex: 1,
+                ),
                 Container(
-                  width: 150.0,
-                  height: 150.0,
-                  decoration:BoxDecoration(
-                      image: DecorationImage(image: AssetImage(Assets.png.checkIcon.path))
-                  ),
+                  width: 150.0.w,
+                  height: 150.0.h,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(Assets.png.checkIcon.path))),
                 ),
-                const SizedBox(height: 19.0,),
-                Text('Reset Complete!',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 32.0)),
-                Text('Now You Can Start And Find Best Deals',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 17.0)),
-                const Spacer(flex: 2,),
+                SizedBox(
+                  height: 19.0.h,
+                ),
+                Text(context.locale.reset_pass_success_title,
+                    style: context.easyTheme.textTheme.headlineMedium!
+                        .copyWith(fontSize: 32.0.sp)),
+                Text(context.locale.reset_pass_success_instruction,
+                    style: context.easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontSize: 17.0.sp)),
+                const Spacer(
+                  flex: 2,
+                ),
               ],
             ),
           ),

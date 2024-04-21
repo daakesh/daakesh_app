@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class FloatingAddProductWidget extends StatelessWidget {
-  const FloatingAddProductWidget({super.key});
+  final TextEditingController searchController;
+  const FloatingAddProductWidget({super.key, required this.searchController});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      focusColor: ColorName.transparent,
-      highlightColor: ColorName.transparent,
-      splashColor: ColorName.transparent,
-      onTap: ()=>openNewPage(AddProInfoScreen()),
+    return GestureDetector(
+      onTap: () {
+        AddProBloc.get.add(AddEditStateEvent(adjustProduct: AdjustProduct.ADD));
+        Utils.openNewPage(const AddProInfoScreen());
+        MyProFuncBloc.get.add(EmptyProductSearchEvent(value: ''));
+        searchController.clear();
+      },
       child: SizedBox(
         width: 120.0.w,
         height: 120.0.h,
@@ -28,8 +31,7 @@ class FloatingAddProductWidget extends StatelessWidget {
                   BoxShadow(
                       offset: Offset(0, 3),
                       blurRadius: 6.0,
-                      color: Color.fromRGBO(0, 0, 0, 0.16)
-                  )
+                      color: Color.fromRGBO(0, 0, 0, 0.16))
                 ],
               ),
               child: Center(
@@ -45,7 +47,7 @@ class FloatingAddProductWidget extends StatelessWidget {
             ),
             Text(
               'Add Product',
-              style: easyTheme.textTheme.bodyLarge!.copyWith(
+              style: context.easyTheme.textTheme.bodyLarge!.copyWith(
                   fontSize: 18.0.sp, color: ColorName.black.withOpacity(0.36)),
             ),
           ],
@@ -54,4 +56,3 @@ class FloatingAddProductWidget extends StatelessWidget {
     );
   }
 }
-

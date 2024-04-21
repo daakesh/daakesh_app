@@ -2,23 +2,22 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-
 class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
   SectionsBloc() : super(const SectionsState()) {
     on<GetCategoryBySectionIDEvent>(_getCategoryBySectionID);
     on<ResetVarEvent>(_resetVarEvent);
   }
-  static SectionsBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+  static SectionsBloc get get => BlocProvider.of(Utils.currentContext);
 
   ///Event to get sections categories at [SectionScreen].
-  FutureOr<void> _getCategoryBySectionID(GetCategoryBySectionIDEvent event, Emitter<SectionsState> emit)async {
+  FutureOr<void> _getCategoryBySectionID(
+      GetCategoryBySectionIDEvent event, Emitter<SectionsState> emit) async {
     if (event.isSeeMore) {
       emit(state.copyWith(
         currentPage: state.currentPage + 1,
         sectionsStateStatus: SectionsStateStatus.LOADINGMORE,
       ));
-    }
-    else{
+    } else {
       emit(state.copyWith(
         sectionsStateStatus: SectionsStateStatus.LOADING,
         secID: event.secID,
@@ -28,23 +27,26 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
         currentPage: 1,
       ));
     }
-    final result = await getIt.get<HomeUseCases>().getCategoryBySectionID(state.secID,state.currentPage);
+    final result = await getIt
+        .get<HomeUseCases>()
+        .getCategoryBySectionID(state.secID, state.currentPage);
     result.fold((l) {
       emit(state.copyWith(sectionsStateStatus: SectionsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
       CategoryModel categoryData = CategoryModel.fromJson(r.data);
       int lastPage = categoryData.data!.lastPage!;
-      List<CategoryItem> newResultList = categoryData.data!.categoryItemList!.toList();
+      List<CategoryItem> newResultList =
+          categoryData.data!.categoryItemList!.toList();
       List<CategoryItem> categoriesListData = state.categoriesListData.toList();
-      if(newResultList.isEmpty){
+      if (newResultList.isEmpty) {
         emit(state.copyWith(
           sectionsStateStatus: SectionsStateStatus.NULL,
-          isMoreData:lastPage == state.currentPage,
+          isMoreData: lastPage == state.currentPage,
         ));
         return;
       }
@@ -52,17 +54,19 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
       emit(state.copyWith(
         sectionsStateStatus: SectionsStateStatus.SUCCESS,
         categoriesListData: categoriesListData,
-        isMoreData:lastPage == state.currentPage,
-
+        isMoreData: lastPage == state.currentPage,
       ));
     });
   }
+
   ///Event to get variables back to initial values at [SectionScreen].
-  FutureOr<void> _resetVarEvent(ResetVarEvent event, Emitter<SectionsState> emit) {
-    emit(state.copyWith(sectionsStateStatus: SectionsStateStatus.SUCCESS,
+  FutureOr<void> _resetVarEvent(
+      ResetVarEvent event, Emitter<SectionsState> emit) {
+    emit(state.copyWith(
+      sectionsStateStatus: SectionsStateStatus.SUCCESS,
       sectionIndex: -1,
       currentPage: 1,
-      isMoreData:true,
+      isMoreData: true,
       categoriesListData: [],
       secID: -1,
       categoryTitle: '',

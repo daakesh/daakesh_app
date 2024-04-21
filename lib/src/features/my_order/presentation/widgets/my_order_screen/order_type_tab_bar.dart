@@ -13,93 +13,115 @@ class OrderTypeTabBar extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 50.0.h,
-          margin: EdgeInsetsDirectional.only(start: 13.0.w, end: 13.0.w, top: 16.0.h),
+          margin: EdgeInsetsDirectional.only(
+              start: 13.0.w, end: 13.0.w, top: 16.0.h),
           decoration: BoxDecoration(
               color: ColorName.paleGray,
-              borderRadius: BorderRadius.all(Radius.circular(8.0.r))
-          ),
-          child: Row(children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: ()=>toggleTabBar(MyOrderTapBar.MYORDER),
-                child: Container(
-                  width: double.infinity,
-                  height: 50.0.h,
-                  decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+          child: Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () => toggleTabBar(MyOrderTapBar.MYORDER),
+                  child: Container(
+                    width: double.infinity,
+                    height: 50.0.h,
+                    decoration: BoxDecoration(
                         color: state.myOrderTapBar.isMyOrder
                             ? ColorName.amber
                             : ColorName.paleGray,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0.r))
+                        borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+                    child: Center(
+                        child: Text(
+                      'My Order',
+                      style:
+                          context.easyTheme.textTheme.headlineMedium!.copyWith(
+                        fontSize: ResponsiveText.getResponsiveFontSize(
+                            fontSize: 18.0),
+                        color: state.myOrderTapBar.isMyOrder
+                            ? ColorName.white
+                            : ColorName.blueGray,
+                      ),
+                    )),
                   ),
-                  child: Center(
-                      child: Text(
-                        'My Order',
-                        style: easyTheme.textTheme.headlineMedium!.copyWith(
-                            fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
-                            color:  state.myOrderTapBar.isMyOrder
-                                ? ColorName.white
-                                : ColorName.blueGray,),
-                      )),
                 ),
               ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: ()=>toggleTabBar(MyOrderTapBar.SWAPREQUEST),
-                child: Container(
-                  width: double.infinity,
-                  height: 50.0.h,
-                  decoration: BoxDecoration(
+              Expanded(
+                child: GestureDetector(
+                  onTap: () => toggleTabBar(MyOrderTapBar.SWAPREQUEST),
+                  child: Container(
+                    width: double.infinity,
+                    height: 50.0.h,
+                    decoration: BoxDecoration(
                         color: state.myOrderTapBar.isSwapRequest
                             ? ColorName.amber
                             : ColorName.paleGray,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0.r))
-                  ),
-                  child: Center(
-                      child: Text(
-                        'Swap Requests',
-                        style: easyTheme.textTheme.headlineMedium!.copyWith(
-                          fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+                    child: Center(
+                        child: Text(
+                      'Swap Requests',
+                      style:
+                          context.easyTheme.textTheme.headlineMedium!.copyWith(
+                        fontSize: ResponsiveText.getResponsiveFontSize(
+                            fontSize: 18.0),
                         color: state.myOrderTapBar.isSwapRequest
                             ? ColorName.white
                             : ColorName.blueGray,
                       ),
-                      )),
-
+                    )),
+                  ),
                 ),
               ),
-            ),
-          ],),
+            ],
+          ),
         ),
-        state.myOrderTapBar.isSwapRequest ? Padding(
-          padding: EdgeInsetsDirectional.only(start: 17.0.w,end: 13.0.w,top: 13.0.h),
-          child: Row(children: [
-            Text('Send',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0)),),
-            Transform.scale(
-              scale: 0.8,
-              child: Switch(
-                  value: state.sendReceiveFlag,
-                  activeColor:ColorName.amber,
-                  hoverColor: ColorName.amber,
-                  activeTrackColor: ColorName.amber,
-                  focusColor: ColorName.amber,
-                  inactiveThumbColor: ColorName.amber,
-                  inactiveTrackColor: ColorName.amber,
-                  thumbColor: MaterialStateProperty.all(ColorName.white),
-                  onChanged: onChange),
-            ),
-            Text('Receive',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0)),),
-            const Spacer(flex: 1),
-            Assets.png.filterIcon.image(width: 38.0.w,height: 38.0.h),
-          ],),
-        ):const SizedBox(),
+        state.myOrderTapBar.isSwapRequest
+            ? Padding(
+                padding: EdgeInsetsDirectional.only(
+                    start: 17.0.w, end: 13.0.w, top: 13.0.h),
+                child: Row(
+                  children: [
+                    Text(
+                      'Send',
+                      style: context.easyTheme.textTheme.bodyLarge!.copyWith(
+                          fontSize: ResponsiveText.getResponsiveFontSize(
+                              fontSize: 18.0)),
+                    ),
+                    Transform.scale(
+                      scale: 0.8,
+                      child: Switch(
+                          value: state.sendReceiveFlag,
+                          activeColor: ColorName.amber,
+                          hoverColor: ColorName.amber,
+                          activeTrackColor: ColorName.amber,
+                          focusColor: ColorName.amber,
+                          inactiveThumbColor: ColorName.amber,
+                          inactiveTrackColor: ColorName.amber,
+                          thumbColor:
+                              MaterialStateProperty.all(ColorName.white),
+                          onChanged: onChange),
+                    ),
+                    Text(
+                      'Receive',
+                      style: context.easyTheme.textTheme.bodyLarge!.copyWith(
+                          fontSize: ResponsiveText.getResponsiveFontSize(
+                              fontSize: 18.0)),
+                    ),
+                    const Spacer(flex: 1),
+                    Assets.png.filterIcon.image(width: 38.0.w, height: 38.0.h),
+                  ],
+                ),
+              )
+            : const SizedBox(),
       ],
     );
   }
-  void onChange(bool value){
+
+  void onChange(bool value) {
     MyOrderBloc.get.add(SendReceiveSwitchEvent(sendReceiveFlag: value));
   }
-  void toggleTabBar(MyOrderTapBar myOrderTapBar){
+
+  void toggleTabBar(MyOrderTapBar myOrderTapBar) {
     MyOrderBloc.get.add(ToggleMyOrderTabBarEvent(myOrderTapBar: myOrderTapBar));
   }
 }

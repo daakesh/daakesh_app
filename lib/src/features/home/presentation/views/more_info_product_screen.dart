@@ -1,69 +1,153 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class MoreInfoProductScreen extends StatefulWidget {
-  const MoreInfoProductScreen({super.key});
+class MoreInfoProductScreen extends StatelessWidget {
+  MoreInfoProductScreen({super.key});
 
-  @override
-  State<MoreInfoProductScreen> createState() => _MoreInfoProductScreenState();
-}
-
-class _MoreInfoProductScreenState extends State<MoreInfoProductScreen> {
   final commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      keyboardDismissBehavior:ScrollViewKeyboardDismissBehavior.onDrag ,
-      child: InkWell(
-        focusColor: ColorName.transparent,
-        highlightColor: ColorName.transparent,
-        splashColor: ColorName.transparent,
-        onTap: ()=>context.disMissKeyboard,
-        child: Padding(
-          padding: const EdgeInsetsDirectional.only(start: 17.5, end: 26.0, top: 12.0),
-          child: BlocBuilder<HomeBloc, HomeState>(
-            builder: (_, state) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ProductCarousalSlider(state: state),
-                  PriceRateSection(state: state),
-                  SizeSection(state:state),
-                  DetailsSection(state: state,),
-                  !state.isDaakeshTodayDeal
-                      ? Center(child: DefaultButtonWidget(text: 'ADD TO CART', onPressed: (){}))
-                      : Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                            Expanded(
-                              flex: 1,
-                                child: DefaultButtonWidget(
-                                    text: 'CALL', onPressed: () {})),
-                            const SizedBox(width: 8.0,),
-                            DefaultButtonWidget(
-                                text: 'WhatsApp',
-                                onPressed: () {},
-                                style: easyTheme.elevatedButtonTheme.style!
-                                    .copyWith(
-                                  minimumSize: MaterialStateProperty.all( Size(40.0.w, 56.0.h)),
-                                  backgroundColor: MaterialStateProperty.all(ColorName.amber),
-
-
-                                )),
-                          ],),
-                  AddCommentRateSection(state: state,),
-                  const Divider(color: ColorName.gray,),
-                  const CommentsSection(),
-                ],
-              );
-            },
-          ),
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => context.disMissKeyboard,
+        child: BlocBuilder<PassDataBloc, PassDataState>(
+          builder: (_, state) {
+            return CustomScrollView(
+              slivers: [
+                const HomeAppBarWidget(),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 17.5, end: 26.0, top: 12.0),
+                    child: ProductCarousalSlider(state: state),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 17.5, end: 26.0),
+                    child: PriceRateSection(state: state),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 17.5, end: 26.0),
+                    child: SizeSection(state: state),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 17.5, end: 26.0),
+                    child: DetailsSection(state: state),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: !state.isDaakeshTodayDeal
+                      ? Center(
+                          child: DefaultButtonWidget(
+                              text:
+                                  context.locale.more_info_product_add_to_cart,
+                              onPressed: () => addToCart(
+                                  state.todayItem.first.id.toString(),
+                                  state.todayItem.first.country.toString(),
+                                  state.todayItem.first.city.toString())),
+                        )
+                      : Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                              start: 17.5, end: 26.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: DefaultButtonWidget(
+                                      text:
+                                          context.locale.more_info_product_call,
+                                      onPressed: () {})),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              DefaultButtonWidget(
+                                  text:
+                                      context.locale.more_info_product_whatsapp,
+                                  onPressed: () {},
+                                  style: context
+                                      .easyTheme.elevatedButtonTheme.style!
+                                      .copyWith(
+                                    minimumSize: MaterialStateProperty.all(
+                                        Size(40.0.w, 56.0.h)),
+                                    backgroundColor: MaterialStateProperty.all(
+                                        ColorName.amber),
+                                  )),
+                            ],
+                          ),
+                        ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 17.5, end: 26.0),
+                    child: AddCommentRateSection(),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(start: 17.5, end: 26.0),
+                    child: Divider(
+                      color: Color.fromARGB(255, 22, 15, 15),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 17.5, end: 26.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              context.locale.more_info_product_comments,
+                              style: context.easyTheme.textTheme.bodyLarge!
+                                  .copyWith(fontSize: 18.0),
+                            ),
+                            Text(
+                              '(200)',
+                              style: context.easyTheme.textTheme.bodyLarge!
+                                  .copyWith(
+                                      fontSize: 18.0, color: ColorName.gray),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 23.0,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const CommentsSection(),
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 40.0,
+                  ),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
+  }
+
+  void addToCart(String itemID, String country, String address) {
+    CartBloc.get.add(
+        AddToCartEvent(itemID: itemID, country: country, address: address));
   }
 }

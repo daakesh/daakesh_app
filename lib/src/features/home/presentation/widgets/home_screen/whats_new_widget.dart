@@ -11,13 +11,13 @@ class WhatsNewWidget extends StatelessWidget {
       children: [
         Assets.png.handmadeIcon.image(),
         Padding(
-          padding: const EdgeInsetsDirectional.only(start: 12.0,top: 14.0),
-          child: Text(title,
-            style: easyTheme.textTheme.bodyMedium!.copyWith(
-              color: ColorName.white,
-              overflow:TextOverflow.fade,
-              fontSize: 25.0,
-            ),
+          padding: const EdgeInsetsDirectional.only(start: 12.0, top: 14.0),
+          child: Text(
+            title,
+            style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                color: ColorName.white,
+                overflow: TextOverflow.fade,
+                fontSize: 25.0),
           ),
         ),
       ],

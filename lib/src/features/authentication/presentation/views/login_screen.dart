@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class LoginScreen extends StatefulWidget {
-   const LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -14,9 +14,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool? checkedValue = false;
-  final FocusNode emailFocusNode= FocusNode();
+  final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
-
 
   @override
   void initState() {
@@ -24,84 +23,118 @@ class _LoginScreenState extends State<LoginScreen> {
     setRememberMeValue();
   }
 
-
-  
   @override
   Widget build(BuildContext context) {
-    return  DefaultBackgroundWidget(
+    return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 20.0.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Spacer(flex: 5,),
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(start: 30.0),
-                  child: DaakeshLogoWidget(),
+                const Spacer(
+                  flex: 5,
                 ),
-                const Spacer(flex: 4,),
-                Text('Welcome back!',style: easyTheme.textTheme.headlineLarge,),
-                const SizedBox(height: 22.0),
+                const Center(child: DaakeshLogoWidget()),
+                const Spacer(
+                  flex: 4,
+                ),
+                Text(
+                  context.locale.login_title,
+                  style: context.easyTheme.textTheme.headlineLarge!
+                      .copyWith(fontSize: 40.0.sp),
+                ),
+                SizedBox(height: 22.0.h),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: 
-                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Email',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
-                        TextFormFieldWidget(
-                          controller: emailController,
-                          focusNode: emailFocusNode,
-                          onFieldSubmitted: (value)=>fieldFocusChange(context, emailFocusNode, passwordFocusNode),
-                          keyboardType: TextInputType.emailAddress,
-                          inputFormatters: [
-                            RegExpValidator.clearWhitespace,
-                          ],
-                        ),
-                        const SizedBox(height: 33.0),
-                        Text('Password',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray),),
-                        TextFormFieldWidget(
-                          controller: passwordController,
-                          focusNode: passwordFocusNode,
-                          obscureText: true,
-                          maxLines: 1,
-                        ),
-                        Row(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        context.locale.login_email_text_field,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0.sp, color: ColorName.darkGray),
+                      ),
+                      TextFormFieldWidget(
+                        controller: emailController,
+                        focusNode: emailFocusNode,
+                        onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                            context, emailFocusNode, passwordFocusNode),
+                        keyboardType: TextInputType.emailAddress,
+                        inputFormatters: [
+                          RegExpValidator.clearWhitespace,
+                        ],
+                      ),
+                      SizedBox(height: 33.0.h),
+                      Text(
+                        context.locale.login_password_text_field,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0.sp, color: ColorName.darkGray),
+                      ),
+                      TextFormFieldWidget(
+                        controller: passwordController,
+                        focusNode: passwordFocusNode,
+                        obscureText: true,
+                        maxLines: 1,
+                      ),
+                      Row(
                         children: [
                           BlocBuilder<AuthBloc, AuthState>(
                             builder: (context, state) {
-                              return Checkbox(
-                                onChanged: (bool? value) {
-                                  AuthBloc.get.add(ToggleRememberMeValueEvent(rememberMeValue: value!));
-                                },
-                                value: state.rememberMeValue,
-                                overlayColor: MaterialStateProperty.all(ColorName.white),
-                                hoverColor: ColorName.white,
-                                side: const BorderSide(color: ColorName.darkGray),
+                              return Transform.scale(
+                                scale: 1.1.w,
+                                child: Checkbox(
+                                  onChanged: (bool? value) {
+                                    AuthBloc.get.add(ToggleRememberMeValueEvent(
+                                        rememberMeValue: value!));
+                                  },
+                                  value: state.rememberMeValue,
+                                  overlayColor: MaterialStateProperty.all(
+                                      ColorName.transparent),
+                                  hoverColor: ColorName.white,
+                                  side: const BorderSide(
+                                      color: ColorName.darkGray),
+                                  activeColor: ColorName.amber,
+                                ),
                               );
                             },
                           ),
-                          Text('Remember Me',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0),)
-                          ],
-                        ),
-                      ],
-                    
-
+                          SizedBox(
+                            width: 2.0.w,
+                          ),
+                          Expanded(
+                            child: Text(
+                              context.locale.remember_me_title,
+                              style: context.easyTheme.textTheme.bodyMedium!
+                                  .copyWith(
+                                      fontSize: 18.0.sp,
+                                      overflow: TextOverflow.ellipsis),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-
-
                 ),
-                const Spacer(flex: 1,),
-                DefaultButtonWidget(text: 'LOGIN', onPressed: onLogin),
-                const SizedBox(height: 25.0),
-                Center(child: TextButtonWidget(text: 'Forget password ?', onPressed: forgetPassword)),
+                const Spacer(
+                  flex: 1,
+                ),
+                Center(
+                    child: DefaultButtonWidget(
+                        text: context.locale.login_button_title,
+                        onPressed: () => onLogin(context))),
+                SizedBox(height: 25.0.h),
+                Center(
+                    child: TextButtonWidget(
+                        text: context.locale.forget_password_text_button,
+                        onPressed: forgetPassword)),
                 const SizedBox(height: 25.0),
                 const CreateAccountWidget(),
-                const Spacer(flex: 1,),
-
+                const Spacer(
+                  flex: 1,
+                ),
               ],
             ),
           ),
@@ -110,31 +143,30 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void onLogin(){
-    if(emailController.text.isEmpty || passwordController.text.isEmpty){
-      ShowToastSnackBar.showSnackBars(message: 'Fill data firstly');
+  void onLogin(BuildContext context) {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.login_snack_bar_title);
       return;
     }
 
     AuthBloc.get.add(OnLoginEvent(
-      phoneNumber: emailController.text.trim(),
-      password: passwordController.text,
-    ));
-
+        email: emailController.text.trim(),
+        password: passwordController.text,
+        context: context));
   }
 
-  void setRememberMeValue()async{
-    String email = await getIt.get<SecureSharedPref>().read('REMEMBER_ME_EMAIL') ?? '';
-    String password = await getIt.get<SecureSharedPref>().read('REMEMBER_ME_PASSWORD') ?? '';
-    emailController.text =email.toString();
+  void setRememberMeValue() async {
+    String email =
+        await GetItUtils.secPrefs.read(SharedPrefKeys.rememberMeEmail) ?? '';
+    String password =
+        await GetItUtils.secPrefs.read(SharedPrefKeys.rememberMePassword) ?? '';
+    emailController.text = email.toString();
     passwordController.text = password.toString();
     AuthBloc.get.add(InitialValueEvent());
   }
 
-  void forgetPassword(){
-    openNewPage(InsertCellPhoneScreen());
+  void forgetPassword() {
+    Utils.openNewPage(InsertCellPhoneScreen());
   }
-
 }
-
-

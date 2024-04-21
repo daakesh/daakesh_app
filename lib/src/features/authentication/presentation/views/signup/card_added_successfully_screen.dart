@@ -13,35 +13,28 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22.0),
+              padding: EdgeInsets.symmetric(horizontal: 22.0.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 110.0,),
-                  const Padding(
-                    padding: EdgeInsetsDirectional.only(start: 38.0),
-                    child: Align(alignment: AlignmentDirectional.centerStart,child: DaakeshLogoWidget()),
-                  ),
-                 // const SizedBox(height: 185.0,),
-                  const Spacer(flex: 1,),
-                  Container(
-                    width: 150.0,
-                    height: 150.0,
-                    decoration:BoxDecoration(
-                        image: DecorationImage(image: AssetImage(Assets.png.checkIcon.path))
-                    ),
-                  ),
-                  const SizedBox(height: 19.0,),
-                  Text('The payment card has been added successfully',
-                      style: easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 26.0),
+                  const Spacer(flex: 1),
+                  const DaakeshLogoWidget(),
+                  const Spacer(flex: 1),
+                  Assets.png.checkIcon.image(),
+                  SizedBox(height: 19.0.h),
+                  Text(
+                    context.locale.add_payment_success_title,
+                    style: context.easyTheme.textTheme.headlineMedium!
+                        .copyWith(fontSize: 26.0.sp),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 9.0,),
-                  const Spacer(flex: 1,),
-                  DefaultButtonWidget(text: 'START SHOPPING', onPressed: onStartShopping),
-                  const SizedBox(height: 72.0,),
-
+                  SizedBox(height: 9.0.h),
+                  const Spacer(flex: 1),
+                  Center(
+                      child: DefaultButtonWidget(
+                          text: context.locale.start_shopping_button_title,
+                          onPressed: onStartShopping)),
+                  SizedBox(height: 72.0.h),
                 ],
               ),
             ),
@@ -50,10 +43,11 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
       ),
     );
   }
-  void onStartShopping()async{
-    ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
-    ProgressCircleDialog.dismiss();
-    openNewPage(const MainScreen(),popPreviousPages: true,);
+
+  void onStartShopping() async {
+    Utils.openNewPage(
+      const MainScreen(),
+      popPreviousPages: true,
+    );
   }
 }

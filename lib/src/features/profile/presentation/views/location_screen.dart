@@ -11,12 +11,11 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-
   final countryController = TextEditingController();
   final cityController = TextEditingController();
   final addressController = TextEditingController();
 
-  final FocusNode countryFocusNode= FocusNode();
+  final FocusNode countryFocusNode = FocusNode();
   final FocusNode cityFocusNode = FocusNode();
   final FocusNode addressFocusNode = FocusNode();
   @override
@@ -26,16 +25,15 @@ class _LocationScreenState extends State<LocationScreen> {
     resetFlag();
   }
 
-  void resetFlag(){
+  void resetFlag() {
     //AuthBloc.get.add(ChangeFlagEvent(flagEmoji: '🇯🇴'));
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return  DefaultBackgroundWidget(
+    return DefaultBackgroundWidget(
       child: Scaffold(
-        backgroundColor:ColorName.transparent,
+        backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
             return Padding(
@@ -48,7 +46,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                   Text(
                     'Location',
-                    style: easyTheme.textTheme.headlineMedium!
+                    style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 36.0),
                   ),
                   const SizedBox(
@@ -56,7 +54,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                   Text(
                     'Location info',
-                    style: easyTheme.textTheme.headlineMedium!
+                    style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 25.0),
                   ),
                   const SizedBox(
@@ -64,31 +62,38 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                   Text(
                     'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                    style: easyTheme.textTheme.bodyMedium!
+                    style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 16.0),
                   ),
                   const SizedBox(
                     height: 21.0,
                   ),
-                  Text('Country',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                  Text('Country',
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
                     controller: countryController,
                     focusNode: countryFocusNode,
                     isSuffixPrefixOn: true,
-                    enabled: state.isUpdateActive,
-                    suffixIcon: SizedBox(height:9.0 ,width:16.0,child: Center(child: Assets.svg.arrowDropDownIcon.svg()),),
+                    enabled: state.isUpdatePersonalActive,
+                    suffixIcon: SizedBox(
+                      height: 9.0,
+                      width: 16.0,
+                      child: Center(child: Assets.svg.arrowDropDownIcon.svg()),
+                    ),
                     prefixIcon: SizedBox(
-                          width: 30.0,
-                          height: 30.0,
-                          child: Center(
-                              child: Text(
-                                state.locationFlagEmoji,
-                                style: const TextStyle(
-                                    color: ColorName.blueGray, fontSize: 24.0),
-                              ))),
-                    onFieldSubmitted: (value)=>fieldFocusChange(context,countryFocusNode,cityFocusNode),
+                        width: 30.0,
+                        height: 30.0,
+                        child: Center(
+                            child: Text(
+                          state.locationFlagEmoji,
+                          style: const TextStyle(
+                              color: ColorName.blueGray, fontSize: 24.0),
+                        ))),
+                    onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                        context, countryFocusNode, cityFocusNode),
                     readOnly: true,
-                    onTap: (){
+                    onTap: () {
                       showCountryDialog(context);
                     },
                     inputFormatters: [
@@ -96,51 +101,66 @@ class _LocationScreenState extends State<LocationScreen> {
                     ],
                   ),
                   const SizedBox(height: 33.0),
-                  Text('City',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                  Text('City',
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
                     controller: cityController,
                     focusNode: cityFocusNode,
-                    enabled: state.isUpdateActive,
-
-                    onFieldSubmitted: (value)=>fieldFocusChange(context,cityFocusNode,addressFocusNode),
+                    enabled: state.isUpdatePersonalActive,
+                    onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                        context, cityFocusNode, addressFocusNode),
                     inputFormatters: [
                       RegExpValidator.beginWhitespace,
                     ],
                   ),
                   const SizedBox(height: 33.0),
-                  Text('Address',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                  Text('Address',
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
                     controller: addressController,
                     focusNode: addressFocusNode,
-                    enabled: state.isUpdateActive,
+                    enabled: state.isUpdatePersonalActive,
                     isSuffixPrefixOn: true,
                     inputFormatters: [
                       RegExpValidator.beginWhitespace,
                     ],
                     suffixIcon: InkWell(
-                      onTap: () =>openNewPage(const MapScreen()),
+                      onTap: () => Utils.openNewPage(const MapScreen()),
                       splashColor: ColorName.transparent,
                       focusColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
-                      child: SizedBox(width: 20.0,height: 20.0,child: Center(child: Assets.svg.locationPinIcon.svg())),
+                      child: SizedBox(
+                          width: 20.0,
+                          height: 20.0,
+                          child:
+                              Center(child: Assets.svg.locationPinIcon.svg())),
                     ),
                   ),
-
-
                   const SizedBox(
                     height: 44.0,
                   ),
-                  const Spacer(flex: 1,),
+                  const Spacer(
+                    flex: 1,
+                  ),
                   Center(
                     child: DefaultButtonWidget(
-                        text: !state.isUpdateActive ? 'MAKE EDIT':'SAVE', onPressed: ()=>onMakeEdit(state.isUpdateActive)),
+                        text: !state.isUpdatePersonalActive
+                            ? 'MAKE EDIT'
+                            : 'SAVE',
+                        onPressed: () =>
+                            onMakeEdit(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(
                     height: 12.0,
                   ),
                   Center(
-                    child:
-                    OutlineButtonWidget(text: !state.isUpdateActive ? 'Cancel':'RESET AND CANCEL', onPressed: ()=>cancel(state.isUpdateActive)),
+                    child: OutlineButtonWidget(
+                        text: !state.isUpdatePersonalActive
+                            ? 'Cancel'
+                            : 'RESET AND CANCEL',
+                        onPressed: () => cancel(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(
                     height: 50.0,
@@ -154,21 +174,26 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 
-  void onMakeEdit(bool isUpdateActive){
+  void onMakeEdit(bool isUpdateActive) {
     ProfileBloc.get.add(ActivateUpdateEvent(isUpdatePersonalActive: true));
   }
 
-  void cancel(bool isUpdateActive){
-    getBack();
+  void cancel(bool isUpdateActive) {
+    Utils.getBack();
     ProfileBloc.get.add(ActivateUpdateEvent(isUpdatePersonalActive: false));
   }
+
   void showCountryDialog(context) {
     return showCountryPicker(
-      context:context,
+      context: context,
       showPhoneCode: false,
       onSelect: (Country country) {
         countryController.text = country.name;
-        ProfileBloc.get.add(ChangeLocationFlagEvent(flagEmoji: country.flagEmoji.toString(),),);
+        ProfileBloc.get.add(
+          ChangeLocationFlagEvent(
+            flagEmoji: country.flagEmoji.toString(),
+          ),
+        );
       },
     );
   }

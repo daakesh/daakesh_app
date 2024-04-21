@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum CardsTypes {
   None,
   VISA,
@@ -5,16 +7,22 @@ enum CardsTypes {
   AMIRICANEXPRESS,
 }
 
-enum ProductTapBar{
+enum UserType {
+  SWAP,
+  SELL,
+}
+
+enum ProductTapBar {
   SHOP,
   SWAP,
 }
-enum MyOrderTapBar{
+
+enum MyOrderTapBar {
   MYORDER,
   SWAPREQUEST,
 }
 
-enum HomeScreenState{
+enum HomeScreenState {
   SEARCH,
   PRODUCTDETAILS,
   SUBCATEGORYRESULT,
@@ -24,7 +32,8 @@ enum HomeScreenState{
   HOMEMADE,
   HOME,
 }
-enum SwapScreenState{
+
+enum SwapScreenState {
   SEARCH,
   PRODUCTDETAILS,
   SUBCATEGORYRESULT,
@@ -34,15 +43,41 @@ enum SwapScreenState{
   OFFERDETAILS,
   HOME,
 }
-enum ProductDisplayMethod{
-  SALE,
-  SWAP,
-  SALESWAP,
+
+enum ProductDisplayMethod {
+  Sell,
+  Swap,
+  SellSwap,
 }
 
-enum AuthManner{
+enum AuthManner {
   SIGNUPIN,
   FORGETPASSWORD,
 }
 
+enum AdjustProduct { ADD, EDIT }
 
+enum SwapRequestType {
+  send,
+  receive,
+}
+
+enum FilterRate {
+  ALL,
+  NONE,
+  TOWSTARS,
+  THREESTARS,
+  FOURSTARS,
+  FIVESTARS,
+}
+
+enum FilterProductType {
+  All,
+  Daakesh,
+  Other,
+}
+
+enum ComplaintType {
+  User,
+  Seller,
+}

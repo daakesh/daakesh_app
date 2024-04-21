@@ -10,15 +10,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
   @override
   void initState() {
     super.initState();
-    Future.delayed(
-      const Duration(seconds: 2),
-    ).then((value) => checkUserLogin());
-
+    checkLogin();
   }
 
   @override
@@ -36,23 +31,30 @@ class _SplashScreenState extends State<SplashScreen> {
           fit: BoxFit.fill,
         ),
       ),
-      child: Scaffold(
+      child: const Scaffold(
         backgroundColor: ColorName.transparent,
-        body: Align(
-          alignment: AlignmentDirectional.centerStart,
-          child: Padding(
-            padding: EdgeInsetsDirectional.only(start: 53.0.w,end: 105.w),
-            child: const DaakeshLogoWidget(),
-          ),
-        ),
+        body: Center(child: DaakeshLogoWidget()),
       ),
     );
   }
+
+  void checkLogin() async {
+    await Future.delayed(const Duration(seconds: 3)).then((value) {
+      checkUserLogin();
+    });
+  }
+
   void checkUserLogin() {
+    ProfileBloc.get.add(SetValueLangEvent());
     if (ValueConstants.userId.isEmpty) {
-      openNewPage(const WelcomeScreen(),popPreviousPages: true);
+      Utils.openNewPage(const WelcomeScreen(), popPreviousPages: true);
       return;
     }
-    openNewPage(const MainScreen(),popPreviousPages: true);
+    getUserData();
+    Utils.openNewPage(const MainScreen(), popPreviousPages: true);
+  }
+
+  void getUserData() {
+    UserDataBloc.get.add(GetUserDataEvent());
   }
 }

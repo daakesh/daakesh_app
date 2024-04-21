@@ -1,19 +1,22 @@
+import 'package:flutter/material.dart';
+
 abstract class AuthEvent {}
 
 ///Login Event
 class OnLoginEvent extends AuthEvent {
-  final String phoneNumber;
+  final String email;
   final String password;
+  final BuildContext context;
 
   OnLoginEvent({
-    required this.phoneNumber,
+    required this.email,
     required this.password,
+    required this.context,
   });
 }
-///Get user data
-class GetUserDataEvent extends AuthEvent {}
+
 ///SignUp Events
-class EnterPersonalInfoEvent extends AuthEvent{
+class EnterPersonalInfoEvent extends AuthEvent {
   final String name;
   final String email;
   final String password;
@@ -24,7 +27,8 @@ class EnterPersonalInfoEvent extends AuthEvent{
     required this.password,
   });
 }
-class EnterLocationInfoEvent extends AuthEvent{
+
+class EnterLocationInfoEvent extends AuthEvent {
   final String country;
   final String city;
   final String address;
@@ -35,13 +39,15 @@ class EnterLocationInfoEvent extends AuthEvent{
     required this.address,
   });
 }
-class ChangeFlagEvent extends AuthEvent{
+
+class ChangeFlagEvent extends AuthEvent {
   final String flagEmoji;
   ChangeFlagEvent({
     required this.flagEmoji,
   });
 }
-class ChangeCountryCodeEvent extends AuthEvent{
+
+class ChangeCountryCodeEvent extends AuthEvent {
   final String phoneCode;
   final String phoneFlag;
 
@@ -50,36 +56,45 @@ class ChangeCountryCodeEvent extends AuthEvent{
     required this.phoneFlag,
   });
 }
-class EnterPhoneEvent extends AuthEvent{
+
+class EnterPhoneEvent extends AuthEvent {
   final String phoneNumber;
+  final BuildContext context;
+
   EnterPhoneEvent({
     required this.phoneNumber,
+    required this.context,
   });
 }
+
 ///
-class SetVerificationIdEvent extends AuthEvent{
+class SetVerificationIdEvent extends AuthEvent {
   final String verificationId;
   SetVerificationIdEvent({required this.verificationId});
 }
+
 ///
-class ValidateSMSCodeEvent extends AuthEvent{
+class ValidateSMSCodeEvent extends AuthEvent {
   final String smsCode;
-  ValidateSMSCodeEvent({required this.smsCode});
+  final BuildContext context;
+  ValidateSMSCodeEvent({required this.smsCode, required this.context});
 }
-class ActivateUserEvent extends AuthEvent{}
-class ResendSMSCodeEvent extends AuthEvent{}
 
-class InitialValueEvent extends AuthEvent{}
+class ActivateUserEvent extends AuthEvent {
+  final BuildContext context;
+  ActivateUserEvent({required this.context});
+}
 
-class ToggleRememberMeValueEvent extends AuthEvent{
+class ResendSMSCodeEvent extends AuthEvent {
+  final BuildContext context;
+  ResendSMSCodeEvent({required this.context});
+}
+
+class InitialValueEvent extends AuthEvent {}
+
+class ToggleRememberMeValueEvent extends AuthEvent {
   final bool rememberMeValue;
   ToggleRememberMeValueEvent({
     required this.rememberMeValue,
   });
 }
-
-
-
-
-
-

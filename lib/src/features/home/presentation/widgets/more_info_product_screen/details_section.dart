@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class DetailsSection extends StatelessWidget {
-  final HomeState state;
+  final PassDataState state;
   const DetailsSection({super.key, required this.state});
 
   @override
@@ -10,45 +10,103 @@ class DetailsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      Text('Details:',style: easyTheme.textTheme.headlineMedium!.copyWith(fontSize: 22.0),),
-      const SizedBox(height: 21.0,),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Brand:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
-          Text('Mac Cosmetics',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
-        ],
-      ),
-      const SizedBox(height: 13.0,),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Model Name:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
-          Text('Mac Cosmetics',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
-        ],
-      ),
-      const SizedBox(height: 13.0,),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Category:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
-          Text('Accessories',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
-        ],
-      ),
-      const SizedBox(height: 13.0,),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Year:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
-          Text('2022',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
-        ],
-      ),
-      const SizedBox(height: 13.0,),
-      Text('description:',style: easyTheme.textTheme.bodyLarge!.copyWith(color: ColorName.gray,fontSize: 18.0),),
-      const SizedBox(height: 13.0,),
-      Text('AquaOasis™ Cool Mist Humidefier (2.2L WaterAquaOasis™ Cool Mist Humidefier (2.2L Water:',style: easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),),
-      const SizedBox(height: 29.0,),
-
-    ],);
+        Text(
+          context.locale.more_info_product_details_title,
+          style: context.easyTheme.textTheme.headlineMedium!
+              .copyWith(fontSize: 22.0),
+        ),
+        const SizedBox(
+          height: 21.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              context.locale.more_info_product_brand_title,
+              style: context.easyTheme.textTheme.bodyLarge!
+                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            ),
+            Text(
+              '${state.todayItem.first.brand!.brandName}',
+              style: context.easyTheme.textTheme.bodyLarge!
+                  .copyWith(fontSize: 18.0),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 13.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              context.locale.more_info_product_model_title,
+              style: context.easyTheme.textTheme.bodyLarge!
+                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            ),
+            Text(
+              'Mac Cosmetics',
+              style: context.easyTheme.textTheme.bodyLarge!
+                  .copyWith(fontSize: 18.0),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 13.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              context.locale.more_info_product_category_title,
+              style: context.easyTheme.textTheme.bodyLarge!
+                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            ),
+            Text(
+              '${state.todayItem.first.category!.name}',
+              style: context.easyTheme.textTheme.bodyLarge!
+                  .copyWith(fontSize: 18.0),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 13.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              context.locale.more_info_product_year_title,
+              style: context.easyTheme.textTheme.bodyLarge!
+                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            ),
+            Text(
+              '${state.todayItem.first.year}',
+              style: context.easyTheme.textTheme.bodyLarge!
+                  .copyWith(fontSize: 18.0),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 13.0,
+        ),
+        Text(
+          context.locale.more_info_product_description_title,
+          style: context.easyTheme.textTheme.bodyLarge!
+              .copyWith(color: ColorName.gray, fontSize: 18.0),
+        ),
+        const SizedBox(
+          height: 13.0,
+        ),
+        Text(
+          '${state.todayItem.first.description}',
+          style:
+              context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),
+        ),
+        const SizedBox(
+          height: 29.0,
+        ),
+      ],
+    );
   }
 }

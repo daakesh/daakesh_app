@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-
 class HomeAppBarWidget extends StatefulWidget {
-  final TextEditingController searchController;
-
-  const HomeAppBarWidget({super.key, required this.searchController});
+  final bool isActive;
+  final bool isCart;
+  const HomeAppBarWidget({
+    super.key,
+    this.isActive = false,
+    this.isCart = false,
+  });
 
   @override
   State<HomeAppBarWidget> createState() => _HomeAppBarWidgetState();
 }
 
 class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
+  final searchController = TextEditingController();
   Timer? _debounceTimer;
 
   @override
@@ -21,6 +25,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
     return BlocBuilder<HomeBloc, HomeState>(builder: (_, state) {
       return SliverAppBar(
         backgroundColor: ColorName.blueGray,
+        leading: const SizedBox(),
         expandedHeight: 160.0,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
@@ -51,14 +56,15 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                           child: TextFormFieldWidget(
-                            controller: widget.searchController,
+                            controller: searchController,
                             isSuffixPrefixOn: true,
+                            readOnly: !widget.isActive,
                             onChanged: onChange,
                             inputFormatters: [
                               RegExpValidator.beginWhitespace,
                             ],
-                            suffixIcon: state.homeScreenState.isSearch
-                                ? InkWell(
+                            suffixIcon: widget.isActive
+                                ? GestureDetector(
                                     onTap: clearText,
                                     child: const Icon(
                                       Icons.clear_outlined,
@@ -66,11 +72,12 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                                     ),
                                   )
                                 : const SizedBox(),
-                            onTap: () => HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.SEARCH )),
-                            style: easyTheme.textTheme.labelMedium!
+                            onTap: () =>
+                                !widget.isActive ? openSearchScreen() : () {},
+                            style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(fontFamily: FontFamily.apercuRegular),
                             isUnderlineOn: true,
-                            hintText: 'Search',
+                            hintText: context.locale.search_hint_text_field,
                           ),
                         ),
                       ),
@@ -80,11 +87,9 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
               ),
               SizedBox(width: 14.0.w),
               GestureDetector(
-                  onTap: () {
-                  HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.CART));
-                  FocusScope.of(context).unfocus();
-                  },
-                  child: Assets.svg.cartAddIcon.svg(width: 24.0.w, height: 24.0.h)),
+                  onTap: () => !widget.isCart ? openCartScreen() : () {},
+                  child: Assets.svg.cartAddIcon
+                      .svg(width: 24.0.w, height: 24.0.h)),
             ],
           ),
           titlePadding: const EdgeInsetsDirectional.only(
@@ -98,7 +103,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
   }
 
   void onChange(String value) {
-      SearchBloc.get.add(EmptySearchEvent());
+    SearchBloc.get.add(EmptySearchEvent());
     _debounceTimer?.cancel();
     if (value.isEmpty) {
       SearchBloc.get.add(EmptySearchEvent());
@@ -108,10 +113,20 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
       SearchBloc.get.add(SearchOnItemsEvent(searchValue: value));
     });
   }
-  void clearText(){
+
+  void openCartScreen() {
     FocusScope.of(context).unfocus();
-    widget.searchController.clear();
+    Utils.openNavNewPage(context, const CartScreen());
+  }
+
+  void clearText() {
+    FocusScope.of(context).unfocus();
+    searchController.clear();
     SearchBloc.get.add(EmptySearchEvent());
-    HomeBloc.get.add(SwapHomeScreenStateEvent(homeScreenState:HomeScreenState.HOME));
+  }
+
+  void openSearchScreen() {
+    FocusScope.of(context).unfocus();
+    Utils.openNavNewPage(context, const SearchScreen());
   }
 }

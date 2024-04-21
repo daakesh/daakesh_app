@@ -3,14 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class SwapResultsScreen extends StatelessWidget {
-  const SwapResultsScreen({super.key});
+  final List<SwapCategoryItem> swapCategoriesListData;
+  const SwapResultsScreen({super.key, required this.swapCategoriesListData});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
-      builder: (context, state) {
-        return CustomScrollView(
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (value) {
+        SwapFilterBloc.get.add(SwapClearFilterDataEvent());
+      },
+      child: Scaffold(
+        body: CustomScrollView(
           slivers: [
+            const SwapAppBarWidget(),
             const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
             SliverToBoxAdapter(
               child: Padding(
@@ -22,7 +28,7 @@ class SwapResultsScreen extends StatelessWidget {
                         height: 38.0,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          itemCount: state.swapCategoriesListData.length,
+                          itemCount: swapCategoriesListData.length,
                           separatorBuilder: (_, i) {
                             return const SizedBox(
                               width: 11.0,
@@ -30,9 +36,10 @@ class SwapResultsScreen extends StatelessWidget {
                           },
                           itemBuilder: (_, index) {
                             SwapCategoryItem swapCategoryItem =
-                                state.swapCategoriesListData[index];
+                                swapCategoriesListData[index];
                             return GestureDetector(
-                              onTap: () => getSubCategoriesData(index),
+                              onTap: () => getSubCategoriesData(
+                                  swapCategoriesListData[index].id!),
                               child: Container(
                                 height: 38.0,
                                 padding: const EdgeInsetsDirectional.symmetric(
@@ -41,8 +48,8 @@ class SwapResultsScreen extends StatelessWidget {
                                     color: ColorName.paleGray,
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(10.0))),
-                                child:
-                                    Center(child: Text('${swapCategoryItem.name}')),
+                                child: Center(
+                                    child: Text('${swapCategoryItem.name}')),
                               ),
                             );
                           },
@@ -52,7 +59,10 @@ class SwapResultsScreen extends StatelessWidget {
                     const SizedBox(
                       width: 11.0,
                     ),
-                    Assets.svg.sortIcon.svg()
+                    GestureDetector(
+                        onTap: () => openSwapFilterScreen(context),
+                        child: Assets.png.filterIcon
+                            .image(width: 38.0, height: 38.0))
                   ],
                 ),
               ),
@@ -71,27 +81,74 @@ class SwapResultsScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child:
-                    Text('Results', style: easyTheme.textTheme.headlineMedium),
+                child: Text(context.locale.swap_results_title,
+                    style: context.easyTheme.textTheme.headlineMedium),
               ),
             ),
             const SliverPadding(padding: EdgeInsets.only(top: 13.0)),
-            SliverList(
-                delegate: SliverChildBuilderDelegate(
-              (_, index) {
-                SwapSubCategory subCategoryItem = state.swapSubCategoryListData[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17),
-                  child: SwapResultItemWidget(swapSubCategory: subCategoryItem),
-                );
+            BlocBuilder<SwapFilterBloc, SwapFilterState>(
+              builder: (context, state) {
+                return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                  (_, index) {
+                    FilterResultModel filterResultModel =
+                        state.subCategoryListData[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 17),
+                      child: SwapResultItemWidget(
+                          filterResultModel: filterResultModel),
+                    );
+                  },
+                  childCount: state.subCategoryListData.length,
+                ));
               },
-              childCount: state.swapSubCategoryListData.length,
-            )),
+            ),
             const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
+            SliverToBoxAdapter(
+                child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
+              builder: (context, state) {
+                return seeMoreHandler(state, context);
+              },
+            )),
+            const SliverPadding(padding: EdgeInsets.only(top: 60.0)),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
-  void getSubCategoriesData(int index) => SwapPassDataBloc.get.add(SwapPreviewSectionSubCategoriesEvent(index:index));
+
+  Widget seeMoreHandler(SwapFilterState state, BuildContext context) {
+    switch (!state.isMoreData) {
+      case true:
+        switch (state.swapFilterStateStatus) {
+          case SwapFilterStateStatus.LOADINGMORE:
+            return const CircularProgressIndicatorWidget();
+          default:
+            return Center(
+                child: TextButtonWidget(
+              text: context.locale.swap_results_see_more_text_button,
+              onPressed: () => onSeeMore(),
+              isBold: true,
+            ));
+        }
+      default:
+        return state.swapFilterStateStatus.isNull
+            ? Center(child: Text(context.locale.swap_results_no_data))
+            : const SizedBox();
+    }
+  }
+
+  void openSwapFilterScreen(context) {
+    FocusScope.of(context).unfocus();
+    Utils.openNavNewPage(context, SwapFilterScreen());
+  }
+
+  void onSeeMore() {
+    SwapFilterBloc.get
+        .add(SwapPreviewSectionSubCategoriesEvent(isSeeMore: true));
+  }
+
+  void getSubCategoriesData(int catID) => SwapFilterBloc.get
+      .add(SwapPreviewSectionSubCategoriesEvent(catID: catID));
 }

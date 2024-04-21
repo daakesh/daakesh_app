@@ -5,11 +5,13 @@ import '../../../../src.export.dart';
 @LazySingleton(as: MyOrderRepository)
 class MyOrderRepositoryImpl implements MyOrderRepository {
   @override
-  Future<Either<Failure, ValidResponse>> updateUserData() async {
-    return await getIt.get<MyOrderDatasource>().updateUserData();
+  Future<Either<Failure, ValidResponse>> getMyOrders() async {
+    return await getIt.get<MyOrderDatasource>().getMyOrders();
   }
 
-
-
-
+  @override
+  Future<Either<Failure, ValidResponse>> getSendReceiveSwapRequest(
+      String type) async {
+    return await getIt.get<MyOrderDatasource>().getSendReceiveSwapRequest(type);
+  }
 }

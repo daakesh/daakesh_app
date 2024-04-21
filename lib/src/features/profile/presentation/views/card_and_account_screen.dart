@@ -7,9 +7,9 @@ class CardAndAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DefaultBackgroundWidget(
+    return DefaultBackgroundWidget(
       child: Scaffold(
-        backgroundColor:ColorName.transparent,
+        backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
             return Padding(
@@ -22,7 +22,7 @@ class CardAndAccountScreen extends StatelessWidget {
                   ),
                   Text(
                     'Card And Accounts',
-                    style: easyTheme.textTheme.headlineMedium!
+                    style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 36.0),
                   ),
                   const SizedBox(
@@ -30,7 +30,7 @@ class CardAndAccountScreen extends StatelessWidget {
                   ),
                   Text(
                     'Payment Method',
-                    style: easyTheme.textTheme.headlineMedium!
+                    style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 25.0),
                   ),
                   const SizedBox(
@@ -38,32 +38,44 @@ class CardAndAccountScreen extends StatelessWidget {
                   ),
                   Text(
                     'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                    style: easyTheme.textTheme.bodyMedium!
+                    style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 16.0),
                   ),
-                  state.isUpdateActive
+                  state.isUpdatePersonalActive
                       ? Padding(
-                        padding: const EdgeInsets.only(top: 29.0),
-                        child: Text(
-                                            'Select the card',
-                                            style: easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 18.0),
-                                          ),
-                      )
+                          padding: const EdgeInsets.only(top: 29.0),
+                          child: Text(
+                            'Select the card',
+                            style: context.easyTheme.textTheme.headlineMedium!
+                                .copyWith(fontSize: 18.0),
+                          ),
+                        )
                       : const SizedBox(),
                   const SizedBox(
                     height: 30.0,
                   ),
-                  CardItem(title: 'XXXX- 1236', index: 1, activeIndex: 1, onTap: () {},cardType: CardsTypes.VISA),
-                  const SizedBox(height: 14.0,),
-                  CardItem(title: 'XXXX- 1236', index: 2, activeIndex: 1, onTap: () {},cardType: CardsTypes.MASTERCARD),
-                  state.isUpdateActive
+                  CardItem(
+                      title: 'XXXX- 1236',
+                      index: 1,
+                      activeIndex: 1,
+                      onTap: () {},
+                      cardType: CardsTypes.VISA),
+                  const SizedBox(
+                    height: 14.0,
+                  ),
+                  CardItem(
+                      title: 'XXXX- 1236',
+                      index: 2,
+                      activeIndex: 1,
+                      onTap: () {},
+                      cardType: CardsTypes.MASTERCARD),
+                  state.isUpdatePersonalActive
                       ? InkWell(
                           splashColor: ColorName.transparent,
                           highlightColor: ColorName.transparent,
                           focusColor: ColorName.transparent,
                           onTap: () {
-                            openNewPage(RegisterCardInfoScreen(
+                            Utils.openNewPage(RegisterCardInfoScreen(
                               isLoggedIn: true,
                             ));
                           },
@@ -80,7 +92,7 @@ class CardAndAccountScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   'Add Payment Card',
-                                  style: easyTheme.textTheme.bodyLarge!
+                                  style: context.easyTheme.textTheme.bodyLarge!
                                       .copyWith(
                                           fontSize: 18.0,
                                           color: ColorName.black
@@ -99,14 +111,19 @@ class CardAndAccountScreen extends StatelessWidget {
                   ),
                   Center(
                     child: DefaultButtonWidget(
-                        text: !state.isUpdateActive ? 'MAKE EDIT':'DELETE', onPressed: ()=>onMakeEdit(state.isUpdateActive)),
+                        text: !state.isUpdatePersonalActive
+                            ? 'MAKE EDIT'
+                            : 'DELETE',
+                        onPressed: () =>
+                            onMakeEdit(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(
                     height: 12.0,
                   ),
                   Center(
-                    child:
-                    OutlineButtonWidget(text: 'Cancel', onPressed: ()=>cancel(state.isUpdateActive)),
+                    child: OutlineButtonWidget(
+                        text: 'Cancel',
+                        onPressed: () => cancel(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(
                     height: 50.0,
@@ -119,11 +136,13 @@ class CardAndAccountScreen extends StatelessWidget {
       ),
     );
   }
-  void onMakeEdit(bool isUpdateActive){
+
+  void onMakeEdit(bool isUpdateActive) {
     ProfileBloc.get.add(ActivateUpdateEvent(isUpdatePersonalActive: true));
   }
-  void cancel(bool isUpdateActive){
+
+  void cancel(bool isUpdateActive) {
     ProfileBloc.get.add(ActivateUpdateEvent(isUpdatePersonalActive: false));
-    getBack();
+    Utils.getBack();
   }
 }

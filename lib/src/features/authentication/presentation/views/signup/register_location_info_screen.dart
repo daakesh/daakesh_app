@@ -4,29 +4,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class RegisterLocationInfoScreen extends StatefulWidget {
-   const RegisterLocationInfoScreen({super.key});
+  const RegisterLocationInfoScreen({super.key});
 
   @override
-  State<RegisterLocationInfoScreen> createState() => _RegisterLocationInfoScreenState();
+  State<RegisterLocationInfoScreen> createState() =>
+      _RegisterLocationInfoScreenState();
 }
 
-class _RegisterLocationInfoScreenState extends State<RegisterLocationInfoScreen> {
+class _RegisterLocationInfoScreenState
+    extends State<RegisterLocationInfoScreen> {
   final countryController = TextEditingController();
   final cityController = TextEditingController();
   final addressController = TextEditingController();
 
-  final FocusNode countryFocusNode= FocusNode();
+  final FocusNode countryFocusNode = FocusNode();
   final FocusNode cityFocusNode = FocusNode();
   final FocusNode addressFocusNode = FocusNode();
   @override
   void initState() {
     super.initState();
-    countryController.text = 'Jordan';
     resetFlag();
   }
 
   @override
   Widget build(BuildContext context) {
+    countryController.text = context.locale.location_country_init_value;
     return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
@@ -34,65 +36,89 @@ class _RegisterLocationInfoScreenState extends State<RegisterLocationInfoScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Spacer(flex: 1,),
-              const SizedBox(height: 44.0),
+              const Spacer(
+                flex: 1,
+              ),
+              SizedBox(height: 44.0.h),
               const Center(child: DaakeshLogoWidget()),
-              const Spacer(flex: 1,),
+              const Spacer(
+                flex: 1,
+              ),
               Padding(
-                padding: const EdgeInsetsDirectional.only(start: 26.0,end: 13.0),
+                padding: EdgeInsetsDirectional.only(start: 26.0.w, end: 13.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Lets Go',style: easyTheme.textTheme.headlineLarge),
-                    const SizedBox(height: 10.0,),
-                    Text('Set Your Location To Start Exploring Best Deal',style: easyTheme.textTheme.headlineMedium),
+                    Text(context.locale.location_title,
+                        style: context.easyTheme.textTheme.headlineLarge!
+                            .copyWith(fontSize: 40.0.sp)),
+                    SizedBox(
+                      height: 10.0.h,
+                    ),
+                    Text(context.locale.location_instruction,
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(fontSize: 25.0.sp)),
                   ],
                 ),
               ),
-              const SizedBox(height: 20.0),
+              SizedBox(height: 20.0.h),
               Padding(
-                padding: const EdgeInsetsDirectional.only(start: 32.0,end:29.0),
+                padding: EdgeInsetsDirectional.only(start: 32.0.w, end: 29.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Country',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    Text(context.locale.country_text_field,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: countryController,
                       focusNode: countryFocusNode,
                       isSuffixPrefixOn: true,
-                      suffixIcon: SizedBox(height:9.0 ,width:16.0,child: Center(child: Assets.svg.arrowDropDownIcon.svg()),),
-                      prefixIcon: BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
+                      suffixIcon: SizedBox(
+                        height: 9.0.h,
+                        width: 16.0.w,
+                        child:
+                            Center(child: Assets.svg.arrowDropDownIcon.svg()),
+                      ),
+                      prefixIcon:
+                          BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
                         return SizedBox(
-                            width: 30.0,
-                            height: 30.0,
+                            width: 30.0.w,
+                            height: 30.0.h,
                             child: Center(
                                 child: Text(
                               state.flagEmoji,
-                              style: const TextStyle(
-                                  color: ColorName.blueGray, fontSize: 24.0),
+                              style: TextStyle(
+                                  color: ColorName.blueGray, fontSize: 24.0.sp),
                             )));
                       }),
-                      onFieldSubmitted: (value)=>fieldFocusChange(context,countryFocusNode,cityFocusNode),
+                      onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                          context, countryFocusNode, cityFocusNode),
                       readOnly: true,
-                      onTap: (){
+                      onTap: () {
                         showCountryDialog(context);
                       },
                       inputFormatters: [
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    const SizedBox(height: 33.0),
-                    Text('City',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    SizedBox(height: 33.0.h),
+                    Text(context.locale.city_text_field,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: cityController,
                       focusNode: cityFocusNode,
-                      onFieldSubmitted: (value)=>fieldFocusChange(context,cityFocusNode,addressFocusNode),
+                      onFieldSubmitted: (value) => Utils.fieldFocusChange(
+                          context, cityFocusNode, addressFocusNode),
                       inputFormatters: [
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    const SizedBox(height: 33.0),
-                    Text('Address',style: easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 18.0,color: ColorName.darkGray)),
+                    SizedBox(height: 33.0.h),
+                    Text(context.locale.address_text_field,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0.sp, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: addressController,
                       focusNode: addressFocusNode,
@@ -100,35 +126,35 @@ class _RegisterLocationInfoScreenState extends State<RegisterLocationInfoScreen>
                       inputFormatters: [
                         RegExpValidator.beginWhitespace,
                       ],
-                      suffixIcon: InkWell(
-                        onTap: () =>openNewPage(const MapScreen()),
-                        splashColor: ColorName.transparent,
-                        focusColor: ColorName.transparent,
-                        highlightColor: ColorName.transparent,
-                        child: SizedBox(width: 20.0,height: 20.0,child: Center(child: Assets.svg.locationPinIcon.svg())),
+                      suffixIcon: GestureDetector(
+                        onTap: () => Utils.openNewPage(const MapScreen()),
+                        child: SizedBox(
+                            width: 20.0.w,
+                            height: 20.0.h,
+                            child: Center(
+                                child: Assets.svg.locationPinIcon.svg())),
                       ),
                     ),
                   ],
                 ),
               ),
-              const Spacer(flex: 1,),
-              const SizedBox(height: 43.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 21.0),
-                child: DefaultButtonWidget(text: 'NEXT', onPressed: ()=>onNext(context)),
+              const Spacer(
+                flex: 1,
               ),
-              const Spacer(flex: 1,),
-              const SizedBox(height: 20.0),
+              SizedBox(height: 43.0.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                child: DefaultButtonWidget(
+                    text: context.locale.location_next_button_title,
+                    onPressed: () => onNext(context)),
+              ),
+              const Spacer(
+                flex: 1,
+              ),
+              SizedBox(height: 20.0.h),
               const AlreadyHaveAccountWidget(),
-              const SizedBox(height: 20.0),
-              const Spacer(flex: 1,),
-
-
-
-
-
-
-
+              SizedBox(height: 20.0.h),
+              const Spacer(flex: 1),
             ],
           ),
         ),
@@ -136,39 +162,38 @@ class _RegisterLocationInfoScreenState extends State<RegisterLocationInfoScreen>
     );
   }
 
-   void onNext(context)async{
-     if (countryController.text.isEmpty ||
-         cityController.text.isEmpty ||
-         addressController.text.isEmpty) {
-       ShowToastSnackBar.showSnackBars(message: 'Fill location data firstly');
-       return;
-     }
+  void onNext(BuildContext context) async {
+    if (countryController.text.isEmpty ||
+        cityController.text.isEmpty ||
+        addressController.text.isEmpty) {
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.fill_location_data_snack_bars);
+      return;
+    }
+    AuthBloc.get.add(EnterLocationInfoEvent(
+      country: countryController.text,
+      city: cityController.text,
+      address: addressController.text,
+    ));
+    Utils.openNewPage(RegisterPhoneNumberScreen());
+  }
 
-     ProgressCircleDialog.show();
-     AuthBloc.get.add(
-         EnterLocationInfoEvent(
-           country:countryController.text,
-           city:cityController.text,
-           address:addressController.text,
-     ));
-     await Future.delayed(const Duration(seconds: 1));
-     ProgressCircleDialog.dismiss();
-     openNewPage(RegisterPhoneNumberScreen());
-   }
-
-   void showCountryDialog(context) {
+  void showCountryDialog(context) {
     return showCountryPicker(
-      context:context,
+      context: context,
       showPhoneCode: false,
       onSelect: (Country country) {
         countryController.text = country.name;
-        AuthBloc.get.add(ChangeFlagEvent(flagEmoji: country.flagEmoji.toString(),),);
+        AuthBloc.get.add(
+          ChangeFlagEvent(
+            flagEmoji: country.flagEmoji.toString(),
+          ),
+        );
       },
     );
   }
 
-  void resetFlag(){
+  void resetFlag() {
     AuthBloc.get.add(ChangeFlagEvent(flagEmoji: '🇯🇴'));
   }
-
 }

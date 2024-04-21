@@ -8,20 +8,24 @@ class SwapRateBloc extends Bloc<SwapRateEvent, SwapRateState> {
     on<SwapGetRateByItemEvent>(_getRateByItem);
     on<SwapEditRateEvent>(_editRate);
   }
-  static SwapRateBloc get get => BlocProvider.of(navigatorKey.currentState!.context);
+  static SwapRateBloc get get =>
+      BlocProvider.of(Utils.navigatorKey.currentState!.context);
 
-  FutureOr<void> _addRate(SwapAddRateEvent event, Emitter<SwapRateState> emit)async {
+  FutureOr<void> _addRate(
+      SwapAddRateEvent event, Emitter<SwapRateState> emit) async {
     int itemId = event.itemId;
     int userId = event.userId;
     int catID = event.catID;
     int rateValue = event.rateValue;
-    emit(state.copyWith(swapRateStateStatus:SwapRateStateStatus.LOADING));
-    final result = await getIt.get<SwapUseCases>().addRate(itemId, userId, catID,rateValue);
+    emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.LOADING));
+    final result = await getIt
+        .get<SwapUseCases>()
+        .addRate(itemId, userId, catID, rateValue);
     result.fold((l) {
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
@@ -29,16 +33,18 @@ class SwapRateBloc extends Bloc<SwapRateEvent, SwapRateState> {
     });
   }
 
-  FutureOr<void> _getRateByItem(SwapGetRateByItemEvent event, Emitter<SwapRateState> emit)async {
+  FutureOr<void> _getRateByItem(
+      SwapGetRateByItemEvent event, Emitter<SwapRateState> emit) async {
     int itemID = event.itemId;
     int userId = event.userId;
-    emit(state.copyWith(swapRateStateStatus:SwapRateStateStatus.LOADING));
-    final result = await getIt.get<SwapUseCases>().getRateByItem(itemID,userId);
+    emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.LOADING));
+    final result =
+        await getIt.get<SwapUseCases>().getRateByItem(itemID, userId);
     result.fold((l) {
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
@@ -46,22 +52,21 @@ class SwapRateBloc extends Bloc<SwapRateEvent, SwapRateState> {
     });
   }
 
-  FutureOr<void> _editRate(SwapEditRateEvent event, Emitter<SwapRateState> emit)async {
+  FutureOr<void> _editRate(
+      SwapEditRateEvent event, Emitter<SwapRateState> emit) async {
     int id = event.id;
     int rateValue = event.rateValue;
-    emit(state.copyWith(swapRateStateStatus:SwapRateStateStatus.LOADING));
-    final result = await getIt.get<SwapUseCases>().editRate(id,rateValue);
+    emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.LOADING));
+    final result = await getIt.get<SwapUseCases>().editRate(id, rateValue);
     result.fold((l) {
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async{
-      if(!r.status!){
+    }, (r) async {
+      if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.SUCCESS));
     });
   }
-
-
 }

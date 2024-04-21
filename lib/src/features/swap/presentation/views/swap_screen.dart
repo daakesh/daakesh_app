@@ -10,39 +10,29 @@ class SwapScreen extends StatefulWidget {
 }
 
 class _SwapScreenState extends State<SwapScreen> {
-  final searchController = TextEditingController();
-  final ScrollController scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    getSwapScreenData();
+  }
 
+  void getSwapScreenData() {
+    SwapAdvBloc.get.add(SwapGetAdvertisementDataEvent());
+    SwapBloc.get.add(SwapGetSectionDataEvent());
+    TrendDealsBloc.get.add(GetTrendDealsDataEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
-        controller: SwapBloc.scrollController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-        return [
-          SwapAppBarWidget(searchController: searchController,),
-        ];
-      },
-        body:BlocBuilder<SwapBloc,SwapState>(
-            builder: (ctx,state){
-           switch(state.swapScreenState){
-             case SwapScreenState.SEARCH: return const SwapSearchScreen();
-             case SwapScreenState.SUBCATEGORYRESULT: return const SwapResultsScreen();
-             case SwapScreenState.CART: return const SwapCartScreen();
-             case SwapScreenState.SECTIONS: return SwapSectionScreen(swapState: state,);
-             case SwapScreenState.PRODUCTDETAILS: return const SwapMoreInfoScreen();
-             case SwapScreenState.SENDOFFER: return const SendOfferScreen();
-             case SwapScreenState.OFFERDETAILS: return const SwapOfferDetailsScreen();
-             default:return SwapDataWidget(state: state);
-           }
+          return [const SwapAppBarWidget()];
+        },
+        body: BlocBuilder<SwapBloc, SwapState>(builder: (ctx, state) {
+          return SwapDataWidget(state: state);
         }),
       ),
     );
   }
 }
-
-
-
-
-

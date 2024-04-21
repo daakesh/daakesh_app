@@ -1,3 +1,326 @@
 {
-  "log_in_button_title": "تسجيل الدخول"
-}
+  "welcomeScreen": "*********WelcomeScreen*********",
+  "welcome_title": "Welcome",
+  "welcome_body_title":"Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet",
+  "create_account_title":"CREATE ACCOUNT",
+  "already_have_an_account":"Already have an Account? ",
+  "login_text_button_title":"Login",
+
+  "registerScreen": "*********RegisterScreen*********",
+  "lets_go_title":"Lets Go",
+  "enter_personal_info_title":"Enter your Personal your Info",
+  "name_text_field":"Name",
+  "email_text_field":"Email",
+  "password_text_field":"Password",
+  "next_button_title":"Next",
+  "fill_personal_data_snack_bars":"Fill personal data firstly",
+  
+  "insertCellPhoneScreen": "*********InsertCellPhoneScreen*********",
+  "forget_password_title":"Forgot Password",
+  "forget_instruction_title":"Enter Your Phone Number",
+  "forget_phone_number_text_field":"Phone Number",
+  "forget_next_button_title":"NEXT",
+  "forget_snack_bar_title":"Firstly, fill cell phone number",
+
+
+  "resetPassScreen": "*********ResetPassScreen*********",
+  "reset_pass_title":"Reset password",
+  "reset_pass_instruction":"Make Sure You Will Remember It",
+  "new_pass_text_field":"New password",
+  "confirm_pass_text_field":"Confirm password",
+  "reset_button_title":"RESET",
+  "password_confirmation_failed":"Password confirmation failed",
+  
+  "resetPassSuccessScreen": "*********ResetPassSuccessScreen*********",
+  "reset_pass_success_title":"Reset Complete!",
+  "reset_pass_success_instruction":"Now You Can Start And Find Best Deals",
+  
+  "verificationCompleteScreen": "*********VerificationCompleteScreen*********",
+  "verification_complete_title":"Verification Complete!",
+  
+  "addPaymentCardScreen": "*********AddPaymentCardScreen*********",
+  "add_payment_card_title":"Add Your Payment Card",
+  "add_payment_card_instruction":"Shop With A Variety Of Products From Daakesh",
+  "add_payment_button_title":"ADD PAYMENT CARD",
+  "later_button_title":"LATER",
+  
+  "cardAddedSuccessfullyScreen": "*********CardAddedSuccessfullyScreen*********",
+  "add_payment_success_title":"The payment card has been added successfully",
+  "start_shopping_button_title":"START SHOPPING",
+  
+  "otpScreen": "*********OTPScreen*********",
+  "otp_title":"Lets Go",
+  "otp_instruction":"Verify Your Identity",
+  "text_button_send_code_again":"Send code again",
+  "validate_button_title":"VALIDATE",
+  "insert_full_code_snack_bar":"Insert full sms code",
+  "otp_body_text": "We Send You A Code To {unite} Phone Number Please Enter The Code To Create Account",
+  "@otp_body_text": {
+    "description": "insert Phone Number",
+    "placeholders": {
+      "unite": {
+        "type": "String",
+        "example": "+962123456789"
+      }
+    }
+  },
+  "code_sent_title":"Code sent",
+  "code_resent_title":"Code resent",
+  
+  "registerCardInfoScreen": "*********RegisterCardInfoScreen*********",
+  "add_card_title":"Add Payment Card",
+  "add_card_instruction":"Enter Card Information",
+  "card_number_text_field":"Card Number",
+  "expiry_date_text_field":"Expiry Date",
+  "expiry_date_text_field_hint":"MM/YY",
+  "cvv_text_field":"CVV",
+  "nickname_text_field":"Nickname (optional)",
+  "add_card_button_title":"ADD CARD",
+  "cancel_add_card_button_title":"CANCEL",
+  
+  "registerLocationInfoScreen": "*********RegisterLocationInfoScreen*********",
+  "location_country_init_value":"Jordan",
+  "location_title":"Lets Go",
+  "location_instruction":"Set Your Location To Start Exploring Best Deal",
+  "country_text_field":"Country",
+  "city_text_field":"City",
+  "address_text_field":"Address",
+  "location_next_button_title":"NEXT",
+  "fill_location_data_snack_bars":"Fill location data firstly",
+
+  "registerPhoneNumberScreen": "*********RegisterPhoneNumberScreen*********",
+  "phone_number_title":"Lets Go",
+  "phone_number_instruction":"Enter Phone Number",
+  "phone_number_text_field":"Phone Number",
+  "phone_number_next_button_title":"NEXT",
+  "fill_phone_number_data_snack_bars":"Fill phone number data firstly",
+
+  "verificationScreen": "*********VerificationScreen*********",
+  "verification_title":"Verification Complete!",
+  "verification_instruction":"Now You Can Start And Find Best Deals",
+  
+  "loginMannerScreen": "*********LoginMannerScreen*********",
+  "login_manner_title":"LOGIN",
+  "login_manner_instruction":"Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet",
+  "login_manner_button_title":"EMAIL",
+  "or_text_title":"OR",
+  "have_an_account_title":"Don't have an Account? ",
+  "create_one_text_button_title":"Create One",
+
+  "loginScreen": "*********LoginScreen*********",
+  "login_title":"Welcome back!",
+  "login_email_text_field":"Email",
+  "login_password_text_field":"Password",
+  "remember_me_title":"Remember Me",
+  "login_button_title":"LOGIN",
+  "forget_password_text_button":"Forget password ?",
+  "login_snack_bar_title":"Fill data firstly",
+  
+  "adjustShippingScreen": "*********AdjustShippingScreen*********",
+  "adjust_shipping_title":"Shipping Address",
+  "shipping_country_text_field":"Country",
+  "shipping_city_text_field":"City",
+  "shipping_address_text_field":"Address",
+  "shipping_apartment_text_field":"Apartment/Building Number",
+  "shipping_phone_number_text_field":"Phone Number",
+  "shipping_edit_button_title":"EDIT ADDRESS",
+  "shipping_clear_button_title":"CLEAR",
+  
+  
+  "cartPayScreen": "*********CartPayScreen*********",
+  "cart_item_title":"Your Cart",
+  "cart_item_edit_button":"Edit",
+  "cart_item_count_title":"Item",
+  "cart_item_cost_title":"Cost",
+  "shipping_item_title":"Shipping",
+  "shipping_item_edit_button":"Edit",
+  "shipping_item_country_title":"Country",
+  "shipping_item_address_title":"Address",
+  "shipping_item_phone_number_title":"Phone Number",
+  "shipping_item_delivery_fee":"Delivery Fee",
+  "total_title":"Total : ",
+  "payment_button_title":"PAYMENT",
+  
+  
+  "cartScreen": "*********CartScreen*********",
+  "cart_title":"Your Cart Details",
+  "cart_off_title":"OFF",
+  "by_title":"By",
+  "see_details_text_button":"See Details",
+  "cart_item_price_title":"Price :",
+  "cart_total_title":"Total :",
+  "cart_total_item_title":"Item",
+  "checkout_button_title":"CHECKOUT",
+
+
+  "checkOutScreen": "*********CheckOutScreen*********",
+  "check_out_total_title":"Total : ",
+  "check_out_pay_button":"PAY",
+  
+  "confirmOrderScreen": "*********ConfirmOrderScreen*********",
+  "confirm_order_title":"Your Order Has Been Confirmed",
+  "confirm_order_instruction":"This Will Be Shown To You On The My Orders Page",
+  "confirm_order_button_title":"BACK SHOPPING",
+  
+  "paymentMethodScreen": "*********PaymentMethodScreen*********",
+  "choose_payment_title":"Choose Payment Method",
+  "credit_card_title":"Credit Card",
+  "cash_on_delivery_title":"Cash Upon Delivery",
+  "cards_title":"Cards",
+  "add_payment_card_text_button":"Add Payment Card",
+  "pay_button_title":"PAY",
+  
+  "filterScreen": "*********FilterScreen*********",
+  "filter_title":"Filter",
+  "filter_available_ship_country":"Available ship country",
+  "filter_available_ship_city":"City",
+  "filter_rate":"Rate",
+  "filter_price_slider":"Price",
+  "filter_product_type":"Product type",
+  "filter_apply_button":"APPLY",
+  "filter_clear_button":"CLEAR",
+  
+  
+  "homeScreen": "*********HomeScreen*********",
+  "search_hint_text_field":"Search",
+  "home_popular_sections_title":"Popular Sections",
+  "home_whats_new_section_title":"What's New",
+  "home_shop_by_brands_section_title":"Shop By Brands",
+  "home_handmade_section_title":"Handmade",
+  "home_daakesh_today_deals_title":"Daakesh Today's Deals",
+  "home_today_deals_title":"Today's Deals",
+  "home_off_title":"OFF",
+  "home_by_title":"By ",
+  
+  "sectionScreen": "*********SectionScreen*********",
+  "section_screen_title":"Sections",
+  "category_title":"Category",
+  "see_more_category_title":"See More",
+  
+  "resultsScreen": "*********ResultsScreen*********",
+  "results_title":"Results",
+  "see_more_results_title":"See More",
+  "results_no_data":"No Data...",
+  "results_off_title":"OFF",
+  "results_by_title":"By",
+  
+  "homemadeScreen": "*********HomemadeScreen*********",
+  "homemade_title_see_more":"See More",
+  
+  
+  "mainScreen": "*********MainScreen*********",
+  "home_bottom_nav_tab":"Home",
+  "my_product_bottom_nav_tab":"My Product",
+  "my_order_bottom_nav_tab":"My Order",
+  "profile_bottom_nav_tab":"Profile",
+  
+  "moreInfoProductScreen": "*********MoreInfoProductScreen*********",
+  "more_info_product_by_title":"By",
+  "more_info_product_size":"Size:",
+  "more_info_product_details_title":"Details:",
+  "more_info_product_brand_title":"Brand:",
+  "more_info_product_model_title":"Model Name:",
+  "more_info_product_category_title":"Category",
+  "more_info_product_year_title":"Year:",
+  "more_info_product_description_title":"description",
+  "more_info_product_add_to_cart":"ADD TO CART",
+  "more_info_product_call":"CALL",
+  "more_info_product_whatsapp":"WhatsApp",
+  "more_info_product_rate":"Rate",
+  "more_info_product_comment":"Comment",
+  "more_info_product_comments":"Comments",
+  
+  "searchScreen": "*********SearchScreen*********",
+  "search_title":"Search",
+  "see_more_text_button":"See More",
+  "no_information_available_title":"No information available...",
+  
+  "shopByBrandsScreen": "*********ShopByBrandsScreen*********",
+  "shop_by_brands_title_see_more":"See More",
+  
+  
+  "exchangeOfferScreen": "*********ExchangeOfferScreen*********",
+  "exchange_offer_title":"Your Exchange Offer Has Been Sent",
+  "exchange_offer_instruction":"If Your Offer Is Approved, This Will Be Shown To You On The My Orders Page",
+  "exchange_offer_create_button_title":"CREATE OTHER SWAP OFFER",
+  "exchange_offer_back_button_title":"BACK TO STORE",
+  
+  "sendOfferScreen": "*********SendOfferScreen*********",
+  "swap_in_title":"Swap In",
+  "swap_by_title":"By",
+  "see_details_title":"See Details",
+  "swap_offer_instruction":"Choose From Your Products What You Want To Exchange",
+  "swap_tag_title":"SWAP",
+  "see_details_my_swap_product":"See Details",
+  "comment_instruction_title":"You can Make offer Better",
+  "add_swap_comment_hint":"Add Comment",
+  "send_offer_button_title":"SEND OFFER",
+  "add_comment_snack_bar":"Add comment please...",
+  
+  "swapFilterScreen": "*********SwapFilterScreen*********",
+  "swap_filter_title":"Filter",
+  "swap_filter_available_ship_country":"Available ship country",
+  "swap_filter_available_ship_city":"City",
+  "swap_filter_rate_title":"Rate",
+  "swap_filter_price_slider":"price",
+  "swap_filter_product_type":"Product type",
+  "swap_filter_all_type":"الكل",
+  "swap_filter_daakesh_type":"داكش",
+  "swap_filter_other_type":"الاخرون",
+  "swap_filter_apply_button":"APPLY",
+  "swap_filter_clear_button":"CLEAR",
+  
+  "swapMoreInfoScreen": "*********SwapMoreInfoScreen*********",
+  "swap_more_info_by_title":"By",
+  "swap_more_info_swap_in_title":"Swap In ",
+  "offer_submitted_title":"Offers Submitted",
+  "swap_offer_details_title":"Details:",
+  "swap_offer_brand_title":"Brand",
+  "swap_offer_model_title":"Model Name:",
+  "swap_offer_category_title":"Category",
+  "swap_offer_year_title":"Year",
+  "swap_offer_description_title":"description",
+  "swap_offer_create_button":"CREATE SWAP OFFER",
+  
+  "swapOfferDetailsScreen": "*********SwapOfferDetailsScreen*********",
+  "swap_offer_swap_in_title":"Swap In",
+  "swap_offer_by_title":"By ",
+  "swap_see_details_text_button":"See Details",
+  "swap_offer_tag_title":"SWAP",
+  "swap_offer_your_comment_title":"Your Comment",
+  "swap_offer_continue_button_title":"CONTINUE",
+  
+  
+  "swapSearchScreen": "*********SwapSearchScreen*********",
+  "swap_search_title":"Search",
+  "see_more_search":"See More",
+  "swap_search_no_information_available":"No information available...",
+  
+  
+  "swapScreen": "*********SwapScreen*********",
+  "swap_search_text_field_hint":"Search",
+  "swap_popular_swap_sections":"Popular Swap Sections",
+  "swap_trending_deals_to_swap":"Trending Deals To Swap",
+  "swap_trend_product_tag":"SWAP",
+  "swap_trend_product_offer_submit":"Offers Submitted",
+  "swap_trend_product_by_title":"By ",
+  
+  "swapSectionScreen": "*********SwapSectionScreen*********",
+  "swap_section_title":"Sections",
+  "swap_category_title":"Category",
+  "swap_see_more_text_button":"See More",
+  
+  "swapResultsScreen": "*********SwapResultsScreen*********",
+  "swap_results_title":"Results",
+  "swap_result_item_tag":"Swap",
+  "swap_result_item_by_title":"By",
+  "swap_result_item_offers_submitted":"Offers Submitted",
+  "swap_results_see_more_text_button":"See More",
+  "swap_results_no_data":"No Data..."
+
+
+
+
+
+
+  }

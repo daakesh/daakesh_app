@@ -18,41 +18,65 @@ class WelcomeScreen extends StatelessWidget {
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Spacer(flex: 3,),
+              const Spacer(
+                flex: 3,
+              ),
               const Center(child: DaakeshLogoWidget()),
-              const Spacer(flex: 3,),
+              const Spacer(
+                flex: 3,
+              ),
               Padding(
-                padding: const EdgeInsetsDirectional.only(start: 16.0,end:26.0 ),
+                padding: EdgeInsetsDirectional.only(start: 16.0.w, end: 26.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Welcome',
-                      style: easyTheme.textTheme.headlineLarge,
+                      context.locale.welcome_title,
+                      style: context.easyTheme.textTheme.headlineLarge!
+                          .copyWith(fontSize: 40.0.sp),
                     ),
-                    const SizedBox(height: 20.86,),
+                    SizedBox(
+                      height: 20.86.h,
+                    ),
                     Text(
-                      'Praesent hendrerit finibus orci eu facilisis. Mauris porttitor sit amet',
-                      style: easyTheme.textTheme.bodyMedium,
+                      context.locale.welcome_body_title,
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 18.0.sp),
                     ),
                   ],
                 ),
               ),
-              const Spacer(flex: 1,),
-              Center(child: DefaultButtonWidget(onPressed: () =>openNewPage(RegisterPersonalInfoScreen()), text: 'CREATE ACCOUNT',)),
-              const Spacer(flex: 1,),
+              const Spacer(
+                flex: 1,
+              ),
+              Center(
+                  child: DefaultButtonWidget(
+                onPressed: () =>
+                    Utils.openNewPage(const RegisterPersonalInfoScreen()),
+                text: context.locale.create_account_title,
+              )),
+              const Spacer(
+                flex: 1,
+              ),
               const ThirdPartyAuthenticationWidget(),
-              const SizedBox(height: 44.0,),
-              AlreadyHaveAccountWidget(onPressed:onLogin),
-              const Spacer(flex: 1,),
+              SizedBox(
+                height: 44.0.h,
+              ),
+              AlreadyHaveAccountWidget(
+                onPressed: onLogin,
+                screen: const LoginMannerScreen(),
+              ),
+              const Spacer(
+                flex: 1,
+              ),
             ],
           ),
         ),
       ),
     );
   }
-  void onLogin()=> openNewPage(const LoginMannerScreen());
-}
 
+  void onLogin() => Utils.openNewPage(const LoginMannerScreen());
+}

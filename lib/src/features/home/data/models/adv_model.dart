@@ -1,6 +1,6 @@
 class AdvModel {
   bool? status;
-  bool? error;
+  String? error;
   List<AdvItem>? data;
 
   AdvModel({

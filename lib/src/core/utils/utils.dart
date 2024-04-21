@@ -1,96 +1,150 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../src.export.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Future<void> openNewPage(Widget widget, {bool popPreviousPages = false}) {
-  return Future<dynamic>.delayed(Duration.zero, () {
-    if (!popPreviousPages) {
-      return navigatorKey.currentState!.push(
-        MaterialPageRoute(
-          builder: (_) => widget,
-          settings: RouteSettings(arguments: widget),
-        ),
-      );
-    }
-    return navigatorKey.currentState!.pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => widget,
-          settings: RouteSettings(
-            arguments: widget,
+class Utils {
+  static Future<void> openNewPage(Widget widget,
+      {bool popPreviousPages = false}) {
+    return Future<dynamic>.delayed(Duration.zero, () {
+      if (!popPreviousPages) {
+        return navigatorKey.currentState!.push(
+          MaterialPageRoute(
+            builder: (_) => widget,
+            settings: RouteSettings(arguments: widget),
           ),
-        ),
-            (Route<dynamic> route) => false);
-  });
-}
+        );
+      }
+      return navigatorKey.currentState!.pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => widget,
+            settings: RouteSettings(
+              arguments: widget,
+            ),
+          ),
+          (Route<dynamic> route) => false);
+    });
+  }
 
-Future<void> openNewPageWithNav(Widget widget, {bool withNavBar = false,}) {
-  return Future<dynamic>.delayed(Duration.zero, () {
-    if (!withNavBar) {
-      return PersistentNavBarNavigator.pushNewScreen(
-        navigatorKey.currentState!.context,
-        screen: widget,
-        withNavBar: true, // OPTIONAL VALUE. True by default.
-      );
-
-
-    }
-    return PersistentNavBarNavigator.pushNewScreen(
-      navigatorKey.currentState!.context,
-      screen: widget,
-      withNavBar: true, // OPTIONAL VALUE. True by default.
+  static void openNavNewPage(BuildContext context, Widget screen,
+      {withNavBar = true}) {
+    PersistentNavBarNavigator.pushNewScreen(
+      context,
+      screen: screen,
+      withNavBar: withNavBar,
     );
-  });
-}
-
-Future<void> getBack(){
-  return Future<dynamic>.delayed(Duration.zero, () {
-    Navigator.pop(navigatorKey.currentState!.context);
-  });
-}
-
-double getScreenWidth(BuildContext context, {bool realWidth = false}) {
-  if (realWidth) {
-    return MediaQuery.of(context).size.width;
-  } //to preview widget like phone scale in preview
-
-  if (kIsWeb) {
-    return MediaQuery.of(context).orientation == Orientation.landscape
-        ? MediaQuery.of(context).size.width / 4
-        : MediaQuery.of(context).size.height / 4;
   }
 
-  return MediaQuery.of(context).orientation == Orientation.portrait
-      ? MediaQuery.of(context).size.width
-      : MediaQuery.of(context).size.height;
-}
+  static GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'Key to navigate without context');
 
-double getScreenHeight(BuildContext context, {bool realHeight = false}) {
-  if (realHeight) {
-    return MediaQuery.of(context).size.height;
-  } //to preview widget like phone scale in preview
-  if (kIsWeb) {
-    return MediaQuery.of(context).orientation == Orientation.landscape
-        ? MediaQuery.of(context).size.height / 1.4
-        : MediaQuery.of(context).size.width / 1.4;
+  static BuildContext currentContext = navigatorKey.currentState!.context;
+
+  static AppLocalizations get locale => AppLocalizations.of(currentContext)!;
+
+  static String formatDate(String dateString) {
+    DateTime date = DateFormat('yyyy-mm-dd').parse(dateString);
+    return DateFormat('mm/dd/yyyy').format(date);
   }
-  return MediaQuery.of(context).orientation == Orientation.portrait
-      ? MediaQuery.of(context).size.height
-      : MediaQuery.of(context).size.width;
+
+  static String countryCodeToEmoji(String country) {
+    String code = CountriesFlags.flags[country].toString();
+    final int firstLetter = code.codeUnitAt(0) - 0x41 + 0x1F1E6;
+    final int secondLetter = code.codeUnitAt(1) - 0x41 + 0x1F1E6;
+    return String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
+  }
+
+  static String handleCountry(countryCode) {
+    switch (countryCode) {
+      case '+962':
+        return countryCodeToEmoji('Jordan');
+      case '+964':
+        return countryCodeToEmoji('Iraq');
+      case '+966':
+        return countryCodeToEmoji('Saudi Arabia');
+      case '+20':
+        return countryCodeToEmoji('Egypt');
+      case '+971':
+        return countryCodeToEmoji('United Arab Emirates');
+      case '+213':
+        return countryCodeToEmoji('Algeria');
+      default:
+        return countryCodeToEmoji('Jordan');
+    }
+  }
+
+  static Future<void> getBack() {
+    return Future<dynamic>.delayed(Duration.zero, () {
+      Navigator.pop(navigatorKey.currentState!.context);
+    });
+  }
+
+  static double getScreenWidth(BuildContext context, {bool realWidth = false}) {
+    if (realWidth) {
+      return MediaQuery.of(context).size.width;
+    } //to preview widget like phone scale in preview
+
+    if (kIsWeb) {
+      return MediaQuery.of(context).orientation == Orientation.landscape
+          ? MediaQuery.of(context).size.width / 4
+          : MediaQuery.of(context).size.height / 4;
+    }
+
+    return MediaQuery.of(context).orientation == Orientation.portrait
+        ? MediaQuery.of(context).size.width
+        : MediaQuery.of(context).size.height;
+  }
+
+  static double getScreenHeight(BuildContext context,
+      {bool realHeight = false}) {
+    if (realHeight) {
+      return MediaQuery.of(context).size.height;
+    } //to preview widget like phone scale in preview
+    if (kIsWeb) {
+      return MediaQuery.of(context).orientation == Orientation.landscape
+          ? MediaQuery.of(context).size.height / 1.4
+          : MediaQuery.of(context).size.width / 1.4;
+    }
+    return MediaQuery.of(context).orientation == Orientation.portrait
+        ? MediaQuery.of(context).size.height
+        : MediaQuery.of(context).size.width;
+  }
+
+  static void fieldFocusChange(
+    BuildContext context,
+    FocusNode currentFocus,
+    FocusNode nextFocus,
+  ) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
+
+  static bool isOpenKeyboard(context) =>
+      MediaQuery.of(context).viewInsets.bottom == 0;
+  static bool isLightTheme(BuildContext context) =>
+      context.easyTheme.brightness == Brightness.light;
+
+  ///static bool getTextDirection(context) =>Directionality.of(context) == TextDirection.rtl;
 }
 
 class ProgressCircleDialog {
   static void show() {
     showDialog(
-        context: navigatorKey.currentState!.context,
-        builder: (_) => const Center(child: CircularProgressIndicator(color: ColorName.blueGray,)),
+        context: Utils.navigatorKey.currentState!.context,
+        builder: (_) => const Center(
+                child: CircularProgressIndicator(
+              color: ColorName.blueGray,
+            )),
         barrierDismissible: false);
   }
+
   static dismiss() {
-      Navigator.pop(navigatorKey.currentState!.context);
-    }
+    Navigator.pop(Utils.navigatorKey.currentState!.context);
   }
+}
 
 class MyBlocObserver extends BlocObserver {
   @override
@@ -130,27 +184,3 @@ class MyBlocObserver extends BlocObserver {
     debugPrint('onClose -- bloc: ${bloc.runtimeType}');
   }
 }
-
-void printFullText(String text) {
-  final pattern = RegExp('.{1800}');
-  pattern.allMatches(text).forEach((match) => debugPrint(match.group(0)));
-}
-
-void fieldFocusChange(
-    BuildContext context,
-    FocusNode currentFocus,
-    FocusNode nextFocus,
-    ) {
-  currentFocus.unfocus();
-  FocusScope.of(context).requestFocus(nextFocus);
-}
-
-bool isOpenKeyboard(context) => MediaQuery.of(context).viewInsets.bottom == 0;
-
-bool getTextDirection(context) => Directionality.of(context) == TextDirection.rtl;
-
-bool get isLightTheme => easyTheme.brightness == Brightness.light;
-
-BuildContext get currentContext => navigatorKey.currentState!.context;
-
-
