@@ -26,13 +26,13 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
         .get<AuthUseCases>()
         .isPhoneNumberExist('+${state.phoneCode}$phoneNumber');
     result.fold((l) {
+      ProgressCircleDialog.dismiss();
       emit(state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-      ProgressCircleDialog.dismiss();
     }, (r) async {
+      ProgressCircleDialog.dismiss();
       bool data = r.data['data'] as bool;
       if (!data) {
-        ProgressCircleDialog.dismiss();
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }

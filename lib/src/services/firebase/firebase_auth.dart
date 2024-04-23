@@ -14,7 +14,14 @@ class FirebaseAuthentication {
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException error) {
+          if (error.code == 'invalid-phone-number') {
+            ProgressCircleDialog.dismiss();
+            ShowToastSnackBar.showSnackBars(
+                message: 'The provided phone number is not valid.');
+            return;
+          }
           ProgressCircleDialog.dismiss();
+
           ShowToastSnackBar.showSnackBars(message: error.toString());
           debugPrint("ERROR $error");
         },
@@ -30,16 +37,18 @@ class FirebaseAuthentication {
           }
 
           _resendToken = resendToken;
-          ProgressCircleDialog.dismiss();
           Future.delayed(Duration.zero).then((value) =>
               ShowToastSnackBar.showSnackBars(
                   message: context.locale.code_sent_title));
+          ProgressCircleDialog.dismiss();
+
           Utils.openNewPage(OTPScreen(authManner: authManner));
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     } catch (error) {
       ProgressCircleDialog.dismiss();
+
       ShowToastSnackBar.showSnackBars(message: error.toString());
     }
   }
@@ -47,7 +56,6 @@ class FirebaseAuthentication {
   static void verificationCompleted(String verificationId, String smsCode,
       AuthManner authManner, BuildContext context) async {
     ProgressCircleDialog.show();
-    await Future.delayed(const Duration(seconds: 1));
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode);

@@ -1,18 +1,19 @@
 {
-    "files.autoSave": "onWindowChange",
-    "workbench.colorTheme": "Tokyo Night",
-    "workbench.preferredHighContrastColorTheme": "Default High Contrast",
-    "workbench.preferredDarkColorTheme": "Default Dark Modern",
-    "workbench.preferredHighContrastLightColorTheme": "Default High Contrast Light",
-    "editor.codeActionsOnSave":{
-        "source.fixAll": "explicit"
-    },
-    "workbench.iconTheme": "easy-icons",
-    "cSpell.words": [
-        "Daakesh",
-        "dartz",
-        "Datasource",
-        "Prefs",
-        "unfocus"
-    ]
+  "files.autoSave": "onWindowChange",
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.preferredHighContrastColorTheme": "Default High Contrast",
+  "workbench.preferredDarkColorTheme": "Default Dark Modern",
+  "workbench.preferredHighContrastLightColorTheme": "Default High Contrast Light",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "workbench.iconTheme": "easy-icons",
+  "cSpell.words": [
+    "Daakesh",
+    "dartz",
+    "Datasource",
+    "Prefs",
+    "unfocus"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/3.19.5"
 }
