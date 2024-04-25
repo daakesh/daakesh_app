@@ -15,12 +15,15 @@ class TodayDealProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Utils.openNavNewPage(
-          context,
-          MoreInfoProductScreen(
-            todayDealItem: todayDealItem,
-            isDaakeshTodayDeal: isDaakeshTodayDeal,
-          )),
+      onTap: () {
+        CommentBloc.get.add(GetCommentByItemEvent(itemId: todayDealItem.id!));
+        Utils.openNavNewPage(
+            context,
+            MoreInfoProductScreen(
+              todayDealItem: todayDealItem,
+              isDaakeshTodayDeal: isDaakeshTodayDeal,
+            ));
+      },
       child: Column(
         children: [
           Container(

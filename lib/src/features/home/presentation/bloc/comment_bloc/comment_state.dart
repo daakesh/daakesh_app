@@ -1,6 +1,5 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:equatable/equatable.dart';
+import '../../../../../src.export.dart';
 
 enum CommentStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
 
@@ -15,19 +14,31 @@ extension CommentStateStatusX on CommentStateStatus{
 
 class CommentState extends Equatable {
   final CommentStateStatus commentStateStatus;
+  final List<CommentRateModelItem> commentList;
+  final int currentPage;
+  final bool isMoreData;
 
 
   const CommentState({
     this.commentStateStatus = CommentStateStatus.INITIAL,
+    this.commentList = const[],
+    this.currentPage = 1,
+    this.isMoreData = true,
 
   });
 
   CommentState copyWith({
     CommentStateStatus? commentStateStatus,
+    List<CommentRateModelItem>? commentList,
+    int? currentPage,
+    bool? isMoreData,
 
   }) {
     return CommentState(
       commentStateStatus: commentStateStatus ?? this.commentStateStatus,
+      commentList: commentList ?? this.commentList,
+      currentPage: currentPage ?? this.currentPage,
+      isMoreData: isMoreData ?? this.isMoreData,
 
 
     );
@@ -36,6 +47,9 @@ class CommentState extends Equatable {
   @override
   List<Object?> get props => [
     commentStateStatus,
+    commentList,
+    currentPage,
+    isMoreData,
   ];
 }
 

@@ -1,7 +1,7 @@
 abstract class CommentEvent {}
 
 class AddCommentEvent extends CommentEvent{
-  final int userId;
+  final String userId;
   final int itemId;
   final String commentDesc;
 
@@ -14,9 +14,11 @@ class AddCommentEvent extends CommentEvent{
 
 class GetCommentByItemEvent extends CommentEvent{
   final int itemId;
+  final bool isSeeMore;
 
   GetCommentByItemEvent({
     required this.itemId,
+    this.isSeeMore = false,
   });
 }
 

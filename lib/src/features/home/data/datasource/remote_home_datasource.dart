@@ -90,11 +90,11 @@ class RemoteHomeDatasource implements HomeDatasource {
   ///Comments API.
   @override
   Future<Either<Failure, ValidResponse>> addComment(
-      int userId, int itemId, String commentDesc) async {
+      String userId, int itemId, String commentDesc) async {
     final result = await getIt
         .get<NetworkService>()
         .post(path: 'DaakeshServices/api/comment/addComment', body: {
-      "userID": "$userId",
+      "userID": userId,
       "itemID": "$itemId",
       "commentDesc": commentDesc,
     });
@@ -132,7 +132,7 @@ class RemoteHomeDatasource implements HomeDatasource {
   ///Rate API.
   @override
   Future<Either<Failure, ValidResponse>> addRate(
-      int itemId, int userId, int catID, int rateValue) async {
+      int itemId, String userId, int catID, double rateValue) async {
     final result = await getIt
         .get<NetworkService>()
         .post(path: 'DaakeshServices/api/rate/addRate', body: {

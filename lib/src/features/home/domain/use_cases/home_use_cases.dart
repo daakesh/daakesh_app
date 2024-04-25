@@ -19,7 +19,7 @@ abstract class HomeUseCases {
 
   ///Comment API
   Future<Either<Failure, ValidResponse>> addComment(
-      int userId, int itemId, String commentDesc);
+      String userId, int itemId, String commentDesc);
   Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
 
@@ -28,7 +28,7 @@ abstract class HomeUseCases {
 
   ///Rate API
   Future<Either<Failure, ValidResponse>> addRate(
-      int itemId, int userId, int catID, int rateValue);
+      int itemId, String userId, int catID, double rateValue);
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
 
@@ -99,7 +99,7 @@ class HomeUseCasesImpl implements HomeUseCases {
   ///Comment API.
   @override
   Future<Either<Failure, ValidResponse>> addComment(
-      int userId, int itemId, String commentDesc) async {
+      String userId, int itemId, String commentDesc) async {
     return await getIt
         .get<HomeRepository>()
         .addComment(userId, itemId, commentDesc);
@@ -124,7 +124,7 @@ class HomeUseCasesImpl implements HomeUseCases {
   ///Rate API
   @override
   Future<Either<Failure, ValidResponse>> addRate(
-      int itemId, int userId, int catID, int rateValue) async {
+      int itemId, String userId, int catID, double rateValue) async {
     return await getIt
         .get<HomeRepository>()
         .addRate(itemId, userId, catID, rateValue);

@@ -12,18 +12,22 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
   static CommentBloc get get =>
       BlocProvider.of(Utils.navigatorKey.currentState!.context);
 
-  FutureOr<void> _addComment(
-      AddCommentEvent event, Emitter<CommentState> emit) async {
-    int userId = event.userId;
+  FutureOr<void> _addComment(AddCommentEvent event, Emitter<CommentState> emit) async {
+    String userId = event.userId;
     int itemId = event.itemId;
     String commentDesc = event.commentDesc;
     emit(state.copyWith(commentStateStatus: CommentStateStatus.LOADING));
+    ProgressCircleDialog.show();
+
     final result =
         await getIt.get<HomeUseCases>().addComment(userId, itemId, commentDesc);
     result.fold((l) {
+      ProgressCircleDialog.dismiss();
+
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
+      ProgressCircleDialog.dismiss();
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
@@ -36,7 +40,21 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       GetCommentByItemEvent event, Emitter<CommentState> emit) async {
     int itemID = event.itemId;
     emit(state.copyWith(commentStateStatus: CommentStateStatus.LOADING));
+    if (event.isSeeMore) {
+      emit(state.copyWith(
+        currentPage: state.currentPage + 1,
+        commentStateStatus: CommentStateStatus.LOADINGMORE,
+      ));
+    } else {
+      emit(state.copyWith(
+        commentStateStatus: CommentStateStatus.LOADING,
+        commentList: [],
+        currentPage: 1,
+      ));
+    }
+
     final result = await getIt.get<HomeUseCases>().getCommentsByItem(itemID);
+
     result.fold((l) {
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -45,7 +63,23 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      emit(state.copyWith(commentStateStatus: CommentStateStatus.SUCCESS));
+      CommentRateModel commentRateModel = CommentRateModel.fromJson(r.data);
+      int lastPage = commentRateModel.data!.lastPage!;
+      List<CommentRateModelItem> newResultList = commentRateModel.data!.commentRateModelItem!.toList();
+      List<CommentRateModelItem> myProductListData = state.commentList.toList();
+      if (newResultList.isEmpty) {
+        emit(state.copyWith(
+          commentStateStatus: CommentStateStatus.NULL,
+          isMoreData: lastPage == state.currentPage,
+        ));
+        return;
+      }
+      myProductListData.addAll(newResultList);
+      emit(state.copyWith(
+        commentStateStatus: CommentStateStatus.SUCCESS,
+        commentList: myProductListData,
+        isMoreData: lastPage == state.currentPage,
+      ));
     });
   }
 

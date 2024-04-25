@@ -128,6 +128,44 @@ class Utils {
       context.easyTheme.brightness == Brightness.light;
 
   ///static bool getTextDirection(context) =>Directionality.of(context) == TextDirection.rtl;
+///
+///
+
+
+
+  static String calculate(String initialTime)  {
+    // Define the initial time
+    DateTime initialDateTime = DateTime.parse(initialTime);
+
+    // Get the current time
+    DateTime currentDateTime = DateTime.now();
+
+    // Calculate the time difference
+    Duration difference = currentDateTime.difference(initialDateTime);
+
+    // Extract time difference in various units
+    int minutes = difference.inMinutes;
+    int hours = difference.inHours;
+    int days = difference.inDays;
+    int weeks = (days / 7).floor();
+    int months = currentDateTime.month - initialDateTime.month + (currentDateTime.year - initialDateTime.year) * 12;
+    int years = currentDateTime.year - initialDateTime.year;
+
+    // Determine the largest time unit present in the difference
+    if (years > 0) {
+      return '$years year';
+    } else if (months > 0) {
+      return '$months month';
+    } else if (weeks > 0) {
+      return '$weeks week';
+    } else if (days > 0) {
+      return '$days day';
+    } else if (hours > 0) {
+      return '$hours hour';
+    } else {
+      return '$minutes minute';
+    }
+  }
 }
 
 class ProgressCircleDialog {

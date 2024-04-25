@@ -17,7 +17,7 @@ abstract class HomeRepository {
 
   ///Comment APIs
   Future<Either<Failure, ValidResponse>> addComment(
-      int userId, int itemId, String commentDesc);
+      String userId, int itemId, String commentDesc);
   Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
   Future<Either<Failure, ValidResponse>> editComments(
@@ -25,7 +25,7 @@ abstract class HomeRepository {
 
   ///Rate APIs
   Future<Either<Failure, ValidResponse>> addRate(
-      int itemId, int userId, int catID, int rateValue);
+      int itemId, String userId, int catID, double rateValue);
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
 
