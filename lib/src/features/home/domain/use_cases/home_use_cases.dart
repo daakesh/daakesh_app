@@ -4,7 +4,7 @@ import '../../../../src.export.dart';
 
 abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> getAdvertisementData();
-  Future<Either<Failure, ValidResponse>> getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
@@ -12,6 +12,9 @@ abstract class HomeUseCases {
 
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
+  Future<Either<Failure, ValidResponse>> getItemsByBrands(
+      int page, int brandId);
+
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
       HomeTodayItemType type, int page);
   Future<Either<Failure, ValidResponse>> searchOnItems(
@@ -52,8 +55,8 @@ class HomeUseCasesImpl implements HomeUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
-    return await getIt.get<HomeRepository>().getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
+    return await getIt.get<HomeRepository>().getSectionData(page);
   }
 
   @override
@@ -80,6 +83,12 @@ class HomeUseCasesImpl implements HomeUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
     return await getIt.get<HomeRepository>().getBrandsData(page);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrands(
+      int page, int brandId) async {
+    return await getIt.get<HomeRepository>().getItemsByBrands(page, brandId);
   }
 
   @override

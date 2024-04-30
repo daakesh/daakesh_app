@@ -190,7 +190,8 @@ class ProfileScreen extends StatelessWidget {
               child: Center(
                   child: DefaultButtonWidget(
                       text: 'LOG OUT',
-                      onPressed: () => GetItUtils.user.logOut())),
+                      onPressed: () =>
+                          UserDataBloc.get.add(LogoutUserEvent()))),
             ),
             const SizedBox(
               height: 30.0,

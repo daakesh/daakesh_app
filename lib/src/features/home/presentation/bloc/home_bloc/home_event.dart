@@ -12,6 +12,9 @@ class SelectProductSizeIndex extends HomeEvent {
   SelectProductSizeIndex({required this.productSizeIndex});
 }
 
-class GetSectionDataEvent extends HomeEvent {}
+class GetSectionDataEvent extends HomeEvent {
+  final bool isSeeMore;
+  GetSectionDataEvent({this.isSeeMore = false});
+}
 
 class GetHomeScreenData extends HomeEvent {}

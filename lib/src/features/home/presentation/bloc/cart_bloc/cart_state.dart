@@ -13,17 +13,17 @@ extension CartStateStatusX on CartStateStatus {
 class CartState extends Equatable {
   final CartStateStatus cartStateStatus;
   final List<CartItem> cartItemsList;
-  final String totalPrice;
+  final double totalPrice;
   const CartState({
     this.cartStateStatus = CartStateStatus.INITIAL,
     this.cartItemsList = const [],
-    this.totalPrice = '',
+    this.totalPrice = 0.0,
   });
 
   CartState copyWith({
     CartStateStatus? cartStateStatus,
     List<CartItem>? cartItemsList,
-    String? totalPrice,
+    double? totalPrice,
   }) {
     return CartState(
       cartStateStatus: cartStateStatus ?? this.cartStateStatus,

@@ -39,7 +39,7 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
       TrendDealsModel trendDealsModel = TrendDealsModel.fromJson(r.data);
       int lastPage = trendDealsModel.data!.lastPage!;
       List<TrendDealsItem> newResultList =
-          trendDealsModel.data!.handmadeItemList!.toList();
+          trendDealsModel.data!.trendDealsData!.toList();
       List<TrendDealsItem> trendDealListData =
           state.trendDealsListData.toList();
       if (newResultList.isEmpty) {

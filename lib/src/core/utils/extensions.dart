@@ -82,3 +82,8 @@ extension FilterProductTypeX on FilterProductType {
   bool get isDaakesh => this == FilterProductType.Daakesh;
   bool get isOther => this == FilterProductType.Other;
 }
+
+extension DecimalUtil on double {
+  String expToStringAsFixed(int afterDecimal) =>
+      '${toString().split('.')[0]}.${toString().split('.')[1].substring(0, afterDecimal)}';
+}

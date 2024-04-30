@@ -22,7 +22,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         proSubCategoryListData: [],
         proBrandListData: [],
         productCatID: null));
-    final result = await getIt.get<HomeUseCases>().getSectionData();
+    final result = await getIt.get<HomeUseCases>().getSectionData(1);
     result.fold((l) {
       emit(state.copyWith(proDetailsStateStatus: ProDetailsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

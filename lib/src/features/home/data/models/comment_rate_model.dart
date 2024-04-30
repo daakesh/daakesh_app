@@ -8,10 +8,12 @@ class CommentRateModel {
   CommentRateModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     error = json['error'];
-     data = json['data'] != null ? CommentModelData.fromJson(json['data']):null;
-    }
+    data =
+        json['data'] != null ? CommentModelData.fromJson(json['data']) : null;
   }
-class CommentModelData{
+}
+
+class CommentModelData {
   int? lastPage;
   List<CommentRateModelItem>? commentRateModelItem;
 
@@ -22,9 +24,11 @@ class CommentModelData{
 
   CommentModelData.fromJson(Map<String, dynamic> json) {
     lastPage = json['last_page'];
-    if(json['data'] != null){
+    if (json['data'] != null) {
       commentRateModelItem = <CommentRateModelItem>[];
-      commentRateModelItem = (json['data'] as List<dynamic>).map((e) => CommentRateModelItem.fromJson(e)).toList();
+      commentRateModelItem = (json['data'] as List<dynamic>)
+          .map((e) => CommentRateModelItem.fromJson(e))
+          .toList();
     }
   }
 }
@@ -46,10 +50,7 @@ class CommentRateModelItem {
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
     item = json['item'] != null ? Item.fromJson(json['item']) : null;
   }
-
-
 }
-
 
 class Item {
   int? id;
@@ -62,7 +63,7 @@ class Item {
   String? city;
   String? year;
   String? condition;
-  int? price;
+  dynamic price;
   double? discount;
   String? discountFrom;
   String? discountTo;
@@ -74,43 +75,44 @@ class Item {
   String? countrySwap;
   String? citySwap;
   String? storeType;
-  int? priceAfterDiscount;
+  dynamic priceAfterDiscount;
   String? discountPercentage;
   List<Rate>? rate;
 
   Item(
       {this.id,
-        this.description,
-        this.itemImg,
-        this.date,
-        this.title,
-        this.type,
-        this.swapFor,
-        this.city,
-        this.year,
-        this.condition,
-        this.price,
-        this.discount,
-        this.discountFrom,
-        this.discountTo,
-        this.country,
-        this.createdAt,
-        this.updatedAt,
-        this.quantity,
-        this.display,
-        this.countrySwap,
-        this.citySwap,
-        this.storeType,
-        this.priceAfterDiscount,
-        this.discountPercentage,
-        this.rate});
+      this.description,
+      this.itemImg,
+      this.date,
+      this.title,
+      this.type,
+      this.swapFor,
+      this.city,
+      this.year,
+      this.condition,
+      this.price,
+      this.discount,
+      this.discountFrom,
+      this.discountTo,
+      this.country,
+      this.createdAt,
+      this.updatedAt,
+      this.quantity,
+      this.display,
+      this.countrySwap,
+      this.citySwap,
+      this.storeType,
+      this.priceAfterDiscount,
+      this.discountPercentage,
+      this.rate});
 
   Item.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
     if (json['itemImg'] != null) {
       itemImg = <String>[];
-      itemImg = (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+      itemImg =
+          (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
     }
     date = json['date'];
     title = json['Title'];
@@ -135,10 +137,10 @@ class Item {
     discountPercentage = json['discount_percentage'];
     if (json['rate'] != null) {
       rate = <Rate>[];
-      rate = (json['rate'] as List<dynamic>).map((e) => Rate.fromJson(e)).toList();
+      rate =
+          (json['rate'] as List<dynamic>).map((e) => Rate.fromJson(e)).toList();
     }
   }
-
 }
 
 class Rate {

@@ -2,9 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-class HomeDataWidget extends StatelessWidget {
+class HomeDataWidget extends StatefulWidget {
   final HomeState state;
+
   const HomeDataWidget({super.key, required this.state});
+
+  @override
+  State<HomeDataWidget> createState() => _HomeDataWidgetState();
+}
+
+class _HomeDataWidgetState extends State<HomeDataWidget> {
+  final controller = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollListener();
+  }
+
+  void scrollListener() {
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        loadMore();
+      }
+    });
+  }
+
+  void loadMore() {
+    HomeBloc.get.add(GetSectionDataEvent(isSeeMore: true));
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -34,18 +61,31 @@ class HomeDataWidget extends StatelessWidget {
             child: SizedBox(
               height: 150.0,
               child: ListView.builder(
+                controller: controller,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (ctx, index) {
-                  SectionItemModel sectionItem = state.sectionListData[index];
-                  return GestureDetector(
-                    onTap: () => exploreSection(context, sectionItem.id!, index,
-                        sectionItem.name.toString()),
-                    child: PopularCategoriesWidget(
-                      data: state.sectionListData[index],
-                    ),
-                  );
+                  if (index < widget.state.sectionListData.length) {
+                    SectionItemModel sectionItem =
+                        widget.state.sectionListData[index];
+                    return GestureDetector(
+                      onTap: () => exploreSection(context, sectionItem.id!,
+                          index, sectionItem.name.toString()),
+                      child: PopularCategoriesWidget(
+                        data: widget.state.sectionListData[index],
+                      ),
+                    );
+                  } else {
+                    return !widget.state.isMoreData
+                        ? const Padding(
+                            padding: EdgeInsetsDirectional.only(
+                              end: 20.0,
+                            ),
+                            child: CircularProgressIndicatorWidget(),
+                          )
+                        : const SizedBox();
+                  }
                 },
-                itemCount: state.sectionListData.length,
+                itemCount: widget.state.sectionListData.length + 1,
               ),
             ),
           ),
@@ -197,7 +237,7 @@ class HomeDataWidget extends StatelessWidget {
         secID: secID,
         sectionIndex: sectionIndex,
         categoryTitle: categoryTitle));
-    Utils.openNavNewPage(context, SectionScreen(homeState: state));
+    Utils.openNavNewPage(context, SectionScreen(homeState: widget.state));
   }
 
   void onShopByBrands(context) {

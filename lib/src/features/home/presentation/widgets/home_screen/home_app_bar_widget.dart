@@ -29,9 +29,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
         expandedHeight: 160.0,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
-          background: SearchBarWidget(
-            state: state,
-          ),
+          background: SearchBarWidget(state: state),
           expandedTitleScale: 1.0,
           title: Row(
             children: [

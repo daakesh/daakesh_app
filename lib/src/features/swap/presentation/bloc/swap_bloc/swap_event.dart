@@ -34,7 +34,11 @@ class SwapSelectProductSizeIndex extends SwapEvent {
   SwapSelectProductSizeIndex({required this.productSizeIndex});
 }
 
-class SwapGetSectionDataEvent extends SwapEvent {}
+class SwapGetSectionDataEvent extends SwapEvent {
+  final bool isSeeMore;
+
+  SwapGetSectionDataEvent({this.isSeeMore = false});
+}
 
 class SwapGetTodayItemsDataEvent extends SwapEvent {}
 

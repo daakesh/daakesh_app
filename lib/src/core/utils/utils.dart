@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../src.export.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -82,6 +86,10 @@ class Utils {
     });
   }
 
+  static String appToStringAsFixed(double number, int afterDecimal) {
+    return '${number.toString().split('.')[0]}.${number.toString().split('.')[1].substring(0, afterDecimal)}';
+  }
+
   static double getScreenWidth(BuildContext context, {bool realWidth = false}) {
     if (realWidth) {
       return MediaQuery.of(context).size.width;
@@ -128,12 +136,28 @@ class Utils {
       context.easyTheme.brightness == Brightness.light;
 
   ///static bool getTextDirection(context) =>Directionality.of(context) == TextDirection.rtl;
-///
-///
+  static void lunchWhatsApp(String contact) async {
+    var phone = contact;
+    var androidUrl = "whatsapp://send?phone=$phone&text=Hi, Whats up";
+    var iosUrl = "https://wa.me/$phone?text=${Uri.parse('Hi, Whats up')}";
 
+    try {
+      if (Platform.isIOS) {
+        await launchUrl(Uri.parse(iosUrl));
+      } else {
+        await launchUrl(Uri.parse(androidUrl));
+      }
+    } on Exception {
+      ShowToastSnackBar.showSnackBars(message: 'WhatsApp is not installed.');
+    }
+  }
 
+  static void lunchCall(String contact) async {
+    var phone = contact;
+    launchUrlString("tel://$phone");
+  }
 
-  static String calculate(String initialTime)  {
+  static String calculate(String initialTime) {
     // Define the initial time
     DateTime initialDateTime = DateTime.parse(initialTime);
 
@@ -148,7 +172,9 @@ class Utils {
     int hours = difference.inHours;
     int days = difference.inDays;
     int weeks = (days / 7).floor();
-    int months = currentDateTime.month - initialDateTime.month + (currentDateTime.year - initialDateTime.year) * 12;
+    int months = currentDateTime.month -
+        initialDateTime.month +
+        (currentDateTime.year - initialDateTime.year) * 12;
     int years = currentDateTime.year - initialDateTime.year;
 
     // Determine the largest time unit present in the difference

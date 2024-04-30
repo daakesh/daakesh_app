@@ -5,7 +5,8 @@ import '../../../../src.export.dart';
 
 // ignore: must_be_immutable
 class SendOfferScreen extends StatelessWidget {
-  SendOfferScreen({super.key});
+  final TrendDealsItem trendDealsItem;
+  SendOfferScreen({super.key, required this.trendDealsItem});
   final commentController = TextEditingController();
   int itemIndex = 0;
   @override
@@ -46,9 +47,9 @@ class SendOfferScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 32.0),
                           child: CachedImage(
-                              imageUrl: state
-                                  .trendDealsListData.first.itemImg!.first
-                                  .toString()),
+                              imageUrl: trendDealsItem.itemImg != null
+                                  ? trendDealsItem.itemImg!.first.toString()
+                                  : ''),
                         ),
                       ),
                       const SizedBox(
@@ -66,7 +67,7 @@ class SendOfferScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsetsDirectional.only(end: 20.0),
                               child: Text(
-                                '${state.trendDealsListData.first.title}\n\n',
+                                '${trendDealsItem.title}\n\n',
                                 maxLines: 3,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
@@ -90,7 +91,7 @@ class SendOfferScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  '${context.locale.swap_in_title} ${state.trendDealsListData.first.citySwap}, ${state.trendDealsListData.first.countrySwap}',
+                                  '${context.locale.swap_in_title} ${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0),
                                   overflow: TextOverflow.fade,
@@ -115,8 +116,7 @@ class SendOfferScreen extends StatelessWidget {
                                                 fontSize: 20.0,
                                                 color: ColorName.gray)),
                                     TextSpan(
-                                        text:
-                                            '${state.trendDealsListData.first.user!.name}',
+                                        text: '${trendDealsItem.user!.name}',
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
                                             .copyWith(fontSize: 20.0)),
@@ -181,6 +181,7 @@ class SendOfferScreen extends StatelessWidget {
                         options: CarouselOptions(
                           viewportFraction: 0.85,
                           initialPage: 0,
+                          enableInfiniteScroll: false,
                           scrollDirection: Axis.horizontal,
                           onPageChanged: (index, reason) {
                             itemIndex = index;
@@ -190,7 +191,7 @@ class SendOfferScreen extends StatelessWidget {
                           return Container(
                             width: double.infinity,
                             margin: const EdgeInsetsDirectional.only(
-                                end: 16.0, bottom: 8.0),
+                                start: 8, end: 8.0, bottom: 8.0),
                             decoration: const BoxDecoration(
                                 color: ColorName.white,
                                 borderRadius:
@@ -383,6 +384,7 @@ class SendOfferScreen extends StatelessWidget {
   }
 
   void openSwapOfferDetailsScreen(context) {
-    Utils.openNavNewPage(context, const SwapOfferDetailsScreen());
+    Utils.openNavNewPage(
+        context, SwapOfferDetailsScreen(trendDealsItem: trendDealsItem));
   }
 }

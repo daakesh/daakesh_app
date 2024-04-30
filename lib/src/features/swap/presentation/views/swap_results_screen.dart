@@ -91,13 +91,17 @@ class SwapResultsScreen extends StatelessWidget {
                 return SliverList(
                     delegate: SliverChildBuilderDelegate(
                   (_, index) {
-                    FilterResultModel filterResultModel =
+                    TrendDealsItem trendDealsItem =
                         state.subCategoryListData[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 17),
-                      child: SwapResultItemWidget(
-                          filterResultModel: filterResultModel),
+                    return GestureDetector(
+                      onTap: () =>
+                          openSwapMoreInfoScreen(context, trendDealsItem),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 17),
+                        child: SwapResultItemWidget(
+                            trendDealsItem: trendDealsItem),
+                      ),
                     );
                   },
                   childCount: state.subCategoryListData.length,
@@ -142,6 +146,14 @@ class SwapResultsScreen extends StatelessWidget {
   void openSwapFilterScreen(context) {
     FocusScope.of(context).unfocus();
     Utils.openNavNewPage(context, SwapFilterScreen());
+  }
+
+  void openSwapMoreInfoScreen(context, TrendDealsItem trendDealsItem) {
+    Utils.openNavNewPage(
+        context,
+        SwapMoreInfoScreen(
+          trendDealsItem: trendDealsItem,
+        ));
   }
 
   void onSeeMore() {

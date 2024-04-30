@@ -25,7 +25,9 @@ class _MainScreenState extends State<MainScreen> {
       child: PersistentTabView(
         context,
         backgroundColor: ColorName.white,
-        screens: MainScreensList.screens,
+        screens: ValueConstants.userId.isNotEmpty
+            ? MainScreensList.screens
+            : MainScreensList.guestScreens,
         items: MainScreenWidget.navBarsItems(context),
         resizeToAvoidBottomInset: false,
         stateManagement: true,

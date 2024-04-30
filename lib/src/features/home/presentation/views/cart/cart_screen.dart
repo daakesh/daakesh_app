@@ -79,7 +79,7 @@ class CartScreen extends StatelessWidget {
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(fontSize: 28.0)),
                         TextSpan(
-                            text: state.totalPrice,
+                            text: state.totalPrice.expToStringAsFixed(1),
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(fontSize: 28.0)),
                       ],
@@ -99,9 +99,21 @@ class CartScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 21.5),
                     child: Center(
-                        child: DefaultButtonWidget(
-                            text: context.locale.checkout_button_title,
-                            onPressed: () => openCheckOutScreen(context))),
+                        child: ValueConstants.userId.isEmpty ||
+                                state.cartItemsList.isEmpty
+                            ? DefaultButtonWidget(
+                                text: context.locale.checkout_button_title,
+                                style: context
+                                    .easyTheme.elevatedButtonTheme.style!
+                                    .copyWith(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(ColorName
+                                                .blueGray
+                                                .withOpacity(0.5))),
+                                onPressed: () {})
+                            : DefaultButtonWidget(
+                                text: context.locale.checkout_button_title,
+                                onPressed: () => openCheckOutScreen(context))),
                   ),
                 ],
               ),

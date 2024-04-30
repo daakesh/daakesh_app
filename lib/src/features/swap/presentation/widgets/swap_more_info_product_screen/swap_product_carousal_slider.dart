@@ -1,11 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../src.export.dart';
 
 class SwapProductCarousalSlider extends StatelessWidget {
-  final SwapPassDataState state;
-  SwapProductCarousalSlider({super.key, required this.state});
+  final TrendDealsItem trendDealsItem;
+  SwapProductCarousalSlider({
+    super.key,
+    required this.trendDealsItem,
+  });
 
   final controller = CarouselController();
 
@@ -28,7 +32,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
                 width: 6.0,
               ),
               Text(
-                '${state.trendDealsListData.first.user!.name}',
+                '${trendDealsItem.user!.name}',
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0),
               ),
@@ -59,12 +63,16 @@ class SwapProductCarousalSlider extends StatelessWidget {
                 SwapPassDataBloc.get
                     .add(ChangeProductSliderIndex(sliderIndex: index));
               }),
-          items: state.trendDealsListData.first.itemImg!.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Transform.scale(
-                    scale: state.scale,
-                    child: CachedImage(imageUrl: i.toString()));
+          items: trendDealsItem.itemImg!.map((i) {
+            return BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
+              builder: (context, state) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Transform.scale(
+                        scale: state.scale,
+                        child: CachedImage(imageUrl: i.toString()));
+                  },
+                );
               },
             );
           }).toList(),
@@ -72,25 +80,26 @@ class SwapProductCarousalSlider extends StatelessWidget {
         const SizedBox(
           height: 30.0,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: state.trendDealsListData.first.itemImg!
-              .asMap()
-              .entries
-              .map((entry) {
-            return Container(
-              width: 12.0,
-              height: 12.0,
-              margin:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: state.sliderIndex == entry.key
-                    ? ColorName.lightOrange
-                    : ColorName.silverGray,
-              ),
+        BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
+          builder: (context, state) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: trendDealsItem.itemImg!.asMap().entries.map((entry) {
+                return Container(
+                  width: 12.0,
+                  height: 12.0,
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: state.sliderIndex == entry.key
+                        ? ColorName.lightOrange
+                        : ColorName.silverGray,
+                  ),
+                );
+              }).toList(),
             );
-          }).toList(),
+          },
         ),
       ],
     );

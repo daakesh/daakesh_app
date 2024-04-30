@@ -79,7 +79,7 @@ class MainScreenWidget {
                 height: 24.0,
                 child: Assets.svg.enableProfileIcon
                     .svg(width: 26.0, height: 26.0)),
-            title: context.locale.my_order_bottom_nav_tab),
+            title: context.locale.profile_bottom_nav_tab),
         inactiveIcon: bottomNavBarItem(
             context: context,
             icon: SizedBox(

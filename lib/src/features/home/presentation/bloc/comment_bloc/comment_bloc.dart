@@ -12,7 +12,8 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
   static CommentBloc get get =>
       BlocProvider.of(Utils.navigatorKey.currentState!.context);
 
-  FutureOr<void> _addComment(AddCommentEvent event, Emitter<CommentState> emit) async {
+  FutureOr<void> _addComment(
+      AddCommentEvent event, Emitter<CommentState> emit) async {
     String userId = event.userId;
     int itemId = event.itemId;
     String commentDesc = event.commentDesc;
@@ -32,14 +33,17 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      emit(state.copyWith(commentStateStatus: CommentStateStatus.SUCCESS));
+      CommentRateModelItem commentRateModel =
+          CommentRateModelItem.fromJson(r.data['data']);
+      state.commentList.add(commentRateModel);
+      emit(state.copyWith(
+          commentStateStatus: CommentStateStatus.SUCCESS,
+          commentList: state.commentList));
     });
   }
 
   FutureOr<void> _getCommentsByItem(
       GetCommentByItemEvent event, Emitter<CommentState> emit) async {
-    int itemID = event.itemId;
-    emit(state.copyWith(commentStateStatus: CommentStateStatus.LOADING));
     if (event.isSeeMore) {
       emit(state.copyWith(
         currentPage: state.currentPage + 1,
@@ -48,12 +52,15 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     } else {
       emit(state.copyWith(
         commentStateStatus: CommentStateStatus.LOADING,
+        itemId: event.itemId,
         commentList: [],
+        isMoreData: true,
         currentPage: 1,
       ));
     }
 
-    final result = await getIt.get<HomeUseCases>().getCommentsByItem(itemID);
+    final result =
+        await getIt.get<HomeUseCases>().getCommentsByItem(state.itemId);
 
     result.fold((l) {
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
@@ -65,7 +72,8 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       }
       CommentRateModel commentRateModel = CommentRateModel.fromJson(r.data);
       int lastPage = commentRateModel.data!.lastPage!;
-      List<CommentRateModelItem> newResultList = commentRateModel.data!.commentRateModelItem!.toList();
+      List<CommentRateModelItem> newResultList =
+          commentRateModel.data!.commentRateModelItem!.toList();
       List<CommentRateModelItem> myProductListData = state.commentList.toList();
       if (newResultList.isEmpty) {
         emit(state.copyWith(

@@ -1,5 +1,6 @@
 import 'package:daakesh/src/src.export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyOrderScreen extends StatefulWidget {
@@ -17,6 +18,9 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
   }
 
   void getData() {
+    if (ValueConstants.userId.isEmpty) {
+      return;
+    }
     SellOrderBloc.get.add(GetMyOrderEvent());
     MySwapOrderBloc.get.add(GetSendSwapRequestEvent());
     MySwapOrderBloc.get.add(GetReceiveSwapRequestEvent());
@@ -99,6 +103,9 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                           ),
                 SliverPadding(
                     padding: EdgeInsetsDirectional.symmetric(vertical: 26.0.h)),
+                SeeMoreWidget(state: state),
+                SliverPadding(
+                    padding: EdgeInsetsDirectional.symmetric(vertical: 40.0.h)),
               ],
             );
           }),

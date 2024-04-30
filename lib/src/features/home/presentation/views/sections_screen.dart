@@ -43,7 +43,6 @@ class SectionScreen extends StatelessWidget {
                           child: PopularCategoriesWidget(
                             data: sectionModel,
                             index: index,
-                            secIndex: state.sectionIndex,
                           ),
                         );
                       },

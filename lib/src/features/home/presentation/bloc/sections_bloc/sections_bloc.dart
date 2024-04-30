@@ -6,6 +6,7 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
   SectionsBloc() : super(const SectionsState()) {
     on<GetCategoryBySectionIDEvent>(_getCategoryBySectionID);
     on<ResetVarEvent>(_resetVarEvent);
+    on<SelectItemEvent>(_selectItem);
   }
   static SectionsBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -71,5 +72,11 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
       secID: -1,
       categoryTitle: '',
     ));
+  }
+
+  FutureOr<void> _selectItem(
+      SelectItemEvent event, Emitter<SectionsState> emit) {
+    int index = event.index;
+    emit(state.copyWith(sectionIndex: index));
   }
 }

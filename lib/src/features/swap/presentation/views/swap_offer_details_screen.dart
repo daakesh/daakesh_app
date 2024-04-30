@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class SwapOfferDetailsScreen extends StatelessWidget {
-  const SwapOfferDetailsScreen({super.key});
+  final TrendDealsItem trendDealsItem;
+  const SwapOfferDetailsScreen({super.key, required this.trendDealsItem});
 
   @override
   Widget build(BuildContext context) {
@@ -16,129 +17,123 @@ class SwapOfferDetailsScreen extends StatelessWidget {
               const SwapAppBarWidget(),
               const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
               SliverToBoxAdapter(
-                child: state.trendDealsListData.isNotEmpty
-                    ? Container(
-                        width: double.infinity,
-                        margin: const EdgeInsetsDirectional.symmetric(
-                            horizontal: 21.0),
-                        decoration: const BoxDecoration(
-                            color: ColorName.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.16),
-                                offset: Offset(0, 3),
-                                blurRadius: 6.0,
-                              )
-                            ]),
-                        child: Row(
+                child: Container(
+                  width: double.infinity,
+                  margin:
+                      const EdgeInsetsDirectional.symmetric(horizontal: 21.0),
+                  decoration: const BoxDecoration(
+                      color: ColorName.white,
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.16),
+                          offset: Offset(0, 3),
+                          blurRadius: 6.0,
+                        )
+                      ]),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(width: 11.0),
+                      Expanded(
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 32.0),
+                            child: CachedImage(
+                              imageUrl: trendDealsItem.itemImg != null
+                                  ? trendDealsItem.itemImg!.first
+                                  : '',
+                            )),
+                      ),
+                      const SizedBox(
+                        width: 18.0,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(width: 11.0),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 32.0),
-                                child: CachedImage(
-                                    imageUrl: state.trendDealsListData.first
-                                        .itemImg!.first),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsetsDirectional.only(end: 20.0),
+                              child: Text(
+                                '${trendDealsItem.title}',
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(
+                                        fontSize: 20.0,
+                                        color: ColorName.gray,
+                                        overflow: TextOverflow.fade),
+                              ),
+                            ),
+                            const SizedBox(height: 10.0),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Assets.svg.locationPinIcon.svg(
+                                    color: ColorName.amber,
+                                    height: 22.0,
+                                    width: 15.0),
+                                const SizedBox(
+                                  width: 6.0,
+                                ),
+                                Expanded(
+                                    child: Text(
+                                  '${context.locale.swap_offer_swap_in_title} ${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap}',
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(fontSize: 16.0),
+                                  overflow: TextOverflow.fade,
+                                )),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15.0,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsetsDirectional.only(start: 6.0),
+                              child: Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                        text:
+                                            context.locale.swap_offer_by_title,
+                                        style: context
+                                            .easyTheme.textTheme.bodyMedium!
+                                            .copyWith(
+                                                fontSize: 20.0,
+                                                color: ColorName.gray)),
+                                    TextSpan(
+                                        text: '${trendDealsItem.user!.name}',
+                                        style: context
+                                            .easyTheme.textTheme.bodyMedium!
+                                            .copyWith(fontSize: 20.0)),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsetsDirectional.only(end: 13.0),
+                              child: Align(
+                                alignment: AlignmentDirectional.centerEnd,
+                                child: TextButtonWidget(
+                                  text: context
+                                      .locale.swap_see_details_text_button,
+                                  onPressed: () {},
+                                ),
                               ),
                             ),
                             const SizedBox(
-                              width: 18.0,
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 20.0,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.only(
-                                        end: 20.0),
-                                    child: Text(
-                                      '${state.trendDealsListData.first.title}',
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 20.0,
-                                              color: ColorName.gray,
-                                              overflow: TextOverflow.fade),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10.0),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Assets.svg.locationPinIcon.svg(
-                                          color: ColorName.amber,
-                                          height: 22.0,
-                                          width: 15.0),
-                                      const SizedBox(
-                                        width: 6.0,
-                                      ),
-                                      Expanded(
-                                          child: Text(
-                                        '${context.locale.swap_offer_swap_in_title} ${state.trendDealsListData.first.citySwap}, ${state.trendDealsListData.first.countrySwap}',
-                                        style: context
-                                            .easyTheme.textTheme.bodyMedium!
-                                            .copyWith(fontSize: 16.0),
-                                        overflow: TextOverflow.fade,
-                                      )),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.only(
-                                        start: 6.0),
-                                    child: Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(
-                                              text: context
-                                                  .locale.swap_offer_by_title,
-                                              style: context.easyTheme.textTheme
-                                                  .bodyMedium!
-                                                  .copyWith(
-                                                      fontSize: 20.0,
-                                                      color: ColorName.gray)),
-                                          TextSpan(
-                                              text:
-                                                  '${state.trendDealsListData.first.user!.name}',
-                                              style: context.easyTheme.textTheme
-                                                  .bodyMedium!
-                                                  .copyWith(fontSize: 20.0)),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.only(
-                                        end: 13.0),
-                                    child: Align(
-                                      alignment: AlignmentDirectional.centerEnd,
-                                      child: TextButtonWidget(
-                                        text: context.locale
-                                            .swap_see_details_text_button,
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 12.0,
-                                  ),
-                                ],
-                              ),
+                              height: 12.0,
                             ),
                           ],
                         ),
-                      )
-                    : const SizedBox(),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               const SliverToBoxAdapter(
                 child: SizedBox(
@@ -300,11 +295,10 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                         text: context.locale.swap_offer_continue_button_title,
                         onPressed: () => onContinue(
                               context,
-                              state.trendDealsListData.first.id.toString(),
+                              trendDealsItem.id.toString(),
                               state.mySwapProductData.first.id.toString(),
                               state.comment.toString(),
-                              state.trendDealsListData.first.user!.id
-                                  .toString(),
+                              trendDealsItem.user!.id.toString(),
                               ValueConstants.userId,
                             ))),
               ),

@@ -20,18 +20,18 @@ class TrendDealsModel {
 
 class TrendDealsData {
   int? lastPage;
-  List<TrendDealsItem>? handmadeItemList;
+  List<TrendDealsItem>? trendDealsData;
 
   TrendDealsData({
     this.lastPage,
-    this.handmadeItemList,
+    this.trendDealsData,
   });
 
   TrendDealsData.fromJson(Map<String, dynamic> json) {
     lastPage = json['last_page'];
     if (json['data'] != null) {
-      handmadeItemList = <TrendDealsItem>[];
-      handmadeItemList = (json['data'] as List<dynamic>)
+      trendDealsData = <TrendDealsItem>[];
+      trendDealsData = (json['data'] as List<dynamic>)
           .map((e) => TrendDealsItem.fromJson(e))
           .toList();
     }
@@ -85,9 +85,10 @@ class TrendDealsItem {
 
   TrendDealsItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    if(json['itemImg'] != null){
+    if (json['itemImg'] != null) {
       itemImg = <String>[];
-      itemImg = (json['itemImg']as List<dynamic>).map((e) => e.toString()).toList();
+      itemImg =
+          (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
     }
     description = json['description'];
     date = json['date'];
@@ -104,11 +105,16 @@ class TrendDealsItem {
     country = json['country'];
     countrySwap = json['country_swap'];
     citySwap = json['city_swap'];
-    section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : null;
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;
+    category = json['category'] != null
+        ? CategoryItem.fromJson(json['category'])
+        : null;
     brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
-    subcategory = json['subcategory'] != null ? SwapSubCategory.fromJson(json['subcategory']) : null;
-
+    subcategory = json['subcategory'] != null
+        ? SwapSubCategory.fromJson(json['subcategory'])
+        : null;
   }
 }

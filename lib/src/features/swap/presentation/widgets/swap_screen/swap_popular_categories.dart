@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class SwapPopularCategoriesWidget extends StatelessWidget {
@@ -17,37 +18,46 @@ class SwapPopularCategoriesWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsetsDirectional.only(
           start: 4.0, end: 12.0, top: 4.0, bottom: 12.0),
-      child: Container(
-        width: 115.0,
-        height: 130.0,
-        decoration: const BoxDecoration(
-          color: ColorName.white,
-          borderRadius: BorderRadius.all(Radius.circular(18.0)),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 3),
-              blurRadius: 6,
-              color: Color.fromRGBO(0, 0, 0, 0.16),
+      child: BlocBuilder<SwapSectionsBloc, SwapSectionsState>(
+        builder: (context, state) {
+          return Container(
+            width: 115.0,
+            height: 130.0,
+            decoration: BoxDecoration(
+              color: state.sectionIndex == index
+                  ? const Color(0xFFf2cd98)
+                  : Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(18.0)),
+              boxShadow: const [
+                BoxShadow(
+                  offset: Offset(0, 3),
+                  blurRadius: 6,
+                  color: Color.fromRGBO(0, 0, 0, 0.16),
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            CachedImage(
-              imageUrl: data.secImg.toString(),
+            child: Stack(
+              alignment: AlignmentDirectional.bottomCenter,
+              children: [
+                CachedImage(
+                  imageUrl: data.secImg != null ? data.secImg.toString() : '',
+                ),
+                Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 11.0),
+                    child: Text(data.name.toString(),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 15.0,
+                            color: state.sectionIndex == index
+                                ? Colors.white
+                                : ColorName.black)),
+                  ),
+                ),
+              ],
             ),
-            Align(
-              alignment: AlignmentDirectional.topStart,
-              child: Padding(
-                padding: const EdgeInsetsDirectional.only(start: 11.0),
-                child: Text(data.name.toString(),
-                    style: context.easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontSize: 15.0)),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

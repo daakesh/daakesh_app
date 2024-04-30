@@ -15,8 +15,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ///Event to get Categories data at [HomeDataWidget]
   FutureOr<void> _getSectionData(
       GetSectionDataEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(homeStateStatus: HomeStateStatus.LOADING));
-    final result = await getIt.get<HomeUseCases>().getSectionData();
+    if (event.isSeeMore) {
+      if (state.isMoreData) {
+        return;
+      }
+      emit(state.copyWith(
+        sectionCurrentPage: state.sectionCurrentPage + 1,
+        homeStateStatus: HomeStateStatus.LOADINGMORE,
+      ));
+    } else {
+      emit(state.copyWith(
+        homeStateStatus: HomeStateStatus.LOADING,
+        sectionListData: [],
+        sectionCurrentPage: 1,
+      ));
+    }
+    final result = await getIt
+        .get<HomeUseCases>()
+        .getSectionData(state.sectionCurrentPage);
     result.fold((l) {
       emit(state.copyWith(homeStateStatus: HomeStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -25,12 +41,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+
       SectionModel sectionModel = SectionModel.fromJson(r.data);
-      List<SectionItemModel> sectionListData =
-          sectionModel.data!.data!.toList();
+      int lastPage = sectionModel.data!.lastPage!;
+      List<SectionItemModel> newResultList = sectionModel.data!.data!.toList();
+      List<SectionItemModel> sectionListData = state.sectionListData.toList();
+      if (newResultList.isEmpty) {
+        emit(state.copyWith(
+          homeStateStatus: HomeStateStatus.NULL,
+          isMoreData: lastPage == state.sectionCurrentPage,
+        ));
+        return;
+      }
+      sectionListData.addAll(newResultList);
       emit(state.copyWith(
-          homeStateStatus: HomeStateStatus.SUCCESS,
-          sectionListData: sectionListData));
+        homeStateStatus: HomeStateStatus.SUCCESS,
+        sectionListData: sectionListData,
+        isMoreData: lastPage == state.sectionCurrentPage,
+      ));
     });
   }
 
@@ -42,7 +70,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     BrandsBloc.get.add(GetBrandsDataEvent());
     TodayDealsBloc.get.add(GetToadyDealsDataEvent());
     TodayDealsBloc.get.add(GetToadyDaakeshDealsDataEvent());
-    CartBloc.get.add(GetCartItemsEvent());
-    ContactInfoBloc.get.add(GetContactInfoEvent());
+    if (ValueConstants.userId.isNotEmpty) {
+      CartBloc.get.add(GetCartItemsEvent());
+      ContactInfoBloc.get.add(GetContactInfoEvent());
+    }
   }
 }

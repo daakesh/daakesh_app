@@ -14,10 +14,10 @@ class RemoteHomeDatasource implements HomeDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
     final result = await getIt.get<NetworkService>().get(
-          path: 'DaakeshServices/api/section/getSections',
-        );
+        path: 'DaakeshServices/api/section/getSections',
+        params: {"page": "$page"});
     return result;
   }
 
@@ -63,6 +63,16 @@ class RemoteHomeDatasource implements HomeDatasource {
   Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/brand/getBrands', params: {"page": "$page"});
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrands(
+      int page, int brandId) async {
+    final result = await getIt.get<NetworkService>().post(
+        path: 'DaakeshServices/api/item/getItemByBrandId',
+        params: {"page": "$page"},
+        body: {"brandID": "$brandId"});
     return result;
   }
 
@@ -137,7 +147,7 @@ class RemoteHomeDatasource implements HomeDatasource {
         .get<NetworkService>()
         .post(path: 'DaakeshServices/api/rate/addRate', body: {
       "itemID": "$itemId",
-      "userID": "$userId",
+      "userID": userId,
       "catID": "$catID",
       "rateValue": "$rateValue",
     });

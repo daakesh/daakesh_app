@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../src.export.dart';
+import '../../../../../src.export.dart';
 
-class ShopByBrandsScreen extends StatelessWidget {
-  const ShopByBrandsScreen({super.key});
+class HomemadeScreen extends StatelessWidget {
+  const HomemadeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BrandsBloc, BrandsState>(
+    return BlocBuilder<HandmadeBloc, HandmadeState>(
       builder: (context, state) {
         return Scaffold(
           body: CustomScrollView(
@@ -16,9 +16,9 @@ class ShopByBrandsScreen extends StatelessWidget {
               const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
               SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
-                BrandItem brandItem = state.brandListData[index];
-                return BrandItemWidget(brandItem: brandItem);
-              }, childCount: state.brandListData.length)),
+                HandmadeItem handmadeItem = state.handmadeListData[index];
+                return HandmadeItemWidget(handmadeItem: handmadeItem);
+              }, childCount: state.handmadeListData.length)),
               const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
               SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
@@ -29,20 +29,19 @@ class ShopByBrandsScreen extends StatelessWidget {
     );
   }
 
-  void onSeeMore() {
-    BrandsBloc.get.add(GetBrandsDataEvent(isSeeMore: true));
-  }
+  void onSeeMore() =>
+      HandmadeBloc.get.add(GetHandmadeDataEvent(isSeeMore: true));
 
-  Widget seeMoreHandler(BrandsState state, BuildContext context) {
+  Widget seeMoreHandler(HandmadeState state, BuildContext context) {
     switch (!state.isMoreData) {
       case true:
-        switch (state.brandsStateStatus) {
-          case BrandsStateStatus.LOADINGMORE:
+        switch (state.handmadeStateStatus) {
+          case HandmadeStateStatus.LOADINGMORE:
             return const CircularProgressIndicatorWidget();
           default:
             return Center(
                 child: TextButtonWidget(
-              text: context.locale.shop_by_brands_title_see_more,
+              text: context.locale.homemade_title_see_more,
               onPressed: () => onSeeMore(),
               isBold: true,
             ));

@@ -4,16 +4,15 @@ import '../../../../../src.export.dart';
 class SwapTrendDealProduct extends StatelessWidget {
   final TrendDealsItem trendDealsItem;
 
-  const SwapTrendDealProduct({super.key, required this.trendDealsItem});
+  const SwapTrendDealProduct({
+    super.key,
+    required this.trendDealsItem,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        SwapPassDataBloc.get
-            .add(PassTrendingDealDataEvent(trendDealsItem: trendDealsItem));
-        openMoreInfoProductScreen(context);
-      },
+      onTap: () => openMoreInfoProductScreen(context),
       child: Column(
         children: [
           Container(
@@ -202,6 +201,9 @@ class SwapTrendDealProduct extends StatelessWidget {
     );
   }
 
-  void openMoreInfoProductScreen(context) =>
-      Utils.openNavNewPage(context, SwapMoreInfoScreen());
+  void openMoreInfoProductScreen(context) => Utils.openNavNewPage(
+      context,
+      SwapMoreInfoScreen(
+        trendDealsItem: trendDealsItem,
+      ));
 }

@@ -4,7 +4,10 @@ import '../../../../src.export.dart';
 
 class SwapSectionScreen extends StatelessWidget {
   final SwapState swapState;
-  const SwapSectionScreen({super.key, required this.swapState});
+  const SwapSectionScreen({
+    super.key,
+    required this.swapState,
+  });
 
   @override
   Widget build(BuildContext context) {

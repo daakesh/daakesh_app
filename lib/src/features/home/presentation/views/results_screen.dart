@@ -94,12 +94,7 @@ class ResultsScreen extends StatelessWidget {
                   (_, index) {
                     TodayItem todayItem = state.subCategoryListData[index];
                     return GestureDetector(
-                      onTap: () => Utils.openNavNewPage(
-                          context,
-                          MoreInfoProductScreen(
-                            todayDealItem: todayItem,
-                            isDaakeshTodayDeal: true,
-                          )),
+                      onTap: () => openMoreInfoScreen(context, todayItem),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 8.0, horizontal: 17),
@@ -148,6 +143,16 @@ class ResultsScreen extends StatelessWidget {
             ? Center(child: Text(context.locale.results_no_data))
             : const SizedBox();
     }
+  }
+
+  void openMoreInfoScreen(context, TodayItem todayDealItem) {
+    CommentBloc.get.add(GetCommentByItemEvent(itemId: todayDealItem.id));
+    Utils.openNavNewPage(
+        context,
+        MoreInfoProductScreen(
+          todayDealItem: todayDealItem,
+          isDaakeshTodayDeal: true,
+        ));
   }
 
   void onSeeMore() {

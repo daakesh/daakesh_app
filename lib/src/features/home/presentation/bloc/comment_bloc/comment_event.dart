@@ -1,6 +1,6 @@
 abstract class CommentEvent {}
 
-class AddCommentEvent extends CommentEvent{
+class AddCommentEvent extends CommentEvent {
   final String userId;
   final int itemId;
   final String commentDesc;
@@ -12,24 +12,24 @@ class AddCommentEvent extends CommentEvent{
   });
 }
 
-class GetCommentByItemEvent extends CommentEvent{
-  final int itemId;
+class GetCommentByItemEvent extends CommentEvent {
+  final int? itemId;
   final bool isSeeMore;
 
   GetCommentByItemEvent({
-    required this.itemId,
+    this.itemId,
     this.isSeeMore = false,
   });
 }
 
-class RemoveCommentsEvent extends CommentEvent{
+class RemoveCommentsEvent extends CommentEvent {
   final int id;
   RemoveCommentsEvent({
     required this.id,
   });
 }
 
-class EditCommentEvent extends CommentEvent{
+class EditCommentEvent extends CommentEvent {
   final int id;
   final String commentDesc;
   EditCommentEvent({
@@ -37,5 +37,3 @@ class EditCommentEvent extends CommentEvent{
     required this.commentDesc,
   });
 }
-
-

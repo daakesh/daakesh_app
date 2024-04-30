@@ -21,7 +21,7 @@ extension SwapFilterStateStatusX on SwapFilterStateStatus {
 
 class SwapFilterState extends Equatable {
   final SwapFilterStateStatus swapFilterStateStatus;
-  final List<FilterResultModel> subCategoryListData;
+  final List<TrendDealsItem> subCategoryListData;
   final int catID;
   final String country;
   final String city;
@@ -51,8 +51,8 @@ class SwapFilterState extends Equatable {
   });
 
   SwapFilterState copyWith({
-    SwapFilterStateStatus? filterStateStatus,
-    List<FilterResultModel>? subCategoryListData,
+    SwapFilterStateStatus? swapFilterStateStatus,
+    List<TrendDealsItem>? subCategoryListData,
     int? catID,
     String? country,
     String? city,
@@ -65,7 +65,8 @@ class SwapFilterState extends Equatable {
     bool? isMoreData,
   }) {
     return SwapFilterState(
-      swapFilterStateStatus: filterStateStatus ?? this.swapFilterStateStatus,
+      swapFilterStateStatus:
+          swapFilterStateStatus ?? this.swapFilterStateStatus,
       subCategoryListData: subCategoryListData ?? this.subCategoryListData,
       catID: catID ?? this.catID,
       country: country ?? this.country,

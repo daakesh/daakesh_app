@@ -15,5 +15,5 @@
     "Prefs",
     "unfocus"
   ],
-  "dart.flutterSdkPath": ".fvm/versions/3.19.5"
+  "dart.flutterSdkPath": ".fvm/versions/stable"
 }

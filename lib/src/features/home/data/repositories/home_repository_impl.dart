@@ -10,8 +10,8 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
-    return await getIt.get<HomeDatasource>().getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
+    return await getIt.get<HomeDatasource>().getSectionData(page);
   }
 
   @override
@@ -38,6 +38,12 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<Either<Failure, ValidResponse>> getBrandsData(int page) async {
     return await getIt.get<HomeDatasource>().getBrandsData(page);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrands(
+      int page, int brandId) async {
+    return await getIt.get<HomeDatasource>().getItemsByBrands(page, brandId);
   }
 
   @override

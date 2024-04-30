@@ -21,13 +21,13 @@ class SendSwapData {
   });
 
   SendSwapData.fromJson(Map<String, dynamic> json) {
+    lastPage = json['last_page'];
     if (json['data'] != null) {
       data = <SendReceiveSwapReqItem>[];
       data = (json['data'] as List<dynamic>)
           .map((e) => SendReceiveSwapReqItem.fromJson(e))
           .toList();
     }
-    lastPage = json['last_page'];
   }
 }
 
@@ -137,26 +137,6 @@ class SourceUser {
     nikname = json['nikname'];
     whatsappNumber = json['whatsappNumber'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['phoneNumber'] = phoneNumber;
-    data['password'] = password;
-    data['active'] = active;
-    data['userType'] = userType;
-    data['token'] = token;
-    data['email'] = email;
-    data['img'] = img;
-    data['deviceToken'] = deviceToken;
-    data['country'] = country;
-    data['city'] = city;
-    data['location'] = location;
-    data['nikname'] = nikname;
-    data['whatsappNumber'] = whatsappNumber;
-    return data;
-  }
 }
 
 class OfferUser {
@@ -210,26 +190,6 @@ class OfferUser {
     nikname = json['nikname'];
     whatsappNumber = json['whatsappNumber'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['phoneNumber'] = phoneNumber;
-    data['password'] = password;
-    data['active'] = active;
-    data['userType'] = userType;
-    data['token'] = token;
-    data['email'] = email;
-    data['img'] = img;
-    data['deviceToken'] = deviceToken;
-    data['country'] = country;
-    data['city'] = city;
-    data['location'] = location;
-    data['nikname'] = nikname;
-    data['whatsappNumber'] = whatsappNumber;
-    return data;
-  }
 }
 
 class SourceItems {
@@ -250,12 +210,12 @@ class SourceItems {
   String? country;
   String? createdAt;
   String? updatedAt;
-  String? quantity;
+  dynamic quantity;
   String? display;
   String? countrySwap;
   String? citySwap;
   String? storeType;
-  String? priceAfterDiscount;
+  dynamic priceAfterDiscount;
   String? discountPercentage;
 
   SourceItems(
@@ -287,7 +247,6 @@ class SourceItems {
   SourceItems.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
-    itemImg = json['itemImg'].cast<String>();
     if (json['itemImg'] != null) {
       itemImg = <String>[];
       itemImg =
@@ -295,27 +254,27 @@ class SourceItems {
     } else {
       itemImg = <String>[];
     }
-    date = json['date'] ?? '';
-    title = json['Title'] ?? '';
-    type = json['Type'] ?? '';
-    swapFor = json['Swap For'] ?? '';
-    city = json['City'] ?? '';
-    year = json['Year'] ?? '';
-    condition = json['Condition'] ?? '';
+    date = json['date'];
+    title = json['Title'];
+    type = json['Type'];
+    swapFor = json['Swap For'];
+    city = json['City'];
+    year = json['Year'];
+    condition = json['Condition'];
     price = json['Price'];
     discount = json['discount'];
-    discountFrom = json['discount_from'] ?? '';
-    discountTo = json['discount_to'] ?? '';
-    country = json['country'] ?? '';
-    createdAt = json['created_at'] ?? '';
-    updatedAt = json['updated_at'] ?? '';
-    quantity = json['quantity'] ?? '';
-    display = json['display'] ?? '';
-    countrySwap = json['country_swap'] ?? '';
-    citySwap = json['city_swap'] ?? '';
-    storeType = json['store_type'] ?? '';
-    priceAfterDiscount = json['price_after_discount'] ?? '';
-    discountPercentage = json['discount_percentage'] ?? '';
+    discountFrom = json['discount_from'];
+    discountTo = json['discount_to'];
+    country = json['country'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    quantity = json['quantity'];
+    display = json['display'];
+    countrySwap = json['country_swap'];
+    citySwap = json['city_swap'];
+    storeType = json['store_type'];
+    priceAfterDiscount = json['price_after_discount'];
+    discountPercentage = json['discount_percentage'];
   }
 }
 
@@ -331,18 +290,18 @@ class OfferItems {
   String? year;
   String? condition;
   dynamic price;
-  String? discount;
+  dynamic discount;
   String? discountFrom;
   String? discountTo;
   String? country;
   String? createdAt;
   String? updatedAt;
-  String? quantity;
+  dynamic quantity;
   String? display;
   String? countrySwap;
   String? citySwap;
   String? storeType;
-  int? priceAfterDiscount;
+  dynamic priceAfterDiscount;
   String? discountPercentage;
 
   OfferItems(

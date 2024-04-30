@@ -1,19 +1,20 @@
 abstract class SectionsEvent {}
 
-
-class GetCategoryBySectionIDEvent extends SectionsEvent{
+class GetCategoryBySectionIDEvent extends SectionsEvent {
   final int? secID;
   final int? sectionIndex;
   final String? categoryTitle;
   final bool isSeeMore;
-  GetCategoryBySectionIDEvent({
-    this.secID,
-    this.sectionIndex,
-    this.categoryTitle,
-    this.isSeeMore = false
-  });
+  GetCategoryBySectionIDEvent(
+      {this.secID,
+      this.sectionIndex,
+      this.categoryTitle,
+      this.isSeeMore = false});
 }
 
-class ResetVarEvent extends SectionsEvent{}
+class ResetVarEvent extends SectionsEvent {}
 
-
+class SelectItemEvent extends SectionsEvent {
+  final int index;
+  SelectItemEvent({required this.index});
+}

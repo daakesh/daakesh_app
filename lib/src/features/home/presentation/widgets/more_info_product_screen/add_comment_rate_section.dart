@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
+// ignore: must_be_immutable
 class AddCommentRateSection extends StatelessWidget {
   final int itemId;
   final int catID;
@@ -63,7 +64,7 @@ class AddCommentRateSection extends StatelessWidget {
                     },
                   ),
                   GestureDetector(
-                      onTap: () =>addRateComment(),
+                      onTap: () => addRateComment(),
                       child:
                           Assets.svg.sendIcon.svg(width: 27.0, height: 27.0)),
                 ],
@@ -96,20 +97,20 @@ class AddCommentRateSection extends StatelessWidget {
     );
   }
 
-
-  void addRateComment(){
+  void addRateComment() {
     addComment();
     addRate();
   }
 
-  void addComment(){
+  void addComment() {
     CommentBloc.get.add(AddCommentEvent(
       userId: ValueConstants.userId,
-      itemId:itemId ,
+      itemId: itemId,
       commentDesc: commentController.text,
     ));
   }
-  void addRate(){
+
+  void addRate() {
     RateBloc.get.add(AddRateEvent(
       userId: ValueConstants.userId,
       itemId: itemId,
@@ -117,8 +118,4 @@ class AddCommentRateSection extends StatelessWidget {
       rateValue: rateValue,
     ));
   }
-
-
-
-
 }

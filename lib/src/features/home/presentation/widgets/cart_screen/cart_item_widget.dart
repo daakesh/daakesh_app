@@ -227,7 +227,7 @@ class CartItemWidget extends StatelessWidget {
                             .copyWith(fontSize: 21.0)),
                     TextSpan(
                         text:
-                            '\$${cartItem.item!.priceAfterDiscount.toInt() * cartItem.quantity!.toInt()}',
+                            '\$${Utils.appToStringAsFixed(cartItem.item!.priceAfterDiscount * cartItem.quantity!, 1)}',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(fontSize: 21.0)),
                   ],

@@ -4,7 +4,7 @@ import '../../../../src.export.dart';
 
 abstract class SwapUseCases {
   Future<Either<Failure, ValidResponse>> getAdvertisementData();
-  Future<Either<Failure, ValidResponse>> getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
@@ -42,8 +42,8 @@ class SwapUseCasesImpl implements SwapUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
-    return await getIt.get<SwapRepository>().getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
+    return await getIt.get<SwapRepository>().getSectionData(page);
   }
 
   @override

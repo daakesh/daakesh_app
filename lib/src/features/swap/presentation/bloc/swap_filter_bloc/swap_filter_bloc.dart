@@ -38,11 +38,11 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     if (event.isSeeMore) {
       emit(state.copyWith(
         currentPage: state.currentPage + 1,
-        filterStateStatus: SwapFilterStateStatus.LOADINGMORE,
+        swapFilterStateStatus: SwapFilterStateStatus.LOADINGMORE,
       ));
     } else {
       emit(state.copyWith(
-          filterStateStatus: SwapFilterStateStatus.LOADING,
+          swapFilterStateStatus: SwapFilterStateStatus.LOADING,
           catID: event.catID,
           isMoreData: true,
           isFilterActive: event.isFilterActive,
@@ -62,29 +62,30 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     final result = await getIt.get<SwapUseCases>().getSubCategoryByCatID(
         state.catID, swapFilterDataModel, state.currentPage);
     result.fold((l) {
-      emit(state.copyWith(filterStateStatus: SwapFilterStateStatus.ERROR));
+      emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      FilterModel filterModel =
-          FilterModel.fromJson(r.data as Map<String, dynamic>);
-      List<FilterResultModel> newResultList = filterModel.data!.data!.toList();
+      TrendDealsModel filterModel =
+          TrendDealsModel.fromJson(r.data as Map<String, dynamic>);
+      List<TrendDealsItem> newResultList =
+          filterModel.data!.trendDealsData!.toList();
       int lastPage = filterModel.data!.lastPage!;
-      List<FilterResultModel> subCategoryListData =
+      List<TrendDealsItem> subCategoryListData =
           state.subCategoryListData.toList();
       if (newResultList.isEmpty) {
         emit(state.copyWith(
-          filterStateStatus: SwapFilterStateStatus.NULL,
+          swapFilterStateStatus: SwapFilterStateStatus.NULL,
           isMoreData: lastPage == state.currentPage,
         ));
         return;
       }
       subCategoryListData.addAll(newResultList);
       emit(state.copyWith(
-        filterStateStatus: SwapFilterStateStatus.SUCCESS,
+        swapFilterStateStatus: SwapFilterStateStatus.SUCCESS,
         subCategoryListData: subCategoryListData,
         isMoreData: lastPage == state.currentPage,
       ));

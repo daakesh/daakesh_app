@@ -15,10 +15,10 @@ class RemoteSwapDatasource implements SwapDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/section/getSections',
-        params: {"type": "swap"});
+        params: {"type": "swap", "page": "$page"});
     return result;
   }
 
