@@ -18,3 +18,10 @@ class GetSectionDataEvent extends HomeEvent {
 }
 
 class GetHomeScreenData extends HomeEvent {}
+
+class SelectTabItemEvent extends HomeEvent {
+  final int index;
+  SelectTabItemEvent({required this.index});
+}
+
+class ActivateSwapEvent extends HomeEvent {}

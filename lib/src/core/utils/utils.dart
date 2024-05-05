@@ -33,8 +33,8 @@ class Utils {
     });
   }
 
-  static void openNavNewPage(BuildContext context, Widget screen,
-      {withNavBar = true}) {
+  static Future<void> openNavNewPage(BuildContext context, Widget screen,
+      {withNavBar = true}) async {
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: screen,

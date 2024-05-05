@@ -31,11 +31,10 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
-      bool data = r.data['data'] as bool;
-      if (!data) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
-        return;
-      }
+      //if (!r.data['data']) {
+      //  ShowToastSnackBar.showSnackBars(message: r.message.toString());
+      //  return;
+      //}
       FirebaseAuthentication.verifyPhoneNumber(
           '+${state.phoneCode}$phoneNumber',
           AuthManner.FORGETPASSWORD,

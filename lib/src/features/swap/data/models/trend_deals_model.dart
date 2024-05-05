@@ -56,6 +56,8 @@ class TrendDealsItem {
   String? country;
   String? countrySwap;
   String? citySwap;
+  int? offerCount;
+
   SectionItemModel? section;
   UserModel? user;
   CategoryItem? category;
@@ -90,31 +92,36 @@ class TrendDealsItem {
       itemImg =
           (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
     }
-    description = json['description'];
-    date = json['date'];
-    title = json['Title'];
-    type = json['Type'];
-    swapFor = json['Swap For'];
-    city = json['City'];
-    year = json['Year'];
-    condition = json['Condition'];
-    price = json['Price'];
+    description = json['description'] ?? "Unknown";
+    date = json['date'] ?? "Unknown";
+    title = json['Title'] ?? "Unknown";
+    type = json['Type'] ?? "Unknown";
+    swapFor = json['Swap For'] ?? "Unknown";
+    city = json['City'] ?? "Unknown";
+    year = json['Year'] ?? "Unknown";
+    condition = json['Condition'] ?? "Unknown";
+    price = json['Price'] ?? "Unknown";
     discount = json['discount'];
-    discountFrom = json['discount_from'];
-    discountTo = json['discount_to'];
-    country = json['country'];
-    countrySwap = json['country_swap'];
-    citySwap = json['city_swap'];
+    discountFrom = json['discount_from'] ?? "Unknown";
+    discountTo = json['discount_to'] ?? "Unknown";
+    country = json['country'] ?? "Unknown";
+    countrySwap = json['country_swap'] ?? "Unknown";
+    citySwap = json['city_swap'] ?? "Unknown";
+    offerCount = json['offers_count'] ?? 0;
     section = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])
-        : null;
-    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
+        : SectionItemModel.initValues();
+    user = json['user'] != null
+        ? UserModel.fromJson(json['user'])
+        : UserModel.initValues();
     category = json['category'] != null
         ? CategoryItem.fromJson(json['category'])
-        : null;
-    brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
+        : CategoryItem.initValues();
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['brand'])
+        : BrandItem.initValues();
     subcategory = json['subcategory'] != null
         ? SwapSubCategory.fromJson(json['subcategory'])
-        : null;
+        : SwapSubCategory.initValues();
   }
 }

@@ -20,7 +20,8 @@ abstract class HomeDatasource {
   ///Comment API
   Future<Either<Failure, ValidResponse>> addComment(
       String userId, int itemId, String commentDesc);
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID);
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(
+      int itemID, int page);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
   Future<Either<Failure, ValidResponse>> editComments(
       int id, String commentDesc);
@@ -42,4 +43,5 @@ abstract class HomeDatasource {
   ///Add order
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList);
+  Future<Either<Failure, ValidResponse>> getCities();
 }

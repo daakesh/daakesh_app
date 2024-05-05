@@ -7,6 +7,8 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     on<SwapSetFilterDataEvent>(_setFilterData);
     on<SwapClearFilterDataEvent>(_clearFilterData);
     on<SwapPreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
+    on<SwapSelectCategoryItemEvent>(_swapSelectCategoryItem);
+    on<GetSwapCitiesEvent>(_getSwapCities);
   }
   static SwapFilterBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _clearFilterData(
@@ -25,6 +27,7 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
   FutureOr<void> _setFilterData(
       SwapSetFilterDataEvent event, Emitter<SwapFilterState> emit) {
     emit(state.copyWith(
+      city: event.city,
       rate: event.rate,
       fromPrice: event.fromPrice,
       toPrice: event.toPrice,
@@ -90,6 +93,31 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
         isMoreData: lastPage == state.currentPage,
       ));
       emit(state.copyWith(subCategoryListData: subCategoryListData));
+    });
+  }
+
+  FutureOr<void> _swapSelectCategoryItem(
+      SwapSelectCategoryItemEvent event, Emitter<SwapFilterState> emit) {
+    emit(state.copyWith(categoryIndex: event.index));
+  }
+
+  FutureOr<void> _getSwapCities(
+      GetSwapCitiesEvent event, Emitter<SwapFilterState> emit) async {
+    emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.LOADING));
+    final result = await getIt.get<SwapUseCases>().getCities();
+    result.fold((l) {
+      emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      CitiesModel citiesModel = CitiesModel.fromJson(r.data);
+      List<CityItem> cityItemList = citiesModel.data!.toList();
+      emit(state.copyWith(
+          swapFilterStateStatus: SwapFilterStateStatus.SUCCESS,
+          cityItemList: cityItemList));
     });
   }
 }

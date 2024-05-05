@@ -4,89 +4,99 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class MainScreenWidget {
-  static List<PersistentBottomNavBarItem> navBarsItems(BuildContext context) {
+  static List<PersistentBottomNavBarItem> navBarsItems(
+      BuildContext context, int index) {
     return [
       PersistentBottomNavBarItem(
         icon: bottomNavBarItem(
-            context: context,
-            icon: SizedBox(
-                height: 24.0,
-                child: Assets.svg.enableHomeIcon.svg(
-                  width: 28.0,
-                  height: 26.0,
-                )),
-            title: context.locale.home_bottom_nav_tab),
-        inactiveIcon: bottomNavBarItem(
-            context: context,
-            icon: SizedBox(
-                height: 24.0,
-                child: Assets.svg.disableHomeIcon.svg(
-                  width: 28.0,
-                  height: 26.0,
-                )),
-            title: context.locale.home_bottom_nav_tab),
+          context: context,
+          icon: SizedBox(
+            height: 24.0,
+            child: 0 == index
+                ? Assets.svg.enableHomeIcon.svg(width: 28.0, height: 26.0)
+                : Assets.svg.disableHomeIcon.svg(width: 28.0, height: 26.0),
+          ),
+          title: context.locale.home_bottom_nav_tab,
+        ),
+        // inactiveIcon: bottomNavBarItem(
+        //     context: context,
+        //     icon: SizedBox(
+        //         height: 24.0,
+        //         child: Assets.svg.disableHomeIcon.svg(
+        //           width: 28.0,
+        //           height: 26.0,
+        //         )),
+        //     title: context.locale.home_bottom_nav_tab),
       ),
       PersistentBottomNavBarItem(
         icon: bottomNavBarItem(
             context: context,
             icon: SizedBox(
                 height: 24.0,
-                child: Assets.svg.enableProductIcon.svg(
-                  width: 24.0,
-                  height: 24.0,
-                )),
+                child: 1 == index
+                    ? Assets.svg.enableProductIcon.svg(
+                        width: 24.0,
+                        height: 24.0,
+                      )
+                    : Assets.svg.disableProductIcon.svg(
+                        width: 24.0,
+                        height: 24.0,
+                      )),
             title: context.locale.my_product_bottom_nav_tab),
-        inactiveIcon: bottomNavBarItem(
-            context: context,
-            icon: SizedBox(
-                height: 24.0,
-                child: Assets.svg.disableProductIcon.svg(
-                  width: 24.0,
-                  height: 24.0,
-                )),
-            title: context.locale.my_product_bottom_nav_tab),
+        // inactiveIcon: bottomNavBarItem(
+        //     context: context,
+        //     icon: SizedBox(
+        //         height: 24.0,
+        //         child: Assets.svg.disableProductIcon.svg(
+        //           width: 24.0,
+        //           height: 24.0,
+        //         )),
+        //     title: context.locale.my_product_bottom_nav_tab),
       ),
       PersistentBottomNavBarItem(
-        icon: Assets.png.swapIcon.image(),
-        textStyle:
-            context.easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0),
-        activeColorPrimary: ColorName.white,
+          icon: Assets.png.swapIcon.image(),
+          textStyle:
+              context.easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0),
+          activeColorPrimary: ColorName.white,
+          title: 'Swap',
+          onPressed: (context) {
+            HomeBloc.get.add(ActivateSwapEvent());
+          }),
+      PersistentBottomNavBarItem(
+        icon: bottomNavBarItem(
+          context: context,
+          icon: SizedBox(
+              height: 24.0,
+              child: 3 == index
+                  ? Assets.png.enableMyOrderIcon.image(
+                      width: 26.0,
+                      height: 26.0,
+                    )
+                  : Assets.png.disableMyOrderIcon.image(
+                      width: 26.0,
+                      height: 26.0,
+                    )),
+          title: context.locale.my_order_bottom_nav_tab,
+        ),
       ),
       PersistentBottomNavBarItem(
         icon: bottomNavBarItem(
             context: context,
             icon: SizedBox(
                 height: 24.0,
-                child: Assets.png.enableMyOrderIcon.image(
-                  width: 26.0,
-                  height: 26.0,
-                )),
-            title: context.locale.my_order_bottom_nav_tab),
-        inactiveIcon: bottomNavBarItem(
-            context: context,
-            icon: SizedBox(
-                height: 24.0,
-                child: Assets.png.disableMyOrderIcon.image(
-                  width: 26.0,
-                  height: 26.0,
-                )),
-            title: context.locale.my_order_bottom_nav_tab),
-      ),
-      PersistentBottomNavBarItem(
-        icon: bottomNavBarItem(
-            context: context,
-            icon: SizedBox(
-                height: 24.0,
-                child: Assets.svg.enableProfileIcon
-                    .svg(width: 26.0, height: 26.0)),
+                child: 4 == index
+                    ? Assets.svg.enableProfileIcon
+                        .svg(width: 26.0, height: 26.0)
+                    : Assets.svg.disableProfileIcon
+                        .svg(width: 26.0, height: 26.0)),
             title: context.locale.profile_bottom_nav_tab),
-        inactiveIcon: bottomNavBarItem(
-            context: context,
-            icon: SizedBox(
-                height: 24.0,
-                child: Assets.svg.disableProfileIcon
-                    .svg(width: 26.0, height: 26.0)),
-            title: context.locale.profile_bottom_nav_tab),
+        // inactiveIcon: bottomNavBarItem(
+        //     context: context,
+        //     icon: SizedBox(
+        //         height: 24.0,
+        //         child: Assets.svg.disableProfileIcon
+        //             .svg(width: 26.0, height: 26.0)),
+        //     title: context.locale.profile_bottom_nav_tab),
       ),
     ];
   }

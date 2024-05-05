@@ -130,7 +130,8 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
                                   text: 'See Details',
-                                  onPressed: () {},
+                                  onPressed: () => seeOfferDetails(
+                                      context, widget.sendReceiveSwapReqItem),
                                   isBold: true,
                                 ),
                               ),
@@ -213,5 +214,21 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
         ),
       ),
     );
+  }
+
+  void seeOfferDetails(
+      BuildContext context, SendReceiveSwapReqItem sendReceiveSwapReqItem) {
+    ProPreviewerModel previewerModel = ProPreviewerModel();
+    previewerModel
+      ..userName = sendReceiveSwapReqItem.offerUser!.name
+      ..itemImage = sendReceiveSwapReqItem.offerItems!.itemImg
+      ..title = sendReceiveSwapReqItem.offerItems!.title
+      ..brandName = "Unknown"
+      ..categoryName = "Unknown"
+      ..year = sendReceiveSwapReqItem.offerItems!.year
+      ..description = sendReceiveSwapReqItem.offerItems!.description
+      ..offerCount = 0;
+    Utils.openNavNewPage(
+        context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
 }

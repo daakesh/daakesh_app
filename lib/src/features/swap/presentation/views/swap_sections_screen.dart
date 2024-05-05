@@ -82,10 +82,10 @@ class SwapSectionScreen extends StatelessWidget {
                       delegate: SliverChildBuilderDelegate(
                       (context, index) => GestureDetector(
                         onTap: () => openSubCategories(
-                          context,
-                          state.swapCategoriesListData,
-                          state.swapCategoriesListData[index].id!,
-                        ),
+                            context,
+                            state.swapCategoriesListData,
+                            state.swapCategoriesListData[index].id!,
+                            index),
                         child: SwapSectionCategoryItem(
                             swapCategoryItem:
                                 state.swapCategoriesListData[index]),
@@ -113,8 +113,10 @@ class SwapSectionScreen extends StatelessWidget {
   void onSeeMore() => SwapSectionsBloc.get
       .add(SwapGetCategoryBySectionIDEvent(isSeeMore: true));
 
-  void openSubCategories(
-      context, List<SwapCategoryItem> swapCategoriesListData, int catID) {
+  void openSubCategories(context, List<SwapCategoryItem> swapCategoriesListData,
+      int catID, int index) {
+    SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: index));
+    SwapFilterBloc.get.add(GetSwapCitiesEvent());
     SwapFilterBloc.get.add(SwapPreviewSectionSubCategoriesEvent(
         catID: catID, isFilterActive: false));
     Utils.openNavNewPage(context,

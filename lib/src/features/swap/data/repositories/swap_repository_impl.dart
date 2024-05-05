@@ -114,4 +114,9 @@ class SwapRepositoryImpl implements SwapRepository {
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue) async {
     return await getIt.get<SwapDatasource>().editRate(id, rateValue);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCities() async {
+    return await getIt.get<SwapDatasource>().getCities();
+  }
 }

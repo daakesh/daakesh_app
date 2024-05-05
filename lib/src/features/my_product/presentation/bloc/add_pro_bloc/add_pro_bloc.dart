@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -125,10 +126,30 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+      int id = r.data['data']['id'];
+      MyProductItem myProductItem = MyProductItem();
+
+      final itemData = await getIt.get<MyProductUseCases>().getItemById(id);
+      itemData.fold((l) {
+        emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
+        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      }, (r) async {
+        if (!r.status!) {
+          ShowToastSnackBar.showSnackBars(message: r.message.toString());
+          return;
+        }
+        myProductItem = MyProductItem.fromJson(r.data['data']);
+      });
+
       ProgressCircleDialog.dismiss();
       getIt.get<EditProduct>().clearData();
       MyProFuncBloc.get.add(ResetValuesEvent());
-      Utils.openNewPage(const ProAddSuccessScreen(), popPreviousPages: true);
+      Utils.openNewPage(
+          ProAddSuccessScreen(
+            displayMethod: state.displayMethod,
+            myProductItem: myProductItem,
+          ),
+          popPreviousPages: true);
       emit(state.copyWith(
         addProStateStatus: AddProStateStatus.SUCCESS,
         productSecID: '',

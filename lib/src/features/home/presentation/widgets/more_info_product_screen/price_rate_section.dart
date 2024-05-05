@@ -35,7 +35,7 @@ class PriceRateSection extends StatelessWidget {
               minRating: 1,
               maxRating: 5,
               ignoreGestures: true,
-              initialRating: 4.5,
+              initialRating: todayDealItem.averageRating ?? 0,
               itemSize: 25.0,
               tapOnlyMode: true,
               itemBuilder: (context, _) => const Icon(
@@ -49,7 +49,7 @@ class PriceRateSection extends StatelessWidget {
             ),
             Flexible(
               child: Text(
-                '4.5',
+                '${todayDealItem.averageRating}',
                 style: context.easyTheme.textTheme.labelLarge!.copyWith(
                     fontSize: 23.0,
                     color: ColorName.black,
@@ -61,7 +61,7 @@ class PriceRateSection extends StatelessWidget {
             ),
             Flexible(
               child: Text(
-                '(200)',
+                '(${todayDealItem.rateCount})',
                 style: context.easyTheme.textTheme.labelLarge!.copyWith(
                     fontSize: 21.0,
                     color: ColorName.gray,

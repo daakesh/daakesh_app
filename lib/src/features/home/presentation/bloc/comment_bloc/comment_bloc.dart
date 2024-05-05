@@ -35,7 +35,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       }
       CommentRateModelItem commentRateModel =
           CommentRateModelItem.fromJson(r.data['data']);
-      state.commentList.add(commentRateModel);
+      state.commentList.insert(0, commentRateModel);
       emit(state.copyWith(
           commentStateStatus: CommentStateStatus.SUCCESS,
           commentList: state.commentList));
@@ -59,8 +59,9 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       ));
     }
 
-    final result =
-        await getIt.get<HomeUseCases>().getCommentsByItem(state.itemId);
+    final result = await getIt
+        .get<HomeUseCases>()
+        .getCommentsByItem(state.itemId, state.currentPage);
 
     result.fold((l) {
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));

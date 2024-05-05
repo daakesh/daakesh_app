@@ -1,13 +1,17 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
     on<GetSectionDataEvent>(_getSectionData);
     on<GetHomeScreenData>(_getHomeScreenData);
+    on<SelectTabItemEvent>(_selectTabItem);
+    on<ActivateSwapEvent>(_activateSwap);
   }
   static HomeBloc get get => BlocProvider.of(Utils.currentContext);
+  static final controller = PersistentTabController();
 
   ///Event to swap between home screen states with widget like:
   /// [HomeDataWidget],[SearchScreen],[ResultsScreen],[CartScreen],[MoreInfoProductScreen]
@@ -74,5 +78,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       CartBloc.get.add(GetCartItemsEvent());
       ContactInfoBloc.get.add(GetContactInfoEvent());
     }
+  }
+
+  FutureOr<void> _selectTabItem(
+      SelectTabItemEvent event, Emitter<HomeState> emit) {
+    if (event.index == 2) {
+      //emit(state.copyWith(tabIndex: null));
+    } else {
+      emit(state.copyWith(tabIndex: event.index));
+    }
+  }
+
+  FutureOr<void> _activateSwap(
+      ActivateSwapEvent event, Emitter<HomeState> emit) {
+    //emit(state.copyWith(isSwapActive: !state.isSwapActive));
+    //print(state.isSwapActive);
+    if (controller.index == 2) {
+      controller.jumpToTab(state.tabIndex);
+    } else {
+      controller.jumpToTab(2);
+    }
+    emit(state.copyWith());
   }
 }

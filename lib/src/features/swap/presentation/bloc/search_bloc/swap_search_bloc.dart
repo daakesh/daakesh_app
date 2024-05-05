@@ -36,11 +36,11 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      SwapSearchModel searchModel = SwapSearchModel.fromJson(r.data);
+      TrendDealsModel searchModel = TrendDealsModel.fromJson(r.data);
       int lastPage = searchModel.data!.lastPage!;
-      List<SwapSearchResultModel> newResultList =
-          searchModel.data!.data!.toList();
-      List<SwapSearchResultModel> swapSearchResultList =
+      List<TrendDealsItem> newResultList =
+          searchModel.data!.trendDealsData!.toList();
+      List<TrendDealsItem> swapSearchResultList =
           state.swapSearchResultList.toList();
       if (newResultList.isEmpty) {
         emit(state.copyWith(

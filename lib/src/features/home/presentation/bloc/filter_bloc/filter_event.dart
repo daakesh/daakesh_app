@@ -15,12 +15,14 @@ class PreviewSectionSubCategoriesEvent extends FilterEvent {
 }
 
 class SetFilterDataEvent extends FilterEvent {
+  final String? city;
   final int? rate;
   final double? fromPrice;
   final double? toPrice;
   final FilterProductType? productType;
 
   SetFilterDataEvent({
+    this.city,
     this.rate,
     this.fromPrice,
     this.toPrice,
@@ -29,3 +31,10 @@ class SetFilterDataEvent extends FilterEvent {
 }
 
 class ClearFilterDataEvent extends FilterEvent {}
+
+class SelectCategoryItemEvent extends FilterEvent {
+  final int index;
+  SelectCategoryItemEvent({required this.index});
+}
+
+class GetCitiesEvent extends FilterEvent {}

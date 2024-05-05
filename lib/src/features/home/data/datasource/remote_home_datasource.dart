@@ -70,9 +70,16 @@ class RemoteHomeDatasource implements HomeDatasource {
   Future<Either<Failure, ValidResponse>> getItemsByBrands(
       int page, int brandId) async {
     final result = await getIt.get<NetworkService>().post(
-        path: 'DaakeshServices/api/item/getItemByBrandId',
-        params: {"page": "$page"},
-        body: {"brandID": "$brandId"});
+          path: 'DaakeshServices/api/item/getItemByBrandId',
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          params: {"page": "$page"},
+          body: jsonEncode({
+            "brandID": "$brandId",
+            "Filter": {"Type": "Sell"},
+          }),
+        );
     return result;
   }
 
@@ -90,9 +97,9 @@ class RemoteHomeDatasource implements HomeDatasource {
       String searchValue, int page, int perPage) async {
     final result = await getIt
         .get<NetworkService>()
-        .get(path: 'DaakeshServices/api/item/SearchUserItems', params: {
-      "name": searchValue.toString(),
-      "page": page.toString(),
+        .get(path: 'DaakeshServices/api/item/SearchItems', params: {
+      "name": searchValue,
+      "page": '$page',
     });
     return result;
   }
@@ -124,10 +131,11 @@ class RemoteHomeDatasource implements HomeDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(
+      int itemID, int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/comment/getCommentsByItem',
-        params: {"itemID": "$itemID"});
+        params: {"itemID": "$itemID", "page": "$page"});
     return result;
   }
 
@@ -233,6 +241,14 @@ class RemoteHomeDatasource implements HomeDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode(orderList),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCities() async {
+    final result = await getIt.get<NetworkService>().get(
+          path: 'DaakeshServices/api/item/getCites',
         );
     return result;
   }

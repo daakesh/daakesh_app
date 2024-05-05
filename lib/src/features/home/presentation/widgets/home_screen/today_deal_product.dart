@@ -120,7 +120,7 @@ class TodayDealProduct extends StatelessWidget {
                 Row(
                   children: [
                     RatingBar.builder(
-                      initialRating: 5,
+                      initialRating: todayDealItem.averageRating!,
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
@@ -137,7 +137,7 @@ class TodayDealProduct extends StatelessWidget {
                     ),
                     Flexible(
                       child: Text(
-                        '5.9',
+                        todayDealItem.averageRating.toString(),
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
                                 fontSize: 14.0.sp,
@@ -149,7 +149,7 @@ class TodayDealProduct extends StatelessWidget {
                     ),
                     Flexible(
                       child: Text(
-                        '(200)',
+                        '(${todayDealItem.rateCount})',
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
                                 fontSize: 13.0.sp,

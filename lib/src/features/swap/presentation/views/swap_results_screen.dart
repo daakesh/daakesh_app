@@ -21,50 +21,56 @@ class SwapResultsScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 38.0,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: swapCategoriesListData.length,
-                          separatorBuilder: (_, i) {
-                            return const SizedBox(
-                              width: 11.0,
-                            );
-                          },
-                          itemBuilder: (_, index) {
-                            SwapCategoryItem swapCategoryItem =
-                                swapCategoriesListData[index];
-                            return GestureDetector(
-                              onTap: () => getSubCategoriesData(
-                                  swapCategoriesListData[index].id!),
-                              child: Container(
-                                height: 38.0,
-                                padding: const EdgeInsetsDirectional.symmetric(
-                                    horizontal: 14.0),
-                                decoration: const BoxDecoration(
-                                    color: ColorName.paleGray,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0))),
-                                child: Center(
-                                    child: Text('${swapCategoryItem.name}')),
-                              ),
-                            );
-                          },
+                child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
+                    builder: (context, state) {
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 38.0,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: swapCategoriesListData.length,
+                            separatorBuilder: (_, i) {
+                              return const SizedBox(
+                                width: 11.0,
+                              );
+                            },
+                            itemBuilder: (_, index) {
+                              SwapCategoryItem swapCategoryItem =
+                                  swapCategoriesListData[index];
+                              return GestureDetector(
+                                onTap: () => getSubCategoriesData(
+                                    swapCategoriesListData[index].id!, index),
+                                child: Container(
+                                  height: 38.0,
+                                  padding:
+                                      const EdgeInsetsDirectional.symmetric(
+                                          horizontal: 14.0),
+                                  decoration: BoxDecoration(
+                                      color: state.categoryIndex == index
+                                          ? const Color(0xFFf2cd98)
+                                          : ColorName.paleGray,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10.0))),
+                                  child: Center(
+                                      child: Text('${swapCategoryItem.name}')),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 11.0,
-                    ),
-                    GestureDetector(
-                        onTap: () => openSwapFilterScreen(context),
-                        child: Assets.png.filterIcon
-                            .image(width: 38.0, height: 38.0))
-                  ],
-                ),
+                      const SizedBox(
+                        width: 11.0,
+                      ),
+                      GestureDetector(
+                          onTap: () => openSwapFilterScreen(context),
+                          child: Assets.png.filterIcon
+                              .image(width: 38.0, height: 38.0))
+                    ],
+                  );
+                }),
               ),
             ),
             SliverToBoxAdapter(
@@ -161,6 +167,8 @@ class SwapResultsScreen extends StatelessWidget {
         .add(SwapPreviewSectionSubCategoriesEvent(isSeeMore: true));
   }
 
-  void getSubCategoriesData(int catID) => SwapFilterBloc.get
-      .add(SwapPreviewSectionSubCategoriesEvent(catID: catID));
+  void getSubCategoriesData(int catID, int index) {
+    SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: index));
+    SwapFilterBloc.get.add(SwapPreviewSectionSubCategoriesEvent(catID: catID));
+  }
 }

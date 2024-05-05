@@ -81,9 +81,12 @@ class CommentsSection extends StatelessWidget {
                               minRating: 1,
                               maxRating: 5,
                               ignoreGestures: true,
-                              initialRating: commentRateModelItem
-                                  .item!.rate!.first.rateValue!
-                                  .toDouble(),
+                              initialRating: 5,
+                              //commentRateModelItem.item!.rate != null
+                              //    ? commentRateModelItem
+                              //        .item!.rate!.first.rateValue!
+                              //        .toDouble()
+                              //    : 0,
                               itemSize: 15.0,
                               tapOnlyMode: true,
                               itemBuilder: (context, _) => const Icon(
@@ -96,9 +99,10 @@ class CommentsSection extends StatelessWidget {
                               width: 6.0,
                             ),
                             Text(
-                              commentRateModelItem.item!.rate!.first.rateValue!
-                                  .toDouble()
-                                  .toString(),
+                              '5.0',
+                              //commentRateModelItem.item!.rate!.first.rateValue!
+                              //    .toDouble()
+                              //    .toString(),
                               style: context.easyTheme.textTheme.labelMedium!
                                   .copyWith(
                                       fontSize: 14.0,

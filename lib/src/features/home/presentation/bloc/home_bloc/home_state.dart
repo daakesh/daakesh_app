@@ -21,6 +21,8 @@ class HomeState extends Equatable {
   final List<SectionItemModel> sectionListData;
   final int sectionCurrentPage;
   final bool isMoreData;
+  final int tabIndex;
+  final bool isSwapActive;
 
   const HomeState({
     this.homeStateStatus = HomeStateStatus.INITIAL,
@@ -30,20 +32,23 @@ class HomeState extends Equatable {
     this.sectionListData = const [],
     this.sectionCurrentPage = 1,
     this.isMoreData = true,
+    this.tabIndex = 0,
+    this.isSwapActive = true,
   });
 
-  HomeState copyWith({
-    HomeStateStatus? homeStateStatus,
-    HomeScreenState? homeScreenState,
+  HomeState copyWith(
+      {HomeStateStatus? homeStateStatus,
+      HomeScreenState? homeScreenState,
 
-    ///Product screen details state
-    bool? isDaakeshTodayDeal,
-    int? sectionCurrentPage,
-    bool? isMoreData,
+      ///Product screen details state
+      bool? isDaakeshTodayDeal,
+      int? sectionCurrentPage,
+      bool? isMoreData,
 
-    ///API Data
-    List<SectionItemModel>? sectionListData,
-  }) {
+      ///API Data
+      List<SectionItemModel>? sectionListData,
+      int? tabIndex,
+      bool? isSwapActive}) {
     return HomeState(
       homeStateStatus: homeStateStatus ?? this.homeStateStatus,
       homeScreenState: homeScreenState ?? this.homeScreenState,
@@ -52,6 +57,8 @@ class HomeState extends Equatable {
       sectionListData: sectionListData ?? this.sectionListData,
       sectionCurrentPage: sectionCurrentPage ?? this.sectionCurrentPage,
       isMoreData: isMoreData ?? this.isMoreData,
+      tabIndex: tabIndex ?? this.tabIndex,
+      isSwapActive: isSwapActive ?? this.isSwapActive,
     );
   }
 
@@ -64,5 +71,9 @@ class HomeState extends Equatable {
         sectionListData,
         sectionCurrentPage,
         isMoreData,
+
+        ///
+        tabIndex,
+        isSwapActive,
       ];
 }

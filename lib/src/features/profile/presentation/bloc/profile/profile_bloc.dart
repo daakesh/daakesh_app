@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -8,6 +9,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ChangeLocationFlagEvent>(_changeLocationFlag);
     on<ChangeLangEvent>(_changeLang);
     on<SetValueLangEvent>(_setValueLang);
+    on<UpdateLocationEvent>(_updateLocation);
   }
   static ProfileBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -41,5 +43,31 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     bool? isEnLang =
         GetItUtils.prefs.getBoolean(SharedPrefKeys.language) ?? false;
     emit(state.copyWith(switchLangValue: isEnLang));
+  }
+
+  FutureOr<void> _updateLocation(
+      UpdateLocationEvent event, Emitter<ProfileState> emit) async {
+    String country = event.country;
+    String city = event.city;
+    String address = event.address;
+
+    emit(state.copyWith(profileStateStatus: ProfileStateStatus.LOADING));
+    ProgressCircleDialog.show();
+    final result = await getIt
+        .get<ProfileUseCases>()
+        .updateLocation(country, city, address);
+    result.fold((l) {
+      ProgressCircleDialog.dismiss();
+      emit(state.copyWith(profileStateStatus: ProfileStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      ProgressCircleDialog.dismiss();
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      UserDataBloc.get.add(GetUserDataEvent());
+      emit(state.copyWith(profileStateStatus: ProfileStateStatus.SUCCESS));
+    });
   }
 }

@@ -21,7 +21,9 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   void initState() {
     super.initState();
-    countryController.text = 'Jordan';
+    countryController.text = GetItUtils.user.userData.location.toString();
+    cityController.text = GetItUtils.user.userData.location.toString();
+    addressController.text = GetItUtils.user.userData.location.toString();
     resetFlag();
   }
 
@@ -149,8 +151,9 @@ class _LocationScreenState extends State<LocationScreen> {
                         text: !state.isUpdatePersonalActive
                             ? 'MAKE EDIT'
                             : 'SAVE',
-                        onPressed: () =>
-                            onMakeEdit(state.isUpdatePersonalActive)),
+                        onPressed: () => !state.isUpdatePersonalActive
+                            ? onMakeEdit(state.isUpdatePersonalActive)
+                            : onSave()),
                   ),
                   const SizedBox(
                     height: 12.0,
@@ -195,6 +198,16 @@ class _LocationScreenState extends State<LocationScreen> {
           ),
         );
       },
+    );
+  }
+
+  void onSave() {
+    ProfileBloc.get.add(
+      UpdateLocationEvent(
+        country: countryController.text,
+        city: cityController.text,
+        address: addressController.text,
+      ),
     );
   }
 }

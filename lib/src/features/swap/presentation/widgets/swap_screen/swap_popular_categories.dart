@@ -36,12 +36,8 @@ class SwapPopularCategoriesWidget extends StatelessWidget {
                 ),
               ],
             ),
-            child: Stack(
-              alignment: AlignmentDirectional.bottomCenter,
+            child: Column(
               children: [
-                CachedImage(
-                  imageUrl: data.secImg != null ? data.secImg.toString() : '',
-                ),
                 Align(
                   alignment: AlignmentDirectional.topStart,
                   child: Padding(
@@ -52,6 +48,14 @@ class SwapPopularCategoriesWidget extends StatelessWidget {
                             color: state.sectionIndex == index
                                 ? Colors.white
                                 : ColorName.black)),
+                  ),
+                ),
+                Expanded(
+                  child: CachedImage(
+                    imageUrl: data.secImg.toString(),
+                    borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(18.0),
+                        bottomLeft: Radius.circular(18.0)),
                   ),
                 ),
               ],

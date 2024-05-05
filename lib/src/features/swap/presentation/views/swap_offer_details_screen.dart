@@ -121,7 +121,8 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                 child: TextButtonWidget(
                                   text: context
                                       .locale.swap_see_details_text_button,
-                                  onPressed: () {},
+                                  onPressed: () =>
+                                      seeDetails(context, trendDealsItem),
                                 ),
                               ),
                             ),
@@ -330,5 +331,20 @@ class SwapOfferDetailsScreen extends StatelessWidget {
       sourceUser: sourceUser,
       offerUser: offerUser,
     ));
+  }
+
+  void seeDetails(BuildContext context, TrendDealsItem trendDealsItem) {
+    ProPreviewerModel previewerModel = ProPreviewerModel();
+    previewerModel
+      ..userName = trendDealsItem.user!.name
+      ..itemImage = trendDealsItem.itemImg
+      ..title = trendDealsItem.title
+      ..brandName = trendDealsItem.brand!.brandName
+      ..categoryName = trendDealsItem.category!.name
+      ..year = trendDealsItem.year
+      ..description = trendDealsItem.description
+      ..offerCount = trendDealsItem.offerCount;
+    Utils.openNavNewPage(
+        context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
 }

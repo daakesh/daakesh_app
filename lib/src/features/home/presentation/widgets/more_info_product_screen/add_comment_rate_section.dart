@@ -64,7 +64,7 @@ class AddCommentRateSection extends StatelessWidget {
                     },
                   ),
                   GestureDetector(
-                      onTap: () => addRateComment(),
+                      onTap: () => addRateComment(context),
                       child:
                           Assets.svg.sendIcon.svg(width: 27.0, height: 27.0)),
                 ],
@@ -97,7 +97,12 @@ class AddCommentRateSection extends StatelessWidget {
     );
   }
 
-  void addRateComment() {
+  void addRateComment(BuildContext context) {
+    if (ValueConstants.userId.isEmpty) {
+      context.showLoginDialog;
+      return;
+    }
+
     addComment();
     addRate();
   }

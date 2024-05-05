@@ -1,6 +1,5 @@
 import 'package:daakesh/src/src.export.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyOrderScreen extends StatefulWidget {
@@ -39,36 +38,94 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                 const SliverToBoxAdapter(
                   child: HeaderWidget(withArrowBack: false),
                 ),
-                SliverAppBar(
-                  pinned: true,
-                  backgroundColor: ColorName.whiteSmoke,
-                  surfaceTintColor: ColorName.whiteSmoke,
-                  bottom: PreferredSize(
-                    preferredSize: Size(double.infinity,
-                        state.myOrderTapBar.isMyOrder ? 30.0.h : 85.0.h),
-                    child: const Text(''),
+                //SliverAppBar(
+                //  pinned: true,
+                //  backgroundColor: ColorName.whiteSmoke,
+                //  surfaceTintColor: ColorName.whiteSmoke,
+                //  bottom: PreferredSize(
+                //    preferredSize: Size(double.infinity,
+                //        state.myOrderTapBar.isMyOrder ? 30.0.h : 85.0.h),
+                //    child: const Text(''),
+                //  ),
+                //  flexibleSpace: OrderTypeTabBar(state: state),
+                //),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(
+                        start: 17.0.w, end: 13.0.w, top: 13.0.h),
+                    child: Text(
+                      'Swap Requests',
+                      style:
+                          context.easyTheme.textTheme.headlineMedium!.copyWith(
+                        fontSize: ResponsiveText.getResponsiveFontSize(
+                            fontSize: 24.0),
+                        color: ColorName.blueGray,
+                      ),
+                    ),
                   ),
-                  flexibleSpace: OrderTypeTabBar(state: state),
                 ),
-                state.myOrderTapBar.isMyOrder
-                    ? BlocBuilder<SellOrderBloc, SellOrderState>(
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(
+                        start: 17.0.w, end: 13.0.w, top: 13.0.h),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Send',
+                          style: context.easyTheme.textTheme.bodyLarge!
+                              .copyWith(
+                                  fontSize:
+                                      ResponsiveText.getResponsiveFontSize(
+                                          fontSize: 18.0)),
+                        ),
+                        Transform.scale(
+                          scale: 0.8,
+                          child: Switch(
+                              value: state.sendReceiveFlag,
+                              activeColor: ColorName.amber,
+                              hoverColor: ColorName.amber,
+                              activeTrackColor: ColorName.amber,
+                              focusColor: ColorName.amber,
+                              inactiveThumbColor: ColorName.amber,
+                              inactiveTrackColor: ColorName.amber,
+                              thumbColor:
+                                  MaterialStateProperty.all(ColorName.white),
+                              onChanged: (value) {
+                                MyOrderBloc.get.add(SendReceiveSwitchEvent(
+                                    sendReceiveFlag: value));
+                              }),
+                        ),
+                        Text(
+                          'Receive',
+                          style: context.easyTheme.textTheme.bodyLarge!
+                              .copyWith(
+                                  fontSize:
+                                      ResponsiveText.getResponsiveFontSize(
+                                          fontSize: 18.0)),
+                        ),
+                        const Spacer(flex: 1),
+                      ],
+                    ),
+                  ),
+                ),
+                // state.myOrderTapBar.isMyOrder
+                //     ? BlocBuilder<SellOrderBloc, SellOrderState>(
+                //         builder: (context, state) {
+                //           return SliverList(
+                //             delegate: SliverChildBuilderDelegate(
+                //                 (context, index) => MyOrderItem(
+                //                     myOrderData: state.myOrderDataList[index]),
+                //                 childCount: state.myOrderDataList.length),
+                //           );
+                //         },
+                //       )
+                state.sendReceiveFlag
+                    ? BlocBuilder<MySwapOrderBloc, MySwapOrderState>(
                         builder: (context, state) {
                           return SliverList(
                             delegate: SliverChildBuilderDelegate(
-                                (context, index) => MyOrderItem(
-                                    myOrderData: state.myOrderDataList[index]),
-                                childCount: state.myOrderDataList.length),
-                          );
-                        },
-                      )
-                    : state.sendReceiveFlag
-                        ? BlocBuilder<MySwapOrderBloc, MySwapOrderState>(
-                            builder: (context, state) {
-                              return SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                    (context, index) => state
-                                                .receiveSwapReqList[index]
-                                                .approved ==
+                                (context, index) =>
+                                    state.receiveSwapReqList[index].approved ==
                                             0
                                         ? ReceiveSwapWaitingItem(
                                             sendReceiveSwapReqItem:
@@ -78,29 +135,26 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                                             receiveSwapReqItem:
                                                 state.receiveSwapReqList[index],
                                           ),
-                                    childCount:
-                                        state.receiveSwapReqList.length),
-                              );
-                            },
-                          )
-                        : BlocBuilder<MySwapOrderBloc, MySwapOrderState>(
-                            builder: (context, state) {
-                              return SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                    (context, index) => state
-                                                .sendSwapReqList[index]
-                                                .approved ==
-                                            0
+                                childCount: state.receiveSwapReqList.length),
+                          );
+                        },
+                      )
+                    : BlocBuilder<MySwapOrderBloc, MySwapOrderState>(
+                        builder: (context, state) {
+                          return SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                                (context, index) =>
+                                    state.sendSwapReqList[index].approved == 0
                                         ? SendSwapWaitingItem(
                                             sendSwapReqItem:
                                                 state.sendSwapReqList[index])
                                         : SendSwapAcceptedItem(
                                             sendSwapReqItem:
                                                 state.sendSwapReqList[index]),
-                                    childCount: state.sendSwapReqList.length),
-                              );
-                            },
-                          ),
+                                childCount: state.sendSwapReqList.length),
+                          );
+                        },
+                      ),
                 SliverPadding(
                     padding: EdgeInsetsDirectional.symmetric(vertical: 26.0.h)),
                 SeeMoreWidget(state: state),

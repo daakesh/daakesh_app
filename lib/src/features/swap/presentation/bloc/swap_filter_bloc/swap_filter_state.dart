@@ -35,6 +35,9 @@ class SwapFilterState extends Equatable {
   final int currentPage;
   final bool isMoreData;
 
+  ///
+  final int categoryIndex;
+  final List<CityItem> cityItemList;
   const SwapFilterState({
     this.swapFilterStateStatus = SwapFilterStateStatus.INITIAL,
     this.subCategoryListData = const [],
@@ -48,6 +51,8 @@ class SwapFilterState extends Equatable {
     this.isFilterActive = false,
     this.currentPage = 1,
     this.isMoreData = true,
+    this.categoryIndex = 0,
+    this.cityItemList = const [],
   });
 
   SwapFilterState copyWith({
@@ -63,6 +68,8 @@ class SwapFilterState extends Equatable {
     bool? isFilterActive,
     int? currentPage,
     bool? isMoreData,
+    int? categoryIndex,
+    List<CityItem>? cityItemList,
   }) {
     return SwapFilterState(
       swapFilterStateStatus:
@@ -78,6 +85,8 @@ class SwapFilterState extends Equatable {
       isFilterActive: isFilterActive ?? this.isFilterActive,
       currentPage: currentPage ?? this.currentPage,
       isMoreData: isMoreData ?? this.isMoreData,
+      categoryIndex: categoryIndex ?? this.categoryIndex,
+      cityItemList: cityItemList ?? this.cityItemList,
     );
   }
 
@@ -95,5 +104,7 @@ class SwapFilterState extends Equatable {
         isFilterActive,
         currentPage,
         isMoreData,
+        categoryIndex,
+        cityItemList,
       ];
 }

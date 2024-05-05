@@ -135,7 +135,8 @@ class SendOfferScreen extends StatelessWidget {
                                       .copyWith(
                                           fontSize: 14.0,
                                           color: ColorName.skyBlue),
-                                  onPressed: () {},
+                                  onPressed: () =>
+                                      seeSourceDetails(context, trendDealsItem),
                                 ),
                               ),
                             ),
@@ -275,7 +276,8 @@ class SendOfferScreen extends StatelessWidget {
                                       TextButtonWidget(
                                         text: context
                                             .locale.see_details_my_swap_product,
-                                        onPressed: () {},
+                                        onPressed: () =>
+                                            seeOfferDetails(context, i),
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
                                             .copyWith(
@@ -386,5 +388,35 @@ class SendOfferScreen extends StatelessWidget {
   void openSwapOfferDetailsScreen(context) {
     Utils.openNavNewPage(
         context, SwapOfferDetailsScreen(trendDealsItem: trendDealsItem));
+  }
+
+  void seeSourceDetails(BuildContext context, TrendDealsItem trendDealsItem) {
+    ProPreviewerModel previewerModel = ProPreviewerModel();
+    previewerModel
+      ..userName = trendDealsItem.user!.name
+      ..itemImage = trendDealsItem.itemImg
+      ..title = trendDealsItem.title
+      ..brandName = trendDealsItem.brand!.brandName
+      ..categoryName = trendDealsItem.category!.name
+      ..year = trendDealsItem.year
+      ..description = trendDealsItem.description
+      ..offerCount = trendDealsItem.offerCount;
+    Utils.openNavNewPage(
+        context, MySwapPreviewerScreen(previewerModel: previewerModel));
+  }
+
+  void seeOfferDetails(BuildContext context, MyProductItem myProductItem) {
+    ProPreviewerModel previewerModel = ProPreviewerModel();
+    previewerModel
+      ..userName = myProductItem.user!.name
+      ..itemImage = myProductItem.itemImg
+      ..title = myProductItem.title
+      ..brandName = myProductItem.brand!.brandName
+      ..categoryName = myProductItem.category!.name
+      ..year = myProductItem.year
+      ..description = myProductItem.description
+      ..offerCount = myProductItem.offerCount;
+    Utils.openNavNewPage(
+        context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
 }

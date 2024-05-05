@@ -20,7 +20,8 @@ abstract class HomeRepository {
   ///Comment APIs
   Future<Either<Failure, ValidResponse>> addComment(
       String userId, int itemId, String commentDesc);
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID);
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(
+      int itemID, int page);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
   Future<Either<Failure, ValidResponse>> editComments(
       int id, String commentDesc);
@@ -40,4 +41,5 @@ abstract class HomeRepository {
       String id, String userID, String itemID, String quantity);
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList);
+  Future<Either<Failure, ValidResponse>> getCities();
 }

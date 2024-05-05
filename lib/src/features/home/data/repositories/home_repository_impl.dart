@@ -76,8 +76,9 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
-    return await getIt.get<HomeDatasource>().getCommentsByItem(itemID);
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(
+      int itemID, int page) async {
+    return await getIt.get<HomeDatasource>().getCommentsByItem(itemID, page);
   }
 
   @override
@@ -135,5 +136,10 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList) async {
     return await getIt.get<HomeDatasource>().addOrder(orderList);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCities() async {
+    return await getIt.get<HomeDatasource>().getCities();
   }
 }

@@ -30,4 +30,5 @@ abstract class SwapRepository {
       int itemId, int userId, int catID, int rateValue);
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
+  Future<Either<Failure, ValidResponse>> getCities();
 }

@@ -1,3 +1,4 @@
+import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
@@ -80,7 +81,8 @@ class SectionScreen extends StatelessWidget {
                         onTap: () => openSubCategories(
                             context,
                             state.categoriesListData,
-                            state.categoriesListData[index].id!),
+                            state.categoriesListData[index].id!,
+                            index),
                         child: SectionCategoryItem(
                             categoryItem: state.categoriesListData[index]),
                       ),
@@ -107,8 +109,10 @@ class SectionScreen extends StatelessWidget {
   void onSeeMore() =>
       SectionsBloc.get.add(GetCategoryBySectionIDEvent(isSeeMore: true));
 
-  void openSubCategories(
-      BuildContext context, List<CategoryItem> categoriesListData, int catID) {
+  void openSubCategories(BuildContext context,
+      List<CategoryItem> categoriesListData, int catID, int index) {
+    FilterBloc.get.add(GetCitiesEvent());
+    FilterBloc.get.add(SelectCategoryItemEvent(index: index));
     FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
     Utils.openNavNewPage(
         context, ResultsScreen(categoriesListData: categoriesListData));

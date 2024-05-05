@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:daakesh/src/core/utils/widgets/zoom_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -69,8 +70,14 @@ class SwapProductCarousalSlider extends StatelessWidget {
                 return Builder(
                   builder: (BuildContext context) {
                     return Transform.scale(
-                        scale: state.scale,
-                        child: CachedImage(imageUrl: i.toString()));
+                      scale: state.scale,
+                      child: GestureDetector(
+                        onTap: () => openZoomImage(i.toString()),
+                        child: CachedImage(
+                          imageUrl: i.toString(),
+                        ),
+                      ),
+                    );
                   },
                 );
               },
@@ -103,5 +110,9 @@ class SwapProductCarousalSlider extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  openZoomImage(String imageUrl) {
+    Utils.openNewPage(ZoomImageWidget(imageUrl: imageUrl));
   }
 }

@@ -75,7 +75,7 @@ class SwapMoreInfoScreen extends StatelessWidget {
                                           fontSize: 23.0,
                                           color: ColorName.gray)),
                               TextSpan(
-                                  text: '25',
+                                  text: '${trendDealsItem.offerCount}',
                                   style: context.easyTheme.textTheme.labelLarge!
                                       .copyWith(
                                           fontSize: 23.0,
@@ -107,12 +107,20 @@ class SwapMoreInfoScreen extends StatelessWidget {
                   SwapDetailsSection(
                     trendDealsItem: trendDealsItem,
                   ),
-                  ValueConstants.userId.isNotEmpty
+                  ValueConstants.userId != trendDealsItem.user!.id
                       ? Center(
                           child: DefaultButtonWidget(
                               text: context.locale.swap_offer_create_button,
                               onPressed: () => onSendOffer(context)))
-                      : const SizedBox(),
+                      : Center(
+                          child: DefaultButtonWidget(
+                          text: context.locale.swap_offer_create_button,
+                          style: context.easyTheme.elevatedButtonTheme.style!
+                              .copyWith(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      ColorName.blueGray.withOpacity(0.5))),
+                          onPressed: () {},
+                        )),
                 ],
               ),
             ),
@@ -122,7 +130,11 @@ class SwapMoreInfoScreen extends StatelessWidget {
     );
   }
 
-  void onSendOffer(context) {
+  void onSendOffer(BuildContext context) {
+    if (ValueConstants.userId.isEmpty) {
+      context.showLoginDialog;
+      return;
+    }
     SwapProBloc.get.add(GetSwapProductEvent());
     openSendOfferScreen(context);
   }

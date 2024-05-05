@@ -22,18 +22,18 @@ class SearchData {
   SearchData.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <SearchResultModel>[];
-      data = (json['data'] as List<dynamic>).map((v) => SearchResultModel.fromJson(v)).toList();
+      data = (json['data'] as List<dynamic>)
+          .map((v) => SearchResultModel.fromJson(v))
+          .toList();
     }
     lastPage = json['last_page'];
-
   }
-
 }
 
 class SearchResultModel {
   int? id;
   String? description;
-  String? itemImg;
+  List<String>? itemImg;
   String? date;
   String? title;
   String? tradeSell;
@@ -41,7 +41,7 @@ class SearchResultModel {
   String? city;
   String? year;
   String? condition;
-  int? price;
+  dynamic price;
   UserModel? user;
   CategoryItem? category;
   BrandItem? brand;
@@ -50,26 +50,30 @@ class SearchResultModel {
 
   SearchResultModel(
       {this.id,
-        this.description,
-        this.itemImg,
-        this.date,
-        this.title,
-        this.tradeSell,
-        this.tradeFor,
-        this.city,
-        this.year,
-        this.condition,
-        this.price,
-        this.user,
-        this.category,
-        this.brand,
-        this.subcategory,
-        this.section});
+      this.description,
+      this.itemImg,
+      this.date,
+      this.title,
+      this.tradeSell,
+      this.tradeFor,
+      this.city,
+      this.year,
+      this.condition,
+      this.price,
+      this.user,
+      this.category,
+      this.brand,
+      this.subcategory,
+      this.section});
 
   SearchResultModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
-    itemImg = json['itemImg'];
+    if (json['itemImg'] != null) {
+      itemImg = <String>[];
+      itemImg =
+          (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+    }
     date = json['date'];
     title = json['Title'];
     tradeSell = json['Trade/Sell'];
@@ -77,14 +81,17 @@ class SearchResultModel {
     city = json['City'];
     year = json['Year'];
     condition = json['Condition'];
-    price = json['Price'].toInt();
+    price = json['Price'];
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;
+    category = json['category'] != null
+        ? CategoryItem.fromJson(json['category'])
+        : null;
     brand = json['brand'] != null ? BrandItem.fromJson(json['section']) : null;
-    subcategory = json['subcategory']!= null ? SubCategory.fromJson(json['subcategory']) : null;
-    section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
+    subcategory = json['subcategory'] != null
+        ? SubCategory.fromJson(json['subcategory'])
+        : null;
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : null;
   }
-
 }
-
-

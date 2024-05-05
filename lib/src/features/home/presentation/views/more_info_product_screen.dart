@@ -63,52 +63,17 @@ class MoreInfoProductScreen extends StatelessWidget {
                                 todayDealItem.city.toString())),
                       )
                     : const SizedBox()
-                : ValueConstants.userId.isNotEmpty
-                    ? Padding(
-                        padding: const EdgeInsetsDirectional.only(
-                            start: 17.5, end: 26.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                                flex: 1,
-                                child: DefaultButtonWidget(
-                                    text: context.locale.more_info_product_call,
-                                    onPressed: () => Utils.lunchCall(
-                                        todayDealItem.user!.phoneNumber
-                                            .toString()))),
-                            const SizedBox(
-                              width: 8.0,
-                            ),
-                            DefaultButtonWidget(
-                                text: context.locale.more_info_product_whatsapp,
-                                onPressed: () => Utils.lunchWhatsApp(
-                                    todayDealItem.user!.phoneNumber.toString()),
-                                style: context
-                                    .easyTheme.elevatedButtonTheme.style!
-                                    .copyWith(
-                                  minimumSize: MaterialStateProperty.all(
-                                      Size(40.0.w, 56.0.h)),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      ColorName.amber),
-                                )),
-                          ],
-                        ),
-                      )
-                    : const SizedBox(),
+                : ContactInfoWidget(
+                    phoneNumber: todayDealItem.user!.phoneNumber.toString()),
           ),
           SliverToBoxAdapter(
-            child: ValueConstants.userId.isNotEmpty
-                ? Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 17.5, end: 26.0),
-                    child: AddCommentRateSection(
-                      itemId: todayDealItem.id!,
-                      catID: todayDealItem.category!.id!,
-                    ),
-                  )
-                : const SizedBox(),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.only(start: 17.5, end: 26.0),
+              child: AddCommentRateSection(
+                itemId: todayDealItem.id!,
+                catID: todayDealItem.category!.id!,
+              ),
+            ),
           ),
           const SliverToBoxAdapter(
             child: Padding(

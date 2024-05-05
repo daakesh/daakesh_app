@@ -117,7 +117,7 @@ class SwapResultItemWidget extends StatelessWidget {
                                   .copyWith(
                                       fontSize: 16.0, color: ColorName.gray)),
                           TextSpan(
-                              text: '25',
+                              text: '${trendDealsItem.offerCount}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       fontSize: 16.0, color: ColorName.red)),

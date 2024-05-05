@@ -99,11 +99,11 @@ class ProfileScreen extends StatelessWidget {
               title: 'Contact Info',
               icon: Assets.svg.profilePhoneIcon.svg(),
             ),
-            CategoryItemWidget(
-              onTap: () => Utils.openNewPage(const CardAndAccountScreen()),
-              title: 'Card and Accounts',
-              icon: Assets.svg.profileCreditCardIcon.svg(),
-            ),
+            // CategoryItemWidget(
+            //   onTap: () => Utils.openNewPage(const CardAndAccountScreen()),
+            //   title: 'Card and Accounts',
+            //   icon: Assets.svg.profileCreditCardIcon.svg(),
+            // ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(const LocationScreen()),
               title: 'Location',

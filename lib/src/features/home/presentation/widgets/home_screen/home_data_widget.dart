@@ -37,6 +37,17 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
     return CustomScrollView(
       slivers: [
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
+        SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              'Version: 1',
+              style: context.easyTheme.textTheme.headlineLarge!.copyWith(
+                fontSize: 20.0,
+              ),
+            ),
+          ),
+        ),
+        const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
 
         ///Carousel slider.
         const SliverToBoxAdapter(
@@ -128,20 +139,20 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
             ),
           ),
         ),
-        const SliverPadding(padding: EdgeInsets.only(top: 20.0)),
 
+        ///const SliverPadding(padding: EdgeInsets.only(top: 20.0)),
         ///Daakesh today deal-section.
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(
-              context.locale.home_daakesh_today_deals_title,
-              style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                fontSize: 18.0,
-              ),
-            ),
-          ),
-        ),
+        /// SliverToBoxAdapter(
+        ///   child: Padding(
+        ///     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        ///     child: Text(
+        ///       context.locale.home_daakesh_today_deals_title,
+        ///       style: context.easyTheme.textTheme.headlineMedium!.copyWith(
+        ///         fontSize: 18.0,
+        ///       ),
+        ///     ),
+        ///   ),
+        ///),
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
         BlocBuilder<TodayDealsBloc, TodayDealsState>(
           builder: (context, state) {
@@ -211,14 +222,14 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                 ? !state.todayDealsStateStatus.isLoadingMore
                     ? Center(
                         child: GestureDetector(
-                          onTap: () => seeMoreHandler(state),
+                          onTap: () => onSeeMore(),
                           child: Text(
                             'See More',
-                            style:
-                                context.easyTheme.textTheme.bodyLarge!.copyWith(
-                              fontSize: 16.0,
-                              color: ColorName.skyBlue,
-                            ),
+                            style: context.easyTheme.textTheme.bodyLarge!
+                                .copyWith(
+                                    fontSize: 16.0,
+                                    color: ColorName.skyBlue,
+                                    fontWeight: FontWeight.bold),
                           ),
                         ),
                       )

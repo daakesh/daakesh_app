@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:daakesh/src/features/features.export.dart';
 import 'package:daakesh/src/features/my_order/data/models/start_swap_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -158,7 +157,8 @@ class MySwapProductCardWidget extends StatelessWidget {
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: TextButtonWidget(
                                       text: 'See Product Details',
-                                      onPressed: () {},
+                                      onPressed: () =>
+                                          seeOfferDetails(context, i),
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -285,5 +285,20 @@ class MySwapProductCardWidget extends StatelessWidget {
       ..offerUser = offerUser;
 
     MySwapOrderBloc.get.add(UpdateOfferEvent(itemId: itemId, approved: 1));
+  }
+
+  void seeOfferDetails(BuildContext context, MyProductItem myProductItem) {
+    ProPreviewerModel previewerModel = ProPreviewerModel();
+    previewerModel
+      ..userName = myProductItem.user!.name
+      ..itemImage = myProductItem.itemImg
+      ..title = myProductItem.title
+      ..brandName = myProductItem.brand!.brandName
+      ..categoryName = myProductItem.category!.name
+      ..year = myProductItem.year
+      ..description = myProductItem.description
+      ..offerCount = myProductItem.offerCount;
+    Utils.openNavNewPage(
+        context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
 }

@@ -35,15 +35,8 @@ class PopularCategoriesWidget extends StatelessWidget {
                     color: Color.fromRGBO(0, 0, 0, 0.16)),
               ],
             ),
-            child: Stack(
-              alignment: AlignmentDirectional.bottomCenter,
+            child: Column(
               children: [
-                CachedImage(
-                  imageUrl: data.secImg.toString(),
-                  borderRadius: const BorderRadius.only(
-                      bottomRight: Radius.circular(18.0),
-                      bottomLeft: Radius.circular(18.0)),
-                ),
                 Align(
                   alignment: AlignmentDirectional.topStart,
                   child: Padding(
@@ -54,6 +47,14 @@ class PopularCategoriesWidget extends StatelessWidget {
                             color: state.sectionIndex == index
                                 ? ColorName.white
                                 : ColorName.black)),
+                  ),
+                ),
+                Expanded(
+                  child: CachedImage(
+                    imageUrl: data.secImg.toString(),
+                    borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(18.0),
+                        bottomLeft: Radius.circular(18.0)),
                   ),
                 ),
               ],

@@ -117,7 +117,7 @@ class ResultItemWidget extends StatelessWidget {
                           minRating: 1,
                           maxRating: 5,
                           ignoreGestures: true,
-                          initialRating: 5.0,
+                          initialRating: todayItem.averageRating!,
                           itemSize: 20.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
@@ -129,7 +129,7 @@ class ResultItemWidget extends StatelessWidget {
                           width: 8.0,
                         ),
                         Text(
-                          '5.9',
+                          todayItem.averageRating.toString(),
                           style: context.easyTheme.textTheme.labelMedium!
                               .copyWith(fontSize: 15.0),
                         ),
@@ -137,7 +137,7 @@ class ResultItemWidget extends StatelessWidget {
                           width: 8.0,
                         ),
                         Text(
-                          '(200)',
+                          '(${todayItem.rateCount})',
                           style: context.easyTheme.textTheme.labelMedium!
                               .copyWith(fontSize: 13.0, color: ColorName.gray),
                         )

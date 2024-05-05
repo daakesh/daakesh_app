@@ -70,7 +70,7 @@ class SwapSectionCategoryItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 18.0, top: 8.0),
               child: Text(
-                '(${swapCategoryItem.swapSubCategoryList!.length})',
+                '(${swapCategoryItem.itemsCount})',
                 style: context.easyTheme.textTheme.labelLarge!
                     .copyWith(fontSize: 16.0, color: ColorName.gray),
               ),

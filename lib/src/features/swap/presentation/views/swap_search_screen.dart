@@ -21,29 +21,13 @@ class SwapSearchScreen extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsetsDirectional.only(start: 31.0, end: 23.0),
-                child: SizedBox(
-                  height: 45.0,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: Align(
-                              alignment: AlignmentDirectional.bottomStart,
-                              child: Text(
-                                context.locale.swap_search_title,
-                                style: context
-                                    .easyTheme.textTheme.headlineMedium!
-                                    .copyWith(
-                                        color:
-                                            ColorName.black.withOpacity(0.57)),
-                              ))),
-                      GestureDetector(
-                          onTap: () => openFilterScreen(context),
-                          child: Assets.png.filterIcon
-                              .image(width: 38.0, height: 38.0)),
-                    ],
-                  ),
-                ),
+                child: Align(
+                    alignment: AlignmentDirectional.bottomStart,
+                    child: Text(
+                      context.locale.swap_search_title,
+                      style: context.easyTheme.textTheme.headlineMedium!
+                          .copyWith(color: ColorName.black.withOpacity(0.57)),
+                    )),
               ),
             ),
             const SliverPadding(padding: EdgeInsetsDirectional.only(top: 21.0)),
@@ -104,7 +88,7 @@ class _SearchResultHandler extends StatelessWidget {
       default:
         return SliverList(
           delegate: SliverChildBuilderDelegate((_, index) {
-            SwapSearchResultModel swapSearchModelData =
+            TrendDealsItem swapSearchModelData =
                 state.swapSearchResultList[index];
             return state.swapSearchResultList.isEmpty
                 ? const SizedBox()
@@ -118,31 +102,36 @@ class _SearchResultHandler extends StatelessWidget {
                       onTap: () {
                         FocusScope.of(context).unfocus();
                       },
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            Assets.svg.searchIcon.svg(),
-                            const SizedBox(
-                              width: 12.0,
-                            ),
-                            Expanded(
-                              child: Text(
-                                swapSearchModelData.description
-                                    .toString()
-                                    .replaceAll('\n', ' '),
-                                style: context.easyTheme.textTheme.bodyMedium!
-                                    .copyWith(
-                                        fontSize: 18.0,
-                                        color: ColorName.mediumGray,
-                                        overflow: TextOverflow.ellipsis),
+                      child: GestureDetector(
+                        onTap: () {
+                          Utils.openNavNewPage(
+                              context,
+                              SwapMoreInfoScreen(
+                                  trendDealsItem: swapSearchModelData));
+                        },
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Row(
+                            children: [
+                              Assets.svg.searchIcon.svg(),
+                              const SizedBox(
+                                width: 12.0,
                               ),
-                            ),
-                            const Icon(
-                              Icons.arrow_upward,
-                              color: ColorName.gray,
-                            )
-                          ],
+                              Expanded(
+                                child: Text(
+                                  swapSearchModelData.description
+                                      .toString()
+                                      .replaceAll('\n', ' '),
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                          fontSize: 18.0,
+                                          color: ColorName.mediumGray,
+                                          overflow: TextOverflow.ellipsis),
+                                ),
+                              ),
+                              Assets.svg.arrowUpRight.svg(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
