@@ -168,8 +168,9 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
   ) {
     if (headers != null) _headers.addAll(headers);
     if (params != null) _params.addAll(params);
-    if (userToken != null)
+    if (userToken != null) {
       _headers.addAll({"Authorization": " Bearer $userToken"});
+    }
   }
 }
 
