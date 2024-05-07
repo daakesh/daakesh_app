@@ -54,7 +54,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   country_picker:
   #Google Map
-  google_maps_flutter: ^2.6.0
+  #google_maps_flutter: ^2.6.0
   #Firebase
   firebase_core: ^2.27.2
   firebase_auth: ^4.18.0
