@@ -78,6 +78,8 @@ class ExchangeOfferScreen extends StatelessWidget {
   }
 
   void backToStore(context) {
+    HomeBloc.controller.jumpToTab(3);
+    HomeBloc.get.add(SelectTabItemEvent(index: 3));
     Utils.openNewPage(const MainScreen());
   }
 }

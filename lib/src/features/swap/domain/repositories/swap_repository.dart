@@ -3,7 +3,7 @@ import '../../../../src.export.dart';
 
 abstract class SwapRepository {
   Future<Either<Failure, ValidResponse>> getAdvertisementData();
-  Future<Either<Failure, ValidResponse>> getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
@@ -30,4 +30,5 @@ abstract class SwapRepository {
       int itemId, int userId, int catID, int rateValue);
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
+  Future<Either<Failure, ValidResponse>> getCities();
 }

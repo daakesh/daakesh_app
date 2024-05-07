@@ -4,7 +4,7 @@ import '../../../../src.export.dart';
 
 abstract class SwapUseCases {
   Future<Either<Failure, ValidResponse>> getAdvertisementData();
-  Future<Either<Failure, ValidResponse>> getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
@@ -31,6 +31,7 @@ abstract class SwapUseCases {
       int itemId, int userId, int catID, int rateValue);
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
+  Future<Either<Failure, ValidResponse>> getCities();
 }
 
 @dev
@@ -42,8 +43,8 @@ class SwapUseCasesImpl implements SwapUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
-    return await getIt.get<SwapRepository>().getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
+    return await getIt.get<SwapRepository>().getSectionData(page);
   }
 
   @override
@@ -145,5 +146,10 @@ class SwapUseCasesImpl implements SwapUseCases {
   Future<Either<Failure, ValidResponse>> getRateByItem(
       int itemId, int userId) async {
     return await getIt.get<SwapRepository>().getRateByItem(itemId, userId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCities() async {
+    return await getIt.get<SwapRepository>().getCities();
   }
 }

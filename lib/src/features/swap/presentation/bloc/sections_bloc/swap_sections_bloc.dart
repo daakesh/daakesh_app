@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
-import '../bloc.export.dart';
 
 class SwapSectionsBloc extends Bloc<SwapSectionsEvent, SwapSectionsState> {
   SwapSectionsBloc() : super(const SwapSectionsState()) {
     on<SwapGetCategoryBySectionIDEvent>(_getCategoryBySectionID);
     on<SwapResetVarEvent>(_resetVarEvent);
+    on<SwapSelectItemEvent>(_selectItem);
   }
   static SwapSectionsBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -74,5 +74,11 @@ class SwapSectionsBloc extends Bloc<SwapSectionsEvent, SwapSectionsState> {
       secID: -1,
       categoryTitle: '',
     ));
+  }
+
+  FutureOr<void> _selectItem(
+      SwapSelectItemEvent event, Emitter<SwapSectionsState> emit) {
+    int index = event.index;
+    emit(state.copyWith(sectionIndex: index));
   }
 }

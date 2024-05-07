@@ -85,20 +85,21 @@ class SwapFilterScreen extends StatelessWidget {
                       const SizedBox(
                         height: 15.0,
                       ),
-                      TextFormFieldWidget(
-                        controller: cityController,
-                        isSuffixPrefixOn: true,
-                        suffixIcon: SizedBox(
-                          height: 9.0,
-                          width: 16.0,
-                          child:
-                              Center(child: Assets.svg.arrowDropDownIcon.svg()),
-                        ),
-                        readOnly: true,
-                        inputFormatters: [
-                          RegExpValidator.beginWhitespace,
-                        ],
-                      ),
+                      BlocBuilder<SwapFilterBloc, SwapFilterState>(
+                          builder: (context, state) {
+                        return DropDownButtonWidget<String>(
+                          onChange: (value) {
+                            SwapFilterBloc.get
+                                .add(SwapSetFilterDataEvent(city: value));
+                          },
+                          value: state.city,
+                          items: state.cityItemList
+                              .map((e) => DropdownMenuItem(
+                                  value: e.city,
+                                  child: Text(e.city.toString())))
+                              .toList(),
+                        );
+                      }),
                       const SizedBox(
                         height: 40.0,
                       ),

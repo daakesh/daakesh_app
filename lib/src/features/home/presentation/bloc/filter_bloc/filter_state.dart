@@ -14,7 +14,7 @@ extension FilterStateStatusX on FilterStateStatus {
 
 class FilterState extends Equatable {
   final FilterStateStatus filterStateStatus;
-  final List<FilterResultModel> subCategoryListData;
+  final List<TodayItem> subCategoryListData;
   final int catID;
   final String country;
   final String city;
@@ -27,6 +27,10 @@ class FilterState extends Equatable {
   ///
   final int currentPage;
   final bool isMoreData;
+
+  ///
+  final int categoryIndex;
+  final List<CityItem> cityItemList;
 
   const FilterState({
     this.filterStateStatus = FilterStateStatus.INITIAL,
@@ -41,11 +45,13 @@ class FilterState extends Equatable {
     this.isFilterActive = false,
     this.currentPage = 1,
     this.isMoreData = true,
+    this.categoryIndex = 0,
+    this.cityItemList = const [],
   });
 
   FilterState copyWith({
     FilterStateStatus? filterStateStatus,
-    List<FilterResultModel>? subCategoryListData,
+    List<TodayItem>? subCategoryListData,
     int? catID,
     String? country,
     String? city,
@@ -56,6 +62,8 @@ class FilterState extends Equatable {
     bool? isFilterActive,
     int? currentPage,
     bool? isMoreData,
+    int? categoryIndex,
+    List<CityItem>? cityItemList,
   }) {
     return FilterState(
       filterStateStatus: filterStateStatus ?? this.filterStateStatus,
@@ -70,6 +78,8 @@ class FilterState extends Equatable {
       isFilterActive: isFilterActive ?? this.isFilterActive,
       currentPage: currentPage ?? this.currentPage,
       isMoreData: isMoreData ?? this.isMoreData,
+      categoryIndex: categoryIndex ?? this.categoryIndex,
+      cityItemList: cityItemList ?? this.cityItemList,
     );
   }
 
@@ -87,5 +97,7 @@ class FilterState extends Equatable {
         isFilterActive,
         currentPage,
         isMoreData,
+        categoryIndex,
+        cityItemList,
       ];
 }

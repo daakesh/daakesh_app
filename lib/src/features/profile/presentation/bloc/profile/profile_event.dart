@@ -18,3 +18,14 @@ class ChangeLocationFlagEvent extends ProfileEvent {
     required this.flagEmoji,
   });
 }
+
+class UpdateLocationEvent extends ProfileEvent {
+  final String country;
+  final String city;
+  final String address;
+  UpdateLocationEvent({
+    required this.country,
+    required this.city,
+    required this.address,
+  });
+}

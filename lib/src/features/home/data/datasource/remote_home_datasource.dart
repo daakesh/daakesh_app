@@ -14,10 +14,10 @@ class RemoteHomeDatasource implements HomeDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
     final result = await getIt.get<NetworkService>().get(
-          path: 'DaakeshServices/api/section/getSections',
-        );
+        path: 'DaakeshServices/api/section/getSections',
+        params: {"page": "$page"});
     return result;
   }
 
@@ -67,10 +67,28 @@ class RemoteHomeDatasource implements HomeDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
+  Future<Either<Failure, ValidResponse>> getItemsByBrands(
+      int page, int brandId) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getItemByBrandId',
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          params: {"page": "$page"},
+          body: jsonEncode({
+            "brandID": "$brandId",
+            "Filter": {"Type": "Sell"},
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      HomeTodayItemType type, int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/item/getTodaysItems',
-        params: {"type": "sell", "page": "$page"});
+        params: {"type": type.name, "page": "$page"});
     return result;
   }
 
@@ -79,9 +97,9 @@ class RemoteHomeDatasource implements HomeDatasource {
       String searchValue, int page, int perPage) async {
     final result = await getIt
         .get<NetworkService>()
-        .get(path: 'DaakeshServices/api/item/SearchUserItems', params: {
-      "name": searchValue.toString(),
-      "page": page.toString(),
+        .get(path: 'DaakeshServices/api/item/SearchItems', params: {
+      "name": searchValue,
+      "page": '$page',
     });
     return result;
   }
@@ -89,11 +107,11 @@ class RemoteHomeDatasource implements HomeDatasource {
   ///Comments API.
   @override
   Future<Either<Failure, ValidResponse>> addComment(
-      int userId, int itemId, String commentDesc) async {
+      String userId, int itemId, String commentDesc) async {
     final result = await getIt
         .get<NetworkService>()
         .post(path: 'DaakeshServices/api/comment/addComment', body: {
-      "userID": "$userId",
+      "userID": userId,
       "itemID": "$itemId",
       "commentDesc": commentDesc,
     });
@@ -113,10 +131,11 @@ class RemoteHomeDatasource implements HomeDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(
+      int itemID, int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/comment/getCommentsByItem',
-        params: {"itemID": "$itemID"});
+        params: {"itemID": "$itemID", "page": "$page"});
     return result;
   }
 
@@ -131,12 +150,12 @@ class RemoteHomeDatasource implements HomeDatasource {
   ///Rate API.
   @override
   Future<Either<Failure, ValidResponse>> addRate(
-      int itemId, int userId, int catID, int rateValue) async {
+      int itemId, String userId, int catID, double rateValue) async {
     final result = await getIt
         .get<NetworkService>()
         .post(path: 'DaakeshServices/api/rate/addRate', body: {
       "itemID": "$itemId",
-      "userID": "$userId",
+      "userID": userId,
       "catID": "$catID",
       "rateValue": "$rateValue",
     });
@@ -222,6 +241,14 @@ class RemoteHomeDatasource implements HomeDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode(orderList),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCities() async {
+    final result = await getIt.get<NetworkService>().get(
+          path: 'DaakeshServices/api/item/getCites',
         );
     return result;
   }

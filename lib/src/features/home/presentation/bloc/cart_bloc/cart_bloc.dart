@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -48,11 +49,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
       CartModel cartModel = CartModel.fromJson(r.data);
       List<CartItem> cartItemsList = cartModel.data!.cart!.toList();
+      double totalPrice = cartModel.data!.totalPrice.toDouble();
 
       emit(state.copyWith(
         cartStateStatus: CartStateStatus.SUCCESS,
         cartItemsList: cartItemsList,
-        totalPrice: cartModel.data!.totalPrice.toString(),
+        totalPrice: totalPrice,
       ));
     });
   }
@@ -75,17 +77,25 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             cartItem.quantity.toString(),
           );
     });
+    debugPrint(cartItemsList[event.index].item!.priceAfterDiscount.toString());
+    double totalPrice = state.totalPrice +
+        cartItemsList[event.index].item!.priceAfterDiscount.toDouble();
+
     emit(state.copyWith(cartItemsList: []));
-    emit(state.copyWith(cartItemsList: cartItemsList.toList()));
+    emit(state.copyWith(
+        cartItemsList: cartItemsList.toList(), totalPrice: totalPrice));
   }
 
   Timer? decreaseTimer;
   FutureOr<void> _decreaseItemCount(
       DecreaseItemCountEvent event, Emitter<CartState> emit) async {
     List<CartItem> cartItemsList = state.cartItemsList.toList();
+    double totalPrice;
     decreaseTimer?.cancel();
 
     if (cartItemsList[event.index].quantity == 1) {
+      totalPrice = state.totalPrice -
+          cartItemsList[event.index].item!.priceAfterDiscount.toDouble();
       getIt
           .get<HomeUseCases>()
           .removeCartItem(cartItemsList[event.index].id.toString());
@@ -103,8 +113,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
       });
     }
+    totalPrice = state.totalPrice -
+        cartItemsList[event.index].item!.priceAfterDiscount.toDouble();
     emit(state.copyWith(cartItemsList: []));
-    emit(state.copyWith(cartItemsList: cartItemsList));
+    emit(state.copyWith(cartItemsList: cartItemsList, totalPrice: totalPrice));
   }
 
   FutureOr<void> _addOrder(AddOrderEvent event, Emitter<CartState> emit) async {

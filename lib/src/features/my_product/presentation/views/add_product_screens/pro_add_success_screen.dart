@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class ProAddSuccessScreen extends StatelessWidget {
-  const ProAddSuccessScreen({super.key});
+  final ProductDisplayMethod displayMethod;
+  final MyProductItem myProductItem;
+  const ProAddSuccessScreen({
+    super.key,
+    required this.displayMethod,
+    required this.myProductItem,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +68,8 @@ class ProAddSuccessScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                   child: OutlineButtonWidget(
-                      text: 'SEE MY PRODUCT', onPressed: seeMyProduct),
+                      text: 'SEE MY PRODUCT',
+                      onPressed: () => seeMyProduct(context)),
                 ),
                 const SizedBox(
                   height: 72.0,
@@ -76,16 +83,41 @@ class ProAddSuccessScreen extends StatelessWidget {
   }
 
   void addNewProduct() async {
-    Utils.openNewPage(
-      const MainScreen(),
-      popPreviousPages: true,
-    );
+    Utils.openNewPage(const MainScreen(), popPreviousPages: true);
+    HomeBloc.controller.jumpToTab(1);
+    HomeBloc.get.add(SelectTabItemEvent(index: 1));
   }
 
-  void seeMyProduct() async {
-    Utils.openNewPage(
-      const MainScreen(),
-      popPreviousPages: true,
-    );
+  void seeMyProduct(BuildContext context) async {
+    ProPreviewerModel previewerModel = ProPreviewerModel();
+    previewerModel
+      ..userName = myProductItem.user!.name
+      ..itemImage = myProductItem.itemImg
+      ..title = myProductItem.title
+      ..averageRating = myProductItem.averageRating
+      ..rateCount = myProductItem.rateCount
+      ..priceAfterDiscount = myProductItem.priceAfterDiscount
+      ..brandName = myProductItem.brand!.brandName
+      ..categoryName = myProductItem.category!.name
+      ..year = myProductItem.year
+      ..description = myProductItem.description
+      ..itemId = myProductItem.id
+      ..categoryID = myProductItem.category!.id
+      ..offerCount = 0;
+
+    if (displayMethod.isSell) {
+      HomeBloc.controller.jumpToTab(1);
+      HomeBloc.get.add(SelectTabItemEvent(index: 1));
+      Utils.openNavNewPage(context, const MainScreen());
+      Utils.openNavNewPage(
+          context, MyProPreviewerScreen(previewerModel: previewerModel));
+    }
+    if (displayMethod.isSwap) {
+      HomeBloc.controller.jumpToTab(1);
+      HomeBloc.get.add(SelectTabItemEvent(index: 1));
+      Utils.openNavNewPage(context, const MainScreen());
+      Utils.openNavNewPage(
+          context, MySwapPreviewerScreen(previewerModel: previewerModel));
+    }
   }
 }

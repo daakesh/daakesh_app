@@ -17,8 +17,16 @@ class RemoteAuthDatasource implements AuthDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> addUser(String name, String email,
-      String password, String phoneNumber, String userType) async {
+  Future<Either<Failure, ValidResponse>> addUser(
+    String name,
+    String email,
+    String password,
+    String phoneNumber,
+    String userType,
+    String country,
+    String city,
+    String address,
+  ) async {
     final result = await getIt
         .get<NetworkService>()
         .post(path: 'DaakeshServices/api/user/addUser', body: {
@@ -26,7 +34,8 @@ class RemoteAuthDatasource implements AuthDatasource {
       "phoneNumber": phoneNumber.toString(),
       "password": password.toString(),
       "userType": userType.toString(),
-      "email": email.toString()
+      "email": email.toString(),
+      "location": "$country, $city, $address"
     });
     return result;
   }
@@ -60,7 +69,7 @@ class RemoteAuthDatasource implements AuthDatasource {
         .get<NetworkService>()
         .post(path: 'DaakeshServices/api/user/updatePassword', body: {
       "phoneNumber": phoneNumber.toString(),
-      "password": phoneNumber.toString(),
+      "password": password.toString(),
     });
     return result;
   }

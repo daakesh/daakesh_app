@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void checkUserLogin() {
     ProfileBloc.get.add(SetValueLangEvent());
     if (ValueConstants.userId.isEmpty) {
-      Utils.openNewPage(const WelcomeScreen(), popPreviousPages: true);
+      Utils.openNewPage(const MainScreen(), popPreviousPages: true);
       return;
     }
     getUserData();
@@ -55,6 +55,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void getUserData() {
+    if (ValueConstants.userId.isEmpty) {
+      return;
+    }
     UserDataBloc.get.add(GetUserDataEvent());
   }
 }

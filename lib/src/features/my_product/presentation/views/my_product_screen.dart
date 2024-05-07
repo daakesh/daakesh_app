@@ -19,9 +19,11 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
   }
 
   void getMyProductScreenData() {
-    MyProBloc.get.add(GetMyProductEvent());
-    MySwapProBloc.get.add(GetMySwapProEvent());
-    SellerInfoBloc.get.add(GetSellerInfoEvent());
+    if (ValueConstants.userId.isNotEmpty) {
+      MyProBloc.get.add(GetMyProductEvent());
+      MySwapProBloc.get.add(GetMySwapProEvent());
+      SellerInfoBloc.get.add(GetSellerInfoEvent());
+    }
   }
 
   @override

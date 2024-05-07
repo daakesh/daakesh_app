@@ -1,10 +1,10 @@
 abstract class RateEvent {}
 
 class AddRateEvent extends RateEvent{
-  final int userId;
+  final String userId;
   final int itemId;
   final int catID;
-  final int rateValue;
+  final double rateValue;
 
   AddRateEvent({
     required this.userId,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class DetailsSection extends StatelessWidget {
-  final PassDataState state;
-  const DetailsSection({super.key, required this.state});
+  final TodayItem todayDealItem;
+  const DetailsSection({super.key, required this.todayDealItem});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class DetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${state.todayItem.first.brand!.brandName}',
+              '${todayDealItem.brand?.brandName}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -63,7 +63,7 @@ class DetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${state.todayItem.first.category!.name}',
+              '${todayDealItem.category!.name}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -81,7 +81,7 @@ class DetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${state.todayItem.first.year}',
+              '${todayDealItem.year}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -99,7 +99,7 @@ class DetailsSection extends StatelessWidget {
           height: 13.0,
         ),
         Text(
-          '${state.todayItem.first.description}',
+          '${todayDealItem.description}',
           style:
               context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),
         ),

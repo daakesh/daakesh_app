@@ -48,11 +48,10 @@ class UserDataImpl implements UserData {
       ]);
   @override
   void logOut() async {
-    UserDataBloc.get.add(LogoutUserEvent());
     ValueConstants.token = '';
     ValueConstants.userId = '';
     await GetItUtils.prefs.removeData(SharedPrefKeys.token);
     GetItUtils.prefs.removeData(SharedPrefKeys.userID).then((value) =>
-        Utils.openNewPage(const SplashScreen(), popPreviousPages: true));
+        Utils.openNewPage(const WelcomeScreen(), popPreviousPages: true));
   }
 }

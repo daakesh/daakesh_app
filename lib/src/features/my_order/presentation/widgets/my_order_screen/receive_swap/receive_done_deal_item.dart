@@ -32,8 +32,8 @@ class ReceiveDoneDealItem extends StatelessWidget {
               SizedBox(width: 12.0.w),
               Expanded(
                 child: CachedImage(
-                    imageUrl: receiveSwapReqItem.sourceItems!.itemImg != null
-                        ? receiveSwapReqItem.sourceItems!.itemImg!.first
+                    imageUrl: receiveSwapReqItem.offerItems!.itemImg != null
+                        ? receiveSwapReqItem.offerItems!.itemImg!.first
                         : ''),
               ),
               SizedBox(width: 18.0.w),
@@ -168,14 +168,19 @@ class ReceiveDoneDealItem extends StatelessWidget {
                 width: 17.0.w,
               ),
               Expanded(
-                  child: DefaultButtonWidget(text: 'CALL', onPressed: () {})),
+                  child: DefaultButtonWidget(
+                      text: 'CALL',
+                      onPressed: () => Utils.lunchCall(receiveSwapReqItem
+                          .offerUser!.phoneNumber
+                          .toString()))),
               SizedBox(
                 width: 9.0.w,
               ),
               Expanded(
                 child: DefaultButtonWidget(
                   text: 'WhatsApp',
-                  onPressed: () {},
+                  onPressed: () => Utils.lunchWhatsApp(
+                      receiveSwapReqItem.offerUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
                       backgroundColor:
                           MaterialStateProperty.all(ColorName.amber)),

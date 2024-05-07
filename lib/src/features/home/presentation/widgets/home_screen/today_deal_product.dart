@@ -16,11 +16,13 @@ class TodayDealProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        PassDataBloc.get
-            .add(PassTodayDealDataEvent(todayDealItem: todayDealItem));
-        PassDataBloc.get.add(
-            DetermentTodayDealEvent(isDaakeshTodayDeal: isDaakeshTodayDeal));
-        Utils.openNavNewPage(context, MoreInfoProductScreen());
+        CommentBloc.get.add(GetCommentByItemEvent(itemId: todayDealItem.id!));
+        Utils.openNavNewPage(
+            context,
+            MoreInfoProductScreen(
+              todayDealItem: todayDealItem,
+              isDaakeshTodayDeal: isDaakeshTodayDeal,
+            ));
       },
       child: Column(
         children: [
@@ -118,7 +120,7 @@ class TodayDealProduct extends StatelessWidget {
                 Row(
                   children: [
                     RatingBar.builder(
-                      initialRating: 5,
+                      initialRating: todayDealItem.averageRating!,
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
@@ -135,7 +137,7 @@ class TodayDealProduct extends StatelessWidget {
                     ),
                     Flexible(
                       child: Text(
-                        '5.9',
+                        todayDealItem.averageRating.toString(),
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
                                 fontSize: 14.0.sp,
@@ -147,7 +149,7 @@ class TodayDealProduct extends StatelessWidget {
                     ),
                     Flexible(
                       child: Text(
-                        '(200)',
+                        '(${todayDealItem.rateCount})',
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
                                 fontSize: 13.0.sp,

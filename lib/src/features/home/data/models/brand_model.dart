@@ -1,4 +1,4 @@
-class BrandModel{
+class BrandModel {
   bool? status;
   String? error;
   BrandData? data;
@@ -9,13 +9,14 @@ class BrandModel{
     this.data,
   });
 
-  BrandModel.fromJson(Map<String,dynamic> json){
+  BrandModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     error = json['error'];
     data = json['data'] != null ? BrandData.fromJson(json['data']) : null;
-  }}
+  }
+}
 
-class BrandData{
+class BrandData {
   int? lastPage;
   List<BrandItem>? brandItemList;
 
@@ -24,9 +25,9 @@ class BrandData{
     this.brandItemList,
   });
 
-  BrandData.fromJson(Map<String,dynamic> json){
+  BrandData.fromJson(Map<String, dynamic> json) {
     lastPage = json['last_page'];
-    if(json['data'] != null ){
+    if (json['data'] != null) {
       brandItemList = <BrandItem>[];
       brandItemList = (json['data'] as List<dynamic>)
           .map((e) => BrandItem.fromJson(e as Map<String, dynamic>))
@@ -34,7 +35,6 @@ class BrandData{
     }
   }
 }
-
 
 class BrandItem {
   int? id;
@@ -46,13 +46,13 @@ class BrandItem {
   String? arName;
 
   BrandItem({
-        this.id,
-        this.brandName,
-        this.description,
-        this.brandImg,
-        this.date,
-        this.secID,
-        this.arName,
+    this.id,
+    this.brandName,
+    this.description,
+    this.brandImg,
+    this.date,
+    this.secID,
+    this.arName,
   });
 
   BrandItem.fromJson(Map<String, dynamic> json) {
@@ -65,4 +65,13 @@ class BrandItem {
     arName = json['arName'];
   }
 
+  BrandItem.initValues() {
+    id = 0;
+    brandName = "Unknown";
+    description = "Unknown";
+    brandImg = "Unknown";
+    date = "Unknown";
+    secID = 0;
+    arName = "Unknown";
+  }
 }

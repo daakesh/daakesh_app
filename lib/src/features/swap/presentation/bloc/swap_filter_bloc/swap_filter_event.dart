@@ -15,12 +15,14 @@ class SwapPreviewSectionSubCategoriesEvent extends SwapFilterEvent {
 }
 
 class SwapSetFilterDataEvent extends SwapFilterEvent {
+  final String? city;
   final int? rate;
   final double? fromPrice;
   final double? toPrice;
   final FilterProductType? productType;
 
   SwapSetFilterDataEvent({
+    this.city,
     this.rate,
     this.fromPrice,
     this.toPrice,
@@ -29,3 +31,10 @@ class SwapSetFilterDataEvent extends SwapFilterEvent {
 }
 
 class SwapClearFilterDataEvent extends SwapFilterEvent {}
+
+class SwapSelectCategoryItemEvent extends SwapFilterEvent {
+  final int index;
+  SwapSelectCategoryItemEvent({required this.index});
+}
+
+class GetSwapCitiesEvent extends SwapFilterEvent {}

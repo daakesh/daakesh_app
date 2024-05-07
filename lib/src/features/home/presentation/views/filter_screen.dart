@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
+// ignore: must_be_immutable
 class FilterScreen extends StatelessWidget {
   FilterScreen({super.key});
 
   final countryController = TextEditingController(text: 'Jordan');
-  final cityController = TextEditingController(text: 'Amman');
+
+  String cityValue = 'Amman';
 
   @override
   Widget build(BuildContext context) {
@@ -86,20 +88,20 @@ class FilterScreen extends StatelessWidget {
                       const SizedBox(
                         height: 15.0,
                       ),
-                      TextFormFieldWidget(
-                        controller: cityController,
-                        isSuffixPrefixOn: true,
-                        suffixIcon: SizedBox(
-                          height: 9.0,
-                          width: 16.0,
-                          child:
-                              Center(child: Assets.svg.arrowDropDownIcon.svg()),
-                        ),
-                        readOnly: true,
-                        inputFormatters: [
-                          RegExpValidator.beginWhitespace,
-                        ],
-                      ),
+                      BlocBuilder<FilterBloc, FilterState>(
+                          builder: (context, state) {
+                        return DropDownButtonWidget<String>(
+                          onChange: (value) {
+                            FilterBloc.get.add(SetFilterDataEvent(city: value));
+                          },
+                          value: state.city,
+                          items: state.cityItemList
+                              .map((e) => DropdownMenuItem(
+                                  value: e.city,
+                                  child: Text(e.city.toString())))
+                              .toList(),
+                        );
+                      }),
                       const SizedBox(
                         height: 40.0,
                       ),

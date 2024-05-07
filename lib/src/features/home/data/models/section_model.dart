@@ -20,14 +20,13 @@ class SectionData {
   SectionData.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <SectionItemModel>[];
-      data = (json['data'] as List<dynamic>).map((v) => SectionItemModel.fromJson(v)).toList();
+      data = (json['data'] as List<dynamic>)
+          .map((v) => SectionItemModel.fromJson(v))
+          .toList();
     }
     lastPage = json['last_page'];
-
   }
-
 }
-
 
 class SectionItemModel {
   int? id;
@@ -49,12 +48,21 @@ class SectionItemModel {
   });
 
   SectionItemModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    description = json['description'];
-    secImg = json['secImg'];
-    date = json['date'];
-    secOrder = json['secOrder'];
-    arName = json['arName'];
+    id = json['id'] ?? 0;
+    name = json['name'] ?? "Unknown";
+    description = json['description'] ?? "Unknown";
+    secImg = json['secImg'] ?? "Unknown";
+    date = json['date'] ?? "Unknown";
+    secOrder = json['secOrder'] ?? 0;
+    arName = json['arName'] ?? "Unknown";
+  }
+  SectionItemModel.initValues() {
+    id = 0;
+    name = "Unknown";
+    description = "Unknown";
+    secImg = "Unknown";
+    date = "Unknown";
+    secOrder = 0;
+    arName = "Unknown";
   }
 }

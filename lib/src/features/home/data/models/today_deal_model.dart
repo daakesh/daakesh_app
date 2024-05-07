@@ -56,6 +56,10 @@ class TodayItem {
   String? discountFrom;
   String? discountTo;
   String? country;
+
+  int? rateCount;
+  double? averageRating;
+
   SectionItemModel? section;
   UserModel? user;
   CategoryItem? category;
@@ -75,6 +79,8 @@ class TodayItem {
       this.price,
       this.discount,
       this.discountFrom,
+      this.rateCount,
+      this.averageRating,
       this.discountTo,
       this.country,
       this.section,
@@ -105,6 +111,14 @@ class TodayItem {
     discountFrom = json['discount_from'];
     discountTo = json['discount_to'];
     country = json['country'];
+    rateCount = json['rate_count'];
+    if (json['avarageRating'] is int) {
+      averageRating = json['avarageRating'].toDouble();
+    }
+    if (json['avarageRating'] is String) {
+      averageRating = double.parse(json['avarageRating']);
+    }
+    //json['avarageRating'] ?? 0.0;
     section = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])
         : null;

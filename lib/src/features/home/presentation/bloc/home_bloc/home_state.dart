@@ -2,85 +2,63 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../../src.export.dart';
 
-enum HomeStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
+enum HomeStateStatus { INITIAL, LOADING, SUCCESS, ERROR, LOADINGMORE, NULL }
 
 extension HomeStateStatusX on HomeStateStatus {
   bool get isInitial => this == HomeStateStatus.INITIAL;
   bool get isSuccess => this == HomeStateStatus.SUCCESS;
   bool get isError => this == HomeStateStatus.ERROR;
   bool get isLoading => this == HomeStateStatus.LOADING;
+  bool get isLoadingMore => this == HomeStateStatus.LOADINGMORE;
+  bool get isNull => this == HomeStateStatus.NULL;
 }
 
 class HomeState extends Equatable {
   final HomeStateStatus homeStateStatus;
   final HomeScreenState homeScreenState;
 
-  ///Filter screen State
-  final int rateIndex;
-  final int productTypeIndex;
-
-  ///Product screen details state
-  final bool isDaakeshTodayDeal;
-
-  ///More Info Product Screen
-  final int productSliderIndex;
-  final int productSizeIndex;
-
   ///API Data
   final List<SectionItemModel> sectionListData;
+  final int sectionCurrentPage;
+  final bool isMoreData;
+  final int tabIndex;
+  final bool isSwapActive;
 
   const HomeState({
     this.homeStateStatus = HomeStateStatus.INITIAL,
     this.homeScreenState = HomeScreenState.HOME,
 
-    ///Filter screen State
-    this.rateIndex = 0,
-    this.productTypeIndex = 0,
-
-    ///Product screen details state
-    this.isDaakeshTodayDeal = false,
-
-    ///More Info Product Screen
-    this.productSliderIndex = 0,
-    this.productSizeIndex = 0,
-
     ///API Data.
     this.sectionListData = const [],
+    this.sectionCurrentPage = 1,
+    this.isMoreData = true,
+    this.tabIndex = 0,
+    this.isSwapActive = true,
   });
 
-  HomeState copyWith({
-    HomeStateStatus? homeStateStatus,
-    HomeScreenState? homeScreenState,
-    int? rateIndex,
-    int? productTypeIndex,
+  HomeState copyWith(
+      {HomeStateStatus? homeStateStatus,
+      HomeScreenState? homeScreenState,
 
-    ///Product screen details state
-    bool? isDaakeshTodayDeal,
+      ///Product screen details state
+      bool? isDaakeshTodayDeal,
+      int? sectionCurrentPage,
+      bool? isMoreData,
 
-    ///More Info Product Screen
-    int? productSliderIndex,
-    int? productSizeIndex,
-
-    ///API Data
-    List<SectionItemModel>? sectionListData,
-  }) {
+      ///API Data
+      List<SectionItemModel>? sectionListData,
+      int? tabIndex,
+      bool? isSwapActive}) {
     return HomeState(
       homeStateStatus: homeStateStatus ?? this.homeStateStatus,
       homeScreenState: homeScreenState ?? this.homeScreenState,
 
-      ///Filter screen States
-      rateIndex: rateIndex ?? this.rateIndex,
-      productTypeIndex: productTypeIndex ?? this.productTypeIndex,
-
-      ///Product screen details states
-      isDaakeshTodayDeal: isDaakeshTodayDeal ?? this.isDaakeshTodayDeal,
-
-      ///More Info Product Screen
-      productSliderIndex: productSliderIndex ?? this.productSliderIndex,
-      productSizeIndex: productSizeIndex ?? this.productSizeIndex,
-
       ///API Data
       sectionListData: sectionListData ?? this.sectionListData,
+      sectionCurrentPage: sectionCurrentPage ?? this.sectionCurrentPage,
+      isMoreData: isMoreData ?? this.isMoreData,
+      tabIndex: tabIndex ?? this.tabIndex,
+      isSwapActive: isSwapActive ?? this.isSwapActive,
     );
   }
 
@@ -89,18 +67,13 @@ class HomeState extends Equatable {
         homeStateStatus,
         homeScreenState,
 
-        ///Filter screen States
-        rateIndex,
-        productTypeIndex,
-
-        ///Product screen details states
-        isDaakeshTodayDeal,
-
-        ///More Info Product Screen
-        productSliderIndex,
-        productSizeIndex,
-
         ///API Data
         sectionListData,
+        sectionCurrentPage,
+        isMoreData,
+
+        ///
+        tabIndex,
+        isSwapActive,
       ];
 }

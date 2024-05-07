@@ -5,9 +5,7 @@ import '../../../../../src.export.dart';
 class SwapBloc extends Bloc<SwapEvent, SwapState> {
   SwapBloc() : super(const SwapState()) {
     //on<SwapSetFilterDataEvent>(_setFilterDataEvent);
-    on<SwapSelectProductPropertiesEvent>(_selectProductProperties);
     on<SwapGetSectionDataEvent>(_getSectionData);
-    on<SwapDetermentTodayDealEvent>(_determentTodayDeal);
     on<SendOfferEvent>(_sendOffer);
   }
 
@@ -16,8 +14,24 @@ class SwapBloc extends Bloc<SwapEvent, SwapState> {
   ///Event to get Categories data at []
   FutureOr<void> _getSectionData(
       SwapGetSectionDataEvent event, Emitter<SwapState> emit) async {
-    emit(state.copyWith(swapStateStatus: SwapStateStatus.LOADING));
-    final result = await getIt.get<SwapUseCases>().getSectionData();
+    if (event.isSeeMore) {
+      if (state.isMoreData) {
+        return;
+      }
+      emit(state.copyWith(
+        sectionCurrentPage: state.sectionCurrentPage + 1,
+        swapStateStatus: SwapStateStatus.LODAINGMORE,
+      ));
+    } else {
+      emit(state.copyWith(
+        swapStateStatus: SwapStateStatus.LODAINGMORE,
+        swapSectionListData: [],
+        sectionCurrentPage: 1,
+      ));
+    }
+    final result = await getIt
+        .get<SwapUseCases>()
+        .getSectionData(state.sectionCurrentPage);
     result.fold((l) {
       emit(state.copyWith(swapStateStatus: SwapStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -27,30 +41,25 @@ class SwapBloc extends Bloc<SwapEvent, SwapState> {
         return;
       }
       SwapSectionModel sectionModel = SwapSectionModel.fromJson(r.data);
-      List<SwapSectionItemModel> swapSectionListData =
+      int lastPage = sectionModel.data!.lastPage!;
+      List<SwapSectionItemModel> newResultList =
           sectionModel.data!.data!.toList();
-      emit(state.copyWith(
+      List<SwapSectionItemModel> swapSectionListData =
+          state.swapSectionListData.toList();
+      if (newResultList.isEmpty) {
+        emit(state.copyWith(
           swapStateStatus: SwapStateStatus.SUCCESS,
-          swapSectionListData: swapSectionListData));
+          isMoreData: lastPage == state.sectionCurrentPage,
+        ));
+        return;
+      }
+      swapSectionListData.addAll(newResultList);
+      emit(state.copyWith(
+        swapStateStatus: SwapStateStatus.SUCCESS,
+        swapSectionListData: swapSectionListData,
+        isMoreData: lastPage == state.sectionCurrentPage,
+      ));
     });
-  }
-
-  ///Event to select product properties such as {Size, preview images ...etc}.
-  FutureOr<void> _selectProductProperties(
-      SwapSelectProductPropertiesEvent event, Emitter<SwapState> emit) {
-    emit(state.copyWith(
-      productSliderIndex: event.productSliderIndex,
-      productSizeIndex: event.productSizeIndex,
-    ));
-  }
-
-  ///In [], Specify today deal is [] or []
-  /// by passing [isDaakeshTodayDeal] flag.
-  FutureOr<void> _determentTodayDeal(
-      SwapDetermentTodayDealEvent event, Emitter<SwapState> emit) {
-    emit(state.copyWith(
-      isDaakeshTodayDeal: event.isDaakeshTodayDeal,
-    ));
   }
 
   FutureOr<void> _sendOffer(

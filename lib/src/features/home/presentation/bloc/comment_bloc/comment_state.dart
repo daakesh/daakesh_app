@@ -1,10 +1,9 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:equatable/equatable.dart';
+import '../../../../../src.export.dart';
 
-enum CommentStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
+enum CommentStateStatus { INITIAL, LOADING, SUCCESS, ERROR, LOADINGMORE, NULL }
 
-extension CommentStateStatusX on CommentStateStatus{
+extension CommentStateStatusX on CommentStateStatus {
   bool get isInitial => this == CommentStateStatus.INITIAL;
   bool get isSuccess => this == CommentStateStatus.SUCCESS;
   bool get isError => this == CommentStateStatus.ERROR;
@@ -15,28 +14,41 @@ extension CommentStateStatusX on CommentStateStatus{
 
 class CommentState extends Equatable {
   final CommentStateStatus commentStateStatus;
-
+  final List<CommentRateModelItem> commentList;
+  final int currentPage;
+  final bool isMoreData;
+  final int itemId;
 
   const CommentState({
     this.commentStateStatus = CommentStateStatus.INITIAL,
-
+    this.commentList = const [],
+    this.currentPage = 1,
+    this.isMoreData = true,
+    this.itemId = 0,
   });
 
   CommentState copyWith({
     CommentStateStatus? commentStateStatus,
-
+    List<CommentRateModelItem>? commentList,
+    int? currentPage,
+    bool? isMoreData,
+    int? itemId,
   }) {
     return CommentState(
       commentStateStatus: commentStateStatus ?? this.commentStateStatus,
-
-
+      commentList: commentList ?? this.commentList,
+      currentPage: currentPage ?? this.currentPage,
+      isMoreData: isMoreData ?? this.isMoreData,
+      itemId: itemId ?? this.itemId,
     );
   }
 
   @override
   List<Object?> get props => [
-    commentStateStatus,
-  ];
+        commentStateStatus,
+        commentList,
+        currentPage,
+        isMoreData,
+        itemId,
+      ];
 }
-
-

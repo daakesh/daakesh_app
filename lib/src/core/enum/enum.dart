@@ -1,5 +1,10 @@
 // ignore_for_file: constant_identifier_names
 
+enum HomeTodayItemType {
+  Daakesh,
+  Sell,
+}
+
 enum CardsTypes {
   None,
   VISA,

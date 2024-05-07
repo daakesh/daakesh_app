@@ -260,7 +260,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
       ShowToastSnackBar.showSnackBars(message: 'Add at least one country...');
       return;
     }
-    AddProBloc.get.add(AddProductEvent());
+    AddProBloc.get.add(AddProductEvent(context: context));
   }
 
   void cancel() {

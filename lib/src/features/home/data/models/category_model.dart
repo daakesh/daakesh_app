@@ -12,7 +12,6 @@ class CategoryModel {
     error = json['error'];
     data = json['data'] != null ? CategoryData.fromJson(json['data']) : null;
   }
-
 }
 
 class CategoryData {
@@ -35,7 +34,6 @@ class CategoryData {
   }
 }
 
-
 class CategoryItem {
   int? id;
   String? name;
@@ -48,19 +46,18 @@ class CategoryItem {
   SectionItemModel? sectionItemModel;
   List<SubCategory>? subCategoryList;
 
-
   CategoryItem({
-        this.id,
-        this.name,
-        this.description,
-        this.catImg,
-        this.date,
-        this.secID,
-        this.arName,
-        this.itemsCount,
-        this.sectionItemModel,
-        this.subCategoryList,
-      });
+    this.id,
+    this.name,
+    this.description,
+    this.catImg,
+    this.date,
+    this.secID,
+    this.arName,
+    this.itemsCount,
+    this.sectionItemModel,
+    this.subCategoryList,
+  });
 
   CategoryItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -71,12 +68,26 @@ class CategoryItem {
     secID = json['secID'];
     arName = json['arName'];
     itemsCount = json['items_count'];
-    sectionItemModel = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
+    sectionItemModel = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : null;
     if (json['sub_category'] != null) {
       subCategoryList = <SubCategory>[];
-      subCategoryList = (json['sub_category'] as List<dynamic>).map((v) => SubCategory.fromJson(v)).toList();
+      subCategoryList = (json['sub_category'] as List<dynamic>)
+          .map((v) => SubCategory.fromJson(v))
+          .toList();
     }
-
-
+  }
+  CategoryItem.initValues() {
+    id = 0;
+    name = "Unknown";
+    description = "Unknown";
+    catImg = "Unknown";
+    date = "Unknown";
+    secID = 0;
+    arName = "Unknown";
+    itemsCount = 0;
+    sectionItemModel = SectionItemModel.initValues();
+    subCategoryList = [];
   }
 }

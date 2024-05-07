@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../../src.export.dart';
 
-enum SearchStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
+enum SearchStateStatus { INITIAL, LOADING, SUCCESS, ERROR, LOADINGMORE, NULL }
 
-extension SearchStateStatusX on SearchStateStatus{
+extension SearchStateStatusX on SearchStateStatus {
   bool get isInitial => this == SearchStateStatus.INITIAL;
   bool get isSuccess => this == SearchStateStatus.SUCCESS;
   bool get isError => this == SearchStateStatus.ERROR;
@@ -15,14 +15,14 @@ extension SearchStateStatusX on SearchStateStatus{
 
 class SearchState extends Equatable {
   final SearchStateStatus searchStateStatus;
-  final List<SearchResultModel> searchResultList;
+  final List<TodayItem> searchResultList;
   final int currentSearchPage;
   final String searchValue;
   final bool isMoreData;
 
   const SearchState({
     this.searchStateStatus = SearchStateStatus.INITIAL,
-    this.searchResultList = const[],
+    this.searchResultList = const [],
     this.currentSearchPage = 1,
     this.searchValue = '',
     this.isMoreData = true,
@@ -30,7 +30,7 @@ class SearchState extends Equatable {
 
   SearchState copyWith({
     SearchStateStatus? searchStateStatus,
-    List<SearchResultModel>? searchResultList,
+    List<TodayItem>? searchResultList,
     int? currentSearchPage,
     String? searchValue,
     bool? isMoreData,
@@ -41,16 +41,15 @@ class SearchState extends Equatable {
       currentSearchPage: currentSearchPage ?? this.currentSearchPage,
       searchValue: searchValue ?? this.searchValue,
       isMoreData: isMoreData ?? this.isMoreData,
-
     );
   }
 
   @override
   List<Object?> get props => [
-    searchStateStatus,
-    searchResultList,
-    currentSearchPage,
-    searchValue,
-    isMoreData,
-  ];
+        searchStateStatus,
+        searchResultList,
+        currentSearchPage,
+        searchValue,
+        isMoreData,
+      ];
 }

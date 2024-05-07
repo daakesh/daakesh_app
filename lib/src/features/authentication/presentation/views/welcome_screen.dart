@@ -60,7 +60,7 @@ class WelcomeScreen extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              const ThirdPartyAuthenticationWidget(),
+              //const ThirdPartyAuthenticationWidget(),
               SizedBox(
                 height: 44.0.h,
               ),

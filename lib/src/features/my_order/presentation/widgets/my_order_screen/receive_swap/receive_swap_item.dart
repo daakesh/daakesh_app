@@ -68,7 +68,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                       height: 1.0.h,
                     ),
                     Text(
-                      'Amman, Jordan',
+                      '${sendReceiveSwapReqItem.offerItems!.citySwap}, ${sendReceiveSwapReqItem.offerItems!.countrySwap}',
                       style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                         fontSize: 13.0.sp,
                         color: ColorName.mediumSilver,
@@ -87,7 +87,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                                       color: ColorName.gray,
                                       fontSize: 16.0.sp)),
                           TextSpan(
-                              text: '25',
+                              text: '0',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.red, fontSize: 16.0.sp)),

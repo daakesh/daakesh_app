@@ -1,6 +1,3 @@
 {
-  "flutterSdkVersion": "3.19.6",
-  "updateVscodeSettings": true,
-  "updateGitIgnore": true,
-  "runPubGetOnSdkChanges": true
+  "flutterSdkVersion": "3.19.6"
 }

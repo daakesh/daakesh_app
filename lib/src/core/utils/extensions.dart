@@ -82,3 +82,44 @@ extension FilterProductTypeX on FilterProductType {
   bool get isDaakesh => this == FilterProductType.Daakesh;
   bool get isOther => this == FilterProductType.Other;
 }
+
+extension DecimalUtil on double {
+  String expToStringAsFixed(int afterDecimal) =>
+      '${toString().split('.')[0]}.${toString().split('.')[1].substring(0, afterDecimal)}';
+}
+
+extension ShowDialog on BuildContext {
+  void get showLoginDialog => showDialog(
+        context: this,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              "Alarm",
+              style: context.easyTheme.textTheme.headlineMedium,
+            ),
+            content: Text(
+              "Welcome! To unlock all features and personalize your experience, please log in or sign",
+              style: context.easyTheme.textTheme.bodyMedium!
+                  .copyWith(fontSize: 18.0, fontWeight: FontWeight.w100),
+            ),
+            actions: [
+              TextButton(
+                child: Text("Close",
+                    style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                        color: Colors.red, fontWeight: FontWeight.bold)),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              TextButton(
+                child: Text("Login",
+                    style: context.easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Utils.openNewPage(const WelcomeScreen());
+                },
+              ),
+            ],
+          );
+        },
+      );
+}

@@ -47,6 +47,19 @@ class RemoteProfileDatasource implements ProfileDatasource {
   }
 
   @override
+  Future<Either<Failure, ValidResponse>> updateLocation(
+      String country, String city, String address) async {
+    final result = await getIt.get<NetworkService>().post(
+        baseUrl: NetworkConstants.baseUrl,
+        path: 'DaakeshServices/api/user/updateUser',
+        body: {
+          "id": ValueConstants.userId,
+          "location": '$country, $city, $address',
+        });
+    return result;
+  }
+
+  @override
   Future<Either<Failure, ValidResponse>> addComplaints(String complaintType,
       String sellerName, String subject, String remark) async {
     final result = await getIt.get<NetworkService>().post(

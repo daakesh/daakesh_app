@@ -47,10 +47,10 @@ class RegExpValidator {
     return RegExp(phoneRex).hasMatch(phone!);
   }
 
-  static bool passwordStrength({required String? password}) {
+  static bool passwordStrength({required String password}) {
     const String phoneRex =
         '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})';
-    return RegExp(phoneRex).hasMatch(password!);
+    return RegExp(phoneRex).hasMatch(password);
   }
 
   static bool isMinimumEightCharacters(String value) {

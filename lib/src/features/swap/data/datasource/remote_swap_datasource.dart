@@ -15,10 +15,10 @@ class RemoteSwapDatasource implements SwapDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/section/getSections',
-        params: {"type": "swap"});
+        params: {"type": "swap", "page": "$page"});
     return result;
   }
 
@@ -85,7 +85,7 @@ class RemoteSwapDatasource implements SwapDatasource {
       String searchValue, int page, int perPage) async {
     final result = await getIt
         .get<NetworkService>()
-        .get(path: 'DaakeshServices/api/item/SearchUserItems', params: {
+        .get(path: 'DaakeshServices/api/item/SearchItems', params: {
       "type": "swap",
       "name": searchValue.toString(),
       "page": page.toString(),
@@ -198,6 +198,14 @@ class RemoteSwapDatasource implements SwapDatasource {
       "id": "$id",
       "rateValue": "$rateValue",
     });
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCities() async {
+    final result = await getIt
+        .get<NetworkService>()
+        .get(path: 'DaakeshServices/api/item/getCites');
     return result;
   }
 }

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../../src.export.dart';
 
@@ -159,7 +157,8 @@ class SendSwapAcceptedItem extends StatelessWidget {
               Expanded(
                 child: DefaultButtonWidget(
                   text: 'CALL',
-                  onPressed: () {},
+                  onPressed: () => Utils.lunchCall(
+                      sendSwapReqItem.sourceUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style,
                 ),
               ),
@@ -169,7 +168,8 @@ class SendSwapAcceptedItem extends StatelessWidget {
               Expanded(
                 child: DefaultButtonWidget(
                   text: 'WhatsApp',
-                  onPressed: () {},
+                  onPressed: () => Utils.lunchWhatsApp(
+                      sendSwapReqItem.sourceUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
                     backgroundColor: MaterialStateProperty.all(ColorName.amber),
                   ),

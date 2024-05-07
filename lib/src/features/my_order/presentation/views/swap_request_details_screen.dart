@@ -131,7 +131,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
                                   text: 'See Details',
-                                  onPressed: () {},
+                                  onPressed: () => seeSourceDetails(
+                                      context, sendSwapReqItem),
                                   isBold: true,
                                 ),
                               ),
@@ -252,7 +253,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: TextButtonWidget(
                                       text: 'See Product Details',
-                                      onPressed: () {},
+                                      onPressed: () => seeOfferDetails(
+                                          context, sendSwapReqItem),
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -306,5 +308,37 @@ class SwapRequestDetailsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void seeSourceDetails(
+      BuildContext context, SendReceiveSwapReqItem sendSwapReqItem) {
+    ProPreviewerModel previewerModel = ProPreviewerModel();
+    previewerModel
+      ..userName = sendSwapReqItem.sourceUser!.name
+      ..itemImage = sendSwapReqItem.sourceItems!.itemImg
+      ..title = sendSwapReqItem.sourceItems!.title
+      ..brandName = "Unknown"
+      ..categoryName = "Unknown"
+      ..year = sendSwapReqItem.sourceItems!.year
+      ..description = sendSwapReqItem.sourceItems!.description
+      ..offerCount = 0;
+    Utils.openNavNewPage(
+        context, MySwapPreviewerScreen(previewerModel: previewerModel));
+  }
+
+  void seeOfferDetails(
+      BuildContext context, SendReceiveSwapReqItem sendSwapReqItem) {
+    ProPreviewerModel previewerModel = ProPreviewerModel();
+    previewerModel
+      ..userName = sendSwapReqItem.offerUser!.name
+      ..itemImage = sendSwapReqItem.offerItems!.itemImg
+      ..title = sendSwapReqItem.offerItems!.title
+      ..brandName = "Unknown"
+      ..categoryName = "Unknown"
+      ..year = sendSwapReqItem.offerItems!.year
+      ..description = sendSwapReqItem.offerItems!.description
+      ..offerCount = 0;
+    Utils.openNavNewPage(
+        context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
 }
