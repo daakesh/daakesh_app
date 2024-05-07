@@ -2,9 +2,16 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../../src.export.dart';
 
-enum SwapSearchStateStatus { INITIAL, LOADING, SUCCESS, ERROR ,LOADINGMORE,NULL}
+enum SwapSearchStateStatus {
+  INITIAL,
+  LOADING,
+  SUCCESS,
+  ERROR,
+  LOADINGMORE,
+  NULL
+}
 
-extension SwapSearchStateStatusX on SwapSearchStateStatus{
+extension SwapSearchStateStatusX on SwapSearchStateStatus {
   bool get isInitial => this == SwapSearchStateStatus.INITIAL;
   bool get isSuccess => this == SwapSearchStateStatus.SUCCESS;
   bool get isError => this == SwapSearchStateStatus.ERROR;
@@ -15,14 +22,14 @@ extension SwapSearchStateStatusX on SwapSearchStateStatus{
 
 class SwapSearchState extends Equatable {
   final SwapSearchStateStatus swapSearchStateStatus;
-  final List<SwapSearchResultModel> swapSearchResultList;
+  final List<TrendDealsItem> swapSearchResultList;
   final int currentSearchPage;
   final String searchValue;
   final bool isMoreData;
 
   const SwapSearchState({
     this.swapSearchStateStatus = SwapSearchStateStatus.INITIAL,
-    this.swapSearchResultList = const[],
+    this.swapSearchResultList = const [],
     this.currentSearchPage = 1,
     this.searchValue = '',
     this.isMoreData = true,
@@ -30,28 +37,27 @@ class SwapSearchState extends Equatable {
 
   SwapSearchState copyWith({
     SwapSearchStateStatus? swapSearchStateStatus,
-    List<SwapSearchResultModel>? swapSearchResultList,
+    List<TrendDealsItem>? swapSearchResultList,
     int? currentSearchPage,
     String? searchValue,
     bool? isMoreData,
   }) {
     return SwapSearchState(
-      swapSearchStateStatus: swapSearchStateStatus ?? this.swapSearchStateStatus,
+      swapSearchStateStatus:
+          swapSearchStateStatus ?? this.swapSearchStateStatus,
       swapSearchResultList: swapSearchResultList ?? this.swapSearchResultList,
       currentSearchPage: currentSearchPage ?? this.currentSearchPage,
       searchValue: searchValue ?? this.searchValue,
       isMoreData: isMoreData ?? this.isMoreData,
-
     );
   }
 
   @override
   List<Object?> get props => [
-    swapSearchStateStatus,
-    swapSearchResultList,
-    currentSearchPage,
-    searchValue,
-    isMoreData,
-
-  ];
+        swapSearchStateStatus,
+        swapSearchResultList,
+        currentSearchPage,
+        searchValue,
+        isMoreData,
+      ];
 }

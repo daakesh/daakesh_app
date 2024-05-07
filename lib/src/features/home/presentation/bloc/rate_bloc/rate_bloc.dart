@@ -13,9 +13,9 @@ class RateBloc extends Bloc<RateEvent, RateState> {
 
   FutureOr<void> _addRate(AddRateEvent event, Emitter<RateState> emit) async {
     int itemId = event.itemId;
-    int userId = event.userId;
+    String userId = event.userId;
     int catID = event.catID;
-    int rateValue = event.rateValue;
+    double rateValue = event.rateValue;
     emit(state.copyWith(rateStateStatus: RateStateStatus.LOADING));
     final result = await getIt
         .get<HomeUseCases>()

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:daakesh/src/core/core.export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -43,16 +44,21 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
   FutureOr<void> _logoutUser(
       LogoutUserEvent event, Emitter<UserDataState> emit) async {
     emit(state.copyWith(userDataStateStatus: UserDataStateStatus.LOADING));
+    ProgressCircleDialog.show();
     final result = await getIt.get<AuthUseCases>().logout();
     result.fold((l) {
+      ProgressCircleDialog.dismiss();
+
       emit(state.copyWith(userDataStateStatus: UserDataStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
+      ProgressCircleDialog.dismiss();
+
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-
+      GetItUtils.user.logOut();
       emit(state.copyWith(userDataStateStatus: UserDataStateStatus.SUCCESS));
     });
   }

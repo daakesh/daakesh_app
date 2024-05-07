@@ -21,7 +21,7 @@ extension SwapFilterStateStatusX on SwapFilterStateStatus {
 
 class SwapFilterState extends Equatable {
   final SwapFilterStateStatus swapFilterStateStatus;
-  final List<FilterResultModel> subCategoryListData;
+  final List<TrendDealsItem> subCategoryListData;
   final int catID;
   final String country;
   final String city;
@@ -35,6 +35,9 @@ class SwapFilterState extends Equatable {
   final int currentPage;
   final bool isMoreData;
 
+  ///
+  final int categoryIndex;
+  final List<CityItem> cityItemList;
   const SwapFilterState({
     this.swapFilterStateStatus = SwapFilterStateStatus.INITIAL,
     this.subCategoryListData = const [],
@@ -48,11 +51,13 @@ class SwapFilterState extends Equatable {
     this.isFilterActive = false,
     this.currentPage = 1,
     this.isMoreData = true,
+    this.categoryIndex = 0,
+    this.cityItemList = const [],
   });
 
   SwapFilterState copyWith({
-    SwapFilterStateStatus? filterStateStatus,
-    List<FilterResultModel>? subCategoryListData,
+    SwapFilterStateStatus? swapFilterStateStatus,
+    List<TrendDealsItem>? subCategoryListData,
     int? catID,
     String? country,
     String? city,
@@ -63,9 +68,12 @@ class SwapFilterState extends Equatable {
     bool? isFilterActive,
     int? currentPage,
     bool? isMoreData,
+    int? categoryIndex,
+    List<CityItem>? cityItemList,
   }) {
     return SwapFilterState(
-      swapFilterStateStatus: filterStateStatus ?? this.swapFilterStateStatus,
+      swapFilterStateStatus:
+          swapFilterStateStatus ?? this.swapFilterStateStatus,
       subCategoryListData: subCategoryListData ?? this.subCategoryListData,
       catID: catID ?? this.catID,
       country: country ?? this.country,
@@ -77,6 +85,8 @@ class SwapFilterState extends Equatable {
       isFilterActive: isFilterActive ?? this.isFilterActive,
       currentPage: currentPage ?? this.currentPage,
       isMoreData: isMoreData ?? this.isMoreData,
+      categoryIndex: categoryIndex ?? this.categoryIndex,
+      cityItemList: cityItemList ?? this.cityItemList,
     );
   }
 
@@ -94,5 +104,7 @@ class SwapFilterState extends Equatable {
         isFilterActive,
         currentPage,
         isMoreData,
+        categoryIndex,
+        cityItemList,
       ];
 }

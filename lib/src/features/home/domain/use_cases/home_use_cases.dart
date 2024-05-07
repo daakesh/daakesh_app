@@ -4,7 +4,7 @@ import '../../../../src.export.dart';
 
 abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> getAdvertisementData();
-  Future<Either<Failure, ValidResponse>> getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
@@ -12,14 +12,19 @@ abstract class HomeUseCases {
 
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page);
+  Future<Either<Failure, ValidResponse>> getItemsByBrands(
+      int page, int brandId);
+
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      HomeTodayItemType type, int page);
   Future<Either<Failure, ValidResponse>> searchOnItems(
       String searchValue, int page, int perPage);
 
   ///Comment API
   Future<Either<Failure, ValidResponse>> addComment(
-      int userId, int itemId, String commentDesc);
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID);
+      String userId, int itemId, String commentDesc);
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(
+      int itemID, int page);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
 
   Future<Either<Failure, ValidResponse>> editComments(
@@ -27,7 +32,7 @@ abstract class HomeUseCases {
 
   ///Rate API
   Future<Either<Failure, ValidResponse>> addRate(
-      int itemId, int userId, int catID, int rateValue);
+      int itemId, String userId, int catID, double rateValue);
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
 
@@ -40,6 +45,7 @@ abstract class HomeUseCases {
       String id, String userID, String itemID, String quantity);
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList);
+  Future<Either<Failure, ValidResponse>> getCities();
 }
 
 @dev
@@ -51,8 +57,8 @@ class HomeUseCasesImpl implements HomeUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
-    return await getIt.get<HomeRepository>().getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
+    return await getIt.get<HomeRepository>().getSectionData(page);
   }
 
   @override
@@ -82,8 +88,15 @@ class HomeUseCasesImpl implements HomeUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
-    return await getIt.get<HomeRepository>().getTodayItemsData(page);
+  Future<Either<Failure, ValidResponse>> getItemsByBrands(
+      int page, int brandId) async {
+    return await getIt.get<HomeRepository>().getItemsByBrands(page, brandId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      HomeTodayItemType type, int page) async {
+    return await getIt.get<HomeRepository>().getTodayItemsData(type, page);
   }
 
   @override
@@ -97,7 +110,7 @@ class HomeUseCasesImpl implements HomeUseCases {
   ///Comment API.
   @override
   Future<Either<Failure, ValidResponse>> addComment(
-      int userId, int itemId, String commentDesc) async {
+      String userId, int itemId, String commentDesc) async {
     return await getIt
         .get<HomeRepository>()
         .addComment(userId, itemId, commentDesc);
@@ -110,8 +123,9 @@ class HomeUseCasesImpl implements HomeUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
-    return await getIt.get<HomeRepository>().getCommentsByItem(itemID);
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(
+      int itemID, int page) async {
+    return await getIt.get<HomeRepository>().getCommentsByItem(itemID, page);
   }
 
   @override
@@ -122,7 +136,7 @@ class HomeUseCasesImpl implements HomeUseCases {
   ///Rate API
   @override
   Future<Either<Failure, ValidResponse>> addRate(
-      int itemId, int userId, int catID, int rateValue) async {
+      int itemId, String userId, int catID, double rateValue) async {
     return await getIt
         .get<HomeRepository>()
         .addRate(itemId, userId, catID, rateValue);
@@ -170,5 +184,10 @@ class HomeUseCasesImpl implements HomeUseCases {
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList) async {
     return await getIt.get<HomeRepository>().addOrder(orderList);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCities() async {
+    return await getIt.get<HomeRepository>().getCities();
   }
 }

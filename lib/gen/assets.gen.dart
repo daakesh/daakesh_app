@@ -112,6 +112,10 @@ class $AssetsSvgGen {
   SvgGenImage get arrowRightIcon =>
       const SvgGenImage('assets/svg/arrow_right_icon.svg');
 
+  /// File path: assets/svg/arrow_up_right.svg
+  SvgGenImage get arrowUpRight =>
+      const SvgGenImage('assets/svg/arrow_up_right.svg');
+
   /// File path: assets/svg/cart_add_icon.svg
   SvgGenImage get cartAddIcon =>
       const SvgGenImage('assets/svg/cart_add_icon.svg');
@@ -228,6 +232,7 @@ class $AssetsSvgGen {
         arrowBackIcon,
         arrowDropDownIcon,
         arrowRightIcon,
+        arrowUpRight,
         cartAddIcon,
         commentIcon,
         creditCardIcon,

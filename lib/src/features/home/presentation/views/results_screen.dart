@@ -21,50 +21,57 @@ class ResultsScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 38.0,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: categoriesListData.length,
-                          separatorBuilder: (_, i) {
-                            return const SizedBox(
-                              width: 11.0,
-                            );
-                          },
-                          itemBuilder: (_, index) {
-                            CategoryItem categoryItem =
-                                categoriesListData[index];
-                            return GestureDetector(
-                              onTap: () => getSubCategoriesData(
-                                  categoryItem.id!.toInt()),
-                              child: Container(
-                                height: 38.0,
-                                padding: const EdgeInsetsDirectional.symmetric(
-                                    horizontal: 14.0),
-                                decoration: const BoxDecoration(
-                                    color: ColorName.paleGray,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0))),
-                                child:
-                                    Center(child: Text('${categoryItem.name}')),
-                              ),
-                            );
-                          },
+                child: BlocBuilder<FilterBloc, FilterState>(
+                  builder: (ctx, state) {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 38.0,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: categoriesListData.length,
+                              separatorBuilder: (_, i) {
+                                return const SizedBox(
+                                  width: 11.0,
+                                );
+                              },
+                              itemBuilder: (_, index) {
+                                CategoryItem categoryItem =
+                                    categoriesListData[index];
+                                return GestureDetector(
+                                  onTap: () => getSubCategoriesData(
+                                      categoryItem.id!.toInt(), index),
+                                  child: Container(
+                                    height: 38.0,
+                                    padding:
+                                        const EdgeInsetsDirectional.symmetric(
+                                            horizontal: 14.0),
+                                    decoration: BoxDecoration(
+                                        color: index == state.categoryIndex
+                                            ? const Color(0xFFf2cd98)
+                                            : ColorName.paleGray,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10.0))),
+                                    child: Center(
+                                        child: Text('${categoryItem.name}')),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 11.0,
-                    ),
-                    // Assets.svg.sortIcon.svg(),
-                    GestureDetector(
-                        onTap: () => openFilterScreen(context),
-                        child: Assets.png.filterIcon
-                            .image(width: 38.0, height: 38.0))
-                  ],
+                        const SizedBox(
+                          width: 11.0,
+                        ),
+                        // Assets.svg.sortIcon.svg(),
+                        GestureDetector(
+                            onTap: () => openFilterScreen(context),
+                            child: Assets.png.filterIcon
+                                .image(width: 38.0, height: 38.0))
+                      ],
+                    );
+                  },
                 ),
               ),
             ),
@@ -92,12 +99,14 @@ class ResultsScreen extends StatelessWidget {
                 return SliverList(
                     delegate: SliverChildBuilderDelegate(
                   (_, index) {
-                    FilterResultModel subCategoryItem =
-                        state.subCategoryListData[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 17),
-                      child: ResultItemWidget(subCategory: subCategoryItem),
+                    TodayItem todayItem = state.subCategoryListData[index];
+                    return GestureDetector(
+                      onTap: () => openMoreInfoScreen(context, todayItem),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 17),
+                        child: ResultItemWidget(todayItem: todayItem),
+                      ),
                     );
                   },
                   childCount: state.subCategoryListData.length,
@@ -143,10 +152,22 @@ class ResultsScreen extends StatelessWidget {
     }
   }
 
+  void openMoreInfoScreen(context, TodayItem todayDealItem) {
+    CommentBloc.get.add(GetCommentByItemEvent(itemId: todayDealItem.id));
+    Utils.openNavNewPage(
+        context,
+        MoreInfoProductScreen(
+          todayDealItem: todayDealItem,
+          isDaakeshTodayDeal: true,
+        ));
+  }
+
   void onSeeMore() {
     FilterBloc.get.add(PreviewSectionSubCategoriesEvent(isSeeMore: true));
   }
 
-  void getSubCategoriesData(int catID) =>
-      FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
+  void getSubCategoriesData(int catID, int index) {
+    FilterBloc.get.add(SelectCategoryItemEvent(index: index));
+    FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
+  }
 }

@@ -90,18 +90,23 @@ class _SearchResultHandler extends StatelessWidget {
       default:
         return SliverList(
           delegate: SliverChildBuilderDelegate((_, index) {
-            SearchResultModel searchModelData = state.searchResultList[index];
+            TodayItem searchModelData = state.searchResultList[index];
             return state.searchResultList.isEmpty
                 ? const SizedBox()
-                : Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: InkWell(
-                      splashColor: ColorName.transparent,
-                      highlightColor: ColorName.transparent,
-                      focusColor: ColorName.transparent,
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                      },
+                : GestureDetector(
+                    onTap: () {
+                      CommentBloc.get.add(
+                          GetCommentByItemEvent(itemId: searchModelData.id));
+                      Utils.openNavNewPage(
+                          context,
+                          MoreInfoProductScreen(
+                            todayDealItem: searchModelData,
+                            isDaakeshTodayDeal: true,
+                          ));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 20.0, left: 31.0, right: 31.0),
                       child: SizedBox(
                         width: double.infinity,
                         child: Row(
@@ -112,7 +117,7 @@ class _SearchResultHandler extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                searchModelData.description
+                                searchModelData.title
                                     .toString()
                                     .replaceAll('\n', ' '),
                                 style: context.easyTheme.textTheme.bodyMedium!
@@ -122,10 +127,7 @@ class _SearchResultHandler extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis),
                               ),
                             ),
-                            const Icon(
-                              Icons.arrow_upward,
-                              color: ColorName.gray,
-                            )
+                            Assets.svg.arrowUpRight.svg()
                           ],
                         ),
                       ),

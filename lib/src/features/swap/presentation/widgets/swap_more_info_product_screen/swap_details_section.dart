@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class SwapDetailsSection extends StatelessWidget {
-  final SwapPassDataState state;
-  const SwapDetailsSection({super.key, required this.state});
+  final TrendDealsItem trendDealsItem;
+  const SwapDetailsSection({super.key, required this.trendDealsItem});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SwapDetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${state.trendDealsListData.first.brand!.brandName}',
+              '${trendDealsItem.brand!.brandName}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -63,7 +63,7 @@ class SwapDetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${state.trendDealsListData.first.category!.name}',
+              '${trendDealsItem.category!.name}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -81,7 +81,7 @@ class SwapDetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${state.trendDealsListData.first.year}',
+              '${trendDealsItem.year}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -99,7 +99,7 @@ class SwapDetailsSection extends StatelessWidget {
           height: 13.0,
         ),
         Text(
-          '${state.trendDealsListData.first.description}',
+          '${trendDealsItem.description}',
           style:
               context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),
         ),

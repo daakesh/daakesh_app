@@ -61,13 +61,6 @@ class _SearchProductBarWidgetState extends State<SearchProductBarWidget> {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {},
-            child: Assets.png.filterIcon.image(
-              width: 38.0.w,
-              height: 38.0.h,
-            ),
-          ),
         ],
       ),
     );

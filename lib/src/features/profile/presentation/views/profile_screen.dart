@@ -99,11 +99,11 @@ class ProfileScreen extends StatelessWidget {
               title: 'Contact Info',
               icon: Assets.svg.profilePhoneIcon.svg(),
             ),
-            CategoryItemWidget(
-              onTap: () => Utils.openNewPage(const CardAndAccountScreen()),
-              title: 'Card and Accounts',
-              icon: Assets.svg.profileCreditCardIcon.svg(),
-            ),
+            // CategoryItemWidget(
+            //   onTap: () => Utils.openNewPage(const CardAndAccountScreen()),
+            //   title: 'Card and Accounts',
+            //   icon: Assets.svg.profileCreditCardIcon.svg(),
+            // ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(const LocationScreen()),
               title: 'Location',
@@ -190,7 +190,8 @@ class ProfileScreen extends StatelessWidget {
               child: Center(
                   child: DefaultButtonWidget(
                       text: 'LOG OUT',
-                      onPressed: () => GetItUtils.user.logOut())),
+                      onPressed: () =>
+                          UserDataBloc.get.add(LogoutUserEvent()))),
             ),
             const SizedBox(
               height: 30.0,

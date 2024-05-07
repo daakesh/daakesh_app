@@ -29,9 +29,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
         expandedHeight: 160.0,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
-          background: SearchBarWidget(
-            state: state,
-          ),
+          background: SearchBarWidget(state: state),
           expandedTitleScale: 1.0,
           title: Row(
             children: [
@@ -85,11 +83,11 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                   ),
                 ),
               ),
-              SizedBox(width: 14.0.w),
-              GestureDetector(
-                  onTap: () => !widget.isCart ? openCartScreen() : () {},
-                  child: Assets.svg.cartAddIcon
-                      .svg(width: 24.0.w, height: 24.0.h)),
+              //SizedBox(width: 14.0.w),
+              // GestureDetector(
+              //     onTap: () => !widget.isCart ? openCartScreen() : () {},
+              //     child: Assets.svg.cartAddIcon
+              //         .svg(width: 24.0.w, height: 24.0.h)),
             ],
           ),
           titlePadding: const EdgeInsetsDirectional.only(

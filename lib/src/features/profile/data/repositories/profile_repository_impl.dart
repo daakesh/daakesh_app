@@ -46,4 +46,12 @@ class ProfileRepositoryImpl implements ProfileRepository {
         .get<ProfileDatasource>()
         .addContactInfo(addContactInfoModel);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> updateLocation(
+      String country, String city, String address) async {
+    return await getIt
+        .get<ProfileDatasource>()
+        .updateLocation(country, city, address);
+  }
 }

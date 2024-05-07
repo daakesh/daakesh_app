@@ -7,6 +7,8 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     on<SwapSetFilterDataEvent>(_setFilterData);
     on<SwapClearFilterDataEvent>(_clearFilterData);
     on<SwapPreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
+    on<SwapSelectCategoryItemEvent>(_swapSelectCategoryItem);
+    on<GetSwapCitiesEvent>(_getSwapCities);
   }
   static SwapFilterBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _clearFilterData(
@@ -25,6 +27,7 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
   FutureOr<void> _setFilterData(
       SwapSetFilterDataEvent event, Emitter<SwapFilterState> emit) {
     emit(state.copyWith(
+      city: event.city,
       rate: event.rate,
       fromPrice: event.fromPrice,
       toPrice: event.toPrice,
@@ -38,11 +41,11 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     if (event.isSeeMore) {
       emit(state.copyWith(
         currentPage: state.currentPage + 1,
-        filterStateStatus: SwapFilterStateStatus.LOADINGMORE,
+        swapFilterStateStatus: SwapFilterStateStatus.LOADINGMORE,
       ));
     } else {
       emit(state.copyWith(
-          filterStateStatus: SwapFilterStateStatus.LOADING,
+          swapFilterStateStatus: SwapFilterStateStatus.LOADING,
           catID: event.catID,
           isMoreData: true,
           isFilterActive: event.isFilterActive,
@@ -62,33 +65,59 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     final result = await getIt.get<SwapUseCases>().getSubCategoryByCatID(
         state.catID, swapFilterDataModel, state.currentPage);
     result.fold((l) {
-      emit(state.copyWith(filterStateStatus: SwapFilterStateStatus.ERROR));
+      emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      FilterModel filterModel =
-          FilterModel.fromJson(r.data as Map<String, dynamic>);
-      List<FilterResultModel> newResultList = filterModel.data!.data!.toList();
+      TrendDealsModel filterModel =
+          TrendDealsModel.fromJson(r.data as Map<String, dynamic>);
+      List<TrendDealsItem> newResultList =
+          filterModel.data!.trendDealsData!.toList();
       int lastPage = filterModel.data!.lastPage!;
-      List<FilterResultModel> subCategoryListData =
+      List<TrendDealsItem> subCategoryListData =
           state.subCategoryListData.toList();
       if (newResultList.isEmpty) {
         emit(state.copyWith(
-          filterStateStatus: SwapFilterStateStatus.NULL,
+          swapFilterStateStatus: SwapFilterStateStatus.NULL,
           isMoreData: lastPage == state.currentPage,
         ));
         return;
       }
       subCategoryListData.addAll(newResultList);
       emit(state.copyWith(
-        filterStateStatus: SwapFilterStateStatus.SUCCESS,
+        swapFilterStateStatus: SwapFilterStateStatus.SUCCESS,
         subCategoryListData: subCategoryListData,
         isMoreData: lastPage == state.currentPage,
       ));
       emit(state.copyWith(subCategoryListData: subCategoryListData));
+    });
+  }
+
+  FutureOr<void> _swapSelectCategoryItem(
+      SwapSelectCategoryItemEvent event, Emitter<SwapFilterState> emit) {
+    emit(state.copyWith(categoryIndex: event.index));
+  }
+
+  FutureOr<void> _getSwapCities(
+      GetSwapCitiesEvent event, Emitter<SwapFilterState> emit) async {
+    emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.LOADING));
+    final result = await getIt.get<SwapUseCases>().getCities();
+    result.fold((l) {
+      emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      CitiesModel citiesModel = CitiesModel.fromJson(r.data);
+      List<CityItem> cityItemList = citiesModel.data!.toList();
+      emit(state.copyWith(
+          swapFilterStateStatus: SwapFilterStateStatus.SUCCESS,
+          cityItemList: cityItemList));
     });
   }
 }

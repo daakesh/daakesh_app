@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class SwapResultItemWidget extends StatelessWidget {
-  final FilterResultModel filterResultModel;
-  const SwapResultItemWidget({super.key, required this.filterResultModel});
+  final TrendDealsItem trendDealsItem;
+  const SwapResultItemWidget({super.key, required this.trendDealsItem});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class SwapResultItemWidget extends StatelessWidget {
                 width: 5.0,
               ),
               Text(
-                filterResultModel.user!.name.toString(),
+                trendDealsItem.user!.name.toString(),
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 13.0, color: ColorName.black),
               ),
@@ -71,8 +71,8 @@ class SwapResultItemWidget extends StatelessWidget {
                 width: 12.0,
               ),
               CachedImage(
-                imageUrl: filterResultModel.itemImg != null
-                    ? filterResultModel.itemImg!.first
+                imageUrl: trendDealsItem.itemImg != null
+                    ? trendDealsItem.itemImg!.first
                     : '',
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 height: 90.0,
@@ -88,7 +88,7 @@ class SwapResultItemWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.only(end: 80.0),
                       child: Text(
-                        '${filterResultModel.description}',
+                        '${trendDealsItem.description}',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(
                                 fontSize: 15.0,
@@ -101,7 +101,7 @@ class SwapResultItemWidget extends StatelessWidget {
                       height: 2.0,
                     ),
                     Text(
-                      '${filterResultModel.city}, ${filterResultModel.city}',
+                      '${trendDealsItem.city}, ${trendDealsItem.city}',
                       style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                           fontSize: 13, color: ColorName.mediumSilver),
                     ),
@@ -117,7 +117,7 @@ class SwapResultItemWidget extends StatelessWidget {
                                   .copyWith(
                                       fontSize: 16.0, color: ColorName.gray)),
                           TextSpan(
-                              text: '25',
+                              text: '${trendDealsItem.offerCount}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       fontSize: 16.0, color: ColorName.red)),

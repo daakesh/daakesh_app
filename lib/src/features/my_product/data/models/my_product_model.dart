@@ -57,6 +57,9 @@ class MyProductItem {
   String? display;
   String? countrySwap;
   String? citySwap;
+  int? rateCount;
+  int? offerCount;
+  double? averageRating;
   UserModel? user;
   MyProductCategory? category;
   BrandItem? brand;
@@ -90,48 +93,92 @@ class MyProductItem {
       this.user,
       this.category,
       this.brand,
+      this.averageRating,
+      this.rateCount,
+      this.offerCount,
       this.subcategory,
       this.section});
 
   MyProductItem.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['id'] ?? 0;
     if (json['itemImg'] != null) {
       itemImg = <String>[];
       itemImg =
           (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+    } else {
+      itemImg = [''];
     }
     priceAfterDiscount = json['price_after_discount'];
     discountPercentage = json['discount_percentage'];
-    description = json['description'];
-    date = json['date'];
-    title = json['Title'];
-    type = json['Type'];
-    swapFor = json['Swap For'];
-    city = json['City'];
-    year = json['Year'];
-    condition = json['Condition'];
+    description = json['description'] ?? "unKnown";
+    date = json['date'] ?? "unKnown";
+    title = json['Title'] ?? "unKnown";
+    type = json['Type'] ?? "unKnown";
+    swapFor = json['Swap For'] ?? "unKnown";
+    city = json['City'] ?? "unKnown";
+    year = json['Year'] ?? "unKnown";
+    condition = json['Condition'] ?? "unKnown";
     price = json['Price'];
     discount = json['discount'];
-    discountFrom = json['discount_from'];
-    discountTo = json['discount_to'];
-    country = json['country'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    quantity = json['quantity'];
-    display = json['display'];
-    countrySwap = json['country_swap'];
-    citySwap = json['city_swap'];
-    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
+    discountFrom = json['discount_from'] ?? "unKnown";
+    discountTo = json['discount_to'] ?? "unKnown";
+    country = json['country'] ?? "unKnown";
+    createdAt = json['created_at'] ?? "unKnown";
+    updatedAt = json['updated_at'] ?? "unKnown";
+    quantity = json['quantity'] ?? 0;
+    display = json['display'] ?? "unKnown";
+    rateCount = 4;
+    averageRating = 3.5;
+    offerCount = 0;
+    countrySwap = json['country_swap'] ?? "unKnown";
+    citySwap = json['city_swap'] ?? "unKnown";
+    user = json['user'] != null
+        ? UserModel.fromJson(json['user'])
+        : UserModel.initValues();
     category = json['category'] != null
         ? MyProductCategory.fromJson(json['category'])
-        : null;
-    brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
+        : MyProductCategory.initValues();
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['brand'])
+        : BrandItem.initValues();
     subcategory = json['subcategory'] != null
         ? SubCategory.fromJson(json['brand'])
-        : null;
+        : SubCategory.initValues();
     section = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])
-        : null;
+        : SectionItemModel.initValues();
+  }
+  MyProductItem.initValues() {
+    id = 0;
+    itemImg = ['', ''];
+    priceAfterDiscount = "unKnown";
+    discountPercentage = "unKnown";
+    description = "unKnown";
+    date = "unKnown";
+    title = "unKnown";
+    type = "unKnown";
+    swapFor = "unKnown";
+    city = "unKnown";
+    year = "unKnown";
+    condition = "unKnown";
+    price = 0.0;
+    discount = 0.0;
+    discountFrom = "unKnown";
+    discountTo = "unKnown";
+    country = "unKnown";
+    createdAt = "unKnown";
+    updatedAt = "unKnown";
+    quantity = 0;
+    display = "unKnown";
+    rateCount = 4;
+    averageRating = 3.5;
+    countrySwap = "unKnown";
+    citySwap = "unKnown";
+    user = UserModel.initValues();
+    category = MyProductCategory.initValues();
+    brand = BrandItem.initValues();
+    subcategory = SubCategory.initValues();
+    section = SectionItemModel.initValues();
   }
 }
 
@@ -154,12 +201,21 @@ class MyProductCategory {
       this.arName});
 
   MyProductCategory.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    description = json['description'];
-    catImg = json['catImg'];
-    date = json['date'];
-    secID = json['secID'];
-    arName = json['arName'];
+    id = json['id'] ?? 0;
+    name = json['name'] ?? "unKnown";
+    description = json['description'] ?? "unKnown";
+    catImg = json['catImg'] ?? "unKnown";
+    date = json['date'] ?? "unKnown";
+    secID = json['secID'] ?? 0;
+    arName = json['arName'] ?? "unKnown";
+  }
+  MyProductCategory.initValues() {
+    id = 0;
+    name = "unKnown";
+    description = "unKnown";
+    catImg = "unKnown";
+    date = "unKnown";
+    secID = 0;
+    arName = "unKnown";
   }
 }

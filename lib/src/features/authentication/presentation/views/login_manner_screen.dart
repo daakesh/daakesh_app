@@ -63,7 +63,7 @@ class LoginMannerScreen extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              const ThirdPartyAuthenticationWidget(),
+              //const ThirdPartyAuthenticationWidget(),
               const Spacer(
                 flex: 1,
               ),

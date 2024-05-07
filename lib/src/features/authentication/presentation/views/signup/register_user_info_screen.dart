@@ -70,6 +70,7 @@ class _RegisterPersonalInfoScreenState
                     TextFormFieldWidget(
                       controller: nameController,
                       focusNode: nameFocusNode,
+                      textCapitalization: TextCapitalization.words,
                       onFieldSubmitted: (value) => Utils.fieldFocusChange(
                           context, nameFocusNode, emailFocusNode),
                       inputFormatters: [
@@ -130,6 +131,17 @@ class _RegisterPersonalInfoScreenState
           message: context.locale.fill_personal_data_snack_bars);
       return;
     }
+    if (!RegExpValidator.isValidEmail(email: emailController.text)) {
+      ShowToastSnackBar.showSnackBars(message: 'Bad email formate');
+      return;
+    }
+    if (!RegExpValidator.passwordStrength(password: passwordController.text)) {
+      ShowToastSnackBar.showSnackBars(
+          message:
+              'Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters');
+      return;
+    }
+
     AuthBloc.get.add(EnterPersonalInfoEvent(
       name: nameController.text,
       email: emailController.text.trim(),

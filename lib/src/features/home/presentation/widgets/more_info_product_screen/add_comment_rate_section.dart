@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
+// ignore: must_be_immutable
 class AddCommentRateSection extends StatelessWidget {
+  final int itemId;
+  final int catID;
   AddCommentRateSection({
     super.key,
+    required this.itemId,
+    required this.catID,
   });
   final commentController = TextEditingController();
+
+  double rateValue = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -45,17 +52,21 @@ class AddCommentRateSection extends StatelessWidget {
                     allowHalfRating: true,
                     minRating: 1,
                     maxRating: 5,
-                    initialRating: 4.5,
+                    initialRating: 5,
                     itemSize: 25.0,
                     itemBuilder: (context, _) => const Icon(
                       Icons.star,
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (rating) {
+                      rateValue = rating;
                       context.disMissKeyboard;
                     },
                   ),
-                  Assets.svg.sendIcon.svg(width: 27.0, height: 27.0),
+                  GestureDetector(
+                      onTap: () => addRateComment(context),
+                      child:
+                          Assets.svg.sendIcon.svg(width: 27.0, height: 27.0)),
                 ],
               ),
               const SizedBox(
@@ -84,5 +95,32 @@ class AddCommentRateSection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void addRateComment(BuildContext context) {
+    if (ValueConstants.userId.isEmpty) {
+      context.showLoginDialog;
+      return;
+    }
+
+    addComment();
+    addRate();
+  }
+
+  void addComment() {
+    CommentBloc.get.add(AddCommentEvent(
+      userId: ValueConstants.userId,
+      itemId: itemId,
+      commentDesc: commentController.text,
+    ));
+  }
+
+  void addRate() {
+    RateBloc.get.add(AddRateEvent(
+      userId: ValueConstants.userId,
+      itemId: itemId,
+      catID: catID,
+      rateValue: rateValue,
+    ));
   }
 }

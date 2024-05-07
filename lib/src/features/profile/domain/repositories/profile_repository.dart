@@ -13,4 +13,6 @@ abstract class ProfileRepository {
   Future<Either<Failure, ValidResponse>> getContactInfo();
   Future<Either<Failure, ValidResponse>> addContactInfo(
       AddContactInfoModel addContactInfoModel);
+  Future<Either<Failure, ValidResponse>> updateLocation(
+      String country, String city, String address);
 }

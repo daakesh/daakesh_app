@@ -2,9 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-class SwapDataWidget extends StatelessWidget {
+class SwapDataWidget extends StatefulWidget {
   final SwapState state;
   const SwapDataWidget({super.key, required this.state});
+
+  @override
+  State<SwapDataWidget> createState() => _SwapDataWidgetState();
+}
+
+class _SwapDataWidgetState extends State<SwapDataWidget> {
+  final controller = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    scrollListener();
+  }
+
+  void scrollListener() {
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        loadMore();
+      }
+    });
+  }
+
+  void loadMore() {
+    SwapBloc.get.add(SwapGetSectionDataEvent(isSeeMore: true));
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -33,18 +58,34 @@ class SwapDataWidget extends StatelessWidget {
               height: 150.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
+                controller: controller,
                 itemBuilder: (ctx, index) {
-                  SwapSectionItemModel sectionItem =
-                      state.swapSectionListData[index];
-                  return GestureDetector(
-                    onTap: () => exploreSection(context, state, sectionItem.id!,
-                        index, sectionItem.name.toString()),
-                    child: SwapPopularCategoriesWidget(
-                      data: state.swapSectionListData[index],
-                    ),
-                  );
+                  if (index < widget.state.swapSectionListData.length) {
+                    SwapSectionItemModel swapSectionItemModel =
+                        widget.state.swapSectionListData[index];
+                    return GestureDetector(
+                      onTap: () => exploreSection(
+                          context,
+                          widget.state,
+                          swapSectionItemModel.id!,
+                          index,
+                          swapSectionItemModel.name.toString()),
+                      child: SwapPopularCategoriesWidget(
+                        data: widget.state.swapSectionListData[index],
+                      ),
+                    );
+                  } else {
+                    return !widget.state.isMoreData
+                        ? const Padding(
+                            padding: EdgeInsetsDirectional.only(
+                              end: 20.0,
+                            ),
+                            child: CircularProgressIndicatorWidget(),
+                          )
+                        : const SizedBox();
+                  }
                 },
-                itemCount: state.swapSectionListData.length,
+                itemCount: widget.state.swapSectionListData.length + 1,
               ),
             ),
           ),
@@ -91,8 +132,13 @@ class SwapDataWidget extends StatelessWidget {
     );
   }
 
-  void exploreSection(context, SwapState state, int secID, int sectionIndex,
-      String categoryTitle) {
+  void exploreSection(
+    context,
+    SwapState state,
+    int secID,
+    int sectionIndex,
+    String categoryTitle,
+  ) {
     SwapSectionsBloc.get.add(SwapGetCategoryBySectionIDEvent(
         secID: secID,
         sectionIndex: sectionIndex,
@@ -101,6 +147,10 @@ class SwapDataWidget extends StatelessWidget {
   }
 
   void openSectionScreen(context, SwapState state) {
-    Utils.openNavNewPage(context, SwapSectionScreen(swapState: state));
+    Utils.openNavNewPage(
+        context,
+        SwapSectionScreen(
+          swapState: state,
+        ));
   }
 }

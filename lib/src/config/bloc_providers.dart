@@ -41,9 +41,8 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<ShippingBloc>(create: (_) => ShippingBloc()),
       BlocProvider<CartBloc>(create: (_) => CartBloc()),
       BlocProvider<FilterBloc>(create: (_) => FilterBloc()),
-
-      ///BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
-      ///BlocProvider<RateBloc>(create: (_) => RateBloc()),
+      BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
+      BlocProvider<RateBloc>(create: (_) => RateBloc()),
 
       ///Swap Blocs
       BlocProvider<SwapBloc>(create: (_) => SwapBloc()),

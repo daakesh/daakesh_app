@@ -108,7 +108,6 @@ class OrderTypeTabBar extends StatelessWidget {
                               fontSize: 18.0)),
                     ),
                     const Spacer(flex: 1),
-                    Assets.png.filterIcon.image(width: 38.0.w, height: 38.0.h),
                   ],
                 ),
               )

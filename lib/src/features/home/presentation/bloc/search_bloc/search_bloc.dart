@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -33,11 +34,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      SearchModel searchModel = SearchModel.fromJson(r.data);
+      TodayItemModel searchModel = TodayItemModel.fromJson(r.data);
       int lastPage = searchModel.data!.lastPage!;
-      List<SearchResultModel> newResultList = searchModel.data!.data!.toList();
-      List<SearchResultModel> searchResultList =
-          state.searchResultList.toList();
+      List<TodayItem> newResultList = searchModel.data!.todayItemList!.toList();
+      List<TodayItem> searchResultList = state.searchResultList.toList();
       if (newResultList.isEmpty) {
         emit(state.copyWith(
           searchStateStatus: SearchStateStatus.NULL,

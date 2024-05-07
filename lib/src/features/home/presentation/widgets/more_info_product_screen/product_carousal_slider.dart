@@ -1,11 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:daakesh/src/core/utils/widgets/zoom_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../src.export.dart';
 
 class ProductCarousalSlider extends StatelessWidget {
-  final PassDataState state;
-  ProductCarousalSlider({super.key, required this.state});
+  final TodayItem todayDealItem;
+  final bool isDaakeshTodayDeal;
+  ProductCarousalSlider({
+    super.key,
+    required this.todayDealItem,
+    required this.isDaakeshTodayDeal,
+  });
 
   final controller = CarouselController();
 
@@ -27,12 +34,12 @@ class ProductCarousalSlider extends StatelessWidget {
               const SizedBox(
                 width: 6.0,
               ),
-              !state.isDaakeshTodayDeal
+              !isDaakeshTodayDeal
                   ? DaakeshLogoWidget(
                       width: 140.0.w,
                     )
                   : Text(
-                      '${state.todayItem.first.user!.name}',
+                      '${todayDealItem.user!.name}',
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 20.0),
                     ),
@@ -62,14 +69,21 @@ class ProductCarousalSlider extends StatelessWidget {
                   PassDataBloc.get.add(
                       SelectProductPropertiesEvent(productSliderIndex: index));
                 }),
-            items: state.todayItem.first.itemImg != null
-                ? state.todayItem.first.itemImg!.map((i) {
+            items: todayDealItem.itemImg != null
+                ? todayDealItem.itemImg!.map((i) {
                     return Builder(builder: (context) {
-                      return Transform.scale(
-                        scale: state.scale,
-                        child: CachedImage(
-                          imageUrl: i.toString(),
-                        ),
+                      return BlocBuilder<PassDataBloc, PassDataState>(
+                        builder: (context, state) {
+                          return Transform.scale(
+                            scale: state.scale,
+                            child: GestureDetector(
+                              onTap: () => openImage(i.toString()),
+                              child: CachedImage(
+                                imageUrl: i.toString(),
+                              ),
+                            ),
+                          );
+                        },
                       );
                     });
                   }).toList()
@@ -81,19 +95,23 @@ class ProductCarousalSlider extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: state.todayItem.first.itemImg != null
-              ? state.todayItem.first.itemImg!.asMap().entries.map((entry) {
-                  return Container(
-                    width: 12.0,
-                    height: 12.0,
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 4.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: state.productSliderIndex == entry.key
-                          ? ColorName.lightOrange
-                          : ColorName.silverGray,
-                    ),
+          children: todayDealItem.itemImg != null
+              ? todayDealItem.itemImg!.asMap().entries.map((entry) {
+                  return BlocBuilder<PassDataBloc, PassDataState>(
+                    builder: (context, state) {
+                      return Container(
+                        width: 12.0,
+                        height: 12.0,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 4.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: state.productSliderIndex == entry.key
+                              ? ColorName.lightOrange
+                              : ColorName.silverGray,
+                        ),
+                      );
+                    },
                   );
                 }).toList()
               : [
@@ -109,5 +127,9 @@ class ProductCarousalSlider extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void openImage(String imageUrl) {
+    Utils.openNewPage(ZoomImageWidget(imageUrl: imageUrl));
   }
 }

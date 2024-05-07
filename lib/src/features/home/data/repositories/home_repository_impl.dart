@@ -10,8 +10,8 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSectionData() async {
-    return await getIt.get<HomeDatasource>().getSectionData();
+  Future<Either<Failure, ValidResponse>> getSectionData(int page) async {
+    return await getIt.get<HomeDatasource>().getSectionData(page);
   }
 
   @override
@@ -41,8 +41,15 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
-    return await getIt.get<HomeDatasource>().getTodayItemsData(page);
+  Future<Either<Failure, ValidResponse>> getItemsByBrands(
+      int page, int brandId) async {
+    return await getIt.get<HomeDatasource>().getItemsByBrands(page, brandId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      HomeTodayItemType type, int page) async {
+    return await getIt.get<HomeDatasource>().getTodayItemsData(type, page);
   }
 
   @override
@@ -56,7 +63,7 @@ class HomeRepositoryImpl implements HomeRepository {
   ///Comment API.
   @override
   Future<Either<Failure, ValidResponse>> addComment(
-      int userId, int itemId, String commentDesc) async {
+      String userId, int itemId, String commentDesc) async {
     return await getIt
         .get<HomeDatasource>()
         .addComment(userId, itemId, commentDesc);
@@ -69,8 +76,9 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getCommentsByItem(int itemID) async {
-    return await getIt.get<HomeDatasource>().getCommentsByItem(itemID);
+  Future<Either<Failure, ValidResponse>> getCommentsByItem(
+      int itemID, int page) async {
+    return await getIt.get<HomeDatasource>().getCommentsByItem(itemID, page);
   }
 
   @override
@@ -81,7 +89,7 @@ class HomeRepositoryImpl implements HomeRepository {
   ///Rate API
   @override
   Future<Either<Failure, ValidResponse>> addRate(
-      int itemId, int userId, int catID, int rateValue) async {
+      int itemId, String userId, int catID, double rateValue) async {
     return await getIt
         .get<HomeDatasource>()
         .addRate(itemId, userId, catID, rateValue);
@@ -128,5 +136,10 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList) async {
     return await getIt.get<HomeDatasource>().addOrder(orderList);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCities() async {
+    return await getIt.get<HomeDatasource>().getCities();
   }
 }

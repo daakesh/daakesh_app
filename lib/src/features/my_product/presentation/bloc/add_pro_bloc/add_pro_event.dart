@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../src.export.dart';
@@ -10,6 +11,7 @@ class AddEditStateEvent extends AddProEvent {
     required this.adjustProduct,
   });
 }
+
 class AddProInfoEvent extends AddProEvent {
   final String productName;
   final String productDescription;
@@ -18,6 +20,7 @@ class AddProInfoEvent extends AddProEvent {
     required this.productDescription,
   });
 }
+
 class AddProCategoriesEvent extends AddProEvent {
   final String productSecID;
   final String productCatID;
@@ -33,18 +36,21 @@ class AddProCategoriesEvent extends AddProEvent {
     required this.productModelYear,
   });
 }
+
 class AddProImagesEvent extends AddProEvent {
   final List<XFile> proImages;
   AddProImagesEvent({
     required this.proImages,
   });
 }
+
 class AddProDisplayMethodEvent extends AddProEvent {
   final ProductDisplayMethod displayMethod;
   AddProDisplayMethodEvent({
     required this.displayMethod,
   });
 }
+
 class AddSaleInfoEvent extends AddProEvent {
   final String productQuantity;
   final String productPrice;
@@ -60,6 +66,7 @@ class AddSaleInfoEvent extends AddProEvent {
     this.toDate,
   });
 }
+
 class AddSwapInfoEvent extends AddProEvent {
   final String displayProduct;
   final String swapCountry;
@@ -71,6 +78,7 @@ class AddSwapInfoEvent extends AddProEvent {
     required this.swapCity,
   });
 }
+
 class AddShipToCountryEvent extends AddProEvent {
   final String shipToCountry;
 
@@ -78,4 +86,9 @@ class AddShipToCountryEvent extends AddProEvent {
     required this.shipToCountry,
   });
 }
-class AddProductEvent extends AddProEvent{}
+
+class AddProductEvent extends AddProEvent {
+  final BuildContext context;
+
+  AddProductEvent({required this.context});
+}

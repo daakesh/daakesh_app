@@ -14,6 +14,8 @@ abstract class ProfileUseCases {
   Future<Either<Failure, ValidResponse>> getContactInfo();
   Future<Either<Failure, ValidResponse>> addContactInfo(
       AddContactInfoModel addContactInfoModel);
+  Future<Either<Failure, ValidResponse>> updateLocation(
+      String country, String city, String address);
 }
 
 @dev
@@ -59,5 +61,13 @@ class ProfileUseCasesImpl implements ProfileUseCases {
     return await getIt
         .get<ProfileRepository>()
         .addContactInfo(addContactInfoModel);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> updateLocation(
+      String country, String city, String address) async {
+    return await getIt
+        .get<ProfileRepository>()
+        .updateLocation(country, city, address);
   }
 }

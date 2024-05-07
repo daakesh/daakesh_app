@@ -7,6 +7,8 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     on<SetFilterDataEvent>(_setFilterData);
     on<ClearFilterDataEvent>(_clearFilterData);
     on<PreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
+    on<SelectCategoryItemEvent>(_selectItem);
+    on<GetCitiesEvent>(_getCities);
   }
   static FilterBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _clearFilterData(
@@ -25,6 +27,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   FutureOr<void> _setFilterData(
       SetFilterDataEvent event, Emitter<FilterState> emit) {
     emit(state.copyWith(
+      city: event.city,
       rate: event.rate,
       fromPrice: event.fromPrice,
       toPrice: event.toPrice,
@@ -70,12 +73,11 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      FilterModel filterModel =
-          FilterModel.fromJson(r.data as Map<String, dynamic>);
-      List<FilterResultModel> newResultList = filterModel.data!.data!.toList();
+      TodayItemModel filterModel =
+          TodayItemModel.fromJson(r.data as Map<String, dynamic>);
+      List<TodayItem> newResultList = filterModel.data!.todayItemList!.toList();
       int lastPage = filterModel.data!.lastPage!;
-      List<FilterResultModel> subCategoryListData =
-          state.subCategoryListData.toList();
+      List<TodayItem> subCategoryListData = state.subCategoryListData.toList();
 
       if (newResultList.isEmpty) {
         emit(state.copyWith(
@@ -92,6 +94,31 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
       ));
 
       emit(state.copyWith(subCategoryListData: subCategoryListData));
+    });
+  }
+
+  FutureOr<void> _selectItem(
+      SelectCategoryItemEvent event, Emitter<FilterState> emit) {
+    emit(state.copyWith(categoryIndex: event.index));
+  }
+
+  FutureOr<void> _getCities(
+      GetCitiesEvent event, Emitter<FilterState> emit) async {
+    emit(state.copyWith(filterStateStatus: FilterStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().getCities();
+    result.fold((l) {
+      emit(state.copyWith(filterStateStatus: FilterStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      CitiesModel citiesModel = CitiesModel.fromJson(r.data);
+      List<CityItem> cityItemList = citiesModel.data!.toList();
+      emit(state.copyWith(
+          filterStateStatus: FilterStateStatus.SUCCESS,
+          cityItemList: cityItemList));
     });
   }
 }

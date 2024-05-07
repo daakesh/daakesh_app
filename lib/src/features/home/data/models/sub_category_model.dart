@@ -1,4 +1,4 @@
-class SubCategory  {
+class SubCategory {
   int? id;
   String? name;
   String? description;
@@ -8,18 +8,27 @@ class SubCategory  {
 
   SubCategory(
       {this.id,
-        this.name,
-        this.description,
-        this.subImg,
-        this.date,
-        this.arName});
+      this.name,
+      this.description,
+      this.subImg,
+      this.date,
+      this.arName});
 
   SubCategory.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    description = json['description'];
-    subImg = json['subImg'];
-    date = json['date'];
-    arName = json['arName'];
+    id = json['id'] ?? 0;
+    name = json['name'] ?? "Unknown";
+    description = json['description'] ?? "Unknown";
+    subImg = json['subImg'] ?? "Unknown";
+    date = json['date'] ?? "Unknown";
+    arName = json['arName'] ?? "Unknown";
+  }
+
+  SubCategory.initValues() {
+    id = 0;
+    name = "Unknown";
+    description = "Unknown";
+    subImg = "Unknown";
+    date = "Unknown";
+    arName = "Unknown";
   }
 }
