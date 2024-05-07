@@ -27,7 +27,7 @@ class DetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${todayDealItem.brand!.brandName}',
+              '${todayDealItem.brand?.brandName}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),

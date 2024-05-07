@@ -69,7 +69,7 @@ class RemoteAuthDatasource implements AuthDatasource {
         .get<NetworkService>()
         .post(path: 'DaakeshServices/api/user/updatePassword', body: {
       "phoneNumber": phoneNumber.toString(),
-      "password": phoneNumber.toString(),
+      "password": password.toString(),
     });
     return result;
   }
