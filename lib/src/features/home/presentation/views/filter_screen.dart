@@ -131,7 +131,7 @@ class FilterScreen extends StatelessWidget {
                         builder: (context, state) {
                           return Row(
                             children: [
-                              const SizedBox(width: 10),
+                              const SizedBox(width: 10.0),
                               Text(
                                 '\$${state.fromPrice.toInt()}',
                                 style: context.easyTheme.textTheme.bodyMedium!
