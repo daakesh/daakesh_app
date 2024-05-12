@@ -33,7 +33,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 108.0,
                 ),
                 Text(
-                  'Complaint',
+                  context.locale.complaint,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 36.0),
                 ),
@@ -41,7 +41,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 14.0,
                 ),
                 Text(
-                  'Location info',
+                  context.locale.location_info,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
@@ -49,7 +49,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 19.0,
                 ),
                 Text(
-                  'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                  context.locale.profile_instruction,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 16.0),
                 ),
@@ -57,7 +57,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 21.0,
                 ),
                 Text(
-                  'Complaint Type',
+                  context.locale.complaint_type,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
@@ -76,7 +76,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 25.0,
                 ),
                 Text(
-                  'Seller Name',
+                  context.locale.seller_name,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
@@ -90,7 +90,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 25.0,
                 ),
                 Text(
-                  'Subject',
+                  context.locale.subject,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
@@ -104,7 +104,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 25.0,
                 ),
                 Text(
-                  'Remark',
+                  context.locale.remark,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(color: ColorName.black.withOpacity(0.5)),
                 ),
@@ -120,15 +120,16 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 Center(
                   child: DefaultButtonWidget(
-                    text: 'SEND',
-                    onPressed: onSend,
+                    text: context.locale.send,
+                    onPressed: () => onSend(context),
                   ),
                 ),
                 const SizedBox(
                   height: 12.0,
                 ),
                 Center(
-                  child: OutlineButtonWidget(text: 'Cancel', onPressed: cancel),
+                  child: OutlineButtonWidget(
+                      text: context.locale.cancel, onPressed: cancel),
                 ),
                 const SizedBox(
                   height: 50.0,
@@ -145,12 +146,12 @@ class ComplaintScreen extends StatelessWidget {
     Utils.getBack();
   }
 
-  void onSend() {
+  void onSend(BuildContext context) {
     if (complaintTypeController.text.isEmpty ||
         sellerNameController.text.isEmpty ||
         subjectController.text.isEmpty ||
         remarkController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Fill all data firstly');
+      ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
       return;
     }
     ComplaintBloc.get.add(AddComplaintEvent(

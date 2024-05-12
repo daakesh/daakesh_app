@@ -81,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text(
-                'Your Account',
+                context.locale.your_account,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 20.0),
               ),
@@ -91,12 +91,12 @@ class ProfileScreen extends StatelessWidget {
             ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(const PersonalInfoScreen()),
-              title: 'Personal Info',
+              title: context.locale.personal_info_title,
               icon: Assets.svg.personIcon.svg(),
             ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(ContactInfoScreen()),
-              title: 'Contact Info',
+              title: context.locale.contact_info_title,
               icon: Assets.svg.profilePhoneIcon.svg(),
             ),
             // CategoryItemWidget(
@@ -106,13 +106,13 @@ class ProfileScreen extends StatelessWidget {
             // ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(const LocationScreen()),
-              title: 'Location',
+              title: context.locale.location_profile_title,
               icon: Assets.svg.locationPinIcon.svg(),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text(
-                'Support',
+                context.locale.support,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 20.0),
               ),
@@ -122,13 +122,13 @@ class ProfileScreen extends StatelessWidget {
             ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(ComplaintScreen()),
-              title: 'Complaint',
+              title: context.locale.complaint_title,
               icon: Assets.svg.commentIcon.svg(),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text(
-                'Setting',
+                context.locale.setting,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 20.0),
               ),
@@ -145,7 +145,7 @@ class ProfileScreen extends StatelessWidget {
                     width: 12.0,
                   ),
                   Text(
-                    'Language',
+                    context.locale.language,
                     style: context.easyTheme.textTheme.labelLarge!
                         .copyWith(fontSize: 16.0, color: ColorName.blueGray),
                   ),
@@ -189,7 +189,7 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Center(
                   child: DefaultButtonWidget(
-                      text: 'LOG OUT',
+                      text: context.locale.log_out,
                       onPressed: () =>
                           UserDataBloc.get.add(LogoutUserEvent()))),
             ),

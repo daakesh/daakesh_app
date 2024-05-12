@@ -26,7 +26,7 @@ class SeeMoreWidget extends StatelessWidget {
                     ? state.mySwapOrderStateStatus.isLoadingMore
                         ? const CircularProgressIndicatorWidget()
                         : TextButtonWidget(
-                            text: 'See More',
+                            text: context.locale.see_more_title,
                             isBold: true,
                             onPressed: () => onSeeMoreTap(
                                 context, flagState.sendReceiveFlag),
@@ -40,7 +40,7 @@ class SeeMoreWidget extends StatelessWidget {
                     ? state.mySwapOrderStateStatus.isLoadingMore
                         ? const CircularProgressIndicatorWidget()
                         : TextButtonWidget(
-                            text: 'See More',
+                            text: context.locale.see_more_title,
                             isBold: true,
                             onPressed: () => onSeeMoreTap(
                                 context, flagState.sendReceiveFlag),

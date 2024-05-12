@@ -47,7 +47,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                   height: 11.0,
                 ),
                 Text(
-                  'Add Product',
+                  context.locale.add_product,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 36.0),
                 ),
@@ -55,7 +55,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                   height: 14.0,
                 ),
                 Text(
-                  'Add Product Categories',
+                  context.locale.add_product_categories,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
@@ -63,20 +63,18 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                   height: 19.0,
                 ),
                 Text(
-                  'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                  context.locale.add_product_instruction,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 16.0),
                 ),
-                const SizedBox(
-                  height: 21.0,
-                ),
+                const SizedBox(height: 21.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Product Section',
+                        context.locale.product_section,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
@@ -107,7 +105,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         height: 21.0,
                       ),
                       Text(
-                        'Product Categories',
+                        context.locale.product_categories,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
@@ -134,7 +132,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         height: 21.0,
                       ),
                       Text(
-                        'Sup Categories',
+                        context.locale.sup_categories,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
@@ -161,7 +159,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         height: 21.0,
                       ),
                       Text(
-                        'Product Brand',
+                        context.locale.product_brand,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
@@ -187,7 +185,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         height: 21.0,
                       ),
                       Text(
-                        'Product Model Year',
+                        context.locale.product_model_year,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
@@ -213,14 +211,16 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                 ),
                 Center(
                   child: DefaultButtonWidget(
-                      text: 'NEXT', onPressed: () => onNext()),
+                      text: context.locale.next_button,
+                      onPressed: () => onNext()),
                 ),
                 const SizedBox(
                   height: 12.0,
                 ),
                 Center(
                   child: OutlineButtonWidget(
-                      text: 'CANCEL', onPressed: () => cancel()),
+                      text: context.locale.cancel_button,
+                      onPressed: () => cancel()),
                 ),
                 const SizedBox(
                   height: 50.0,

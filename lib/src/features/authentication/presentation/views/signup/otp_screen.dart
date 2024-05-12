@@ -254,6 +254,7 @@ class _OTPScreenState extends State<OTPScreen> {
     if (text.length == 1) {
       if (isLast) {
         currentFocus.unfocus();
+        onValidate(context);
         return;
       }
 

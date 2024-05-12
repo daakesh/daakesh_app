@@ -92,8 +92,6 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
         subCategoryListData: subCategoryListData,
         isMoreData: lastPage == state.currentPage,
       ));
-
-      emit(state.copyWith(subCategoryListData: subCategoryListData));
     });
   }
 
@@ -116,9 +114,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);
       List<CityItem> cityItemList = citiesModel.data!.toList();
-      emit(state.copyWith(
-          filterStateStatus: FilterStateStatus.SUCCESS,
-          cityItemList: cityItemList));
+      emit(state.copyWith(cityItemList: cityItemList));
     });
   }
 }

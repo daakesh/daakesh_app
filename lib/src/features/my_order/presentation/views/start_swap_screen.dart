@@ -31,11 +31,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
               const SliverToBoxAdapter(
                 child: HeaderWidget(withArrowBack: true, isLight: true),
               ),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 15.0,
-                ),
-              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 15.0)),
               SliverToBoxAdapter(
                 child: Container(
                   width: double.infinity,
@@ -70,9 +66,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 18.0.w,
-                      ),
+                      SizedBox(width: 18.0.w),
                       Expanded(
                         flex: 2,
                         child: Column(
@@ -107,7 +101,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'Swap In ${widget.sendReceiveSwapReqItem.offerItems!.citySwap}, ${widget.sendReceiveSwapReqItem.offerItems!.countrySwap}',
+                                  '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.offerItems!.citySwap}, ${widget.sendReceiveSwapReqItem.offerItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0.sp),
                                   overflow: TextOverflow.fade,
@@ -120,7 +114,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                             Padding(
                                 padding:
                                     EdgeInsetsDirectional.only(start: 6.0.w),
-                                child: Text('Your Product',
+                                child: Text(context.locale.your_product,
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(fontSize: 20.0.sp))),
@@ -129,7 +123,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               child: Align(
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
-                                  text: 'See Details',
+                                  text: context.locale.see_details,
                                   onPressed: () => seeOfferDetails(
                                       context, widget.sendReceiveSwapReqItem),
                                   isBold: true,
@@ -170,8 +164,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 15.0.sp),
                     children: [
-                      const TextSpan(
-                          text: 'Select The Product You Want To Trade\n'),
+                      TextSpan(text: '${context.locale.select_product}\n'),
                       const TextSpan(text: '('),
                       TextSpan(
                           text: '25',
@@ -179,7 +172,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               .copyWith(
                                   color: ColorName.red, fontSize: 15.0.sp)),
                       const TextSpan(text: ') '),
-                      const TextSpan(text: 'Offers Submitted'),
+                      TextSpan(text: context.locale.offers_submitted),
                     ],
                   ),
                 ),
@@ -190,8 +183,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                 ),
               ),
               MySwapProductCardWidget(
-                sendReceiveSwapReqItem: widget.sendReceiveSwapReqItem,
-              ),
+                  sendReceiveSwapReqItem: widget.sendReceiveSwapReqItem),
               SliverToBoxAdapter(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

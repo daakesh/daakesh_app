@@ -30,7 +30,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
             child: Padding(
               padding: EdgeInsetsDirectional.only(end: 17.0.w, top: 7.0.h),
               child: Text(
-                'Waiting',
+                context.locale.receive_waiting,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 12.0.sp, color: ColorName.red),
               ),
@@ -98,7 +98,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                                       color: ColorName.gray,
                                       fontSize: 16.0.sp)),
                           TextSpan(
-                              text: 'Offers Submitted',
+                              text: context.locale.receive_offers_submitted,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.black,
@@ -118,7 +118,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.0.w),
             child: Center(
                 child: DefaultButtonWidget(
-                    text: 'START SWAP',
+                    text: context.locale.start_swap,
                     onPressed: () =>
                         onStartSwap(context, sendReceiveSwapReqItem))),
           ),

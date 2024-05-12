@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({
-    super.key,
-  });
+  SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,7 @@ class SearchScreen extends StatelessWidget {
         body: BlocBuilder<SearchBloc, SearchState>(builder: (_, state) {
           return CustomScrollView(
             slivers: [
-              const HomeAppBarWidget(isActive: true),
+              HomeAppBarWidget(isActive: true),
               const SliverPadding(
                   padding: EdgeInsetsDirectional.only(top: 21.0)),
               SliverToBoxAdapter(

@@ -32,8 +32,7 @@ class _PriceSliderWidgetState extends State<PriceSliderWidget> {
             divisions: 10,
             min: widget.minValue,
             max: widget.maxValue,
-            labels: RangeLabels(
-                '\$${state.fromPrice.round()}', '\$${state.toPrice.round()}'),
+            //labels: RangeLabels('\$${state.fromPrice.round()}', '\$${state.toPrice.round()}'),
             activeColor: ColorName.amber,
             inactiveColor: ColorName.sliver,
             onChanged: (value) {

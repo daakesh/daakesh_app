@@ -7,8 +7,35 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
     on<GetHandmadeDataEvent>(_getHandmadeData);
     on<GetItemsByHomemadeEvent>(_getHandmadeItem);
     on<ResetHandmadeValueEvent>(_resetHandmadeValue);
+    on<SetHandmadeFilterDataEvent>(_setFilterData);
+    on<ClearHandmadeFilterDataEvent>(_clearHandmadeFilterData);
+    on<GetHandmadeCitiesEvent>(_getHandmadeCities);
   }
   static HandmadeBloc get get => BlocProvider.of(Utils.currentContext);
+
+  FutureOr<void> _clearHandmadeFilterData(
+      ClearHandmadeFilterDataEvent event, Emitter<HandmadeState> emit) {
+    emit(state.copyWith(
+      country: "Jordan",
+      city: "Amman",
+      rate: 0,
+      fromPrice: 0.0,
+      toPrice: 500.0,
+      isFilterActive: false,
+      type: FilterProductType.All,
+    ));
+  }
+
+  FutureOr<void> _setFilterData(
+      SetHandmadeFilterDataEvent event, Emitter<HandmadeState> emit) {
+    emit(state.copyWith(
+      city: event.city,
+      rate: event.rate,
+      fromPrice: event.fromPrice,
+      toPrice: event.toPrice,
+      type: event.productType,
+    ));
+  }
 
   ///Event to get Brands data at [HomeDataWidget]
   FutureOr<void> _getHandmadeData(
@@ -36,11 +63,11 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      HandmadeModel handmadeModel = HandmadeModel.fromJson(r.data);
-      int lastPage = handmadeModel.data!.lastPage!;
-      List<HandmadeItem> newResultList =
-          handmadeModel.data!.handmadeItemList!.toList();
-      List<HandmadeItem> handmadeListData = state.handmadeListData.toList();
+      TodayItemModel todayItemModel = TodayItemModel.fromJson(r.data);
+      int lastPage = todayItemModel.data!.lastPage!;
+      List<TodayItem> newResultList =
+          todayItemModel.data!.todayItemList!.toList();
+      List<TodayItem> handmadeListData = state.handmadeListData.toList();
       if (newResultList.isEmpty) {
         emit(state.copyWith(
           handmadeStateStatus: HandmadeStateStatus.NULL,
@@ -73,10 +100,7 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
       ));
     }
 
-    final result = await getIt.get<HomeUseCases>().getItemsByBrands(
-          state.itemsCurrentPage,
-          state.homemadeID,
-        );
+    final result = await getIt.get<HomeUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -103,6 +127,24 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
         itemByHandmadeList: todayItemData,
         isMoreDataItems: lastPage == state.itemsCurrentPage,
       ));
+    });
+  }
+
+  FutureOr<void> _getHandmadeCities(
+      GetHandmadeCitiesEvent event, Emitter<HandmadeState> emit) async {
+    emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().getCities();
+    result.fold((l) {
+      emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      CitiesModel citiesModel = CitiesModel.fromJson(r.data);
+      List<CityItem> cityItemList = citiesModel.data!.toList();
+      emit(state.copyWith(cityItemList: cityItemList));
     });
   }
 

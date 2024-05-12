@@ -24,7 +24,8 @@ class ResultItemWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              todayItem.discount != null
+              todayItem.discountPercentage != "0%" &&
+                      todayItem.discountPercentage != "0"
                   ? Container(
                       constraints:
                           const BoxConstraints(minWidth: 70.0, maxHeight: 25.0),
@@ -129,7 +130,7 @@ class ResultItemWidget extends StatelessWidget {
                           width: 8.0,
                         ),
                         Text(
-                          todayItem.averageRating.toString(),
+                          Utils.appToStringAsFixed(todayItem.averageRating!, 1),
                           style: context.easyTheme.textTheme.labelMedium!
                               .copyWith(fontSize: 15.0),
                         ),
@@ -149,11 +150,11 @@ class ResultItemWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            '\$${todayItem.priceAfterDiscount} ',
+                            '\$${todayItem.priceAfterDiscount!.toInt()} ',
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(fontSize: 21.0),
                           ),
-                          todayItem.discount != null
+                          todayItem.discountPercentage != "0%"
                               ? Text(
                                   '\$${todayItem.price}',
                                   style: context

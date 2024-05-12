@@ -36,7 +36,7 @@ class SwapProductItem extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
                   child: Text(
-                    'Edit',
+                    context.locale.edit,
                     style: context.easyTheme.textTheme.bodyLarge!
                         .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
                   ),
@@ -77,7 +77,7 @@ class SwapProductItem extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                                text: 'Swap In :',
+                                text: context.locale.ship,
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
                                         fontSize: 15.0.sp,
@@ -98,7 +98,7 @@ class SwapProductItem extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                                text: 'Display:',
+                                text: context.locale.display,
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
                                         fontSize: 15.0.sp,

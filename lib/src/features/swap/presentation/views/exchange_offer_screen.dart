@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
 
@@ -74,12 +75,19 @@ class ExchangeOfferScreen extends StatelessWidget {
   }
 
   void createOtherSwapOffer(context) {
-    Utils.openNewPage(const MainScreen());
+    Utils.openNavNewPage(context, const SwapScreen());
   }
 
   void backToStore(context) {
+    Navigator.of(context).pushAndRemoveUntil(
+      CupertinoPageRoute(
+        builder: (BuildContext context) {
+          return const SwapScreen();
+        },
+      ),
+      (_) => false,
+    );
     HomeBloc.controller.jumpToTab(3);
     HomeBloc.get.add(SelectTabItemEvent(index: 3));
-    Utils.openNewPage(const MainScreen());
   }
 }

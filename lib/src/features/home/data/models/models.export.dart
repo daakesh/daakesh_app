@@ -13,3 +13,4 @@ export 'filter_model.dart';
 export 'add_order_model.dart';
 export 'comment_rate_model.dart';
 export 'city_model.dart';
+export 'over_all_rate_model.dart';

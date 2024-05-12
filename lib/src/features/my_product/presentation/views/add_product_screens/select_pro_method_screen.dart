@@ -30,7 +30,7 @@ class SelectProMethodScreen extends StatelessWidget {
                   height: 11.0,
                 ),
                 Text(
-                  'Add Product',
+                  context.locale.add_product,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 36.0),
                 ),
@@ -38,7 +38,7 @@ class SelectProMethodScreen extends StatelessWidget {
                   height: 14.0,
                 ),
                 Text(
-                  'Choose a product display method',
+                  context.locale.choose_product,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
@@ -46,7 +46,7 @@ class SelectProMethodScreen extends StatelessWidget {
                   height: 19.0,
                 ),
                 Text(
-                  'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                  context.locale.add_product_instruction,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 16.0),
                 ),
@@ -58,12 +58,12 @@ class SelectProMethodScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MethodItem(
-                        title: 'For Sale',
+                        title: context.locale.for_sale,
                         productDisplayMethod: ProductDisplayMethod.Sell,
                         selectedMethod: state.productDisplayMethod,
                       ),
                       MethodItem(
-                        title: 'For Swap',
+                        title: context.locale.for_swap,
                         productDisplayMethod: ProductDisplayMethod.Swap,
                         selectedMethod: state.productDisplayMethod,
                       ),
@@ -79,7 +79,7 @@ class SelectProMethodScreen extends StatelessWidget {
                 BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
                   return Center(
                     child: DefaultButtonWidget(
-                      text: 'NEXT',
+                      text: context.locale.next_button,
                       onPressed: () => onNext(state.productDisplayMethod),
                     ),
                   );
@@ -89,7 +89,8 @@ class SelectProMethodScreen extends StatelessWidget {
                 ),
                 Center(
                   child: OutlineButtonWidget(
-                      text: 'CANCEL', onPressed: () => cancel()),
+                      text: context.locale.cancel_button,
+                      onPressed: () => cancel()),
                 ),
                 const SizedBox(
                   height: 50.0,

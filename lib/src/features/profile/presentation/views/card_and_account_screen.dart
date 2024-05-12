@@ -21,7 +21,7 @@ class CardAndAccountScreen extends StatelessWidget {
                     height: 108.0,
                   ),
                   Text(
-                    'Card And Accounts',
+                    context.locale.card_and_accounts,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 36.0),
                   ),
@@ -29,7 +29,7 @@ class CardAndAccountScreen extends StatelessWidget {
                     height: 14.0,
                   ),
                   Text(
-                    'Payment Method',
+                    context.locale.card_and_accounts,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 25.0),
                   ),
@@ -37,7 +37,7 @@ class CardAndAccountScreen extends StatelessWidget {
                     height: 19.0,
                   ),
                   Text(
-                    'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                    context.locale.profile_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 16.0),
                   ),
@@ -45,7 +45,7 @@ class CardAndAccountScreen extends StatelessWidget {
                       ? Padding(
                           padding: const EdgeInsets.only(top: 29.0),
                           child: Text(
-                            'Select the card',
+                            context.locale.select_the_card,
                             style: context.easyTheme.textTheme.headlineMedium!
                                 .copyWith(fontSize: 18.0),
                           ),
@@ -91,7 +91,7 @@ class CardAndAccountScreen extends StatelessWidget {
                                   size: 30,
                                 ),
                                 Text(
-                                  'Add Payment Card',
+                                  context.locale.add_payment_card,
                                   style: context.easyTheme.textTheme.bodyLarge!
                                       .copyWith(
                                           fontSize: 18.0,
@@ -112,8 +112,8 @@ class CardAndAccountScreen extends StatelessWidget {
                   Center(
                     child: DefaultButtonWidget(
                         text: !state.isUpdatePersonalActive
-                            ? 'MAKE EDIT'
-                            : 'DELETE',
+                            ? context.locale.make_edit
+                            : context.locale.delete,
                         onPressed: () =>
                             onMakeEdit(state.isUpdatePersonalActive)),
                   ),
@@ -122,7 +122,7 @@ class CardAndAccountScreen extends StatelessWidget {
                   ),
                   Center(
                     child: OutlineButtonWidget(
-                        text: 'Cancel',
+                        text: context.locale.cancel,
                         onPressed: () => cancel(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(

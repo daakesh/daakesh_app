@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
-import '../bloc.export.dart';
 
 class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
   SwapSearchBloc() : super(const SwapSearchState()) {

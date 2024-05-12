@@ -32,7 +32,7 @@ class SellerInfoCard extends StatelessWidget {
                       children: [
                         Expanded(
                             child: Text(
-                          'Seller Info',
+                          context.locale.seller_info,
                           style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(fontSize: 19.0.sp),
                         )),
@@ -40,7 +40,7 @@ class SellerInfoCard extends StatelessWidget {
                           onTap: () =>
                               onEditSellerInfo(state.sellerInfoModel.first),
                           child: Text(
-                            'Edit',
+                            context.locale.edit_button,
                             style: context.easyTheme.textTheme.headlineMedium!
                                 .copyWith(
                                     fontSize: 14.0.sp,
@@ -61,7 +61,7 @@ class SellerInfoCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'USED NAME',
+                                context.locale.user_name,
                                 style: context.easyTheme.textTheme.bodySmall!
                                     .copyWith(
                                         fontWeight: FontWeight.w600,
@@ -83,7 +83,7 @@ class SellerInfoCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'USED PHONE',
+                                context.locale.used_phone,
                                 style: context.easyTheme.textTheme.bodySmall!
                                     .copyWith(
                                         fontWeight: FontWeight.w600,
@@ -108,7 +108,7 @@ class SellerInfoCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Your Store Rate:',
+                          context.locale.your_store_rate,
                           style: context.easyTheme.textTheme.bodyMedium!
                               .copyWith(
                                   fontSize: 13.0.sp, color: ColorName.grayish),
@@ -144,8 +144,8 @@ class SellerInfoCard extends StatelessWidget {
                         )),
                         Text(
                           state.sellerInfoModel.first.active == 1
-                              ? 'Active'
-                              : 'inActive',
+                              ? context.locale.active
+                              : context.locale.inActive,
                           style:
                               context.easyTheme.textTheme.labelMedium!.copyWith(
                             fontSize: 16.0.sp,
@@ -165,8 +165,6 @@ class SellerInfoCard extends StatelessWidget {
   }
 
   void onEditSellerInfo(SellerInfoData sellerInfoData) {
-    Utils.openNewPage(EditSellerInfoScreen(
-      sellerInfoData: sellerInfoData,
-    ));
+    Utils.openNewPage(EditSellerInfoScreen(sellerInfoData: sellerInfoData));
   }
 }

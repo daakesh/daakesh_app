@@ -5,7 +5,6 @@ import '../../../../src.export.dart';
 class SwapFilterScreen extends StatelessWidget {
   SwapFilterScreen({super.key});
   final countryController = TextEditingController(text: 'Jordan');
-  final cityController = TextEditingController(text: 'Amman');
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +126,23 @@ class SwapFilterScreen extends StatelessWidget {
                       ),
                       const SwapPriceSliderWidget(
                           minValue: 0.0, maxValue: 1000.0),
+                      Row(
+                        children: [
+                          const SizedBox(width: 10),
+                          Text(
+                            '\$0',
+                            style: context.easyTheme.textTheme.bodyMedium!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          const Spacer(flex: 1),
+                          Text(
+                            '\$1000',
+                            style: context.easyTheme.textTheme.bodyMedium!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(width: 10),
+                        ],
+                      ),
                       const SizedBox(
                         height: 34.0,
                       ),
@@ -191,13 +207,11 @@ class SwapFilterScreen extends StatelessWidget {
 
   void clear(context, bool filterIsActive) {
     if (!filterIsActive) {
-      Navigator.pop(context);
       SwapFilterBloc.get.add(SwapClearFilterDataEvent());
       return;
     }
     SwapFilterBloc.get
         .add(SwapPreviewSectionSubCategoriesEvent(isFilterActive: false));
     SwapFilterBloc.get.add(SwapClearFilterDataEvent());
-    Navigator.pop(context);
   }
 }

@@ -20,7 +20,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                   height: 16.0.h,
                 ),
                 Text(
-                  'Swap Requests Details',
+                  context.locale.swap_requests_details,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 22.0.sp),
                 ),
@@ -93,7 +93,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'Swap In ${sendSwapReqItem.sourceItems!.citySwap}, ${sendSwapReqItem.sourceItems!.countrySwap}',
+                                  '${context.locale.swap_in} ${sendSwapReqItem.sourceItems!.citySwap}, ${sendSwapReqItem.sourceItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0.sp),
                                   overflow: TextOverflow.fade,
@@ -109,7 +109,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 TextSpan(
                                   children: [
                                     TextSpan(
-                                        text: 'By ',
+                                        text: '${context.locale.byTitle} ',
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
                                             .copyWith(
@@ -130,7 +130,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                               child: Align(
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
-                                  text: 'See Details',
+                                  text: context.locale.see_details,
                                   onPressed: () => seeSourceDetails(
                                       context, sendSwapReqItem),
                                   isBold: true,
@@ -227,7 +227,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Text(
-                                      'Swap In ${sendSwapReqItem.offerItems!.citySwap}, ${sendSwapReqItem.offerItems!.countrySwap}',
+                                      '${context.locale.swap_in} ${sendSwapReqItem.offerItems!.citySwap}, ${sendSwapReqItem.offerItems!.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(fontSize: 16.0.sp),
@@ -241,7 +241,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 Padding(
                                   padding:
                                       EdgeInsetsDirectional.only(start: 6.0.w),
-                                  child: Text('Your Product',
+                                  child: Text(context.locale.your_product,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(fontSize: 20.0.sp)),
@@ -252,7 +252,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                   child: Align(
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: TextButtonWidget(
-                                      text: 'See Product Details',
+                                      text: context.locale.see_product_details,
                                       onPressed: () => seeOfferDetails(
                                           context, sendSwapReqItem),
                                       style: context
@@ -275,7 +275,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                         padding: EdgeInsetsDirectional.only(
                             start: 22.0.w, end: 14.0.w),
                         child: Text(
-                          'Your Comment',
+                          context.locale.your_comment,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
                                   fontSize: 20.0.sp,

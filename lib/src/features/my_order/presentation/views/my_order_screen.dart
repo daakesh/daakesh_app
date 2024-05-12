@@ -54,7 +54,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                     padding: EdgeInsetsDirectional.only(
                         start: 17.0.w, end: 13.0.w, top: 13.0.h),
                     child: Text(
-                      'Swap Requests',
+                      context.locale.swapRequests,
                       style:
                           context.easyTheme.textTheme.headlineMedium!.copyWith(
                         fontSize: ResponsiveText.getResponsiveFontSize(
@@ -71,7 +71,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Send',
+                          context.locale.send_swap_request,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
                                   fontSize:
@@ -96,7 +96,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                               }),
                         ),
                         Text(
-                          'Receive',
+                          context.locale.receive_swap_request,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
                                   fontSize:

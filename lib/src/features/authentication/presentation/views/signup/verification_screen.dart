@@ -14,8 +14,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
     super.initState();
     Future.delayed(
       const Duration(seconds: 2),
-    ).then((value) => Utils.openNewPage(const AddPaymentCardScreen(),
-        popPreviousPages: true));
+    ).then((value) =>
+        Utils.openNewPage(const MainScreen(), popPreviousPages: true));
   }
 
   @override

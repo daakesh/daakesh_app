@@ -21,7 +21,7 @@ class CategoryItemWidget extends StatelessWidget {
       highlightColor: ColorName.transparent,
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(left: 40.0, right: 40.0, bottom: 30.0),
+        padding: const EdgeInsets.only(left: 40, right: 40.0, bottom: 30.0),
         child: Row(
           children: [
             SizedBox(

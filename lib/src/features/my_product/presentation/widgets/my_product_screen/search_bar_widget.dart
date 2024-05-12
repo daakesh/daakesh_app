@@ -51,7 +51,7 @@ class _SearchProductBarWidgetState extends State<SearchProductBarWidget> {
                         controller: widget.searchController,
                         isUnderlineOn: true,
                         onChanged: onChange,
-                        hintText: 'Search In Your Product',
+                        hintText: context.locale.search_in_your_product,
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(fontFamily: FontFamily.apercuRegular),
                       ),

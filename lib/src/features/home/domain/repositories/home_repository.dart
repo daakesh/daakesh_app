@@ -18,8 +18,8 @@ abstract class HomeRepository {
       String searchValue, int page, int perPage);
 
   ///Comment APIs
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc);
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue);
   Future<Either<Failure, ValidResponse>> getCommentsByItem(
       int itemID, int page);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
@@ -42,4 +42,8 @@ abstract class HomeRepository {
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList);
   Future<Either<Failure, ValidResponse>> getCities();
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId);
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId);
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
+      int brandID, FilterDataModel filterDataModel, int page);
 }

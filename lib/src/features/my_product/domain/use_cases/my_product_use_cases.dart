@@ -18,6 +18,8 @@ abstract class MyProductUseCases {
   Future<Either<Failure, ValidResponse>> updateSellerInfo(
       String phoneNumber, String userName, String whatsappNumber);
   Future<Either<Failure, ValidResponse>> getItemById(int id);
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue);
 }
 
 @dev
@@ -95,5 +97,18 @@ class MyProductUseCasesImpl implements MyProductUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getItemById(int id) async {
     return await getIt.get<MyProductRepository>().getItemById(id);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
+    return await getIt.get<MyProductRepository>().addComment(
+          userId,
+          itemId,
+          commentDesc,
+          catID,
+          subID,
+          rateValue,
+        );
   }
 }

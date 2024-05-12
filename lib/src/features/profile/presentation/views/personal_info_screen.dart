@@ -55,7 +55,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         height: 70.0,
                       ),
                       Text(
-                        'Personal Info',
+                        context.locale.personal_info,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(fontSize: 36.0),
                       ),
@@ -116,7 +116,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       ),
                       Center(
                           child: Text(
-                        'Change Photo',
+                        context.locale.change_photo,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       )),
@@ -124,7 +124,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         height: 23.0,
                       ),
                       Text(
-                        'Name',
+                        context.locale.name,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
@@ -136,7 +136,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         height: 40.0,
                       ),
                       Text(
-                        'Email',
+                        context.locale.email,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
@@ -148,7 +148,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         height: 40.0,
                       ),
                       Text(
-                        'Password',
+                        context.locale.password,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       ),
@@ -166,7 +166,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       ),
                       Center(
                         child: DefaultButtonWidget(
-                            text: !state.isUpdateActive ? 'MAKE EDIT' : 'SAVE',
+                            text: !state.isUpdateActive
+                                ? context.locale.make_edit
+                                : context.locale.save_edit,
                             onPressed: () => !state.isUpdateActive
                                 ? onMakeEdit()
                                 : onSave()),
@@ -177,8 +179,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       Center(
                         child: OutlineButtonWidget(
                             text: !state.isUpdateActive
-                                ? 'Cancel'
-                                : 'RESET AND CANCEL',
+                                ? context.locale.cancel
+                                : context.locale.reset_and_cancel_contact,
                             onPressed: () => cancel()),
                       ),
                       const Spacer(

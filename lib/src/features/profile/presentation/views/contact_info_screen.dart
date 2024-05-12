@@ -40,7 +40,7 @@ class ContactInfoScreen extends StatelessWidget {
                       height: 108.0,
                     ),
                     Text(
-                      'Contact Info',
+                      context.locale.contact_info,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 36.0),
                     ),
@@ -48,7 +48,7 @@ class ContactInfoScreen extends StatelessWidget {
                       height: 14.0,
                     ),
                     Text(
-                      'Change your Contact info',
+                      context.locale.change_contact_info,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.0),
                     ),
@@ -56,7 +56,7 @@ class ContactInfoScreen extends StatelessWidget {
                       height: 19.0,
                     ),
                     Text(
-                      'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                      context.locale.profile_instruction,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 16.0),
                     ),
@@ -64,7 +64,7 @@ class ContactInfoScreen extends StatelessWidget {
                       height: 18.0,
                     ),
                     Text(
-                      'Personal Phone Number',
+                      context.locale.personal_phone_number,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(color: ColorName.black.withOpacity(0.5)),
                     ),
@@ -106,7 +106,7 @@ class ContactInfoScreen extends StatelessWidget {
                       height: 44.0,
                     ),
                     Text(
-                      'Commercial Phone Number',
+                      context.locale.commercial_phone_number,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(color: ColorName.black.withOpacity(0.5)),
                     ),
@@ -148,7 +148,7 @@ class ContactInfoScreen extends StatelessWidget {
                       height: 44.0,
                     ),
                     Text(
-                      'WhatsApp Commercial Phone Number',
+                      context.locale.whatsApp_phone_number,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(color: ColorName.black.withOpacity(0.5)),
                     ),
@@ -195,11 +195,11 @@ class ContactInfoScreen extends StatelessWidget {
                     Center(
                         child: DefaultButtonWidget(
                             text: !state.isUpdatePersonalActive
-                                ? 'MAKE EDIT'
-                                : 'SAVE',
+                                ? context.locale.edit_contact
+                                : context.locale.save_edit,
                             onPressed: () => !state.isUpdatePersonalActive
                                 ? onMakeEdit()
-                                : onSave()) //onMakeEdit()),
+                                : onSave(context)) //onMakeEdit()),
                         ),
                     const SizedBox(
                       height: 12.0,
@@ -207,8 +207,8 @@ class ContactInfoScreen extends StatelessWidget {
                     Center(
                       child: OutlineButtonWidget(
                           text: !state.isUpdatePersonalActive
-                              ? 'Cancel'
-                              : 'RESET AND CANCEL',
+                              ? context.locale.cancel_contact
+                              : context.locale.reset_and_cancel_contact,
                           onPressed: () =>
                               cancel(context, state.isUpdatePersonalActive)),
                     ),
@@ -236,11 +236,12 @@ class ContactInfoScreen extends StatelessWidget {
         .add(ActivateUpdateContactInfoEvent(isUpdatePersonalActive: false));
   }
 
-  void onSave() {
+  void onSave(BuildContext context) {
     if (personPhoneController.text.isEmpty &&
         commercialPhoneController.text.isEmpty &&
         whatsAppPhoneController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Fill data firstly...');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.fill_contact_data);
       return;
     }
     ContactInfoBloc.get.add(AddContactInfoEvent(

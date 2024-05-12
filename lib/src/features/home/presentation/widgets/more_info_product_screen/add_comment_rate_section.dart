@@ -6,10 +6,12 @@ import '../../../../../src.export.dart';
 class AddCommentRateSection extends StatelessWidget {
   final int itemId;
   final int catID;
+  final int subID;
   AddCommentRateSection({
     super.key,
     required this.itemId,
     required this.catID,
+    required this.subID,
   });
   final commentController = TextEditingController();
 
@@ -102,25 +104,20 @@ class AddCommentRateSection extends StatelessWidget {
       context.showLoginDialog;
       return;
     }
-
+    if (commentController.text.isEmpty) {
+      ShowToastSnackBar.showSnackBars(message: context.locale.add_comment);
+      return;
+    }
     addComment();
-    addRate();
   }
 
   void addComment() {
     CommentBloc.get.add(AddCommentEvent(
-      userId: ValueConstants.userId,
-      itemId: itemId,
-      commentDesc: commentController.text,
-    ));
-  }
-
-  void addRate() {
-    RateBloc.get.add(AddRateEvent(
-      userId: ValueConstants.userId,
-      itemId: itemId,
-      catID: catID,
-      rateValue: rateValue,
-    ));
+        userId: ValueConstants.userId,
+        itemId: itemId,
+        commentDesc: commentController.text,
+        catID: catID,
+        subID: subID,
+        rateValue: rateValue));
   }
 }

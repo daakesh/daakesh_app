@@ -13,11 +13,30 @@ class HomemadeScreen extends StatelessWidget {
           body: CustomScrollView(
             slivers: [
               const HomeAppBarWidget(),
+              const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: GestureDetector(
+                        onTap: () => openFilterScreen(context),
+                        child: Assets.png.filterIcon
+                            .image(width: 38.0, height: 38.0)),
+                  ),
+                ),
+              ),
               const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
               SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
-                HandmadeItem handmadeItem = state.handmadeListData[index];
-                return HandmadeItemWidget(handmadeItem: handmadeItem);
+                TodayItem handmadeItem = state.handmadeListData[index];
+                return Padding(
+                  padding:
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  child: GestureDetector(
+                      onTap: () => openMoreInfoScreen(context, handmadeItem),
+                      child: ResultItemWidget(todayItem: handmadeItem)),
+                );
               }, childCount: state.handmadeListData.length)),
               const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
               SliverToBoxAdapter(child: seeMoreHandler(state, context)),
@@ -27,6 +46,14 @@ class HomemadeScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  void openMoreInfoScreen(BuildContext context, TodayItem todayItem) {
+    CommentBloc.get.add(GetCommentByItemEvent(itemId: todayItem.id));
+    Utils.openNavNewPage(
+        context,
+        MoreInfoProductScreen(
+            todayDealItem: todayItem, isDaakeshTodayDeal: true));
   }
 
   void onSeeMore() =>
@@ -49,5 +76,9 @@ class HomemadeScreen extends StatelessWidget {
       default:
         return const SizedBox();
     }
+  }
+
+  void openFilterScreen(BuildContext context) {
+    Utils.openNavNewPage(context, HandmadeFilterScreen());
   }
 }

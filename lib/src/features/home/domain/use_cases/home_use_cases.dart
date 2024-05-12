@@ -21,8 +21,8 @@ abstract class HomeUseCases {
       String searchValue, int page, int perPage);
 
   ///Comment API
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc);
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue);
   Future<Either<Failure, ValidResponse>> getCommentsByItem(
       int itemID, int page);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
@@ -46,6 +46,10 @@ abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList);
   Future<Either<Failure, ValidResponse>> getCities();
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId);
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId);
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
+      int brandID, FilterDataModel filterDataModel, int page);
 }
 
 @dev
@@ -109,11 +113,16 @@ class HomeUseCasesImpl implements HomeUseCases {
 
   ///Comment API.
   @override
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc) async {
-    return await getIt
-        .get<HomeRepository>()
-        .addComment(userId, itemId, commentDesc);
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
+    return await getIt.get<HomeRepository>().addComment(
+          userId,
+          itemId,
+          commentDesc,
+          catID,
+          subID,
+          rateValue,
+        );
   }
 
   @override
@@ -189,5 +198,23 @@ class HomeUseCasesImpl implements HomeUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getCities() async {
     return await getIt.get<HomeRepository>().getCities();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId) async {
+    return await getIt.get<HomeRepository>().getCommentCountItem(itemId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId) async {
+    return await getIt.get<HomeRepository>().getOverAllRateItem(itemId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
+      int brandID, FilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getItemsByBrandID(brandID, filterDataModel, page);
   }
 }

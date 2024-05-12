@@ -59,6 +59,9 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
         return;
       }
       GetItUtils.user.logOut();
+      await Future.delayed(const Duration(seconds: 1));
+      HomeBloc.controller.jumpToTab(0);
+      HomeBloc.get.add(SelectTabItemEvent(index: 0));
       emit(state.copyWith(userDataStateStatus: UserDataStateStatus.SUCCESS));
     });
   }

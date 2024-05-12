@@ -4,11 +4,17 @@ class AddCommentEvent extends CommentEvent {
   final String userId;
   final int itemId;
   final String commentDesc;
+  final int catID;
+  final int subID;
+  final double rateValue;
 
   AddCommentEvent({
     required this.userId,
     required this.itemId,
     required this.commentDesc,
+    required this.catID,
+    required this.subID,
+    required this.rateValue,
   });
 }
 
@@ -29,11 +35,11 @@ class RemoveCommentsEvent extends CommentEvent {
   });
 }
 
-class EditCommentEvent extends CommentEvent {
-  final int id;
-  final String commentDesc;
-  EditCommentEvent({
-    required this.id,
-    required this.commentDesc,
+class GetCommentCountEvent extends CommentEvent {
+  final int itemId;
+  GetCommentCountEvent({
+    required this.itemId,
   });
 }
+
+class EmptyCommentDataEvent extends CommentEvent {}

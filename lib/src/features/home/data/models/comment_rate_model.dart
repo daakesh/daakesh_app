@@ -152,7 +152,7 @@ class Rate {
 
   Rate.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    rateValue = json['rateValue'];
+    rateValue = json['rateValue'] ?? 0;
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
   }
 }

@@ -1,7 +1,6 @@
-import 'package:daakesh/src/core/core.export.dart';
-import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../src.export.dart';
 
 class BrandsItemScreen extends StatelessWidget {
   const BrandsItemScreen({super.key});
@@ -13,6 +12,19 @@ class BrandsItemScreen extends StatelessWidget {
         return CustomScrollView(
           slivers: [
             const HomeAppBarWidget(),
+            const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: GestureDetector(
+                      onTap: () => openFilterScreen(context),
+                      child: Assets.png.filterIcon
+                          .image(width: 38.0, height: 38.0)),
+                ),
+              ),
+            ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => GestureDetector(
@@ -77,5 +89,9 @@ class BrandsItemScreen extends StatelessWidget {
               )
             : const SizedBox();
     }
+  }
+
+  void openFilterScreen(BuildContext context) {
+    Utils.openNavNewPage(context, BrandFilterScreen());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../src.export.dart';
@@ -27,48 +28,52 @@ class PriceRateSection extends StatelessWidget {
         const SizedBox(
           height: 10.0,
         ),
-        Row(
-          children: [
-            RatingBar.builder(
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              minRating: 1,
-              maxRating: 5,
-              ignoreGestures: true,
-              initialRating: todayDealItem.averageRating ?? 0,
-              itemSize: 25.0,
-              tapOnlyMode: true,
-              itemBuilder: (context, _) => const Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {},
-            ),
-            const SizedBox(
-              width: 12.0,
-            ),
-            Flexible(
-              child: Text(
-                '${todayDealItem.averageRating}',
-                style: context.easyTheme.textTheme.labelLarge!.copyWith(
-                    fontSize: 23.0,
-                    color: ColorName.black,
-                    overflow: TextOverflow.ellipsis),
-              ),
-            ),
-            const SizedBox(
-              width: 12.0,
-            ),
-            Flexible(
-              child: Text(
-                '(${todayDealItem.rateCount})',
-                style: context.easyTheme.textTheme.labelLarge!.copyWith(
-                    fontSize: 21.0,
-                    color: ColorName.gray,
-                    overflow: TextOverflow.ellipsis),
-              ),
-            ),
-          ],
+        BlocBuilder<RateBloc, RateState>(
+          builder: (context, state) {
+            return Row(
+              children: [
+                RatingBar.builder(
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  minRating: 1,
+                  maxRating: 5,
+                  ignoreGestures: true,
+                  initialRating: state.rateAverage,
+                  itemSize: 25.0,
+                  tapOnlyMode: true,
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {},
+                ),
+                const SizedBox(
+                  width: 12.0,
+                ),
+                Flexible(
+                  child: Text(
+                    '${state.rateAverage}',
+                    style: context.easyTheme.textTheme.labelLarge!.copyWith(
+                        fontSize: 23.0,
+                        color: ColorName.black,
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                ),
+                const SizedBox(
+                  width: 12.0,
+                ),
+                Flexible(
+                  child: Text(
+                    '(${todayDealItem.rateCount})',
+                    style: context.easyTheme.textTheme.labelLarge!.copyWith(
+                        fontSize: 21.0,
+                        color: ColorName.gray,
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
         const SizedBox(
           height: 14.0,

@@ -31,7 +31,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
                 width: 14.0.w,
               ),
               Text(
-                'Swap Requests:',
+                context.locale.whatsApp_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 18.0.sp, color: ColorName.black),
               ),
@@ -50,7 +50,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
                 flex: 1,
               ),
               Text(
-                'Accepted',
+                context.locale.send_accept_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 12.0.sp, color: ColorName.springGreen),
               ),
@@ -62,7 +62,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.0.w),
             child: Text(
-              'Request In: ${Utils.formatDate(sendSwapReqItem.createdAt.toString())}',
+              '${context.locale.request_in} ${Utils.formatDate(sendSwapReqItem.createdAt.toString())}',
               style: context.easyTheme.textTheme.labelLarge!.copyWith(
                 fontSize: 14.0.sp,
                 color: ColorName.gray,
@@ -95,7 +95,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
                 ),
                 SizedBox(width: 50.0.w),
                 Text(
-                  'Product',
+                  context.locale.send_product_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
@@ -129,7 +129,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
                 ),
                 SizedBox(width: 50.0.w),
                 Text(
-                  'Offered',
+                  context.locale.send_offer_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
@@ -141,7 +141,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(start: 60.0.w),
             child: TextButtonWidget(
-              text: 'See All Details',
+              text: context.locale.see_all_details,
               onPressed: () => seeAllDetails(context, sendSwapReqItem),
               isBold: true,
             ),
@@ -156,7 +156,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
               SizedBox(width: 19.0.w),
               Expanded(
                 child: DefaultButtonWidget(
-                  text: 'CALL',
+                  text: context.locale.call_button,
                   onPressed: () => Utils.lunchCall(
                       sendSwapReqItem.sourceUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style,
@@ -167,7 +167,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
               ),
               Expanded(
                 child: DefaultButtonWidget(
-                  text: 'WhatsApp',
+                  text: context.locale.whatsApp_title,
                   onPressed: () => Utils.lunchWhatsApp(
                       sendSwapReqItem.sourceUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(

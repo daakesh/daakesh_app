@@ -77,4 +77,12 @@ class MyProductRepositoryImpl implements MyProductRepository {
   Future<Either<Failure, ValidResponse>> getItemById(int id) async {
     return await getIt.get<MyProductDatasource>().getItemById(id);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
+    return await getIt
+        .get<MyProductDatasource>()
+        .addComment(userId, itemId, commentDesc, catID, subID, rateValue);
+  }
 }

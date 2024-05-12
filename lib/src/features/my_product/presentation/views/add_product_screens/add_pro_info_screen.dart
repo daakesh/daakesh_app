@@ -42,7 +42,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
                     height: 108.0,
                   ),
                   Text(
-                    'Add Product',
+                    context.locale.add_product,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 36.0),
                   ),
@@ -50,7 +50,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
                     height: 14.0,
                   ),
                   Text(
-                    'Add Product Info',
+                    context.locale.add_product_info,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 25.0),
                   ),
@@ -58,7 +58,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
                     height: 19.0,
                   ),
                   Text(
-                    'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                    context.locale.add_product_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 16.0),
                   ),
@@ -70,7 +70,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Product Name',
+                        Text(context.locale.product_name,
                             style: context.easyTheme.textTheme.bodyMedium!
                                 .copyWith(
                                     fontSize: 18.0, color: ColorName.darkGray)),
@@ -81,7 +81,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
                               context, nameSellerFocusNode, phoneFocusNode),
                         ),
                         const SizedBox(height: 22.0),
-                        Text('Write Product Description',
+                        Text(context.locale.product_description,
                             style: context.easyTheme.textTheme.bodyMedium!
                                 .copyWith(
                                     fontSize: 18.0, color: ColorName.darkGray)),
@@ -104,7 +104,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
                     ),
                     child: TextFormFieldWidget(
                       controller: productDescriptionController,
-                      hintText: 'Description',
+                      hintText: context.locale.description_hint,
                       isUnderlineOn: true,
                       expands: true,
                       textAlignVertical: TextAlignVertical.top,
@@ -118,14 +118,16 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
                   ),
                   Center(
                     child: DefaultButtonWidget(
-                        text: 'NEXT', onPressed: () => onNext()),
+                        text: context.locale.next_button,
+                        onPressed: () => onNext()),
                   ),
                   const SizedBox(
                     height: 12.0,
                   ),
                   Center(
                     child: OutlineButtonWidget(
-                        text: 'CANCEL', onPressed: () => cancel()),
+                        text: context.locale.cancel_button,
+                        onPressed: () => cancel()),
                   ),
                   const SizedBox(
                     height: 50.0,
@@ -142,7 +144,8 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
   void onNext() async {
     if (productNameController.text.isEmpty ||
         productDescriptionController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Firstly, fill all data');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.add_pro_data_snack_bar);
       return;
     }
     AddProBloc.get.add(AddProInfoEvent(

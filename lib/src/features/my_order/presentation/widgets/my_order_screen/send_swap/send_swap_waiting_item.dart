@@ -30,7 +30,7 @@ class SendSwapWaitingItem extends StatelessWidget {
                 width: 14.0.w,
               ),
               Text(
-                'Swap Requests:',
+                context.locale.swap_request_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 18.0.sp, color: ColorName.black),
               ),
@@ -49,7 +49,7 @@ class SendSwapWaitingItem extends StatelessWidget {
                 flex: 1,
               ),
               Text(
-                'Waiting',
+                context.locale.send_waiting_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 12.0.sp, color: ColorName.red),
               ),
@@ -61,7 +61,7 @@ class SendSwapWaitingItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.0.w),
             child: Text(
-              'Request In: ${Utils.formatDate(sendSwapReqItem.createdAt.toString())}',
+              '${context.locale.request_in} ${Utils.formatDate(sendSwapReqItem.createdAt.toString())}',
               style: context.easyTheme.textTheme.labelLarge!.copyWith(
                 fontSize: 14.0.sp,
                 color: ColorName.gray,
@@ -94,7 +94,7 @@ class SendSwapWaitingItem extends StatelessWidget {
                 ),
                 SizedBox(width: 50.0.w),
                 Text(
-                  'Product',
+                  context.locale.send_product_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
@@ -129,7 +129,7 @@ class SendSwapWaitingItem extends StatelessWidget {
                 ),
                 SizedBox(width: 50.0.w),
                 Text(
-                  'Offered',
+                  context.locale.send_offer_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
@@ -142,7 +142,7 @@ class SendSwapWaitingItem extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(start: 60.0.w),
             child: TextButtonWidget(
-              text: 'See All Details',
+              text: context.locale.see_all_details,
               onPressed: () => seeAllDetails(context, sendSwapReqItem),
               isBold: true,
             ),
@@ -157,8 +157,7 @@ class SendSwapWaitingItem extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 21.0.w),
               child: Text.rich(TextSpan(children: [
                 TextSpan(
-                    text:
-                        'The number has been hidden until your offer is approved',
+                    text: context.locale.hidden_number_title,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 14.0.sp)),
               ])),
@@ -170,7 +169,7 @@ class SendSwapWaitingItem extends StatelessWidget {
               SizedBox(width: 19.0.w),
               Expanded(
                 child: DefaultButtonWidget(
-                  text: 'CALL',
+                  text: context.locale.call_button,
                   onPressed: () {},
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
                     backgroundColor: MaterialStateProperty.all(
@@ -183,7 +182,7 @@ class SendSwapWaitingItem extends StatelessWidget {
               ),
               Expanded(
                 child: DefaultButtonWidget(
-                  text: 'WhatsApp',
+                  text: context.locale.whatsApp_title,
                   onPressed: () {},
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
                     backgroundColor: MaterialStateProperty.all(

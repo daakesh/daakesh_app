@@ -127,9 +127,36 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
             );
           },
         ),
-        const SliverPadding(padding: EdgeInsets.only(top: 40.0)),
+        const SliverPadding(padding: EdgeInsets.only(top: 25.0)),
+
+        BlocBuilder<TrendDealsBloc, TrendDealsState>(builder: (context, state) {
+          return SliverToBoxAdapter(
+            child: !state.isMoreData
+                ? !state.swapTodayDealsStateStatus.isLoadingMore
+                    ? Center(
+                        child: GestureDetector(
+                          onTap: () => onSeeMore(),
+                          child: Text(
+                            context.locale.see_more,
+                            style: context.easyTheme.textTheme.bodyLarge!
+                                .copyWith(
+                                    fontSize: 16.0,
+                                    color: ColorName.skyBlue,
+                                    fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      )
+                    : const CircularProgressIndicatorWidget()
+                : const SizedBox(),
+          );
+        }),
+        const SliverPadding(padding: EdgeInsets.only(top: 50.0)),
       ],
     );
+  }
+
+  void onSeeMore() {
+    TrendDealsBloc.get.add(GetTrendDealsDataEvent(isSeeMore: true));
   }
 
   void exploreSection(

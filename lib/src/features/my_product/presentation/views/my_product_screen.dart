@@ -76,7 +76,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                     padding: EdgeInsetsDirectional.only(
                         start: 28.0.w, bottom: 13.0.h),
                     child: Text(
-                      'My Product',
+                      context.locale.my_product,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 20.0.sp, color: ColorName.black),
                     ),
@@ -92,8 +92,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                               MyProductItem myProductItem =
                                   state.myProductListData[index];
                               return ShopProductItem(
-                                myProductItem: myProductItem,
-                              );
+                                  myProductItem: myProductItem);
                             }, childCount: state.myProductListData.length));
                           },
                         )
@@ -134,7 +133,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                                   onTap: () =>
                                       seeMoreSearchProduct(state.searchValue),
                                   child: Text(
-                                    'See More',
+                                    context.locale.see_more,
                                     style: context
                                         .easyTheme.textTheme.bodyLarge!
                                         .copyWith(
@@ -168,7 +167,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
             default:
               return Center(
                   child: TextButtonWidget(
-                text: 'See More',
+                text: context.locale.see_more,
                 onPressed: () => onSeeMore(state),
                 isBold: true,
               ));
@@ -186,7 +185,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
             default:
               return Center(
                   child: TextButtonWidget(
-                text: 'See More',
+                text: context.locale.see_more,
                 onPressed: () => onSeeMore(state),
                 isBold: true,
               ));

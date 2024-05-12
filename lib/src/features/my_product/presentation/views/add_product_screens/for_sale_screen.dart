@@ -52,7 +52,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       height: 11.0.h,
                     ),
                     Text(
-                      'Add Product',
+                      context.locale.add_product,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 36.0.sp),
                     ),
@@ -60,7 +60,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       height: 14.0.h,
                     ),
                     Text(
-                      'For Sale Info',
+                      context.locale.for_sale_info,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.0.sp),
                     ),
@@ -68,7 +68,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       height: 19.0.h,
                     ),
                     Text(
-                      'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                      context.locale.add_product_instruction,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 16.0.sp),
                     ),
@@ -83,7 +83,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Product Quantity',
+                    Text(context.locale.product_quantity,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
@@ -93,7 +93,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                     SizedBox(
                       height: 22.0.h,
                     ),
-                    Text('Product Price',
+                    Text(context.locale.product_price,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
@@ -113,7 +113,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Product Discount',
+                                  Text(context.locale.product_discount,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -178,7 +178,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Discount Date',
+                                  Text(context.locale.discount_date,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -189,7 +189,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                                       Expanded(
                                           child: TextFormFieldWidget(
                                         controller: fromDateController,
-                                        hintText: 'From  --/--/-----',
+                                        hintText: context.locale.from_discount,
                                         hintStyle: context
                                             .easyTheme.textTheme.labelMedium,
                                         readOnly: true,
@@ -199,7 +199,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                                       Expanded(
                                           child: TextFormFieldWidget(
                                         controller: toDateController,
-                                        hintText: 'To  --/--/-----',
+                                        hintText: context.locale.to_discount,
                                         hintStyle: context
                                             .easyTheme.textTheme.labelMedium,
                                         readOnly: true,
@@ -228,7 +228,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
-                    text: 'NEXT', onPressed: () => onNext()),
+                    text: context.locale.next_button, onPressed: () => onNext()),
               ),
               SizedBox(
                 height: 12.0.h,
@@ -236,7 +236,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: OutlineButtonWidget(
-                    text: 'CANCEL', onPressed: () => cancel()),
+                    text: context.locale.cancel_button, onPressed: () => cancel()),
               ),
               SizedBox(
                 height: 50.0.h,
@@ -303,7 +303,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
   void onNext() async {
     if (productQuantityController.text.isEmpty ||
         productPriceController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Firstly, fill all data...');
+      ShowToastSnackBar.showSnackBars(message: context.locale.add_pro_data_snack_bar);
       return;
     }
     AddProBloc.get.add(AddSaleInfoEvent(

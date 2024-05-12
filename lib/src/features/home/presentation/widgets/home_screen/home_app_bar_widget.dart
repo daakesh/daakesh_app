@@ -6,6 +6,7 @@ import '../../../../../src.export.dart';
 class HomeAppBarWidget extends StatefulWidget {
   final bool isActive;
   final bool isCart;
+
   const HomeAppBarWidget({
     super.key,
     this.isActive = false,
@@ -121,10 +122,17 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
     FocusScope.of(context).unfocus();
     searchController.clear();
     SearchBloc.get.add(EmptySearchEvent());
+    Navigator.pop(context);
   }
 
   void openSearchScreen() {
-    FocusScope.of(context).unfocus();
-    Utils.openNavNewPage(context, const SearchScreen());
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => SearchScreen(),
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+      ),
+    );
   }
 }

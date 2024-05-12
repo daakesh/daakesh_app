@@ -74,6 +74,7 @@ class BrandItemWidget extends StatelessWidget {
   void getItemsByBrand(BuildContext context, int brandID) {
     BrandsBloc.get.add(GetItemsByBrandsEvent(brandID: brandID));
     BrandsBloc.get.add(ResetValueEvent());
+    BrandsBloc.get.add(GetBrandsCitiesEvent());
     Utils.openNavNewPage(context, const BrandsItemScreen());
   }
 }

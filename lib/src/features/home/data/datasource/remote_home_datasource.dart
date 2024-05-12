@@ -106,14 +106,17 @@ class RemoteHomeDatasource implements HomeDatasource {
 
   ///Comments API.
   @override
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc) async {
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
     final result = await getIt
         .get<NetworkService>()
-        .post(path: 'DaakeshServices/api/comment/addComment', body: {
+        .post(path: 'DaakeshServices/api/comment/addCommentWithRate', body: {
       "userID": userId,
       "itemID": "$itemId",
       "commentDesc": commentDesc,
+      "catID": "$catID",
+      "subID": "$subID",
+      "rateValue": "$rateValue",
     });
     return result;
   }
@@ -249,6 +252,50 @@ class RemoteHomeDatasource implements HomeDatasource {
   Future<Either<Failure, ValidResponse>> getCities() async {
     final result = await getIt.get<NetworkService>().get(
           path: 'DaakeshServices/api/item/getCites',
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/item/getItemDetails',
+      params: {
+        "id": "$itemId",
+        "userID": ValueConstants.userId,
+      },
+    );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/rate/getOverallRateForItem',
+      params: {
+        "itemID": "$itemId",
+      },
+    );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
+      int brandID, FilterDataModel filterDataModel, int page) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getItemByBrandId',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "brandID": brandID,
+            "Filter": filterDataModel.toJson(),
+            "orderBy": {
+              "name": "created_at",
+              "operation": "desc",
+            },
+          }),
         );
     return result;
   }

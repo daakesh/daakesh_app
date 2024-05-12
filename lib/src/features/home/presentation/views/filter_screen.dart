@@ -7,7 +7,6 @@ class FilterScreen extends StatelessWidget {
   FilterScreen({super.key});
 
   final countryController = TextEditingController(text: 'Jordan');
-
   String cityValue = 'Amman';
 
   @override
@@ -128,6 +127,27 @@ class FilterScreen extends StatelessWidget {
                         height: 12.0,
                       ),
                       const PriceSliderWidget(minValue: 0.0, maxValue: 1000.0),
+                      BlocBuilder<FilterBloc, FilterState>(
+                        builder: (context, state) {
+                          return Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              Text(
+                                '\$${state.fromPrice.toInt()}',
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              const Spacer(flex: 1),
+                              Text(
+                                '\$${state.toPrice.toInt()}',
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          );
+                        },
+                      ),
                       const SizedBox(
                         height: 34.0,
                       ),
@@ -191,12 +211,10 @@ class FilterScreen extends StatelessWidget {
 
   void clear(context, bool filterIsActive) {
     if (!filterIsActive) {
-      Navigator.pop(context);
       FilterBloc.get.add(ClearFilterDataEvent());
       return;
     }
     FilterBloc.get.add(PreviewSectionSubCategoriesEvent(isFilterActive: false));
     FilterBloc.get.add(ClearFilterDataEvent());
-    Navigator.pop(context);
   }
 }

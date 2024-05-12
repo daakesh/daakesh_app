@@ -62,11 +62,11 @@ class HomeRepositoryImpl implements HomeRepository {
 
   ///Comment API.
   @override
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc) async {
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
     return await getIt
         .get<HomeDatasource>()
-        .addComment(userId, itemId, commentDesc);
+        .addComment(userId, itemId, commentDesc, catID, subID, rateValue);
   }
 
   @override
@@ -141,5 +141,23 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<Either<Failure, ValidResponse>> getCities() async {
     return await getIt.get<HomeDatasource>().getCities();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId) async {
+    return await getIt.get<HomeDatasource>().getCommentCountItem(itemId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId) async {
+    return await getIt.get<HomeDatasource>().getOverAllRateItem(itemId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
+      int brandID, FilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getItemsByBrandID(brandID, filterDataModel, page);
   }
 }

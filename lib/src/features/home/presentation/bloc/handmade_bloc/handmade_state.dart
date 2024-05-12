@@ -15,13 +15,23 @@ extension HandmadeStateStatusX on HandmadeStateStatus {
 
 class HandmadeState extends Equatable {
   final HandmadeStateStatus handmadeStateStatus;
-  final List<HandmadeItem> handmadeListData;
+  final List<TodayItem> handmadeListData;
   final int currentPage;
   final bool isMoreData;
   final List<TodayItem> itemByHandmadeList;
   final int itemsCurrentPage;
   final int homemadeID;
   final bool isMoreDataItems;
+
+  ///
+  final String country;
+  final String city;
+  final int rate;
+  final double fromPrice;
+  final double toPrice;
+  final FilterProductType type;
+  final bool isFilterActive;
+  final List<CityItem> cityItemList;
 
   const HandmadeState({
     this.handmadeStateStatus = HandmadeStateStatus.INITIAL,
@@ -32,17 +42,33 @@ class HandmadeState extends Equatable {
     this.itemsCurrentPage = 1,
     this.homemadeID = 0,
     this.isMoreDataItems = true,
+    this.country = 'Jordan',
+    this.city = 'Amman',
+    this.rate = 0,
+    this.fromPrice = 0.0,
+    this.toPrice = 500.0,
+    this.type = FilterProductType.All,
+    this.isFilterActive = false,
+    this.cityItemList = const [],
   });
 
   HandmadeState copyWith({
     HandmadeStateStatus? handmadeStateStatus,
-    List<HandmadeItem>? handmadeListData,
+    List<TodayItem>? handmadeListData,
     int? currentPage,
     bool? isMoreData,
     List<TodayItem>? itemByHandmadeList,
     int? itemsCurrentPage,
     bool? isMoreDataItems,
     int? homemadeID,
+    String? country,
+    String? city,
+    int? rate,
+    double? fromPrice,
+    double? toPrice,
+    FilterProductType? type,
+    bool? isFilterActive,
+    List<CityItem>? cityItemList,
   }) {
     return HandmadeState(
       handmadeStateStatus: handmadeStateStatus ?? this.handmadeStateStatus,
@@ -53,6 +79,14 @@ class HandmadeState extends Equatable {
       itemsCurrentPage: itemsCurrentPage ?? this.itemsCurrentPage,
       isMoreDataItems: isMoreDataItems ?? this.isMoreDataItems,
       homemadeID: homemadeID ?? this.homemadeID,
+      country: country ?? this.country,
+      city: city ?? this.city,
+      rate: rate ?? this.rate,
+      fromPrice: fromPrice ?? this.fromPrice,
+      toPrice: toPrice ?? this.toPrice,
+      type: type ?? this.type,
+      isFilterActive: isFilterActive ?? this.isFilterActive,
+      cityItemList: cityItemList ?? this.cityItemList,
     );
   }
 
@@ -66,5 +100,13 @@ class HandmadeState extends Equatable {
         itemsCurrentPage,
         isMoreDataItems,
         homemadeID,
+        country,
+        city,
+        rate,
+        fromPrice,
+        toPrice,
+        type,
+        isFilterActive,
+        cityItemList,
       ];
 }

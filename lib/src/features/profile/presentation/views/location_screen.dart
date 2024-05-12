@@ -47,7 +47,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     height: 108.0,
                   ),
                   Text(
-                    'Location',
+                    context.locale.location,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 36.0),
                   ),
@@ -55,7 +55,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     height: 14.0,
                   ),
                   Text(
-                    'Location info',
+                    context.locale.location_info_title,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 25.0),
                   ),
@@ -63,14 +63,14 @@ class _LocationScreenState extends State<LocationScreen> {
                     height: 19.0,
                   ),
                   Text(
-                    'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                    context.locale.profile_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 16.0),
                   ),
                   const SizedBox(
                     height: 21.0,
                   ),
-                  Text('Country',
+                  Text(context.locale.location_country,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
@@ -103,7 +103,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     ],
                   ),
                   const SizedBox(height: 33.0),
-                  Text('City',
+                  Text(context.locale.location_city,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
@@ -117,7 +117,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     ],
                   ),
                   const SizedBox(height: 33.0),
-                  Text('Address',
+                  Text(context.locale.location_address,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                   TextFormFieldWidget(
@@ -149,8 +149,8 @@ class _LocationScreenState extends State<LocationScreen> {
                   Center(
                     child: DefaultButtonWidget(
                         text: !state.isUpdatePersonalActive
-                            ? 'MAKE EDIT'
-                            : 'SAVE',
+                            ? context.locale.edit_contact
+                            : context.locale.save_edit,
                         onPressed: () => !state.isUpdatePersonalActive
                             ? onMakeEdit(state.isUpdatePersonalActive)
                             : onSave()),
@@ -161,8 +161,8 @@ class _LocationScreenState extends State<LocationScreen> {
                   Center(
                     child: OutlineButtonWidget(
                         text: !state.isUpdatePersonalActive
-                            ? 'Cancel'
-                            : 'RESET AND CANCEL',
+                            ? context.locale.cancel_contact
+                            : context.locale.reset_and_cancel_contact,
                         onPressed: () => cancel(state.isUpdatePersonalActive)),
                   ),
                   const SizedBox(

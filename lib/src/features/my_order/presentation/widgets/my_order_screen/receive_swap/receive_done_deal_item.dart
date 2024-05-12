@@ -71,7 +71,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                              text: 'You Made A Deal With ',
+                              text: context.locale.you_made_a_deal_title,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.springGreen,
@@ -98,14 +98,14 @@ class ReceiveDoneDealItem extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 15.0.w),
-                child: Text('Swap Product',
+                child: Text(context.locale.swap_product_title,
                     style: context.easyTheme.textTheme.labelLarge!
                         .copyWith(fontSize: 15.0.sp, color: ColorName.black)),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(end: 15.0.w),
                 child: TextButtonWidget(
-                  text: 'See Offer Details',
+                  text: context.locale.see_offer_details,
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                     fontSize: 14.0.sp,
                     color: ColorName.skyBlue,
@@ -145,7 +145,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                 ),
                 SizedBox(width: 15.0.w),
                 Text(
-                  'Product',
+                  context.locale.product_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
@@ -169,7 +169,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
               ),
               Expanded(
                   child: DefaultButtonWidget(
-                      text: 'CALL',
+                      text: context.locale.call_button_title,
                       onPressed: () => Utils.lunchCall(receiveSwapReqItem
                           .offerUser!.phoneNumber
                           .toString()))),
@@ -178,7 +178,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
               ),
               Expanded(
                 child: DefaultButtonWidget(
-                  text: 'WhatsApp',
+                  text: context.locale.whatsApp_button_title,
                   onPressed: () => Utils.lunchWhatsApp(
                       receiveSwapReqItem.offerUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(

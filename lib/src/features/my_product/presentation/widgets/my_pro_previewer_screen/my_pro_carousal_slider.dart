@@ -4,12 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-class ProductSlider extends StatelessWidget {
+class ProductSlider extends StatefulWidget {
   final ProPreviewerModel previewerModel;
-  ProductSlider({
+
+  const ProductSlider({
     super.key,
     required this.previewerModel,
   });
+
+  @override
+  State<ProductSlider> createState() => _ProductSliderState();
+}
+
+class _ProductSliderState extends State<ProductSlider> {
+  int currentIndex = 0;
 
   final controller = CarouselController();
 
@@ -32,7 +40,7 @@ class ProductSlider extends StatelessWidget {
                 width: 6.0,
               ),
               Text(
-                previewerModel.userName!,
+                widget.previewerModel.userName!,
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0),
               ),
@@ -58,11 +66,11 @@ class ProductSlider extends StatelessWidget {
               viewportFraction: 1,
               height: 250.0,
               onPageChanged: (index, reason) {
-                PassDataBloc.get.add(
-                    SelectProductPropertiesEvent(productSliderIndex: index));
+                currentIndex = index;
+                setState(() {});
               }),
-          items: previewerModel.itemImage != null
-              ? previewerModel.itemImage!.map((i) {
+          items: widget.previewerModel.itemImage != null
+              ? widget.previewerModel.itemImage!.map((i) {
                   return Builder(builder: (context) {
                     return BlocBuilder<PassDataBloc, PassDataState>(
                       builder: (context, state) {
@@ -86,8 +94,8 @@ class ProductSlider extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: previewerModel.itemImage != null
-              ? previewerModel.itemImage!.asMap().entries.map((entry) {
+          children: widget.previewerModel.itemImage != null
+              ? widget.previewerModel.itemImage!.asMap().entries.map((entry) {
                   return BlocBuilder<PassDataBloc, PassDataState>(
                     builder: (context, state) {
                       return Container(
@@ -97,7 +105,7 @@ class ProductSlider extends StatelessWidget {
                             vertical: 8.0, horizontal: 4.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: state.productSliderIndex == entry.key
+                          color: currentIndex == entry.key
                               ? ColorName.lightOrange
                               : ColorName.silverGray,
                         ),

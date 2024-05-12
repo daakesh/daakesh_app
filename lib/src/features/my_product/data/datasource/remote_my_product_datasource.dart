@@ -157,4 +157,20 @@ class RemoteMyProductDatasource implements MyProductDatasource {
     });
     return result;
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
+    final result = await getIt
+        .get<NetworkService>()
+        .post(path: 'DaakeshServices/api/comment/addCommentWithRate', body: {
+      "userID": userId,
+      "itemID": "$itemId",
+      "commentDesc": commentDesc,
+      "catID": "$catID",
+      "subID": "$subID",
+      "rateValue": "$rateValue",
+    });
+    return result;
+  }
 }

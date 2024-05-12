@@ -30,7 +30,6 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
       emit(state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
-      ProgressCircleDialog.dismiss();
       //if (!r.data['data']) {
       //  ShowToastSnackBar.showSnackBars(message: r.message.toString());
       //  return;

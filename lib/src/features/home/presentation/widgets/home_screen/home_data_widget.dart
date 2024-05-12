@@ -40,7 +40,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         SliverToBoxAdapter(
           child: Center(
             child: Text(
-              'Version: 1',
+              'Version: 3',
               style: context.easyTheme.textTheme.headlineLarge!.copyWith(
                 fontSize: 20.0,
               ),
@@ -224,7 +224,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                         child: GestureDetector(
                           onTap: () => onSeeMore(),
                           child: Text(
-                            'See More',
+                            context.locale.see_more,
                             style: context.easyTheme.textTheme.bodyLarge!
                                 .copyWith(
                                     fontSize: 16.0,
@@ -256,6 +256,8 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
   }
 
   void openHandmade(context) {
+    HandmadeBloc.get.add(GetHandmadeCitiesEvent());
+
     Utils.openNavNewPage(context, const HomemadeScreen());
   }
 

@@ -95,43 +95,35 @@ class _SearchResultHandler extends StatelessWidget {
                 : Padding(
                     padding: const EdgeInsetsDirectional.only(
                         start: 31.0, end: 23.0, bottom: 20.0),
-                    child: InkWell(
-                      splashColor: ColorName.transparent,
-                      highlightColor: ColorName.transparent,
-                      focusColor: ColorName.transparent,
+                    child: GestureDetector(
                       onTap: () {
-                        FocusScope.of(context).unfocus();
+                        Utils.openNavNewPage(
+                            context,
+                            SwapMoreInfoScreen(
+                                trendDealsItem: swapSearchModelData));
                       },
-                      child: GestureDetector(
-                        onTap: () {
-                          Utils.openNavNewPage(
-                              context,
-                              SwapMoreInfoScreen(
-                                  trendDealsItem: swapSearchModelData));
-                        },
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Assets.svg.searchIcon.svg(),
-                              const SizedBox(
-                                width: 12.0,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Assets.svg.searchIcon.svg(),
+                            const SizedBox(
+                              width: 12.0,
+                            ),
+                            Expanded(
+                              child: Text(
+                                swapSearchModelData.description
+                                    .toString()
+                                    .replaceAll('\n', ' '),
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(
+                                        fontSize: 18.0,
+                                        color: ColorName.mediumGray,
+                                        overflow: TextOverflow.ellipsis),
                               ),
-                              Expanded(
-                                child: Text(
-                                  swapSearchModelData.description
-                                      .toString()
-                                      .replaceAll('\n', ' '),
-                                  style: context.easyTheme.textTheme.bodyMedium!
-                                      .copyWith(
-                                          fontSize: 18.0,
-                                          color: ColorName.mediumGray,
-                                          overflow: TextOverflow.ellipsis),
-                                ),
-                              ),
-                              Assets.svg.arrowUpRight.svg(),
-                            ],
-                          ),
+                            ),
+                            Assets.svg.arrowUpRight.svg(),
+                          ],
                         ),
                       ),
                     ),

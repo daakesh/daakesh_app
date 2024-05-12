@@ -30,7 +30,7 @@ class ProductTypeTabBar extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
                 child: Center(
                     child: Text(
-                  'Shop',
+                  context.locale.shop_tab_bar,
                   style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                       fontSize: 18.0.sp,
                       color: state.productTapBar == ProductTapBar.SHOP
@@ -53,7 +53,7 @@ class ProductTypeTabBar extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
                 child: Center(
                     child: Text(
-                  'Swap',
+                  context.locale.swap_tab_bar,
                   style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                     fontSize: 18.0.sp,
                     color: state.productTapBar == ProductTapBar.SWAP

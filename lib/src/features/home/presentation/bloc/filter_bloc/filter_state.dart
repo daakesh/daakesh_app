@@ -23,6 +23,7 @@ class FilterState extends Equatable {
   final double toPrice;
   final FilterProductType type;
   final bool isFilterActive;
+  final List<CityItem> cityItemList;
 
   ///
   final int currentPage;
@@ -30,7 +31,6 @@ class FilterState extends Equatable {
 
   ///
   final int categoryIndex;
-  final List<CityItem> cityItemList;
 
   const FilterState({
     this.filterStateStatus = FilterStateStatus.INITIAL,

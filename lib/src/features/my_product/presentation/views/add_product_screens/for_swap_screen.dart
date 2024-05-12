@@ -10,7 +10,7 @@ class ForSwapScreen extends StatefulWidget {
 }
 
 class _ForSwapScreenState extends State<ForSwapScreen> {
-  final displayProductController = TextEditingController();
+  final displayProductController = TextEditingController(text: "public");
   final countryController = TextEditingController();
   final cityController = TextEditingController();
 
@@ -48,7 +48,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       height: 11.0.h,
                     ),
                     Text(
-                      'Add Product',
+                      context.locale.add_product,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 36.0.sp),
                     ),
@@ -56,7 +56,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       height: 14.0.h,
                     ),
                     Text(
-                      'Swap!',
+                      context.locale.swap_title,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.0.sp),
                     ),
@@ -64,7 +64,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       height: 19.0.h,
                     ),
                     Text(
-                      'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                      context.locale.add_product_instruction,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 16.0.sp),
                     ),
@@ -79,25 +79,27 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Display the product on the store',
+                    Text(context.locale.display_type,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5))),
-                    TextFormFieldWidget(
-                        controller: displayProductController,
-                        readOnly: true,
-                        isSuffixPrefixOn: true,
-                        suffixIcon: InkWell(
-                          onTap: () {},
-                          child: SizedBox(
-                              width: 20.0,
-                              height: 20.0,
-                              child: Center(
-                                  child: Assets.svg.arrowDropDownIcon.svg())),
-                        )),
+                    DropDownButtonWidget<String>(
+                      items: [
+                        DropdownMenuItem(
+                          value: 'Public',
+                          child: Text(context.locale.public),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Private',
+                          child: Text(context.locale.private),
+                        ),
+                      ],
+                      value: displayProductController.text,
+                      onChange: (value) {},
+                    ),
                     SizedBox(
                       height: 22.0.h,
                     ),
-                    Text('Country swap',
+                    Text(context.locale.country_swap,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
@@ -130,7 +132,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                     SizedBox(
                       height: 21.0.h,
                     ),
-                    Text('City swap',
+                    Text(context.locale.city_swap,
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(controller: cityController),
@@ -149,7 +151,8 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
-                    text: 'NEXT', onPressed: () => onNext()),
+                    text: context.locale.next_button,
+                    onPressed: () => onNext()),
               ),
               SizedBox(
                 height: 12.0.h,
@@ -157,7 +160,8 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: OutlineButtonWidget(
-                    text: 'CANCEL', onPressed: () => cancel()),
+                    text: context.locale.cancel_button,
+                    onPressed: () => cancel()),
               ),
               SizedBox(
                 height: 50.0.h,
@@ -177,7 +181,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
       displayProductController.text = 'Public';
       countryController.text = data!.countrySwap.toString();
       cityController.text = data.citySwap.toString();
-      String flag = await Utils.countryCodeToEmoji(data.countrySwap.toString());
+      String flag = Utils.countryCodeToEmoji(data.countrySwap.toString());
       MyProFuncBloc.get.add(
         ChangeCountrySwapFlagEvent(
           flagEmoji: flag,
@@ -194,7 +198,8 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
     if (displayProductController.text.isEmpty ||
         countryController.text.isEmpty ||
         cityController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Firstly, fill all data...');
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.add_pro_data_snack_bar);
       return;
     }
     AddProBloc.get.add(AddSwapInfoEvent(

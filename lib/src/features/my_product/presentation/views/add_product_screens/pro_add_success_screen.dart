@@ -45,7 +45,7 @@ class ProAddSuccessScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsetsDirectional.symmetric(horizontal: 21.0.w),
                   child: Text(
-                    'Your product has been added successfully',
+                    context.locale.your_product_added_successfully,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 26.0),
                     textAlign: TextAlign.center,
@@ -60,7 +60,8 @@ class ProAddSuccessScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                   child: DefaultButtonWidget(
-                      text: 'ADD NEW PRODUCT', onPressed: addNewProduct),
+                      text: context.locale.add_new_product,
+                      onPressed: addNewProduct),
                 ),
                 const SizedBox(
                   height: 9.0,
@@ -68,7 +69,7 @@ class ProAddSuccessScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                   child: OutlineButtonWidget(
-                      text: 'SEE MY PRODUCT',
+                      text: context.locale.see_my_product,
                       onPressed: () => seeMyProduct(context)),
                 ),
                 const SizedBox(

@@ -16,6 +16,7 @@ class ProPreviewerModel {
   int? rateCount;
   dynamic priceAfterDiscount;
   int? categoryID;
+  int? subID;
 
   ProPreviewerModel({
     this.averageRating = 0,
@@ -35,5 +36,6 @@ class ProPreviewerModel {
     this.categoryName = "Mac Cosmetics",
     this.year = "2024",
     this.description = "Unknown",
+    this.subID = 0,
   });
 }

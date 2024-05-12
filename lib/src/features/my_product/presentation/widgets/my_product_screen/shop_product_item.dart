@@ -79,9 +79,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                           ),
                         ),
                       )
-                    : const SizedBox(
-                        height: 30.0,
-                      ),
+                    : const SizedBox(height: 30.0),
               ],
             ),
             Column(
@@ -96,7 +94,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                         end: 20.0,
                       ),
                       child: Text(
-                        'Edit',
+                        context.locale.edit,
                         style: context.easyTheme.textTheme.bodyLarge!
                             .copyWith(fontSize: 12.0, color: ColorName.skyBlue),
                       ),
@@ -171,7 +169,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               ? Row(
                                   children: [
                                     Text(
-                                      '\$${widget.myProductItem.priceAfterDiscount}',
+                                      '\$${widget.myProductItem.priceAfterDiscount!.toInt()}',
                                       style: context
                                           .easyTheme.textTheme.labelMedium!
                                           .copyWith(fontSize: 21.0.sp),
@@ -225,7 +223,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: 'Entry Date : ',
+                                      text: context.locale.entry_date,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -243,14 +241,12 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              height: 11.0,
-                            ),
+                            const SizedBox(height: 11.0),
                             Text.rich(
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: 'Categories : ',
+                                      text: context.locale.categories,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -279,7 +275,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: 'Quantity : ',
+                                      text: context.locale.quantity,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -302,7 +298,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: 'Ship To : ',
+                                      text: context.locale.ship,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -355,6 +351,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
       ..year = myProductItem.year
       ..description = myProductItem.description
       ..itemId = myProductItem.id
+      ..subID = myProductItem.subcategory!.id
       ..categoryID = myProductItem.category!.id;
     Utils.openNavNewPage(
         context, MyProPreviewerScreen(previewerModel: previewerModel));

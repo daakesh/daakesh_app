@@ -56,7 +56,7 @@ class MySwapProductCardWidget extends StatelessWidget {
                             ),
                             child: Center(
                                 child: Text(
-                              'New',
+                              context.locale.new_title,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(fontSize: 14.0.sp),
                             )),
@@ -118,7 +118,7 @@ class MySwapProductCardWidget extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Text(
-                                      'Swap In ${i.citySwap}, ${i.countrySwap}',
+                                      '${context.locale.swap_in} ${i.citySwap}, ${i.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(fontSize: 16.0.sp),
@@ -136,7 +136,8 @@ class MySwapProductCardWidget extends StatelessWidget {
                                       TextSpan(
                                         children: [
                                           TextSpan(
-                                              text: 'By ',
+                                              text:
+                                                  '${context.locale.byTitle} ',
                                               style: context.easyTheme.textTheme
                                                   .bodyMedium!
                                                   .copyWith(
@@ -156,7 +157,7 @@ class MySwapProductCardWidget extends StatelessWidget {
                                   child: Align(
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: TextButtonWidget(
-                                      text: 'See Product Details',
+                                      text: context.locale.see_product_details,
                                       onPressed: () =>
                                           seeOfferDetails(context, i),
                                       style: context
@@ -179,7 +180,7 @@ class MySwapProductCardWidget extends StatelessWidget {
                         padding: EdgeInsetsDirectional.only(
                             start: 22.0.w, end: 14.0.w),
                         child: Text(
-                          'Your Comment',
+                          context.locale.your_comment,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
                                   fontSize: 20.0.sp,
@@ -209,7 +210,7 @@ class MySwapProductCardWidget extends StatelessWidget {
                           ),
                           Expanded(
                             child: DefaultButtonWidget(
-                              text: 'ACCEPT THE OFFER',
+                              text: context.locale.accept_offer,
                               style: context
                                   .easyTheme.elevatedButtonTheme.style!
                                   .copyWith(
@@ -233,7 +234,7 @@ class MySwapProductCardWidget extends StatelessWidget {
                           ),
                           Expanded(
                             child: DefaultButtonWidget(
-                              text: 'Reject',
+                              text: context.locale.reject,
                               style: context
                                   .easyTheme.elevatedButtonTheme.style!
                                   .copyWith(

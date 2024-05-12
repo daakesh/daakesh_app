@@ -115,9 +115,7 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);
       List<CityItem> cityItemList = citiesModel.data!.toList();
-      emit(state.copyWith(
-          swapFilterStateStatus: SwapFilterStateStatus.SUCCESS,
-          cityItemList: cityItemList));
+      emit(state.copyWith(cityItemList: cityItemList));
     });
   }
 }

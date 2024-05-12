@@ -46,7 +46,7 @@ class FloatingAddProductWidget extends StatelessWidget {
               ),
             ),
             Text(
-              'Add Product',
+              context.locale.add_product,
               style: context.easyTheme.textTheme.bodyLarge!.copyWith(
                   fontSize: 18.0.sp, color: ColorName.black.withOpacity(0.36)),
             ),
