@@ -34,8 +34,8 @@ abstract class NetworkService {
 class NetworkServiceImpl with NetworksLogs implements NetworkService {
   final Map<String, String> _headers = {
     "Accept": "application/json",
+    "lang": ValueConstants.language,
   };
-  final Map<String, dynamic> _params = {"lang": "en"};
 
   @override
   Future<Either<Failure, ValidResponse>> get({
@@ -167,7 +167,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
     String? userToken,
   ) {
     if (headers != null) _headers.addAll(headers);
-    if (params != null) _params.addAll(params);
+    //if (params != null) _params.addAll(params);
     if (userToken != null) {
       _headers.addAll({"Authorization": " Bearer $userToken"});
     }

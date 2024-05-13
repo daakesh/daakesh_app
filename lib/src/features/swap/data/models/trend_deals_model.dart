@@ -57,7 +57,6 @@ class TrendDealsItem {
   String? countrySwap;
   String? citySwap;
   int? offerCount;
-
   SectionItemModel? section;
   UserModel? user;
   CategoryItem? category;

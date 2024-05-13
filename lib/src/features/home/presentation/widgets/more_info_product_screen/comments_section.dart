@@ -82,7 +82,9 @@ class CommentsSection extends StatelessWidget {
                               maxRating: 5,
                               ignoreGestures: true,
                               initialRating:
-                                  commentRateModelItem.item!.rate != null
+                                  commentRateModelItem.item!.rate != null &&
+                                          commentRateModelItem
+                                              .item!.rate!.isNotEmpty
                                       ? commentRateModelItem
                                           .item!.rate!.first.rateValue!
                                           .toDouble()
@@ -99,7 +101,9 @@ class CommentsSection extends StatelessWidget {
                               width: 6.0,
                             ),
                             Text(
-                              commentRateModelItem.item!.rate != null
+                              commentRateModelItem.item!.rate != null &&
+                                      commentRateModelItem
+                                          .item!.rate!.isNotEmpty
                                   ? commentRateModelItem
                                       .item!.rate!.first.rateValue!
                                       .toDouble()

@@ -110,7 +110,9 @@ class RemoteHomeDatasource implements HomeDatasource {
       String commentDesc, int catID, int subID, double rateValue) async {
     final result = await getIt
         .get<NetworkService>()
-        .post(path: 'DaakeshServices/api/comment/addCommentWithRate', body: {
+        .post(path: 'DaakeshServices/api/comment/addCommentWithRate', params: {
+      "lang": ValueConstants.language
+    }, body: {
       "userID": userId,
       "itemID": "$itemId",
       "commentDesc": commentDesc,

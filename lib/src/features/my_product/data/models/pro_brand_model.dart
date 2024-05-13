@@ -1,3 +1,4 @@
+import '../../../../src.export.dart';
 
 class ProBrandModel {
   bool? status;
@@ -16,7 +17,6 @@ class ProBrandModel {
           .toList();
     }
   }
-
 }
 
 class ProBrandItem {
@@ -32,7 +32,7 @@ class ProBrandItem {
 
   ProBrandItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['brandName'];
+    name = Utils.isEnglish ? json['brandName'] : json['arName'];
     arName = json['arName'];
   }
 }

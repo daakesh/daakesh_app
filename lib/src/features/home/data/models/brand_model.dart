@@ -1,3 +1,5 @@
+import '../../../../src.export.dart';
+
 class BrandModel {
   bool? status;
   String? error;
@@ -57,7 +59,8 @@ class BrandItem {
 
   BrandItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    brandName = json['brandName'];
+    brandName =
+        Utils.isEnglish ? json['brandName'] : json['arName'] ?? "Unknown";
     description = json['description'];
     brandImg = json['brandImg'];
     date = json['date'];

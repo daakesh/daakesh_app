@@ -9,4 +9,5 @@ class SharedPrefKeys {
 
   ///
   static const String language = 'LANGUAGE';
+  static const String languageCode = 'LANGUAGE_CODE';
 }

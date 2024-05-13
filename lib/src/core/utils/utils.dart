@@ -33,6 +33,30 @@ class Utils {
     });
   }
 
+  static Future<void> openPageWithoutAnimation(Widget widget,
+      {bool popPreviousPages = false}) {
+    return Future<dynamic>.delayed(Duration.zero, () {
+      if (!popPreviousPages) {
+        return navigatorKey.currentState!.push(
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => widget,
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+        );
+      }
+      return navigatorKey.currentState!.pushAndRemoveUntil(
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => widget,
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+          (Route<dynamic> route) => false);
+    });
+  }
+
+  static bool get isEnglish => ValueConstants.language == 'en';
+
   static Future<void> openNavNewPage(BuildContext context, Widget screen,
       {withNavBar = true}) async {
     PersistentNavBarNavigator.pushNewScreen(

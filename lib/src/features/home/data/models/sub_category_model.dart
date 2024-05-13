@@ -1,3 +1,5 @@
+import '../../../../src.export.dart';
+
 class SubCategory {
   int? id;
   String? name;
@@ -16,7 +18,7 @@ class SubCategory {
 
   SubCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    name = json['name'] ?? "Unknown";
+    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "Unknown";
     description = json['description'] ?? "Unknown";
     subImg = json['subImg'] ?? "Unknown";
     date = json['date'] ?? "Unknown";

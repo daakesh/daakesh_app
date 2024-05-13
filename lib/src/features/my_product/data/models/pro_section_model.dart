@@ -1,3 +1,5 @@
+import '../../../../src.export.dart';
+
 class ProductSectionModel {
   bool? status;
   String? error;
@@ -20,7 +22,9 @@ class ProSectionData {
   ProSectionData.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <ProSectionItemModel>[];
-      data = (json['data'] as List<dynamic>).map((v) => ProSectionItemModel.fromJson(v)).toList();
+      data = (json['data'] as List<dynamic>)
+          .map((v) => ProSectionItemModel.fromJson(v))
+          .toList();
     }
     lastPage = json['last_page'];
   }
@@ -39,7 +43,7 @@ class ProSectionItemModel {
 
   ProSectionItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "Unknown";
     arName = json['arName'];
   }
 }

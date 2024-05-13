@@ -7,4 +7,6 @@ class ValueConstants {
   static const test = Environment('test');
   static String token = GetItUtils.prefs.getData(SharedPrefKeys.token) ?? '';
   static String userId = GetItUtils.prefs.getData(SharedPrefKeys.userID) ?? '';
+  static String language =
+      GetItUtils.prefs.getData(SharedPrefKeys.languageCode) as String? ?? 'en';
 }

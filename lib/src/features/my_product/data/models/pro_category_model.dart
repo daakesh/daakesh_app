@@ -1,3 +1,4 @@
+import '../../../../src.export.dart';
 
 class ProCategoryModel {
   bool? status;
@@ -11,7 +12,6 @@ class ProCategoryModel {
     error = json['error'];
     data = json['data'] != null ? ProCategoryData.fromJson(json['data']) : null;
   }
-
 }
 
 class ProCategoryData {
@@ -34,12 +34,10 @@ class ProCategoryData {
   }
 }
 
-
 class ProCategoryItem {
   int? id;
   String? name;
   String? arName;
-
 
   ProCategoryItem({
     this.id,
@@ -49,7 +47,7 @@ class ProCategoryItem {
 
   ProCategoryItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "Unknown";
     arName = json['arName'];
   }
 }

@@ -85,13 +85,15 @@ class SearchResultModel {
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
     category = json['category'] != null
         ? CategoryItem.fromJson(json['category'])
-        : null;
-    brand = json['brand'] != null ? BrandItem.fromJson(json['section']) : null;
+        : CategoryItem.initValues();
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['section'])
+        : BrandItem.initValues();
     subcategory = json['subcategory'] != null
         ? SubCategory.fromJson(json['subcategory'])
-        : null;
+        : SubCategory.initValues();
     section = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])
-        : null;
+        : SectionItemModel.initValues();
   }
 }

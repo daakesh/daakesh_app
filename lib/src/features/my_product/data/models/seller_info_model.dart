@@ -30,11 +30,11 @@ class SellerInfoData {
   });
 
   SellerInfoData.fromJson(Map<String, dynamic> json) {
-    userName = json['User Name'];
-    usedPhone = json['Used Phone'];
-    id = json['id'];
-    active = json['active'];
-    storeRate = json['storeRate'];
+    userName = json['User Name'] ?? "Unknown";
+    usedPhone = json['Used Phone'] ?? "Unknown";
+    id = json['id'] ?? "Unknown";
+    active = json['active'] ?? 1;
+    storeRate = json['storeRate'] ?? 0;
     if (json['rate'] != null) {
       rate = <SellerInfoRate>[];
       rate = (json['rate'] as List<dynamic>)
@@ -51,7 +51,7 @@ class SellerInfoRate {
   SellerInfoRate({this.id, this.rateValue});
 
   SellerInfoRate.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    rateValue = json['rateValue'];
+    id = json['id'] ?? 0;
+    rateValue = json['rateValue'] ?? 0;
   }
 }

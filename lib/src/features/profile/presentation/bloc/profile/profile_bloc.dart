@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -18,8 +17,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ActivateUpdateEvent event, Emitter<ProfileState> emit) {
     emit(state.copyWith(
       isUpdatePersonalActive: event.isUpdatePersonalActive,
-
-      ///TODO:return to make it according the BackEnd Data.
       locationFlagEmoji: '🇯🇴',
     ));
   }
@@ -33,6 +30,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ///Event to swap between languages at [ProfileScreen].
   FutureOr<void> _changeLang(
       ChangeLangEvent event, Emitter<ProfileState> emit) async {
+    if (event.switchLangValue) {
+      ValueConstants.language = 'ar';
+      await GetItUtils.prefs.setString(SharedPrefKeys.languageCode, 'ar');
+    } else {
+      ValueConstants.language = 'en';
+      await GetItUtils.prefs.setString(SharedPrefKeys.languageCode, 'en');
+    }
+    Utils.openPageWithoutAnimation(const MainScreen(), popPreviousPages: true);
     await GetItUtils.prefs
         .setBool(SharedPrefKeys.language, event.switchLangValue);
     emit(state.copyWith(switchLangValue: event.switchLangValue));
@@ -40,6 +45,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   FutureOr<void> _setValueLang(
       SetValueLangEvent event, Emitter<ProfileState> emit) {
+    ValueConstants.language =
+        GetItUtils.prefs.getData(SharedPrefKeys.languageCode) ?? 'en';
     bool? isEnLang =
         GetItUtils.prefs.getBoolean(SharedPrefKeys.language) ?? false;
     emit(state.copyWith(switchLangValue: isEnLang));

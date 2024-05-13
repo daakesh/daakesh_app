@@ -1,3 +1,5 @@
+import '../../../../src.export.dart';
+
 class SectionModel {
   bool? status;
   String? error;
@@ -49,7 +51,7 @@ class SectionItemModel {
 
   SectionItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    name = json['name'] ?? "Unknown";
+    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "Unknown";
     description = json['description'] ?? "Unknown";
     secImg = json['secImg'] ?? "Unknown";
     date = json['date'] ?? "Unknown";

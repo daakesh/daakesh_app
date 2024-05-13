@@ -19,8 +19,6 @@ class SwapAdvModel {
           .toList();
     }
   }
-
-
 }
 
 class SwapAdvItem {
@@ -31,9 +29,8 @@ class SwapAdvItem {
   SwapAdvItem({this.id, this.image, this.link});
 
   SwapAdvItem.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    image = json['image'];
-    link = json['link'];
+    id = json['id'] ?? 0;
+    image = json['image'] ?? "Unknown";
+    link = json['link'] ?? "Unknown";
   }
-
 }

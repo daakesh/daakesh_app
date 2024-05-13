@@ -61,16 +61,17 @@ class CategoryItem {
 
   CategoryItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "Unknown";
     description = json['description'];
-    catImg = json['catImg'];
-    date = json['date'];
-    secID = json['secID'];
-    arName = json['arName'];
-    itemsCount = json['items_count'];
+    catImg = json['catImg'] ?? "Unknown";
+
+    date = json['date'] ?? "Unknown";
+    secID = json['secID'] ?? 0;
+    arName = json['arName'] ?? "Unknown";
+    itemsCount = json['items_count'] ?? 0;
     sectionItemModel = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])
-        : null;
+        : SectionItemModel.initValues();
     if (json['sub_category'] != null) {
       subCategoryList = <SubCategory>[];
       subCategoryList = (json['sub_category'] as List<dynamic>)
