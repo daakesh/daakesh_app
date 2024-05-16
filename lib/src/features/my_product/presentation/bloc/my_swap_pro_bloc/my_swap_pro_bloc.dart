@@ -5,6 +5,7 @@ import '../../../../../src.export.dart';
 class MySwapProBloc extends Bloc<MySwapProEvent, MySwapProState> {
   MySwapProBloc() : super(const MySwapProState()) {
     on<GetMySwapProEvent>(_getMySwapPro);
+    on<ClearSwapDataEvent>(_clearSwapData);
   }
   static MySwapProBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -55,5 +56,13 @@ class MySwapProBloc extends Bloc<MySwapProEvent, MySwapProState> {
         isMoreData: lastPage == state.currentPage,
       ));
     });
+  }
+
+  FutureOr<void> _clearSwapData(
+      ClearSwapDataEvent event, Emitter<MySwapProState> emit) {
+    emit(state.copyWith(
+      myProductListData: [],
+      isMoreData: true,
+    ));
   }
 }

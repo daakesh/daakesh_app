@@ -62,14 +62,18 @@ class PriceRateSection extends StatelessWidget {
                 const SizedBox(
                   width: 12.0,
                 ),
-                Flexible(
-                  child: Text(
-                    '(${todayDealItem.rateCount})',
-                    style: context.easyTheme.textTheme.labelLarge!.copyWith(
-                        fontSize: 21.0,
-                        color: ColorName.gray,
-                        overflow: TextOverflow.ellipsis),
-                  ),
+                BlocBuilder<CommentBloc, CommentState>(
+                  builder: (context, state) {
+                    return Flexible(
+                      child: Text(
+                        '(${state.commentCount})',
+                        style: context.easyTheme.textTheme.labelLarge!.copyWith(
+                            fontSize: 21.0,
+                            color: ColorName.gray,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    );
+                  },
                 ),
               ],
             );

@@ -99,11 +99,18 @@ class ProAddSuccessScreen extends StatelessWidget {
       ..rateCount = myProductItem.rateCount
       ..priceAfterDiscount = myProductItem.priceAfterDiscount
       ..brandName = myProductItem.brand!.brandName
+      ..brandArName = myProductItem.brand!.arName
       ..categoryName = myProductItem.category!.name
+      ..categoryArName = myProductItem.category!.arName
       ..year = myProductItem.year
       ..description = myProductItem.description
+      ..citySwap = myProductItem.citySwap
+      ..countrySwap = myProductItem.countrySwap
       ..itemId = myProductItem.id
       ..categoryID = myProductItem.category!.id
+      ..citySwap = myProductItem.citySwap
+      ..countrySwap = myProductItem.countrySwap
+      ..date = myProductItem.date
       ..offerCount = 0;
 
     if (displayMethod.isSell) {

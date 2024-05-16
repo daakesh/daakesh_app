@@ -219,7 +219,10 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
       ..categoryName = "Unknown"
       ..year = sendReceiveSwapReqItem.offerItems!.year
       ..description = sendReceiveSwapReqItem.offerItems!.description
-      ..offerCount = 0;
+      ..citySwap = sendReceiveSwapReqItem.offerItems!.citySwap
+      ..countrySwap = sendReceiveSwapReqItem.offerItems!.countrySwap
+      ..date = sendReceiveSwapReqItem.createdAt
+      ..offerCount = -1;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }

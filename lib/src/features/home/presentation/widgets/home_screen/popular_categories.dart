@@ -41,7 +41,10 @@ class PopularCategoriesWidget extends StatelessWidget {
                   alignment: AlignmentDirectional.topStart,
                   child: Padding(
                     padding: const EdgeInsetsDirectional.only(start: 11.0),
-                    child: Text(data.name.toString(),
+                    child: Text(
+                        Utils.isEnglish
+                            ? data.name.toString()
+                            : data.arName.toString(),
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 15.0,
                             color: state.sectionIndex == index

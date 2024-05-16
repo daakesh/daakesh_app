@@ -82,7 +82,7 @@ class CommentsSectionWidget extends StatelessWidget {
                               maxRating: 5,
                               ignoreGestures: true,
                               initialRating: commentRateModelItem
-                                  .item!.rate!.first.rateValue!
+                                  .rate!.rateValue!
                                   .toDouble(),
                               itemSize: 15.0,
                               tapOnlyMode: true,
@@ -97,8 +97,7 @@ class CommentsSectionWidget extends StatelessWidget {
                             ),
                             Text(
                               Utils.appToStringAsFixed(
-                                  commentRateModelItem
-                                      .item!.rate!.first.rateValue!
+                                  commentRateModelItem.rate!.rateValue!
                                       .toDouble(),
                                   1),
                               style: context.easyTheme.textTheme.labelMedium!

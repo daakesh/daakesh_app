@@ -27,7 +27,9 @@ class SwapDetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${trendDealsItem.brand!.brandName}',
+              Utils.isEnglish
+                  ? '${trendDealsItem.brand!.brandName}'
+                  : '${trendDealsItem.brand!.arName}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -63,7 +65,9 @@ class SwapDetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              '${trendDealsItem.category!.name}',
+              Utils.isEnglish
+                  ? '${trendDealsItem.category!.name}'
+                  : '${trendDealsItem.category!.arName}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),

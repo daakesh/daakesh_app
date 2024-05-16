@@ -4,7 +4,9 @@ abstract class HandmadeEvent {}
 
 class GetHandmadeDataEvent extends HandmadeEvent {
   final bool isSeeMore;
-  GetHandmadeDataEvent({this.isSeeMore = false});
+  final bool? isFilterActive;
+
+  GetHandmadeDataEvent({this.isFilterActive, this.isSeeMore = false});
 }
 
 class GetItemsByHomemadeEvent extends HandmadeEvent {

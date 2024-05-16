@@ -74,7 +74,16 @@ class HomemadeScreen extends StatelessWidget {
             ));
         }
       default:
-        return const SizedBox();
+        return state.handmadeStateStatus.isLoading
+            ? const CircularProgressIndicatorWidget()
+            : state.handmadeStateStatus.isNull
+                ? Center(
+                    child: Text(
+                      context.locale.results_no_data,
+                      style: context.easyTheme.textTheme.headlineMedium,
+                    ),
+                  )
+                : const SizedBox();
     }
   }
 

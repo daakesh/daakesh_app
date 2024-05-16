@@ -131,9 +131,18 @@ class MyProductItem {
     updatedAt = json['updated_at'] ?? "unKnown";
     quantity = json['quantity'] ?? 0;
     display = json['display'] ?? "unKnown";
-    rateCount = 0;
-    averageRating = 3.5;
-    offerCount = 0;
+    rateCount = json['rate_count'] ?? 0;
+    if (json['avarageRating'] != null) {
+      if (json['avarageRating'] is int) {
+        averageRating = json['avarageRating'].toDouble();
+      }
+      if (json['avarageRating'] is String) {
+        averageRating = double.parse(json['avarageRating']);
+      }
+    } else {
+      averageRating = 0.0;
+    }
+    offerCount = json['offers_count'] ?? 0;
     countrySwap = json['country_swap'] ?? "unKnown";
     citySwap = json['city_swap'] ?? "unKnown";
     user = json['user'] != null

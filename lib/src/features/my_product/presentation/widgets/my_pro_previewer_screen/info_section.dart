@@ -27,7 +27,9 @@ class InfoSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              previewerModel.brandName!,
+              Utils.isEnglish
+                  ? previewerModel.brandName!
+                  : previewerModel.brandArName!,
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -63,7 +65,9 @@ class InfoSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              previewerModel.categoryName!,
+              Utils.isEnglish
+                  ? previewerModel.categoryName!
+                  : previewerModel.categoryArName!,
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),

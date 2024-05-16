@@ -31,8 +31,11 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
-    return await getIt.get<HomeDatasource>().getHandmadeData(page);
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+      FilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getHandmadeData(filterDataModel, page);
   }
 
   @override

@@ -34,7 +34,7 @@ abstract class NetworkService {
 class NetworkServiceImpl with NetworksLogs implements NetworkService {
   final Map<String, String> _headers = {
     "Accept": "application/json",
-    "lang": ValueConstants.language,
+    //"lang": ValueConstants.language,
   };
 
   @override

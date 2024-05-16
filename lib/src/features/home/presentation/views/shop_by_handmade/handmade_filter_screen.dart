@@ -98,7 +98,9 @@ class HandmadeFilterScreen extends StatelessWidget {
                           items: state.cityItemList
                               .map((e) => DropdownMenuItem(
                                   value: e.city,
-                                  child: Text(e.city.toString())))
+                                  child: Text(Utils.isEnglish
+                                      ? e.city.toString()
+                                      : e.ar.toString())))
                               .toList(),
                         );
                       }),
@@ -207,7 +209,7 @@ class HandmadeFilterScreen extends StatelessWidget {
   }
 
   void apply(context) {
-    //FilterBloc.get.add(PreviewSectionSubCategoriesEvent(isFilterActive: true));
+    HandmadeBloc.get.add(GetHandmadeDataEvent(isFilterActive: true));
     Navigator.pop(context);
   }
 
@@ -216,7 +218,7 @@ class HandmadeFilterScreen extends StatelessWidget {
       HandmadeBloc.get.add(ClearHandmadeFilterDataEvent());
       return;
     }
-    //FilterBloc.get.add(PreviewSectionSubCategoriesEvent(isFilterActive: false));
+    HandmadeBloc.get.add(GetHandmadeDataEvent(isFilterActive: false));
     HandmadeBloc.get.add(ClearHandmadeFilterDataEvent());
   }
 }

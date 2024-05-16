@@ -295,9 +295,14 @@ class MySwapProductCardWidget extends StatelessWidget {
       ..itemImage = myProductItem.itemImg
       ..title = myProductItem.title
       ..brandName = myProductItem.brand!.brandName
+      ..brandArName = myProductItem.brand!.arName
       ..categoryName = myProductItem.category!.name
+      ..categoryArName = myProductItem.category!.arName
       ..year = myProductItem.year
       ..description = myProductItem.description
+      ..citySwap = myProductItem.citySwap
+      ..countrySwap = myProductItem.countrySwap
+      ..date = myProductItem.date
       ..offerCount = myProductItem.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));

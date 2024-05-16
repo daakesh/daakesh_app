@@ -154,6 +154,7 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
         searchResultList: [],
         searchValue: event.value.isEmpty ? '' : event.value,
         currentSearchPage: 1,
+        productTapBar: event.isClear ? ProductTapBar.SHOP : state.productTapBar,
         isMoreData: true));
   }
 

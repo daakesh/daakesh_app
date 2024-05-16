@@ -50,7 +50,9 @@ class SwapSectionCategoryItem extends StatelessWidget {
                     height: 10.0,
                   ),
                   Text(
-                    swapCategoryItem.name.toString(),
+                    Utils.isEnglish
+                        ? swapCategoryItem.name.toString()
+                        : swapCategoryItem.arName.toString(),
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                         fontSize: 20.0,
                         color: ColorName.black.withOpacity(0.68)),

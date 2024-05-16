@@ -69,7 +69,7 @@ class RemoteMyProductDatasource implements MyProductDatasource {
       String searchValue, int page) async {
     final result = await getIt
         .get<NetworkService>()
-        .get(path: 'DaakeshServices/api/item/SearchItems', params: {
+        .get(path: 'DaakeshServices/api/item/SearchUserItems', params: {
       "id": ValueConstants.userId,
       "name": searchValue,
       "page": '$page',

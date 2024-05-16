@@ -10,7 +10,8 @@ abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
       int catID, FilterDataModel filterDataModel, int page);
 
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+      FilterDataModel filterDataModel, int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getItemsByBrands(
       int page, int brandId);
@@ -82,8 +83,11 @@ class HomeUseCasesImpl implements HomeUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
-    return await getIt.get<HomeRepository>().getHandmadeData(page);
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+      FilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getHandmadeData(filterDataModel, page);
   }
 
   @override

@@ -8,7 +8,8 @@ abstract class HomeDatasource {
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
       int catID, FilterDataModel filterDataModel, int page);
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+      FilterDataModel filterDataModel, int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getItemsByBrands(
       int page, int brandId);

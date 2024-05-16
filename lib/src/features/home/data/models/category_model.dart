@@ -61,7 +61,7 @@ class CategoryItem {
 
   CategoryItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "Unknown";
+    name = json['name'] ?? "Unknown";
     description = json['description'];
     catImg = json['catImg'] ?? "Unknown";
 

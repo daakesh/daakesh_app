@@ -37,7 +37,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ValueConstants.language = 'en';
       await GetItUtils.prefs.setString(SharedPrefKeys.languageCode, 'en');
     }
-    Utils.openPageWithoutAnimation(const MainScreen(), popPreviousPages: true);
     await GetItUtils.prefs
         .setBool(SharedPrefKeys.language, event.switchLangValue);
     emit(state.copyWith(switchLangValue: event.switchLangValue));

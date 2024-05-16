@@ -96,7 +96,9 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                             items: state.sectionListData
                                 .map((e) => DropdownMenuItem(
                                     value: e.id.toString(),
-                                    child: Text(e.name.toString())))
+                                    child: Text(Utils.isEnglish
+                                        ? e.name.toString()
+                                        : e.arName.toString())))
                                 .toList(),
                           );
                         },
@@ -123,7 +125,9 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                             items: state.proCategoryListData
                                 .map((e) => DropdownMenuItem(
                                     value: e.id.toString(),
-                                    child: Text(e.name.toString())))
+                                    child: Text(Utils.isEnglish
+                                        ? e.name.toString()
+                                        : e.arName.toString())))
                                 .toList(),
                           );
                         },
@@ -150,7 +154,9 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                                 .map<DropdownMenuItem<String>>((e) =>
                                     DropdownMenuItem(
                                         value: e.id.toString(),
-                                        child: Text(e.name.toString())))
+                                        child: Text(Utils.isEnglish
+                                            ? e.name.toString()
+                                            : e.arName.toString())))
                                 .toList(),
                           );
                         },
@@ -176,7 +182,9 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                             items: state.proBrandListData
                                 .map((e) => DropdownMenuItem(
                                     value: e.id.toString(),
-                                    child: Text(e.name.toString())))
+                                    child: Text(Utils.isEnglish
+                                        ? e.name.toString()
+                                        : e.arName.toString())))
                                 .toList(),
                           );
                         },

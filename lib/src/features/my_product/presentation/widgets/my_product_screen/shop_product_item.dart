@@ -141,7 +141,9 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                 minRating: 1,
                                 maxRating: 5,
                                 ignoreGestures: true,
-                                initialRating: 5.0,
+                                initialRating: widget
+                                    .myProductItem.averageRating!
+                                    .toDouble(),
                                 itemSize: 14.6.h,
                                 itemBuilder: (context, _) => const Icon(
                                   Icons.star,
@@ -151,13 +153,15 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               ),
                               SizedBox(width: 8.0.w),
                               Text(
-                                '5.9',
+                                widget.myProductItem.averageRating!
+                                    .toDouble()
+                                    .toString(),
                                 style: context.easyTheme.textTheme.labelMedium!
                                     .copyWith(fontSize: 15.0.sp),
                               ),
                               SizedBox(width: 8.0.w),
                               Text(
-                                '(200)',
+                                '(${widget.myProductItem.rateCount})',
                                 style: context.easyTheme.textTheme.labelMedium!
                                     .copyWith(
                                         fontSize: 13.0.sp,
@@ -347,11 +351,16 @@ class _ShopProductItemState extends State<ShopProductItem> {
       ..rateCount = myProductItem.rateCount
       ..priceAfterDiscount = myProductItem.priceAfterDiscount
       ..brandName = myProductItem.brand!.brandName
+      ..brandArName = myProductItem.brand!.arName
       ..categoryName = myProductItem.category!.name
+      ..categoryArName = myProductItem.category!.arName
       ..year = myProductItem.year
       ..description = myProductItem.description
       ..itemId = myProductItem.id
+      ..citySwap = myProductItem.citySwap
+      ..countrySwap = myProductItem.countrySwap
       ..subID = myProductItem.subcategory!.id
+      ..date = myProductItem.date
       ..categoryID = myProductItem.category!.id;
     Utils.openNavNewPage(
         context, MyProPreviewerScreen(previewerModel: previewerModel));

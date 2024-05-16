@@ -88,7 +88,6 @@ class TodayItem {
       this.category,
       this.brand,
       this.subcategory});
-
   TodayItem.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     description = json['description'] ?? "Unknown";

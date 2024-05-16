@@ -1,5 +1,3 @@
-import '../../../../src.export.dart';
-
 class CitiesModel {
   bool? status;
   String? error;
@@ -40,7 +38,7 @@ class CityItem {
       this.ar});
 
   CityItem.fromJson(Map<String, dynamic> json) {
-    city = Utils.isEnglish ? json['city'] : json['ar'] ?? "Unknown";
+    city = json['city'] ?? "Unknown";
     country = json['country'];
     pop2024 = json['pop2024'];
     latitude = json['latitude'];

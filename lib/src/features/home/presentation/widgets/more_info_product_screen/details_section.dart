@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../../../../src.export.dart';
 
 class DetailsSection extends StatelessWidget {
@@ -19,15 +21,18 @@ class DetailsSection extends StatelessWidget {
           height: 21.0,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.locale.more_info_product_brand_title,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            Expanded(
+              child: Text(
+                context.locale.more_info_product_brand_title,
+                style: context.easyTheme.textTheme.bodyLarge!
+                    .copyWith(color: ColorName.gray, fontSize: 18.0),
+              ),
             ),
             Text(
-              '${todayDealItem.brand?.brandName}',
+              Utils.isEnglish
+                  ? '${todayDealItem.brand!.brandName}'
+                  : '${todayDealItem.brand!.arName}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -37,12 +42,13 @@ class DetailsSection extends StatelessWidget {
           height: 13.0,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.locale.more_info_product_model_title,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            Expanded(
+              child: Text(
+                context.locale.more_info_product_model_title,
+                style: context.easyTheme.textTheme.bodyLarge!
+                    .copyWith(color: ColorName.gray, fontSize: 18.0),
+              ),
             ),
             Text(
               'Mac Cosmetics',
@@ -55,15 +61,18 @@ class DetailsSection extends StatelessWidget {
           height: 13.0,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.locale.more_info_product_category_title,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            Expanded(
+              child: Text(
+                context.locale.more_info_product_category_title,
+                style: context.easyTheme.textTheme.bodyLarge!
+                    .copyWith(color: ColorName.gray, fontSize: 18.0),
+              ),
             ),
             Text(
-              '${todayDealItem.category!.name}',
+              Utils.isEnglish
+                  ? '${todayDealItem.category!.name}'
+                  : '${todayDealItem.category!.arName}',
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),
@@ -73,12 +82,13 @@ class DetailsSection extends StatelessWidget {
           height: 13.0,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.locale.more_info_product_year_title,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            Expanded(
+              child: Text(
+                context.locale.more_info_product_year_title,
+                style: context.easyTheme.textTheme.bodyLarge!
+                    .copyWith(color: ColorName.gray, fontSize: 18.0),
+              ),
             ),
             Text(
               '${todayDealItem.year}',

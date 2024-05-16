@@ -54,7 +54,9 @@ class ResultsScreen extends StatelessWidget {
                                         borderRadius: const BorderRadius.all(
                                             Radius.circular(10.0))),
                                     child: Center(
-                                        child: Text('${categoryItem.name}')),
+                                        child: Text(Utils.isEnglish
+                                            ? "${categoryItem.name}"
+                                            : "${categoryItem.arName}")),
                                   ),
                                 );
                               },

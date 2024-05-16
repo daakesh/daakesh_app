@@ -46,7 +46,9 @@ class BrandItemWidget extends StatelessWidget {
                       height: 10.0,
                     ),
                     Text(
-                      brandItem.brandName.toString().toString(),
+                      Utils.isEnglish
+                          ? brandItem.brandName.toString()
+                          : brandItem.arName.toString(),
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(
                               fontSize: 20.0,
@@ -54,7 +56,7 @@ class BrandItemWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 4.0),
                     Text(
-                      brandItem.description.toString().toString(),
+                      brandItem.description.toString(),
                       style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                           fontSize: 18.0, color: ColorName.mediumGray),
                     ),

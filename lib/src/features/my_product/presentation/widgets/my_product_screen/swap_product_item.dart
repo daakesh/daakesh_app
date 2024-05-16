@@ -142,10 +142,15 @@ class SwapProductItem extends StatelessWidget {
       ..rateCount = myProductItem.rateCount
       ..priceAfterDiscount = myProductItem.priceAfterDiscount
       ..brandName = myProductItem.brand!.brandName
+      ..brandArName = myProductItem.brand!.arName
       ..categoryName = myProductItem.category!.name
+      ..categoryArName = myProductItem.category!.arName
+      ..citySwap = myProductItem.citySwap
+      ..countrySwap = myProductItem.countrySwap
       ..year = myProductItem.year
       ..description = myProductItem.description
       ..itemId = myProductItem.id
+      ..date = myProductItem.date
       ..categoryID = myProductItem.category!.id
       ..offerCount = myProductItem.offerCount;
     Utils.openNavNewPage(

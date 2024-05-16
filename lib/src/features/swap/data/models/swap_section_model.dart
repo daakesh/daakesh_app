@@ -1,5 +1,3 @@
-import '../../../../src.export.dart';
-
 class SwapSectionModel {
   bool? status;
   String? error;
@@ -51,7 +49,7 @@ class SwapSectionItemModel {
 
   SwapSectionItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "Unknown";
+    name = json['name'] ?? "Unknown";
     description = json['description'] ?? "Unknown";
     secImg = json['secImg'] ?? "Unknown";
     date = json['date'] ?? "Unknown";

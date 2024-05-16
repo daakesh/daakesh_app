@@ -340,8 +340,13 @@ class SwapOfferDetailsScreen extends StatelessWidget {
       ..itemImage = trendDealsItem.itemImg
       ..title = trendDealsItem.title
       ..brandName = trendDealsItem.brand!.brandName
+      ..brandArName = trendDealsItem.brand!.arName
       ..categoryName = trendDealsItem.category!.name
+      ..categoryArName = trendDealsItem.category!.arName
+      ..citySwap = trendDealsItem.citySwap
+      ..countrySwap = trendDealsItem.countrySwap
       ..year = trendDealsItem.year
+      ..date = trendDealsItem.date
       ..description = trendDealsItem.description
       ..offerCount = trendDealsItem.offerCount;
     Utils.openNavNewPage(

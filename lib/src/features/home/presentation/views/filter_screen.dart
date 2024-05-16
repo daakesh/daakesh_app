@@ -97,7 +97,9 @@ class FilterScreen extends StatelessWidget {
                           items: state.cityItemList
                               .map((e) => DropdownMenuItem(
                                   value: e.city,
-                                  child: Text(e.city.toString())))
+                                  child: Text(Utils.isEnglish
+                                      ? e.city.toString()
+                                      : e.ar.toString())))
                               .toList(),
                         );
                       }),

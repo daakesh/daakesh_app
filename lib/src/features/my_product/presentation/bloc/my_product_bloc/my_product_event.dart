@@ -48,3 +48,5 @@ class GetProOverAllRateItemsEvent extends MyProEvent {
 }
 
 class EmptyProDataEvent extends MyProEvent {}
+
+class ClearDataEvent extends MyProEvent {}

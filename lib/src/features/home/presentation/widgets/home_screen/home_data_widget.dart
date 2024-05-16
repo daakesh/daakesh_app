@@ -40,7 +40,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         SliverToBoxAdapter(
           child: Center(
             child: Text(
-              'Version: 3',
+              'Version: 2',
               style: context.easyTheme.textTheme.headlineLarge!.copyWith(
                 fontSize: 20.0,
               ),

@@ -24,3 +24,5 @@ class StartSwapEvent extends MySwapOrderEvent {
   final StartSwapModel startSwapModel;
   StartSwapEvent({required this.startSwapModel});
 }
+
+class EmptyMyOrderDataEvent extends MySwapOrderEvent {}

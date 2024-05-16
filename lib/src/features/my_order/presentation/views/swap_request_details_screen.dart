@@ -321,6 +321,9 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..categoryName = "Unknown"
       ..year = sendSwapReqItem.sourceItems!.year
       ..description = sendSwapReqItem.sourceItems!.description
+      ..citySwap = sendSwapReqItem.offerItems!.citySwap
+      ..countrySwap = sendSwapReqItem.offerItems!.countrySwap
+      ..date = sendSwapReqItem.createdAt
       ..offerCount = 0;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
@@ -337,6 +340,9 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..categoryName = "Unknown"
       ..year = sendSwapReqItem.offerItems!.year
       ..description = sendSwapReqItem.offerItems!.description
+      ..citySwap = sendSwapReqItem.offerItems!.citySwap
+      ..countrySwap = sendSwapReqItem.offerItems!.countrySwap
+      ..date = sendSwapReqItem.createdAt
       ..offerCount = 0;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));

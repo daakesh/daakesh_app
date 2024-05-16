@@ -38,19 +38,20 @@ class CommentRateModelItem {
   String? commentDesc;
   String? date;
   UserModel? user;
-  Item? item;
+  Rate? rate;
 
   CommentRateModelItem(
-      {this.id, this.commentDesc, this.date, this.user, this.item});
+      {this.id, this.commentDesc, this.date, this.user, this.rate});
 
   CommentRateModelItem.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     commentDesc = json['commentDesc'] ?? "Unknown";
-    date = json['date'];
+    date = json['date'] ?? "Unknown";
     user = json['user'] != null
         ? UserModel.fromJson(json['user'])
         : UserModel.initValues();
-    item = json['item'] != null ? Item.fromJson(json['item']) : null;
+    rate =
+        json['rate'] != null ? Rate.fromJson(json['rate']) : Rate.initValue();
   }
 }
 

@@ -38,6 +38,80 @@ class MySwapPreviewerScreen extends StatelessWidget {
                         .copyWith(fontSize: 24.0, color: ColorName.gray),
                   ),
                   const SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    children: [
+                      Assets.svg.locationPinIcon.svg(
+                          height: 21.0, width: 21.0, color: ColorName.amber),
+                      const SizedBox(
+                        width: 6.5,
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          style:
+                              context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 16.0,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: context.locale.swap_more_info_swap_in_title,
+                            ),
+                            TextSpan(
+                              text: '${previewerModel.citySwap}, ',
+                            ),
+                            TextSpan(
+                              text: '${previewerModel.countrySwap}, ',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: '(',
+                                  style: context.easyTheme.textTheme.labelLarge!
+                                      .copyWith(
+                                          fontSize: 23.0,
+                                          color: ColorName.gray)),
+                              TextSpan(
+                                  text: '${previewerModel.offerCount}',
+                                  style: context.easyTheme.textTheme.labelLarge!
+                                      .copyWith(
+                                          fontSize: 23.0,
+                                          color: ColorName.red)),
+                              TextSpan(
+                                  text: ') ',
+                                  style: context.easyTheme.textTheme.labelLarge!
+                                      .copyWith(
+                                          fontSize: 23.0,
+                                          color: ColorName.gray)),
+                              TextSpan(
+                                  text: context.locale.offer_submitted_title,
+                                  style: context.easyTheme.textTheme.labelLarge!
+                                      .copyWith(
+                                          fontSize: 23.0,
+                                          color: ColorName.black)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '${previewerModel.date}',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 15.0, color: ColorName.grayishBlue),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
                     height: 30.0,
                   ),
                 ],

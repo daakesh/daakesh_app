@@ -8,6 +8,7 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
     on<GetReceiveSwapRequestEvent>(_getReceiveSwapRequest);
     on<UpdateOfferEvent>(_acceptRejectSwapEvent);
     on<StartSwapEvent>(_startSwap);
+    on<EmptyMyOrderDataEvent>(_emptyMyOrderData);
   }
   static MySwapOrderBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -165,5 +166,17 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
       emit(state.copyWith(
           mySwapOrderStateStatus: MySwapOrderStateStatus.SUCCESS));
     });
+  }
+
+  FutureOr<void> _emptyMyOrderData(
+      EmptyMyOrderDataEvent event, Emitter<MySwapOrderState> emit) {
+    emit(state.copyWith(
+      receiveSwapReqList: [],
+      isReceiveMoreData: true,
+      receiveCurrentPage: 1,
+      isSendMoreData: true,
+      sendCurrentPage: 1,
+      sendSwapReqList: [],
+    ));
   }
 }

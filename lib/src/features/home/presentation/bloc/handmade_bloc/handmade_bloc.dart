@@ -49,12 +49,23 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
       emit(state.copyWith(
         handmadeStateStatus: HandmadeStateStatus.LOADING,
         handmadeListData: [],
+        isFilterActive: event.isFilterActive,
         currentPage: 1,
       ));
     }
-
-    final result =
-        await getIt.get<HomeUseCases>().getHandmadeData(state.currentPage);
+    FilterDataModel filterDataModel = FilterDataModel();
+    if (state.isFilterActive) {
+      filterDataModel
+        ..type = state.type.name
+        ..fromPrice = '${state.fromPrice.toInt()}'
+        ..toPrice = '${state.toPrice.toInt()}'
+        ..country = state.country
+        ..city = state.city
+        ..rate = '${state.rate}';
+    }
+    final result = await getIt
+        .get<HomeUseCases>()
+        .getHandmadeData(filterDataModel, state.currentPage);
     result.fold((l) {
       emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

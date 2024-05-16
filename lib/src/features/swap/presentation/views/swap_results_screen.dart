@@ -54,7 +54,9 @@ class SwapResultsScreen extends StatelessWidget {
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(10.0))),
                                   child: Center(
-                                      child: Text('${swapCategoryItem.name}')),
+                                      child: Text(Utils.isEnglish
+                                          ? '${swapCategoryItem.name}'
+                                          : '${swapCategoryItem.arName}')),
                                 ),
                               );
                             },

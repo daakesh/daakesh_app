@@ -10,6 +10,7 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
     on<GetProCommentByItemEvent>(_getProCommentByItem);
     on<GetProOverAllRateItemsEvent>(_getProOverAllRateItems);
     on<EmptyProDataEvent>(_emptyProDataEvent);
+    on<ClearDataEvent>(_clearData);
   }
   static MyProBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _getMyProduct(
@@ -192,5 +193,9 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
   FutureOr<void> _emptyProDataEvent(
       EmptyProDataEvent event, Emitter<MyProState> emit) {
     emit(state.copyWith(rateAverage: 0.0, commentCount: 0));
+  }
+
+  FutureOr<void> _clearData(ClearDataEvent event, Emitter<MyProState> emit) {
+    emit(state.copyWith(myProductListData: [], isMoreData: true));
   }
 }

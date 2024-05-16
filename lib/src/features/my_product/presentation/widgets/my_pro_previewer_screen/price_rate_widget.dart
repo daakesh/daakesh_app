@@ -59,14 +59,18 @@ class PriceRateWidget extends StatelessWidget {
                 const SizedBox(
                   width: 12.0,
                 ),
-                Flexible(
-                  child: Text(
-                    '(${previewerModel.rateCount})',
-                    style: context.easyTheme.textTheme.labelLarge!.copyWith(
-                        fontSize: 21.0,
-                        color: ColorName.gray,
-                        overflow: TextOverflow.ellipsis),
-                  ),
+                BlocBuilder<MyProBloc, MyProState>(
+                  builder: (context, state) {
+                    return Flexible(
+                      child: Text(
+                        '(${state.commentCount})',
+                        style: context.easyTheme.textTheme.labelLarge!.copyWith(
+                            fontSize: 21.0,
+                            color: ColorName.gray,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    );
+                  },
                 ),
               ],
             );
