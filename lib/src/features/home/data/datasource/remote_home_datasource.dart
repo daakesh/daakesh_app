@@ -315,4 +315,19 @@ class RemoteHomeDatasource implements HomeDatasource {
         );
     return result;
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, FilterDataModel filterDataModel, int page) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getSearchItemsResult',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(
+              {"Filter": filterDataModel.toJson(), "name": searchValue}),
+        );
+    return result;
+  }
 }

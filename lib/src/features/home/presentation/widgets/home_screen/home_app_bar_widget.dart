@@ -56,9 +56,21 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                           padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                           child: TextFormFieldWidget(
                             controller: searchController,
+                            textInputAction: TextInputAction.search,
                             isSuffixPrefixOn: true,
                             readOnly: !widget.isActive,
                             onChanged: onChange,
+                            onFieldSubmitted: (value) {
+                              if (value.isEmpty) {
+                                return;
+                              }
+                              SearchBloc.get
+                                  .add(SearchFilterEvent(searchValue: value));
+                              FilterBloc.get.add(GetCitiesEvent());
+
+                              Utils.openNavNewPage(
+                                  context, const SearchItemsScreen());
+                            },
                             inputFormatters: [
                               RegExpValidator.beginWhitespace,
                             ],
@@ -129,7 +141,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => SearchScreen(),
+        pageBuilder: (context, animation1, animation2) => const SearchScreen(),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
       ),

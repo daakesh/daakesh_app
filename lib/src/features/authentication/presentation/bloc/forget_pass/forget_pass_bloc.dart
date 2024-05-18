@@ -30,10 +30,10 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
       emit(state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
-      //if (!r.data['data']) {
-      //  ShowToastSnackBar.showSnackBars(message: r.message.toString());
-      //  return;
-      //}
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
       FirebaseAuthentication.verifyPhoneNumber(
           '+${state.phoneCode}$phoneNumber',
           AuthManner.FORGETPASSWORD,

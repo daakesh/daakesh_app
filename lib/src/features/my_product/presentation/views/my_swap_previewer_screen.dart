@@ -105,7 +105,7 @@ class MySwapPreviewerScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${previewerModel.date}',
+                        Utils.formatDate(previewerModel.date.toString()),
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 15.0, color: ColorName.grayishBlue),
                       )

@@ -163,4 +163,12 @@ class HomeRepositoryImpl implements HomeRepository {
         .get<HomeDatasource>()
         .getItemsByBrandID(brandID, filterDataModel, page);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, FilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getSearchItemsResult(searchValue, filterDataModel, page);
+  }
 }

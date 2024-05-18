@@ -7,3 +7,4 @@ export 'sections_screen/sections_screen.export.dart';
 export 'shop_brands_screen/shop_brands_screen.export.dart';
 export 'handmade_screen/handmade_screen.export.dart';
 export 'main_screen/main_screen.export.dart';
+export 'search_screen/search.export.dart';

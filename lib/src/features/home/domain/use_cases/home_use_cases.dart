@@ -51,6 +51,8 @@ abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId);
   Future<Either<Failure, ValidResponse>> getItemsByBrandID(
       int brandID, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, FilterDataModel filterDataModel, int page);
 }
 
 @dev
@@ -220,5 +222,13 @@ class HomeUseCasesImpl implements HomeUseCases {
     return await getIt
         .get<HomeRepository>()
         .getItemsByBrandID(brandID, filterDataModel, page);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, FilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getSearchItemsResult(searchValue, filterDataModel, page);
   }
 }

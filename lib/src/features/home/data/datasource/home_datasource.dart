@@ -49,4 +49,6 @@ abstract class HomeDatasource {
   Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId);
   Future<Either<Failure, ValidResponse>> getItemsByBrandID(
       int brandID, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, FilterDataModel filterDataModel, int page);
 }

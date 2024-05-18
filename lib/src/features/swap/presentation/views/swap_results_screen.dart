@@ -25,6 +25,25 @@ class SwapResultsScreen extends StatelessWidget {
                     builder: (context, state) {
                   return Row(
                     children: [
+                      GestureDetector(
+                        onTap: () => getSubCategoriesData(1, -1),
+                        child: Container(
+                          height: 38.0,
+                          padding: const EdgeInsetsDirectional.symmetric(
+                              horizontal: 14.0),
+                          decoration: BoxDecoration(
+                              color: -1 == state.categoryIndex
+                                  ? const Color(0xFFf2cd98)
+                                  : ColorName.paleGray,
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(10.0))),
+                          child: Center(
+                              child: Text(Utils.isEnglish ? "All" : "الكل")),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 11.0,
+                      ),
                       Expanded(
                         child: SizedBox(
                           height: 38.0,

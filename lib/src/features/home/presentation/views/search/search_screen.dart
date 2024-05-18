@@ -1,9 +1,11 @@
+import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../src.export.dart';
+
+import '../../../../../src.export.dart';
 
 class SearchScreen extends StatelessWidget {
-  SearchScreen({super.key});
+  const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class SearchScreen extends StatelessWidget {
         body: BlocBuilder<SearchBloc, SearchState>(builder: (_, state) {
           return CustomScrollView(
             slivers: [
-              HomeAppBarWidget(isActive: true),
+              const HomeAppBarWidget(isActive: true),
               const SliverPadding(
                   padding: EdgeInsetsDirectional.only(top: 21.0)),
               SliverToBoxAdapter(
@@ -78,29 +80,25 @@ class _SearchResultHandler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (state.searchStateStatus) {
-      case SearchStateStatus.LOADING:
+      case SearchStateStatus.SEARCHLOADING:
         return const SliverToBoxAdapter(
             child: CircularProgressIndicatorWidget());
-      case SearchStateStatus.NULL:
+      case SearchStateStatus.NULLSEARCH:
         return SliverToBoxAdapter(
             child: Center(
                 child: Text(context.locale.no_information_available_title)));
       default:
         return SliverList(
           delegate: SliverChildBuilderDelegate((_, index) {
-            TodayItem searchModelData = state.searchResultList[index];
+            String searchModelData = state.searchResultList[index];
             return state.searchResultList.isEmpty
                 ? const SizedBox()
                 : GestureDetector(
                     onTap: () {
-                      CommentBloc.get.add(
-                          GetCommentByItemEvent(itemId: searchModelData.id));
-                      Utils.openNavNewPage(
-                          context,
-                          MoreInfoProductScreen(
-                            todayDealItem: searchModelData,
-                            isDaakeshTodayDeal: true,
-                          ));
+                      SearchBloc.get
+                          .add(SearchFilterEvent(searchValue: searchModelData));
+                      FilterBloc.get.add(GetCitiesEvent());
+                      Utils.openNavNewPage(context, const SearchItemsScreen());
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -115,9 +113,7 @@ class _SearchResultHandler extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                searchModelData.title
-                                    .toString()
-                                    .replaceAll('\n', ' '),
+                                searchModelData,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 18.0,

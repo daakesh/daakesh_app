@@ -119,4 +119,12 @@ class SwapRepositoryImpl implements SwapRepository {
   Future<Either<Failure, ValidResponse>> getCities() async {
     return await getIt.get<SwapDatasource>().getCities();
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, SwapFilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .getSearchItemsResult(searchValue, filterDataModel, page);
+  }
 }

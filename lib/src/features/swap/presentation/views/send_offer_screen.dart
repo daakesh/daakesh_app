@@ -423,6 +423,7 @@ class SendOfferScreen extends StatelessWidget {
       ..citySwap = myProductItem.citySwap
       ..countrySwap = myProductItem.countrySwap
       ..year = myProductItem.year
+      ..date = myProductItem.date
       ..description = myProductItem.description
       ..offerCount = myProductItem.offerCount;
     Utils.openNavNewPage(

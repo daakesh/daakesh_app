@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
@@ -57,6 +58,16 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
                           child: TextFormFieldWidget(
                             controller: controller,
                             isSuffixPrefixOn: true,
+                            onFieldSubmitted: (value) {
+                              if (value.isEmpty) {
+                                return;
+                              }
+                              SwapSearchBloc.get.add(
+                                  SwapSearchFilterEvent(searchValue: value));
+                              SwapFilterBloc.get.add(GetSwapCitiesEvent());
+                              Utils.openNavNewPage(
+                                  context, const SwapSearchItemsScreen());
+                            },
                             onChanged: onChange,
                             readOnly: !widget.isActive,
                             inputFormatters: [

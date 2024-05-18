@@ -28,6 +28,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final double cursorWidth;
   final int? maxLines;
   final TextAlignVertical textAlignVertical;
+  final TextInputAction? textInputAction;
 
   const TextFormFieldWidget({
     super.key,
@@ -55,6 +56,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.readOnly = false,
     this.expands = false,
     this.maxLines,
+    this.textInputAction,
   });
 
   @override
@@ -65,6 +67,7 @@ class TextFormFieldWidget extends StatelessWidget {
         controller: controller,
         textCapitalization: textCapitalization,
         textAlignVertical: textAlignVertical,
+        textInputAction: textInputAction ?? TextInputAction.done,
         style: style ??
             context.easyTheme.textTheme.labelMedium!
                 .copyWith(fontSize: 18.0.sp),

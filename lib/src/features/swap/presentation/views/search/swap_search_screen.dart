@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../src.export.dart';
+import '../../../../../src.export.dart';
 
 class SwapSearchScreen extends StatelessWidget {
   const SwapSearchScreen({
@@ -13,9 +13,7 @@ class SwapSearchScreen extends StatelessWidget {
       body: BlocBuilder<SwapSearchBloc, SwapSearchState>(builder: (_, state) {
         return CustomScrollView(
           slivers: [
-            const SwapAppBarWidget(
-              isActive: true,
-            ),
+            const SwapAppBarWidget(isActive: true),
             const SliverPadding(padding: EdgeInsetsDirectional.only(top: 21.0)),
             SliverToBoxAdapter(
               child: Padding(
@@ -34,7 +32,7 @@ class SwapSearchScreen extends StatelessWidget {
             _SearchResultHandler(state: state),
             const SliverPadding(padding: EdgeInsetsDirectional.only(top: 55.0)),
             SliverToBoxAdapter(
-              child: !state.isMoreData
+              child: !state.isMoreDataItems
                   ? !state.swapSearchStateStatus.isLoadingMore
                       ? Center(
                           child: InkWell(
@@ -65,8 +63,10 @@ class SwapSearchScreen extends StatelessWidget {
   }
 
   void seeMore(String searchValue) {
-    SwapSearchBloc.get
-        .add(SwapSearchOnItemsEvent(searchValue: searchValue, isSeeMore: true));
+    SwapSearchBloc.get.add(SwapSearchOnItemsEvent(
+      searchValue: searchValue,
+      isSeeMore: true,
+    ));
   }
 }
 
@@ -97,10 +97,11 @@ class _SearchResultHandler extends StatelessWidget {
                         start: 31.0, end: 23.0, bottom: 20.0),
                     child: GestureDetector(
                       onTap: () {
+                        SwapSearchBloc.get.add(SwapSearchFilterEvent(
+                            searchValue: swapSearchModelData.title.toString()));
+                        SwapFilterBloc.get.add(GetSwapCitiesEvent());
                         Utils.openNavNewPage(
-                            context,
-                            SwapMoreInfoScreen(
-                                trendDealsItem: swapSearchModelData));
+                            context, const SwapSearchItemsScreen());
                       },
                       child: SizedBox(
                         width: double.infinity,
@@ -112,9 +113,7 @@ class _SearchResultHandler extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                swapSearchModelData.description
-                                    .toString()
-                                    .replaceAll('\n', ' '),
+                                swapSearchModelData.title.toString(),
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 18.0,

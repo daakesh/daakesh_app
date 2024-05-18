@@ -31,4 +31,6 @@ abstract class SwapRepository {
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
   Future<Either<Failure, ValidResponse>> getCities();
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, SwapFilterDataModel filterDataModel, int page);
 }

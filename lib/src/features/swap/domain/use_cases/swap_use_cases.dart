@@ -32,6 +32,8 @@ abstract class SwapUseCases {
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
   Future<Either<Failure, ValidResponse>> getCities();
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, SwapFilterDataModel filterDataModel, int page);
 }
 
 @dev
@@ -151,5 +153,13 @@ class SwapUseCasesImpl implements SwapUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getCities() async {
     return await getIt.get<SwapRepository>().getCities();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue, SwapFilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<SwapRepository>()
+        .getSearchItemsResult(searchValue, filterDataModel, page);
   }
 }
