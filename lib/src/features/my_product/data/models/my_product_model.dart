@@ -155,7 +155,7 @@ class MyProductItem {
         ? BrandItem.fromJson(json['brand'])
         : BrandItem.initValues();
     subcategory = json['subcategory'] != null
-        ? SubCategory.fromJson(json['brand'])
+        ? SubCategory.fromJson(json['subcategory'])
         : SubCategory.initValues();
     section = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])

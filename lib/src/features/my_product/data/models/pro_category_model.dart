@@ -3,31 +3,16 @@ import '../../../../src.export.dart';
 class ProCategoryModel {
   bool? status;
   String? error;
-  ProCategoryData? data;
+  List<ProCategoryItem>? data;
 
   ProCategoryModel({this.status, this.error, this.data});
 
   ProCategoryModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     error = json['error'];
-    data = json['data'] != null ? ProCategoryData.fromJson(json['data']) : null;
-  }
-}
-
-class ProCategoryData {
-  int? lastPage;
-  List<ProCategoryItem>? categoryItemList;
-
-  ProCategoryData({
-    this.lastPage,
-    this.categoryItemList,
-  });
-
-  ProCategoryData.fromJson(Map<String, dynamic> json) {
-    lastPage = json['last_page'];
     if (json['data'] != null) {
-      categoryItemList = <ProCategoryItem>[];
-      categoryItemList = (json['data'] as List<dynamic>)
+      data = <ProCategoryItem>[];
+      data = (json['data'] as List<dynamic>)
           .map((v) => ProCategoryItem.fromJson(v))
           .toList();
     }

@@ -24,15 +24,15 @@ class AddProInfoEvent extends AddProEvent {
 class AddProCategoriesEvent extends AddProEvent {
   final String productSecID;
   final String productCatID;
-  final String productSubCatID;
-  final String productBrandID;
+  final String? productSubCatID;
+  final String? productBrandID;
   final String productModelYear;
 
   AddProCategoriesEvent({
     required this.productSecID,
     required this.productCatID,
-    required this.productSubCatID,
-    required this.productBrandID,
+    this.productSubCatID,
+    this.productBrandID,
     required this.productModelYear,
   });
 }

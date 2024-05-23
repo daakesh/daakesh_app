@@ -18,8 +18,11 @@ class RemoteMyProductDatasource implements MyProductDatasource {
   @override
   Future<Either<Failure, ValidResponse>> getSections() async {
     final result = await getIt.get<NetworkService>().get(
-          path: 'DaakeshServices/api/section/getSections',
-        );
+      path: 'DaakeshServices/api/section/getSections',
+      params: {
+        "withPaginate": "false",
+      },
+    );
     return result;
   }
 
@@ -28,7 +31,7 @@ class RemoteMyProductDatasource implements MyProductDatasource {
       String secID) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/category/getCategoryBySection',
-        params: {"secID": secID});
+        params: {"withPaginate": "false", "secID": secID});
     return result;
   }
 
@@ -48,6 +51,7 @@ class RemoteMyProductDatasource implements MyProductDatasource {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/subCategory/getSubcategoryByCategoryId',
         params: {
+          "withPaginate": "false",
           "catID": catID,
         });
     return result;
@@ -118,8 +122,9 @@ class RemoteMyProductDatasource implements MyProductDatasource {
     }
     addProData.itemImageList = images;
     final result = await getIt.get<NetworkService>().post(
-        path: 'DaakeshServices/api/item/updateItem',
-        body: addProModel.editItemToJson());
+          path: 'DaakeshServices/api/item/updateItem',
+          body: addProModel.editItemToJson(),
+        );
     return result;
   }
 

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -128,7 +127,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       }
       int id = r.data['data']['id'];
       MyProductItem myProductItem = MyProductItem();
-
       final itemData = await getIt.get<MyProductUseCases>().getItemById(id);
       itemData.fold((l) {
         emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));

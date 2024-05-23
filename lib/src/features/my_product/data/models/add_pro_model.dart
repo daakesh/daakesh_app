@@ -51,14 +51,19 @@ class AddProModel {
       this.citySwap,
       this.itemFileImg,
       this.itemImageList});
+
   Map<String, dynamic> addItemToJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['userID'] = userID.toString();
     data['description'] = description.toString();
     data['catID'] = catID.toString();
-    data['subID'] = subID.toString();
     data['secID'] = secID.toString();
-    data['brandID'] = brandID.toString();
+    if (subID != null && subID!.isNotEmpty && subID != "-1") {
+      data['subID'] = subID;
+    }
+    if (brandID != null && brandID!.isNotEmpty) {
+      data['brandID'] = brandID;
+    }
     data['title'] = title.toString();
     data['tradeOrSell'] = tradeOrSell.toString();
     data['tradeFor'] = tradeFor.toString();
@@ -84,8 +89,12 @@ class AddProModel {
     data['description'] = description.toString();
     data['catID'] = catID.toString();
     data['secID'] = secID.toString();
-    data['subID'] = subID.toString();
-    data['brandID'] = brandID.toString();
+    if (subID != null && subID!.isNotEmpty && subID != "-1") {
+      data['subID'] = subID;
+    }
+    if (brandID != null && brandID!.isNotEmpty) {
+      data['brandID'] = brandID;
+    }
     data['title'] = title.toString();
     data['type'] = tradeOrSell.toString();
     data['price'] = price.toString();

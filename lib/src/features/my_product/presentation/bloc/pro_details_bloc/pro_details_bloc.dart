@@ -12,6 +12,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
     on<GetProSubCategoryEvent>(_getProSubCategory);
     on<GetBrandsBySectionEvent>(_getBrandsBySection);
     on<GetDropDownDataEvent>(_getDropDownData);
+    on<ResetCategoriesDataEvent>(_resetCategoriesData);
   }
   static ProDetailsBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _getProSections(
@@ -22,7 +23,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         proSubCategoryListData: [],
         proBrandListData: [],
         productCatID: null));
-    final result = await getIt.get<HomeUseCases>().getSectionData(1);
+    final result = await getIt.get<MyProductUseCases>().getSections();
     result.fold((l) {
       emit(state.copyWith(proDetailsStateStatus: ProDetailsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -32,8 +33,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         return;
       }
       ProductSectionModel sectionModel = ProductSectionModel.fromJson(r.data);
-      List<ProSectionItemModel> sectionListData =
-          sectionModel.data!.data!.toList();
+      List<ProSectionItemModel> sectionListData = sectionModel.data!.toList();
       if (event.isEdit) {
         if (isEdit()) {
           emit(state.copyWith(
@@ -56,11 +56,12 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       GetProCategoryEvent event, Emitter<ProDetailsState> emit) async {
     ProgressCircleDialog.show();
     emit(state.copyWith(
-      proDetailsStateStatus: ProDetailsStateStatus.LOADING,
-      proCategoryListData: [],
-      proSubCategoryListData: [],
-      productSecID: event.secID,
-    ));
+        proDetailsStateStatus: ProDetailsStateStatus.LOADING,
+        proCategoryListData: [],
+        proSubCategoryListData: [],
+        productSecID: event.secID,
+        productSubCatID: "-1"));
+
     final result =
         await getIt.get<MyProductUseCases>().getCategoryBySection(event.secID);
     result.fold((l) {
@@ -76,7 +77,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       ProgressCircleDialog.dismiss();
       ProCategoryModel proCategoryModel = ProCategoryModel.fromJson(r.data);
       List<ProCategoryItem> proCategoryListData =
-          proCategoryModel.data!.categoryItemList!.toList();
+          proCategoryModel.data!.toList();
 
       if (event.isEdit) {
         if (isEdit()) {
@@ -101,8 +102,10 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       GetProSubCategoryEvent event, Emitter<ProDetailsState> emit) async {
     ProgressCircleDialog.show();
     emit(state.copyWith(
-        proDetailsStateStatus: ProDetailsStateStatus.LOADING,
-        productCatID: event.catID));
+      proDetailsStateStatus: ProDetailsStateStatus.LOADING,
+      productCatID: event.catID,
+      //productSubCatID: null,
+    ));
     final result = await getIt
         .get<MyProductUseCases>()
         .getSubcategoryByCategoryId(event.catID);
@@ -121,20 +124,21 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
           ProSubCategoryModel.fromJson(r.data);
       List<ProSubCategoryItem> proSubCategoryListData =
           proSubCategoryModel.data!.toList();
+
       if (event.isEdit) {
         if (isEdit()) {
-          if (getIt.get<EditProduct>().myProductItem!.subcategory != null) {
-            emit(state.copyWith(
-              proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
-              proSubCategoryListData: proSubCategoryListData,
-              productSubCatID: getIt
-                  .get<EditProduct>()
-                  .myProductItem!
-                  .subcategory!
-                  .id
-                  .toString(),
-            ));
-          }
+          emit(state.copyWith(
+            proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
+            proSubCategoryListData: proSubCategoryListData,
+            productSubCatID: proSubCategoryListData.isNotEmpty
+                ? getIt
+                    .get<EditProduct>()
+                    .myProductItem!
+                    .subcategory!
+                    .id
+                    .toString()
+                : "-1",
+          ));
         }
         return;
       }
@@ -143,7 +147,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         proSubCategoryListData: proSubCategoryListData,
         productSubCatID: proSubCategoryListData.isNotEmpty
             ? proSubCategoryListData.first.id.toString()
-            : null,
+            : "-1",
       ));
     });
   }
@@ -209,34 +213,26 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
 
   FutureOr<void> _getDropDownData(
       GetDropDownDataEvent event, Emitter<ProDetailsState> emit) {
-    String productSubCatID = '';
     if (getIt.get<EditProduct>().myProductItem != null) {
       String productSecID =
           getIt.get<EditProduct>().myProductItem!.section!.id.toString();
       String productCatID =
           getIt.get<EditProduct>().myProductItem!.category!.id.toString();
-      String productBrandID =
-          getIt.get<EditProduct>().myProductItem!.brand!.id.toString();
-      if (getIt.get<EditProduct>().myProductItem!.subcategory != null) {
-        productSubCatID =
-            getIt.get<EditProduct>().myProductItem!.subcategory!.id.toString();
-        getProSubCategory(productCatID.toString());
-      }
       getProSections();
       getProCategory(productSecID.toString());
       getProBrand(productSecID.toString());
-
-      emit(state.copyWith(
-        productSecID: productSecID,
-        productCatID: productCatID,
-        productSubCatID: productSubCatID,
-        productBrandID: productBrandID,
-      ));
+      if (getIt.get<EditProduct>().myProductItem!.subcategory != null) {
+        getProSubCategory(productCatID.toString());
+      }
     } else {
       ProDetailsBloc.get.add(GetProSectionsEvent());
+    }
+  }
+
+  FutureOr<void> _resetCategoriesData(
+      ResetCategoriesDataEvent event, Emitter<ProDetailsState> emit) {
+    if (!isEdit()) {
       emit(state.copyWith(
-        productSecID: null,
-        productCatID: null,
         productSubCatID: null,
         productBrandID: null,
       ));

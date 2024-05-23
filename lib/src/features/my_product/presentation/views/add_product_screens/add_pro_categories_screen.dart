@@ -62,10 +62,14 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                 const SizedBox(
                   height: 19.0,
                 ),
-                Text(
-                  context.locale.add_product_instruction,
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(fontSize: 16.0),
+                BlocBuilder<AddProBloc, AddProState>(
+                  builder: (context, state) {
+                    return Text(
+                      context.locale.add_product_instruction,
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 16.0),
+                    );
+                  },
                 ),
                 const SizedBox(height: 21.0),
                 Padding(
@@ -214,9 +218,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                     ],
                   ),
                 ),
-                const Spacer(
-                  flex: 1,
-                ),
+                const Spacer(flex: 1),
                 Center(
                   child: DefaultButtonWidget(
                       text: context.locale.next_button,
@@ -245,11 +247,16 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
   }
 
   void onNext() async {
+    if (productSecID == null || productCatID == null) {
+      ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
+      return;
+    }
+
     AddProBloc.get.add(AddProCategoriesEvent(
       productSecID: productSecID.toString(),
       productCatID: productCatID.toString(),
-      productSubCatID: productSubCatID.toString(),
-      productBrandID: productBrandID.toString(),
+      productSubCatID: productSubCatID,
+      productBrandID: productBrandID,
       productModelYear: productModelYearController.text,
     ));
     Utils.openNewPage(const AddProImagesScreen());
@@ -260,7 +267,10 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
     resetData();
   }
 
-  void resetData() {}
+  void resetData() {
+    ProDetailsBloc.get.add(ResetCategoriesDataEvent());
+  }
+
   void getProCategory(String secID) {
     ProDetailsBloc.get.add(GetProCategoryEvent(secID: secID));
   }
