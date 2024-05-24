@@ -317,12 +317,14 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..userName = sendSwapReqItem.sourceUser!.name
       ..itemImage = sendSwapReqItem.sourceItems!.itemImg
       ..title = sendSwapReqItem.sourceItems!.title
-      ..brandName = "Unknown"
-      ..categoryName = "Unknown"
+      ..brandName = sendSwapReqItem.sourceItems!.brand!.brandName
+      ..brandArName = sendSwapReqItem.sourceItems!.brand!.arName
+      ..categoryName = sendSwapReqItem.sourceItems!.category!.name
+      ..categoryArName = sendSwapReqItem.sourceItems!.category!.arName
       ..year = sendSwapReqItem.sourceItems!.year
       ..description = sendSwapReqItem.sourceItems!.description
-      ..citySwap = sendSwapReqItem.offerItems!.citySwap
-      ..countrySwap = sendSwapReqItem.offerItems!.countrySwap
+      ..citySwap = sendSwapReqItem.sourceItems!.citySwap
+      ..countrySwap = sendSwapReqItem.sourceItems!.countrySwap
       ..date = sendSwapReqItem.createdAt
       ..offerCount = 0;
     Utils.openNavNewPage(
@@ -336,8 +338,10 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..userName = sendSwapReqItem.offerUser!.name
       ..itemImage = sendSwapReqItem.offerItems!.itemImg
       ..title = sendSwapReqItem.offerItems!.title
-      ..brandName = "Unknown"
-      ..categoryName = "Unknown"
+      ..brandName = sendSwapReqItem.offerItems!.brand!.brandName
+      ..brandArName = sendSwapReqItem.offerItems!.brand!.arName
+      ..categoryName = sendSwapReqItem.offerItems!.category!.name
+      ..categoryArName = sendSwapReqItem.offerItems!.category!.arName
       ..year = sendSwapReqItem.offerItems!.year
       ..description = sendSwapReqItem.offerItems!.description
       ..citySwap = sendSwapReqItem.offerItems!.citySwap

@@ -3,7 +3,9 @@ import '../../../../../../src.export.dart';
 
 class SendSwapWaitingItem extends StatelessWidget {
   final SendReceiveSwapReqItem sendSwapReqItem;
-  const SendSwapWaitingItem({super.key, required this.sendSwapReqItem});
+  final int approved;
+  const SendSwapWaitingItem(
+      {super.key, required this.sendSwapReqItem, required this.approved});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,7 @@ class SendSwapWaitingItem extends StatelessWidget {
           SizedBox(height: 9.0.h),
           Row(
             children: [
-              SizedBox(
-                width: 14.0.w,
-              ),
+              SizedBox(width: 14.0.w),
               Text(
                 context.locale.swap_request_title,
                 style: context.easyTheme.textTheme.headlineMedium!
@@ -38,7 +38,7 @@ class SendSwapWaitingItem extends StatelessWidget {
                 width: 3.0.w,
               ),
               Text(
-                '#12354',
+                '#${sendSwapReqItem.offerId ?? "12345"}',
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 18.0.sp, color: ColorName.black),
               ),
@@ -49,7 +49,9 @@ class SendSwapWaitingItem extends StatelessWidget {
                 flex: 1,
               ),
               Text(
-                context.locale.send_waiting_title,
+                approved == 0
+                    ? context.locale.send_waiting_title
+                    : context.locale.send_rejected_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 12.0.sp, color: ColorName.red),
               ),

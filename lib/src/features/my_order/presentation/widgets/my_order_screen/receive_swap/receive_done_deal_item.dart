@@ -3,7 +3,12 @@ import '../../../../../../src.export.dart';
 
 class ReceiveDoneDealItem extends StatelessWidget {
   final SendReceiveSwapReqItem receiveSwapReqItem;
-  const ReceiveDoneDealItem({super.key, required this.receiveSwapReqItem});
+  final int approved;
+  const ReceiveDoneDealItem({
+    super.key,
+    required this.receiveSwapReqItem,
+    required this.approved,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +76,14 @@ class ReceiveDoneDealItem extends StatelessWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                              text: context.locale.you_made_a_deal_title,
+                              text: approved == 1
+                                  ? context.locale.you_made_a_deal_title
+                                  : context.locale.you_not_made_a_deal_title,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
-                                      color: ColorName.springGreen,
+                                      color: approved == 1
+                                          ? ColorName.springGreen
+                                          : ColorName.red,
                                       fontSize: 16.0.sp)),
                           TextSpan(
                               text: '${receiveSwapReqItem.offerUser!.name}',
@@ -111,7 +120,14 @@ class ReceiveDoneDealItem extends StatelessWidget {
                     color: ColorName.skyBlue,
                     fontFamily: FontFamily.apercuBold,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Utils.openNavNewPage(
+                        context,
+                        StartSwapScreen(
+                          sendReceiveSwapReqItem: receiveSwapReqItem,
+                          isPreviewer: true,
+                        ));
+                  },
                   isBold: true,
                 ),
               ),
@@ -157,40 +173,46 @@ class ReceiveDoneDealItem extends StatelessWidget {
           SizedBox(
             height: 17.0.h,
           ),
-          Divider(
-            color: ColorName.gray,
-            indent: 15.0.w,
-            endIndent: 15.0.w,
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 17.0.w,
-              ),
-              Expanded(
-                  child: DefaultButtonWidget(
-                      text: context.locale.call_button_title,
-                      onPressed: () => Utils.lunchCall(receiveSwapReqItem
-                          .offerUser!.phoneNumber
-                          .toString()))),
-              SizedBox(
-                width: 9.0.w,
-              ),
-              Expanded(
-                child: DefaultButtonWidget(
-                  text: context.locale.whatsApp_button_title,
-                  onPressed: () => Utils.lunchWhatsApp(
-                      receiveSwapReqItem.offerUser!.phoneNumber.toString()),
-                  style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
-                      backgroundColor:
-                          MaterialStateProperty.all(ColorName.amber)),
-                ),
-              ),
-              SizedBox(
-                width: 17.0.w,
-              ),
-            ],
-          ),
+          approved == 1
+              ? Divider(
+                  color: ColorName.gray,
+                  indent: 15.0.w,
+                  endIndent: 15.0.w,
+                )
+              : const SizedBox(),
+          approved == 1
+              ? Row(
+                  children: [
+                    SizedBox(
+                      width: 17.0.w,
+                    ),
+                    Expanded(
+                        child: DefaultButtonWidget(
+                            text: context.locale.call_button_title,
+                            onPressed: () => Utils.lunchCall(receiveSwapReqItem
+                                .offerUser!.phoneNumber
+                                .toString()))),
+                    SizedBox(
+                      width: 9.0.w,
+                    ),
+                    Expanded(
+                      child: DefaultButtonWidget(
+                        text: context.locale.whatsApp_button_title,
+                        onPressed: () => Utils.lunchWhatsApp(receiveSwapReqItem
+                            .offerUser!.phoneNumber
+                            .toString()),
+                        style: context.easyTheme.elevatedButtonTheme.style!
+                            .copyWith(
+                                backgroundColor:
+                                    MaterialStateProperty.all(ColorName.amber)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 17.0.w,
+                    ),
+                  ],
+                )
+              : const SizedBox(),
           SizedBox(
             height: 16.0.h,
           ),

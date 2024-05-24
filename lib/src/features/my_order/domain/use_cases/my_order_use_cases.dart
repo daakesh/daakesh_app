@@ -7,7 +7,11 @@ abstract class MyOrderUseCases {
   Future<Either<Failure, ValidResponse>> getMyOrders();
   Future<Either<Failure, ValidResponse>> getSendReceiveSwapRequest(
       String type, int page);
-  Future<Either<Failure, ValidResponse>> updateOffer(int itemId, int approved);
+  Future<Either<Failure, ValidResponse>> updateOffer(
+    int itemId,
+    int approved,
+    String comment,
+  );
   Future<Either<Failure, ValidResponse>> startSwap(
       StartSwapModel startSwapModel);
 }
@@ -30,8 +34,10 @@ class MyOrderUseCasesImpl implements MyOrderUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> updateOffer(
-      int itemId, int approved) async {
-    return await getIt.get<MyOrderRepository>().updateOffer(itemId, approved);
+      int itemId, int approved, String comment) async {
+    return await getIt
+        .get<MyOrderRepository>()
+        .updateOffer(itemId, approved, comment);
   }
 
   @override

@@ -129,11 +129,13 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                                             0
                                         ? ReceiveSwapWaitingItem(
                                             sendReceiveSwapReqItem:
-                                                state.receiveSwapReqList[index],
-                                          )
+                                                state.receiveSwapReqList[index])
                                         : ReceiveDoneDealItem(
                                             receiveSwapReqItem:
                                                 state.receiveSwapReqList[index],
+                                            approved: state
+                                                .receiveSwapReqList[index]
+                                                .approved!,
                                           ),
                                 childCount: state.receiveSwapReqList.length),
                           );
@@ -143,14 +145,20 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                         builder: (context, state) {
                           return SliverList(
                             delegate: SliverChildBuilderDelegate(
-                                (context, index) =>
-                                    state.sendSwapReqList[index].approved == 0
-                                        ? SendSwapWaitingItem(
-                                            sendSwapReqItem:
-                                                state.sendSwapReqList[index])
-                                        : SendSwapAcceptedItem(
-                                            sendSwapReqItem:
-                                                state.sendSwapReqList[index]),
+                                (context, index) => state.sendSwapReqList[index]
+                                                .approved ==
+                                            0 ||
+                                        state.sendSwapReqList[index].approved ==
+                                            -1
+                                    ? SendSwapWaitingItem(
+                                        sendSwapReqItem:
+                                            state.sendSwapReqList[index],
+                                        approved: state
+                                            .sendSwapReqList[index].approved!,
+                                      )
+                                    : SendSwapAcceptedItem(
+                                        sendSwapReqItem:
+                                            state.sendSwapReqList[index]),
                                 childCount: state.sendSwapReqList.length),
                           );
                         },

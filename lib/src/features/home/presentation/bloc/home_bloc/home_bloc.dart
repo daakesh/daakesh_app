@@ -73,9 +73,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HandmadeBloc.get.add(GetHandmadeDataEvent());
     BrandsBloc.get.add(GetBrandsDataEvent());
     TodayDealsBloc.get.add(GetToadyDealsDataEvent());
-    TodayDealsBloc.get.add(GetToadyDaakeshDealsDataEvent());
+    //TodayDealsBloc.get.add(GetToadyDaakeshDealsDataEvent());
     if (ValueConstants.userId.isNotEmpty) {
-      CartBloc.get.add(GetCartItemsEvent());
+      //CartBloc.get.add(GetCartItemsEvent());
       ContactInfoBloc.get.add(GetContactInfoEvent());
     }
   }
@@ -91,10 +91,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> _activateSwap(
       ActivateSwapEvent event, Emitter<HomeState> emit) {
-    //emit(state.copyWith(isSwapActive: !state.isSwapActive));
-    //print(state.isSwapActive);
     if (controller.index == 2) {
-      controller.jumpToTab(state.tabIndex);
+      controller.jumpToTab(0);
+      emit(state.copyWith(tabIndex: 0));
     } else {
       controller.jumpToTab(2);
     }

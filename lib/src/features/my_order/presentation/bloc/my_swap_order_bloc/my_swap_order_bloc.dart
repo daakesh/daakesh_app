@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -118,16 +119,14 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
     ProgressCircleDialog.show();
     final result = await getIt
         .get<MyOrderUseCases>()
-        .updateOffer(event.itemId, event.approved);
+        .updateOffer(event.itemId, event.approved, event.comment);
     result.fold((l) {
       ProgressCircleDialog.dismiss();
-
       emit(
           state.copyWith(mySwapOrderStateStatus: MySwapOrderStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
-
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
@@ -137,6 +136,7 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
       SendReceiveSwapReqItem sendReceiveSwapReqItem =
           SendReceiveSwapReqItem.fromJson(r.data['data']);
       state.receiveSwapReqList.add(sendReceiveSwapReqItem);
+      Navigator.pop(event.context);
       emit(state.copyWith(
           mySwapOrderStateStatus: MySwapOrderStateStatus.SUCCESS,
           receiveSwapReqList: state.receiveSwapReqList));

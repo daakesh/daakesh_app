@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract class HomeEvent {}
 
 class GetToTopScreenEvent extends HomeEvent {}
@@ -24,4 +26,7 @@ class SelectTabItemEvent extends HomeEvent {
   SelectTabItemEvent({required this.index});
 }
 
-class ActivateSwapEvent extends HomeEvent {}
+class ActivateSwapEvent extends HomeEvent {
+  final BuildContext context;
+  ActivateSwapEvent({required this.context});
+}

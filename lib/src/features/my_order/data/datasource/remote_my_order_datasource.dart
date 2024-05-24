@@ -30,13 +30,14 @@ class RemoteMyOrderDatasource implements MyOrderDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> updateOffer(
-      int itemId, int approved) async {
+      int itemId, int approved, String comment) async {
     final result = await getIt.get<NetworkService>().post(
         baseUrl: NetworkConstants.baseUrl,
         path: 'DaakeshServices/api/swapOffer/updateOffer',
         body: {
           "id": "$itemId",
           "approved": "$approved",
+          "note": comment,
         });
     return result;
   }

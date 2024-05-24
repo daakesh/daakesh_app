@@ -31,7 +31,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
                 width: 14.0.w,
               ),
               Text(
-                context.locale.whatsApp_title,
+                context.locale.swapRequests,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 18.0.sp, color: ColorName.black),
               ),
@@ -39,7 +39,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
                 width: 3.0.w,
               ),
               Text(
-                '#12354',
+                '#${sendSwapReqItem.offerId ?? "12345"}',
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 18.0.sp, color: ColorName.black),
               ),

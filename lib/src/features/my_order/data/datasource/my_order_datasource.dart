@@ -6,7 +6,8 @@ abstract class MyOrderDatasource {
   Future<Either<Failure, ValidResponse>> getMyOrders();
   Future<Either<Failure, ValidResponse>> getSendReceiveSwapRequest(
       String type, int page);
-  Future<Either<Failure, ValidResponse>> updateOffer(int itemId, int approved);
+  Future<Either<Failure, ValidResponse>> updateOffer(
+      int itemId, int approved, String comment);
   Future<Either<Failure, ValidResponse>> startSwap(
       StartSwapModel startSwapModel);
 }

@@ -4,8 +4,10 @@ import '../../../../../../src.export.dart';
 
 class ReceiveSwapWaitingItem extends StatelessWidget {
   final SendReceiveSwapReqItem sendReceiveSwapReqItem;
-  const ReceiveSwapWaitingItem(
-      {super.key, required this.sendReceiveSwapReqItem});
+  const ReceiveSwapWaitingItem({
+    super.key,
+    required this.sendReceiveSwapReqItem,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,8 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                                       color: ColorName.gray,
                                       fontSize: 16.0.sp)),
                           TextSpan(
-                              text: '0',
+                              text:
+                                  '${sendReceiveSwapReqItem.offerItems!.offerCount}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.red, fontSize: 16.0.sp)),
@@ -131,10 +134,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
   }
 
   void onStartSwap(context, SendReceiveSwapReqItem sendReceiveSwapReqItem) {
-    Utils.openNavNewPage(
-        context,
-        StartSwapScreen(
-          sendReceiveSwapReqItem: sendReceiveSwapReqItem,
-        ));
+    Utils.openNavNewPage(context,
+        StartSwapScreen(sendReceiveSwapReqItem: sendReceiveSwapReqItem));
   }
 }

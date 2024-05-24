@@ -20,8 +20,10 @@ class MyOrderRepositoryImpl implements MyOrderRepository {
 
   @override
   Future<Either<Failure, ValidResponse>> updateOffer(
-      int itemId, int approved) async {
-    return await getIt.get<MyOrderDatasource>().updateOffer(itemId, approved);
+      int itemId, int approved, String comment) async {
+    return await getIt
+        .get<MyOrderDatasource>()
+        .updateOffer(itemId, approved, comment);
   }
 
   @override

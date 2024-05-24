@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import '../../../../../src.export.dart';
 
 class MainScreenWidget {
@@ -55,12 +54,12 @@ class MainScreenWidget {
       ),
       PersistentBottomNavBarItem(
           icon: Assets.png.swapIcon.image(),
-          textStyle:
-              context.easyTheme.textTheme.bodyMedium!.copyWith(fontSize: 14.0),
+          textStyle: context.easyTheme.textTheme.bodyMedium!
+              .copyWith(fontSize: 14.0, color: ColorName.blueGray),
           activeColorPrimary: ColorName.white,
           title: 'Swap',
-          onPressed: (context) {
-            HomeBloc.get.add(ActivateSwapEvent());
+          onPressed: (_) {
+            HomeBloc.get.add(ActivateSwapEvent(context: context));
           }),
       PersistentBottomNavBarItem(
         icon: bottomNavBarItem(

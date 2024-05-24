@@ -1,3 +1,5 @@
+import 'package:daakesh/src/features/features.export.dart';
+
 class SendReceiveSwapReqModel {
   bool? status;
   String? error;
@@ -251,6 +253,10 @@ class SourceItems {
   String? storeType;
   dynamic priceAfterDiscount;
   String? discountPercentage;
+  int? offerId;
+  int? offerCount;
+  BrandItem? brand;
+  CategoryItem? category;
 
   SourceItems(
       {this.id,
@@ -276,6 +282,10 @@ class SourceItems {
       this.citySwap,
       this.storeType,
       this.priceAfterDiscount,
+      this.offerCount,
+      this.brand,
+      this.offerId,
+      this.category,
       this.discountPercentage});
 
   SourceItems.fromJson(Map<String, dynamic> json) {
@@ -305,10 +315,18 @@ class SourceItems {
     quantity = json['quantity'] ?? "UnKnown";
     display = json['display'] ?? "UnKnown";
     countrySwap = json['country_swap'] ?? "UnKnown";
+    offerId = json['offer_id'] ?? 12345;
     citySwap = json['city_swap'] ?? "UnKnown";
     storeType = json['store_type'] ?? "UnKnown";
     priceAfterDiscount = json['price_after_discount'] ?? "UnKnown";
+    offerCount = json['offers_count'] ?? 0;
     discountPercentage = json['discount_percentage'] ?? "UnKnown";
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['brand'])
+        : BrandItem.initValues();
+    category = json['category'] != null
+        ? CategoryItem.fromJson(json['category'])
+        : CategoryItem.initValues();
   }
   SourceItems.initValues() {
     id = 0;
@@ -334,6 +352,7 @@ class SourceItems {
     countrySwap = "UnKnown";
     citySwap = "UnKnown";
     storeType = "UnKnown";
+    offerCount = 0;
     priceAfterDiscount = "UnKnown";
     discountPercentage = "UnKnown";
   }
@@ -364,6 +383,10 @@ class OfferItems {
   String? storeType;
   dynamic priceAfterDiscount;
   String? discountPercentage;
+  int? offerId;
+  int? offerCount;
+  BrandItem? brand;
+  CategoryItem? category;
 
   OfferItems(
       {this.id,
@@ -389,6 +412,10 @@ class OfferItems {
       this.citySwap,
       this.storeType,
       this.priceAfterDiscount,
+      this.offerCount,
+      this.brand,
+      this.offerId,
+      this.category,
       this.discountPercentage});
 
   OfferItems.fromJson(Map<String, dynamic> json) {
@@ -422,11 +449,18 @@ class OfferItems {
     storeType = json['store_type'] ?? "UnKnown";
     priceAfterDiscount = json['price_after_discount'] ?? "UnKnown";
     discountPercentage = json['discount_percentage'] ?? "UnKnown";
+    offerId = json['offer_id'] ?? 12345;
+    offerCount = json['offers_count'] ?? 0;
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['brand'])
+        : BrandItem.initValues();
+    category = json['category'] != null
+        ? CategoryItem.fromJson(json['category'])
+        : CategoryItem.initValues();
   }
   OfferItems.initValues() {
     id = 0;
     description = "UnKnown";
-
     itemImg = [''];
     date = "UnKnown";
     title = "UnKnown";
@@ -449,5 +483,6 @@ class OfferItems {
     storeType = "UnKnown";
     priceAfterDiscount = "UnKnown";
     discountPercentage = "UnKnown";
+    offerCount = 0;
   }
 }

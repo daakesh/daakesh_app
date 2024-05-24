@@ -3,7 +3,12 @@ import '../../../../src.export.dart';
 
 class StartSwapScreen extends StatefulWidget {
   final SendReceiveSwapReqItem sendReceiveSwapReqItem;
-  const StartSwapScreen({super.key, required this.sendReceiveSwapReqItem});
+  final bool isPreviewer;
+  const StartSwapScreen({
+    super.key,
+    required this.sendReceiveSwapReqItem,
+    this.isPreviewer = false,
+  });
   @override
   State<StartSwapScreen> createState() => _StartSwapScreenState();
 }
@@ -16,6 +21,9 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
   }
 
   void getMyOffer() {
+    if (widget.isPreviewer) {
+      return;
+    }
     MySwapProBloc.get.add(GetMySwapProEvent());
   }
 
@@ -167,7 +175,8 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                       TextSpan(text: '${context.locale.select_product}\n'),
                       const TextSpan(text: '('),
                       TextSpan(
-                          text: '25',
+                          text:
+                              '${widget.sendReceiveSwapReqItem.offerItems!.offerCount}',
                           style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(
                                   color: ColorName.red, fontSize: 15.0.sp)),
@@ -183,18 +192,21 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                 ),
               ),
               MySwapProductCardWidget(
-                  sendReceiveSwapReqItem: widget.sendReceiveSwapReqItem),
+                  sendReceiveSwapReqItem: widget.sendReceiveSwapReqItem,
+                  isPreviewer: widget.isPreviewer),
               SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Assets.svg.iosArrowBack.svg(),
-                    const SizedBox(
-                      width: 6.0,
-                    ),
-                    Assets.svg.iosArrowForward.svg(),
-                  ],
-                ),
+                child: !widget.isPreviewer
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Assets.svg.iosArrowBack.svg(),
+                          const SizedBox(
+                            width: 6.0,
+                          ),
+                          Assets.svg.iosArrowForward.svg(),
+                        ],
+                      )
+                    : const SizedBox(),
               ),
               const SliverToBoxAdapter(
                 child: SizedBox(
@@ -215,14 +227,16 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
       ..userName = sendReceiveSwapReqItem.offerUser!.name
       ..itemImage = sendReceiveSwapReqItem.offerItems!.itemImg
       ..title = sendReceiveSwapReqItem.offerItems!.title
-      ..brandName = "Unknown"
-      ..categoryName = "Unknown"
+      ..brandName = sendReceiveSwapReqItem.offerItems!.brand!.brandName
+      ..brandArName = sendReceiveSwapReqItem.offerItems!.brand!.arName
+      ..categoryName = sendReceiveSwapReqItem.offerItems!.category!.name
+      ..categoryArName = sendReceiveSwapReqItem.offerItems!.category!.arName
       ..year = sendReceiveSwapReqItem.offerItems!.year
       ..description = sendReceiveSwapReqItem.offerItems!.description
       ..citySwap = sendReceiveSwapReqItem.offerItems!.citySwap
       ..countrySwap = sendReceiveSwapReqItem.offerItems!.countrySwap
       ..date = sendReceiveSwapReqItem.createdAt
-      ..offerCount = -1;
+      ..offerCount = sendReceiveSwapReqItem.sourceItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }

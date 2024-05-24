@@ -1,4 +1,5 @@
 import 'package:daakesh/src/features/my_order/data/models/start_swap_model.dart';
+import 'package:flutter/material.dart';
 
 abstract class MySwapOrderEvent {}
 
@@ -17,7 +18,14 @@ class GetReceiveSwapRequestEvent extends MySwapOrderEvent {
 class UpdateOfferEvent extends MySwapOrderEvent {
   final int itemId;
   final int approved;
-  UpdateOfferEvent({required this.approved, required this.itemId});
+  final BuildContext context;
+  final String comment;
+  UpdateOfferEvent({
+    required this.comment,
+    required this.context,
+    required this.approved,
+    required this.itemId,
+  });
 }
 
 class StartSwapEvent extends MySwapOrderEvent {
