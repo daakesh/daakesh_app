@@ -358,10 +358,23 @@ class SendOfferScreen extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(
-            child: Center(
-                child: DefaultButtonWidget(
-                    text: context.locale.send_offer_button_title,
-                    onPressed: () => sendOffer(context))),
+            child: BlocBuilder<SwapProBloc, SwapProState>(
+              builder: (context, state) {
+                return Center(
+                    child: DefaultButtonWidget(
+                        text: context.locale.send_offer_button_title,
+                        style: context.easyTheme.elevatedButtonTheme.style!
+                            .copyWith(
+                          backgroundColor: MaterialStateProperty.all(
+                              state.mySwapProductListData.isNotEmpty
+                                  ? ColorName.blueGray
+                                  : ColorName.blueGray.withOpacity(0.5)),
+                        ),
+                        onPressed: () => state.mySwapProductListData.isNotEmpty
+                            ? sendOffer(context)
+                            : () {}));
+              },
+            ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 50.0)),
         ],

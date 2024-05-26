@@ -42,7 +42,7 @@ class SendReceiveSwapReqItem {
   int? approved;
   String? note;
   String? status;
-  String? offerId;
+  int? offerId;
   String? createdAt;
   String? updatedAt;
   SourceItems? sourceItems;
@@ -332,7 +332,6 @@ class SourceItems {
     id = 0;
     description = "UnKnown";
     itemImg = [''];
-
     date = "UnKnown";
     title = "UnKnown";
     type = "UnKnown";
