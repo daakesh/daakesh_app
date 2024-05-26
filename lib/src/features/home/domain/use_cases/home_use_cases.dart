@@ -53,6 +53,8 @@ abstract class HomeUseCases {
       int brandID, FilterDataModel filterDataModel, int page);
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
       String searchValue, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getAllTodayItems(
+      FilterDataModel filterDataModel, int page);
 }
 
 @dev
@@ -230,5 +232,13 @@ class HomeUseCasesImpl implements HomeUseCases {
     return await getIt
         .get<HomeRepository>()
         .getSearchItemsResult(searchValue, filterDataModel, page);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getAllTodayItems(
+      FilterDataModel filterDataModel, int page) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getAllTodayItems(filterDataModel, page);
   }
 }

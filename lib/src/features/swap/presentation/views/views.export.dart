@@ -7,3 +7,4 @@ export 'swap_sections_screen.dart';
 export 'swap_offer_details_screen.dart';
 export 'exchange_offer_screen.dart';
 export 'search/search.export.dart';
+export 'view_all_deals/view_all_deals.export.dart';

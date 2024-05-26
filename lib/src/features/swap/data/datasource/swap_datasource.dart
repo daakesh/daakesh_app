@@ -33,4 +33,6 @@ abstract class SwapDatasource {
   Future<Either<Failure, ValidResponse>> getCities();
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
       String searchValue, SwapFilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getOfferedItems(
+      SwapFilterDataModel filterDataModel, int page);
 }

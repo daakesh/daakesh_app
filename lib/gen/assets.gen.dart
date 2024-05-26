@@ -8,8 +8,9 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class $AssetsPngGen {
   const $AssetsPngGen();
@@ -63,12 +64,28 @@ class $AssetsPngGen {
   AssetGenImage get productIcon =>
       const AssetGenImage('assets/png/product_icon.png');
 
+  /// File path: assets/png/shop_mode_ar.gif
+  AssetGenImage get shopModeAr =>
+      const AssetGenImage('assets/png/shop_mode_ar.gif');
+
+  /// File path: assets/png/shop_mode_en.gif
+  AssetGenImage get shopModeEn =>
+      const AssetGenImage('assets/png/shop_mode_en.gif');
+
   /// File path: assets/png/splash_screen_background.png
   AssetGenImage get splashScreenBackground =>
       const AssetGenImage('assets/png/splash_screen_background.png');
 
   /// File path: assets/png/swap_icon.png
   AssetGenImage get swapIcon => const AssetGenImage('assets/png/swap_icon.png');
+
+  /// File path: assets/png/swap_mode_ar.gif
+  AssetGenImage get swapModeAr =>
+      const AssetGenImage('assets/png/swap_mode_ar.gif');
+
+  /// File path: assets/png/swap_mode_en.gif
+  AssetGenImage get swapModeEn =>
+      const AssetGenImage('assets/png/swap_mode_en.gif');
 
   /// File path: assets/png/visa_icon.png
   AssetGenImage get visaIcon => const AssetGenImage('assets/png/visa_icon.png');
@@ -88,8 +105,12 @@ class $AssetsPngGen {
         langIcon,
         mastercardIcon,
         productIcon,
+        shopModeAr,
+        shopModeEn,
         splashScreenBackground,
         swapIcon,
+        swapModeAr,
+        swapModeEn,
         visaIcon
       ];
 }
@@ -273,9 +294,11 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(this._assetName, {this.size = null});
 
   final String _assetName;
+
+  final Size? size;
 
   Image image({
     Key? key,
@@ -347,9 +370,20 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(this._assetName);
+  const SvgGenImage(
+    this._assetName, {
+    this.size = null,
+  }) : _isVecFormat = false;
+
+  const SvgGenImage.vec(
+    this._assetName, {
+    this.size = null,
+  }) : _isVecFormat = true;
 
   final String _assetName;
+
+  final Size? size;
+  final bool _isVecFormat;
 
   SvgPicture svg({
     Key? key,
@@ -364,19 +398,21 @@ class SvgGenImage {
     WidgetBuilder? placeholderBuilder,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    SvgTheme theme = const SvgTheme(),
+    SvgTheme? theme,
     ColorFilter? colorFilter,
     Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
     @deprecated bool cacheColorFilter = false,
   }) {
-    return SvgPicture.asset(
-      _assetName,
+    return SvgPicture(
+      _isVecFormat
+          ? AssetBytesLoader(_assetName,
+              assetBundle: bundle, packageName: package)
+          : SvgAssetLoader(_assetName,
+              assetBundle: bundle, packageName: package),
       key: key,
       matchTextDirection: matchTextDirection,
-      bundle: bundle,
-      package: package,
       width: width,
       height: height,
       fit: fit,
@@ -386,9 +422,8 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      colorFilter: colorFilter,
-      color: color,
-      colorBlendMode: colorBlendMode,
+      colorFilter: colorFilter ??
+          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );

@@ -2,8 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daakesh/src/features/my_order/data/models/start_swap_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path/path.dart';
-
 import '../../../../../src.export.dart';
 
 class MySwapProductCardWidget extends StatelessWidget {

@@ -182,11 +182,20 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(
-              context.locale.home_today_deals_title,
-              style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                fontSize: 18.0,
-              ),
+            child: Row(
+              children: [
+                Text(
+                  context.locale.home_today_deals_title,
+                  style: context.easyTheme.textTheme.headlineMedium!
+                      .copyWith(fontSize: 18.0),
+                ),
+                const Spacer(),
+                TextButtonWidget(
+                  onPressed: () => openViewAllScreen(),
+                  text: context.locale.home_today_deals_view_all,
+                  isBold: true,
+                )
+              ],
             ),
           ),
         ),
@@ -204,7 +213,9 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                         todayDealItem: todayDealItem,
                       );
                     },
-                    childCount: state.todayDealsListData.length,
+                    childCount: state.todayDealsListData.length <= 4
+                        ? state.todayDealsListData.length
+                        : 4,
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -215,28 +226,27 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
           },
         ),
         const SliverPadding(padding: EdgeInsets.only(top: 25.0)),
-
-        BlocBuilder<TodayDealsBloc, TodayDealsState>(builder: (context, state) {
-          return SliverToBoxAdapter(
-            child: !state.isMoreData
-                ? !state.todayDealsStateStatus.isLoadingMore
-                    ? Center(
-                        child: GestureDetector(
-                          onTap: () => onSeeMore(),
-                          child: Text(
-                            context.locale.see_more,
-                            style: context.easyTheme.textTheme.bodyLarge!
-                                .copyWith(
-                                    fontSize: 16.0,
-                                    color: ColorName.skyBlue,
-                                    fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    : const CircularProgressIndicatorWidget()
-                : const SizedBox(),
-          );
-        }),
+        // BlocBuilder<TodayDealsBloc, TodayDealsState>(builder: (context, state) {
+        //   return SliverToBoxAdapter(
+        //     child: !state.isMoreData
+        //         ? !state.todayDealsStateStatus.isLoadingMore
+        //             ? Center(
+        //                 child: GestureDetector(
+        //                   onTap: () => onSeeMore(),
+        //                   child: Text(
+        //                     context.locale.see_more,
+        //                     style: context.easyTheme.textTheme.bodyLarge!
+        //                         .copyWith(
+        //                             fontSize: 16.0,
+        //                             color: ColorName.skyBlue,
+        //                             fontWeight: FontWeight.bold),
+        //                   ),
+        //                 ),
+        //               )
+        //             : const CircularProgressIndicatorWidget()
+        //         : const SizedBox(),
+        //   );
+        // }),
         const SliverPadding(padding: EdgeInsets.only(top: 50.0)),
       ],
     );
@@ -257,7 +267,6 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
 
   void openHandmade(context) {
     HandmadeBloc.get.add(GetHandmadeCitiesEvent());
-
     Utils.openNavNewPage(context, const HomemadeScreen());
   }
 
@@ -282,5 +291,11 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
 
   void onSeeMore() {
     TodayDealsBloc.get.add(GetToadyDealsDataEvent(isSeeMore: true));
+  }
+
+  void openViewAllScreen() {
+    TodayDealsBloc.get.add(GetViewAllItemsEvent());
+    TodayDealsBloc.get.add(GetViewAllCitiesEvent());
+    Utils.openNavNewPage(context, const ViewAllTodatDealsScreen());
   }
 }

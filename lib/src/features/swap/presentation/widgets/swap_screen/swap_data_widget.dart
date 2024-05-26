@@ -96,11 +96,21 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(
-              context.locale.swap_trending_deals_to_swap,
-              style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                fontSize: 18.0,
-              ),
+            child: Row(
+              children: [
+                Text(
+                  context.locale.swap_trending_deals_to_swap,
+                  style: context.easyTheme.textTheme.headlineMedium!.copyWith(
+                    fontSize: 18.0,
+                  ),
+                ),
+                const Spacer(),
+                TextButtonWidget(
+                  text: context.locale.swap_trending_deal_view_all,
+                  isBold: true,
+                  onPressed: () => openViewAllScreen(),
+                ),
+              ],
             ),
           ),
         ),
@@ -117,39 +127,41 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
                       return SwapTrendDealProduct(
                           trendDealsItem: trendDealsItem);
                     },
-                    childCount: state.trendDealsListData.length,
+                    childCount: state.trendDealsListData.length <= 4
+                        ? state.trendDealsListData.length
+                        : 4,
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.6,
-                      mainAxisSpacing: 8.0,
+                      mainAxisSpacing: 4.0,
                       crossAxisSpacing: 8.0)),
             );
           },
         ),
         const SliverPadding(padding: EdgeInsets.only(top: 25.0)),
 
-        BlocBuilder<TrendDealsBloc, TrendDealsState>(builder: (context, state) {
-          return SliverToBoxAdapter(
-            child: !state.isMoreData
-                ? !state.swapTodayDealsStateStatus.isLoadingMore
-                    ? Center(
-                        child: GestureDetector(
-                          onTap: () => onSeeMore(),
-                          child: Text(
-                            context.locale.see_more,
-                            style: context.easyTheme.textTheme.bodyLarge!
-                                .copyWith(
-                                    fontSize: 16.0,
-                                    color: ColorName.skyBlue,
-                                    fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    : const CircularProgressIndicatorWidget()
-                : const SizedBox(),
-          );
-        }),
+        // BlocBuilder<TrendDealsBloc, TrendDealsState>(builder: (context, state) {
+        //   return SliverToBoxAdapter(
+        //     child: !state.isMoreData
+        //         ? !state.swapTodayDealsStateStatus.isLoadingMore
+        //             ? Center(
+        //                 child: GestureDetector(
+        //                   onTap: () => onSeeMore(),
+        //                   child: Text(
+        //                     context.locale.see_more,
+        //                     style: context.easyTheme.textTheme.bodyLarge!
+        //                         .copyWith(
+        //                             fontSize: 16.0,
+        //                             color: ColorName.skyBlue,
+        //                             fontWeight: FontWeight.bold),
+        //                   ),
+        //                 ),
+        //               )
+        //             : const CircularProgressIndicatorWidget()
+        //         : const SizedBox(),
+        //   );
+        // }),
         const SliverPadding(padding: EdgeInsets.only(top: 50.0)),
       ],
     );
@@ -167,9 +179,10 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
     String categoryTitle,
   ) {
     SwapSectionsBloc.get.add(SwapGetCategoryBySectionIDEvent(
-        secID: secID,
-        sectionIndex: sectionIndex,
-        categoryTitle: categoryTitle));
+      secID: secID,
+      sectionIndex: sectionIndex,
+      categoryTitle: categoryTitle,
+    ));
     openSectionScreen(context, state);
   }
 
@@ -179,5 +192,11 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
         SwapSectionScreen(
           swapState: state,
         ));
+  }
+
+  void openViewAllScreen() {
+    TrendDealsBloc.get.add(GetItemsViewAllsEvent());
+    TrendDealsBloc.get.add(GetViewAllsCitiesEvent());
+    Utils.openNavNewPage(context, const ViewAllDealsScreen());
   }
 }

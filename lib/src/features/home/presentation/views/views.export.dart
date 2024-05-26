@@ -9,3 +9,4 @@ export 'sections_screen.dart';
 export 'shop_by_handmade/shop_by_handmade.export.dart';
 export 'shop_by_brand/shop_by_brand.export.dart';
 export 'search/search.export.dart';
+export 'view_all_today_deals/view_all_today_deals.export.dart';

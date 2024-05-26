@@ -40,6 +40,7 @@ class _MainScreenState extends State<MainScreen> {
         popActionScreens: PopActionScreensType.all,
         navBarStyle: NavBarStyle.style15,
         padding: const NavBarPadding.only(bottom: 12.0),
+        popAllScreensOnTapAnyTabs: true,
         navBarHeight: Utils.isOpenKeyboard(context) ? 77 : 0.0,
         decoration: const NavBarDecoration(
             boxShadow: [

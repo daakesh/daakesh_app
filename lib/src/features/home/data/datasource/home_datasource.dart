@@ -51,4 +51,6 @@ abstract class HomeDatasource {
       int brandID, FilterDataModel filterDataModel, int page);
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
       String searchValue, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getAllTodayItems(
+      FilterDataModel filterDataModel, int page);
 }

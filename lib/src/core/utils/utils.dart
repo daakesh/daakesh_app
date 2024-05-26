@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gif/gif.dart';
 import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,6 +32,25 @@ class Utils {
           ),
           (Route<dynamic> route) => false);
     });
+  }
+
+  static Future<void> showSwapOverLay(
+      BuildContext context, String gifImage) async {
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry overlayEntry = OverlayEntry(
+        builder: (context) => Container(
+              alignment: Alignment.center,
+              width: Utils.getScreenWidth(context),
+              height: Utils.getScreenHeight(context),
+              color: Colors.white,
+              child: Gif(
+                image: AssetImage(gifImage),
+                autostart: Autostart.once,
+              ),
+            ));
+    overlayState.insert(overlayEntry);
+    await Future.delayed(const Duration(seconds: 3));
+    overlayEntry.remove();
   }
 
   static Future<void> openPageWithoutAnimation(Widget widget,

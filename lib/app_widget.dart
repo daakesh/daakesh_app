@@ -2,6 +2,7 @@ import 'package:daakesh/src/src.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gif/gif.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({

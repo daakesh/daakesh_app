@@ -90,11 +90,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> _activateSwap(
-      ActivateSwapEvent event, Emitter<HomeState> emit) {
+      ActivateSwapEvent event, Emitter<HomeState> emit) async {
     if (controller.index == 2) {
+      await Utils.showSwapOverLay(
+          event.context,
+          Utils.isEnglish
+              ? Assets.png.shopModeEn.path
+              : Assets.png.shopModeAr.path);
       controller.jumpToTab(0);
       emit(state.copyWith(tabIndex: 0));
     } else {
+      await Utils.showSwapOverLay(
+          event.context,
+          Utils.isEnglish
+              ? Assets.png.swapModeEn.path
+              : Assets.png.swapModeAr.path);
+
       controller.jumpToTab(2);
     }
     emit(state.copyWith());
