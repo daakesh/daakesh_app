@@ -43,6 +43,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<FilterBloc>(create: (_) => FilterBloc()),
       BlocProvider<CommentBloc>(create: (_) => CommentBloc()),
       BlocProvider<RateBloc>(create: (_) => RateBloc()),
+      BlocProvider<OfferDealsBloc>(create: (_) => OfferDealsBloc()),
 
       ///Swap Blocs
       BlocProvider<SwapBloc>(create: (_) => SwapBloc()),

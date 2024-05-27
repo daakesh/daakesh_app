@@ -20,6 +20,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
       fromPrice: 0.0,
       toPrice: 500.0,
       isFilterActive: false,
+      sortingType: SortingType.desc,
       type: FilterProductType.All,
     ));
   }
@@ -48,6 +49,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
           catID: event.catID,
           isMoreData: true,
           isFilterActive: event.isFilterActive,
+          sortingType: event.sortingType,
           subCategoryListData: [],
           currentPage: 1));
     }
@@ -62,9 +64,8 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
         ..rate = '${state.rate}';
     }
 
-    final result = await getIt
-        .get<HomeUseCases>()
-        .getSubCategoryByCatID(state.catID, filterDataModel, state.currentPage);
+    final result = await getIt.get<HomeUseCases>().getSubCategoryByCatID(
+        state.catID, filterDataModel, state.currentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(filterStateStatus: FilterStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

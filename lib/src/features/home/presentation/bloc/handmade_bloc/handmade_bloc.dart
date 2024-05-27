@@ -21,6 +21,7 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
       rate: 0,
       fromPrice: 0.0,
       toPrice: 500.0,
+      sortingType: SortingType.desc,
       isFilterActive: false,
       type: FilterProductType.All,
     ));
@@ -49,6 +50,7 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
       emit(state.copyWith(
         handmadeStateStatus: HandmadeStateStatus.LOADING,
         handmadeListData: [],
+        sortingType: event.sortingType,
         isFilterActive: event.isFilterActive,
         currentPage: 1,
       ));
@@ -65,7 +67,7 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
     }
     final result = await getIt
         .get<HomeUseCases>()
-        .getHandmadeData(filterDataModel, state.currentPage);
+        .getHandmadeData(filterDataModel, state.currentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

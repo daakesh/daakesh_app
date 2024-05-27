@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-class ViewAllTodatDealsScreen extends StatelessWidget {
-  const ViewAllTodatDealsScreen({super.key});
+class ViewAllTodayDealsScreen extends StatelessWidget {
+  const ViewAllTodayDealsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,28 @@ class ViewAllTodatDealsScreen extends StatelessWidget {
                       onTap: () => openFilterScreen(context),
                       child: Assets.png.filterIcon
                           .image(width: 38.0, height: 38.0)),
+                ),
+              ),
+            ),
+            const SliverPadding(padding: EdgeInsets.only(top: 7.0)),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(context.locale.results_title,
+                          style: context.easyTheme.textTheme.headlineMedium),
+                    ),
+                    GestureDetector(
+                      onTap: () => state.sortingType == SortingType.desc
+                          ? TodayDealsBloc.get.add(GetViewAllItemsEvent(
+                              sortingType: SortingType.asc))
+                          : TodayDealsBloc.get.add(GetViewAllItemsEvent(
+                              sortingType: SortingType.desc)),
+                      child: Assets.svg.sortIcon.svg(),
+                    ),
+                  ],
                 ),
               ),
             ),

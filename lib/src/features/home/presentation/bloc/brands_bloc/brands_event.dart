@@ -13,10 +13,12 @@ class GetItemsByBrandsEvent extends BrandsEvent {
   final int? brandID;
   final bool? isFilterActive;
   final bool isSeeMore;
+  final SortingType? sortingType;
   GetItemsByBrandsEvent({
     this.isSeeMore = false,
     this.brandID,
     this.isFilterActive,
+    this.sortingType,
   });
 }
 

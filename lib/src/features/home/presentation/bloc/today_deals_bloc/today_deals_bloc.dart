@@ -122,6 +122,7 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
           todayDealsStateStatus: TodayDealsStateStatus.LOADING,
           isMoreDataItems: true,
           isFilterActive: event.isFilterActive,
+          sortingType: event.sortingType,
           allTodayDealsListData: [],
           itemsCurrentPage: 1));
     }
@@ -136,9 +137,8 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
         ..rate = '${state.rate}';
     }
 
-    final result = await getIt
-        .get<HomeUseCases>()
-        .getAllTodayItems(filterDataModel, state.itemsCurrentPage);
+    final result = await getIt.get<HomeUseCases>().getAllTodayItems(
+        filterDataModel, state.itemsCurrentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(todayDealsStateStatus: TodayDealsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

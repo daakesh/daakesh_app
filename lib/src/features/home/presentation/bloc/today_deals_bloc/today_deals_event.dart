@@ -15,9 +15,11 @@ class GetToadyDealsDataEvent extends TodayDealsEvent {
 class GetViewAllItemsEvent extends TodayDealsEvent {
   final bool? isFilterActive;
   final bool isSeeMore;
+  final SortingType? sortingType;
   GetViewAllItemsEvent({
     this.isSeeMore = false,
     this.isFilterActive,
+    this.sortingType,
   });
 }
 

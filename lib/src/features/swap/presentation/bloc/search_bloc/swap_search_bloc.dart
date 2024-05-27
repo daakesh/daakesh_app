@@ -85,6 +85,7 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
           isMoreData: true,
           searchValue: event.searchValue ?? state.searchValue,
           isFilterActive: event.isFilterActive,
+          sortingType: event.sortingType,
           filterDataList: [],
           filterCurrentPage: 1));
     }
@@ -100,10 +101,10 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
     }
 
     final result = await getIt.get<SwapUseCases>().getSearchItemsResult(
-          state.searchValue,
-          filterDataModel,
-          state.filterCurrentPage,
-        );
+        state.searchValue,
+        filterDataModel,
+        state.filterCurrentPage,
+        state.sortingType);
     result.fold((l) {
       emit(state.copyWith(swapSearchStateStatus: SwapSearchStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

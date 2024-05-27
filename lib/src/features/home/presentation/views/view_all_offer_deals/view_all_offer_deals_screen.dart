@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
-class BrandsItemScreen extends StatelessWidget {
-  const BrandsItemScreen({super.key});
+class ViewAllOfferDealsScreen extends StatelessWidget {
+  const ViewAllOfferDealsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<BrandsBloc, BrandsState>(builder: (context, state) {
+      body: BlocBuilder<OfferDealsBloc, OfferDealsState>(
+          builder: (context, state) {
         return CustomScrollView(
           slivers: [
             const HomeAppBarWidget(),
@@ -37,9 +38,9 @@ class BrandsItemScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => state.sortingType == SortingType.desc
-                          ? BrandsBloc.get.add(GetItemsByBrandsEvent(
+                          ? OfferDealsBloc.get.add(ViewAllOfferDealsItemsEvent(
                               sortingType: SortingType.asc))
-                          : BrandsBloc.get.add(GetItemsByBrandsEvent(
+                          : OfferDealsBloc.get.add(ViewAllOfferDealsItemsEvent(
                               sortingType: SortingType.desc)),
                       child: Assets.svg.sortIcon.svg(),
                     ),
@@ -50,17 +51,17 @@ class BrandsItemScreen extends StatelessWidget {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => GestureDetector(
-                  onTap: () =>
-                      openMoreInfoScreen(context, state.itemByBrandList[index]),
+                  onTap: () => openMoreInfoScreen(
+                      context, state.allTodayDealsListData[index]),
                   child: Padding(
                     padding:
                         const EdgeInsets.only(left: 17.0, right: 17.0, top: 17),
                     child: ResultItemWidget(
-                      todayItem: state.itemByBrandList[index],
+                      todayItem: state.allTodayDealsListData[index],
                     ),
                   ),
                 ),
-                childCount: state.itemByBrandList.length,
+                childCount: state.allTodayDealsListData.length,
               ),
             ),
             const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
@@ -84,14 +85,14 @@ class BrandsItemScreen extends StatelessWidget {
   }
 
   void onSeeMore() {
-    BrandsBloc.get.add(GetItemsByBrandsEvent(isSeeMore: true));
+    OfferDealsBloc.get.add(ViewAllOfferDealsItemsEvent(isSeeMore: true));
   }
 
-  Widget seeMoreHandler(BrandsState state, BuildContext context) {
+  Widget seeMoreHandler(OfferDealsState state, BuildContext context) {
     switch (!state.isMoreDataItems) {
       case true:
-        switch (state.brandsStateStatus) {
-          case BrandsStateStatus.LOADINGMORE:
+        switch (state.offerDealsStateStatus) {
+          case OfferDealsStateStatus.LOADINGMORE:
             return const CircularProgressIndicatorWidget();
           default:
             return Center(
@@ -102,7 +103,7 @@ class BrandsItemScreen extends StatelessWidget {
             ));
         }
       default:
-        return state.brandsStateStatus.isNull
+        return state.offerDealsStateStatus.isNull
             ? Center(
                 child: Text(
                   context.locale.results_no_data,
@@ -114,6 +115,6 @@ class BrandsItemScreen extends StatelessWidget {
   }
 
   void openFilterScreen(BuildContext context) {
-    Utils.openNavNewPage(context, BrandFilterScreen());
+    Utils.openNavNewPage(context, ViewAllOfferDealsFiltterScreen());
   }
 }

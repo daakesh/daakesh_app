@@ -31,6 +31,28 @@ class SwapSearchItemsScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              const SliverPadding(padding: EdgeInsets.only(top: 7.0)),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(context.locale.results_title,
+                            style: context.easyTheme.textTheme.headlineMedium),
+                      ),
+                      GestureDetector(
+                        onTap: () => state.sortingType == SortingType.desc
+                            ? SwapSearchBloc.get.add(SwapSearchFilterEvent(
+                                sortingType: SortingType.asc))
+                            : SwapSearchBloc.get.add(SwapSearchFilterEvent(
+                                sortingType: SortingType.desc)),
+                        child: Assets.svg.sortIcon.svg(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               state.filterDataList.isNotEmpty
                   ? SliverList(
                       delegate: SliverChildBuilderDelegate(

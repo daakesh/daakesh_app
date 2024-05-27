@@ -31,13 +31,17 @@ class RemoteSwapDatasource implements SwapDatasource {
           "type": "swap",
           "secID": secID.toString(),
           "page": page.toString(),
+          "withPaginate": "true"
         });
     return result;
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, SwapFilterDataModel swapFilterDataModel, int page) async {
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getItemByCategoryId',
           params: {"page": "$page"},
@@ -49,7 +53,7 @@ class RemoteSwapDatasource implements SwapDatasource {
             "Filter": swapFilterDataModel.toJson(),
             "orderBy": {
               "name": "created_at",
-              "operation": "desc",
+              "operation": sortingtype.name,
             },
           }),
         );
@@ -211,7 +215,10 @@ class RemoteSwapDatasource implements SwapDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, SwapFilterDataModel filterDataModel, int page) async {
+      String searchValue,
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getSearchItemsResult',
           params: {"page": "$page"},
@@ -219,14 +226,24 @@ class RemoteSwapDatasource implements SwapDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode(
-              {"Filter": filterDataModel.toJson(), "name": searchValue}),
+            {
+              "Filter": filterDataModel.toJson(),
+              "name": searchValue,
+              "orderBy": {
+                "name": "created_at",
+                "operation": sortingType.name,
+              },
+            },
+          ),
         );
     return result;
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getOfferedItems(
-      SwapFilterDataModel filterDataModel, int page) async {
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getOfferedItems',
           params: {"page": "$page"},
@@ -237,7 +254,7 @@ class RemoteSwapDatasource implements SwapDatasource {
             "Filter": filterDataModel.toJson(),
             "orderBy": {
               "name": "created_at",
-              "operation": "desc",
+              "operation": sortingType.name,
             },
           }),
         );

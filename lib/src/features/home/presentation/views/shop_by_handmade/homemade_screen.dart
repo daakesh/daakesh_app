@@ -26,6 +26,28 @@ class HomemadeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(context.locale.results_title,
+                            style: context.easyTheme.textTheme.headlineMedium),
+                      ),
+                      GestureDetector(
+                        onTap: () => state.sortingType == SortingType.desc
+                            ? HandmadeBloc.get.add(GetHandmadeDataEvent(
+                                sortingType: SortingType.asc))
+                            : HandmadeBloc.get.add(GetHandmadeDataEvent(
+                                sortingType: SortingType.desc)),
+                        child: Assets.svg.sortIcon.svg(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
               SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {

@@ -38,6 +38,7 @@ class TrendDealsState extends Equatable {
   final FilterProductType type;
   final bool isFilterActive;
   final List<CityItem> cityItemList;
+  final SortingType sortingType;
 
   const TrendDealsState({
     this.swapTodayDealsStateStatus = SwapTodayDealsStateStatus.INITIAL,
@@ -57,6 +58,7 @@ class TrendDealsState extends Equatable {
     this.type = FilterProductType.All,
     this.isFilterActive = false,
     this.cityItemList = const [],
+    this.sortingType = SortingType.desc,
   });
 
   TrendDealsState copyWith({
@@ -77,6 +79,7 @@ class TrendDealsState extends Equatable {
     FilterProductType? type,
     bool? isFilterActive,
     List<CityItem>? cityItemList,
+    SortingType? sortingType,
   }) {
     return TrendDealsState(
       swapTodayDealsStateStatus:
@@ -97,6 +100,7 @@ class TrendDealsState extends Equatable {
       type: type ?? this.type,
       isFilterActive: isFilterActive ?? this.isFilterActive,
       cityItemList: cityItemList ?? this.cityItemList,
+      sortingType: sortingType ?? this.sortingType,
     );
   }
 
@@ -117,5 +121,6 @@ class TrendDealsState extends Equatable {
         type,
         isFilterActive,
         cityItemList,
+        sortingType,
       ];
 }

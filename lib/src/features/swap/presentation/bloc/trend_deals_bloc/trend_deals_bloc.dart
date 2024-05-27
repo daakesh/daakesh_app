@@ -74,6 +74,7 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
           swapTodayDealsStateStatus: SwapTodayDealsStateStatus.LOADING,
           isMoreDataItems: true,
           isFilterActive: event.isFilterActive,
+          sortingType: event.sortingType,
           trendDealListData: [],
           itemsCurrentPage: 1));
     }
@@ -88,9 +89,8 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
         ..rate = '${state.rate}';
     }
 
-    final result = await getIt
-        .get<SwapUseCases>()
-        .getOfferedItems(filterDataModel, state.itemsCurrentPage);
+    final result = await getIt.get<SwapUseCases>().getOfferedItems(
+        filterDataModel, state.itemsCurrentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(
           swapTodayDealsStateStatus: SwapTodayDealsStateStatus.ERROR));

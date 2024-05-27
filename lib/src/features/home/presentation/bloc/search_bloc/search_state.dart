@@ -41,6 +41,7 @@ class SearchState extends Equatable {
   final int filterCurrentPage;
   final List<TodayItem> filterDataList;
   final bool isMoreDataItems;
+  final SortingType sortingType;
 
   const SearchState({
     this.searchStateStatus = SearchStateStatus.INITIAL,
@@ -58,25 +59,26 @@ class SearchState extends Equatable {
     this.filterCurrentPage = 1,
     this.filterDataList = const [],
     this.isMoreDataItems = true,
+    this.sortingType = SortingType.desc,
   });
 
-  SearchState copyWith({
-    SearchStateStatus? searchStateStatus,
-    List<String>? searchResultList,
-    int? currentSearchPage,
-    String? searchValue,
-    bool? isMoreData,
-    String? country,
-    String? city,
-    int? rate,
-    double? fromPrice,
-    double? toPrice,
-    FilterProductType? type,
-    bool? isFilterActive,
-    int? filterCurrentPage,
-    List<TodayItem>? filterDataList,
-    bool? isMoreDataItems,
-  }) {
+  SearchState copyWith(
+      {SearchStateStatus? searchStateStatus,
+      List<String>? searchResultList,
+      int? currentSearchPage,
+      String? searchValue,
+      bool? isMoreData,
+      String? country,
+      String? city,
+      int? rate,
+      double? fromPrice,
+      double? toPrice,
+      FilterProductType? type,
+      bool? isFilterActive,
+      int? filterCurrentPage,
+      List<TodayItem>? filterDataList,
+      bool? isMoreDataItems,
+      SortingType? sortingType}) {
     return SearchState(
       searchStateStatus: searchStateStatus ?? this.searchStateStatus,
       searchResultList: searchResultList ?? this.searchResultList,
@@ -93,6 +95,7 @@ class SearchState extends Equatable {
       filterCurrentPage: filterCurrentPage ?? this.filterCurrentPage,
       filterDataList: filterDataList ?? this.filterDataList,
       isMoreDataItems: isMoreDataItems ?? this.isMoreDataItems,
+      sortingType: sortingType ?? this.sortingType,
     );
   }
 
@@ -112,5 +115,6 @@ class SearchState extends Equatable {
         isFilterActive,
         filterDataList,
         isMoreDataItems,
+        sortingType,
       ];
 }

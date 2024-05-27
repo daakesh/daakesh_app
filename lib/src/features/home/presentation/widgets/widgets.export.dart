@@ -9,3 +9,4 @@ export 'handmade_screen/handmade_screen.export.dart';
 export 'main_screen/main_screen.export.dart';
 export 'search_screen/search.export.dart';
 export 'view_today_deals_screen/view_all_filter_screen/view_all_filter_screen.export.dart';
+export 'view_all_offer_deals/view_all_filter_screen.export.dart';

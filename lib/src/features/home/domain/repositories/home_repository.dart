@@ -6,10 +6,10 @@ abstract class HomeRepository {
   Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
-  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(int catID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getHandmadeData(
-      FilterDataModel filterDataModel, int page);
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getItemsByBrands(
       int page, int brandId);
@@ -45,10 +45,13 @@ abstract class HomeRepository {
   Future<Either<Failure, ValidResponse>> getCities();
   Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId);
   Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId);
-  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
-      int brandID, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(int brandID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, FilterDataModel filterDataModel, int page);
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getAllTodayItems(
-      FilterDataModel filterDataModel, int page);
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
 }

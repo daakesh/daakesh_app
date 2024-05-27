@@ -7,7 +7,10 @@ abstract class SwapRepository {
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, SwapFilterDataModel swapFilterDataModel, int page);
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype);
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getTodayItemsData(int page);
@@ -32,7 +35,10 @@ abstract class SwapRepository {
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
   Future<Either<Failure, ValidResponse>> getCities();
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, SwapFilterDataModel filterDataModel, int page);
+      String searchValue,
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getOfferedItems(
-      SwapFilterDataModel filterDataModel, int page);
+      SwapFilterDataModel filterDataModel, int page, SortingType sortingType);
 }

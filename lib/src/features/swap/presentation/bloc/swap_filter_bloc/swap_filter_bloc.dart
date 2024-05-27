@@ -48,6 +48,7 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
           swapFilterStateStatus: SwapFilterStateStatus.LOADING,
           catID: event.catID,
           isMoreData: true,
+          sortingtype: event.sortingType,
           isFilterActive: event.isFilterActive,
           subCategoryListData: [],
           currentPage: 1));
@@ -63,7 +64,7 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
         ..rate = '${state.rate}';
     }
     final result = await getIt.get<SwapUseCases>().getSubCategoryByCatID(
-        state.catID, swapFilterDataModel, state.currentPage);
+        state.catID, swapFilterDataModel, state.currentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

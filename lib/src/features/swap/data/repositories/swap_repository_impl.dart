@@ -24,10 +24,13 @@ class SwapRepositoryImpl implements SwapRepository {
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, SwapFilterDataModel swapFilterDataModel, int page) async {
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype) async {
     return await getIt
         .get<SwapDatasource>()
-        .getSubCategoryByCatID(catID, swapFilterDataModel, page);
+        .getSubCategoryByCatID(catID, swapFilterDataModel, page, sortingtype);
   }
 
   @override
@@ -122,17 +125,22 @@ class SwapRepositoryImpl implements SwapRepository {
 
   @override
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, SwapFilterDataModel filterDataModel, int page) async {
+      String searchValue,
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<SwapDatasource>()
-        .getSearchItemsResult(searchValue, filterDataModel, page);
+        .getSearchItemsResult(searchValue, filterDataModel, page, sortingType);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getOfferedItems(
-      SwapFilterDataModel filterDataModel, int page) async {
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<SwapDatasource>()
-        .getOfferedItems(filterDataModel, page);
+        .getOfferedItems(filterDataModel, page, sortingType);
   }
 }

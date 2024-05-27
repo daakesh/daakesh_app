@@ -86,3 +86,8 @@ enum ComplaintType {
   User,
   Seller,
 }
+
+enum SortingType {
+  desc,
+  asc,
+}

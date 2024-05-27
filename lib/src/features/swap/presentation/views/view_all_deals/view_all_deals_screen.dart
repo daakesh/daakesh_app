@@ -26,6 +26,28 @@ class ViewAllDealsScreen extends StatelessWidget {
                 ),
               ),
             ),
+            const SliverPadding(padding: EdgeInsets.only(top: 7.0)),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(context.locale.results_title,
+                          style: context.easyTheme.textTheme.headlineMedium),
+                    ),
+                    GestureDetector(
+                      onTap: () => state.sortingType == SortingType.desc
+                          ? TrendDealsBloc.get.add(GetItemsViewAllsEvent(
+                              sortingType: SortingType.asc))
+                          : TrendDealsBloc.get.add(GetItemsViewAllsEvent(
+                              sortingType: SortingType.desc)),
+                      child: Assets.svg.sortIcon.svg(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => GestureDetector(

@@ -70,6 +70,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           isMoreData: true,
           searchValue: event.searchValue ?? state.searchValue,
           isFilterActive: event.isFilterActive,
+          sortingType: event.sortingType,
           filterDataList: [],
           filterCurrentPage: 1));
     }
@@ -85,10 +86,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     }
 
     final result = await getIt.get<HomeUseCases>().getSearchItemsResult(
-          state.searchValue,
-          filterDataModel,
-          state.filterCurrentPage,
-        );
+        state.searchValue,
+        filterDataModel,
+        state.filterCurrentPage,
+        state.sortingType);
     result.fold((l) {
       emit(state.copyWith(searchStateStatus: SearchStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

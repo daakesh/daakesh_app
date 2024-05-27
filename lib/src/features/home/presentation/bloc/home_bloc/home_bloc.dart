@@ -73,6 +73,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HandmadeBloc.get.add(GetHandmadeDataEvent());
     BrandsBloc.get.add(GetBrandsDataEvent());
     TodayDealsBloc.get.add(GetToadyDealsDataEvent());
+    OfferDealsBloc.get.add(GetAllOfferDealsEvent());
     //TodayDealsBloc.get.add(GetToadyDaakeshDealsDataEvent());
     if (ValueConstants.userId.isNotEmpty) {
       //CartBloc.get.add(GetCartItemsEvent());

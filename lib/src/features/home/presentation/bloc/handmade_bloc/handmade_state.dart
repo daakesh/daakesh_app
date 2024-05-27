@@ -22,6 +22,7 @@ class HandmadeState extends Equatable {
   final int itemsCurrentPage;
   final int homemadeID;
   final bool isMoreDataItems;
+  final SortingType sortingType;
 
   ///
   final String country;
@@ -50,6 +51,7 @@ class HandmadeState extends Equatable {
     this.type = FilterProductType.All,
     this.isFilterActive = false,
     this.cityItemList = const [],
+    this.sortingType = SortingType.desc,
   });
 
   HandmadeState copyWith({
@@ -69,6 +71,7 @@ class HandmadeState extends Equatable {
     FilterProductType? type,
     bool? isFilterActive,
     List<CityItem>? cityItemList,
+    SortingType? sortingType,
   }) {
     return HandmadeState(
       handmadeStateStatus: handmadeStateStatus ?? this.handmadeStateStatus,
@@ -87,6 +90,7 @@ class HandmadeState extends Equatable {
       type: type ?? this.type,
       isFilterActive: isFilterActive ?? this.isFilterActive,
       cityItemList: cityItemList ?? this.cityItemList,
+      sortingType: sortingType ?? this.sortingType,
     );
   }
 
@@ -108,5 +112,6 @@ class HandmadeState extends Equatable {
         type,
         isFilterActive,
         cityItemList,
+        sortingType,
       ];
 }

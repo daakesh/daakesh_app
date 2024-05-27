@@ -70,6 +70,7 @@ class BrandsBloc extends Bloc<BrandsEvent, BrandsState> {
           brandsStateStatus: BrandsStateStatus.LOADING,
           brandID: event.brandID,
           isMoreDataItems: true,
+          sortingType: event.sortingType,
           isFilterActive: event.isFilterActive,
           itemByBrandList: [],
           itemsCurrentPage: 1));
@@ -86,7 +87,10 @@ class BrandsBloc extends Bloc<BrandsEvent, BrandsState> {
     }
 
     final result = await getIt.get<HomeUseCases>().getItemsByBrandID(
-        state.brandID, filterDataModel, state.itemsCurrentPage);
+        state.brandID,
+        filterDataModel,
+        state.itemsCurrentPage,
+        state.sortingType);
     result.fold((l) {
       emit(state.copyWith(brandsStateStatus: BrandsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

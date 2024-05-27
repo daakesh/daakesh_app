@@ -16,11 +16,13 @@ class SwapSearchFilterEvent extends SwapSearchEvent {
   final String? searchValue;
   final bool? isFilterActive;
   final bool isSeeMore;
+  final SortingType? sortingType;
 
   SwapSearchFilterEvent({
     this.searchValue,
     this.isFilterActive,
     this.isSeeMore = false,
+    this.sortingType,
   });
 }
 

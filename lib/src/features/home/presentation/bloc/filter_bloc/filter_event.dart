@@ -6,11 +6,13 @@ class PreviewSectionSubCategoriesEvent extends FilterEvent {
   final int? catID;
   final bool? isFilterActive;
   final bool isSeeMore;
+  final SortingType? sortingType;
 
   PreviewSectionSubCategoriesEvent({
     this.catID,
     this.isFilterActive,
     this.isSeeMore = false,
+    this.sortingType,
   });
 }
 

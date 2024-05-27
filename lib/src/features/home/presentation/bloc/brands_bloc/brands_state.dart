@@ -30,6 +30,7 @@ class BrandsState extends Equatable {
   final FilterProductType type;
   final bool isFilterActive;
   final List<CityItem> cityItemList;
+  final SortingType sortingType;
 
   const BrandsState({
     this.brandsStateStatus = BrandsStateStatus.INITIAL,
@@ -48,6 +49,7 @@ class BrandsState extends Equatable {
     this.type = FilterProductType.All,
     this.isFilterActive = false,
     this.cityItemList = const [],
+    this.sortingType = SortingType.desc,
   });
 
   BrandsState copyWith({
@@ -67,6 +69,7 @@ class BrandsState extends Equatable {
     FilterProductType? type,
     bool? isFilterActive,
     List<CityItem>? cityItemList,
+    SortingType? sortingType,
   }) {
     return BrandsState(
       brandsStateStatus: brandsStateStatus ?? this.brandsStateStatus,
@@ -85,6 +88,7 @@ class BrandsState extends Equatable {
       type: type ?? this.type,
       isFilterActive: isFilterActive ?? this.isFilterActive,
       cityItemList: cityItemList ?? this.cityItemList,
+      sortingType: sortingType ?? this.sortingType,
     );
   }
 
@@ -106,5 +110,6 @@ class BrandsState extends Equatable {
         type,
         isFilterActive,
         cityItemList,
+        sortingType,
       ];
 }

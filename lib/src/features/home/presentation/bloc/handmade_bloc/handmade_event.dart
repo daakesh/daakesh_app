@@ -5,8 +5,10 @@ abstract class HandmadeEvent {}
 class GetHandmadeDataEvent extends HandmadeEvent {
   final bool isSeeMore;
   final bool? isFilterActive;
+  final SortingType? sortingType;
 
-  GetHandmadeDataEvent({this.isFilterActive, this.isSeeMore = false});
+  GetHandmadeDataEvent(
+      {this.isFilterActive, this.isSeeMore = false, this.sortingType});
 }
 
 class GetItemsByHomemadeEvent extends HandmadeEvent {

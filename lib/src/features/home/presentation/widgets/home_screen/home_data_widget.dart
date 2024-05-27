@@ -226,6 +226,54 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
           },
         ),
         const SliverPadding(padding: EdgeInsets.only(top: 25.0)),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              children: [
+                Text(
+                  context.locale.home_offer_deals_title,
+                  style: context.easyTheme.textTheme.headlineMedium!
+                      .copyWith(fontSize: 18.0),
+                ),
+                const Spacer(),
+                TextButtonWidget(
+                  onPressed: () => openViewAllOfferDealsScreen(),
+                  text: context.locale.home_today_deals_view_all,
+                  isBold: true,
+                )
+              ],
+            ),
+          ),
+        ),
+        const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
+
+        BlocBuilder<OfferDealsBloc, OfferDealsState>(
+          builder: (context, state) {
+            return SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    (_, index) {
+                      TodayItem todayDealItem =
+                          state.homeTodayDealsListData[index];
+                      return TodayDealProduct(
+                        isDaakeshTodayDeal: true,
+                        todayDealItem: todayDealItem,
+                      );
+                    },
+                    childCount: state.homeTodayDealsListData.length <= 4
+                        ? state.homeTodayDealsListData.length
+                        : 4,
+                  ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.65,
+                      mainAxisSpacing: 8.0,
+                      crossAxisSpacing: 8.0)),
+            );
+          },
+        ),
         // BlocBuilder<TodayDealsBloc, TodayDealsState>(builder: (context, state) {
         //   return SliverToBoxAdapter(
         //     child: !state.isMoreData
@@ -279,7 +327,7 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
           default:
             return Center(
                 child: TextButtonWidget(
-              text: 'See More',
+              text: context.locale.see_more,
               onPressed: () => onSeeMore(),
               isBold: true,
             ));
@@ -296,6 +344,13 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
   void openViewAllScreen() {
     TodayDealsBloc.get.add(GetViewAllItemsEvent());
     TodayDealsBloc.get.add(GetViewAllCitiesEvent());
-    Utils.openNavNewPage(context, const ViewAllTodatDealsScreen());
+    Utils.openNavNewPage(context, const ViewAllTodayDealsScreen());
+  }
+
+  void openViewAllOfferDealsScreen() {
+    //TodayDealsBloc.get.add(GetViewAllItemsEvent());
+    OfferDealsBloc.get.add(ViewAllOfferDealsItemsEvent());
+    OfferDealsBloc.get.add(GetViewAllOfferDealsCitiesEvent());
+    Utils.openNavNewPage(context, const ViewAllOfferDealsScreen());
   }
 }

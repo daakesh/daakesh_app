@@ -64,7 +64,6 @@ class CategoryItem {
     name = json['name'] ?? "Unknown";
     description = json['description'];
     catImg = json['catImg'] ?? "Unknown";
-
     date = json['date'] ?? "Unknown";
     secID = json['secID'] ?? 0;
     arName = json['arName'] ?? "Unknown";

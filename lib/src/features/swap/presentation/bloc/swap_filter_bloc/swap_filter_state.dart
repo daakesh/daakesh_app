@@ -38,6 +38,7 @@ class SwapFilterState extends Equatable {
   ///
   final int categoryIndex;
   final List<CityItem> cityItemList;
+  final SortingType sortingType;
   const SwapFilterState({
     this.swapFilterStateStatus = SwapFilterStateStatus.INITIAL,
     this.subCategoryListData = const [],
@@ -53,24 +54,25 @@ class SwapFilterState extends Equatable {
     this.isMoreData = true,
     this.categoryIndex = 0,
     this.cityItemList = const [],
+    this.sortingType = SortingType.desc,
   });
 
-  SwapFilterState copyWith({
-    SwapFilterStateStatus? swapFilterStateStatus,
-    List<TrendDealsItem>? subCategoryListData,
-    int? catID,
-    String? country,
-    String? city,
-    int? rate,
-    double? fromPrice,
-    double? toPrice,
-    FilterProductType? type,
-    bool? isFilterActive,
-    int? currentPage,
-    bool? isMoreData,
-    int? categoryIndex,
-    List<CityItem>? cityItemList,
-  }) {
+  SwapFilterState copyWith(
+      {SwapFilterStateStatus? swapFilterStateStatus,
+      List<TrendDealsItem>? subCategoryListData,
+      int? catID,
+      String? country,
+      String? city,
+      int? rate,
+      double? fromPrice,
+      double? toPrice,
+      FilterProductType? type,
+      bool? isFilterActive,
+      int? currentPage,
+      bool? isMoreData,
+      int? categoryIndex,
+      List<CityItem>? cityItemList,
+      SortingType? sortingtype}) {
     return SwapFilterState(
       swapFilterStateStatus:
           swapFilterStateStatus ?? this.swapFilterStateStatus,
@@ -87,6 +89,7 @@ class SwapFilterState extends Equatable {
       isMoreData: isMoreData ?? this.isMoreData,
       categoryIndex: categoryIndex ?? this.categoryIndex,
       cityItemList: cityItemList ?? this.cityItemList,
+      sortingType: sortingtype ?? this.sortingType,
     );
   }
 
@@ -106,5 +109,6 @@ class SwapFilterState extends Equatable {
         isMoreData,
         categoryIndex,
         cityItemList,
+        sortingType,
       ];
 }

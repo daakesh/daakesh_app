@@ -6,11 +6,13 @@ class SwapPreviewSectionSubCategoriesEvent extends SwapFilterEvent {
   final int? catID;
   final bool? isFilterActive;
   final bool isSeeMore;
+  final SortingType? sortingType;
 
   SwapPreviewSectionSubCategoriesEvent({
     this.catID,
     this.isFilterActive,
     this.isSeeMore = false,
+    this.sortingType,
   });
 }
 

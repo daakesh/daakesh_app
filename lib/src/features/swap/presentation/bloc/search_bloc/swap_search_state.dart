@@ -42,6 +42,7 @@ class SwapSearchState extends Equatable {
   final int filterCurrentPage;
   final List<TrendDealsItem> filterDataList;
   final bool isMoreDataItems;
+  final SortingType sortingType;
 
   const SwapSearchState({
     this.swapSearchStateStatus = SwapSearchStateStatus.INITIAL,
@@ -59,25 +60,26 @@ class SwapSearchState extends Equatable {
     this.filterCurrentPage = 1,
     this.filterDataList = const [],
     this.isMoreDataItems = true,
+    this.sortingType = SortingType.desc,
   });
 
-  SwapSearchState copyWith({
-    SwapSearchStateStatus? swapSearchStateStatus,
-    List<TrendDealsItem>? swapSearchResultList,
-    int? currentSearchPage,
-    String? searchValue,
-    bool? isMoreData,
-    String? country,
-    String? city,
-    int? rate,
-    double? fromPrice,
-    double? toPrice,
-    FilterProductType? type,
-    bool? isFilterActive,
-    int? filterCurrentPage,
-    List<TrendDealsItem>? filterDataList,
-    bool? isMoreDataItems,
-  }) {
+  SwapSearchState copyWith(
+      {SwapSearchStateStatus? swapSearchStateStatus,
+      List<TrendDealsItem>? swapSearchResultList,
+      int? currentSearchPage,
+      String? searchValue,
+      bool? isMoreData,
+      String? country,
+      String? city,
+      int? rate,
+      double? fromPrice,
+      double? toPrice,
+      FilterProductType? type,
+      bool? isFilterActive,
+      int? filterCurrentPage,
+      List<TrendDealsItem>? filterDataList,
+      bool? isMoreDataItems,
+      SortingType? sortingType}) {
     return SwapSearchState(
       swapSearchStateStatus:
           swapSearchStateStatus ?? this.swapSearchStateStatus,
@@ -95,6 +97,7 @@ class SwapSearchState extends Equatable {
       filterCurrentPage: filterCurrentPage ?? this.filterCurrentPage,
       filterDataList: filterDataList ?? this.filterDataList,
       isMoreDataItems: isMoreDataItems ?? this.isMoreDataItems,
+      sortingType: sortingType ?? this.sortingType,
     );
   }
 
@@ -114,5 +117,6 @@ class SwapSearchState extends Equatable {
         isFilterActive,
         filterDataList,
         isMoreDataItems,
+        sortingType,
       ];
 }

@@ -8,7 +8,10 @@ abstract class SwapUseCases {
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, SwapFilterDataModel swapFilterDataModel, int page);
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype);
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getTodayItemsData(int page);
@@ -33,9 +36,12 @@ abstract class SwapUseCases {
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
   Future<Either<Failure, ValidResponse>> getCities();
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, SwapFilterDataModel filterDataModel, int page);
+      String searchValue,
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getOfferedItems(
-      SwapFilterDataModel filterDataModel, int page);
+      SwapFilterDataModel filterDataModel, int page, SortingType sortingType);
 }
 
 @dev
@@ -61,10 +67,13 @@ class SwapUseCasesImpl implements SwapUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, SwapFilterDataModel swapFilterDataModel, int page) async {
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype) async {
     return await getIt
         .get<SwapRepository>()
-        .getSubCategoryByCatID(catID, swapFilterDataModel, page);
+        .getSubCategoryByCatID(catID, swapFilterDataModel, page, sortingtype);
   }
 
   @override
@@ -159,17 +168,22 @@ class SwapUseCasesImpl implements SwapUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, SwapFilterDataModel filterDataModel, int page) async {
+      String searchValue,
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<SwapRepository>()
-        .getSearchItemsResult(searchValue, filterDataModel, page);
+        .getSearchItemsResult(searchValue, filterDataModel, page, sortingType);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getOfferedItems(
-      SwapFilterDataModel filterDataModel, int page) async {
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<SwapRepository>()
-        .getOfferedItems(filterDataModel, page);
+        .getOfferedItems(filterDataModel, page, sortingType);
   }
 }

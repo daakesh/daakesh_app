@@ -26,13 +26,21 @@ class RemoteHomeDatasource implements HomeDatasource {
       int secID, int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/category/getCategoryBySection',
-        params: {"secID": secID.toString(), "page": page.toString()});
+        params: {
+          "secID": secID.toString(),
+          "page": page.toString(),
+          "withPaginate": "true",
+          "type": "sell"
+        });
     return result;
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page) async {
+      int catID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getItemByCategoryId',
           params: {"page": "$page"},
@@ -43,8 +51,8 @@ class RemoteHomeDatasource implements HomeDatasource {
             "catID": catID,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
-              "name": "created_at",
-              "operation": "desc",
+              "name": "price",
+              "operation": sortingType.name,
             },
           }),
         );
@@ -55,6 +63,7 @@ class RemoteHomeDatasource implements HomeDatasource {
   Future<Either<Failure, ValidResponse>> getHandmadeData(
     FilterDataModel filterDataModel,
     int page,
+    SortingType sortingType,
   ) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getHandmadeItems',
@@ -65,8 +74,8 @@ class RemoteHomeDatasource implements HomeDatasource {
           body: jsonEncode({
             "Filter": filterDataModel.toJson(),
             "orderBy": {
-              "name": "created_at",
-              "operation": "desc",
+              "name": "price",
+              "operation": sortingType.name,
             },
           }),
         );
@@ -297,7 +306,10 @@ class RemoteHomeDatasource implements HomeDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> getItemsByBrandID(
-      int brandID, FilterDataModel filterDataModel, int page) async {
+      int brandID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getItemByBrandId',
           params: {"page": "$page"},
@@ -308,8 +320,8 @@ class RemoteHomeDatasource implements HomeDatasource {
             "brandID": brandID,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
-              "name": "created_at",
-              "operation": "desc",
+              "name": "price",
+              "operation": sortingType.name,
             },
           }),
         );
@@ -318,22 +330,33 @@ class RemoteHomeDatasource implements HomeDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, FilterDataModel filterDataModel, int page) async {
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getSearchItemsResult',
           params: {"page": "$page"},
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: jsonEncode(
-              {"Filter": filterDataModel.toJson(), "name": searchValue}),
+          body: jsonEncode({
+            "Filter": filterDataModel.toJson(),
+            "name": searchValue,
+            "orderBy": {
+              "name": "price",
+              "operation": sortingType.name,
+            },
+          }),
         );
     return result;
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getAllTodayItems(
-      FilterDataModel filterDataModel, int page) async {
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getOfferedItems',
           params: {"page": "$page"},
@@ -343,8 +366,8 @@ class RemoteHomeDatasource implements HomeDatasource {
           body: jsonEncode({
             "Filter": filterDataModel.toJson(),
             "orderBy": {
-              "name": "created_at",
-              "operation": "desc",
+              "name": "price",
+              "operation": sortingType.name,
             },
           }),
         );

@@ -10,9 +10,11 @@ class GetTrendDealsDataEvent extends TrendDealsEvent {
 class GetItemsViewAllsEvent extends TrendDealsEvent {
   final bool? isFilterActive;
   final bool isSeeMore;
+  final SortingType? sortingType;
   GetItemsViewAllsEvent({
     this.isSeeMore = false,
     this.isFilterActive,
+    this.sortingType,
   });
 }
 

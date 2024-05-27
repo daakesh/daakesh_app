@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
@@ -108,8 +109,28 @@ class ResultsScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child: Text(context.locale.results_title,
-                    style: context.easyTheme.textTheme.headlineMedium),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(context.locale.results_title,
+                          style: context.easyTheme.textTheme.headlineMedium),
+                    ),
+                    BlocBuilder<FilterBloc, FilterState>(
+                      builder: (context, state) {
+                        return GestureDetector(
+                          onTap: () => state.sortingType == SortingType.desc
+                              ? FilterBloc.get.add(
+                                  PreviewSectionSubCategoriesEvent(
+                                      sortingType: SortingType.asc))
+                              : FilterBloc.get.add(
+                                  PreviewSectionSubCategoriesEvent(
+                                      sortingType: SortingType.desc)),
+                          child: Assets.svg.sortIcon.svg(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
             const SliverPadding(padding: EdgeInsets.only(top: 13.0)),

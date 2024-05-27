@@ -13,11 +13,13 @@ class SearchFilterEvent extends SearchEvent {
   final String? searchValue;
   final bool? isFilterActive;
   final bool isSeeMore;
+  final SortingType? sortingType;
 
   SearchFilterEvent({
     this.searchValue,
     this.isFilterActive,
     this.isSeeMore = false,
+    this.sortingType,
   });
 }
 

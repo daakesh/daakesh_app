@@ -7,11 +7,11 @@ abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
-  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(int catID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
 
   Future<Either<Failure, ValidResponse>> getHandmadeData(
-      FilterDataModel filterDataModel, int page);
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getItemsByBrands(
       int page, int brandId);
@@ -49,12 +49,15 @@ abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> getCities();
   Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId);
   Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId);
-  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
-      int brandID, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(int brandID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, FilterDataModel filterDataModel, int page);
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getAllTodayItems(
-      FilterDataModel filterDataModel, int page);
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
 }
 
 @dev
@@ -80,18 +83,23 @@ class HomeUseCasesImpl implements HomeUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page) async {
+      int catID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<HomeRepository>()
-        .getSubCategoryByCatID(catID, filterDataModel, page);
+        .getSubCategoryByCatID(catID, filterDataModel, page, sortingType);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getHandmadeData(
-      FilterDataModel filterDataModel, int page) async {
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<HomeRepository>()
-        .getHandmadeData(filterDataModel, page);
+        .getHandmadeData(filterDataModel, page, sortingType);
   }
 
   @override
@@ -220,25 +228,33 @@ class HomeUseCasesImpl implements HomeUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> getItemsByBrandID(
-      int brandID, FilterDataModel filterDataModel, int page) async {
+      int brandID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<HomeRepository>()
-        .getItemsByBrandID(brandID, filterDataModel, page);
+        .getItemsByBrandID(brandID, filterDataModel, page, sortingType);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getSearchItemsResult(
-      String searchValue, FilterDataModel filterDataModel, int page) async {
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<HomeRepository>()
-        .getSearchItemsResult(searchValue, filterDataModel, page);
+        .getSearchItemsResult(searchValue, filterDataModel, page, sortingType);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getAllTodayItems(
-      FilterDataModel filterDataModel, int page) async {
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<HomeRepository>()
-        .getAllTodayItems(filterDataModel, page);
+        .getAllTodayItems(filterDataModel, page, sortingType);
   }
 }
