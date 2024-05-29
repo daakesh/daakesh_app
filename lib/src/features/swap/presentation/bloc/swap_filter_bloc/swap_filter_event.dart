@@ -7,12 +7,14 @@ class SwapPreviewSectionSubCategoriesEvent extends SwapFilterEvent {
   final bool? isFilterActive;
   final bool isSeeMore;
   final SortingType? sortingType;
+  final bool? isAllItems;
 
   SwapPreviewSectionSubCategoriesEvent({
     this.catID,
     this.isFilterActive,
     this.isSeeMore = false,
     this.sortingType,
+    this.isAllItems,
   });
 }
 
@@ -40,3 +42,9 @@ class SwapSelectCategoryItemEvent extends SwapFilterEvent {
 }
 
 class GetSwapCitiesEvent extends SwapFilterEvent {}
+
+class GetSwapSubCategoriesEvent extends SwapFilterEvent {
+  final int catID;
+
+  GetSwapSubCategoriesEvent({required this.catID});
+}

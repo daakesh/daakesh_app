@@ -115,12 +115,12 @@ class SwapSectionScreen extends StatelessWidget {
 
   void openSubCategories(context, List<SwapCategoryItem> swapCategoriesListData,
       int catID, int index) {
-    SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: index));
+    SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: -1));
     SwapFilterBloc.get.add(GetSwapCitiesEvent());
+    SwapFilterBloc.get.add(GetSwapSubCategoriesEvent(catID: catID));
     SwapFilterBloc.get.add(SwapPreviewSectionSubCategoriesEvent(
         catID: catID, isFilterActive: false));
-    Utils.openNavNewPage(context,
-        SwapResultsScreen(swapCategoriesListData: swapCategoriesListData));
+    Utils.openNavNewPage(context, SwapResultsScreen(catID: catID));
   }
 
   Widget seeMoreHandler(SwapSectionsState state, BuildContext context) {

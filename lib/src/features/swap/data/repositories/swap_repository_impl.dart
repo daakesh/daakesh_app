@@ -34,6 +34,22 @@ class SwapRepositoryImpl implements SwapRepository {
   }
 
   @override
+  Future<Either<Failure, ValidResponse>> getSwapSubCategoiresByCatID(
+      int catID) async {
+    return await getIt.get<SwapDatasource>().getSwapSubCategoiresByCatID(catID);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsBySubCategoriesID(
+      int subID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype) async {
+    return await getIt.get<SwapDatasource>().getItemsBySubCategoriesID(
+        subID, swapFilterDataModel, page, sortingtype);
+  }
+
+  @override
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
     return await getIt.get<SwapDatasource>().getHandmadeData(page);
   }

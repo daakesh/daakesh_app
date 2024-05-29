@@ -61,6 +61,40 @@ class RemoteSwapDatasource implements SwapDatasource {
   }
 
   @override
+  Future<Either<Failure, ValidResponse>> getItemsBySubCategoriesID(
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getItemBySubCategoryId',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "subID": catID,
+            "Filter": swapFilterDataModel.toJson(),
+            "orderBy": {
+              "name": "created_at",
+              "operation": sortingtype.name,
+            },
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSwapSubCategoiresByCatID(
+      int catID) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/subCategory/getSubcategoryByCategoryId',
+      params: {"catID": "$catID"},
+    );
+    return result;
+  }
+
+  @override
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/item/getHandmadeItems',

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class SwapResultsScreen extends StatelessWidget {
-  final List<SwapCategoryItem> swapCategoriesListData;
-  const SwapResultsScreen({super.key, required this.swapCategoriesListData});
+  final int catID;
+  const SwapResultsScreen({super.key, required this.catID});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class SwapResultsScreen extends StatelessWidget {
                   return Row(
                     children: [
                       GestureDetector(
-                        onTap: () => getSubCategoriesData(1, -1),
+                        onTap: () => getSubCategoriesData(catID, -1),
                         child: Container(
                           height: 38.0,
                           padding: const EdgeInsetsDirectional.symmetric(
@@ -44,43 +44,48 @@ class SwapResultsScreen extends StatelessWidget {
                       const SizedBox(
                         width: 11.0,
                       ),
-                      Expanded(
-                        child: SizedBox(
-                          height: 38.0,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: swapCategoriesListData.length,
-                            separatorBuilder: (_, i) {
-                              return const SizedBox(
-                                width: 11.0,
-                              );
-                            },
-                            itemBuilder: (_, index) {
-                              SwapCategoryItem swapCategoryItem =
-                                  swapCategoriesListData[index];
-                              return GestureDetector(
-                                onTap: () => getSubCategoriesData(
-                                    swapCategoriesListData[index].id!, index),
-                                child: Container(
-                                  height: 38.0,
-                                  padding:
-                                      const EdgeInsetsDirectional.symmetric(
-                                          horizontal: 14.0),
-                                  decoration: BoxDecoration(
-                                      color: state.categoryIndex == index
-                                          ? const Color(0xFFf2cd98)
-                                          : ColorName.paleGray,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10.0))),
-                                  child: Center(
-                                      child: Text(Utils.isEnglish
-                                          ? '${swapCategoryItem.name}'
-                                          : '${swapCategoryItem.arName}')),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                      BlocBuilder<SwapFilterBloc, SwapFilterState>(
+                        builder: (context, state) {
+                          return Expanded(
+                            child: SizedBox(
+                              height: 38.0,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: state.subCategoryList.length,
+                                separatorBuilder: (_, i) {
+                                  return const SizedBox(
+                                    width: 11.0,
+                                  );
+                                },
+                                itemBuilder: (_, index) {
+                                  SubCategory subCategory =
+                                      state.subCategoryList[index];
+                                  return GestureDetector(
+                                    onTap: () => getItemsBySubCategoriesID(
+                                        state.subCategoryList[index].id!,
+                                        index),
+                                    child: Container(
+                                      height: 38.0,
+                                      padding:
+                                          const EdgeInsetsDirectional.symmetric(
+                                              horizontal: 14.0),
+                                      decoration: BoxDecoration(
+                                          color: state.categoryIndex == index
+                                              ? const Color(0xFFf2cd98)
+                                              : ColorName.paleGray,
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10.0))),
+                                      child: Center(
+                                          child: Text(Utils.isEnglish
+                                              ? '${subCategory.name}'
+                                              : '${subCategory.arName}')),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(
                         width: 11.0,
@@ -211,6 +216,13 @@ class SwapResultsScreen extends StatelessWidget {
 
   void getSubCategoriesData(int catID, int index) {
     SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: index));
-    SwapFilterBloc.get.add(SwapPreviewSectionSubCategoriesEvent(catID: catID));
+    SwapFilterBloc.get.add(
+        SwapPreviewSectionSubCategoriesEvent(catID: catID, isAllItems: true));
+  }
+
+  void getItemsBySubCategoriesID(int subID, int index) {
+    SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: index));
+    SwapFilterBloc.get.add(
+        SwapPreviewSectionSubCategoriesEvent(catID: subID, isAllItems: false));
   }
 }

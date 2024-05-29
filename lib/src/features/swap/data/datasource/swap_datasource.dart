@@ -11,6 +11,14 @@ abstract class SwapDatasource {
       SwapFilterDataModel swapFilterDataModel,
       int page,
       SortingType sortingtype);
+  Future<Either<Failure, ValidResponse>> getItemsBySubCategoriesID(
+      int subID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype);
+
+  Future<Either<Failure, ValidResponse>> getSwapSubCategoiresByCatID(int catID);
+
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getTodayItemsData(int page);
