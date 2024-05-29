@@ -34,6 +34,22 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
+  Future<Either<Failure, ValidResponse>> getItemBySubCategoryID(
+      int subID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getItemBySubCategoryID(subID, filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSubCategories(int catID) async {
+    return await getIt.get<HomeDatasource>().getSubCategories(catID);
+  }
+
+  @override
   Future<Either<Failure, ValidResponse>> getHandmadeData(
       FilterDataModel filterDataModel,
       int page,

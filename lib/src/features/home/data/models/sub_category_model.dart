@@ -1,3 +1,22 @@
+class SubCategoryModel {
+  bool? status;
+  String? error;
+  List<SubCategory>? data;
+
+  SubCategoryModel({this.status, this.error, this.data});
+
+  SubCategoryModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    error = json['error'];
+    if (json['data'] != null) {
+      data = <SubCategory>[];
+      data = (json['data'] as List<dynamic>)
+          .map((e) => SubCategory.fromJson(e))
+          .toList();
+    }
+  }
+}
+
 class SubCategory {
   int? id;
   String? name;

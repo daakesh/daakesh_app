@@ -7,12 +7,14 @@ class PreviewSectionSubCategoriesEvent extends FilterEvent {
   final bool? isFilterActive;
   final bool isSeeMore;
   final SortingType? sortingType;
+  final bool? isAllItems;
 
   PreviewSectionSubCategoriesEvent({
     this.catID,
     this.isFilterActive,
     this.isSeeMore = false,
     this.sortingType,
+    this.isAllItems,
   });
 }
 
@@ -40,3 +42,8 @@ class SelectCategoryItemEvent extends FilterEvent {
 }
 
 class GetCitiesEvent extends FilterEvent {}
+
+class GetSubCategoiresEvent extends FilterEvent {
+  final int catID;
+  GetSubCategoiresEvent({required this.catID});
+}

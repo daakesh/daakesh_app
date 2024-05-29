@@ -111,10 +111,10 @@ class SectionScreen extends StatelessWidget {
   void openSubCategories(BuildContext context,
       List<CategoryItem> categoriesListData, int catID, int index) {
     FilterBloc.get.add(GetCitiesEvent());
-    FilterBloc.get.add(SelectCategoryItemEvent(index: index));
+    FilterBloc.get.add(SelectCategoryItemEvent(index: -1));
+    FilterBloc.get.add(GetSubCategoiresEvent(catID: catID));
     FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
-    Utils.openNavNewPage(
-        context, ResultsScreen(categoriesListData: categoriesListData));
+    Utils.openNavNewPage(context, ResultsScreen(catID: catID));
   }
 
   Widget seeMoreHandler(SectionsState state, BuildContext context) {

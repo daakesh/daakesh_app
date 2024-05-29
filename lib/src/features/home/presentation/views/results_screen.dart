@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
 class ResultsScreen extends StatelessWidget {
-  final List<CategoryItem> categoriesListData;
-  const ResultsScreen({super.key, required this.categoriesListData});
+  final int catID;
+  const ResultsScreen({
+    super.key,
+    required this.catID,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class ResultsScreen extends StatelessWidget {
                     return Row(
                       children: [
                         GestureDetector(
-                          onTap: () => getSubCategoriesData(1, -1),
+                          onTap: () => getSubCategoriesData(catID, -1),
                           child: Container(
                             height: 38.0,
                             padding: const EdgeInsetsDirectional.symmetric(
@@ -48,18 +50,18 @@ class ResultsScreen extends StatelessWidget {
                             height: 38.0,
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
-                              itemCount: categoriesListData.length,
+                              itemCount: state.subCategoryList.length,
                               separatorBuilder: (_, i) {
                                 return const SizedBox(
                                   width: 11.0,
                                 );
                               },
                               itemBuilder: (_, index) {
-                                CategoryItem categoryItem =
-                                    categoriesListData[index];
+                                SubCategory subCategory =
+                                    state.subCategoryList[index];
                                 return GestureDetector(
-                                  onTap: () => getSubCategoriesData(
-                                      categoryItem.id!.toInt(), index),
+                                  onTap: () => getItemBySubCategoriesID(
+                                      subCategory.id!, index),
                                   child: Container(
                                     height: 38.0,
                                     padding:
@@ -73,8 +75,8 @@ class ResultsScreen extends StatelessWidget {
                                             Radius.circular(10.0))),
                                     child: Center(
                                         child: Text(Utils.isEnglish
-                                            ? "${categoryItem.name}"
-                                            : "${categoryItem.arName}")),
+                                            ? "${subCategory.name}"
+                                            : "${subCategory.arName}")),
                                   ),
                                 );
                               },
@@ -208,6 +210,13 @@ class ResultsScreen extends StatelessWidget {
 
   void getSubCategoriesData(int catID, int index) {
     FilterBloc.get.add(SelectCategoryItemEvent(index: index));
-    FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
+    FilterBloc.get
+        .add(PreviewSectionSubCategoriesEvent(catID: catID, isAllItems: true));
+  }
+
+  void getItemBySubCategoriesID(int subID, int index) {
+    FilterBloc.get.add(SelectCategoryItemEvent(index: index));
+    FilterBloc.get
+        .add(PreviewSectionSubCategoriesEvent(catID: subID, isAllItems: false));
   }
 }

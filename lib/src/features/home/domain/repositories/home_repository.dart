@@ -8,6 +8,9 @@ abstract class HomeRepository {
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(int catID,
       FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getItemBySubCategoryID(int subID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getSubCategories(int catID);
   Future<Either<Failure, ValidResponse>> getHandmadeData(
       FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);

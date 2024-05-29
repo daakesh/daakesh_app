@@ -60,6 +60,38 @@ class RemoteHomeDatasource implements HomeDatasource {
   }
 
   @override
+  Future<Either<Failure, ValidResponse>> getItemBySubCategoryID(
+      int subID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getItemBySubCategoryId',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "subID": subID,
+            "Filter": filterDataModel.toJson(),
+            "orderBy": {
+              "name": "price",
+              "operation": sortingType.name,
+            },
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSubCategories(int catID) async {
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/subCategory/getSubcategoryByCategoryId',
+        params: {"catID": "$catID"});
+    return result;
+  }
+
+  @override
   Future<Either<Failure, ValidResponse>> getHandmadeData(
     FilterDataModel filterDataModel,
     int page,
