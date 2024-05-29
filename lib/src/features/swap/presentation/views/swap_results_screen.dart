@@ -8,169 +8,161 @@ class SwapResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: true,
-      onPopInvoked: (value) {
-        SwapFilterBloc.get.add(SwapClearFilterDataEvent());
-      },
-      child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            const SwapAppBarWidget(),
-            const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
-                    builder: (context, state) {
-                  return Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => getSubCategoriesData(catID, -1),
-                        child: Container(
-                          height: 38.0,
-                          padding: const EdgeInsetsDirectional.symmetric(
-                              horizontal: 14.0),
-                          decoration: BoxDecoration(
-                              color: -1 == state.categoryIndex
-                                  ? const Color(0xFFf2cd98)
-                                  : ColorName.paleGray,
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(10.0))),
-                          child: Center(
-                              child: Text(Utils.isEnglish ? "All" : "الكل")),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 11.0,
-                      ),
-                      BlocBuilder<SwapFilterBloc, SwapFilterState>(
-                        builder: (context, state) {
-                          return Expanded(
-                            child: SizedBox(
-                              height: 38.0,
-                              child: ListView.separated(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: state.subCategoryList.length,
-                                separatorBuilder: (_, i) {
-                                  return const SizedBox(
-                                    width: 11.0,
-                                  );
-                                },
-                                itemBuilder: (_, index) {
-                                  SubCategory subCategory =
-                                      state.subCategoryList[index];
-                                  return GestureDetector(
-                                    onTap: () => getItemsBySubCategoriesID(
-                                        state.subCategoryList[index].id!,
-                                        index),
-                                    child: Container(
-                                      height: 38.0,
-                                      padding:
-                                          const EdgeInsetsDirectional.symmetric(
-                                              horizontal: 14.0),
-                                      decoration: BoxDecoration(
-                                          color: state.categoryIndex == index
-                                              ? const Color(0xFFf2cd98)
-                                              : ColorName.paleGray,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10.0))),
-                                      child: Center(
-                                          child: Text(Utils.isEnglish
-                                              ? '${subCategory.name}'
-                                              : '${subCategory.arName}')),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(
-                        width: 11.0,
-                      ),
-                      GestureDetector(
-                          onTap: () => openSwapFilterScreen(context),
-                          child: Assets.png.filterIcon
-                              .image(width: 38.0, height: 38.0))
-                    ],
-                  );
-                }),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child: Divider(
-                  color: ColorName.gray.withOpacity(0.25),
-                  indent: 14.0,
-                  endIndent: 14.0,
-                ),
-              ),
-            ),
-            const SliverPadding(padding: EdgeInsets.only(top: 7.0)),
-            SliverToBoxAdapter(
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          const SwapAppBarWidget(),
+          const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 17.0),
               child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
-                builder: (context, state) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(context.locale.results_title,
-                              style:
-                                  context.easyTheme.textTheme.headlineMedium),
-                        ),
-                        GestureDetector(
-                          onTap: () => state.sortingType == SortingType.desc
-                              ? SwapFilterBloc.get.add(
-                                  SwapPreviewSectionSubCategoriesEvent(
-                                      sortingType: SortingType.asc))
-                              : SwapFilterBloc.get.add(
-                                  SwapPreviewSectionSubCategoriesEvent(
-                                      sortingType: SortingType.desc)),
-                          child: Assets.svg.sortIcon.svg(),
-                        ),
-                      ],
+                  builder: (context, state) {
+                return Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => getSubCategoriesData(catID, -1),
+                      child: Container(
+                        height: 38.0,
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 14.0),
+                        decoration: BoxDecoration(
+                            color: -1 == state.categoryIndex
+                                ? const Color(0xFFf2cd98)
+                                : ColorName.paleGray,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10.0))),
+                        child: Center(
+                            child: Text(Utils.isEnglish ? "All" : "الكل")),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 11.0,
+                    ),
+                    BlocBuilder<SwapFilterBloc, SwapFilterState>(
+                      builder: (context, state) {
+                        return Expanded(
+                          child: SizedBox(
+                            height: 38.0,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.subCategoryList.length,
+                              separatorBuilder: (_, i) {
+                                return const SizedBox(
+                                  width: 11.0,
+                                );
+                              },
+                              itemBuilder: (_, index) {
+                                SubCategory subCategory =
+                                    state.subCategoryList[index];
+                                return GestureDetector(
+                                  onTap: () => getItemsBySubCategoriesID(
+                                      state.subCategoryList[index].id!, index),
+                                  child: Container(
+                                    height: 38.0,
+                                    padding:
+                                        const EdgeInsetsDirectional.symmetric(
+                                            horizontal: 14.0),
+                                    decoration: BoxDecoration(
+                                        color: state.categoryIndex == index
+                                            ? const Color(0xFFf2cd98)
+                                            : ColorName.paleGray,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10.0))),
+                                    child: Center(
+                                        child: Text(Utils.isEnglish
+                                            ? '${subCategory.name}'
+                                            : '${subCategory.arName}')),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      width: 11.0,
+                    ),
+                    GestureDetector(
+                        onTap: () => openSwapFilterScreen(context),
+                        child: Assets.png.filterIcon
+                            .image(width: 38.0, height: 38.0))
+                  ],
+                );
+              }),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 17.0),
+              child: Divider(
+                color: ColorName.gray.withOpacity(0.25),
+                indent: 14.0,
+                endIndent: 14.0,
+              ),
+            ),
+          ),
+          const SliverPadding(padding: EdgeInsets.only(top: 7.0)),
+          SliverToBoxAdapter(
+            child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
+              builder: (context, state) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(context.locale.results_title,
+                            style: context.easyTheme.textTheme.headlineMedium),
+                      ),
+                      GestureDetector(
+                        onTap: () => state.sortingType == SortingType.desc
+                            ? SwapFilterBloc.get.add(
+                                SwapPreviewSectionSubCategoriesEvent(
+                                    sortingType: SortingType.asc))
+                            : SwapFilterBloc.get.add(
+                                SwapPreviewSectionSubCategoriesEvent(
+                                    sortingType: SortingType.desc)),
+                        child: Assets.svg.sortIcon.svg(),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          const SliverPadding(padding: EdgeInsets.only(top: 13.0)),
+          BlocBuilder<SwapFilterBloc, SwapFilterState>(
+            builder: (context, state) {
+              return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                (_, index) {
+                  TrendDealsItem trendDealsItem =
+                      state.subCategoryListData[index];
+                  return GestureDetector(
+                    onTap: () =>
+                        openSwapMoreInfoScreen(context, trendDealsItem),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 17),
+                      child:
+                          SwapResultItemWidget(trendDealsItem: trendDealsItem),
                     ),
                   );
                 },
-              ),
-            ),
-            const SliverPadding(padding: EdgeInsets.only(top: 13.0)),
-            BlocBuilder<SwapFilterBloc, SwapFilterState>(
-              builder: (context, state) {
-                return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                  (_, index) {
-                    TrendDealsItem trendDealsItem =
-                        state.subCategoryListData[index];
-                    return GestureDetector(
-                      onTap: () =>
-                          openSwapMoreInfoScreen(context, trendDealsItem),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8.0, horizontal: 17),
-                        child: SwapResultItemWidget(
-                            trendDealsItem: trendDealsItem),
-                      ),
-                    );
-                  },
-                  childCount: state.subCategoryListData.length,
-                ));
-              },
-            ),
-            const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
-            SliverToBoxAdapter(
-                child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
-              builder: (context, state) {
-                return seeMoreHandler(state, context);
-              },
-            )),
-            const SliverPadding(padding: EdgeInsets.only(top: 60.0)),
-          ],
-        ),
+                childCount: state.subCategoryListData.length,
+              ));
+            },
+          ),
+          const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
+          SliverToBoxAdapter(
+              child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
+            builder: (context, state) {
+              return seeMoreHandler(state, context);
+            },
+          )),
+          const SliverPadding(padding: EdgeInsets.only(top: 60.0)),
+        ],
       ),
     );
   }

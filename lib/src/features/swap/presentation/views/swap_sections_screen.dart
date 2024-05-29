@@ -115,6 +115,7 @@ class SwapSectionScreen extends StatelessWidget {
 
   void openSubCategories(context, List<SwapCategoryItem> swapCategoriesListData,
       int catID, int index) {
+    SwapFilterBloc.get.add(SwapClearFilterDataEvent());
     SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: -1));
     SwapFilterBloc.get.add(GetSwapCitiesEvent());
     SwapFilterBloc.get.add(GetSwapSubCategoriesEvent(catID: catID));

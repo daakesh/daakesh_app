@@ -18,8 +18,10 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
       country: "Jordan",
       city: "Amman",
       rate: 0,
+      isAllItems: true,
       fromPrice: 0.0,
       toPrice: 500.0,
+      subCategoryList: [],
       isFilterActive: false,
       type: FilterProductType.All,
     ));

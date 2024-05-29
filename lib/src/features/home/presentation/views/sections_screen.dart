@@ -111,6 +111,7 @@ class SectionScreen extends StatelessWidget {
   void openSubCategories(BuildContext context,
       List<CategoryItem> categoriesListData, int catID, int index) {
     FilterBloc.get.add(GetCitiesEvent());
+    FilterBloc.get.add(ClearFilterDataEvent());
     FilterBloc.get.add(SelectCategoryItemEvent(index: -1));
     FilterBloc.get.add(GetSubCategoiresEvent(catID: catID));
     FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
