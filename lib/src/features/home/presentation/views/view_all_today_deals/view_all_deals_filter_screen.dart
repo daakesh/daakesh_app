@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 // ignore: must_be_immutable
-class ViewAllDealsFiltterScreen extends StatelessWidget {
-  ViewAllDealsFiltterScreen({super.key});
+class ViewAllDealsFilterScreen extends StatelessWidget {
+  ViewAllDealsFilterScreen({super.key});
 
   final countryController = TextEditingController(text: 'Jordan');
   String cityValue = 'Amman';

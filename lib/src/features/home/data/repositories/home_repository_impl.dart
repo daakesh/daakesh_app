@@ -72,8 +72,13 @@ class HomeRepositoryImpl implements HomeRepository {
 
   @override
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page) async {
-    return await getIt.get<HomeDatasource>().getTodayItemsData(type, page);
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getTodayItemsData(filterDataModel, type, page, sortingType);
   }
 
   @override

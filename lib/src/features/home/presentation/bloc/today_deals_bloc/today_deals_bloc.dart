@@ -30,9 +30,11 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
       ));
     }
 
-    final result = await getIt
-        .get<HomeUseCases>()
-        .getTodayItemsData(HomeTodayItemType.Sell, state.currentPage);
+    final result = await getIt.get<HomeUseCases>().getTodayItemsData(
+        FilterDataModel(),
+        HomeTodayItemType.Sell,
+        state.currentPage,
+        SortingType.desc);
     result.fold((l) {
       emit(state.copyWith(todayDealsStateStatus: TodayDealsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -77,9 +79,11 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
       ));
     }
 
-    final result = await getIt
-        .get<HomeUseCases>()
-        .getTodayItemsData(HomeTodayItemType.Daakesh, state.daakeshCurrentPage);
+    final result = await getIt.get<HomeUseCases>().getTodayItemsData(
+        FilterDataModel(),
+        HomeTodayItemType.Daakesh,
+        state.daakeshCurrentPage,
+        SortingType.desc);
     result.fold((l) {
       emit(state.copyWith(todayDealsStateStatus: TodayDealsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -137,8 +141,11 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
         ..rate = '${state.rate}';
     }
 
-    final result = await getIt.get<HomeUseCases>().getAllTodayItems(
-        filterDataModel, state.itemsCurrentPage, state.sortingType);
+    final result = await getIt.get<HomeUseCases>().getTodayItemsData(
+        filterDataModel,
+        HomeTodayItemType.Daakesh,
+        state.itemsCurrentPage,
+        state.sortingType);
     result.fold((l) {
       emit(state.copyWith(todayDealsStateStatus: TodayDealsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());

@@ -115,6 +115,6 @@ class ViewAllTodayDealsScreen extends StatelessWidget {
   }
 
   void openFilterScreen(BuildContext context) {
-    Utils.openNavNewPage(context, ViewAllDealsFiltterScreen());
+    Utils.openNavNewPage(context, ViewAllDealsFilterScreen());
   }
 }

@@ -20,7 +20,10 @@ abstract class SwapUseCases {
   Future<Either<Failure, ValidResponse>> getSwapSubCategoiresByCatID(int catID);
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page);
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> searchOnItems(
       String searchValue, int page, int perPage);
   Future<Either<Failure, ValidResponse>> getMySwapProduct(int page);
@@ -109,8 +112,13 @@ class SwapUseCasesImpl implements SwapUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
-    return await getIt.get<SwapRepository>().getTodayItemsData(page);
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<SwapRepository>()
+        .getTodayItemsData(swapFilterDataModel, page, sortingType);
   }
 
   @override

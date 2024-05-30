@@ -85,7 +85,7 @@ class RemoteSwapDatasource implements SwapDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getSwapSubCategoiresByCatID(
+  Future<Either<Failure, ValidResponse>> getSwapSubCategoriesByCatID(
       int catID) async {
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/subCategory/getSubcategoryByCategoryId',
@@ -111,10 +111,26 @@ class RemoteSwapDatasource implements SwapDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
-    final result = await getIt.get<NetworkService>().get(
-        path: 'DaakeshServices/api/item/getTodaysItems',
-        params: {"type": "swap", "page": "$page"});
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getTodaysItems',
+          params: {"type": "swap", "page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "type": "swap",
+            "owner": "Admin",
+            "Filter": swapFilterDataModel.toJson(),
+            "orderBy": {
+              "name": "price",
+              "operation": "$sortingType",
+            },
+          }),
+        );
     return result;
   }
 

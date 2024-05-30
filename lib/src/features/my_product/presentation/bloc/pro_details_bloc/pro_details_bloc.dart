@@ -124,20 +124,28 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
           ProSubCategoryModel.fromJson(r.data);
       List<ProSubCategoryItem> proSubCategoryListData =
           proSubCategoryModel.data!.toList();
+      String subID = '';
+      try {
+        ProSubCategoryItem proSubCategoryItem =
+            proSubCategoryListData.firstWhere((element) =>
+                element.id.toString() ==
+                getIt
+                    .get<EditProduct>()
+                    .myProductItem!
+                    .subcategory!
+                    .id
+                    .toString());
 
+        subID = proSubCategoryItem.id.toString();
+      } catch (e) {
+        subID = proSubCategoryListData.first.id.toString();
+      }
       if (event.isEdit) {
         if (isEdit()) {
           emit(state.copyWith(
             proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
             proSubCategoryListData: proSubCategoryListData,
-            productSubCatID: proSubCategoryListData.isNotEmpty
-                ? getIt
-                    .get<EditProduct>()
-                    .myProductItem!
-                    .subcategory!
-                    .id
-                    .toString()
-                : "-1",
+            productSubCatID: proSubCategoryListData.isNotEmpty ? subID : "-1",
           ));
         }
         return;

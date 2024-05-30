@@ -16,7 +16,10 @@ abstract class HomeDatasource {
   Future<Either<Failure, ValidResponse>> getItemsByBrands(
       int page, int brandId);
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page);
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> searchOnItems(
       String searchValue, int page, int perPage);
 

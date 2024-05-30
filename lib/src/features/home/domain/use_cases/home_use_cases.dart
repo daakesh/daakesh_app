@@ -20,7 +20,10 @@ abstract class HomeUseCases {
       int page, int brandId);
 
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page);
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> searchOnItems(
       String searchValue, int page, int perPage);
 
@@ -134,8 +137,13 @@ class HomeUseCasesImpl implements HomeUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page) async {
-    return await getIt.get<HomeRepository>().getTodayItemsData(type, page);
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getTodayItemsData(filterDataModel, type, page, sortingType);
   }
 
   @override
