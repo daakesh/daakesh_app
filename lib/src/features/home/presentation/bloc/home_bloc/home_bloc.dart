@@ -101,6 +101,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       controller.jumpToTab(0);
       emit(state.copyWith(tabIndex: 0));
     } else {
+      emit(state.copyWith(tabIndex: 0));
+
       await Utils.showSwapOverLay(
           event.context,
           Utils.isEnglish
