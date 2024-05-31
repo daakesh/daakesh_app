@@ -153,50 +153,56 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         ///     ),
         ///   ),
         ///),
-        const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
-        BlocBuilder<TodayDealsBloc, TodayDealsState>(
-          builder: (context, state) {
-            return SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (_, index) {
-                      TodayItem daakeshTodayDealItem =
-                          state.daakeshTodayDealsListData[index];
-                      return TodayDealProduct(
-                          todayDealItem: daakeshTodayDealItem);
-                    },
-                    childCount: state.daakeshTodayDealsListData.length,
-                  ),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.65,
-                      mainAxisSpacing: 8.0,
-                      crossAxisSpacing: 8.0)),
-            );
-          },
-        ),
+        ///const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
+        ///BlocBuilder<TodayDealsBloc, TodayDealsState>(
+        ///  builder: (context, state) {
+        ///    return SliverPadding(
+        ///      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        ///      sliver: SliverGrid(
+        ///          delegate: SliverChildBuilderDelegate(
+        ///            (_, index) {
+        ///              TodayItem daakeshTodayDealItem =
+        ///                  state.daakeshTodayDealsListData[index];
+        ///              return TodayDealProduct(
+        ///                  todayDealItem: daakeshTodayDealItem);
+        ///            },
+        ///            childCount: state.daakeshTodayDealsListData.length,
+        ///          ),
+        ///          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        ///              crossAxisCount: 2,
+        ///              childAspectRatio: 0.65,
+        ///              mainAxisSpacing: 8.0,
+        ///              crossAxisSpacing: 8.0)),
+        ///    );
+        ///  },
+        ///),
         const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
 
         ///Today deal-section.
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              children: [
-                Text(
-                  context.locale.home_today_deals_title,
-                  style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 18.0),
+          child: BlocBuilder<TodayDealsBloc, TodayDealsState>(
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  children: [
+                    Text(
+                      context.locale.home_today_deals_title,
+                      style: context.easyTheme.textTheme.headlineMedium!
+                          .copyWith(fontSize: 18.0),
+                    ),
+                    const Spacer(),
+                    state.todayDealsListData.length > 4
+                        ? TextButtonWidget(
+                            onPressed: () => openViewAllScreen(),
+                            text: context.locale.home_today_deals_view_all,
+                            isBold: true,
+                          )
+                        : const SizedBox()
+                  ],
                 ),
-                const Spacer(),
-                TextButtonWidget(
-                  onPressed: () => openViewAllScreen(),
-                  text: context.locale.home_today_deals_view_all,
-                  isBold: true,
-                )
-              ],
-            ),
+              );
+            },
           ),
         ),
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
@@ -227,23 +233,29 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         ),
         const SliverPadding(padding: EdgeInsets.only(top: 25.0)),
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              children: [
-                Text(
-                  context.locale.home_offer_deals_title,
-                  style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 18.0),
+          child: BlocBuilder<OfferDealsBloc, OfferDealsState>(
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  children: [
+                    Text(
+                      context.locale.home_offer_deals_title,
+                      style: context.easyTheme.textTheme.headlineMedium!
+                          .copyWith(fontSize: 18.0),
+                    ),
+                    const Spacer(),
+                    state.homeTodayDealsListData.length > 4
+                        ? TextButtonWidget(
+                            onPressed: () => openViewAllOfferDealsScreen(),
+                            text: context.locale.home_today_deals_view_all,
+                            isBold: true,
+                          )
+                        : const SizedBox()
+                  ],
                 ),
-                const Spacer(),
-                TextButtonWidget(
-                  onPressed: () => openViewAllOfferDealsScreen(),
-                  text: context.locale.home_today_deals_view_all,
-                  isBold: true,
-                )
-              ],
-            ),
+              );
+            },
           ),
         ),
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),

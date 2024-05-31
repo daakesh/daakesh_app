@@ -94,24 +94,31 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
 
         ///Trending Deals To Swap-section.
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              children: [
-                Text(
-                  context.locale.swap_trending_deals_to_swap,
-                  style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                    fontSize: 18.0,
-                  ),
+          child: BlocBuilder<TrendDealsBloc, TrendDealsState>(
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  children: [
+                    Text(
+                      context.locale.swap_trending_deals_to_swap,
+                      style:
+                          context.easyTheme.textTheme.headlineMedium!.copyWith(
+                        fontSize: 18.0,
+                      ),
+                    ),
+                    const Spacer(),
+                    state.trendDealsListData.length > 4
+                        ? TextButtonWidget(
+                            text: context.locale.swap_trending_deal_view_all,
+                            isBold: true,
+                            onPressed: () => openViewAllScreen(),
+                          )
+                        : const SizedBox(),
+                  ],
                 ),
-                const Spacer(),
-                TextButtonWidget(
-                  text: context.locale.swap_trending_deal_view_all,
-                  isBold: true,
-                  onPressed: () => openViewAllScreen(),
-                ),
-              ],
-            ),
+              );
+            },
           ),
         ),
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
