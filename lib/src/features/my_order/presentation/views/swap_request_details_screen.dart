@@ -326,7 +326,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..citySwap = sendSwapReqItem.sourceItems!.citySwap
       ..countrySwap = sendSwapReqItem.sourceItems!.countrySwap
       ..date = sendSwapReqItem.createdAt
-      ..offerCount = 0;
+      ..offerCount = sendSwapReqItem.sourceItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
@@ -347,7 +347,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..citySwap = sendSwapReqItem.offerItems!.citySwap
       ..countrySwap = sendSwapReqItem.offerItems!.countrySwap
       ..date = sendSwapReqItem.createdAt
-      ..offerCount = 0;
+      ..offerCount = sendSwapReqItem.offerItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
