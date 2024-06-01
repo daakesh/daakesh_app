@@ -111,7 +111,6 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
 
   FutureOr<void> _getSwapCities(
       GetSwapCitiesEvent event, Emitter<SwapFilterState> emit) async {
-    emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.LOADING));
     final result = await getIt.get<SwapUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));

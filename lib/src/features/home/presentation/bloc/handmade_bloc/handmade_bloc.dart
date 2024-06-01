@@ -145,7 +145,7 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
 
   FutureOr<void> _getHandmadeCities(
       GetHandmadeCitiesEvent event, Emitter<HandmadeState> emit) async {
-    emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.LOADING));
+    emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.CITYLOADING));
     final result = await getIt.get<HomeUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.ERROR));
@@ -157,7 +157,9 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);
       List<CityItem> cityItemList = citiesModel.data!.toList();
-      emit(state.copyWith(cityItemList: cityItemList));
+      emit(state.copyWith(
+          handmadeStateStatus: HandmadeStateStatus.SUCCESS,
+          cityItemList: cityItemList));
     });
   }
 

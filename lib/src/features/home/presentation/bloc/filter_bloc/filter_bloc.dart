@@ -9,7 +9,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     on<PreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
     on<SelectCategoryItemEvent>(_selectItem);
     on<GetCitiesEvent>(_getCities);
-    on<GetSubCategoiresEvent>(_getSubCategoires);
+    on<GetSubCategoriesEvent>(_getSubCategories);
   }
   static FilterBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _clearFilterData(
@@ -126,9 +126,8 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     });
   }
 
-  FutureOr<void> _getSubCategoires(
-      GetSubCategoiresEvent event, Emitter<FilterState> emit) async {
-    emit(state.copyWith(filterStateStatus: FilterStateStatus.LOADING));
+  FutureOr<void> _getSubCategories(
+      GetSubCategoriesEvent event, Emitter<FilterState> emit) async {
     final result =
         await getIt.get<HomeUseCases>().getSubCategories(event.catID);
     result.fold((l) {

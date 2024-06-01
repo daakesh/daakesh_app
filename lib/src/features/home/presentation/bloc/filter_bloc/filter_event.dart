@@ -43,7 +43,7 @@ class SelectCategoryItemEvent extends FilterEvent {
 
 class GetCitiesEvent extends FilterEvent {}
 
-class GetSubCategoiresEvent extends FilterEvent {
+class GetSubCategoriesEvent extends FilterEvent {
   final int catID;
-  GetSubCategoiresEvent({required this.catID});
+  GetSubCategoriesEvent({required this.catID});
 }

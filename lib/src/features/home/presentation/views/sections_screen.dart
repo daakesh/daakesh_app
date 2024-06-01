@@ -113,7 +113,7 @@ class SectionScreen extends StatelessWidget {
     FilterBloc.get.add(GetCitiesEvent());
     FilterBloc.get.add(ClearFilterDataEvent());
     FilterBloc.get.add(SelectCategoryItemEvent(index: -1));
-    FilterBloc.get.add(GetSubCategoiresEvent(catID: catID));
+    FilterBloc.get.add(GetSubCategoriesEvent(catID: catID));
     FilterBloc.get.add(PreviewSectionSubCategoriesEvent(catID: catID));
     Utils.openNavNewPage(context, ResultsScreen(catID: catID));
   }

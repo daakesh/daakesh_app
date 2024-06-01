@@ -146,7 +146,6 @@ class BrandsBloc extends Bloc<BrandsEvent, BrandsState> {
 
   FutureOr<void> _getBrandsCities(
       GetBrandsCitiesEvent event, Emitter<BrandsState> emit) async {
-    emit(state.copyWith(brandsStateStatus: BrandsStateStatus.LOADING));
     final result = await getIt.get<HomeUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(brandsStateStatus: BrandsStateStatus.ERROR));

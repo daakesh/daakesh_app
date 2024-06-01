@@ -2,12 +2,21 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../../src.export.dart';
 
-enum HandmadeStateStatus { INITIAL, LOADING, SUCCESS, ERROR, LOADINGMORE, NULL }
+enum HandmadeStateStatus {
+  INITIAL,
+  LOADING,
+  CITYLOADING,
+  SUCCESS,
+  ERROR,
+  LOADINGMORE,
+  NULL
+}
 
 extension HandmadeStateStatusX on HandmadeStateStatus {
   bool get isInitial => this == HandmadeStateStatus.INITIAL;
   bool get isSuccess => this == HandmadeStateStatus.SUCCESS;
   bool get isError => this == HandmadeStateStatus.ERROR;
+  bool get isCityLoading => this == HandmadeStateStatus.CITYLOADING;
   bool get isLoading => this == HandmadeStateStatus.LOADING;
   bool get isLoadingMore => this == HandmadeStateStatus.LOADINGMORE;
   bool get isNull => this == HandmadeStateStatus.NULL;
