@@ -201,9 +201,11 @@ class SwapTrendDealProduct extends StatelessWidget {
     );
   }
 
-  void openMoreInfoProductScreen(context) => Utils.openNavNewPage(
-      context,
-      SwapMoreInfoScreen(
-        trendDealsItem: trendDealsItem,
-      ));
+  void openMoreInfoProductScreen(context) {
+    Utils.openNavNewPage(
+        context,
+        SwapMoreInfoScreen(
+          trendDealsItem: trendDealsItem,
+        ));
+  }
 }

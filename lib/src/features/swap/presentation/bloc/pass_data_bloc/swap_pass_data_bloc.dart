@@ -40,6 +40,7 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
     List<MyProductItem> mySwapProductData = state.mySwapProductData.toList();
     List<MyProductItem> itemSelected = <MyProductItem>[];
     MyProductItem item = mySwapProductData.elementAt(event.index);
+    print(item.id.toString());
     itemSelected.add(item);
     emit(state.copyWith(itemSelected: itemSelected));
   }

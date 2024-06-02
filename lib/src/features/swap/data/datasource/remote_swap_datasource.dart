@@ -65,7 +65,7 @@ class RemoteSwapDatasource implements SwapDatasource {
       int catID,
       SwapFilterDataModel swapFilterDataModel,
       int page,
-      SortingType sortingtype) async {
+      SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getItemBySubCategoryId',
           params: {"page": "$page"},
@@ -77,7 +77,7 @@ class RemoteSwapDatasource implements SwapDatasource {
             "Filter": swapFilterDataModel.toJson(),
             "orderBy": {
               "name": "created_at",
-              "operation": sortingtype.name,
+              "operation": sortingType.name,
             },
           }),
         );
@@ -123,11 +123,11 @@ class RemoteSwapDatasource implements SwapDatasource {
           },
           body: jsonEncode({
             "type": "swap",
-            "owner": "Admin",
+            "owner": "normal",
             "Filter": swapFilterDataModel.toJson(),
             "orderBy": {
               "name": "price",
-              "operation": "$sortingType",
+              "operation": sortingType.name,
             },
           }),
         );

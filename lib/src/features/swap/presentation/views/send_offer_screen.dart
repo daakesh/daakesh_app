@@ -383,11 +383,6 @@ class SendOfferScreen extends StatelessWidget {
   }
 
   void sendOffer(BuildContext context) {
-    if (commentController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
-          message: context.locale.add_comment_snack_bar);
-      return;
-    }
     passAllData(context);
   }
 

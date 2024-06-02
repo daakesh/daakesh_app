@@ -31,20 +31,20 @@ class UserModel {
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'] ?? "unKnown";
-    name = json['name'] ?? "unKnown";
-    phoneNumber = json['phoneNumber'] ?? "unKnown";
-    password = json['password'] ?? "unKnown";
+    id = json['id'];
+    name = json['name'];
+    phoneNumber = json['phoneNumber'];
+    password = json['password'];
     active = json['active'];
-    userType = json['userType'] ?? "unKnown";
-    token = json['token'] ?? "unKnown";
-    email = json['email'] ?? "unKnown";
-    img = json['img'] ?? "unKnown";
-    deviceToken = json['deviceToken'] ?? "unKnown";
-    country = json['country'] ?? "unKnown";
-    city = json['city'] ?? "unKnown";
-    address = json['address'] ?? "unKnown";
-    location = json['location'] ?? "unKnown";
+    userType = json['userType'];
+    token = json['token'];
+    email = json['email'];
+    img = json['img'];
+    deviceToken = json['deviceToken'];
+    country = json['country'];
+    city = json['city'];
+    address = json['address'];
+    location = json['location'];
   }
   UserModel.initValues() {
     id = "unKnown";

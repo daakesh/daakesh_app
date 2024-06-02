@@ -152,7 +152,7 @@ class RemoteHomeDatasource implements HomeDatasource {
           },
           body: jsonEncode({
             "type": "sell",
-            "owner": "Admin",
+            "owner": "normal",
             "Filter": filterDataModel.toJson(),
             "orderBy": {
               "name": "price",

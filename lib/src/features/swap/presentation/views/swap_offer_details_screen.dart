@@ -297,7 +297,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                         onPressed: () => onContinue(
                               context,
                               trendDealsItem.id.toString(),
-                              state.mySwapProductData.first.id.toString(),
+                              state.itemSelected.first.id.toString(),
                               state.comment.toString(),
                               trendDealsItem.user!.id.toString(),
                               ValueConstants.userId,
