@@ -257,6 +257,7 @@ class SourceItems {
   int? offerCount;
   BrandItem? brand;
   CategoryItem? category;
+  SectionItemModel? section;
 
   SourceItems(
       {this.id,
@@ -286,6 +287,7 @@ class SourceItems {
       this.brand,
       this.offerId,
       this.category,
+      this.section,
       this.discountPercentage});
 
   SourceItems.fromJson(Map<String, dynamic> json) {
@@ -324,6 +326,9 @@ class SourceItems {
     brand = json['brand'] != null
         ? BrandItem.fromJson(json['brand'])
         : BrandItem.initValues();
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : SectionItemModel.initValues();
     category = json['category'] != null
         ? CategoryItem.fromJson(json['category'])
         : CategoryItem.initValues();
@@ -354,6 +359,9 @@ class SourceItems {
     offerCount = 0;
     priceAfterDiscount = "UnKnown";
     discountPercentage = "UnKnown";
+    brand = BrandItem.initValues();
+    section = SectionItemModel.initValues();
+    category = CategoryItem.initValues();
   }
 }
 
@@ -386,6 +394,7 @@ class OfferItems {
   int? offerCount;
   BrandItem? brand;
   CategoryItem? category;
+  SectionItemModel? section;
 
   OfferItems(
       {this.id,
@@ -415,6 +424,7 @@ class OfferItems {
       this.brand,
       this.offerId,
       this.category,
+      this.section,
       this.discountPercentage});
 
   OfferItems.fromJson(Map<String, dynamic> json) {
@@ -456,6 +466,9 @@ class OfferItems {
     category = json['category'] != null
         ? CategoryItem.fromJson(json['category'])
         : CategoryItem.initValues();
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : SectionItemModel.initValues();
   }
   OfferItems.initValues() {
     id = 0;
@@ -483,5 +496,8 @@ class OfferItems {
     priceAfterDiscount = "UnKnown";
     discountPercentage = "UnKnown";
     offerCount = 0;
+    brand = BrandItem.initValues();
+    section = SectionItemModel.initValues();
+    category = CategoryItem.initValues();
   }
 }

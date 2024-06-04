@@ -599,12 +599,8 @@ class MySwapProductCardWidget extends StatelessWidget {
       ..userName = myProductItem.sourceUser!.name
       ..itemImage = myProductItem.sourceItems!.itemImg
       ..title = myProductItem.sourceItems!.title
-      ..sectionName = 'null'
-
-      /// myProductItem.section!.name.toString()
-      ..sectionArName = 'null'
-
-      ///myProductItem.section!.arName.toString()
+      ..sectionName = myProductItem.sourceItems!.section!.name.toString()
+      ..sectionArName = myProductItem.sourceItems!.section!.arName.toString()
       ..brandName = myProductItem.sourceItems!.brand!.brandName
       ..brandArName = myProductItem.sourceItems!.brand!.arName
       ..categoryName = myProductItem.sourceItems!.category!.name

@@ -317,12 +317,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..userName = sendSwapReqItem.sourceUser!.name
       ..itemImage = sendSwapReqItem.sourceItems!.itemImg
       ..title = sendSwapReqItem.sourceItems!.title
-      ..sectionName = ''
-
-      ///sendSwapReqItem.sourceItems.!.name.toString()
-      ..sectionArName = ''
-
-      ///sendSwapReqItem.sourceItems!.section!.arName.toString()
+      ..sectionName = sendSwapReqItem.sourceItems!.section!.name
+      ..sectionArName = sendSwapReqItem.sourceItems!.section!.arName
       ..brandName = sendSwapReqItem.sourceItems!.brand!.brandName
       ..brandArName = sendSwapReqItem.sourceItems!.brand!.arName
       ..categoryName = sendSwapReqItem.sourceItems!.category!.name
@@ -344,12 +340,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..userName = sendSwapReqItem.offerUser!.name
       ..itemImage = sendSwapReqItem.offerItems!.itemImg
       ..title = sendSwapReqItem.offerItems!.title
-      ..sectionName = ''
-
-      ///sendSwapReqItem.sourceItems.!.name.toString()
-      ..sectionArName = ''
-
-      ///sendSwapReqItem.sourceItems!.section!.arName.toString()
+      ..sectionName = sendSwapReqItem.offerItems!.section!.name
+      ..sectionArName = sendSwapReqItem.offerItems!.section!.arName
       ..brandName = sendSwapReqItem.offerItems!.brand!.brandName
       ..brandArName = sendSwapReqItem.offerItems!.brand!.arName
       ..categoryName = sendSwapReqItem.offerItems!.category!.name
