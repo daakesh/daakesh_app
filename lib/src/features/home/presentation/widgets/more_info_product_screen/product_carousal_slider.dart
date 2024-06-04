@@ -82,7 +82,8 @@ class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
                         return Transform.scale(
                           scale: state.scale,
                           child: GestureDetector(
-                            onTap: () => openImage(i.toString()),
+                            onTap: () =>
+                                openImage(widget.todayDealItem.itemImg!),
                             child: CachedImage(
                               imageUrl: i.toString(),
                             ),
@@ -129,7 +130,7 @@ class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
     );
   }
 
-  void openImage(String imageUrl) {
-    Utils.openNewPage(ZoomImageWidget(imageUrl: imageUrl));
+  void openImage(List<String> imageUrl) {
+    Utils.openNewPage(ZoomImageWidget(imageUrlList: imageUrl));
   }
 }

@@ -72,7 +72,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
                     return Transform.scale(
                       scale: state.scale,
                       child: GestureDetector(
-                        onTap: () => openZoomImage(i.toString()),
+                        onTap: () => openZoomImage(trendDealsItem.itemImg!),
                         child: CachedImage(
                           imageUrl: i.toString(),
                         ),
@@ -112,7 +112,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
     );
   }
 
-  openZoomImage(String imageUrl) {
-    Utils.openNewPage(ZoomImageWidget(imageUrl: imageUrl));
+  void openZoomImage(List<String> imageUrl) {
+    Utils.openNewPage(ZoomImageWidget(imageUrlList: imageUrl));
   }
 }
