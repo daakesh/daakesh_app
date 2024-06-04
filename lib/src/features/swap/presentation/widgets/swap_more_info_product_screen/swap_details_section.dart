@@ -47,7 +47,9 @@ class SwapDetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              'Mac Cosmetics',
+              Utils.isEnglish
+                  ? trendDealsItem.section!.name.toString()
+                  : trendDealsItem.section!.arName.toString(),
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),

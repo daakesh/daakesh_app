@@ -6,3 +6,9 @@ class GetMySwapProEvent extends MySwapProEvent {
 }
 
 class ClearSwapDataEvent extends MySwapProEvent {}
+
+class RemoveSwapItemEvent extends MySwapProEvent {
+  final int id;
+
+  RemoveSwapItemEvent({required this.id});
+}

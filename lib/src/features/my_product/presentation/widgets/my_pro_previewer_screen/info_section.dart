@@ -47,7 +47,9 @@ class InfoSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18.0),
             ),
             Text(
-              'Mac Cosmetics',
+              Utils.isEnglish
+                  ? previewerModel.sectionName!.toString()
+                  : previewerModel.sectionArName!.toString(),
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),

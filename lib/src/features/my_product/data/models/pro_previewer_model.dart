@@ -9,6 +9,8 @@ class ProPreviewerModel {
   String? date;
   String? brandName;
   String? brandArName;
+  String? sectionName;
+  String? sectionArName;
   String? modelName;
   String? categoryName;
   String? categoryArName;
@@ -35,11 +37,13 @@ class ProPreviewerModel {
     this.swapCountry = "Unknown",
     this.offerCount = 0,
     this.date = "Unknown",
-    this.brandName = "Unknown",
-    this.brandArName = "Unknown",
+    this.sectionName = "Null",
+    this.sectionArName = "بدون",
+    this.brandName = "Null",
+    this.brandArName = "بدون",
     this.modelName = "Unknown",
-    this.categoryName = "Unknown",
-    this.categoryArName = "Unknown",
+    this.categoryName = "Null",
+    this.categoryArName = "بدون",
     this.year = "2024",
     this.description = "Unknown",
     this.subID = 0,

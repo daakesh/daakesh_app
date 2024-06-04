@@ -339,6 +339,8 @@ class SwapOfferDetailsScreen extends StatelessWidget {
       ..userName = trendDealsItem.user!.name
       ..itemImage = trendDealsItem.itemImg
       ..title = trendDealsItem.title
+      ..sectionName = trendDealsItem.section!.name.toString()
+      ..sectionArName = trendDealsItem.section!.arName.toString()
       ..brandName = trendDealsItem.brand!.brandName
       ..brandArName = trendDealsItem.brand!.arName
       ..categoryName = trendDealsItem.category!.name

@@ -10,4 +10,5 @@ abstract class MyOrderRepository {
       int itemId, int approved, String comment);
   Future<Either<Failure, ValidResponse>> startSwap(
       StartSwapModel startSwapModel);
+  Future<Either<Failure, ValidResponse>> removeOffer(int id);
 }

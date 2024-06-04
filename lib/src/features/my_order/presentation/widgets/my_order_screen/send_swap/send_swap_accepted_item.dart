@@ -179,6 +179,16 @@ class SendSwapAcceptedItem extends StatelessWidget {
             ],
           ),
           SizedBox(height: 13.0.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 19.0.w),
+            child: Center(
+              child: DefaultButtonWidget(
+                text: context.locale.delete_item,
+                onPressed: () => deleteItem(context, sendSwapReqItem.id!),
+              ),
+            ),
+          ),
+          SizedBox(height: 13.0.h),
         ],
       ),
     );
@@ -190,5 +200,13 @@ class SendSwapAcceptedItem extends StatelessWidget {
       screen: SwapRequestDetailsScreen(sendSwapReqItem: sendSwapReqItem),
       withNavBar: true,
     );
+  }
+
+  void deleteItem(BuildContext context, int id) {
+    context.showRemoveDialog().then((value) {
+      if (value) {
+        MySwapOrderBloc.get.add(RemoveSendOfferItemEvent(id: id));
+      }
+    });
   }
 }

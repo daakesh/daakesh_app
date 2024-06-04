@@ -14,6 +14,7 @@ abstract class MyOrderUseCases {
   );
   Future<Either<Failure, ValidResponse>> startSwap(
       StartSwapModel startSwapModel);
+  Future<Either<Failure, ValidResponse>> removeOffer(int id);
 }
 
 @dev
@@ -44,5 +45,10 @@ class MyOrderUseCasesImpl implements MyOrderUseCases {
   Future<Either<Failure, ValidResponse>> startSwap(
       StartSwapModel startSwapModel) async {
     return await getIt.get<MyOrderRepository>().startSwap(startSwapModel);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeOffer(int id) async {
+    return await getIt.get<MyOrderRepository>().removeOffer(id);
   }
 }

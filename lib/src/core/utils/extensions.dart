@@ -94,23 +94,23 @@ extension ShowDialog on BuildContext {
         builder: (context) {
           return AlertDialog(
             title: Text(
-              "Alarm",
+              context.locale.alarm,
               style: context.easyTheme.textTheme.headlineMedium,
             ),
             content: Text(
-              "Welcome! To unlock all features and personalize your experience, please log in or sign",
+              context.locale.login_instruction,
               style: context.easyTheme.textTheme.bodyMedium!
                   .copyWith(fontSize: 18.0, fontWeight: FontWeight.w100),
             ),
             actions: [
               TextButton(
-                child: Text("Close",
+                child: Text(context.locale.close,
                     style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                         color: Colors.red, fontWeight: FontWeight.bold)),
                 onPressed: () => Navigator.of(context).pop(),
               ),
               TextButton(
-                child: Text("Login",
+                child: Text(context.locale.login,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.bold)),
                 onPressed: () {
@@ -122,4 +122,50 @@ extension ShowDialog on BuildContext {
           );
         },
       );
+
+  Future<bool> showRemoveDialog() async {
+    return await showDialog(
+      context: this,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            context.locale.alarm,
+            style: context.easyTheme.textTheme.headlineMedium,
+          ),
+          content: Text(
+            context.locale.are_you_sure_you_wanna_remove_the_item,
+            style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+              fontSize: 18.0,
+              fontWeight: FontWeight.w100,
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text(
+                context.locale.remove,
+                style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+            ),
+            TextButton(
+              child: Text(
+                context.locale.cancel_remove_item,
+                style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

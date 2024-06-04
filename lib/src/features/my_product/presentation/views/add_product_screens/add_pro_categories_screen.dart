@@ -251,7 +251,6 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
       ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
       return;
     }
-
     AddProBloc.get.add(AddProCategoriesEvent(
       productSecID: productSecID.toString(),
       productCatID: productCatID.toString(),

@@ -3,21 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  @override
-  void initState() {
-    super.initState();
-    getHomeScreenData();
-  }
-
-  void getHomeScreenData() => HomeBloc.get.add(GetHomeScreenData());
 
   @override
   Widget build(BuildContext context) {

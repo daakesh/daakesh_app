@@ -58,11 +58,12 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       (l) {
         ShowToastSnackBar.showSnackBars(message: l.message.toString());
       },
-      (r) {
+      (r) async {
         if (!r.status!) {
           ShowToastSnackBar.showSnackBars(message: r.message.toString());
           return;
         }
+        await getIt.get<AuthUseCases>().activateUser(ValueConstants.userId);
       },
     );
   }

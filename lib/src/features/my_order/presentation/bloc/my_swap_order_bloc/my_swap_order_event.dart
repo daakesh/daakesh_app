@@ -34,3 +34,13 @@ class StartSwapEvent extends MySwapOrderEvent {
 }
 
 class EmptyMyOrderDataEvent extends MySwapOrderEvent {}
+
+class RemoveSendOfferItemEvent extends MySwapOrderEvent {
+  final int id;
+  RemoveSendOfferItemEvent({required this.id});
+}
+
+class RemoveReceiveOfferItemEvent extends MySwapOrderEvent {
+  final int id;
+  RemoveReceiveOfferItemEvent({required this.id});
+}

@@ -11,6 +11,7 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
     on<GetProOverAllRateItemsEvent>(_getProOverAllRateItems);
     on<EmptyProDataEvent>(_emptyProDataEvent);
     on<ClearDataEvent>(_clearData);
+    on<RemoveItemEvent>(_removeItem);
   }
   static MyProBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _getMyProduct(
@@ -197,5 +198,25 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
 
   FutureOr<void> _clearData(ClearDataEvent event, Emitter<MyProState> emit) {
     emit(state.copyWith(myProductListData: [], isMoreData: true));
+  }
+
+  FutureOr<void> _removeItem(
+      RemoveItemEvent event, Emitter<MyProState> emit) async {
+    ProgressCircleDialog.show();
+    final result = await getIt.get<MyProductUseCases>().removeProduct(event.id);
+    result.fold((l) {
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      ProgressCircleDialog.dismiss();
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      ShowToastSnackBar.showSnackBars(message: r.data['data'].toString());
+      List<MyProductItem> cartItemsList = state.myProductListData.toList();
+      cartItemsList.removeWhere((item) => event.id == item.id);
+      emit(state.copyWith(myProductListData: []));
+      emit(state.copyWith(myProductListData: cartItemsList));
+    });
   }
 }

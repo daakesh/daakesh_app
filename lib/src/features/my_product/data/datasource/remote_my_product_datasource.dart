@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -100,7 +101,10 @@ class RemoteMyProductDatasource implements MyProductDatasource {
     addProData.itemImageList = images;
     final result = await getIt.get<NetworkService>().post(
         path: 'DaakeshServices/api/item/addItem',
-        body: addProData.addItemToJson());
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(addProModel.addItemToJson()));
     return result;
   }
 
@@ -123,7 +127,10 @@ class RemoteMyProductDatasource implements MyProductDatasource {
     addProData.itemImageList = images;
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/updateItem',
-          body: addProModel.editItemToJson(),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(addProModel.editItemToJson()),
         );
     return result;
   }
@@ -160,6 +167,13 @@ class RemoteMyProductDatasource implements MyProductDatasource {
       "id": "$id",
       "userID": ValueConstants.userId,
     });
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeProduct(int id) async {
+    final result = await getIt.get<NetworkService>().get(
+        path: 'DaakeshServices/api/item/deleteItem', params: {"id": "$id"});
     return result;
   }
 

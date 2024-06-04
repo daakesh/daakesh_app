@@ -19,4 +19,5 @@ abstract class MyProductDatasource {
   Future<Either<Failure, ValidResponse>> getItemById(int id);
   Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
       String commentDesc, int catID, int subID, double rateValue);
+  Future<Either<Failure, ValidResponse>> removeProduct(int id);
 }

@@ -32,3 +32,7 @@ class AppWidget extends StatelessWidget {
     );
   }
 }
+
+
+///brand and subCategory make non value.
+

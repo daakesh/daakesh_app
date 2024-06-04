@@ -372,6 +372,7 @@
   "myProductsScreen": "*********MyProductsScreen*********",
   "my_product": "My Product",
   "see_more": "See More",
+  "delete_item": "DELETE",
   "shop_tab_bar": "Shop",
   "swap_tab_bar": "Swap",
   "search_in_your_product": "Search In Your Product",
@@ -428,7 +429,7 @@
   "change_photo": "Change Photo",
   "name": "Name",
   "email": "Email",
-  "password": "Password",
+  "password": "New Password",
   "profileScreen": "*********ProfileScreen*********",
   "your_account": "Your Account",
   "personal_info_title": "Personal Info",
@@ -438,5 +439,14 @@
   "complaint_title": "Complaint",
   "setting": "Setting",
   "language": "Language",
-  "log_out": "LOG OUT"
+  "log_out": "LOG OUT",
+  "removeDialog": "*********RemoveDialog*********",
+  "alarm": "Alarm",
+  "are_you_sure_you_wanna_remove_the_item": "Are you sure you wanna remove the item.",
+  "remove": "Remove",
+  "cancel_remove_item": "Cancel",
+  "loginDialog": "*********LoginDialog*********",
+  "login_instruction": "Welcome! To unlock all features and personalize your experience, please log in or sign",
+  "close": "Close",
+  "login": "Login"
 }

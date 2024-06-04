@@ -179,6 +179,7 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
       ResetViewAllEvent event, Emitter<TodayDealsState> emit) {
     emit(state.copyWith(
       allTodayDealsListData: [],
+      todayDealsListData: [],
       isMoreDataItems: true,
       country: "Jordan",
       city: "Amman",

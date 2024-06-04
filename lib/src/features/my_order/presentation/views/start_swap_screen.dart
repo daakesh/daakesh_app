@@ -227,6 +227,12 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
       ..userName = sendReceiveSwapReqItem.offerUser!.name
       ..itemImage = sendReceiveSwapReqItem.offerItems!.itemImg
       ..title = sendReceiveSwapReqItem.offerItems!.title
+      ..sectionName = 'NULL'
+
+      ///sendReceiveSwapReqItem.sourceItems.!.name.toString()
+      ..sectionArName = 'NULL'
+
+      ///sendReceiveSwapReqItem.sourceItems!.section!.arName.toString()
       ..brandName = sendReceiveSwapReqItem.offerItems!.brand!.brandName
       ..brandArName = sendReceiveSwapReqItem.offerItems!.brand!.arName
       ..categoryName = sendReceiveSwapReqItem.offerItems!.category!.name

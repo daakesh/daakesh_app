@@ -59,8 +59,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         proDetailsStateStatus: ProDetailsStateStatus.LOADING,
         proCategoryListData: [],
         proSubCategoryListData: [],
-        productSecID: event.secID,
-        productSubCatID: "-1"));
+        productSecID: event.secID));
 
     final result =
         await getIt.get<MyProductUseCases>().getCategoryBySection(event.secID);
@@ -90,6 +89,8 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         }
         return;
       }
+      getProSubCategory(proCategoryListData.first.id.toString(),
+          isEdit: event.isEdit);
       emit(state.copyWith(
         proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
         proCategoryListData: proCategoryListData,
@@ -124,6 +125,9 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
           ProSubCategoryModel.fromJson(r.data);
       List<ProSubCategoryItem> proSubCategoryListData =
           proSubCategoryModel.data!.toList();
+      proSubCategoryListData.insert(
+          0, ProSubCategoryItem(id: -1, name: "null", arName: "بدون"));
+
       String subID = '';
       try {
         ProSubCategoryItem proSubCategoryItem =
@@ -140,12 +144,13 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       } catch (e) {
         subID = proSubCategoryListData.first.id.toString();
       }
+
       if (event.isEdit) {
         if (isEdit()) {
           emit(state.copyWith(
             proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
             proSubCategoryListData: proSubCategoryListData,
-            productSubCatID: proSubCategoryListData.isNotEmpty ? subID : "-1",
+            productSubCatID: subID,
           ));
         }
         return;
@@ -153,9 +158,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       emit(state.copyWith(
         proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
         proSubCategoryListData: proSubCategoryListData,
-        productSubCatID: proSubCategoryListData.isNotEmpty
-            ? proSubCategoryListData.first.id.toString()
-            : "-1",
+        productSubCatID: proSubCategoryListData.first.id.toString(),
       ));
     });
   }
@@ -175,28 +178,34 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       }
       ProBrandModel proBrandModel = ProBrandModel.fromJson(r.data);
       List<ProBrandItem> proBrandListData = proBrandModel.data!.toList();
+      proBrandListData.insert(
+          0, ProBrandItem(id: -1, name: "null", arName: "بدون"));
       emit(state.copyWith(
         proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
         proBrandListData: proBrandListData,
       ));
       if (event.isEdit) {
         if (isEdit()) {
-          emit(state.copyWith(
-            proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
-            proBrandListData: proBrandListData,
-            productBrandID:
-                getIt.get<EditProduct>().myProductItem!.brand!.id.toString(),
-          ));
+          if (getIt.get<EditProduct>().myProductItem!.brand!.id != 0) {
+            emit(state.copyWith(
+              proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
+              proBrandListData: proBrandListData,
+              productBrandID:
+                  getIt.get<EditProduct>().myProductItem!.brand!.id.toString(),
+            ));
+          } else {
+            emit(state.copyWith(
+                proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
+                proBrandListData: proBrandListData,
+                productBrandID: proBrandListData.first.id.toString()));
+          }
         }
         return;
       }
       emit(state.copyWith(
-        proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
-        proBrandListData: proBrandListData,
-        productBrandID: proBrandListData.isNotEmpty
-            ? proBrandListData.first.id.toString()
-            : null,
-      ));
+          proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
+          proBrandListData: proBrandListData,
+          productBrandID: proBrandListData.first.id.toString()));
     });
   }
 
@@ -229,9 +238,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       getProSections();
       getProCategory(productSecID.toString());
       getProBrand(productSecID.toString());
-      if (getIt.get<EditProduct>().myProductItem!.subcategory != null) {
-        getProSubCategory(productCatID.toString());
-      }
+      getProSubCategory(productCatID.toString());
     } else {
       ProDetailsBloc.get.add(GetProSectionsEvent());
     }
@@ -261,6 +268,6 @@ void getProBrand(String secID) {
   ProDetailsBloc.get.add(GetBrandsBySectionEvent(secID: secID, isEdit: true));
 }
 
-void getProSubCategory(String catID) {
-  ProDetailsBloc.get.add(GetProSubCategoryEvent(catID: catID, isEdit: true));
+void getProSubCategory(String catID, {bool isEdit = true}) {
+  ProDetailsBloc.get.add(GetProSubCategoryEvent(catID: catID, isEdit: isEdit));
 }

@@ -79,6 +79,11 @@ class MyProductRepositoryImpl implements MyProductRepository {
   }
 
   @override
+  Future<Either<Failure, ValidResponse>> removeProduct(int id) async {
+    return await getIt.get<MyProductDatasource>().removeProduct(id);
+  }
+
+  @override
   Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
       String commentDesc, int catID, int subID, double rateValue) async {
     return await getIt

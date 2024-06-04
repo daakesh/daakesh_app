@@ -216,8 +216,28 @@ class ReceiveDoneDealItem extends StatelessWidget {
           SizedBox(
             height: 16.0.h,
           ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+            child: Center(
+              child: DefaultButtonWidget(
+                text: context.locale.delete_item,
+                onPressed: () => deleteItem(context, receiveSwapReqItem.id!),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 16.0.h,
+          ),
         ],
       ),
     );
+  }
+
+  void deleteItem(BuildContext context, int id) {
+    context.showRemoveDialog().then((value) {
+      if (value) {
+        MySwapOrderBloc.get.add(RemoveReceiveOfferItemEvent(id: id));
+      }
+    });
   }
 }

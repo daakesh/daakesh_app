@@ -2,13 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
+import 'package:collection/collection.dart';
 
 // ignore: must_be_immutable
 class SendOfferScreen extends StatelessWidget {
   final TrendDealsItem trendDealsItem;
   SendOfferScreen({super.key, required this.trendDealsItem});
+
   final commentController = TextEditingController();
-  int itemIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,113 +187,126 @@ class SendOfferScreen extends StatelessWidget {
                           enableInfiniteScroll: false,
                           scrollDirection: Axis.horizontal,
                           onPageChanged: (index, reason) {
-                            itemIndex = index;
+                            SwapPassDataBloc.get
+                                .add(PassMySwapProductDataEvent(index: index));
                           },
                         ),
-                        items: state.mySwapProductListData.map((i) {
-                          return Container(
-                            width: double.infinity,
-                            margin: const EdgeInsetsDirectional.only(
-                                start: 8, end: 8.0, bottom: 8.0),
-                            decoration: const BoxDecoration(
-                                color: ColorName.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4.0)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromRGBO(0, 0, 0, 0.16),
-                                    offset: Offset(0, 3),
-                                    blurRadius: 6.0,
-                                  )
-                                ]),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  width: 11.0,
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 32.0),
-                                    child: CachedImage(
-                                        imageUrl: i.itemImg!.first.toString()),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 18.0,
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(
-                                        height: 20.0,
+                        items:
+                            state.mySwapProductListData.mapIndexed((index, i) {
+                          return BlocBuilder<SwapPassDataBloc,
+                              SwapPassDataState>(
+                            builder: (context, passState) {
+                              return Container(
+                                width: double.infinity,
+                                margin: const EdgeInsetsDirectional.only(
+                                    start: 8, end: 8.0, bottom: 8.0),
+                                decoration: BoxDecoration(
+                                    color: ColorName.white,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(4.0)),
+                                    border: passState.itemIndex == index
+                                        ? Border.all(
+                                            color: Colors.amber, width: 2.0)
+                                        : null,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(0, 0, 0, 0.16),
+                                        offset: Offset(0, 3),
+                                        blurRadius: 6.0,
+                                      )
+                                    ]),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      width: 11.0,
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 32.0),
+                                        child: CachedImage(
+                                            imageUrl:
+                                                i.itemImg!.first.toString()),
                                       ),
-                                      Flexible(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.only(
-                                                  end: 8.0),
-                                          child: Text(
-                                            '${i.title}\n\n\n',
-                                            maxLines: 3,
+                                    ),
+                                    const SizedBox(
+                                      width: 18.0,
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(
+                                            height: 20.0,
+                                          ),
+                                          Flexible(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .only(end: 8.0),
+                                              child: Text(
+                                                '${i.title}\n\n\n',
+                                                maxLines: 3,
+                                                style: context.easyTheme
+                                                    .textTheme.bodyMedium!
+                                                    .copyWith(
+                                                        fontSize: 20.0,
+                                                        color: ColorName.gray,
+                                                        overflow: TextOverflow
+                                                            .ellipsis),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Container(
+                                            constraints: const BoxConstraints(
+                                                maxWidth: 66.0),
+                                            decoration: BoxDecoration(
+                                              color: ColorName.red,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(4.0.r)),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                context.locale.swap_tag_title,
+                                                textAlign: TextAlign.center,
+                                                style: context.easyTheme
+                                                    .textTheme.headlineMedium!
+                                                    .copyWith(
+                                                        fontSize: 14.0,
+                                                        color: ColorName.white),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 6.0,
+                                          ),
+                                          TextButtonWidget(
+                                            text: context.locale
+                                                .see_details_my_swap_product,
+                                            onPressed: () =>
+                                                seeOfferDetails(context, i),
                                             style: context
                                                 .easyTheme.textTheme.bodyMedium!
                                                 .copyWith(
-                                                    fontSize: 20.0,
-                                                    color: ColorName.gray,
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      Container(
-                                        constraints: const BoxConstraints(
-                                            maxWidth: 66.0),
-                                        decoration: BoxDecoration(
-                                          color: ColorName.red,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4.0.r)),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            context.locale.swap_tag_title,
-                                            textAlign: TextAlign.center,
-                                            style: context.easyTheme.textTheme
-                                                .headlineMedium!
-                                                .copyWith(
                                                     fontSize: 14.0,
-                                                    color: ColorName.white),
+                                                    color: ColorName.skyBlue),
                                           ),
-                                        ),
+                                          const SizedBox(
+                                            height: 12.0,
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(
-                                        height: 6.0,
-                                      ),
-                                      TextButtonWidget(
-                                        text: context
-                                            .locale.see_details_my_swap_product,
-                                        onPressed: () =>
-                                            seeOfferDetails(context, i),
-                                        style: context
-                                            .easyTheme.textTheme.bodyMedium!
-                                            .copyWith(
-                                                fontSize: 14.0,
-                                                color: ColorName.skyBlue),
-                                      ),
-                                      const SizedBox(
-                                        height: 12.0,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              );
+                            },
                           );
                         }).toList(),
                       )
@@ -387,7 +402,6 @@ class SendOfferScreen extends StatelessWidget {
   }
 
   void passAllData(context) {
-    SwapPassDataBloc.get.add(PassMySwapProductDataEvent(index: itemIndex));
     SwapPassDataBloc.get
         .add(PassSwapCommentEvent(comment: commentController.text));
     openSwapOfferDetailsScreen(context);
@@ -404,6 +418,8 @@ class SendOfferScreen extends StatelessWidget {
       ..userName = trendDealsItem.user!.name
       ..itemImage = trendDealsItem.itemImg
       ..title = trendDealsItem.title
+      ..sectionName = trendDealsItem.section!.name.toString()
+      ..sectionArName = trendDealsItem.section!.arName.toString()
       ..brandName = trendDealsItem.brand!.brandName
       ..brandArName = trendDealsItem.brand!.arName
       ..categoryName = trendDealsItem.category!.name
@@ -424,6 +440,8 @@ class SendOfferScreen extends StatelessWidget {
       ..userName = myProductItem.user!.name
       ..itemImage = myProductItem.itemImg
       ..title = myProductItem.title
+      ..sectionName = myProductItem.section!.name.toString()
+      ..sectionArName = myProductItem.section!.arName.toString()
       ..brandName = myProductItem.brand!.brandName
       ..brandArName = myProductItem.brand!.arName
       ..categoryName = myProductItem.category!.name

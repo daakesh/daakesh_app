@@ -60,9 +60,13 @@ class AddProModel {
     data['secID'] = secID.toString();
     if (subID != null && subID!.isNotEmpty && subID != "-1") {
       data['subID'] = subID;
+    } else {
+      data['subID'] = null;
     }
-    if (brandID != null && brandID!.isNotEmpty) {
+    if (brandID != null && brandID!.isNotEmpty && brandID != "-1") {
       data['brandID'] = brandID;
+    } else {
+      data['brandID'] = null;
     }
     data['title'] = title.toString();
     data['tradeOrSell'] = tradeOrSell.toString();
@@ -89,11 +93,16 @@ class AddProModel {
     data['description'] = description.toString();
     data['catID'] = catID.toString();
     data['secID'] = secID.toString();
+
     if (subID != null && subID!.isNotEmpty && subID != "-1") {
       data['subID'] = subID;
+    } else {
+      data['subID'] = null;
     }
-    if (brandID != null && brandID!.isNotEmpty) {
+    if (brandID != null && brandID!.isNotEmpty && brandID != "-1") {
       data['brandID'] = brandID;
+    } else {
+      data['brandID'] = null;
     }
     data['title'] = title.toString();
     data['type'] = tradeOrSell.toString();

@@ -128,6 +128,19 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
           SizedBox(
             height: 16.0.h,
           ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+            child: Center(
+              child: DefaultButtonWidget(
+                text: context.locale.delete_item,
+                onPressed: () =>
+                    deleteItem(context, sendReceiveSwapReqItem.id!),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 16.0.h,
+          ),
         ],
       ),
     );
@@ -136,5 +149,13 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
   void onStartSwap(context, SendReceiveSwapReqItem sendReceiveSwapReqItem) {
     Utils.openNavNewPage(context,
         StartSwapScreen(sendReceiveSwapReqItem: sendReceiveSwapReqItem));
+  }
+
+  void deleteItem(BuildContext context, int id) {
+    context.showRemoveDialog().then((value) {
+      if (value) {
+        MySwapOrderBloc.get.add(RemoveReceiveOfferItemEvent(id: id));
+      }
+    });
   }
 }

@@ -67,11 +67,11 @@ class BrandItem {
 
   BrandItem.initValues() {
     id = 0;
-    brandName = "Unknown";
+    brandName = "Null";
     description = "Unknown";
     brandImg = "Unknown";
     date = "Unknown";
     secID = 0;
-    arName = "Unknown";
+    arName = "بدون";
   }
 }

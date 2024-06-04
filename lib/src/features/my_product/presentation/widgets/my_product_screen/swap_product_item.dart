@@ -104,7 +104,7 @@ class SwapProductItem extends StatelessWidget {
                                         fontSize: 15.0.sp,
                                         color: ColorName.gray)),
                             TextSpan(
-                                text: '${myProductItem.display}',
+                                text: ' : ${myProductItem.display}',
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
                                         fontSize: 13.0.sp,
@@ -118,6 +118,13 @@ class SwapProductItem extends StatelessWidget {
               ],
             ),
             SizedBox(height: 18.0.h),
+            Center(
+              child: DefaultButtonWidget(
+                text: context.locale.delete_item,
+                onPressed: () => deleteItem(context, myProductItem.id!),
+              ),
+            ),
+            SizedBox(height: 20.0.h),
           ],
         ),
       ),
@@ -132,6 +139,14 @@ class SwapProductItem extends StatelessWidget {
         productDisplayMethod: ProductDisplayMethod.Swap));
   }
 
+  void deleteItem(BuildContext context, int id) async {
+    context.showRemoveDialog().then((value) {
+      if (value) {
+        MySwapProBloc.get.add(RemoveSwapItemEvent(id: id));
+      }
+    });
+  }
+
   void previewProduct(BuildContext context) {
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
@@ -140,6 +155,8 @@ class SwapProductItem extends StatelessWidget {
       ..title = myProductItem.title
       ..averageRating = myProductItem.averageRating
       ..rateCount = myProductItem.rateCount
+      ..sectionName = myProductItem.section!.name.toString()
+      ..sectionArName = myProductItem.section!.arName.toString()
       ..priceAfterDiscount = myProductItem.priceAfterDiscount
       ..brandName = myProductItem.brand!.brandName
       ..brandArName = myProductItem.brand!.arName

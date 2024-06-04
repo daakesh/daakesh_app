@@ -31,4 +31,9 @@ class MyOrderRepositoryImpl implements MyOrderRepository {
       StartSwapModel startSwapModel) async {
     return await getIt.get<MyOrderDatasource>().startSwap(startSwapModel);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeOffer(int id) async {
+    return await getIt.get<MyOrderDatasource>().removeOffer(id);
+  }
 }

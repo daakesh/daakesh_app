@@ -51,7 +51,9 @@ class DetailsSection extends StatelessWidget {
               ),
             ),
             Text(
-              'Mac Cosmetics',
+              Utils.isEnglish
+                  ? todayDealItem.section!.name.toString()
+                  : todayDealItem.section!.arName.toString(),
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),

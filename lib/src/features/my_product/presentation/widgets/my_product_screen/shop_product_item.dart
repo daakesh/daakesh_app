@@ -325,6 +325,13 @@ class _ShopProductItemState extends State<ShopProductItem> {
                   ),
                 ),
                 SizedBox(height: 14.0.h),
+                Center(
+                  child: DefaultButtonWidget(
+                    text: context.locale.delete_item,
+                    onPressed: () => deleteItem(widget.myProductItem.id!),
+                  ),
+                ),
+                SizedBox(height: 20.0.h),
               ],
             ),
           ],
@@ -341,12 +348,22 @@ class _ShopProductItemState extends State<ShopProductItem> {
         productDisplayMethod: ProductDisplayMethod.Sell));
   }
 
+  void deleteItem(int id) async {
+    await context.showRemoveDialog().then((value) {
+      if (value) {
+        MyProBloc.get.add(RemoveItemEvent(id: id));
+      }
+    });
+  }
+
   void previewProduct(MyProductItem myProductItem) {
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
       ..userName = myProductItem.user!.name
       ..itemImage = myProductItem.itemImg
       ..title = myProductItem.title
+      ..sectionName = myProductItem.section!.name.toString()
+      ..sectionArName = myProductItem.section!.arName.toString()
       ..averageRating = myProductItem.averageRating
       ..rateCount = myProductItem.rateCount
       ..priceAfterDiscount = myProductItem.priceAfterDiscount

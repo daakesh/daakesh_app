@@ -50,3 +50,9 @@ class GetProOverAllRateItemsEvent extends MyProEvent {
 class EmptyProDataEvent extends MyProEvent {}
 
 class ClearDataEvent extends MyProEvent {}
+
+class RemoveItemEvent extends MyProEvent {
+  final int id;
+
+  RemoveItemEvent({required this.id});
+}

@@ -51,4 +51,14 @@ class RemoteMyOrderDatasource implements MyOrderDatasource {
         body: startSwapModel.toJson());
     return result;
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeOffer(int id) async {
+    final result = await getIt.get<NetworkService>().get(
+      baseUrl: NetworkConstants.baseUrl,
+      path: 'DaakeshServices/api/swapOffer/deleteOffer',
+      params: {"id": "$id"},
+    );
+    return result;
+  }
 }
