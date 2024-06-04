@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daakesh/src/core/utils/widgets/zoom_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../src.export.dart';
+import 'package:collection/collection.dart';
 
 class SwapProductCarousalSlider extends StatelessWidget {
   final TrendDealsItem trendDealsItem;
@@ -64,7 +64,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
                 SwapPassDataBloc.get
                     .add(ChangeProductSliderIndex(sliderIndex: index));
               }),
-          items: trendDealsItem.itemImg!.map((i) {
+          items: trendDealsItem.itemImg!.mapIndexed((index, i) {
             return BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
               builder: (context, state) {
                 return Builder(
@@ -72,7 +72,8 @@ class SwapProductCarousalSlider extends StatelessWidget {
                     return Transform.scale(
                       scale: state.scale,
                       child: GestureDetector(
-                        onTap: () => openZoomImage(trendDealsItem.itemImg!),
+                        onTap: () =>
+                            openZoomImage(trendDealsItem.itemImg!, index),
                         child: CachedImage(
                           imageUrl: i.toString(),
                         ),
@@ -112,7 +113,10 @@ class SwapProductCarousalSlider extends StatelessWidget {
     );
   }
 
-  void openZoomImage(List<String> imageUrl) {
-    Utils.openNewPage(ZoomImageWidget(imageUrlList: imageUrl));
+  void openZoomImage(List<String> imageUrl, int index) {
+    Utils.openNewPage(ZoomImageWidget(
+      imageUrlList: imageUrl,
+      index: index,
+    ));
   }
 }

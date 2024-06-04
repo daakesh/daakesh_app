@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daakesh/src/core/utils/widgets/zoom_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:collection/collection.dart';
 import '../../../../../src.export.dart';
 
 class ProductCarousalSlider extends StatefulWidget {
@@ -75,7 +75,7 @@ class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
                 setState(() {});
               }),
           items: widget.todayDealItem.itemImg != null
-              ? widget.todayDealItem.itemImg!.map((i) {
+              ? widget.todayDealItem.itemImg!.mapIndexed((index, i) {
                   return Builder(builder: (context) {
                     return BlocBuilder<PassDataBloc, PassDataState>(
                       builder: (context, state) {
@@ -83,7 +83,7 @@ class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
                           scale: state.scale,
                           child: GestureDetector(
                             onTap: () =>
-                                openImage(widget.todayDealItem.itemImg!),
+                                openImage(widget.todayDealItem.itemImg!, index),
                             child: CachedImage(
                               imageUrl: i.toString(),
                             ),
@@ -130,7 +130,7 @@ class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
     );
   }
 
-  void openImage(List<String> imageUrl) {
-    Utils.openNewPage(ZoomImageWidget(imageUrlList: imageUrl));
+  void openImage(List<String> imageUrl, int index) {
+    Utils.openNewPage(ZoomImageWidget(imageUrlList: imageUrl, index: index));
   }
 }

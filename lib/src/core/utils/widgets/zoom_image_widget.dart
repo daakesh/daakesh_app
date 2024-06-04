@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class ZoomImageWidget extends StatefulWidget {
   final List<String> imageUrlList;
+  final int index;
   const ZoomImageWidget({
     super.key,
     required this.imageUrlList,
+    required this.index,
   });
 
   @override
@@ -34,6 +36,7 @@ class _ZoomImageWidgetState extends State<ZoomImageWidget> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: PageView.builder(
+          controller: PageController(initialPage: widget.index),
           physics: scale == 1.0
               ? const ScrollPhysics()
               : const NeverScrollableScrollPhysics(),

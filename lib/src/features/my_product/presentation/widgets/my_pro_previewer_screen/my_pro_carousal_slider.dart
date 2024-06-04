@@ -3,6 +3,7 @@ import 'package:daakesh/src/core/utils/widgets/zoom_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
+import 'package:collection/collection.dart';
 
 class ProductSlider extends StatefulWidget {
   final ProPreviewerModel previewerModel;
@@ -70,15 +71,15 @@ class _ProductSliderState extends State<ProductSlider> {
                 setState(() {});
               }),
           items: widget.previewerModel.itemImage != null
-              ? widget.previewerModel.itemImage!.map((i) {
+              ? widget.previewerModel.itemImage!.mapIndexed((index, i) {
                   return Builder(builder: (context) {
                     return BlocBuilder<PassDataBloc, PassDataState>(
                       builder: (context, state) {
                         return Transform.scale(
                           scale: state.scale,
                           child: GestureDetector(
-                            onTap: () =>
-                                openImage(widget.previewerModel.itemImage!),
+                            onTap: () => openImage(
+                                widget.previewerModel.itemImage!, index),
                             child: CachedImage(
                               imageUrl: i.toString(),
                             ),
@@ -129,7 +130,7 @@ class _ProductSliderState extends State<ProductSlider> {
     );
   }
 
-  void openImage(List<String> imageUrl) {
-    Utils.openNewPage(ZoomImageWidget(imageUrlList: imageUrl));
+  void openImage(List<String> imageUrl, int index) {
+    Utils.openNewPage(ZoomImageWidget(imageUrlList: imageUrl, index: index));
   }
 }
