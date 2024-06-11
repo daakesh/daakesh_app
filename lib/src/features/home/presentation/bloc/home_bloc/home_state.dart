@@ -4,6 +4,8 @@ import '../../../../../src.export.dart';
 
 enum HomeStateStatus { INITIAL, LOADING, SUCCESS, ERROR, LOADINGMORE, NULL }
 
+enum StoreType { SHOP, SWAP }
+
 extension HomeStateStatusX on HomeStateStatus {
   bool get isInitial => this == HomeStateStatus.INITIAL;
   bool get isSuccess => this == HomeStateStatus.SUCCESS;
@@ -23,6 +25,7 @@ class HomeState extends Equatable {
   final bool isMoreData;
   final int tabIndex;
   final bool isSwapActive;
+  final StoreType storeType;
 
   const HomeState({
     this.homeStateStatus = HomeStateStatus.INITIAL,
@@ -34,21 +37,24 @@ class HomeState extends Equatable {
     this.isMoreData = true,
     this.tabIndex = 0,
     this.isSwapActive = true,
+    this.storeType = StoreType.SHOP,
   });
 
-  HomeState copyWith(
-      {HomeStateStatus? homeStateStatus,
-      HomeScreenState? homeScreenState,
+  HomeState copyWith({
+    HomeStateStatus? homeStateStatus,
+    HomeScreenState? homeScreenState,
 
-      ///Product screen details state
-      bool? isDaakeshTodayDeal,
-      int? sectionCurrentPage,
-      bool? isMoreData,
+    ///Product screen details state
+    bool? isDaakeshTodayDeal,
+    int? sectionCurrentPage,
+    bool? isMoreData,
 
-      ///API Data
-      List<SectionItemModel>? sectionListData,
-      int? tabIndex,
-      bool? isSwapActive}) {
+    ///API Data
+    List<SectionItemModel>? sectionListData,
+    int? tabIndex,
+    bool? isSwapActive,
+    StoreType? storeType,
+  }) {
     return HomeState(
       homeStateStatus: homeStateStatus ?? this.homeStateStatus,
       homeScreenState: homeScreenState ?? this.homeScreenState,
@@ -59,6 +65,7 @@ class HomeState extends Equatable {
       isMoreData: isMoreData ?? this.isMoreData,
       tabIndex: tabIndex ?? this.tabIndex,
       isSwapActive: isSwapActive ?? this.isSwapActive,
+      storeType: storeType ?? this.storeType,
     );
   }
 
@@ -75,5 +82,6 @@ class HomeState extends Equatable {
         ///
         tabIndex,
         isSwapActive,
+        storeType,
       ];
 }

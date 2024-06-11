@@ -2,7 +2,7 @@ import 'package:daakesh/src/sharing_widget/guest_alarm_widget.dart';
 import 'package:flutter/material.dart';
 import '../../src.export.dart';
 
-class MainScreensList {
+abstract class MainScreensList {
   static final List<Widget> guestScreens = [
     const HomeScreen(),
     const GuestAlarmWidget(),
@@ -10,10 +10,42 @@ class MainScreensList {
     const GuestAlarmWidget(),
     const GuestAlarmWidget(),
   ];
-  static final List<Widget> screens = [
+
+  static List<Widget> guestScreensMEthod(StoreType storeType) {
+    return [
+      storeType == StoreType.SHOP ? const HomeScreen() : const SwapScreen(),
+      const GuestAlarmWidget(),
+      const Scaffold(body: SizedBox()),
+      const GuestAlarmWidget(),
+      const GuestAlarmWidget(),
+    ];
+  }
+
+  static final List<Widget> shopScreens = [
     const HomeScreen(),
     const MyProductsScreen(),
+    const Scaffold(body: SizedBox()),
+    const MyOrderScreen(),
+    const ProfileScreen(),
+  ];
+  static List<Widget> screensMethod(StoreType storeType) {
+    return [
+      storeType == StoreType.SHOP ? const HomeScreen() : const SwapScreen(),
+      const MyProductsScreen(),
+      const Scaffold(
+        body: SizedBox(),
+      ),
+      const MyOrderScreen(),
+      const ProfileScreen(),
+    ];
+  }
+
+  static final List<Widget> swapScreens = [
     const SwapScreen(),
+    const MyProductsScreen(),
+    const Scaffold(
+      body: SizedBox(),
+    ),
     const MyOrderScreen(),
     const ProfileScreen(),
   ];

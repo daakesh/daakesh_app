@@ -31,6 +31,7 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
+        ProgressCircleDialog.dismiss();
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
@@ -86,6 +87,9 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
         return;
       }
       ProgressCircleDialog.dismiss();
+      await getIt
+          .get<AuthUseCases>()
+          .activateUser(r.data['data']['id'].toString());
       Utils.openNewPage(const ResetPassSuccessScreen(), popPreviousPages: true);
       emit(
           state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.SUCCESS));

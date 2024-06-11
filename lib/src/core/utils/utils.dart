@@ -124,6 +124,16 @@ class Utils {
     }
   }
 
+  static String displayHandler(BuildContext context, String value) {
+    if (value == "Public") {
+      return isEnglish ? 'Public' : 'عام';
+    } else {
+      return isEnglish ? 'Private' : 'خاص';
+    }
+
+    return '';
+  }
+
   static Future<void> getBack() {
     return Future<dynamic>.delayed(Duration.zero, () {
       Navigator.pop(navigatorKey.currentState!.context);

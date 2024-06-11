@@ -4,7 +4,7 @@ import '../../../../../src.export.dart';
 
 class MainScreenWidget {
   static List<PersistentBottomNavBarItem> navBarsItems(
-      BuildContext context, int index) {
+      BuildContext context, int index, StoreType storeType) {
     return [
       PersistentBottomNavBarItem(
         icon: bottomNavBarItem(
@@ -17,15 +17,6 @@ class MainScreenWidget {
           ),
           title: context.locale.home_bottom_nav_tab,
         ),
-        // inactiveIcon: bottomNavBarItem(
-        //     context: context,
-        //     icon: SizedBox(
-        //         height: 24.0,
-        //         child: Assets.svg.disableHomeIcon.svg(
-        //           width: 28.0,
-        //           height: 26.0,
-        //         )),
-        //     title: context.locale.home_bottom_nav_tab),
       ),
       PersistentBottomNavBarItem(
         icon: bottomNavBarItem(
@@ -55,9 +46,11 @@ class MainScreenWidget {
       PersistentBottomNavBarItem(
           icon: Assets.png.swapIcon.image(),
           textStyle: context.easyTheme.textTheme.bodyMedium!
-              .copyWith(fontSize: 14.0, color: ColorName.blueGray),
+              .copyWith(fontSize: 12.0, color: ColorName.blueGray),
           activeColorPrimary: ColorName.white,
-          title: 'Swap',
+          title: storeType == StoreType.SWAP
+              ? context.locale.go_to_shop
+              : context.locale.go_to_Swap,
           onPressed: (_) {
             HomeBloc.get.add(ActivateSwapEvent(context: context));
           }),

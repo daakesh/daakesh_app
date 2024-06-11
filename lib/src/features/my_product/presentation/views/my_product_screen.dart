@@ -46,9 +46,9 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                   const SliverToBoxAdapter(
                     child: HeaderWidget(withArrowBack: false),
                   ),
-                  SliverPadding(
-                      padding: EdgeInsetsDirectional.only(top: 16.0.h)),
-                  const SliverToBoxAdapter(child: SellerInfoCard()),
+
+                  ///SliverPadding(padding: EdgeInsetsDirectional.only(top: 16.0.h)),
+                  ///const SliverToBoxAdapter(child: SellerInfoCard()),
                   SliverPadding(
                       padding: EdgeInsetsDirectional.only(top: 8.0.h)),
                   SliverAppBar(

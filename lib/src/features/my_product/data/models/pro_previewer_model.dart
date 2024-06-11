@@ -23,6 +23,8 @@ class ProPreviewerModel {
   int? subID;
   String? citySwap;
   String? countrySwap;
+  String? discountPercentage;
+  dynamic price;
 
   ProPreviewerModel({
     this.averageRating = 0,
@@ -36,7 +38,7 @@ class ProPreviewerModel {
     this.swapCity = "Unknown",
     this.swapCountry = "Unknown",
     this.offerCount = 0,
-    this.date = "Unknown",
+    this.date = "2024/05/05",
     this.sectionName = "Null",
     this.sectionArName = "بدون",
     this.brandName = "Null",
@@ -49,5 +51,7 @@ class ProPreviewerModel {
     this.subID = 0,
     this.citySwap = "Unknown",
     this.countrySwap = "Unknown",
+    this.discountPercentage = "%0",
+    this.price,
   });
 }

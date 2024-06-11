@@ -5,7 +5,7 @@ import '../../../../src.export.dart';
 
 abstract class ProfileUseCases {
   Future<Either<Failure, ValidResponse>> updateUserData(
-      String name, XFile? profileImage);
+      String name, XFile? profileImage, String phoneNumber);
   Future<Either<Failure, ValidResponse>> updateUserPassword(
       String password, String phoneNumber);
   Future<Either<Failure, ValidResponse>> addComplaints(
@@ -23,10 +23,10 @@ abstract class ProfileUseCases {
 class ProfileUseCasesImpl implements ProfileUseCases {
   @override
   Future<Either<Failure, ValidResponse>> updateUserData(
-      String name, XFile? profileImage) async {
+      String name, XFile? profileImage, String phoneNumber) async {
     return await getIt
         .get<ProfileRepository>()
-        .updateUserData(name, profileImage);
+        .updateUserData(name, profileImage, phoneNumber);
   }
 
   @override

@@ -17,9 +17,10 @@ class MainScreen extends StatelessWidget {
           HomeBloc.get.add(SelectTabItemEvent(index: index));
         },
         screens: ValueConstants.userId.isNotEmpty
-            ? MainScreensList.screens
-            : MainScreensList.guestScreens,
-        items: MainScreenWidget.navBarsItems(context, state.tabIndex),
+            ? MainScreensList.screensMethod(state.storeType)
+            : MainScreensList.guestScreensMEthod(state.storeType),
+        items: MainScreenWidget.navBarsItems(
+            context, state.tabIndex, state.storeType),
         resizeToAvoidBottomInset: false,
         stateManagement: true,
         hideNavigationBarWhenKeyboardShows: true,

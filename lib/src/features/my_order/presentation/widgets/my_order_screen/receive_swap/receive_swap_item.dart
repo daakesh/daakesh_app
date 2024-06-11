@@ -128,19 +128,6 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
           SizedBox(
             height: 16.0.h,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-            child: Center(
-              child: DefaultButtonWidget(
-                text: context.locale.delete_item,
-                onPressed: () =>
-                    deleteItem(context, sendReceiveSwapReqItem.id!),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 16.0.h,
-          ),
         ],
       ),
     );

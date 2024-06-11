@@ -155,7 +155,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      UserModel userData =UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
+      UserModel userData =
+          UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
       GetItUtils.user.setUserData(userData);
       emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
     });

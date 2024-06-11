@@ -13,3 +13,12 @@ void main() async {
   //runApp(DevicePreview(builder: (BuildContext context) => const AppWidget()));
   Bloc.observer = MyBlocObserver();
 }
+
+
+
+
+
+
+
+///- 3  => insert change phone into account details to change it.
+///- 10 => forget pasword working fine but process is not correct

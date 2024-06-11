@@ -110,10 +110,7 @@ class _AddCommentRateSectionState extends State<AddCommentRateSection> {
       context.showLoginDialog;
       return;
     }
-    if (commentController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: context.locale.add_comment);
-      return;
-    }
+
     addComment();
   }
 

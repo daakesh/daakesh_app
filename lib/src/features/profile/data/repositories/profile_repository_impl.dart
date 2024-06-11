@@ -7,10 +7,10 @@ import '../../../../src.export.dart';
 class ProfileRepositoryImpl implements ProfileRepository {
   @override
   Future<Either<Failure, ValidResponse>> updateUserData(
-      String name, XFile? profileImage) async {
+      String name, XFile? profileImage, String phoneNumber) async {
     return await getIt
         .get<ProfileDatasource>()
-        .updateUserData(name, profileImage);
+        .updateUserData(name, profileImage, phoneNumber);
   }
 
   @override

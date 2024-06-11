@@ -8,7 +8,7 @@ import '../../../../src.export.dart';
 class RemoteProfileDatasource implements ProfileDatasource {
   @override
   Future<Either<Failure, ValidResponse>> updateUserData(
-      String name, XFile? profileImage) async {
+      String name, XFile? profileImage, String phoneNumber) async {
     String imageLink = '';
     if (profileImage != null) {
       final data = await getIt.get<NetworkService>().uploadImage(
@@ -24,10 +24,12 @@ class RemoteProfileDatasource implements ProfileDatasource {
             ? {
                 "id": ValueConstants.userId,
                 "name": name,
+                "phoneNumber": phoneNumber
               }
             : {
                 "id": ValueConstants.userId,
                 "name": name,
+                "phoneNumber": phoneNumber,
                 "img": imageLink,
               });
     return result;

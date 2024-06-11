@@ -85,11 +85,32 @@ class PriceRateSection extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
-              '\$${todayDealItem.priceAfterDiscount}',
-              style: context.easyTheme.textTheme.labelLarge!
-                  .copyWith(fontSize: 30.0, color: ColorName.black),
-            ),
+            todayDealItem.discountPercentage == '0%'
+                ? Text(
+                    '\$${todayDealItem.priceAfterDiscount} ',
+                    style: context.easyTheme.textTheme.bodyMedium!
+                        .copyWith(fontSize: 30.0, fontWeight: FontWeight.w600),
+                    overflow: TextOverflow.ellipsis,
+                  )
+                : Row(
+                    children: [
+                      Text(
+                        '\$${todayDealItem.priceAfterDiscount} ',
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 30.0, fontWeight: FontWeight.w600),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        '\$${todayDealItem.price}',
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(
+                          fontSize: 20.0.sp,
+                          decoration: TextDecoration.lineThrough,
+                          color: ColorName.gray,
+                        ),
+                      ),
+                    ],
+                  ),
             const Spacer(
               flex: 1,
             ),

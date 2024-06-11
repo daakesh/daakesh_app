@@ -4,7 +4,7 @@ import '../../../../src.export.dart';
 
 abstract class ProfileRepository {
   Future<Either<Failure, ValidResponse>> updateUserData(
-      String name, XFile? profileImage);
+      String name, XFile? profileImage, String phoneNumber);
   Future<Either<Failure, ValidResponse>> updateUserPassword(
       String password, String phoneNumber);
   Future<Either<Failure, ValidResponse>> addComplaints(

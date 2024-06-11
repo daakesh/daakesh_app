@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../src.export.dart';
@@ -16,6 +18,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final personPhoneController = TextEditingController();
   String userImage = '';
   XFile? image;
 
@@ -25,6 +28,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     userImage = GetItUtils.user.userData.img ?? '';
     nameController.text = GetItUtils.user.userData.name ?? '';
     emailController.text = GetItUtils.user.userData.email ?? '';
+    personPhoneController.text = GetItUtils.user.userData.phoneNumber ?? '';
   }
 
   @override
@@ -161,6 +165,51 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       const SizedBox(
                         height: 40.0,
                       ),
+                      Text(
+                        context.locale.phone_number,
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                      ),
+                      TextFormFieldWidget(
+                        controller: personPhoneController,
+                        keyboardType: TextInputType.number,
+                        isSuffixPrefixOn: true,
+                        enabled: state.isUpdateActive,
+                        // suffixIcon: GestureDetector(
+                        //   onTap: () =>
+                        //       selectCountry(context, (Country country) {
+                        //     PersonalInfoBloc.get
+                        //         .add(UpdatePersonalPhoneNumberEvent(
+                        //       phoneCode: country.phoneCode,
+                        //       flagEmoji: country.flagEmoji,
+                        //     ));
+                        //   }),
+                        //   child: SizedBox(
+                        //     width: 65.0,
+                        //     child: Row(
+                        //       children: [
+                        //         Text(
+                        //           state.personalPhoneFlagEmoji,
+                        //           style: const TextStyle(
+                        //               color: ColorName.blueGray,
+                        //               fontSize: 24.0),
+                        //         ),
+                        //         const SizedBox(
+                        //           width: 10.0,
+                        //         ),
+                        //         Assets.svg.arrowDropDownIcon.svg(),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(16),
+                          RegExpValidator.clearZero
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 40.0,
+                      ),
                       const Spacer(
                         flex: 1,
                       ),
@@ -200,6 +249,14 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     );
   }
 
+  void selectCountry(context, ValueChanged<Country> onSelect) {
+    return showCountryPicker(
+      context: context,
+      showPhoneCode: true,
+      onSelect: onSelect,
+    );
+  }
+
   void pickImage() async {
     image = await ImagePickerHelper.getGalleryImage();
     PersonalInfoBloc.get
@@ -213,8 +270,10 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
 
   void onSave() {
     PersonalInfoBloc.get.add(UpdatePersonalInfoEvent(
+        context: context,
         name: nameController.text,
         image: image,
+        phoneNumber: personPhoneController.text,
         password: passwordController.text));
   }
 

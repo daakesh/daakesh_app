@@ -73,7 +73,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                 BorderRadius.all(Radius.circular(4.0.r))),
                         child: Center(
                           child: Text(
-                            '${widget.myProductItem.discountPercentage} OFF',
+                            '${widget.myProductItem.discountPercentage} ${context.locale.off}',
                             style: context.easyTheme.textTheme.labelLarge!
                                 .copyWith(fontSize: 15.0.sp),
                           ),
@@ -257,8 +257,9 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                               fontSize: 15.0.sp,
                                               color: ColorName.gray)),
                                   TextSpan(
-                                      text:
-                                          '${widget.myProductItem.category!.name}',
+                                      text: Utils.isEnglish
+                                          ? '${widget.myProductItem.category!.name}'
+                                          : '${widget.myProductItem.category!.arName}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -378,7 +379,9 @@ class _ShopProductItemState extends State<ShopProductItem> {
       ..countrySwap = myProductItem.countrySwap
       ..subID = myProductItem.subcategory!.id
       ..date = myProductItem.date
-      ..categoryID = myProductItem.category!.id;
+      ..categoryID = myProductItem.category!.id
+      ..discountPercentage = myProductItem.discountPercentage!
+      ..price = myProductItem.price!;
     Utils.openNavNewPage(
         context, MyProPreviewerScreen(previewerModel: previewerModel));
   }

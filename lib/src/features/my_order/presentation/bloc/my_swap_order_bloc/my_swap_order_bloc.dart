@@ -133,11 +133,13 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+      int index = state.receiveSwapReqList
+          .indexWhere((element) => element.id == event.itemId);
       state.receiveSwapReqList
           .removeWhere((element) => element.id == event.itemId);
       SendReceiveSwapReqItem sendReceiveSwapReqItem =
           SendReceiveSwapReqItem.fromJson(r.data['data']);
-      state.receiveSwapReqList.add(sendReceiveSwapReqItem);
+      state.receiveSwapReqList.insert(index, sendReceiveSwapReqItem);
       Navigator.pop(event.context);
       emit(state.copyWith(
           mySwapOrderStateStatus: MySwapOrderStateStatus.SUCCESS,

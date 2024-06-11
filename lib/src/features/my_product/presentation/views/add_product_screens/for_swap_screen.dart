@@ -10,7 +10,7 @@ class ForSwapScreen extends StatefulWidget {
 }
 
 class _ForSwapScreenState extends State<ForSwapScreen> {
-  final displayProductController = TextEditingController(text: "public");
+  final displayProductController = TextEditingController();
   final countryController = TextEditingController();
   final cityController = TextEditingController();
 
@@ -94,7 +94,9 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                         ),
                       ],
                       value: displayProductController.text,
-                      onChange: (value) {},
+                      onChange: (value) {
+                        displayProductController.text = value.toString();
+                      },
                     ),
                     SizedBox(
                       height: 22.0.h,
