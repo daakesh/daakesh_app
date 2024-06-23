@@ -5,13 +5,12 @@ import '../../../../src.export.dart';
 abstract class MyProductUseCases {
   Future<Either<Failure, ValidResponse>> getMyProduct(int page, String type);
   Future<Either<Failure, ValidResponse>> getSections();
-  Future<Either<Failure, ValidResponse>> getCategoryBySection(String secID);
-  Future<Either<Failure, ValidResponse>> isCategoryHasSub(String catID);
-  Future<Either<Failure, ValidResponse>> getSubcategoryByCategoryId(
-      String catID);
-  Future<Either<Failure, ValidResponse>> getBrandsBySection(String secID);
+  Future<Either<Failure, ValidResponse>> getCategoryBySection(int secID);
+  Future<Either<Failure, ValidResponse>> isCategoryHasSub(int catID);
+  Future<Either<Failure, ValidResponse>> getSubcategoryByCategoryId(int catID);
+  Future<Either<Failure, ValidResponse>> getBrandsBySection(int secID);
   Future<Either<Failure, ValidResponse>> searchOnProduct(
-      String searchValue, int page);
+      String searchValue, int page, ProductTapBar type);
   Future<Either<Failure, ValidResponse>> addProduct(AddProModel addProModel);
   Future<Either<Failure, ValidResponse>> updateProduct(AddProModel addProModel);
   Future<Either<Failure, ValidResponse>> getSellerInfo();
@@ -38,36 +37,34 @@ class MyProductUseCasesImpl implements MyProductUseCases {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getCategoryBySection(
-      String secID) async {
+  Future<Either<Failure, ValidResponse>> getCategoryBySection(int secID) async {
     return await getIt.get<MyProductRepository>().getCategoryBySection(secID);
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> isCategoryHasSub(String catID) async {
+  Future<Either<Failure, ValidResponse>> isCategoryHasSub(int catID) async {
     return await getIt.get<MyProductRepository>().isCategoryHasSub(catID);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getSubcategoryByCategoryId(
-      String catID) async {
+      int catID) async {
     return await getIt
         .get<MyProductRepository>()
         .getSubcategoryByCategoryId(catID);
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getBrandsBySection(
-      String secID) async {
+  Future<Either<Failure, ValidResponse>> getBrandsBySection(int secID) async {
     return await getIt.get<MyProductRepository>().getBrandsBySection(secID);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> searchOnProduct(
-      String searchValue, int page) async {
+      String searchValue, int page, ProductTapBar type) async {
     return await getIt
         .get<MyProductRepository>()
-        .searchOnProduct(searchValue, page);
+        .searchOnProduct(searchValue, page, type);
   }
 
   @override

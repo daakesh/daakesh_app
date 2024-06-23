@@ -16,36 +16,34 @@ class MyProductRepositoryImpl implements MyProductRepository {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getCategoryBySection(
-      String secID) async {
+  Future<Either<Failure, ValidResponse>> getCategoryBySection(int secID) async {
     return await getIt.get<MyProductDatasource>().getCategoryBySection(secID);
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> isCategoryHasSub(String catID) async {
+  Future<Either<Failure, ValidResponse>> isCategoryHasSub(int catID) async {
     return await getIt.get<MyProductDatasource>().isCategoryHasSub(catID);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getSubcategoryByCategoryId(
-      String catID) async {
+      int catID) async {
     return await getIt
         .get<MyProductDatasource>()
         .getSubcategoryByCategoryId(catID);
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getBrandsBySection(
-      String secID) async {
+  Future<Either<Failure, ValidResponse>> getBrandsBySection(int secID) async {
     return await getIt.get<MyProductDatasource>().getBrandsBySection(secID);
   }
 
   @override
   Future<Either<Failure, ValidResponse>> searchOnProduct(
-      String searchValue, int page) async {
+      String searchValue, int page, ProductTapBar type) async {
     return await getIt
         .get<MyProductDatasource>()
-        .searchOnProduct(searchValue, page);
+        .searchOnProduct(searchValue, page, type);
   }
 
   @override

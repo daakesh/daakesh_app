@@ -62,7 +62,7 @@ class BrandItem {
     brandImg = json['brandImg'];
     date = json['date'];
     secID = json['secID'];
-    arName = json['arName'];
+    arName = json['arName'] ?? json['brandName'];
   }
 
   BrandItem.initValues() {

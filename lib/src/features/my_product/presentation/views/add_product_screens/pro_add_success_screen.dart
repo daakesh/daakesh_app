@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
@@ -101,6 +102,8 @@ class ProAddSuccessScreen extends StatelessWidget {
     previewerModel
       ..userName = myProductItem.user!.name
       ..itemImage = myProductItem.itemImg
+      ..sectionName = myProductItem.section!.name
+      ..sectionArName = myProductItem.section!.arName
       ..title = myProductItem.title
       ..averageRating = myProductItem.averageRating
       ..rateCount = myProductItem.rateCount
@@ -123,14 +126,28 @@ class ProAddSuccessScreen extends StatelessWidget {
     if (displayMethod.isSell) {
       HomeBloc.controller.jumpToTab(1);
       HomeBloc.get.add(SelectTabItemEvent(index: 1));
-      Utils.openNavNewPage(context, const MainScreen());
+      Navigator.of(context).pushAndRemoveUntil(
+        CupertinoPageRoute(
+          builder: (BuildContext context) {
+            return const MainScreen();
+          },
+        ),
+        (_) => false,
+      );
       Utils.openNavNewPage(
           context, MyProPreviewerScreen(previewerModel: previewerModel));
     }
     if (displayMethod.isSwap) {
       HomeBloc.controller.jumpToTab(1);
       HomeBloc.get.add(SelectTabItemEvent(index: 1));
-      Utils.openNavNewPage(context, const MainScreen());
+      Navigator.of(context).pushAndRemoveUntil(
+        CupertinoPageRoute(
+          builder: (BuildContext context) {
+            return const MainScreen();
+          },
+        ),
+        (_) => false,
+      );
       Utils.openNavNewPage(
           context, MySwapPreviewerScreen(previewerModel: previewerModel));
     }

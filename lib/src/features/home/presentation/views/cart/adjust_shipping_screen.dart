@@ -105,17 +105,17 @@ class AdjustShippingScreen extends StatelessWidget {
                     inputFormatters: [
                       RegExpValidator.beginWhitespace,
                     ],
-                    suffixIcon: InkWell(
-                      onTap: () => Utils.openNewPage(const MapScreen()),
-                      splashColor: ColorName.transparent,
-                      focusColor: ColorName.transparent,
-                      highlightColor: ColorName.transparent,
-                      child: SizedBox(
-                          width: 20.0,
-                          height: 20.0,
-                          child:
-                              Center(child: Assets.svg.locationPinIcon.svg())),
-                    ),
+                    // suffixIcon: InkWell(
+                    //   onTap: () => Utils.openNewPage(const MapScreen()),
+                    //   splashColor: ColorName.transparent,
+                    //   focusColor: ColorName.transparent,
+                    //   highlightColor: ColorName.transparent,
+                    //   child: SizedBox(
+                    //       width: 20.0,
+                    //       height: 20.0,
+                    //       child:
+                    //           Center(child: Assets.svg.locationPinIcon.svg())),
+                    // ),
                   ),
                   const SizedBox(height: 33.0),
                   Text(context.locale.shipping_apartment_text_field,

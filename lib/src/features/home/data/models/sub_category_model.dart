@@ -39,7 +39,7 @@ class SubCategory {
     description = json['description'] ?? "Unknown";
     subImg = json['subImg'] ?? "Unknown";
     date = json['date'] ?? "Unknown";
-    arName = json['arName'] ?? "Unknown";
+    arName = json['arName'] ?? json['name'];
   }
 
   SubCategory.initValues() {

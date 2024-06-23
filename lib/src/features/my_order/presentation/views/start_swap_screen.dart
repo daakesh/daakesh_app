@@ -237,7 +237,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
       ..description = sendReceiveSwapReqItem.offerItems!.description
       ..citySwap = sendReceiveSwapReqItem.offerItems!.citySwap
       ..countrySwap = sendReceiveSwapReqItem.offerItems!.countrySwap
-      ..date = sendReceiveSwapReqItem.createdAt
+      //..date = sendReceiveSwapReqItem.createdAt
       ..offerCount = sendReceiveSwapReqItem.offerItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));

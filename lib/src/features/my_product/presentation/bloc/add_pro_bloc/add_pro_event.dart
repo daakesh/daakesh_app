@@ -22,10 +22,10 @@ class AddProInfoEvent extends AddProEvent {
 }
 
 class AddProCategoriesEvent extends AddProEvent {
-  final String productSecID;
-  final String productCatID;
-  final String? productSubCatID;
-  final String? productBrandID;
+  final int productSecID;
+  final int productCatID;
+  final int? productSubCatID;
+  final int? productBrandID;
   final String productModelYear;
 
   AddProCategoriesEvent({

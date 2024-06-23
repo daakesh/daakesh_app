@@ -54,7 +54,7 @@ class SectionItemModel {
     secImg = json['secImg'] ?? "Unknown";
     date = json['date'] ?? "Unknown";
     secOrder = json['secOrder'] ?? 0;
-    arName = json['arName'] ?? "Unknown";
+    arName = json['arName'] ?? json['name'];
   }
   SectionItemModel.initValues() {
     id = 0;

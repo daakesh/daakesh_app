@@ -27,11 +27,11 @@ class ProDetailsState extends Equatable {
   final List<ProBrandItem> proBrandListData;
 
   ///
-  final String? productSecID;
-  final String? productCatID;
-  final String? productSubCatID;
-  final String? productBrandID;
-  final String? productModelYear;
+  final int productSecID;
+  final int productCatID;
+  final int productSubCatID;
+  final int productBrandID;
+  final String productModelYear;
 
   const ProDetailsState({
     this.proDetailsStateStatus = ProDetailsStateStatus.INITIAL,
@@ -41,11 +41,11 @@ class ProDetailsState extends Equatable {
     this.proBrandListData = const [],
 
     ///
-    this.productSecID,
-    this.productCatID,
-    this.productSubCatID,
-    this.productBrandID,
-    this.productModelYear,
+    this.productSecID = 1000,
+    this.productCatID = 1000,
+    this.productSubCatID = 1000,
+    this.productBrandID = 1000,
+    this.productModelYear = '2024',
   });
 
   ProDetailsState copyWith({
@@ -54,10 +54,10 @@ class ProDetailsState extends Equatable {
     List<ProCategoryItem>? proCategoryListData,
     List<ProSubCategoryItem>? proSubCategoryListData,
     List<ProBrandItem>? proBrandListData,
-    String? productSecID,
-    String? productCatID,
-    String? productSubCatID,
-    String? productBrandID,
+    int? productSecID,
+    int? productCatID,
+    int? productSubCatID,
+    int? productBrandID,
     String? productModelYear,
   }) {
     return ProDetailsState(

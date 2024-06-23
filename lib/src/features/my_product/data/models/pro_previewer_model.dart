@@ -38,7 +38,7 @@ class ProPreviewerModel {
     this.swapCity = "Unknown",
     this.swapCountry = "Unknown",
     this.offerCount = 0,
-    this.date = "2024/05/05",
+    this.date = "2024-05-01 20:27:02",
     this.sectionName = "Null",
     this.sectionArName = "بدون",
     this.brandName = "Null",
@@ -51,7 +51,7 @@ class ProPreviewerModel {
     this.subID = 0,
     this.citySwap = "Unknown",
     this.countrySwap = "Unknown",
-    this.discountPercentage = "%0",
+    this.discountPercentage = "0%",
     this.price,
   });
 }

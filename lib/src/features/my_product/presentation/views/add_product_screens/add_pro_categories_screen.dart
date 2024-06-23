@@ -13,11 +13,11 @@ class AddProCategoriesScreen extends StatefulWidget {
 class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
   final productModelYearController =
       TextEditingController(text: DateTime.now().year.toString());
-  String? productSecID;
-  String? productCatID;
-  String? productSubCatID;
-  String? productBrandID;
-  String? productModelYear;
+  int? productSecID;
+  int? productCatID;
+  int? productSubCatID;
+  int? productBrandID;
+  int? productModelYear;
 
   @override
   void initState() {
@@ -89,17 +89,17 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                           }
                         },
                         builder: (context, state) {
-                          return DropDownButtonWidget<String>(
+                          return DropDownButtonWidget<int>(
                             onChange: (value) {
                               debugPrint(value.toString());
-                              productSecID = value.toString();
-                              getProBrand(value.toString());
-                              getProCategory(value.toString());
+                              productSecID = value;
+                              getProBrand(value!);
+                              getProCategory(value);
                             },
                             value: productSecID,
                             items: state.sectionListData
-                                .map((e) => DropdownMenuItem(
-                                    value: e.id.toString(),
+                                .map((e) => DropdownMenuItem<int>(
+                                    value: e.id,
                                     child: Text(Utils.isEnglish
                                         ? e.name.toString()
                                         : e.arName.toString())))
@@ -120,15 +120,15 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                           productCatID = state.productCatID;
                         },
                         builder: (context, state) {
-                          return DropDownButtonWidget<String>(
+                          return DropDownButtonWidget<int>(
                             onChange: (value) {
-                              productCatID = value.toString();
-                              getProSubCategory(value.toString());
+                              productCatID = value;
+                              getProSubCategory(value!);
                             },
                             value: state.productCatID,
                             items: state.proCategoryListData
-                                .map((e) => DropdownMenuItem(
-                                    value: e.id.toString(),
+                                .map((e) => DropdownMenuItem<int>(
+                                    value: e.id,
                                     child: Text(Utils.isEnglish
                                         ? e.name.toString()
                                         : e.arName.toString())))
@@ -149,15 +149,15 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                           productSubCatID = state.productSubCatID;
                         },
                         builder: (context, state) {
-                          return DropDownButtonWidget<String>(
+                          return DropDownButtonWidget<int>(
                             onChange: (value) {
-                              productSubCatID = value.toString();
+                              productSubCatID = value;
                             },
                             value: state.productSubCatID,
                             items: state.proSubCategoryListData
-                                .map<DropdownMenuItem<String>>((e) =>
+                                .map<DropdownMenuItem<int>>((e) =>
                                     DropdownMenuItem(
-                                        value: e.id.toString(),
+                                        value: e.id,
                                         child: Text(Utils.isEnglish
                                             ? e.name.toString()
                                             : e.arName.toString())))
@@ -178,14 +178,14 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                           productBrandID = state.productBrandID;
                         },
                         builder: (context, state) {
-                          return DropDownButtonWidget<String>(
+                          return DropDownButtonWidget<int>(
                             onChange: (value) {
-                              productBrandID = value.toString();
+                              productBrandID = value;
                             },
                             value: state.productBrandID,
                             items: state.proBrandListData
-                                .map((e) => DropdownMenuItem(
-                                    value: e.id.toString(),
+                                .map((e) => DropdownMenuItem<int>(
+                                    value: e.id,
                                     child: Text(Utils.isEnglish
                                         ? e.name.toString()
                                         : e.arName.toString())))
@@ -247,13 +247,17 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
   }
 
   void onNext() async {
+    print("productSecID : $productSecID");
+    print("productCatID : $productCatID");
+    print("productSubCatID : $productSubCatID");
+    print("productBrandID : $productBrandID");
     if (productSecID == null || productCatID == null) {
       ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
       return;
     }
     AddProBloc.get.add(AddProCategoriesEvent(
-      productSecID: productSecID.toString(),
-      productCatID: productCatID.toString(),
+      productSecID: productSecID!,
+      productCatID: productCatID!,
       productSubCatID: productSubCatID,
       productBrandID: productBrandID,
       productModelYear: productModelYearController.text,
@@ -270,15 +274,15 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
     ProDetailsBloc.get.add(ResetCategoriesDataEvent());
   }
 
-  void getProCategory(String secID) {
+  void getProCategory(int secID) {
     ProDetailsBloc.get.add(GetProCategoryEvent(secID: secID));
   }
 
-  void getProBrand(String secID) {
+  void getProBrand(int secID) {
     ProDetailsBloc.get.add(GetBrandsBySectionEvent(secID: secID));
   }
 
-  void getProSubCategory(String catID) {
+  void getProSubCategory(int catID) {
     ProDetailsBloc.get.add(GetProSubCategoryEvent(catID: catID));
   }
 

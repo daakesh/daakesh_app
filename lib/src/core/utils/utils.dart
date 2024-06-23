@@ -94,6 +94,9 @@ class Utils {
   static AppLocalizations get locale => AppLocalizations.of(currentContext)!;
 
   static String formatDate(String dateString) {
+    if (dateString.isEmpty) {
+      dateString = "2024-05-01 20:27:02";
+    }
     DateTime date = DateFormat('yyyy-mm-dd').parse(dateString);
     return DateFormat('mm/dd/yyyy').format(date);
   }
@@ -130,8 +133,6 @@ class Utils {
     } else {
       return isEnglish ? 'Private' : 'خاص';
     }
-
-    return '';
   }
 
   static Future<void> getBack() {

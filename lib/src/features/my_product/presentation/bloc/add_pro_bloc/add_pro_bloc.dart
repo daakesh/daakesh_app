@@ -150,12 +150,12 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
           popPreviousPages: true);
       emit(state.copyWith(
         addProStateStatus: AddProStateStatus.SUCCESS,
-        productSecID: '',
+        productSecID: 1000,
         productName: '',
         productDescription: '',
-        productCatID: '',
-        productSubCatID: '',
-        productBrandID: '',
+        productCatID: 1000,
+        productSubCatID: 1000,
+        productBrandID: 1000,
         productModelYear: '',
         proImages: [],
         displayMethod: ProductDisplayMethod.Sell,

@@ -83,7 +83,7 @@ class SwapProductItem extends StatelessWidget {
                                         fontSize: 15.0.sp,
                                         color: ColorName.gray)),
                             TextSpan(
-                                text: '${myProductItem.countrySwap}',
+                                text: ' ${myProductItem.countrySwap}',
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
                                         fontSize: 13.0.sp,

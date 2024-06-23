@@ -115,7 +115,7 @@ extension ShowDialog on BuildContext {
                         .copyWith(fontWeight: FontWeight.bold)),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  Utils.openNewPage(const WelcomeScreen());
+                  Utils.openNewPage(const LoginScreen());
                 },
               ),
             ],

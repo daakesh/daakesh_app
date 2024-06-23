@@ -5,10 +5,10 @@ class AddProModel {
   String? proId;
   String? title;
   String? description;
-  String? secID;
-  String? catID;
-  String? subID;
-  String? brandID;
+  int? secID;
+  int? catID;
+  int? subID;
+  int? brandID;
   String? tradeOrSell;
   String? tradeFor;
   String? price;
@@ -58,12 +58,12 @@ class AddProModel {
     data['description'] = description.toString();
     data['catID'] = catID.toString();
     data['secID'] = secID.toString();
-    if (subID != null && subID!.isNotEmpty && subID != "-1") {
+    if (subID != null && subID != 1000) {
       data['subID'] = subID;
     } else {
       data['subID'] = null;
     }
-    if (brandID != null && brandID!.isNotEmpty && brandID != "-1") {
+    if (brandID != null && brandID != 1000) {
       data['brandID'] = brandID;
     } else {
       data['brandID'] = null;
@@ -94,12 +94,12 @@ class AddProModel {
     data['catID'] = catID.toString();
     data['secID'] = secID.toString();
 
-    if (subID != null && subID!.isNotEmpty && subID != "-1") {
+    if (subID != null && subID != 1000) {
       data['subID'] = subID;
     } else {
       data['subID'] = null;
     }
-    if (brandID != null && brandID!.isNotEmpty && brandID != "-1") {
+    if (brandID != null && brandID != 1000) {
       data['brandID'] = brandID;
     } else {
       data['brandID'] = null;

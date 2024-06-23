@@ -28,8 +28,8 @@ class InfoSection extends StatelessWidget {
             ),
             Text(
               Utils.isEnglish
-                  ? previewerModel.brandName!
-                  : previewerModel.brandArName!,
+                  ? previewerModel.brandName.toString()
+                  : previewerModel.brandArName.toString(),
               style: context.easyTheme.textTheme.bodyLarge!
                   .copyWith(fontSize: 18.0),
             ),

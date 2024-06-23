@@ -52,6 +52,6 @@ class UserDataImpl implements UserData {
     ValueConstants.userId = '';
     await GetItUtils.prefs.removeData(SharedPrefKeys.token);
     GetItUtils.prefs.removeData(SharedPrefKeys.userID).then((value) =>
-        Utils.openNewPage(const WelcomeScreen(), popPreviousPages: true));
+        Utils.openNewPage(const LoginScreen(), popPreviousPages: true));
   }
 }

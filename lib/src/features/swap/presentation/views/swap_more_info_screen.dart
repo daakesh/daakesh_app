@@ -50,10 +50,10 @@ class SwapMoreInfoScreen extends StatelessWidget {
                               text: context.locale.swap_more_info_swap_in_title,
                             ),
                             TextSpan(
-                              text: '${trendDealsItem.citySwap}, ',
+                              text: ' ${trendDealsItem.citySwap} , ',
                             ),
                             TextSpan(
-                              text: '${trendDealsItem.countrySwap}, ',
+                              text: '${trendDealsItem.countrySwap} , ',
                             ),
                           ],
                         ),

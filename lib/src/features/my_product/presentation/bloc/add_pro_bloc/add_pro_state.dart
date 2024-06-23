@@ -21,10 +21,10 @@ class AddProState extends Equatable {
   final AdjustProduct adjustProduct;
   final String productName;
   final String productDescription;
-  final String productSecID;
-  final String productCatID;
-  final String productSubCatID;
-  final String productBrandID;
+  final int productSecID;
+  final int productCatID;
+  final int productSubCatID;
+  final int productBrandID;
   final String productModelYear;
   final List<XFile> proImages;
   final ProductDisplayMethod displayMethod;
@@ -47,10 +47,10 @@ class AddProState extends Equatable {
     this.adjustProduct = AdjustProduct.ADD,
     this.productName = '',
     this.productDescription = '',
-    this.productSecID = '',
-    this.productCatID = '',
-    this.productSubCatID = '',
-    this.productBrandID = '',
+    this.productSecID = 1000,
+    this.productCatID = 1000,
+    this.productSubCatID = 1000,
+    this.productBrandID = 1000,
     this.productModelYear = '',
     this.proImages = const [],
     this.displayMethod = ProductDisplayMethod.Sell,
@@ -74,10 +74,10 @@ class AddProState extends Equatable {
     AdjustProduct? adjustProduct,
     String? productName,
     String? productDescription,
-    String? productSecID,
-    String? productCatID,
-    String? productSubCatID,
-    String? productBrandID,
+    int? productSecID,
+    int? productCatID,
+    int? productSubCatID,
+    int? productBrandID,
     String? productModelYear,
     List<XFile>? proImages,
     ProductDisplayMethod? displayMethod,

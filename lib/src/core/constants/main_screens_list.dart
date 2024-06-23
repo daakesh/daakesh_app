@@ -28,25 +28,16 @@ abstract class MainScreensList {
     const MyOrderScreen(),
     const ProfileScreen(),
   ];
-  static List<Widget> screensMethod(StoreType storeType) {
-    return [
-      storeType == StoreType.SHOP ? const HomeScreen() : const SwapScreen(),
-      const MyProductsScreen(),
-      const Scaffold(
-        body: SizedBox(),
-      ),
-      const MyOrderScreen(),
-      const ProfileScreen(),
-    ];
-  }
 
   static final List<Widget> swapScreens = [
     const SwapScreen(),
     const MyProductsScreen(),
-    const Scaffold(
-      body: SizedBox(),
-    ),
+    const Scaffold(body: SizedBox()),
     const MyOrderScreen(),
     const ProfileScreen(),
   ];
+
+  static List<Widget> screensMethod(StoreType storeType) {
+    return storeType == StoreType.SHOP ? shopScreens : swapScreens;
+  }
 }

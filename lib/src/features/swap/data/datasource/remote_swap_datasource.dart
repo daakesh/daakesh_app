@@ -149,9 +149,13 @@ class RemoteSwapDatasource implements SwapDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> getMySwapProduct(int page) async {
-    final result = await getIt.get<NetworkService>().get(
-        path: 'DaakeshServices/api/item/getItemsByUser',
-        params: {"id": ValueConstants.userId, "type": "SWAP", "page": "$page"});
+    final result = await getIt
+        .get<NetworkService>()
+        .get(path: 'DaakeshServices/api/item/getItemsByUser', params: {
+      "id": ValueConstants.userId,
+      "type": "SWAP",
+      "page": "$page",
+    });
     return result;
   }
 

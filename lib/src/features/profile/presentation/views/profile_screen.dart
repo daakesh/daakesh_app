@@ -13,9 +13,7 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const HeaderWidget(withArrowBack: false),
-            const SizedBox(
-              height: 21.0,
-            ),
+            const SizedBox(height: 21.0),
             BlocBuilder<UserDataBloc, UserDataState>(
               builder: (context, state) {
                 return Row(
@@ -94,11 +92,11 @@ class ProfileScreen extends StatelessWidget {
               title: context.locale.personal_info_title,
               icon: Assets.svg.personIcon.svg(),
             ),
-            CategoryItemWidget(
-              onTap: () => Utils.openNewPage(ContactInfoScreen()),
-              title: context.locale.contact_info_title,
-              icon: Assets.svg.profilePhoneIcon.svg(),
-            ),
+            //CategoryItemWidget(
+            //  onTap: () => Utils.openNewPage(ContactInfoScreen()),
+            //  title: context.locale.contact_info_title,
+            //  icon: Assets.svg.profilePhoneIcon.svg(),
+            //),
             // CategoryItemWidget(
             //   onTap: () => Utils.openNewPage(const CardAndAccountScreen()),
             //   title: 'Card and Accounts',

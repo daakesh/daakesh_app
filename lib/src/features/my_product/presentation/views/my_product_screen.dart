@@ -64,10 +64,10 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                         height: 130.0.h,
                         child: Column(
                           children: [
-                            ProductTypeTabBar(state: state),
-                            SizedBox(
-                              height: 17.0.h,
-                            ),
+                            ProductTypeTabBar(
+                                state: state,
+                                searchController: searchController),
+                            SizedBox(height: 17.0.h),
                             SearchProductBarWidget(
                                 searchController: searchController),
                           ],
@@ -92,7 +92,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                     ),
                   ),
                   if (state.searchValue.isEmpty) ...[
-                    state.productTapBar == ProductTapBar.SHOP
+                    state.productTapBar == ProductTapBar.SELL
                         ? BlocBuilder<MyProBloc, MyProState>(
                             builder: (context, state) {
                               return SliverList(
@@ -119,7 +119,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                                           state.mySwapProductListData.length));
                             },
                           ),
-                    state.productTapBar == ProductTapBar.SHOP
+                    state.productTapBar == ProductTapBar.SELL
                         ? SliverToBoxAdapter(
                             child: BlocBuilder<MyProBloc, MyProState>(
                             builder: (context, state) {

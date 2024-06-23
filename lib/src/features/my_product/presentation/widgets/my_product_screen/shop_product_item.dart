@@ -287,7 +287,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                               fontSize: 15.0.sp,
                                               color: ColorName.gray)),
                                   TextSpan(
-                                      text: '${widget.myProductItem.quantity}',
+                                      text: ' ${widget.myProductItem.quantity}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
@@ -310,7 +310,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                               fontSize: 15.0.sp,
                                               color: ColorName.gray)),
                                   TextSpan(
-                                      text: '${widget.myProductItem.country}',
+                                      text: ' ${widget.myProductItem.country}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(

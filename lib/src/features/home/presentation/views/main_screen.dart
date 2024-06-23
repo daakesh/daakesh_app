@@ -11,7 +11,7 @@ class MainScreen extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       return PersistentTabView(
         context,
-        backgroundColor: ColorName.white,
+        backgroundColor: ColorName.blueGray,
         controller: HomeBloc.controller,
         onItemSelected: (index) {
           HomeBloc.get.add(SelectTabItemEvent(index: index));
@@ -24,7 +24,7 @@ class MainScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         stateManagement: true,
         hideNavigationBarWhenKeyboardShows: true,
-        popAllScreensOnTapOfSelectedTab: true,
+        popAllScreensOnTapOfSelectedTab: false,
         popActionScreens: PopActionScreensType.all,
         navBarStyle: NavBarStyle.style15,
         padding: const NavBarPadding.only(bottom: 12.0),

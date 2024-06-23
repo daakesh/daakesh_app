@@ -82,7 +82,8 @@ class PriceRateWidget extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            previewerModel.discountPercentage == '0%'
+            previewerModel.discountPercentage == '0%' ||
+                    previewerModel.discountPercentage == null
                 ? Text(
                     '\$${previewerModel.priceAfterDiscount} ',
                     style: context.easyTheme.textTheme.bodyMedium!

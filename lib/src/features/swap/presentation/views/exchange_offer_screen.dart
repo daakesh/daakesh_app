@@ -75,19 +75,29 @@ class ExchangeOfferScreen extends StatelessWidget {
   }
 
   void createOtherSwapOffer(context) {
-    Utils.openNavNewPage(context, const SwapScreen());
+    Navigator.of(context).pushAndRemoveUntil(
+      CupertinoPageRoute(
+        builder: (BuildContext context) {
+          return const MainScreen();
+        },
+      ),
+      (_) => false,
+    );
+    HomeBloc.controller.jumpToTab(0);
+    HomeBloc.get.add(SelectTabItemEvent(index: 0));
   }
 
   void backToStore(context) {
     Navigator.of(context).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (BuildContext context) {
-          return const SwapScreen();
+          return const MainScreen();
         },
       ),
       (_) => false,
     );
-    HomeBloc.controller.jumpToTab(3);
-    HomeBloc.get.add(SelectTabItemEvent(index: 3));
+    HomeBloc.controller.jumpToTab(0);
+    HomeBloc.get.add(SelectTabItemEvent(index: 0));
+    HomeBloc.get.add(BackToStoreEvent(storeType: StoreType.SHOP));
   }
 }

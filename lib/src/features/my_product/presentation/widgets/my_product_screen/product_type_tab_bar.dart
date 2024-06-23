@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../src.export.dart';
 
 class ProductTypeTabBar extends StatelessWidget {
   final MyProFuncState state;
-  const ProductTypeTabBar({super.key, required this.state});
+  final TextEditingController searchController;
+  const ProductTypeTabBar(
+      {super.key, required this.state, required this.searchController});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,12 @@ class ProductTypeTabBar extends StatelessWidget {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () => swapTabBar(ProductTapBar.SHOP),
+              onTap: () => swapTabBar(ProductTapBar.SELL),
               child: Container(
                 width: double.infinity,
                 height: 50.0.h,
                 decoration: BoxDecoration(
-                    color: state.productTapBar == ProductTapBar.SHOP
+                    color: state.productTapBar == ProductTapBar.SELL
                         ? ColorName.amber
                         : ColorName.paleGray,
                     borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
@@ -33,7 +34,7 @@ class ProductTypeTabBar extends StatelessWidget {
                   context.locale.shop_tab_bar,
                   style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                       fontSize: 18.0.sp,
-                      color: state.productTapBar == ProductTapBar.SHOP
+                      color: state.productTapBar == ProductTapBar.SELL
                           ? ColorName.white
                           : ColorName.blueGray),
                 )),
@@ -70,6 +71,8 @@ class ProductTypeTabBar extends StatelessWidget {
   }
 
   void swapTabBar(ProductTapBar productTapBar) {
+    searchController.clear();
+    MyProFuncBloc.get.add(EmptyProductSearchEvent(value: ''));
     MyProFuncBloc.get
         .add(SwapTabBarProductTypeEvent(productTapBar: productTapBar));
   }

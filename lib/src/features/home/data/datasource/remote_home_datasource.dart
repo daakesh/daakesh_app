@@ -170,6 +170,7 @@ class RemoteHomeDatasource implements HomeDatasource {
         .get<NetworkService>()
         .get(path: 'DaakeshServices/api/item/SearchItems', params: {
       "name": searchValue,
+      "type": "sell",
       "page": '$page',
     });
     return result;

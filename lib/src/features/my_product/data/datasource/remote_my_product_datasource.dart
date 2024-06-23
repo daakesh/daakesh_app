@@ -28,56 +28,55 @@ class RemoteMyProductDatasource implements MyProductDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getCategoryBySection(
-      String secID) async {
+  Future<Either<Failure, ValidResponse>> getCategoryBySection(int secID) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/category/getCategoryBySection',
-        params: {"withPaginate": "false", "secID": secID});
+        params: {"withPaginate": "false", "secID": secID.toString()});
     return result;
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> isCategoryHasSub(String catID) async {
+  Future<Either<Failure, ValidResponse>> isCategoryHasSub(int catID) async {
     final result = await getIt
         .get<NetworkService>()
         .get(path: 'DaakeshServices/api/category/isCategoryHasSub', params: {
-      "catID": catID,
+      "catID": catID.toString(),
     });
     return result;
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getSubcategoryByCategoryId(
-      String catID) async {
+      int catID) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/subCategory/getSubcategoryByCategoryId',
         params: {
           "withPaginate": "false",
-          "catID": catID,
+          "catID": catID.toString(),
         });
     return result;
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getBrandsBySection(
-      String secID) async {
+  Future<Either<Failure, ValidResponse>> getBrandsBySection(int secID) async {
     final result = await getIt
         .get<NetworkService>()
         .get(path: 'DaakeshServices/api/brand/getBrandsBySection', params: {
-      "secID": secID,
+      "secID": secID.toString(),
     });
     return result;
   }
 
   @override
   Future<Either<Failure, ValidResponse>> searchOnProduct(
-      String searchValue, int page) async {
+      String searchValue, int page, ProductTapBar type) async {
     final result = await getIt
         .get<NetworkService>()
         .get(path: 'DaakeshServices/api/item/SearchUserItems', params: {
       "id": ValueConstants.userId,
       "name": searchValue,
       "page": '$page',
+      "type": type.name
     });
     return result;
   }

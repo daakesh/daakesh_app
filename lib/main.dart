@@ -20,5 +20,21 @@ void main() async {
 
 
 
-///- 3  => insert change phone into account details to change it.
-///- 10 => forget pasword working fine but process is not correct
+///1-skip two login screen ==> Done.
+///
+///3-swap item location in arabic need space. ==> Done.
+///
+///5-cannot go to shop page after do swap. ==> Done.
+///
+///7-search my item message not exist in arabic. == Done.
+///
+///
+///2-new password able in account details. ==> Don't understand.
+///
+///4-gray screen in vape juice in swap. ==> There is no gray screen.
+///
+///6-menu not clickable after do swap. ==> Don't understand.
+///
+///8-search my item get duplicate. ==> after delete my item should delete from SearchUserItems service.
+///
+///9-search my item in swap ans sell is the same ==> I already pass type but it ain't work, Should filter from backend. 

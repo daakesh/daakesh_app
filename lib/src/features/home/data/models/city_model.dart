@@ -45,6 +45,6 @@ class CityItem {
     longitude = json['longitude'];
     cityDisp = json['cityDisp'];
     pop2024Disp = json['pop2024Disp'];
-    ar = json['ar'];
+    ar = json['ar'] ?? json['city'];
   }
 }

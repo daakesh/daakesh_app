@@ -58,10 +58,10 @@ class MySwapPreviewerScreen extends StatelessWidget {
                               text: context.locale.swap_more_info_swap_in_title,
                             ),
                             TextSpan(
-                              text: '${previewerModel.citySwap}, ',
+                              text: ' ${previewerModel.citySwap} , ',
                             ),
                             TextSpan(
-                              text: '${previewerModel.countrySwap}, ',
+                              text: '${previewerModel.countrySwap} , ',
                             ),
                           ],
                         ),

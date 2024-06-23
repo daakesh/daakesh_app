@@ -1,4 +1,3 @@
-import 'package:daakesh/src/features/authentication/presentation/views/login_manner_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
 
@@ -64,10 +63,7 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(
                 height: 44.0.h,
               ),
-              AlreadyHaveAccountWidget(
-                onPressed: onLogin,
-                screen: const LoginMannerScreen(),
-              ),
+              const AlreadyHaveAccountWidget(),
               const Spacer(
                 flex: 1,
               ),
@@ -77,6 +73,4 @@ class WelcomeScreen extends StatelessWidget {
       ),
     );
   }
-
-  void onLogin() => Utils.openNewPage(const LoginMannerScreen());
 }

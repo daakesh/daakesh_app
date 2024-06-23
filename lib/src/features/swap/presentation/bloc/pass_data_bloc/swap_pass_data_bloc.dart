@@ -37,11 +37,14 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
 
   FutureOr<void> _passMySwapProductData(
       PassMySwapProductDataEvent event, Emitter<SwapPassDataState> emit) {
+    emit(state.copyWith(itemIndex: event.index));
+
     List<MyProductItem> mySwapProductData = state.mySwapProductData.toList();
     List<MyProductItem> itemSelected = <MyProductItem>[];
-    MyProductItem item = mySwapProductData.elementAt(event.index);
+    MyProductItem item = mySwapProductData.elementAt(state.itemIndex);
     itemSelected.add(item);
-    emit(state.copyWith(itemSelected: itemSelected, itemIndex: event.index));
+    emit(
+        state.copyWith(itemSelected: itemSelected, itemIndex: state.itemIndex));
   }
 
   FutureOr<void> _passSwapComment(

@@ -421,7 +421,7 @@
   "change_photo": "Change Photo",
   "name": "Name",
   "email": "Email",
-  "password": "Password",
+  "password": "New Password",
   "profileScreen": "*********ProfileScreen*********",
   "your_account": "Your Account",
   "personal_info_title": "Account Details",
@@ -450,5 +450,10 @@
   "you_not_made_a_deal_title": "You Not Made A Deal With ",
   "password_changed": "Password updated successfully",
   "swap_trending_deal_view_all": "view all",
-  "off": "OFF"
+  "off": "OFF",
+  "welcomeMessage": "Welcome! To Daakesh",
+  "unlockFeaturesMessage": "Unlock All Features by Logging In",
+  "welcomeLoginMessage": "Welcome! To unlock all features and personalize your experience, please log in or sign",
+  "loginButton": "LOGIN",
+  "no_more_data_available": "No more Data Available..."
 }

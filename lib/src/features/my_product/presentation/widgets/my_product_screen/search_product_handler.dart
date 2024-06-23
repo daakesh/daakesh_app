@@ -12,8 +12,9 @@ class SearchProductHandler extends StatelessWidget {
         return const SliverToBoxAdapter(
             child: CircularProgressIndicatorWidget());
       case MyProFuncStateStatus.NULL:
-        return const SliverToBoxAdapter(
-            child: Center(child: Text('No information available...')));
+        return SliverToBoxAdapter(
+            child: Center(
+                child: Text(context.locale.no_information_available_title)));
       default:
         return SliverList(
           delegate: SliverChildBuilderDelegate((_, index) {

@@ -18,7 +18,7 @@ enum UserType {
 }
 
 enum ProductTapBar {
-  SHOP,
+  SELL,
   SWAP,
 }
 

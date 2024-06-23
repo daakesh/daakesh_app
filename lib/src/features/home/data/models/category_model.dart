@@ -66,7 +66,7 @@ class CategoryItem {
     catImg = json['catImg'] ?? "Unknown";
     date = json['date'] ?? "Unknown";
     secID = json['secID'] ?? 0;
-    arName = json['arName'] ?? "Unknown";
+    arName = json['arName'] ?? json['name'];
     itemsCount = json['items_count'] ?? 0;
     sectionItemModel = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])

@@ -46,7 +46,7 @@ class MainScreenWidget {
       PersistentBottomNavBarItem(
           icon: Assets.png.swapIcon.image(),
           textStyle: context.easyTheme.textTheme.bodyMedium!
-              .copyWith(fontSize: 12.0, color: ColorName.blueGray),
+              .copyWith(fontSize: 12.0, color: ColorName.white),
           activeColorPrimary: ColorName.white,
           title: storeType == StoreType.SWAP
               ? context.locale.go_to_shop
@@ -110,7 +110,7 @@ class MainScreenWidget {
               color: ColorName.transparent,
               child: Text(title,
                   style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(fontSize: 14.0)))
+                      .copyWith(fontSize: 14.0, color: Colors.white)))
         ],
       );
 }

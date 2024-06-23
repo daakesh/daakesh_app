@@ -159,7 +159,7 @@
   "home_popular_sections_title": "الأقسام الشائعة",
   "home_whats_new_section_title": "ما هو الجديد",
   "home_shop_by_brands_section_title": "تسوق حسب العلامات التجارية",
-  "home_handmade_section_title": "يدوي",
+  "home_handmade_section_title": "صناعة يدوية",
   "home_daakesh_today_deals_title": "عروض داقيش اليوم",
   "home_today_deals_title": "عروض اليوم",
   "home_off_title": "خصم",
@@ -450,5 +450,10 @@
   "you_not_made_a_deal_title": "لم تبرم صفقة مع ",
   "password_changed": "تم تحديث كلمة المرور بنجاح",
   "swap_trending_deal_view_all": "عرض الكل",
-  "off": "خصم"
+  "off": "خصم",
+  "welcomeMessage": "مرحبًا! في داكيش",
+  "unlockFeaturesMessage": "افتح جميع الميزات بتسجيل الدخول",
+  "welcomeLoginMessage": "مرحبًا! لفتح جميع الميزات وتخصيص تجربتك، يرجى تسجيل الدخول أو التسجيل",
+  "loginButton": "تسجيل الدخول",
+  "no_more_data_available": "لا يوجد المزيد من البيانات المتاحة..."
 }
