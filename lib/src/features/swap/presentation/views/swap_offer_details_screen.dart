@@ -330,6 +330,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
       comment: comment,
       sourceUser: sourceUser,
       offerUser: offerUser,
+      trendDealsItem: trendDealsItem,
     ));
   }
 

@@ -98,13 +98,13 @@ class SwapTrendDealProduct extends StatelessWidget {
                     '${trendDealsItem.title}\n',
                     maxLines: 2,
                     style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                        fontSize: 14.0.sp,
+                        fontSize: 15.0.sp,
                         color: ColorName.gray,
                         overflow: TextOverflow.ellipsis),
                   ),
                 ),
                 SizedBox(
-                  height: 2.0.h,
+                  height: 7.5.h,
                 ),
                 Text(
                   '${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap} ',
@@ -114,7 +114,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                       overflow: TextOverflow.ellipsis),
                 ),
                 const SizedBox(
-                  height: 11.0,
+                  height: 4.0,
                 ),
                 FittedBox(
                   fit: BoxFit.scaleDown,

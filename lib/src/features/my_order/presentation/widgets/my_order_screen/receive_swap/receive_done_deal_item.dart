@@ -223,7 +223,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
 
   void deleteItem(BuildContext context, int id) {
     context.showRemoveDialog().then((value) {
-      if (value) {
+      if (value != null && value == true) {
         MySwapOrderBloc.get.add(RemoveReceiveOfferItemEvent(id: id));
       }
     });

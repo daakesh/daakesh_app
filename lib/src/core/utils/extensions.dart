@@ -95,73 +95,90 @@ extension ShowDialog on BuildContext {
           return AlertDialog(
             title: Text(
               context.locale.alarm,
+              textAlign: TextAlign.center,
               style: context.easyTheme.textTheme.headlineMedium,
             ),
             content: Text(
               context.locale.login_instruction,
+              textAlign: TextAlign.center,
               style: context.easyTheme.textTheme.bodyMedium!
                   .copyWith(fontSize: 18.0, fontWeight: FontWeight.w100),
             ),
             actions: [
-              TextButton(
-                child: Text(context.locale.close,
-                    style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                        color: Colors.red, fontWeight: FontWeight.bold)),
-                onPressed: () => Navigator.of(context).pop(),
+              Center(
+                child: TextButton(
+                  child: Text(context.locale.close,
+                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0)),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
               ),
-              TextButton(
-                child: Text(context.locale.login,
-                    style: context.easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontWeight: FontWeight.bold)),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Utils.openNewPage(const LoginScreen());
-                },
+              Center(
+                child: TextButton(
+                  child: Text(context.locale.login,
+                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.bold, fontSize: 18.0)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Utils.openNewPage(const LoginScreen());
+                  },
+                ),
               ),
             ],
           );
         },
       );
 
-  Future<bool> showRemoveDialog() async {
+  Future<bool?> showRemoveDialog() async {
     return await showDialog(
       context: this,
+      barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
           title: Text(
             context.locale.alarm,
             style: context.easyTheme.textTheme.headlineMedium,
+            textAlign: TextAlign.center,
           ),
           content: Text(
             context.locale.are_you_sure_you_wanna_remove_the_item,
+            textAlign: TextAlign.center,
             style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-              fontSize: 18.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.w100,
             ),
           ),
           actions: [
-            TextButton(
-              child: Text(
-                context.locale.remove,
-                style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
+            Center(
+              child: TextButton(
+                child: Text(
+                  context.locale.remove,
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                    color: Colors.red,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
               ),
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
             ),
-            TextButton(
-              child: Text(
-                context.locale.cancel_remove_item,
-                style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.bold,
+            Center(
+              child: TextButton(
+                child: Text(
+                  context.locale.cancel_remove_item,
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                  ),
                 ),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
               ),
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
             ),
           ],
         );

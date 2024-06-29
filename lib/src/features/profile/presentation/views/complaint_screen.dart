@@ -29,9 +29,7 @@ class ComplaintScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 108.0,
-                ),
+                SizedBox(height: 60.0.sp),
                 Text(
                   context.locale.complaint,
                   style: context.easyTheme.textTheme.headlineMedium!
@@ -58,8 +56,8 @@ class ComplaintScreen extends StatelessWidget {
                 ),
                 Text(
                   context.locale.complaint_type,
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.black.withOpacity(0.5)),
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
                 ),
                 DropDownButtonWidget<String>(
                   onChange: (value) {
@@ -73,12 +71,12 @@ class ComplaintScreen extends StatelessWidget {
                       .toList(),
                 ),
                 const SizedBox(
-                  height: 25.0,
+                  height: 10.0,
                 ),
                 Text(
                   context.locale.seller_name,
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.black.withOpacity(0.5)),
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
                 ),
                 TextFormFieldWidget(
                   controller: sellerNameController,
@@ -87,12 +85,12 @@ class ComplaintScreen extends StatelessWidget {
                       context, sellerNameFocusNode, subjectFocusNode),
                 ),
                 const SizedBox(
-                  height: 25.0,
+                  height: 10.0,
                 ),
                 Text(
                   context.locale.subject,
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.black.withOpacity(0.5)),
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
                 ),
                 TextFormFieldWidget(
                   controller: subjectController,
@@ -101,19 +99,19 @@ class ComplaintScreen extends StatelessWidget {
                       context, subjectFocusNode, remarkFocusNode),
                 ),
                 const SizedBox(
-                  height: 25.0,
+                  height: 10.0,
                 ),
                 Text(
                   context.locale.remark,
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.black.withOpacity(0.5)),
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
                 ),
                 TextFormFieldWidget(
                   controller: remarkController,
                   focusNode: remarkFocusNode,
                 ),
                 const SizedBox(
-                  height: 44.0,
+                  height: 20.0,
                 ),
                 const Spacer(
                   flex: 1,
@@ -125,7 +123,7 @@ class ComplaintScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 12.0,
+                  height: 10.0,
                 ),
                 Center(
                   child: OutlineButtonWidget(

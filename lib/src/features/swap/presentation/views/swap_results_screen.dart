@@ -36,9 +36,7 @@ class SwapResultsScreen extends StatelessWidget {
                             child: Text(Utils.isEnglish ? "All" : "الكل")),
                       ),
                     ),
-                    const SizedBox(
-                      width: 11.0,
-                    ),
+                    const SizedBox(width: 11.0),
                     BlocBuilder<SwapFilterBloc, SwapFilterState>(
                       builder: (context, state) {
                         return Expanded(
@@ -81,13 +79,24 @@ class SwapResultsScreen extends StatelessWidget {
                         );
                       },
                     ),
+                    const SizedBox(width: 11.0),
+                    GestureDetector(
+                        onTap: () => openSwapFilterScreen(context),
+                        child: Assets.png.filterIcon
+                            .image(width: 40.w, height: 40.h)),
                     const SizedBox(
                       width: 11.0,
                     ),
                     GestureDetector(
-                        onTap: () => openSwapFilterScreen(context),
-                        child: Assets.png.filterIcon
-                            .image(width: 38.0, height: 38.0))
+                      onTap: () => state.sortingType == SortingType.desc
+                          ? SwapFilterBloc.get.add(
+                              SwapPreviewSectionSubCategoriesEvent(
+                                  sortingType: SortingType.asc))
+                          : SwapFilterBloc.get.add(
+                              SwapPreviewSectionSubCategoriesEvent(
+                                  sortingType: SortingType.desc)),
+                      child: Assets.svg.sortIcon.svg(width: 30.w, height: 30.h),
+                    ),
                   ],
                 );
               }),
@@ -115,23 +124,13 @@ class SwapResultsScreen extends StatelessWidget {
                         child: Text(context.locale.results_title,
                             style: context.easyTheme.textTheme.headlineMedium),
                       ),
-                      GestureDetector(
-                        onTap: () => state.sortingType == SortingType.desc
-                            ? SwapFilterBloc.get.add(
-                                SwapPreviewSectionSubCategoriesEvent(
-                                    sortingType: SortingType.asc))
-                            : SwapFilterBloc.get.add(
-                                SwapPreviewSectionSubCategoriesEvent(
-                                    sortingType: SortingType.desc)),
-                        child: Assets.svg.sortIcon.svg(),
-                      ),
                     ],
                   ),
                 );
               },
             ),
           ),
-          const SliverPadding(padding: EdgeInsets.only(top: 13.0)),
+          const SliverPadding(padding: EdgeInsets.only(top: 4.0)),
           BlocBuilder<SwapFilterBloc, SwapFilterState>(
             builder: (context, state) {
               return SliverList(

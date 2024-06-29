@@ -36,12 +36,12 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 108.0,
+                SizedBox(
+                  height: 70.0.h,
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: Assets.svg.arrowBackIcon.svg(),
+                  child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                 ),
                 const SizedBox(
                   height: 11.0,
@@ -49,7 +49,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                 Text(
                   context.locale.add_product,
                   style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 36.0),
+                      .copyWith(fontSize: 36.0.sp),
                 ),
                 const SizedBox(
                   height: 14.0,
@@ -79,8 +79,9 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                     children: [
                       Text(
                         context.locale.product_section,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_, state) {
@@ -108,12 +109,13 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 21.0,
+                        height: 15.0,
                       ),
                       Text(
                         context.locale.product_categories,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_, state) {
@@ -137,12 +139,13 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 21.0,
+                        height: 15.0,
                       ),
                       Text(
                         context.locale.sup_categories,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_, state) {
@@ -166,12 +169,13 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 21.0,
+                        height: 15.0,
                       ),
                       Text(
                         context.locale.product_brand,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_, state) {
@@ -194,12 +198,13 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 21.0,
+                        height: 15.0,
                       ),
                       Text(
                         context.locale.product_model_year,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       TextFormFieldWidget(
                         controller: productModelYearController,
@@ -213,7 +218,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         onTap: () => selectModelYear(context),
                       ),
                       const SizedBox(
-                        height: 70.0,
+                        height: 20.0,
                       ),
                     ],
                   ),
@@ -247,10 +252,6 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
   }
 
   void onNext() async {
-    print("productSecID : $productSecID");
-    print("productCatID : $productCatID");
-    print("productSubCatID : $productSubCatID");
-    print("productBrandID : $productBrandID");
     if (productSecID == null || productCatID == null) {
       ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
       return;

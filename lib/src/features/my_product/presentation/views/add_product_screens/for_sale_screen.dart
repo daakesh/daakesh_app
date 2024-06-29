@@ -38,15 +38,13 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 108.0.h,
-                    ),
+                    SizedBox(height: 70.0.h),
                     InkWell(
                       focusColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
                       splashColor: ColorName.transparent,
                       onTap: () => Navigator.pop(context),
-                      child: Assets.svg.arrowBackIcon.svg(),
+                      child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                     ),
                     SizedBox(
                       height: 11.0.h,
@@ -84,8 +82,9 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(context.locale.product_quantity,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5))),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
                       controller: productQuantityController,
                       keyboardType: TextInputType.number,
@@ -94,8 +93,9 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       height: 22.0.h,
                     ),
                     Text(context.locale.product_price,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5))),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
                       controller: productPriceController,
                       isSuffixPrefixOn: true,
@@ -117,6 +117,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
+                                              fontSize: 18.0,
                                               color: ColorName.black
                                                   .withOpacity(0.5))),
                                   TextFormFieldWidget(
@@ -228,7 +229,8 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
-                    text: context.locale.next_button, onPressed: () => onNext()),
+                    text: context.locale.next_button,
+                    onPressed: () => onNext()),
               ),
               SizedBox(
                 height: 12.0.h,
@@ -236,7 +238,8 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: OutlineButtonWidget(
-                    text: context.locale.cancel_button, onPressed: () => cancel()),
+                    text: context.locale.cancel_button,
+                    onPressed: () => cancel()),
               ),
               SizedBox(
                 height: 50.0.h,
@@ -303,7 +306,8 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
   void onNext() async {
     if (productQuantityController.text.isEmpty ||
         productPriceController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: context.locale.add_pro_data_snack_bar);
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.add_pro_data_snack_bar);
       return;
     }
     AddProBloc.get.add(AddSaleInfoEvent(

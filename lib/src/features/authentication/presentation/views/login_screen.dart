@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         context.locale.login_email_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray),
+                            fontSize: 18.0, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: emailController,
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         context.locale.login_password_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray),
+                            fontSize: 18.0, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: passwordController,

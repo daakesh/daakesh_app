@@ -21,19 +21,6 @@ class SearchItemsScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                  child: Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: GestureDetector(
-                        onTap: () => openFilterScreen(context),
-                        child: Assets.png.filterIcon
-                            .image(width: 38.0, height: 38.0)),
-                  ),
-                ),
-              ),
-              const SliverPadding(padding: EdgeInsets.only(top: 7.0)),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
                   child: Row(
                     children: [
                       Expanded(
@@ -41,12 +28,18 @@ class SearchItemsScreen extends StatelessWidget {
                             style: context.easyTheme.textTheme.headlineMedium),
                       ),
                       GestureDetector(
+                          onTap: () => openFilterScreen(context),
+                          child: Assets.png.filterIcon
+                              .image(width: 40.w, height: 40.h)),
+                      const SizedBox(width: 11),
+                      GestureDetector(
                         onTap: () => state.sortingType == SortingType.desc
                             ? SearchBloc.get.add(
                                 SearchFilterEvent(sortingType: SortingType.asc))
                             : SearchBloc.get.add(SearchFilterEvent(
                                 sortingType: SortingType.desc)),
-                        child: Assets.svg.sortIcon.svg(),
+                        child:
+                            Assets.svg.sortIcon.svg(width: 30.w, height: 30.h),
                       ),
                     ],
                   ),

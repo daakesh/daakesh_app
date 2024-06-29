@@ -52,18 +52,14 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(
-                                height: 38.0,
-                              ),
+                              const SizedBox(height: 38.0),
                               Text(
                                 'Today\'s Deals',
                                 style: context
                                     .easyTheme.textTheme.headlineMedium!
                                     .copyWith(color: ColorName.white),
                               ),
-                              const SizedBox(
-                                height: 35.0,
-                              ),
+                              const SizedBox(height: 35.0),
                               Container(
                                 height: 36.0.h,
                                 constraints:
@@ -84,19 +80,11 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                               ),
                             ],
                           ),
-                          const Spacer(
-                            flex: 1,
-                          ),
+                          const Spacer(flex: 1),
                           CachedImage(
                             imageUrl: i.image.toString(),
-                            width: 150.0,
-                            height: 150.0,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8.0)),
+                            width: 190,
                           ),
-                          const SizedBox(
-                            width: 8.0,
-                          )
                         ],
                       )),
                 );

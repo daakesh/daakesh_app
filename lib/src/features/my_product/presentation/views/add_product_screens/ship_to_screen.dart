@@ -35,14 +35,14 @@ class _ShipToScreenState extends State<ShipToScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 108.0.h,
+                      height: 70.0.h,
                     ),
                     InkWell(
                       focusColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
                       splashColor: ColorName.transparent,
                       onTap: cancel,
-                      child: Assets.svg.arrowBackIcon.svg(),
+                      child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                     ),
                     SizedBox(
                       height: 11.0.h,
@@ -86,6 +86,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                           Text(context.locale.country,
                               style: context.easyTheme.textTheme.bodyMedium!
                                   .copyWith(
+                                      fontSize: 18,
                                       color: ColorName.black.withOpacity(0.5))),
                           TextFormFieldWidget(
                             controller: countryController,

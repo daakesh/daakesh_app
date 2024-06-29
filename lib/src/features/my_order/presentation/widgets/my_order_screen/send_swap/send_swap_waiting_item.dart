@@ -58,6 +58,17 @@ class SendSwapWaitingItem extends StatelessWidget {
               SizedBox(
                 width: 15.0.w,
               ),
+              GestureDetector(
+                onTap: () => deleteItem(context, sendSwapReqItem.id!),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 20.0, top: 3),
+                  child: Text(
+                    context.locale.delete_item,
+                    style: context.easyTheme.textTheme.bodyLarge!
+                        .copyWith(fontSize: 10.0, color: ColorName.red),
+                  ),
+                ),
+              ),
             ],
           ),
           Padding(
@@ -196,16 +207,6 @@ class SendSwapWaitingItem extends StatelessWidget {
             ],
           ),
           SizedBox(height: 13.0.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 19.0.w),
-            child: Center(
-              child: DefaultButtonWidget(
-                text: context.locale.delete_item,
-                onPressed: () => deleteItem(context, sendSwapReqItem.id!),
-              ),
-            ),
-          ),
-          SizedBox(height: 13.0.h),
         ],
       ),
     );
@@ -221,7 +222,7 @@ class SendSwapWaitingItem extends StatelessWidget {
 
   void deleteItem(BuildContext context, int id) {
     context.showRemoveDialog().then((value) {
-      if (value) {
+      if (value != null && value == true) {
         MySwapOrderBloc.get.add(RemoveSendOfferItemEvent(id: id));
       }
     });

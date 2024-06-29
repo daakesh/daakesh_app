@@ -85,8 +85,12 @@ class SwapBloc extends Bloc<SwapEvent, SwapState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      SwapProBloc.get.add(ResetMySwapItemDataEvent());
-      Utils.openNavNewPage(event.context, const ExchangeOfferScreen(),
+
+      Utils.openNavNewPage(
+          event.context,
+          ExchangeOfferScreen(
+            trendDealsItem: event.trendDealsItem,
+          ),
           withNavBar: false);
       emit(state.copyWith(swapStateStatus: SwapStateStatus.SUCCESS));
     });

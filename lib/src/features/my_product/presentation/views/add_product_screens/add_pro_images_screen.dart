@@ -30,12 +30,12 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 108.0,
+                  SizedBox(
+                    height: 70.0.h,
                   ),
                   GestureDetector(
                     onTap: cancel,
-                    child: Assets.svg.arrowBackIcon.svg(),
+                    child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                   ),
                   const SizedBox(
                     height: 11.0,
@@ -43,7 +43,7 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                   Text(
                     context.locale.add_product,
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 36.0),
+                        .copyWith(fontSize: 36.0.sp),
                   ),
                   const SizedBox(
                     height: 14.0,

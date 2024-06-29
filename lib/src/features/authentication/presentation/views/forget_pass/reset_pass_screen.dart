@@ -56,7 +56,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                       Text(
                         context.locale.new_pass_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray),
+                            fontSize: 18.0, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: newPassController,
@@ -74,7 +74,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                       Text(
                         context.locale.confirm_pass_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray),
+                            fontSize: 18.0, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: confirmPassController,

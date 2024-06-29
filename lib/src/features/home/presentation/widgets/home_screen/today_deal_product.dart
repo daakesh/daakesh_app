@@ -110,12 +110,12 @@ class TodayDealProduct extends StatelessWidget {
                   '${todayDealItem.title}\n',
                   maxLines: 2,
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                      fontSize: 14.0.sp,
+                      fontSize: 15.0.sp,
                       color: ColorName.gray,
                       overflow: TextOverflow.ellipsis),
                 ),
                 SizedBox(
-                  height: 4.5.h,
+                  height: 7.5.h,
                 ),
                 Row(
                   children: [
@@ -125,7 +125,7 @@ class TodayDealProduct extends StatelessWidget {
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
-                      itemSize: 15.0.r,
+                      itemSize: 20.0.r,
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -166,7 +166,7 @@ class TodayDealProduct extends StatelessWidget {
                     ? Text(
                         '\$${todayDealItem.priceAfterDiscount} ',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 20.0, fontWeight: FontWeight.w600),
+                            fontSize: 16.0, fontWeight: FontWeight.w600),
                         overflow: TextOverflow.ellipsis,
                       )
                     : Row(
@@ -176,7 +176,7 @@ class TodayDealProduct extends StatelessWidget {
                             '\$${todayDealItem.priceAfterDiscount} ',
                             style: context.easyTheme.textTheme.bodyMedium!
                                 .copyWith(
-                                    fontSize: 20.0,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.w600),
                             overflow: TextOverflow.ellipsis,
                           )),

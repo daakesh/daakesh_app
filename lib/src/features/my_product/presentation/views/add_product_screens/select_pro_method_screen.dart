@@ -16,15 +16,15 @@ class SelectProMethodScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 108.0,
+                SizedBox(
+                  height: 70.0.h,
                 ),
                 InkWell(
                   focusColor: ColorName.transparent,
                   highlightColor: ColorName.transparent,
                   splashColor: ColorName.transparent,
                   onTap: () => Navigator.pop(context),
-                  child: Assets.svg.arrowBackIcon.svg(),
+                  child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                 ),
                 const SizedBox(
                   height: 11.0,
@@ -32,7 +32,7 @@ class SelectProMethodScreen extends StatelessWidget {
                 Text(
                   context.locale.add_product,
                   style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 36.0),
+                      .copyWith(fontSize: 36.0.sp),
                 ),
                 const SizedBox(
                   height: 14.0,
@@ -74,7 +74,7 @@ class SelectProMethodScreen extends StatelessWidget {
                   );
                 }),
                 const Spacer(
-                  flex: 1,
+                  flex: 3,
                 ),
                 BlocBuilder<MyProFuncBloc, MyProFuncState>(builder: (_, state) {
                   return Center(

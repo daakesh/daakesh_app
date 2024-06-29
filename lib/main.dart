@@ -20,21 +20,13 @@ void main() async {
 
 
 
-///1-skip two login screen ==> Done.
-///
-///3-swap item location in arabic need space. ==> Done.
-///
-///5-cannot go to shop page after do swap. ==> Done.
-///
-///7-search my item message not exist in arabic. == Done.
 ///
 ///
-///2-new password able in account details. ==> Don't understand.
+///Go to swap padding into nav bar
+///erase add product title.
 ///
-///4-gray screen in vape juice in swap. ==> There is no gray screen.
+///reduce the space at my product item.
+///change the title size.
 ///
-///6-menu not clickable after do swap. ==> Don't understand.
 ///
-///8-search my item get duplicate. ==> after delete my item should delete from SearchUserItems service.
 ///
-///9-search my item in swap ans sell is the same ==> I already pass type but it ain't work, Should filter from backend. 

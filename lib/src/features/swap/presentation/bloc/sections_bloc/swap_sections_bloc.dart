@@ -25,6 +25,7 @@ class SwapSectionsBloc extends Bloc<SwapSectionsEvent, SwapSectionsState> {
         secID: event.secID,
         sectionIndex: event.sectionIndex,
         categoryTitle: event.categoryTitle,
+        arCategoryTitle: event.arCategoryTitle,
         swapCategoriesListData: [],
         currentPage: 1,
       ));

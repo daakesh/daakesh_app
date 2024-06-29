@@ -25,6 +25,7 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
         secID: event.secID,
         sectionIndex: event.sectionIndex,
         categoryTitle: event.categoryTitle,
+        arCategoryTitle: event.arCategoryTitle,
         categoriesListData: [],
         currentPage: 1,
       ));

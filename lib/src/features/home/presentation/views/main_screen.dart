@@ -24,11 +24,11 @@ class MainScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         stateManagement: true,
         hideNavigationBarWhenKeyboardShows: true,
-        popAllScreensOnTapOfSelectedTab: false,
+        popAllScreensOnTapOfSelectedTab: true,
         popActionScreens: PopActionScreensType.all,
         navBarStyle: NavBarStyle.style15,
         padding: const NavBarPadding.only(bottom: 12.0),
-        popAllScreensOnTapAnyTabs: true,
+        popAllScreensOnTapAnyTabs: false,
         navBarHeight: Utils.isOpenKeyboard(context) ? 77 : 0.0,
         decoration: const NavBarDecoration(
             boxShadow: [

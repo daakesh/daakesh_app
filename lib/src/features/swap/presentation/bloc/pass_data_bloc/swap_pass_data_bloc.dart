@@ -10,6 +10,7 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
     on<PassMySwapProductDataEvent>(_passMySwapProductData);
     on<PassSwapCommentEvent>(_passSwapComment);
     on<PassMySwapProductListEvent>(_passMySwapProductList);
+    on<ResetSwapPassValuesEvent>(_resetSwapPassValues);
   }
   static SwapPassDataBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -55,5 +56,10 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
   FutureOr<void> _passMySwapProductList(
       PassMySwapProductListEvent event, Emitter<SwapPassDataState> emit) {
     emit(state.copyWith(mySwapProductData: event.mySwapProductData));
+  }
+
+  FutureOr<void> _resetSwapPassValues(
+      ResetSwapPassValuesEvent event, Emitter<SwapPassDataState> emit) {
+    emit(state.copyWith(itemIndex: 0));
   }
 }

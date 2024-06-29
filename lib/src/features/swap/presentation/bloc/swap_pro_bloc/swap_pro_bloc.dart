@@ -69,7 +69,7 @@ class SwapProBloc extends Bloc<SwapProEvent, SwapProState> {
       ResetMySwapItemDataEvent event, Emitter<SwapProState> emit) {
     emit(state.copyWith(
       swapProStateStatus: SwapProStateStatus.INITIAL,
-      mySwapProductListData: [],
+      //mySwapProductListData: [],
       currentPage: 1,
       isMoreData: true,
     ));

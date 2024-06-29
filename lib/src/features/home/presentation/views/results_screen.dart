@@ -84,8 +84,33 @@ class ResultsScreen extends StatelessWidget {
                       // Assets.svg.sortIcon.svg(),
                       GestureDetector(
                           onTap: () => openFilterScreen(context),
-                          child: Assets.png.filterIcon
-                              .image(width: 38.0, height: 38.0))
+                          child: SizedBox(
+                            height: 40.h,
+                            width: 40.w,
+                            child: Assets.png.filterIcon.image(
+                              color: ColorName.blueGray,
+                            ),
+                          )),
+                      const SizedBox(
+                        width: 11.0,
+                      ),
+                      BlocBuilder<FilterBloc, FilterState>(
+                        builder: (context, state) {
+                          return GestureDetector(
+                            onTap: () => state.sortingType == SortingType.desc
+                                ? FilterBloc.get.add(
+                                    PreviewSectionSubCategoriesEvent(
+                                        sortingType: SortingType.asc))
+                                : FilterBloc.get.add(
+                                    PreviewSectionSubCategoriesEvent(
+                                        sortingType: SortingType.desc)),
+                            child: SizedBox(
+                                width: 30.w,
+                                height: 30.h,
+                                child: Assets.svg.sortIcon.svg()),
+                          );
+                        },
+                      ),
                     ],
                   );
                 },
@@ -102,7 +127,7 @@ class ResultsScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SliverPadding(padding: EdgeInsets.only(top: 7.0)),
+          const SliverPadding(padding: EdgeInsets.only(top: 4.0)),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 17.0),
@@ -112,25 +137,11 @@ class ResultsScreen extends StatelessWidget {
                     child: Text(context.locale.results_title,
                         style: context.easyTheme.textTheme.headlineMedium),
                   ),
-                  BlocBuilder<FilterBloc, FilterState>(
-                    builder: (context, state) {
-                      return GestureDetector(
-                        onTap: () => state.sortingType == SortingType.desc
-                            ? FilterBloc.get.add(
-                                PreviewSectionSubCategoriesEvent(
-                                    sortingType: SortingType.asc))
-                            : FilterBloc.get.add(
-                                PreviewSectionSubCategoriesEvent(
-                                    sortingType: SortingType.desc)),
-                        child: Assets.svg.sortIcon.svg(),
-                      );
-                    },
-                  ),
                 ],
               ),
             ),
           ),
-          const SliverPadding(padding: EdgeInsets.only(top: 13.0)),
+          const SliverPadding(padding: EdgeInsets.only(top: 6.0)),
           BlocBuilder<FilterBloc, FilterState>(
             builder: (context, state) {
               return SliverList(

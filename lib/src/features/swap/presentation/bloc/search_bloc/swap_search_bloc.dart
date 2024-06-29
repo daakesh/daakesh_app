@@ -69,6 +69,7 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
         swapSearchResultList: [],
         searchValue: '',
         currentSearchPage: 1,
+        isMoreDataItems: true,
         isMoreData: true));
   }
 

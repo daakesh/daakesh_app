@@ -43,9 +43,7 @@ class _LocationScreenState extends State<LocationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 108.0,
-                  ),
+                  SizedBox(height: 60.0.sp),
                   Text(
                     context.locale.location,
                     style: context.easyTheme.textTheme.headlineMedium!
@@ -102,7 +100,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       RegExpValidator.beginWhitespace,
                     ],
                   ),
-                  const SizedBox(height: 33.0),
+                  const SizedBox(height: 16.0),
                   Text(context.locale.location_city,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
@@ -116,7 +114,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       RegExpValidator.beginWhitespace,
                     ],
                   ),
-                  const SizedBox(height: 33.0),
+                  const SizedBox(height: 16.0),
                   Text(context.locale.location_address,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
@@ -141,7 +139,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     // ),
                   ),
                   const SizedBox(
-                    height: 44.0,
+                    height: 20.0,
                   ),
                   const Spacer(
                     flex: 1,
@@ -156,7 +154,7 @@ class _LocationScreenState extends State<LocationScreen> {
                             : onSave()),
                   ),
                   const SizedBox(
-                    height: 12.0,
+                    height: 10.0,
                   ),
                   Center(
                     child: OutlineButtonWidget(

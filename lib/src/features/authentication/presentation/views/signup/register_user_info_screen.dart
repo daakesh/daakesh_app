@@ -66,7 +66,7 @@ class _RegisterPersonalInfoScreenState
                   children: [
                     Text(context.locale.name_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray)),
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: nameController,
                       focusNode: nameFocusNode,
@@ -80,7 +80,7 @@ class _RegisterPersonalInfoScreenState
                     SizedBox(height: 33.0.h),
                     Text(context.locale.email_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray)),
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: emailController,
                       focusNode: emailFocusNode,
@@ -94,7 +94,7 @@ class _RegisterPersonalInfoScreenState
                     SizedBox(height: 33.0.h),
                     Text(context.locale.password_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray)),
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: passwordController,
                       focusNode: passwordFocusNode,

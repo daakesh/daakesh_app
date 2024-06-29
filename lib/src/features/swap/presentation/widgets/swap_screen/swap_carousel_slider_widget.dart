@@ -89,14 +89,8 @@ class _SwapCarouselSliderWidgetState extends State<SwapCarouselSliderWidget> {
                           ),
                           CachedImage(
                             imageUrl: i.image.toString(),
-                            width: 150.0,
-                            height: 150.0,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8.0)),
+                            width: 190.0,
                           ),
-                          const SizedBox(
-                            width: 8.0,
-                          )
                         ],
                       )),
                 );

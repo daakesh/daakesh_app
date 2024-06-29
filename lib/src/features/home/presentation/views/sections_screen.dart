@@ -14,7 +14,7 @@ class SectionScreen extends StatelessWidget {
           body: CustomScrollView(
             slivers: [
               const HomeAppBarWidget(),
-              const SliverToBoxAdapter(child: SizedBox(height: 26.0)),
+              const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 17.0),
@@ -38,8 +38,11 @@ class SectionScreen extends StatelessWidget {
                         SectionItemModel sectionModel =
                             homeState.sectionListData[index];
                         return GestureDetector(
-                          onTap: () => getSectionCategories(sectionModel.id!,
-                              index, sectionModel.name.toString()),
+                          onTap: () => getSectionCategories(
+                              sectionModel.id!,
+                              index,
+                              sectionModel.name.toString(),
+                              sectionModel.arName.toString()),
                           child: PopularCategoriesWidget(
                             data: sectionModel,
                             index: index,
@@ -51,7 +54,7 @@ class SectionScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 29.5)),
+              const SliverToBoxAdapter(child: SizedBox(height: 6.0)),
               SliverToBoxAdapter(
                 child: Divider(
                   color: ColorName.gray.withOpacity(0.36),
@@ -59,14 +62,14 @@ class SectionScreen extends StatelessWidget {
                   indent: 46.0,
                 ),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 29.5)),
+              const SliverToBoxAdapter(child: SizedBox(height: 10.0)),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 31.0),
                   child: Text(
-                    '${state.categoryTitle} ${context.locale.category_title}',
+                    '${Utils.isEnglish ? state.categoryTitle : state.arCategoryTitle} ${context.locale.category_title}',
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                      fontSize: 24.0,
+                      fontSize: 20.0.sp,
                       color: ColorName.black.withOpacity(0.57),
                     ),
                   ),
@@ -98,11 +101,14 @@ class SectionScreen extends StatelessWidget {
     );
   }
 
-  void getSectionCategories(int secID, int sectionIndex, String categoryTitle) {
+  void getSectionCategories(int secID, int sectionIndex, String categoryTitle,
+      String arCategoryTitle) {
     SectionsBloc.get.add(GetCategoryBySectionIDEvent(
-        secID: secID,
-        sectionIndex: sectionIndex,
-        categoryTitle: categoryTitle));
+      secID: secID,
+      sectionIndex: sectionIndex,
+      categoryTitle: categoryTitle,
+      arCategoryTitle: arCategoryTitle,
+    ));
   }
 
   void onSeeMore() =>

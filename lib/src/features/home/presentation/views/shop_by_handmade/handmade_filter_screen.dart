@@ -25,32 +25,26 @@ class HandmadeFilterScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 52.0,
-                      ),
+                      const SizedBox(height: 40.0),
                       Center(
-                          child: Text(
-                        context.locale.filter_title,
-                        style: context.easyTheme.textTheme.headlineMedium!
-                            .copyWith(fontSize: 31.0),
-                      )),
-                      const SizedBox(
-                        height: 16.0,
+                        child: Text(
+                          context.locale.filter_title,
+                          style: context.easyTheme.textTheme.headlineMedium!
+                              .copyWith(fontSize: 31.0),
+                        ),
                       ),
-                      IconButton(
-                          onPressed: () => Navigator.pop(context),
-                          icon: const Icon(Icons.arrow_back)),
-                      const SizedBox(
-                        height: 39.0,
+                      const SizedBox(height: 16.0),
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Utils.flipWidget(Assets.svg.arrowBackIcon
+                            .svg(height: 16, width: 16)),
                       ),
+                      const SizedBox(height: 16.0),
                       Text(
                         context.locale.filter_available_ship_country,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
-                      ),
-                      const SizedBox(
-                        height: 15.0,
                       ),
                       TextFormFieldWidget(
                         controller: countryController,
@@ -75,17 +69,12 @@ class HandmadeFilterScreen extends StatelessWidget {
                           RegExpValidator.beginWhitespace,
                         ],
                       ),
-                      const SizedBox(
-                        height: 33.0,
-                      ),
+                      const SizedBox(height: 14.0),
                       Text(
                         context.locale.filter_available_ship_city,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
-                      ),
-                      const SizedBox(
-                        height: 15.0,
                       ),
                       BlocBuilder<HandmadeBloc, HandmadeState>(
                           builder: (context, state) {
@@ -104,30 +93,21 @@ class HandmadeFilterScreen extends StatelessWidget {
                               .toList(),
                         );
                       }),
-                      const SizedBox(
-                        height: 40.0,
-                      ),
+                      const SizedBox(height: 14.0),
                       Text(
                         context.locale.filter_rate,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
                       ),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
+                      const SizedBox(height: 12.0),
                       const HandmadeSelectRate(),
-                      const SizedBox(
-                        height: 34.0,
-                      ),
+                      const SizedBox(height: 16.0),
                       Text(
                         context.locale.filter_price_slider,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0,
                             color: ColorName.black.withOpacity(0.5)),
-                      ),
-                      const SizedBox(
-                        height: 12.0,
                       ),
                       const HandmadePriceSlider(
                           minValue: 0.0, maxValue: 1000.0),
@@ -152,9 +132,7 @@ class HandmadeFilterScreen extends StatelessWidget {
                           );
                         },
                       ),
-                      const SizedBox(
-                        height: 34.0,
-                      ),
+                      const SizedBox(height: 10.0),
                       Text(
                         context.locale.filter_product_type,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
@@ -164,17 +142,13 @@ class HandmadeFilterScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 16.0,
-                ),
+                const SizedBox(height: 16.0),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 22.0),
                   child: SizedBox(
                       width: double.infinity, child: HandmadeProductType()),
                 ),
-                const SizedBox(
-                  height: 65.0,
-                ),
+                const SizedBox(height: 14.0),
                 Padding(
                   padding:
                       const EdgeInsetsDirectional.only(start: 23.0, end: 19.0),
@@ -197,9 +171,7 @@ class HandmadeFilterScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 65.0,
-                ),
+                const SizedBox(height: 65.0),
               ],
             ),
           ),

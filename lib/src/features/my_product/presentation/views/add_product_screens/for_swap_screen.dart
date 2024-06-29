@@ -35,14 +35,14 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 108.0.h,
+                      height: 70.0.h,
                     ),
                     InkWell(
                       focusColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
                       splashColor: ColorName.transparent,
                       onTap: () => Navigator.pop(context),
-                      child: Assets.svg.arrowBackIcon.svg(),
+                      child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                     ),
                     SizedBox(
                       height: 11.0.h,
@@ -80,8 +80,9 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(context.locale.display_type,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5))),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18,
+                            color: ColorName.black.withOpacity(0.5))),
                     DropDownButtonWidget<String>(
                       items: [
                         DropdownMenuItem(
@@ -102,8 +103,9 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       height: 22.0.h,
                     ),
                     Text(context.locale.country_swap,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5))),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18,
+                            color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(
                       controller: countryController,
                       isSuffixPrefixOn: true,
@@ -135,8 +137,9 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       height: 21.0.h,
                     ),
                     Text(context.locale.city_swap,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5))),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18,
+                            color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(controller: cityController),
                     SizedBox(
                       height: 21.0.h,

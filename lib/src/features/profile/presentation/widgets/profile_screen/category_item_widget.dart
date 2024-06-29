@@ -21,7 +21,8 @@ class CategoryItemWidget extends StatelessWidget {
       highlightColor: ColorName.transparent,
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(left: 40, right: 40.0, bottom: 30.0),
+        padding: const EdgeInsetsDirectional.only(
+            start: 23, end: 40.0, bottom: 20.0),
         child: Row(
           children: [
             SizedBox(
@@ -40,7 +41,8 @@ class CategoryItemWidget extends StatelessWidget {
             const Spacer(
               flex: 1,
             ),
-            Assets.svg.arrowRightIcon.svg(height: 16.0, width: 16.0),
+            Utils.flipWidget(
+                Assets.svg.arrowRightIcon.svg(height: 16.0, width: 16.0)),
           ],
         ),
       ),

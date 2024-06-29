@@ -46,7 +46,8 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               context.locale.swap_popular_swap_sections,
-              style: context.easyTheme.textTheme.headlineSmall,
+              style: context.easyTheme.textTheme.headlineSmall!
+                  .copyWith(fontSize: 18.0),
             ),
           ),
         ),
@@ -69,7 +70,8 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
                           widget.state,
                           swapSectionItemModel.id!,
                           index,
-                          swapSectionItemModel.name.toString()),
+                          swapSectionItemModel.name.toString(),
+                          swapSectionItemModel.arName.toString()),
                       child: SwapPopularCategoriesWidget(
                         data: widget.state.swapSectionListData[index],
                       ),
@@ -184,11 +186,13 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
     int secID,
     int sectionIndex,
     String categoryTitle,
+    String arCategoryTitle,
   ) {
     SwapSectionsBloc.get.add(SwapGetCategoryBySectionIDEvent(
       secID: secID,
       sectionIndex: sectionIndex,
       categoryTitle: categoryTitle,
+      arCategoryTitle: arCategoryTitle,
     ));
     openSectionScreen(context, state);
   }

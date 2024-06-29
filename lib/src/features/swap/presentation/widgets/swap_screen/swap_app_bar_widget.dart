@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
@@ -123,8 +122,9 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
 
   void clearText() {
     FocusScope.of(context).unfocus();
-    controller.clear();
     SwapSearchBloc.get.add(SwapEmptySearchEvent());
+    controller.clear();
+    Navigator.pop(context);
   }
 
   void openSearchScreen() {

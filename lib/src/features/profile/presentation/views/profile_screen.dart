@@ -73,9 +73,7 @@ class ProfileScreen extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(
-              height: 31.0,
-            ),
+            const SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text(
@@ -85,12 +83,12 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 31.0,
+              height: 20.0,
             ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(const PersonalInfoScreen()),
               title: context.locale.personal_info_title,
-              icon: Assets.svg.personIcon.svg(),
+              icon: Assets.svg.personIcon.svg(width: 24.0, height: 24.0),
             ),
             //CategoryItemWidget(
             //  onTap: () => Utils.openNewPage(ContactInfoScreen()),
@@ -105,7 +103,7 @@ class ProfileScreen extends StatelessWidget {
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(const LocationScreen()),
               title: context.locale.location_profile_title,
-              icon: Assets.svg.locationPinIcon.svg(),
+              icon: Assets.svg.locationPinIcon.svg(width: 24.0, height: 24.0),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
@@ -116,12 +114,12 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 29.0,
+              height: 20.0,
             ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(ComplaintScreen()),
               title: context.locale.complaint_title,
-              icon: Assets.svg.commentIcon.svg(),
+              icon: Assets.svg.commentIcon.svg(width: 24.0, height: 24.0),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
@@ -132,13 +130,13 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 29.0,
+              height: 20.0,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 43.0),
+              padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Row(
                 children: [
-                  Assets.png.langIcon.image(width: 30.0, height: 30.0),
+                  Assets.png.langIcon.image(width: 24.0, height: 24.0),
                   const SizedBox(
                     width: 12.0,
                   ),

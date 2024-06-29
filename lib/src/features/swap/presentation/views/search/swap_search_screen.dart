@@ -9,51 +9,62 @@ class SwapSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<SwapSearchBloc, SwapSearchState>(builder: (_, state) {
-        return CustomScrollView(
-          slivers: [
-            const SwapAppBarWidget(isActive: true),
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 21.0)),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding:
-                    const EdgeInsetsDirectional.only(start: 31.0, end: 23.0),
-                child: Align(
-                    alignment: AlignmentDirectional.bottomStart,
-                    child: Text(
-                      context.locale.swap_search_title,
-                      style: context.easyTheme.textTheme.headlineMedium!
-                          .copyWith(color: ColorName.black.withOpacity(0.57)),
-                    )),
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (value) {
+        FocusScope.of(context).unfocus();
+        SwapSearchBloc.get.add(SwapEmptySearchEvent());
+      },
+      child: Scaffold(
+        body: BlocBuilder<SwapSearchBloc, SwapSearchState>(builder: (_, state) {
+          return CustomScrollView(
+            slivers: [
+              const SwapAppBarWidget(isActive: true),
+              const SliverPadding(
+                  padding: EdgeInsetsDirectional.only(top: 21.0)),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding:
+                      const EdgeInsetsDirectional.only(start: 31.0, end: 23.0),
+                  child: Align(
+                      alignment: AlignmentDirectional.bottomStart,
+                      child: Text(
+                        context.locale.swap_search_title,
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(color: ColorName.black.withOpacity(0.57)),
+                      )),
+                ),
               ),
-            ),
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 21.0)),
-            _SearchResultHandler(state: state),
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 55.0)),
-            SliverToBoxAdapter(
-              child: !state.isMoreDataItems
-                  ? !state.swapSearchStateStatus.isLoadingMore
-                      ? Center(
-                          child: InkWell(
-                            onTap: () => seeMore(state.searchValue),
-                            child: Text(
-                              context.locale.see_more_search,
-                              style: context.easyTheme.textTheme.bodyLarge!
-                                  .copyWith(
-                                fontSize: 16.0,
-                                color: ColorName.skyBlue,
+              const SliverPadding(
+                  padding: EdgeInsetsDirectional.only(top: 21.0)),
+              _SearchResultHandler(state: state),
+              const SliverPadding(
+                  padding: EdgeInsetsDirectional.only(top: 55.0)),
+              SliverToBoxAdapter(
+                child: !state.isMoreData
+                    ? !state.swapSearchStateStatus.isLoadingMore
+                        ? Center(
+                            child: InkWell(
+                              onTap: () => seeMore(state.searchValue),
+                              child: Text(
+                                context.locale.see_more_search,
+                                style: context.easyTheme.textTheme.bodyLarge!
+                                    .copyWith(
+                                  fontSize: 16.0,
+                                  color: ColorName.skyBlue,
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      : const CircularProgressIndicatorWidget()
-                  : const SizedBox(),
-            ),
-            const SliverPadding(padding: EdgeInsetsDirectional.only(top: 55.0)),
-          ],
-        );
-      }),
+                          )
+                        : const CircularProgressIndicatorWidget()
+                    : const SizedBox(),
+              ),
+              const SliverPadding(
+                  padding: EdgeInsetsDirectional.only(top: 55.0)),
+            ],
+          );
+        }),
+      ),
     );
   }
 

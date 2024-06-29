@@ -19,32 +19,36 @@ class ViewAllDealsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 17.0),
                 child: Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: GestureDetector(
-                      onTap: () => openFilterScreen(context),
-                      child: Assets.png.filterIcon
-                          .image(width: 38.0, height: 38.0)),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(context.locale.results_title,
+                            style: context.easyTheme.textTheme.headlineMedium),
+                      ),
+                      GestureDetector(
+                          onTap: () => openFilterScreen(context),
+                          child: Assets.png.filterIcon
+                              .image(width: 40.w, height: 40.h)),
+                      const SizedBox(width: 11),
+                      GestureDetector(
+                        onTap: () => state.sortingType == SortingType.desc
+                            ? TrendDealsBloc.get.add(GetItemsViewAllsEvent(
+                                sortingType: SortingType.asc))
+                            : TrendDealsBloc.get.add(GetItemsViewAllsEvent(
+                                sortingType: SortingType.desc)),
+                        child:
+                            Assets.svg.sortIcon.svg(width: 30.w, height: 30.h),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            const SliverPadding(padding: EdgeInsets.only(top: 7.0)),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                padding: EdgeInsets.symmetric(horizontal: 17.0),
                 child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(context.locale.results_title,
-                          style: context.easyTheme.textTheme.headlineMedium),
-                    ),
-                    GestureDetector(
-                      onTap: () => state.sortingType == SortingType.desc
-                          ? TrendDealsBloc.get.add(GetItemsViewAllsEvent(
-                              sortingType: SortingType.asc))
-                          : TrendDealsBloc.get.add(GetItemsViewAllsEvent(
-                              sortingType: SortingType.desc)),
-                      child: Assets.svg.sortIcon.svg(),
-                    ),
-                  ],
+                  children: [],
                 ),
               ),
             ),
@@ -55,7 +59,7 @@ class ViewAllDealsScreen extends StatelessWidget {
                       context, state.trendDealListData[index]),
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(left: 17.0, right: 17.0, top: 17),
+                        const EdgeInsets.only(left: 17.0, right: 17.0, top: 10),
                     child: SwapResultItemWidget(
                       trendDealsItem: state.trendDealListData[index],
                     ),

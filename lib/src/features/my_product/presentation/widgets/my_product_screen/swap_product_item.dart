@@ -29,19 +29,40 @@ class SwapProductItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              onTap: () => onEdit(myProductItem),
-              child: Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Padding(
-                  padding: EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
-                  child: Text(
-                    context.locale.edit,
-                    style: context.easyTheme.textTheme.bodyLarge!
-                        .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
+            Row(
+              children: [
+                const Expanded(child: SizedBox()),
+                GestureDetector(
+                  onTap: () => onEdit(myProductItem),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
+                      child: Text(
+                        context.locale.edit,
+                        style: context.easyTheme.textTheme.bodyLarge!
+                            .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                GestureDetector(
+                  onTap: () => deleteItem(context, myProductItem.id!),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.only(end: 20.0, top: 10),
+                      child: Text(
+                        context.locale.delete_item,
+                        style: context.easyTheme.textTheme.bodyLarge!
+                            .copyWith(fontSize: 10.0, color: ColorName.red),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +73,7 @@ class SwapProductItem extends StatelessWidget {
                   imageUrl: myProductItem.itemImg != null
                       ? myProductItem.itemImg!.first
                       : '',
+                  fit: BoxFit.contain,
                   height: 80.0,
                 )),
                 SizedBox(width: 18.0.w),
@@ -80,19 +102,19 @@ class SwapProductItem extends StatelessWidget {
                                 text: context.locale.ship,
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 15.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.gray)),
                             TextSpan(
                                 text: ' ${myProductItem.countrySwap}',
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 13.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.black)),
                           ],
                         ),
                       ),
                       const SizedBox(
-                        height: 6.0,
+                        height: 4.0,
                       ),
                       Text.rich(
                         TextSpan(
@@ -101,14 +123,14 @@ class SwapProductItem extends StatelessWidget {
                                 text: context.locale.display,
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 15.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.gray)),
                             TextSpan(
                                 text:
                                     ' : ${Utils.displayHandler(context, myProductItem.display.toString())}',
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 13.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.black)),
                           ],
                         ),
@@ -117,13 +139,6 @@ class SwapProductItem extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            SizedBox(height: 18.0.h),
-            Center(
-              child: DefaultButtonWidget(
-                text: context.locale.delete_item,
-                onPressed: () => deleteItem(context, myProductItem.id!),
-              ),
             ),
             SizedBox(height: 20.0.h),
           ],
@@ -140,9 +155,9 @@ class SwapProductItem extends StatelessWidget {
         productDisplayMethod: ProductDisplayMethod.Swap));
   }
 
-  void deleteItem(BuildContext context, int id) async {
+  void deleteItem(BuildContext context, int id) {
     context.showRemoveDialog().then((value) {
-      if (value) {
+      if (value != null && value == true) {
         MySwapProBloc.get.add(RemoveSwapItemEvent(id: id));
       }
     });

@@ -38,13 +38,26 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 108.0,
+                  SizedBox(
+                    height: 70.0.h,
+                  ),
+                  InkWell(
+                    focusColor: ColorName.transparent,
+                    highlightColor: ColorName.transparent,
+                    splashColor: ColorName.transparent,
+                    onTap: () {
+                      getIt.get<EditProduct>().clearData();
+                      Navigator.pop(context);
+                    },
+                    child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
+                  ),
+                  SizedBox(
+                    height: 11.0.h,
                   ),
                   Text(
                     context.locale.add_product,
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 36.0),
+                        .copyWith(fontSize: 36.0.sp),
                   ),
                   const SizedBox(
                     height: 14.0,

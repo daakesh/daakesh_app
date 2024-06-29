@@ -56,6 +56,9 @@ class $AssetsPngGen {
   /// File path: assets/png/lang_icon.png
   AssetGenImage get langIcon => const AssetGenImage('assets/png/lang_icon.png');
 
+  /// File path: assets/png/line.png
+  AssetGenImage get line => const AssetGenImage('assets/png/line.png');
+
   /// File path: assets/png/mastercard_icon.png
   AssetGenImage get mastercardIcon =>
       const AssetGenImage('assets/png/mastercard_icon.png');
@@ -103,6 +106,7 @@ class $AssetsPngGen {
         googleIcon,
         handmadeIcon,
         langIcon,
+        line,
         mastercardIcon,
         productIcon,
         shopModeAr,
@@ -216,6 +220,9 @@ class $AssetsSvgGen {
   SvgGenImage get lightDaakeshLogo =>
       const SvgGenImage('assets/svg/light_daakesh_logo.svg');
 
+  /// File path: assets/svg/line.svg
+  SvgGenImage get line => const SvgGenImage('assets/svg/line.svg');
+
   /// File path: assets/svg/location_pin_icon.svg
   SvgGenImage get locationPinIcon =>
       const SvgGenImage('assets/svg/location_pin_icon.svg');
@@ -274,6 +281,7 @@ class $AssetsSvgGen {
         iosArrowBack,
         iosArrowForward,
         lightDaakeshLogo,
+        line,
         locationPinIcon,
         personIcon,
         plusIcon,

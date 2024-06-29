@@ -50,10 +50,8 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
 
         ///Carousel slider.
-        const SliverToBoxAdapter(
-          child: HomeCarouselSliderWidget(),
-        ),
-        const SliverPadding(padding: EdgeInsets.only(top: 24.0)),
+        const SliverToBoxAdapter(child: HomeCarouselSliderWidget()),
+        const SliverPadding(padding: EdgeInsets.only(top: 10.0)),
 
         ///Popular-section.
         SliverToBoxAdapter(
@@ -61,7 +59,8 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               context.locale.home_popular_sections_title,
-              style: context.easyTheme.textTheme.headlineSmall,
+              style: context.easyTheme.textTheme.headlineMedium!
+                  .copyWith(fontSize: 18.0),
             ),
           ),
         ),
@@ -79,8 +78,12 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                     SectionItemModel sectionItem =
                         widget.state.sectionListData[index];
                     return GestureDetector(
-                      onTap: () => exploreSection(context, sectionItem.id!,
-                          index, sectionItem.name.toString()),
+                      onTap: () => exploreSection(
+                          context,
+                          sectionItem.id!,
+                          index,
+                          sectionItem.name.toString(),
+                          sectionItem.arName.toString()),
                       child: PopularCategoriesWidget(
                         data: widget.state.sectionListData[index],
                       ),
@@ -312,12 +315,14 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
     );
   }
 
-  void exploreSection(
-      context, int secID, int sectionIndex, String categoryTitle) {
+  void exploreSection(context, int secID, int sectionIndex,
+      String categoryTitle, String arCategoryTitle) {
     SectionsBloc.get.add(GetCategoryBySectionIDEvent(
-        secID: secID,
-        sectionIndex: sectionIndex,
-        categoryTitle: categoryTitle));
+      secID: secID,
+      sectionIndex: sectionIndex,
+      categoryTitle: categoryTitle,
+      arCategoryTitle: arCategoryTitle,
+    ));
     Utils.openNavNewPage(context, SectionScreen(homeState: widget.state));
   }
 

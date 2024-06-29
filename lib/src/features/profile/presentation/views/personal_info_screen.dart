@@ -52,19 +52,14 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Spacer(
-                        flex: 1,
-                      ),
-                      const SizedBox(
-                        height: 70.0,
-                      ),
+                      SizedBox(height: 60.0.sp),
                       Text(
                         context.locale.personal_info,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(fontSize: 36.0),
                       ),
                       const SizedBox(
-                        height: 39.0,
+                        height: 20.0,
                       ),
                       state.image.isEmpty
                           ? GestureDetector(
@@ -129,32 +124,35 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       ),
                       Text(
                         context.locale.name,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       TextFormFieldWidget(
                         controller: nameController,
                         enabled: state.isUpdateActive,
                       ),
                       const SizedBox(
-                        height: 40.0,
+                        height: 10.0,
                       ),
                       Text(
                         context.locale.email,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       TextFormFieldWidget(
                         controller: emailController,
                         enabled: state.isUpdateActive,
                       ),
                       const SizedBox(
-                        height: 40.0,
+                        height: 10.0,
                       ),
                       Text(
                         context.locale.password,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       TextFormFieldWidget(
                         controller: passwordController,
@@ -163,12 +161,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         maxLines: 1,
                       ),
                       const SizedBox(
-                        height: 40.0,
+                        height: 10.0,
                       ),
                       Text(
                         context.locale.phone_number,
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       TextFormFieldWidget(
                         controller: personPhoneController,
@@ -208,7 +207,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         ],
                       ),
                       const SizedBox(
-                        height: 40.0,
+                        height: 20.0,
                       ),
                       const Spacer(
                         flex: 1,

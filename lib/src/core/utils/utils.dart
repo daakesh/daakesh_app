@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -88,6 +88,17 @@ class Utils {
 
   static GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'Key to navigate without context');
+
+  static Widget flipWidget(Widget icon) {
+    if (isEnglish) {
+      return icon;
+    }
+    return Transform(
+      alignment: Alignment.center,
+      transform: Matrix4.rotationY(math.pi),
+      child: icon,
+    );
+  }
 
   static BuildContext currentContext = navigatorKey.currentState!.context;
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../features.export.dart';
+
 abstract class SwapEvent {}
 
 class SwapGetToTopScreenEvent extends SwapEvent {}
@@ -44,6 +46,7 @@ class SwapGetTodayItemsDataEvent extends SwapEvent {}
 
 class SendOfferEvent extends SwapEvent {
   final BuildContext context;
+  final TrendDealsItem trendDealsItem;
   final String sourceItem;
   final String offerItem;
   final String comment;
@@ -52,6 +55,7 @@ class SendOfferEvent extends SwapEvent {
 
   SendOfferEvent({
     required this.context,
+    required this.trendDealsItem,
     required this.sourceItem,
     required this.offerItem,
     required this.comment,

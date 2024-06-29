@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
-import 'package:collection/collection.dart';
 
 // ignore: must_be_immutable
 class SendOfferScreen extends StatefulWidget {
@@ -45,6 +44,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
       canPop: true,
       onPopInvoked: (value) {
         SwapProBloc.get.add(ResetMySwapItemDataEvent());
+        SwapPassDataBloc.get.add(ResetSwapPassValuesEvent());
       },
       child: Scaffold(
         backgroundColor: ColorName.whiteSmoke,
