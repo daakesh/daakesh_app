@@ -186,11 +186,7 @@ class HandmadeFilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      HandmadeBloc.get.add(ClearHandmadeFilterDataEvent());
-      return;
-    }
-    HandmadeBloc.get.add(GetHandmadeDataEvent(isFilterActive: false));
     HandmadeBloc.get.add(ClearHandmadeFilterDataEvent());
+    HandmadeBloc.get.add(GetHandmadeDataEvent(isFilterActive: false));
   }
 }

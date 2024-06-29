@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-
 import '../src.export.dart';
 
 class HeaderWidget extends StatelessWidget {
   final bool withArrowBack;
   final bool isLight;
   final double? height;
+  final bool isSend;
+  final int? requestID;
 
   const HeaderWidget({
     super.key,
     this.withArrowBack = true,
     this.isLight = false,
     this.height,
+    this.isSend = false,
+    this.requestID,
   });
 
   @override
@@ -76,9 +79,32 @@ class HeaderWidget extends StatelessWidget {
                       ),
                     ],
                   ),
+            isSend
+                ? InkWell(
+                    onTap: () => deleteItem(context, requestID ?? 0),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 18.0.w, vertical: 16.0.h),
+                      child: const Icon(
+                        Icons.delete_forever,
+                        size: 30,
+                        color: ColorName.red,
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),
     );
+  }
+
+  void deleteItem(BuildContext context, int id) {
+    context.showRemoveDialog().then((value) {
+      if (value != null && value == true) {
+        MySwapOrderBloc.get.add(RemoveSendOfferItemEvent(id: id));
+        Navigator.pop(context);
+      }
+    });
   }
 }

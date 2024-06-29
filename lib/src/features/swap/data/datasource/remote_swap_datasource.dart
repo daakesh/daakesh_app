@@ -314,4 +314,17 @@ class RemoteSwapDatasource implements SwapDatasource {
         );
     return result;
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    final result = await getIt.get<NetworkService>().post(
+      path: 'DaakeshServices/api/advertisement/clickAdv',
+      body: {
+        "user_id": userID,
+        "adv_id": advID,
+      },
+    );
+    return result;
+  }
 }

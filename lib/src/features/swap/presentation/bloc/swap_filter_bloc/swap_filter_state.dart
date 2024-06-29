@@ -50,7 +50,7 @@ class SwapFilterState extends Equatable {
     this.city = 'Amman',
     this.rate = 0,
     this.fromPrice = 0.0,
-    this.toPrice = 500.0,
+    this.toPrice = 1000.0,
     this.type = FilterProductType.All,
     this.isFilterActive = false,
     this.currentPage = 1,

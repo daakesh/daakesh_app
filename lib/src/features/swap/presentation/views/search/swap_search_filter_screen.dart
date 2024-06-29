@@ -188,12 +188,7 @@ class SwapSearchFilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      SwapSearchBloc.get.add(SwapSearchFilterEvent(isFilterActive: false));
-      SwapSearchBloc.get.add(SwapClearSearchFilterDataEvent());
-      return;
-    }
-    SwapSearchBloc.get.add(SwapSearchFilterEvent(isFilterActive: false));
     SwapSearchBloc.get.add(SwapClearSearchFilterDataEvent());
+    SwapSearchBloc.get.add(SwapSearchFilterEvent(isFilterActive: false));
   }
 }

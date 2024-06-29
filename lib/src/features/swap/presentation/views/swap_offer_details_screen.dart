@@ -73,8 +73,8 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                               children: [
                                 Assets.svg.locationPinIcon.svg(
                                     color: ColorName.amber,
-                                    height: 22.0,
-                                    width: 15.0),
+                                    height: 20.sp,
+                                    width: 20.sp),
                                 const SizedBox(
                                   width: 6.0,
                                 ),
@@ -82,7 +82,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                     child: Text(
                                   '${context.locale.swap_offer_swap_in_title} ${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
-                                      .copyWith(fontSize: 16.0),
+                                      .copyWith(fontSize: 16.0.sp),
                                   overflow: TextOverflow.fade,
                                 )),
                               ],
@@ -121,6 +121,10 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                 child: TextButtonWidget(
                                   text: context
                                       .locale.swap_see_details_text_button,
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                          color: ColorName.skyBlue,
+                                          fontSize: 13.0.sp),
                                   onPressed: () =>
                                       seeDetails(context, trendDealsItem),
                                 ),
@@ -258,7 +262,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                   context.locale.swap_offer_your_comment_title,
                                   style: context.easyTheme.textTheme.bodyLarge!
                                       .copyWith(
-                                          fontSize: 20.0,
+                                          fontSize: 20.0.sp,
                                           color:
                                               ColorName.black.withOpacity(0.5)),
                                 ),
@@ -273,7 +277,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontSize: 14.0,
+                                            fontSize: 14.0.sp,
                                             fontWeight: FontWeight.normal,
                                             color: ColorName.blueGray),
                                   ),

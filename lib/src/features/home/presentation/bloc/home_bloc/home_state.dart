@@ -37,7 +37,7 @@ class HomeState extends Equatable {
     this.isMoreData = true,
     this.tabIndex = 0,
     this.isSwapActive = true,
-    this.storeType = StoreType.SHOP,
+    this.storeType = StoreType.SWAP,
   });
 
   HomeState copyWith({

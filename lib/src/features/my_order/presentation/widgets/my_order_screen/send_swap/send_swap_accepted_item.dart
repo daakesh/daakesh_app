@@ -52,21 +52,10 @@ class SendSwapAcceptedItem extends StatelessWidget {
               Text(
                 context.locale.send_accept_title,
                 style: context.easyTheme.textTheme.headlineMedium!
-                    .copyWith(fontSize: 12.0.sp, color: ColorName.springGreen),
+                    .copyWith(fontSize: 14.0.sp, color: ColorName.springGreen),
               ),
               SizedBox(
                 width: 15.0.w,
-              ),
-              GestureDetector(
-                onTap: () => deleteItem(context, sendSwapReqItem.id!),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 20.0, top: 3),
-                  child: Text(
-                    context.locale.delete_item,
-                    style: context.easyTheme.textTheme.bodyLarge!
-                        .copyWith(fontSize: 10.0, color: ColorName.red),
-                  ),
-                ),
               ),
             ],
           ),
@@ -83,7 +72,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
           SizedBox(height: 8.0.h),
           Container(
             width: double.infinity,
-            height: 42.0.h,
+            height: 50.0.h,
             color: ColorName.lightGrayishBlue,
             child: Row(
               children: [
@@ -118,7 +107,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
           SizedBox(height: 4.0.h),
           Container(
             width: double.infinity,
-            height: 42.0.h,
+            height: 50.0.h,
             color: ColorName.white,
             child: Row(
               children: [
@@ -150,11 +139,10 @@ class SendSwapAcceptedItem extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(start: 60.0.w),
+            padding: EdgeInsetsDirectional.only(start: 78.0.w),
             child: TextButtonWidget(
               text: context.locale.see_all_details,
               onPressed: () => seeAllDetails(context, sendSwapReqItem),
-              isBold: true,
             ),
           ),
           Divider(
@@ -170,7 +158,9 @@ class SendSwapAcceptedItem extends StatelessWidget {
                   text: context.locale.call_button,
                   onPressed: () => Utils.lunchCall(
                       sendSwapReqItem.sourceUser!.phoneNumber.toString()),
-                  style: context.easyTheme.elevatedButtonTheme.style,
+                  style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
+                    minimumSize: MaterialStateProperty.all(const Size(387, 40)),
+                  ),
                 ),
               ),
               SizedBox(
@@ -183,6 +173,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
                       sendSwapReqItem.sourceUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
                     backgroundColor: MaterialStateProperty.all(ColorName.amber),
+                    minimumSize: MaterialStateProperty.all(const Size(387, 40)),
                   ),
                 ),
               ),
@@ -198,7 +189,10 @@ class SendSwapAcceptedItem extends StatelessWidget {
   void seeAllDetails(context, sendSwapReqItem) {
     PersistentNavBarNavigator.pushNewScreen(
       context,
-      screen: SwapRequestDetailsScreen(sendSwapReqItem: sendSwapReqItem),
+      screen: SwapRequestDetailsScreen(
+        sendSwapReqItem: sendSwapReqItem,
+        isSend: true,
+      ),
       withNavBar: true,
     );
   }

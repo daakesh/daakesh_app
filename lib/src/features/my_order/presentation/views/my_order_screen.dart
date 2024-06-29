@@ -85,13 +85,26 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                           child: Switch(
                               value: state.sendReceiveFlag,
                               activeColor: ColorName.amber,
-                              hoverColor: ColorName.amber,
-                              activeTrackColor: ColorName.amber,
-                              focusColor: ColorName.amber,
                               inactiveThumbColor: ColorName.amber,
                               inactiveTrackColor: ColorName.amber,
+                              focusColor: ColorName.amber,
+                              hoverColor: ColorName.amber,
+                              activeTrackColor: ColorName.amber,
+                              trackOutlineColor:
+                                  MaterialStateProperty.resolveWith(
+                                (final Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.selected)) {
+                                    return null;
+                                  }
+                                  return ColorName.transparent;
+                                },
+                              ),
                               thumbColor:
                                   MaterialStateProperty.all(ColorName.white),
+                              thumbIcon: MaterialStateProperty.all(const Icon(
+                                Icons.abc,
+                                color: ColorName.white,
+                              )),
                               onChanged: (value) {
                                 MyOrderBloc.get.add(SendReceiveSwitchEvent(
                                     sendReceiveFlag: value));

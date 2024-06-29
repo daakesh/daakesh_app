@@ -34,5 +34,6 @@
     <color name="spring_green">#55AE7B</color>
     <color name="forest_green">#276B0A</color>
     <color name="orange_yellow">#FFA31D</color>
+    <color name="gainsboro">#DBDBDB</color>
 
 </manifest>

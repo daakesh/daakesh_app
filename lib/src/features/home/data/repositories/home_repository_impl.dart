@@ -213,4 +213,10 @@ class HomeRepositoryImpl implements HomeRepository {
         .get<HomeDatasource>()
         .getAllTodayItems(filterDataModel, page, sortingType);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    return await getIt.get<HomeDatasource>().clickAdv(userID, advID);
+  }
 }

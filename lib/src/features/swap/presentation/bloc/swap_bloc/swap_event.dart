@@ -63,3 +63,8 @@ class SendOfferEvent extends SwapEvent {
     required this.offerUser,
   });
 }
+
+class ClickSwapAdvEvent extends SwapEvent {
+  final String advID;
+  ClickSwapAdvEvent({required this.advID});
+}

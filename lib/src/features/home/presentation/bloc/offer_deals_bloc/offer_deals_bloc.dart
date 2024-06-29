@@ -96,7 +96,6 @@ class OfferDealsBloc extends Bloc<OfferDealsEvent, OfferDealsState> {
       ResetViewAllOfferDealsEvent event, Emitter<OfferDealsState> emit) {
     emit(state.copyWith(
       allTodayDealsListData: [],
-      homeTodayDealsListData: [],
       isMoreDataItems: true,
       country: "Jordan",
       city: "Amman",

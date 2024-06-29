@@ -86,7 +86,8 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                             Padding(
                               padding: EdgeInsetsDirectional.only(end: 45.0.w),
                               child: Text(
-                                '${widget.sendReceiveSwapReqItem.offerItems!.title}\n',
+                                '${widget.sendReceiveSwapReqItem.offerItems!.title}',
+                                maxLines: 3,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 20.0.sp,
@@ -101,9 +102,10 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Assets.svg.locationPinIcon.svg(
-                                    color: ColorName.amber,
-                                    height: 22.0,
-                                    width: 15.0.w),
+                                  color: ColorName.amber,
+                                  height: 20.0.h,
+                                  width: 20.0.w,
+                                ),
                                 SizedBox(
                                   width: 6.0.w,
                                 ),
@@ -132,9 +134,12 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
                                   text: context.locale.see_details,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: ColorName.skyBlue,
+                                  ),
                                   onPressed: () => seeOfferDetails(
                                       context, widget.sendReceiveSwapReqItem),
-                                  isBold: true,
                                 ),
                               ),
                             ),
@@ -194,20 +199,6 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
               MySwapProductCardWidget(
                   sendReceiveSwapReqItem: widget.sendReceiveSwapReqItem,
                   isPreviewer: widget.isPreviewer),
-              SliverToBoxAdapter(
-                child: !widget.isPreviewer
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Assets.svg.iosArrowBack.svg(),
-                          const SizedBox(
-                            width: 6.0,
-                          ),
-                          Assets.svg.iosArrowForward.svg(),
-                        ],
-                      )
-                    : const SizedBox(),
-              ),
               const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 50.0,

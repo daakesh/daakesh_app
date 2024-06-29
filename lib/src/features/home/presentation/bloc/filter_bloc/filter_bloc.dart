@@ -19,7 +19,6 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
       city: "Amman",
       rate: 0,
       isAllItems: true,
-      subCategoryList: [],
       fromPrice: 0.0,
       toPrice: 500.0,
       isFilterActive: false,

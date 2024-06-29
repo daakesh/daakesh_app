@@ -183,10 +183,6 @@ class FilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      FilterBloc.get.add(ClearFilterDataEvent());
-      return;
-    }
     FilterBloc.get.add(PreviewSectionSubCategoriesEvent(isFilterActive: false));
     FilterBloc.get.add(ClearFilterDataEvent());
   }

@@ -187,12 +187,7 @@ class SearchFilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      SearchBloc.get.add(SearchFilterEvent(isFilterActive: false));
-      SearchBloc.get.add(ClearSearchFilterDataEvent());
-      return;
-    }
-    SearchBloc.get.add(SearchFilterEvent(isFilterActive: false));
     SearchBloc.get.add(ClearSearchFilterDataEvent());
+    SearchBloc.get.add(SearchFilterEvent(isFilterActive: false));
   }
 }

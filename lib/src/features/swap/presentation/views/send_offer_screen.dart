@@ -103,13 +103,13 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                 padding:
                                     const EdgeInsetsDirectional.only(end: 20.0),
                                 child: Text(
-                                  '${widget.trendDealsItem.title}\n\n',
+                                  '${widget.trendDealsItem.title}',
                                   maxLines: 3,
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
                                           fontSize: 20.0,
                                           color: ColorName.gray,
-                                          overflow: TextOverflow.ellipsis),
+                                          overflow: TextOverflow.fade),
                                 ),
                               ),
                               const SizedBox(
@@ -120,8 +120,8 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                 children: [
                                   Assets.svg.locationPinIcon.svg(
                                       color: ColorName.amber,
-                                      height: 22.0,
-                                      width: 15.0),
+                                      height: 22.h,
+                                      width: 22.w),
                                   const SizedBox(
                                     width: 6.0,
                                   ),
@@ -172,7 +172,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontSize: 14.0,
+                                            fontSize: 13.0.sp,
                                             color: ColorName.skyBlue),
                                     onPressed: () => seeSourceDetails(
                                         context, widget.trendDealsItem),
@@ -203,7 +203,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                   context.locale.swap_offer_instruction,
                   textAlign: TextAlign.center,
                   style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                    fontSize: 22.0,
+                    fontSize: 20.0.sp,
                   ),
                 ),
               ),
@@ -356,7 +356,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
               child: BlocBuilder<SwapProBloc, SwapProState>(
                 builder: (context, state) {
                   return SizedBox(
-                    height: 220,
+                    height: 200.h,
                     child: PageView.builder(
                         controller: controller,
                         itemCount: !state.isMoreData
@@ -427,15 +427,15 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                                   const EdgeInsetsDirectional
                                                       .only(end: 8.0),
                                               child: Text(
-                                                '${model.title}\n\n\n',
+                                                '${model.title}',
                                                 maxLines: 3,
                                                 style: context.easyTheme
                                                     .textTheme.bodyMedium!
                                                     .copyWith(
                                                         fontSize: 20.0,
                                                         color: ColorName.gray,
-                                                        overflow: TextOverflow
-                                                            .ellipsis),
+                                                        overflow:
+                                                            TextOverflow.fade),
                                               ),
                                             ),
                                           ),
@@ -473,7 +473,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                             style: context
                                                 .easyTheme.textTheme.bodyMedium!
                                                 .copyWith(
-                                                    fontSize: 14.0,
+                                                    fontSize: 13.sp,
                                                     color: ColorName.skyBlue),
                                           ),
                                           const SizedBox(

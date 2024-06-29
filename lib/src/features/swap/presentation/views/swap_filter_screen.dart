@@ -107,7 +107,7 @@ class SwapFilterScreen extends StatelessWidget {
                             color: ColorName.black.withOpacity(0.5)),
                       ),
                       const SwapPriceSliderWidget(
-                          minValue: 0.0, maxValue: 500.0),
+                          minValue: 0.0, maxValue: 1000.0),
                       BlocBuilder<SwapFilterBloc, SwapFilterState>(
                         builder: (context, state) {
                           return Row(
@@ -184,12 +184,8 @@ class SwapFilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      SwapFilterBloc.get.add(SwapClearFilterDataEvent());
-      return;
-    }
+    SwapFilterBloc.get.add(SwapClearFilterDataEvent());
     SwapFilterBloc.get
         .add(SwapPreviewSectionSubCategoriesEvent(isFilterActive: false));
-    SwapFilterBloc.get.add(SwapClearFilterDataEvent());
   }
 }

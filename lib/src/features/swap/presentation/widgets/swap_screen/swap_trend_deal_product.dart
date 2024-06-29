@@ -109,13 +109,11 @@ class SwapTrendDealProduct extends StatelessWidget {
                 Text(
                   '${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap} ',
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                      fontSize: 14.0,
+                      fontSize: 13.0.sp,
                       color: ColorName.mediumSilver,
                       overflow: TextOverflow.ellipsis),
                 ),
-                const SizedBox(
-                  height: 4.0,
-                ),
+                const SizedBox(height: 1.0),
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Padding(

@@ -164,4 +164,10 @@ class SwapRepositoryImpl implements SwapRepository {
         .get<SwapDatasource>()
         .getOfferedItems(filterDataModel, page, sortingType);
   }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    return await getIt.get<SwapDatasource>().clickAdv(userID, advID);
+  }
 }

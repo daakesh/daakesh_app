@@ -16,7 +16,7 @@ class SwapDetailsSection extends StatelessWidget {
               .copyWith(fontSize: 22.0),
         ),
         const SizedBox(
-          height: 21.0,
+          height: 10.0,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,19 +24,19 @@ class SwapDetailsSection extends StatelessWidget {
             Text(
               context.locale.swap_offer_brand_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+                  .copyWith(color: ColorName.gray, fontSize: 18.sp),
             ),
             Text(
               Utils.isEnglish
                   ? '${trendDealsItem.brand!.brandName}'
                   : '${trendDealsItem.brand!.arName}',
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0),
+                  .copyWith(fontSize: 18.sp),
             ),
           ],
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,19 +44,19 @@ class SwapDetailsSection extends StatelessWidget {
             Text(
               context.locale.swap_offer_model_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+                  .copyWith(color: ColorName.gray, fontSize: 18.sp),
             ),
             Text(
               Utils.isEnglish
                   ? trendDealsItem.section!.name.toString()
                   : trendDealsItem.section!.arName.toString(),
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0),
+                  .copyWith(fontSize: 18.sp),
             ),
           ],
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,19 +64,19 @@ class SwapDetailsSection extends StatelessWidget {
             Text(
               context.locale.swap_offer_category_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+                  .copyWith(color: ColorName.gray, fontSize: 18.sp),
             ),
             Text(
               Utils.isEnglish
                   ? '${trendDealsItem.category!.name}'
                   : '${trendDealsItem.category!.arName}',
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0),
+                  .copyWith(fontSize: 18.sp),
             ),
           ],
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,30 +84,30 @@ class SwapDetailsSection extends StatelessWidget {
             Text(
               context.locale.swap_offer_year_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+                  .copyWith(color: ColorName.gray, fontSize: 18.sp),
             ),
             Text(
               '${trendDealsItem.year}',
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0),
+                  .copyWith(fontSize: 18.sp),
             ),
           ],
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Text(
           context.locale.swap_offer_description_title,
           style: context.easyTheme.textTheme.bodyLarge!
-              .copyWith(color: ColorName.gray, fontSize: 18.0),
+              .copyWith(color: ColorName.gray, fontSize: 18.sp),
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Text(
           '${trendDealsItem.description}',
           style:
-              context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),
+              context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.sp),
         ),
         const SizedBox(
           height: 29.0,

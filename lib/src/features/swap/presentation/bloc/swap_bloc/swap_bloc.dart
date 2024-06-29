@@ -7,6 +7,7 @@ class SwapBloc extends Bloc<SwapEvent, SwapState> {
     //on<SwapSetFilterDataEvent>(_setFilterDataEvent);
     on<SwapGetSectionDataEvent>(_getSectionData);
     on<SendOfferEvent>(_sendOffer);
+    on<ClickSwapAdvEvent>(_clickSwapAdv);
   }
 
   static SwapBloc get get => BlocProvider.of(Utils.currentContext);
@@ -93,6 +94,27 @@ class SwapBloc extends Bloc<SwapEvent, SwapState> {
           ),
           withNavBar: false);
       emit(state.copyWith(swapStateStatus: SwapStateStatus.SUCCESS));
+    });
+  }
+
+  FutureOr<void> _clickSwapAdv(
+      ClickSwapAdvEvent event, Emitter<SwapState> emit) async {
+    emit(state.copyWith(swapStateStatus: SwapStateStatus.LOADING));
+    final result = await getIt
+        .get<SwapUseCases>()
+        .clickAdv(ValueConstants.userId, event.advID);
+    result.fold((l) {
+      emit(state.copyWith(swapStateStatus: SwapStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+
+      emit(state.copyWith(
+        swapStateStatus: SwapStateStatus.SUCCESS,
+      ));
     });
   }
 }

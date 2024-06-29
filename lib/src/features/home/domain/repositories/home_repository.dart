@@ -60,4 +60,5 @@ abstract class HomeRepository {
       SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getAllTodayItems(
       FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> clickAdv(String userID, String advID);
 }

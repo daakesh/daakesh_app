@@ -1,3 +1,4 @@
+import 'package:daakesh/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
@@ -157,8 +158,28 @@ class ProfileScreen extends StatelessWidget {
                     width: 8.0,
                   ),
                   BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
-                    return Switch.adaptive(
+                    return Switch(
                         value: state.switchLangValue,
+                        activeColor: ColorName.blueGray,
+                        inactiveThumbColor: ColorName.blueGray,
+                        inactiveTrackColor: ColorName.gainsboro,
+                        focusColor: ColorName.gainsboro,
+                        hoverColor: ColorName.gainsboro,
+                        activeTrackColor: ColorName.gainsboro,
+                        trackOutlineColor: MaterialStateProperty.resolveWith(
+                          (final Set<MaterialState> states) {
+                            if (states.contains(MaterialState.selected)) {
+                              return null;
+                            }
+                            return ColorName.transparent;
+                          },
+                        ),
+                        thumbColor:
+                            MaterialStateProperty.all(ColorName.blueGray),
+                        thumbIcon: MaterialStateProperty.all(const Icon(
+                          Icons.abc,
+                          color: ColorName.blueGray,
+                        )),
                         onChanged: (value) {
                           ProfileBloc.get
                               .add(ChangeLangEvent(switchLangValue: value));

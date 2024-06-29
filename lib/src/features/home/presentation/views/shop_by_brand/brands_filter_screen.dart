@@ -188,11 +188,7 @@ class BrandFilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      BrandsBloc.get.add(ResetValueEvent());
-      return;
-    }
-    BrandsBloc.get.add(GetItemsByBrandsEvent(isFilterActive: false));
     BrandsBloc.get.add(ResetValueEvent());
+    BrandsBloc.get.add(GetItemsByBrandsEvent(isFilterActive: false));
   }
 }

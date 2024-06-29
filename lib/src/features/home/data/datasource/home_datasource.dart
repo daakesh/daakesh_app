@@ -62,4 +62,5 @@ abstract class HomeDatasource {
   Future<Either<Failure, ValidResponse>> getAllTodayItems(
       FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getSubCategories(int catID);
+  Future<Either<Failure, ValidResponse>> clickAdv(String userID, String advID);
 }

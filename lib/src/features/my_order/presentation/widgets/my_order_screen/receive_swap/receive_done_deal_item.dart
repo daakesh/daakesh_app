@@ -84,13 +84,13 @@ class ReceiveDoneDealItem extends StatelessWidget {
                                       color: approved == 1
                                           ? ColorName.springGreen
                                           : ColorName.red,
-                                      fontSize: 16.0.sp)),
+                                      fontSize: 12.0.sp)),
                           TextSpan(
                               text: '${receiveSwapReqItem.offerUser!.name}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.black,
-                                      fontSize: 15.0.sp)),
+                                      fontSize: 12.0.sp)),
                         ],
                       ),
                     ),
@@ -116,9 +116,8 @@ class ReceiveDoneDealItem extends StatelessWidget {
                 child: TextButtonWidget(
                   text: context.locale.see_offer_details,
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                    fontSize: 14.0.sp,
+                    fontSize: 12.0.sp,
                     color: ColorName.skyBlue,
-                    fontFamily: FontFamily.apercuBold,
                   ),
                   onPressed: () {
                     Utils.openNavNewPage(
@@ -138,7 +137,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            height: 42.0.h,
+            height: 50.0.h,
             color: ColorName.lightGrayishBlue,
             child: Row(
               children: [
@@ -189,6 +188,11 @@ class ReceiveDoneDealItem extends StatelessWidget {
                     Expanded(
                         child: DefaultButtonWidget(
                             text: context.locale.call_button_title,
+                            style: context.easyTheme.elevatedButtonTheme.style!
+                                .copyWith(
+                              minimumSize: MaterialStateProperty.all(
+                                  const Size(387.0, 40)),
+                            ),
                             onPressed: () => Utils.lunchCall(receiveSwapReqItem
                                 .offerUser!.phoneNumber
                                 .toString()))),
@@ -203,6 +207,8 @@ class ReceiveDoneDealItem extends StatelessWidget {
                             .toString()),
                         style: context.easyTheme.elevatedButtonTheme.style!
                             .copyWith(
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(387.0, 40)),
                                 backgroundColor:
                                     MaterialStateProperty.all(ColorName.amber)),
                       ),

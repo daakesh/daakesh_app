@@ -61,7 +61,7 @@ class MySwapPreviewerScreen extends StatelessWidget {
                               text: ' ${previewerModel.citySwap} , ',
                             ),
                             TextSpan(
-                              text: '${previewerModel.countrySwap} , ',
+                              text: '${previewerModel.countrySwap}',
                             ),
                           ],
                         ),

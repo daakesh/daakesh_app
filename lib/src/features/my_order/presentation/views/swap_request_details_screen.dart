@@ -3,7 +3,9 @@ import '../../../../src.export.dart';
 
 class SwapRequestDetailsScreen extends StatelessWidget {
   final SendReceiveSwapReqItem sendSwapReqItem;
-  const SwapRequestDetailsScreen({super.key, required this.sendSwapReqItem});
+  final bool isSend;
+  const SwapRequestDetailsScreen(
+      {super.key, required this.sendSwapReqItem, this.isSend = false});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,12 @@ class SwapRequestDetailsScreen extends StatelessWidget {
           body: LayoutBuilderWidget(
             child: Column(
               children: [
-                const HeaderWidget(withArrowBack: true, isLight: true),
+                HeaderWidget(
+                  withArrowBack: true,
+                  isLight: true,
+                  requestID: sendSwapReqItem.id,
+                  isSend: isSend,
+                ),
                 SizedBox(
                   height: 16.0.h,
                 ),
@@ -131,9 +138,13 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
                                   text: context.locale.see_details,
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                    fontSize: 14.0.sp,
+                                    color: ColorName.skyBlue,
+                                  ),
                                   onPressed: () => seeSourceDetails(
                                       context, sendSwapReqItem),
-                                  isBold: true,
                                 ),
                               ),
                             ),
@@ -203,7 +214,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                   padding:
                                       EdgeInsetsDirectional.only(end: 45.0.w),
                                   child: Text(
-                                    '${sendSwapReqItem.offerItems!.title}\n',
+                                    '${sendSwapReqItem.offerItems!.title}',
+                                    maxLines: 3,
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
@@ -236,7 +248,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 15.0.h,
+                                  height: 8.0.h,
                                 ),
                                 Padding(
                                   padding:
@@ -259,10 +271,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
                                         fontSize: 14.0.sp,
-                                        fontWeight: FontWeight.bold,
                                         color: ColorName.skyBlue,
                                       ),
-                                      isBold: true,
                                     ),
                                   ),
                                 ),
@@ -278,7 +288,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                           context.locale.your_comment,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
-                                  fontSize: 20.0.sp,
+                                  fontSize: 18.0.sp,
                                   color: ColorName.black.withOpacity(0.5)),
                         ),
                       ),

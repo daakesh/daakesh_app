@@ -190,11 +190,7 @@ class ViewAllDealsFilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      TodayDealsBloc.get.add(ResetViewAllEvent());
-      return;
-    }
-    TodayDealsBloc.get.add(GetViewAllItemsEvent(isFilterActive: false));
     TodayDealsBloc.get.add(ResetViewAllEvent());
+    TodayDealsBloc.get.add(GetViewAllItemsEvent(isFilterActive: false));
   }
 }

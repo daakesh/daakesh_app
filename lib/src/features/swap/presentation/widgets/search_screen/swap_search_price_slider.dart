@@ -23,14 +23,12 @@ class _SwapPriceSliderWidgetState extends State<SwapSearchPriceSlider> {
         showValueIndicator: ShowValueIndicator.always,
         thumbColor: const Color(0xffAE6905),
       ),
-      child: BlocBuilder<SwapFilterBloc, SwapFilterState>(
+      child: BlocBuilder<SwapSearchBloc, SwapSearchState>(
         builder: (context, state) {
           return RangeSlider(
             divisions: 10,
             min: widget.minValue,
             max: widget.maxValue,
-            labels: RangeLabels(
-                '\$${state.fromPrice.round()}', '\$${state.toPrice.round()}'),
             activeColor: ColorName.amber,
             inactiveColor: ColorName.sliver,
             onChanged: (value) {
@@ -44,7 +42,7 @@ class _SwapPriceSliderWidgetState extends State<SwapSearchPriceSlider> {
   }
 
   void setPrice(double fromPrice, double toPrice) {
-    SwapFilterBloc.get
-        .add(SwapSetFilterDataEvent(fromPrice: fromPrice, toPrice: toPrice));
+    SwapSearchBloc.get.add(
+        SwapSetSearchFilterDataEvent(fromPrice: fromPrice, toPrice: toPrice));
   }
 }

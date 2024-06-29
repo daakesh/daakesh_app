@@ -64,6 +64,7 @@ abstract class HomeUseCases {
       SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getAllTodayItems(
       FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> clickAdv(String userID, String advID);
 }
 
 @dev
@@ -72,6 +73,12 @@ class HomeUseCasesImpl implements HomeUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
     return await getIt.get<HomeRepository>().getAdvertisementData();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    return await getIt.get<HomeRepository>().clickAdv(userID, advID);
   }
 
   @override

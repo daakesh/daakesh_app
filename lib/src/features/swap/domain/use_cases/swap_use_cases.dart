@@ -51,6 +51,7 @@ abstract class SwapUseCases {
       SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getOfferedItems(
       SwapFilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> clickAdv(String userID, String advID);
 }
 
 @dev
@@ -59,6 +60,12 @@ class SwapUseCasesImpl implements SwapUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
     return await getIt.get<SwapRepository>().getAdvertisementData();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    return await getIt.get<SwapRepository>().clickAdv(userID, advID);
   }
 
   @override

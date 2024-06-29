@@ -52,4 +52,5 @@ abstract class SwapDatasource {
       SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getOfferedItems(
       SwapFilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> clickAdv(String userID, String advID);
 }

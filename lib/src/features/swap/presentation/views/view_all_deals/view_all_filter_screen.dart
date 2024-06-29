@@ -183,11 +183,7 @@ class ViewAllFilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      TrendDealsBloc.get.add(ResetViewAllValueEvent());
-      return;
-    }
-    TrendDealsBloc.get.add(GetItemsViewAllsEvent(isFilterActive: false));
     TrendDealsBloc.get.add(ResetViewAllValueEvent());
+    TrendDealsBloc.get.add(GetItemsViewAllsEvent(isFilterActive: false));
   }
 }

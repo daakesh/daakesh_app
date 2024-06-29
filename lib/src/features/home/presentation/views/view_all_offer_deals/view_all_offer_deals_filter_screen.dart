@@ -187,11 +187,7 @@ class ViewAllOfferDealsFilterScreen extends StatelessWidget {
   }
 
   void clear(context, bool filterIsActive) {
-    if (!filterIsActive) {
-      OfferDealsBloc.get.add(ResetViewAllOfferDealsEvent());
-      return;
-    }
-    OfferDealsBloc.get.add(ViewAllOfferDealsItemsEvent(isFilterActive: false));
     OfferDealsBloc.get.add(ResetViewAllOfferDealsEvent());
+    OfferDealsBloc.get.add(ViewAllOfferDealsItemsEvent(isFilterActive: false));
   }
 }
