@@ -53,11 +53,11 @@ class SwapProductItem extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.only(end: 20.0, top: 10),
+                          EdgeInsetsDirectional.only(end: 20.0, top: 12.0.h),
                       child: Text(
                         context.locale.delete_item,
                         style: context.easyTheme.textTheme.bodyLarge!
-                            .copyWith(fontSize: 10.0, color: ColorName.red),
+                            .copyWith(fontSize: 14.0, color: ColorName.red),
                       ),
                     ),
                   ),

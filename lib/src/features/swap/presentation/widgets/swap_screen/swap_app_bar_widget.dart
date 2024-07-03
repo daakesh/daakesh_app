@@ -26,7 +26,7 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
     return BlocBuilder<SwapBloc, SwapState>(builder: (_, state) {
       return SliverAppBar(
         backgroundColor: ColorName.blueGray,
-        expandedHeight: 160.0,
+        expandedHeight: 150.h,
         leading: const SizedBox(),
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(

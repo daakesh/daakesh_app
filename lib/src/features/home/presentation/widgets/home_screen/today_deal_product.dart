@@ -114,9 +114,6 @@ class TodayDealProduct extends StatelessWidget {
                       color: ColorName.gray,
                       overflow: TextOverflow.ellipsis),
                 ),
-                SizedBox(
-                  height: 7.5.h,
-                ),
                 Row(
                   children: [
                     RatingBar.builder(

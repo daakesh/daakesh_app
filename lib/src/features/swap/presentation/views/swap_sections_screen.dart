@@ -69,7 +69,7 @@ class SwapSectionScreen extends StatelessWidget {
               const SliverToBoxAdapter(child: SizedBox(height: 10.0)),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 31.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
                   child: Text(
                     '${Utils.isEnglish ? state.categoryTitle : state.arCategoryTitle} ${context.locale.swap_category_title}',
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
@@ -79,7 +79,7 @@ class SwapSectionScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 15.0)),
+              const SliverToBoxAdapter(child: SizedBox(height: 4.0)),
               state.swapCategoriesListData.isNotEmpty
                   ? SliverList(
                       delegate: SliverChildBuilderDelegate(

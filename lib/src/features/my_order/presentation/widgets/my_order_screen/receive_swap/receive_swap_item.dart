@@ -76,9 +76,6 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                         color: ColorName.mediumSilver,
                       ),
                     ),
-                    SizedBox(
-                      height: 8.0.h,
-                    ),
                     Text.rich(
                       TextSpan(
                         children: [

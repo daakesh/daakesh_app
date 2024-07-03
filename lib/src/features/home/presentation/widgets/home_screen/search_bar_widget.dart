@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../../../../../src.export.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -25,8 +24,11 @@ class SearchBarWidget extends StatelessWidget {
           children: [
             Opacity(
               opacity: 0.3,
-              child: Assets.svg.line
-                  .svg(alignment: AlignmentDirectional.bottomEnd),
+              child: Assets.svg.line.svg(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  fit: BoxFit.fitHeight,
+                  height: 160.h,
+                  width: 160.w),
             ),
             Padding(
               padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),

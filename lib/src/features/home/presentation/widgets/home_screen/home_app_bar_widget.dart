@@ -27,7 +27,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
       return SliverAppBar(
         backgroundColor: ColorName.blueGray,
         leading: const SizedBox(),
-        expandedHeight: 160.0,
+        expandedHeight: 150.h,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
           background: SearchBarWidget(state: state),

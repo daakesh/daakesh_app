@@ -85,8 +85,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                   child: Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.only(end: 10.0, top: 10),
+                      padding: EdgeInsetsDirectional.only(end: 20.w, top: 10),
                       child: Text(
                         context.locale.edit,
                         style: context.easyTheme.textTheme.bodyLarge!
@@ -101,11 +100,11 @@ class _ShopProductItemState extends State<ShopProductItem> {
                     alignment: Alignment.center,
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.only(end: 20.0, top: 13),
+                          const EdgeInsetsDirectional.only(end: 20.0, top: 10),
                       child: Text(
                         context.locale.delete_item,
                         style: context.easyTheme.textTheme.bodyLarge!
-                            .copyWith(fontSize: 10.0, color: ColorName.red),
+                            .copyWith(fontSize: 14.0, color: ColorName.red),
                       ),
                     ),
                   ),

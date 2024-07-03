@@ -32,12 +32,12 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                         )
                       ]),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(width: 11.0),
                       Expanded(
                         child: Padding(
-                            padding: const EdgeInsets.only(top: 32.0),
+                            padding: EdgeInsets.all(8.h),
                             child: CachedImage(
                               imageUrl: trendDealsItem.itemImg != null
                                   ? trendDealsItem.itemImg!.first
@@ -180,14 +180,11 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const SizedBox(
-                                  width: 11.0,
-                                ),
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(top: 32.0),
+                                    padding: EdgeInsets.all(8.h),
                                     child: CachedImage(
                                         imageUrl: state
                                             .itemSelected.first.itemImg!.first),
@@ -269,17 +266,29 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 13.0,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.only(
+                                Container(
+                                  width: double.infinity,
+                                  constraints:
+                                      BoxConstraints(minHeight: 80.0.h),
+                                  margin: const EdgeInsetsDirectional.only(
                                       end: 14.0),
-                                  child: Text(
-                                    state.comment.toString(),
-                                    style: context
-                                        .easyTheme.textTheme.bodyMedium!
-                                        .copyWith(
-                                            fontSize: 14.0.sp,
-                                            fontWeight: FontWeight.normal,
-                                            color: ColorName.blueGray),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.grey.withOpacity(0.15),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.only(
+                                        top: 8, start: 10, end: 14.0),
+                                    child: Text(
+                                      state.comment.toString(),
+                                      style: context
+                                          .easyTheme.textTheme.bodyMedium!
+                                          .copyWith(
+                                              fontSize: 14.0.sp,
+                                              fontWeight: FontWeight.normal,
+                                              color: ColorName.blueGray),
+                                    ),
                                   ),
                                 ),
                               ],

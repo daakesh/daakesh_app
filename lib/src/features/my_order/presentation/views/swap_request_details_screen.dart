@@ -55,11 +55,13 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(top: 32.0.h),
-                          child: CachedImage(
-                            imageUrl: sendSwapReqItem
-                                .sourceItems!.itemImg!.first
-                                .toString(),
+                          padding: EdgeInsets.all(8.h),
+                          child: Center(
+                            child: CachedImage(
+                              imageUrl: sendSwapReqItem
+                                  .sourceItems!.itemImg!.first
+                                  .toString(),
+                            ),
                           ),
                         ),
                       ),
@@ -192,7 +194,10 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(top: 32.0.h),
+                              padding: sendSwapReqItem
+                                      .offerItems!.itemImg!.first.isNotEmpty
+                                  ? EdgeInsets.all(8.h)
+                                  : EdgeInsets.only(top: 32.h),
                               child: CachedImage(
                                   imageUrl: sendSwapReqItem
                                       .offerItems!.itemImg!.first

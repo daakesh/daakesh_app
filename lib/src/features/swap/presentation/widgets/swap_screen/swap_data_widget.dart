@@ -35,6 +35,17 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
     return CustomScrollView(
       slivers: [
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
+        SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              'Version: 6',
+              style: context.easyTheme.textTheme.headlineLarge!.copyWith(
+                fontSize: 20.0,
+              ),
+            ),
+          ),
+        ),
+        const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
 
         ///Swap Carousel slider.
         const SliverToBoxAdapter(child: SwapCarouselSliderWidget()),

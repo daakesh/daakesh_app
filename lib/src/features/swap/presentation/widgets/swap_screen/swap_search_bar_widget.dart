@@ -22,8 +22,11 @@ class SwapSearchBarWidget extends StatelessWidget {
           children: [
             Opacity(
               opacity: 0.3,
-              child: Assets.svg.line
-                  .svg(alignment: AlignmentDirectional.bottomEnd),
+              child: Assets.svg.line.svg(
+                alignment: AlignmentDirectional.bottomEnd,
+                width: 160.w,
+                height: 160.h,
+              ),
             ),
             Padding(
               padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),

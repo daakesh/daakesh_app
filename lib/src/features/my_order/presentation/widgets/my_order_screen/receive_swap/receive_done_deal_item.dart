@@ -70,7 +70,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 12.0.h,
+                      height: 2.0.h,
                     ),
                     Text.rich(
                       TextSpan(
@@ -84,13 +84,13 @@ class ReceiveDoneDealItem extends StatelessWidget {
                                       color: approved == 1
                                           ? ColorName.springGreen
                                           : ColorName.red,
-                                      fontSize: 12.0.sp)),
+                                      fontSize: 14.0.sp)),
                           TextSpan(
                               text: '${receiveSwapReqItem.offerUser!.name}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.black,
-                                      fontSize: 12.0.sp)),
+                                      fontSize: 14.0.sp)),
                         ],
                       ),
                     ),
@@ -116,7 +116,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                 child: TextButtonWidget(
                   text: context.locale.see_offer_details,
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                    fontSize: 12.0.sp,
+                    fontSize: 14.0.sp,
                     color: ColorName.skyBlue,
                   ),
                   onPressed: () {

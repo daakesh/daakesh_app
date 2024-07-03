@@ -119,7 +119,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               ],
                             ),
                             const SizedBox(
-                              height: 15.0,
+                              height: 8.0,
                             ),
                             Padding(
                                 padding:

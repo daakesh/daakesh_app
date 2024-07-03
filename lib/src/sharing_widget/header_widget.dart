@@ -20,7 +20,7 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: isLight ? 130.h : 160.h,
+      height: isLight ? 110.h : 140.h,
       width: double.infinity,
       decoration: BoxDecoration(
         color: isLight ? ColorName.white : ColorName.blueGray,
@@ -32,8 +32,11 @@ class HeaderWidget extends StatelessWidget {
           children: [
             Opacity(
               opacity: 0.3,
-              child: Assets.svg.line
-                  .svg(alignment: AlignmentDirectional.bottomEnd),
+              child: Assets.svg.line.svg(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  color: isLight ? Colors.grey : null,
+                  width: 160.w,
+                  height: 160.h),
             ),
             withArrowBack
                 ? Stack(

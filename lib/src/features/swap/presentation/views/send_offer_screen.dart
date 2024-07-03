@@ -59,7 +59,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
             SliverToBoxAdapter(
               child: Container(
                 width: double.infinity,
-                margin: const EdgeInsetsDirectional.symmetric(horizontal: 21.0),
+                margin: const EdgeInsetsDirectional.symmetric(horizontal: 35.0),
                 decoration: const BoxDecoration(
                     color: ColorName.white,
                     borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -73,14 +73,14 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 child: BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
                   builder: (context, state) {
                     return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
                           width: 11.0,
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 32.0),
+                            padding: EdgeInsets.all(8.0.h),
                             child: CachedImage(
                                 imageUrl: widget.trendDealsItem.itemImg != null
                                     ? widget.trendDealsItem.itemImg!.first
@@ -130,13 +130,13 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                     '${context.locale.swap_in_title} ${widget.trendDealsItem.citySwap}, ${widget.trendDealsItem.countrySwap}',
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
-                                        .copyWith(fontSize: 16.0),
+                                        .copyWith(fontSize: 14.0.sp),
                                     overflow: TextOverflow.fade,
                                   )),
                                 ],
                               ),
                               const SizedBox(
-                                height: 15.0,
+                                height: 4.0,
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.only(
@@ -150,14 +150,14 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                           style: context
                                               .easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                                  fontSize: 20.0,
+                                                  fontSize: 20.0.sp,
                                                   color: ColorName.gray)),
                                       TextSpan(
                                           text:
                                               '${widget.trendDealsItem.user!.name}',
                                           style: context
                                               .easyTheme.textTheme.bodyMedium!
-                                              .copyWith(fontSize: 20.0)),
+                                              .copyWith(fontSize: 20.0.sp)),
                                     ],
                                   ),
                                 ),
@@ -506,11 +506,11 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Assets.svg.iosArrowBack.svg(),
+                  Assets.svg.iosArrowBack.svg(width: 20.w, height: 20.h),
                   const SizedBox(
                     width: 6.0,
                   ),
-                  Assets.svg.iosArrowForward.svg(),
+                  Assets.svg.iosArrowForward.svg(width: 20.w, height: 20.h),
                 ],
               ),
             ),

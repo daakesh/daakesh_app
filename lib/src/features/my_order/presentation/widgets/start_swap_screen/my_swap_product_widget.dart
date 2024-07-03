@@ -206,16 +206,12 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                           width: double.infinity,
                           padding: const EdgeInsetsDirectional.only(
                               start: 10.0, end: 10, top: 7.0),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                               color: ColorName.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 6.0,
-                                    color: Color.fromRGBO(0, 0, 0, 0.16),
-                                    offset: Offset(0, 6))
-                              ],
+                              border: Border.all(
+                                  color: ColorName.gray.withOpacity(0.15)),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0))),
+                                  const BorderRadius.all(Radius.circular(6.0))),
                           child: TextFormFieldWidget(
                             controller: controller,
                             isUnderlineOn: true,
@@ -400,11 +396,11 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 15.0,
+                                  height: 8.0,
                                 ),
                                 Padding(
                                     padding: EdgeInsetsDirectional.only(
-                                        start: 6.0.w),
+                                        start: 4.0.w),
                                     child: Text.rich(
                                       TextSpan(
                                         children: [
@@ -441,7 +437,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
-                                        fontSize: 12.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.skyBlue,
                                       ),
                                       isBold: true,

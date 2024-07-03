@@ -39,7 +39,7 @@ class PriceRateSection extends StatelessWidget {
                   maxRating: 5,
                   ignoreGestures: true,
                   initialRating: state.rateAverage,
-                  itemSize: 25.0,
+                  itemSize: 25.0.sp,
                   tapOnlyMode: true,
                   itemBuilder: (context, _) => const Icon(
                     Icons.star,
@@ -80,7 +80,7 @@ class PriceRateSection extends StatelessWidget {
           },
         ),
         const SizedBox(
-          height: 14.0,
+          height: 1.0,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
