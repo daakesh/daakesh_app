@@ -16,6 +16,8 @@ class ProAddSuccessScreen extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (value) {
+        getIt.get<EditProduct>().clearData();
+
         addNewProduct();
       },
       child: DefaultBackgroundWidget(
@@ -52,7 +54,9 @@ class ProAddSuccessScreen extends StatelessWidget {
                     padding:
                         EdgeInsetsDirectional.symmetric(horizontal: 21.0.w),
                     child: Text(
-                      context.locale.your_product_added_successfully,
+                      getIt.get<EditProduct>().myProductItem == null
+                          ? context.locale.your_product_added_successfully
+                          : context.locale.your_product_edited_successfully,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 26.0),
                       textAlign: TextAlign.center,
@@ -92,12 +96,16 @@ class ProAddSuccessScreen extends StatelessWidget {
   }
 
   void addNewProduct() async {
+    getIt.get<EditProduct>().clearData();
+
     Utils.openNewPage(const MainScreen(), popPreviousPages: true);
     HomeBloc.controller.jumpToTab(1);
     HomeBloc.get.add(SelectTabItemEvent(index: 1));
   }
 
   void seeMyProduct(BuildContext context) async {
+    getIt.get<EditProduct>().clearData();
+
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
       ..userName = myProductItem.user!.name

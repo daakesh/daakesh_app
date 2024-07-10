@@ -30,8 +30,11 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     if (event.password!.isNotEmpty) {
       _updatePassword(event.password.toString(), event.context);
     }
-    final result = await getIt.get<ProfileUseCases>().updateUserData(event.name,
-        event.image, '+${state.personalPhoneCode + event.phoneNumber}');
+    final result = await getIt.get<ProfileUseCases>().updateUserData(
+          event.name,
+          event.image,
+          event.phoneNumber,
+        );
     result.fold(
       (l) {
         ProgressCircleDialog.dismiss();
@@ -45,7 +48,13 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
           ShowToastSnackBar.showSnackBars(message: r.message.toString());
           return;
         }
+        ShowToastSnackBar.showSnackBars(
+            message: event.context.locale.profile_changed);
+
         UserDataBloc.get.add(GetUserDataEvent());
+        PersonalInfoBloc.get
+            .add(ActivateUpdatePersonalInfoEvent(isUpdateActive: false));
+
         emit(state.copyWith(
             profileStateStatus: PersonalInfoStateStatus.SUCCESS));
       },
@@ -64,8 +73,6 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
           ShowToastSnackBar.showSnackBars(message: r.message.toString());
           return;
         }
-        ShowToastSnackBar.showSnackBars(
-            message: context.locale.password_changed);
 
         await getIt.get<AuthUseCases>().activateUser(ValueConstants.userId);
       },

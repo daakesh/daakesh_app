@@ -10,6 +10,8 @@ class PassDataBloc extends Bloc<PassDataEvent, PassDataState> {
     on<ZoomInOutEvent>(_zoomInOut);
     on<SelectProductPropertiesEvent>(_selectProductProperties);
     on<DetermentTodayDealEvent>(_determentTodayDeal);
+    on<ProductZoomInOutEvent>(_proZoomInOut);
+    on<ResetScaleValueEvent>(_resetScaleValue);
   }
   static PassDataBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -45,5 +47,20 @@ class PassDataBloc extends Bloc<PassDataEvent, PassDataState> {
     }
     scale++;
     emit(state.copyWith(scale: scale));
+  }
+
+  FutureOr<void> _proZoomInOut(
+      ProductZoomInOutEvent event, Emitter<PassDataState> emit) {
+    double scale = state.productScale;
+    if (scale == 3) {
+      scale = 0;
+    }
+    scale++;
+    emit(state.copyWith(productScale: scale));
+  }
+
+  FutureOr<void> _resetScaleValue(
+      ResetScaleValueEvent event, Emitter<PassDataState> emit) {
+    emit(state.copyWith(scale: event.scale, productScale: event.productScale));
   }
 }

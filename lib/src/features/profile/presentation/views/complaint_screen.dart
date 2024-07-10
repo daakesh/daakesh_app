@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
+import 'package:collection/collection.dart';
 
 // ignore: must_be_immutable
 class ComplaintScreen extends StatelessWidget {
@@ -13,13 +14,17 @@ class ComplaintScreen extends StatelessWidget {
   final FocusNode remarkFocusNode = FocusNode();
   final List<ComplaintType> complaintTypeList = [
     ComplaintType.User,
-    ComplaintType.Seller,
+    ComplaintType.General,
   ];
 
   String? complaintValue;
 
   @override
   Widget build(BuildContext context) {
+    final List<String> complaintValues = [
+      context.locale.user_complaint,
+      context.locale.general_complaint,
+    ];
     return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
@@ -65,24 +70,10 @@ class ComplaintScreen extends StatelessWidget {
                   },
                   value: complaintValue,
                   items: complaintTypeList
-                      .map((e) => DropdownMenuItem(
+                      .mapIndexed((index, e) => DropdownMenuItem(
                           value: e.index.toString(),
-                          child: Text(e.name.toString())))
+                          child: Text(complaintValues[index])))
                       .toList(),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  context.locale.seller_name,
-                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                      fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
-                ),
-                TextFormFieldWidget(
-                  controller: sellerNameController,
-                  focusNode: sellerNameFocusNode,
-                  onFieldSubmitted: (value) => Utils.fieldFocusChange(
-                      context, sellerNameFocusNode, subjectFocusNode),
                 ),
                 const SizedBox(
                   height: 10.0,

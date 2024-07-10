@@ -56,7 +56,9 @@ class RemoteProfileDatasource implements ProfileDatasource {
         path: 'DaakeshServices/api/user/updateUser',
         body: {
           "id": ValueConstants.userId,
-          "location": '$country, $city, $address',
+          "country": country,
+          "city": city,
+          "location": address,
         });
     return result;
   }

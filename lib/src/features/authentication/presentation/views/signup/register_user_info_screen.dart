@@ -34,7 +34,7 @@ class _RegisterPersonalInfoScreenState
               SizedBox(
                 height: 20.0.h,
               ),
-              const Center(child: DaakeshLogoWidget()),
+              const Center(child: GeneralDaakeshLogoWidget()),
               SizedBox(
                 height: 40.0.h,
               ),

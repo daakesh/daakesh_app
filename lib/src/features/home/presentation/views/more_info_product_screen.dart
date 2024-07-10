@@ -21,6 +21,7 @@ class MoreInfoProductScreen extends StatelessWidget {
       onPopInvoked: (value) {
         RateBloc.get.add(EmptyDataEvent());
         CommentBloc.get.add(EmptyCommentDataEvent());
+        PassDataBloc.get.add(ResetScaleValueEvent(scale: 1.0));
       },
       child: RefreshIndicatorWidget(
         onRefresh: () {

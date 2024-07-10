@@ -19,6 +19,7 @@ class MyProPreviewerScreen extends StatelessWidget {
       canPop: true,
       onPopInvoked: (value) {
         MyProBloc.get.add(EmptyProDataEvent());
+        PassDataBloc.get.add(ResetScaleValueEvent(productScale: 1.0));
       },
       child: RefreshIndicatorWidget(
         onRefresh: () => getAllItemData(),

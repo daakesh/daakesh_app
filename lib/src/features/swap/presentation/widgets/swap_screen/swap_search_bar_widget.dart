@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class SwapSearchBarWidget extends StatelessWidget {
@@ -33,12 +34,21 @@ class SwapSearchBarWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 53.0),
-                  Center(
-                    child: DaakeshLogoWidget(
-                      isLight: true,
-                      width: 184.0.w,
-                    ),
+                  SizedBox(height: Utils.isEnglish ? 50.0 : 30.0),
+                  BlocBuilder<ProfileBloc, ProfileState>(
+                    builder: (context, state) {
+                      return Center(
+                        child: state.switchLangValue
+                            ? ArabicDaakeshLogoWidget(
+                                isLight: true,
+                                width: 184.0.w,
+                              )
+                            : DaakeshLogoWidget(
+                                isLight: true,
+                                width: 184.0.w,
+                              ),
+                      );
+                    },
                   ),
                   state.swapScreenState.isProductDetails ||
                           state.swapScreenState.isCart ||
@@ -63,17 +73,6 @@ class SwapSearchBarWidget extends StatelessWidget {
   }
 
   void onBack(SwapState state) {
-    if (state.swapScreenState.isOfferDetails) {
-      return;
-    }
-    if (state.swapScreenState.isSendOffer) {
-      return;
-    }
-    if (state.swapScreenState.isSubCategoryResult) {
-      return;
-    }
-    if (state.swapScreenState.isSections) {
-      SwapSectionsBloc.get.add(SwapResetVarEvent());
-    }
+    SwapSectionsBloc.get.add(SwapResetVarEvent());
   }
 }

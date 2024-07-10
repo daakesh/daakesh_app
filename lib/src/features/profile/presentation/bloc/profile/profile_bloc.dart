@@ -17,7 +17,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ActivateUpdateEvent event, Emitter<ProfileState> emit) {
     emit(state.copyWith(
       isUpdatePersonalActive: event.isUpdatePersonalActive,
-      locationFlagEmoji: '🇯🇴',
+      locationFlagEmoji: event.locationFlagEmoji,
     ));
   }
 
@@ -73,6 +73,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         return;
       }
       UserDataBloc.get.add(GetUserDataEvent());
+      ProfileBloc.get.add(ActivateUpdateEvent(isUpdatePersonalActive: false));
       emit(state.copyWith(profileStateStatus: ProfileStateStatus.SUCCESS));
     });
   }

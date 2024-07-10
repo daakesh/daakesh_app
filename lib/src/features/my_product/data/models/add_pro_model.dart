@@ -15,8 +15,7 @@ class AddProModel {
   String? condition;
   String? city;
   String? year;
-  String? discountFrom;
-  String? discountTo;
+
   String? discount;
   String? country;
   String? quantity;
@@ -41,8 +40,6 @@ class AddProModel {
       this.condition,
       this.city,
       this.year,
-      this.discountFrom,
-      this.discountTo,
       this.discount,
       this.country,
       this.quantity,
@@ -75,8 +72,6 @@ class AddProModel {
     data['condition'] = condition.toString();
     data['city'] = city.toString();
     data['year'] = year.toString();
-    data['discount_from'] = discountFrom.toString();
-    data['discount_to'] = discountTo.toString();
     data['discount'] = discount.toString();
     data['country'] = country.toString();
     data['quantity'] = quantity.toString();
@@ -110,15 +105,16 @@ class AddProModel {
     data['condition'] = condition.toString();
     data['city'] = city.toString();
     data['year'] = year.toString();
-    data['discount_from'] = discountFrom.toString();
-    data['discount_to'] = discountTo.toString();
+
     data['discount'] = discount.toString();
     data['country'] = country.toString();
     data['quantity'] = quantity.toString();
     data['display'] = display.toString();
     data['country_swap'] = countrySwap.toString();
     data['city_swap'] = citySwap.toString();
-    //data['itemImg'] = itemImageList!.join(',');
+    if (itemImageList!.isNotEmpty && itemImageList != null) {
+      data['itemImg'] = itemImageList!.join(',');
+    }
     return data;
   }
 }

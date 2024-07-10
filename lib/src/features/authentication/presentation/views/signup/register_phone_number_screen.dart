@@ -20,7 +20,7 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
               const Spacer(
                 flex: 2,
               ),
-              const Center(child: DaakeshLogoWidget()),
+              const Center(child: GeneralDaakeshLogoWidget()),
               const Spacer(
                 flex: 1,
               ),

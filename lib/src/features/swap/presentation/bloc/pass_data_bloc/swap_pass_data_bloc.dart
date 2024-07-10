@@ -60,6 +60,6 @@ class SwapPassDataBloc extends Bloc<SwapPassDataEvent, SwapPassDataState> {
 
   FutureOr<void> _resetSwapPassValues(
       ResetSwapPassValuesEvent event, Emitter<SwapPassDataState> emit) {
-    emit(state.copyWith(itemIndex: 0));
+    emit(state.copyWith(itemIndex: 0, scale: 1.0));
   }
 }

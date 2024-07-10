@@ -16,7 +16,7 @@ class AddPaymentCardScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(flex: 1),
-                const DaakeshLogoWidget(),
+                const GeneralDaakeshLogoWidget(),
                 const Spacer(
                   flex: 1,
                 ),

@@ -60,8 +60,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       productQuantity: event.productQuantity,
       productPrice: event.productPrice,
       productDiscount: discount,
-      fromDate: event.fromDate,
-      toDate: event.toDate,
     ));
   }
 
@@ -104,8 +102,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       ..quantity = state.productQuantity
       ..price = state.productPrice
       ..discount = state.productDiscount
-      ..discountFrom = state.fromDate
-      ..discountTo = state.toDate
       ..country = state.shipToCountry
       ..display = state.displayProduct
       ..countrySwap = state.swapCountry
@@ -140,7 +136,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       });
 
       ProgressCircleDialog.dismiss();
-      getIt.get<EditProduct>().clearData();
       MyProFuncBloc.get.add(ResetValuesEvent());
       Utils.openNewPage(
           ProAddSuccessScreen(
@@ -162,8 +157,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
         productQuantity: '',
         productPrice: '',
         productDiscount: '',
-        fromDate: '',
-        toDate: '',
         displayProduct: '',
         swapCountry: 'Jordan',
         swapCity: 'Amman',

@@ -48,12 +48,17 @@ class _ProductSliderState extends State<ProductSlider> {
               const Spacer(
                 flex: 1,
               ),
-              GestureDetector(
-                onTap: () => PassDataBloc.get.add(ZoomInOutEvent()),
-                child: Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: Assets.svg.zoomInIcon.svg(),
-                ),
+              BlocBuilder<PassDataBloc, PassDataState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () => PassDataBloc.get.add(ProductZoomInOutEvent()),
+                    child: Align(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        child: state.productScale != 3
+                            ? Assets.svg.zoomInIcon.svg()
+                            : Assets.svg.zoomOutIcon.svg()),
+                  );
+                },
               ),
             ],
           ),
@@ -76,7 +81,7 @@ class _ProductSliderState extends State<ProductSlider> {
                     return BlocBuilder<PassDataBloc, PassDataState>(
                       builder: (context, state) {
                         return Transform.scale(
-                          scale: state.scale,
+                          scale: state.productScale,
                           child: GestureDetector(
                             onTap: () => openImage(
                                 widget.previewerModel.itemImage!, index),

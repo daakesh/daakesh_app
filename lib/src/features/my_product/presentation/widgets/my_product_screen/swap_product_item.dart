@@ -37,27 +37,23 @@ class SwapProductItem extends StatelessWidget {
                   child: Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
-                      child: Text(
-                        context.locale.edit,
-                        style: context.easyTheme.textTheme.bodyLarge!
-                            .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
-                      ),
+                      padding: EdgeInsetsDirectional.only(end: 20.w, top: 10),
+                      child: Assets.svg.editIcon.svg(width: 20, height: 20),
                     ),
                   ),
                 ),
+                const SizedBox(width: 10),
                 GestureDetector(
                   onTap: () => deleteItem(context, myProductItem.id!),
                   child: Align(
                     alignment: Alignment.center,
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.only(end: 20.0, top: 12.0.h),
-                      child: Text(
-                        context.locale.delete_item,
-                        style: context.easyTheme.textTheme.bodyLarge!
-                            .copyWith(fontSize: 14.0, color: ColorName.red),
+                          const EdgeInsetsDirectional.only(end: 20.0, top: 10),
+                      child: Assets.svg.deleteIcon.svg(
+                        color: ColorName.red,
+                        width: 20,
+                        height: 20,
                       ),
                     ),
                   ),

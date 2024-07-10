@@ -85,7 +85,7 @@ class PriceRateWidget extends StatelessWidget {
             previewerModel.discountPercentage == '0%' ||
                     previewerModel.discountPercentage == null
                 ? Text(
-                    '\$${previewerModel.priceAfterDiscount} ',
+                    '${context.locale.jordan_dinar} ${previewerModel.priceAfterDiscount} ',
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 30.0, fontWeight: FontWeight.w600),
                     overflow: TextOverflow.ellipsis,
@@ -93,13 +93,13 @@ class PriceRateWidget extends StatelessWidget {
                 : Row(
                     children: [
                       Text(
-                        '\$${previewerModel.priceAfterDiscount} ',
+                        '${context.locale.jordan_dinar} ${previewerModel.priceAfterDiscount} ',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 30.0, fontWeight: FontWeight.w600),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        '\$${previewerModel.price}',
+                        '${context.locale.jordan_dinar} ${previewerModel.price}',
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
                           fontSize: 20.0.sp,

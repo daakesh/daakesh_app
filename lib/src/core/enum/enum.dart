@@ -84,7 +84,7 @@ enum FilterProductType {
 
 enum ComplaintType {
   User,
-  Seller,
+  General,
 }
 
 enum SortingType {

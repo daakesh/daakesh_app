@@ -18,7 +18,7 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Spacer(flex: 1),
-                  const DaakeshLogoWidget(),
+                  const GeneralDaakeshLogoWidget(),
                   const Spacer(flex: 1),
                   Assets.png.checkIcon.image(),
                   SizedBox(height: 19.0.h),

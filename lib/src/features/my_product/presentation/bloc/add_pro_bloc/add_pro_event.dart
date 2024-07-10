@@ -55,15 +55,11 @@ class AddSaleInfoEvent extends AddProEvent {
   final String productQuantity;
   final String productPrice;
   final String? productDiscount;
-  final String? fromDate;
-  final String? toDate;
 
   AddSaleInfoEvent({
     required this.productQuantity,
     required this.productPrice,
     this.productDiscount,
-    this.fromDate,
-    this.toDate,
   });
 }
 

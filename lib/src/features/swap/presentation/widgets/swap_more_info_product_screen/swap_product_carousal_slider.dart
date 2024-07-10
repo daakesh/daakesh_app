@@ -40,12 +40,17 @@ class SwapProductCarousalSlider extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              GestureDetector(
-                onTap: () => SwapPassDataBloc.get.add(SwapZoomInOutEvent()),
-                child: Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: Assets.svg.zoomInIcon.svg(),
-                ),
+              BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () => SwapPassDataBloc.get.add(SwapZoomInOutEvent()),
+                    child: Align(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        child: state.scale != 3
+                            ? Assets.svg.zoomInIcon.svg()
+                            : Assets.svg.zoomOutIcon.svg()),
+                  );
+                },
               ),
             ],
           ),

@@ -15,8 +15,6 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
   final productQuantityController = TextEditingController();
   final productPriceController = TextEditingController();
   final productDiscountController = TextEditingController();
-  final fromDateController = TextEditingController();
-  final toDateController = TextEditingController();
 
   @override
   void initState() {
@@ -171,50 +169,6 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       },
                     ),
                     SizedBox(
-                      height: 22.0.h,
-                    ),
-                    BlocBuilder<MyProFuncBloc, MyProFuncState>(
-                      builder: (context, state) {
-                        return state.discountSwitchButton
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(context.locale.discount_date,
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              color: ColorName.black
-                                                  .withOpacity(0.5))),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          child: TextFormFieldWidget(
-                                        controller: fromDateController,
-                                        hintText: context.locale.from_discount,
-                                        hintStyle: context
-                                            .easyTheme.textTheme.labelMedium,
-                                        readOnly: true,
-                                        onTap: () => selectDiscountDate(
-                                            context, fromDateController),
-                                      )),
-                                      Expanded(
-                                          child: TextFormFieldWidget(
-                                        controller: toDateController,
-                                        hintText: context.locale.to_discount,
-                                        hintStyle: context
-                                            .easyTheme.textTheme.labelMedium,
-                                        readOnly: true,
-                                        onTap: () => selectDiscountDate(
-                                            context, toDateController),
-                                      )),
-                                    ],
-                                  ),
-                                ],
-                              )
-                            : const SizedBox();
-                      },
-                    ),
-                    SizedBox(
                       height: 21.0.h,
                     ),
                   ],
@@ -259,8 +213,6 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
         MyProFuncBloc.get.add(OnOffDiscountEvent(value: true));
         discount = double.parse(data.discount.toString()) * 100;
         productDiscountController.text = '${discount.toInt()}%';
-        fromDateController.text = data.discountFrom.toString();
-        toDateController.text = data.discountTo.toString();
       }
       productQuantityController.text = data.quantity.toString();
       productPriceController.text = data.price.toString();
@@ -272,15 +224,11 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
       var data = getIt.get<EditProduct>().myProductItem;
       double discount = double.parse(data!.discount.toString()) * 100;
       productDiscountController.text = '${discount.toInt()}%';
-      fromDateController.text = data.discountFrom.toString();
-      toDateController.text = data.discountTo.toString();
     }
   }
 
   void clearDiscountData() {
     productDiscountController.clear();
-    fromDateController.clear();
-    toDateController.clear();
   }
 
   void selectDiscountDate(context, TextEditingController controller) async {
@@ -314,8 +262,6 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
       productQuantity: productQuantityController.text,
       productPrice: productPriceController.text,
       productDiscount: productDiscountController.text,
-      fromDate: fromDateController.text,
-      toDate: toDateController.text,
     ));
     Utils.openNewPage(const ShipToScreen());
   }

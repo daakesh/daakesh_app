@@ -6,11 +6,13 @@ import '../../../../../src.export.dart';
 class SwapAppBarWidget extends StatefulWidget {
   final bool isActive;
   final bool isCart;
+  final SwapSearchState? searchState;
 
   const SwapAppBarWidget({
     super.key,
     this.isActive = false,
     this.isCart = false,
+    this.searchState,
   });
 
   @override
@@ -55,10 +57,13 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                           child: TextFormFieldWidget(
+                            textInputAction: TextInputAction.search,
                             controller: controller,
                             isSuffixPrefixOn: true,
                             onFieldSubmitted: (value) {
-                              if (value.isEmpty) {
+                              if (value.isEmpty ||
+                                  widget.searchState!.swapSearchStateStatus ==
+                                      SwapSearchStateStatus.NULL) {
                                 return;
                               }
                               SwapSearchBloc.get.add(

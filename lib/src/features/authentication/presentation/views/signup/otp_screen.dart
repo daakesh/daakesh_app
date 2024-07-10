@@ -38,7 +38,7 @@ class _OTPScreenState extends State<OTPScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Spacer(flex: 1),
-                const Center(child: DaakeshLogoWidget()),
+                const Center(child: GeneralDaakeshLogoWidget()),
                 SizedBox(height: 60.0.h),
                 Padding(
                   padding: EdgeInsetsDirectional.only(start: 26.0.w),

@@ -22,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
               const Spacer(
                 flex: 3,
               ),
-              const Center(child: DaakeshLogoWidget()),
+              const Center(child: GeneralDaakeshLogoWidget()),
               const Spacer(
                 flex: 3,
               ),

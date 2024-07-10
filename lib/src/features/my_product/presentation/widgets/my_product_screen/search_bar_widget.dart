@@ -4,7 +4,9 @@ import '../../../../../src.export.dart';
 
 class SearchProductBarWidget extends StatefulWidget {
   final TextEditingController searchController;
-  const SearchProductBarWidget({super.key, required this.searchController});
+  final MyProFuncState state;
+  const SearchProductBarWidget(
+      {super.key, required this.searchController, required this.state});
 
   @override
   State<SearchProductBarWidget> createState() => _SearchProductBarWidgetState();
@@ -51,7 +53,10 @@ class _SearchProductBarWidgetState extends State<SearchProductBarWidget> {
                         controller: widget.searchController,
                         isUnderlineOn: true,
                         onChanged: onChange,
-                        hintText: context.locale.search_in_your_product,
+                        hintText:
+                            widget.state.productTapBar == ProductTapBar.SELL
+                                ? context.locale.search_in_your_sell_product
+                                : context.locale.search_in_your_swap_product,
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(fontFamily: FontFamily.apercuRegular),
                       ),

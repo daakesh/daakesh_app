@@ -28,7 +28,7 @@ class InsertCellPhoneScreen extends StatelessWidget {
                   child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                 ),
               ),
-              const Center(child: DaakeshLogoWidget()),
+              const Center(child: GeneralDaakeshLogoWidget()),
               const Spacer(
                 flex: 1,
               ),

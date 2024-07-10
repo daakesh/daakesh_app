@@ -14,11 +14,23 @@ class ShopByBrandsScreen extends StatelessWidget {
             slivers: [
               const HomeAppBarWidget(),
               const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
-              SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                BrandItem brandItem = state.brandListData[index];
-                return BrandItemWidget(brandItem: brandItem);
-              }, childCount: state.brandListData.length)),
+              SliverGrid.builder(
+                itemCount: state.brandListData.length,
+                itemBuilder: (context, index) {
+                  BrandItem brandItem = state.brandListData[index];
+                  return Padding(
+                    padding: index % 2 == 0
+                        ? const EdgeInsetsDirectional.only(start: 12.0)
+                        : const EdgeInsetsDirectional.only(end: 12.0),
+                    child: BrandItemWidget(brandItem: brandItem),
+                  );
+                },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16.w,
+                  mainAxisSpacing: 16.h,
+                ),
+              ),
               const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
               SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverToBoxAdapter(child: SizedBox(height: 50.0)),

@@ -52,12 +52,18 @@ class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
               const Spacer(
                 flex: 1,
               ),
-              GestureDetector(
-                onTap: () => PassDataBloc.get.add(ZoomInOutEvent()),
-                child: Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: Assets.svg.zoomInIcon.svg(),
-                ),
+              BlocBuilder<PassDataBloc, PassDataState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () => PassDataBloc.get.add(ZoomInOutEvent()),
+                    child: Align(
+                      alignment: AlignmentDirectional.bottomEnd,
+                      child: state.scale != 3
+                          ? Assets.svg.zoomInIcon.svg()
+                          : Assets.svg.zoomOutIcon.svg(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

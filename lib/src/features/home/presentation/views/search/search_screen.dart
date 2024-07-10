@@ -1,4 +1,3 @@
-import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -85,8 +84,10 @@ class _SearchResultHandler extends StatelessWidget {
             child: CircularProgressIndicatorWidget());
       case SearchStateStatus.NULLSEARCH:
         return SliverToBoxAdapter(
-            child: Center(
-                child: Text(context.locale.no_information_available_title)));
+          child: Center(
+            child: Text(context.locale.no_information_available_title),
+          ),
+        );
       default:
         return SliverList(
           delegate: SliverChildBuilderDelegate((_, index) {

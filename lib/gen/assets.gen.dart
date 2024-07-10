@@ -67,6 +67,10 @@ class $AssetsPngGen {
   AssetGenImage get productIcon =>
       const AssetGenImage('assets/png/product_icon.png');
 
+  /// File path: assets/png/shop_by_brand.png
+  AssetGenImage get shopByBrand =>
+      const AssetGenImage('assets/png/shop_by_brand.png');
+
   /// File path: assets/png/shop_mode_ar.gif
   AssetGenImage get shopModeAr =>
       const AssetGenImage('assets/png/shop_mode_ar.gif');
@@ -109,6 +113,7 @@ class $AssetsPngGen {
         line,
         mastercardIcon,
         productIcon,
+        shopByBrand,
         shopModeAr,
         shopModeEn,
         splashScreenBackground,
@@ -161,6 +166,14 @@ class $AssetsSvgGen {
   SvgGenImage get daakeshLogo =>
       const SvgGenImage('assets/svg/daakesh_logo.svg');
 
+  /// File path: assets/svg/dark_arabic_logo.svg
+  SvgGenImage get darkArabicLogo =>
+      const SvgGenImage('assets/svg/dark_arabic_logo.svg');
+
+  /// File path: assets/svg/delete_icon copy.svg
+  SvgGenImage get deleteIconCopy =>
+      const SvgGenImage('assets/svg/delete_icon copy.svg');
+
   /// File path: assets/svg/delete_icon.svg
   SvgGenImage get deleteIcon => const SvgGenImage('assets/svg/delete_icon.svg');
 
@@ -175,6 +188,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/disable_profile_icon.svg
   SvgGenImage get disableProfileIcon =>
       const SvgGenImage('assets/svg/disable_profile_icon.svg');
+
+  /// File path: assets/svg/edit_icon.svg
+  SvgGenImage get editIcon => const SvgGenImage('assets/svg/edit_icon.svg');
 
   /// File path: assets/svg/empty_image_icon.svg
   SvgGenImage get emptyImageIcon =>
@@ -216,6 +232,10 @@ class $AssetsSvgGen {
   SvgGenImage get iosArrowForward =>
       const SvgGenImage('assets/svg/ios_arrow_forward.svg');
 
+  /// File path: assets/svg/light_arabic_logo.svg
+  SvgGenImage get lightArabicLogo =>
+      const SvgGenImage('assets/svg/light_arabic_logo.svg');
+
   /// File path: assets/svg/light_daakesh_logo.svg
   SvgGenImage get lightDaakeshLogo =>
       const SvgGenImage('assets/svg/light_daakesh_logo.svg');
@@ -247,12 +267,20 @@ class $AssetsSvgGen {
   /// File path: assets/svg/send_icon.svg
   SvgGenImage get sendIcon => const SvgGenImage('assets/svg/send_icon.svg');
 
+  /// File path: assets/svg/shop_by_brand.svg
+  SvgGenImage get shopByBrand =>
+      const SvgGenImage('assets/svg/shop_by_brand.svg');
+
   /// File path: assets/svg/sort_icon.svg
   SvgGenImage get sortIcon => const SvgGenImage('assets/svg/sort_icon.svg');
 
   /// File path: assets/svg/zoom_in_icon.svg
   SvgGenImage get zoomInIcon =>
       const SvgGenImage('assets/svg/zoom_in_icon.svg');
+
+  /// File path: assets/svg/zoom_out_icon.svg
+  SvgGenImage get zoomOutIcon =>
+      const SvgGenImage('assets/svg/zoom_out_icon.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [
@@ -266,10 +294,13 @@ class $AssetsSvgGen {
         creditCardIcon,
         creditCardLogoIcon,
         daakeshLogo,
+        darkArabicLogo,
+        deleteIconCopy,
         deleteIcon,
         disableHomeIcon,
         disableProductIcon,
         disableProfileIcon,
+        editIcon,
         emptyImageIcon,
         enableHomeIcon,
         enableProductIcon,
@@ -280,6 +311,7 @@ class $AssetsSvgGen {
         imagePickerIcon,
         iosArrowBack,
         iosArrowForward,
+        lightArabicLogo,
         lightDaakeshLogo,
         line,
         locationPinIcon,
@@ -289,8 +321,10 @@ class $AssetsSvgGen {
         profilePhoneIcon,
         searchIcon,
         sendIcon,
+        shopByBrand,
         sortIcon,
-        zoomInIcon
+        zoomInIcon,
+        zoomOutIcon
       ];
 }
 

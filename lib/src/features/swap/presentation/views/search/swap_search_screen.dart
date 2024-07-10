@@ -19,7 +19,7 @@ class SwapSearchScreen extends StatelessWidget {
         body: BlocBuilder<SwapSearchBloc, SwapSearchState>(builder: (_, state) {
           return CustomScrollView(
             slivers: [
-              const SwapAppBarWidget(isActive: true),
+              SwapAppBarWidget(isActive: true, searchState: state),
               const SliverPadding(
                   padding: EdgeInsetsDirectional.only(top: 21.0)),
               SliverToBoxAdapter(

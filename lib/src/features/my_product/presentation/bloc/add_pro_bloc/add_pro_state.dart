@@ -33,8 +33,6 @@ class AddProState extends Equatable {
   final String productQuantity;
   final String productPrice;
   final String productDiscount;
-  final String fromDate;
-  final String toDate;
 
   ///Swap data
   final String displayProduct;
@@ -57,8 +55,6 @@ class AddProState extends Equatable {
     this.productQuantity = '',
     this.productPrice = '',
     this.productDiscount = '',
-    this.fromDate = '',
-    this.toDate = '',
 
     ///Swap data
     this.displayProduct = '',
@@ -86,8 +82,6 @@ class AddProState extends Equatable {
     String? productQuantity,
     String? productPrice,
     String? productDiscount,
-    String? fromDate,
-    String? toDate,
 
     ///Swap Data
     String? displayProduct,
@@ -114,8 +108,6 @@ class AddProState extends Equatable {
       productQuantity: productQuantity ?? this.productQuantity,
       productPrice: productPrice ?? this.productPrice,
       productDiscount: productDiscount ?? this.productDiscount,
-      fromDate: fromDate ?? this.fromDate,
-      toDate: toDate ?? this.toDate,
 
       ///
       displayProduct: displayProduct ?? this.displayProduct,
@@ -147,8 +139,6 @@ class AddProState extends Equatable {
         productQuantity,
         productPrice,
         productDiscount,
-        fromDate,
-        toDate,
 
         ///
         displayProduct,

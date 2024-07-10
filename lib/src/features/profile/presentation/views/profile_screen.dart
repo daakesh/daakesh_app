@@ -149,50 +149,7 @@ class ProfileScreen extends StatelessWidget {
                   const Spacer(
                     flex: 1,
                   ),
-                  Text(
-                    'English',
-                    style: context.easyTheme.textTheme.labelLarge!
-                        .copyWith(fontSize: 12.0, color: ColorName.blueGray),
-                  ),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
-                    return Switch(
-                        value: state.switchLangValue,
-                        activeColor: ColorName.blueGray,
-                        inactiveThumbColor: ColorName.blueGray,
-                        inactiveTrackColor: ColorName.gainsboro,
-                        focusColor: ColorName.gainsboro,
-                        hoverColor: ColorName.gainsboro,
-                        activeTrackColor: ColorName.gainsboro,
-                        trackOutlineColor: MaterialStateProperty.resolveWith(
-                          (final Set<MaterialState> states) {
-                            if (states.contains(MaterialState.selected)) {
-                              return null;
-                            }
-                            return ColorName.transparent;
-                          },
-                        ),
-                        thumbColor:
-                            MaterialStateProperty.all(ColorName.blueGray),
-                        thumbIcon: MaterialStateProperty.all(const Icon(
-                          Icons.abc,
-                          color: ColorName.blueGray,
-                        )),
-                        onChanged: (value) {
-                          ProfileBloc.get
-                              .add(ChangeLangEvent(switchLangValue: value));
-                        });
-                  }),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  Text(
-                    'عربي',
-                    style: context.easyTheme.textTheme.labelLarge!
-                        .copyWith(fontSize: 12.0, color: ColorName.blueGray),
-                  ),
+                  const LanguageSwapWidget(),
                 ],
               ),
             ),
@@ -219,6 +176,63 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class LanguageSwapWidget extends StatelessWidget {
+  final MainAxisAlignment mainAxisAlignment;
+  const LanguageSwapWidget(
+      {super.key, this.mainAxisAlignment = MainAxisAlignment.start});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: mainAxisAlignment,
+      children: [
+        Text(
+          'English',
+          style: context.easyTheme.textTheme.labelLarge!
+              .copyWith(fontSize: 12.0, color: ColorName.blueGray),
+        ),
+        const SizedBox(
+          width: 8.0,
+        ),
+        BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
+          return Switch(
+              value: state.switchLangValue,
+              activeColor: ColorName.blueGray,
+              inactiveThumbColor: ColorName.blueGray,
+              inactiveTrackColor: ColorName.gainsboro,
+              focusColor: ColorName.gainsboro,
+              hoverColor: ColorName.gainsboro,
+              activeTrackColor: ColorName.gainsboro,
+              trackOutlineColor: MaterialStateProperty.resolveWith(
+                (final Set<MaterialState> states) {
+                  if (states.contains(MaterialState.selected)) {
+                    return null;
+                  }
+                  return ColorName.transparent;
+                },
+              ),
+              thumbColor: MaterialStateProperty.all(ColorName.blueGray),
+              thumbIcon: MaterialStateProperty.all(const Icon(
+                Icons.abc,
+                color: ColorName.blueGray,
+              )),
+              onChanged: (value) {
+                ProfileBloc.get.add(ChangeLangEvent(switchLangValue: value));
+              });
+        }),
+        const SizedBox(
+          width: 8.0,
+        ),
+        Text(
+          'عربي',
+          style: context.easyTheme.textTheme.labelLarge!
+              .copyWith(fontSize: 12.0, color: ColorName.blueGray),
+        ),
+      ],
     );
   }
 }

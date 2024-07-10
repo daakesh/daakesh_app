@@ -171,8 +171,12 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       ),
                       TextFormFieldWidget(
                         controller: personPhoneController,
-                        keyboardType: TextInputType.number,
-                        isSuffixPrefixOn: true,
+                        keyboardType: TextInputType.phone,
+                        hintText: '+962770099773',
+                        hintStyle: context.easyTheme.textTheme.labelMedium!
+                            .copyWith(
+                                fontSize: 18.0.sp,
+                                color: ColorName.gray.withOpacity(0.6)),
                         enabled: state.isUpdateActive,
                         // suffixIcon: GestureDetector(
                         //   onTap: () =>

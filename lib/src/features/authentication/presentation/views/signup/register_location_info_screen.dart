@@ -40,7 +40,7 @@ class _RegisterLocationInfoScreenState
                 flex: 1,
               ),
               SizedBox(height: 44.0.h),
-              const Center(child: DaakeshLogoWidget()),
+              const Center(child: GeneralDaakeshLogoWidget()),
               const Spacer(
                 flex: 1,
               ),

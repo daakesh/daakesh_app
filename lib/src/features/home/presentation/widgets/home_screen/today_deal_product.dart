@@ -161,7 +161,7 @@ class TodayDealProduct extends StatelessWidget {
                 ),
                 todayDealItem.discountPercentage == '0%'
                     ? Text(
-                        '\$${todayDealItem.priceAfterDiscount} ',
+                        '${context.locale.jordan_dinar} ${todayDealItem.priceAfterDiscount} ',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 16.0, fontWeight: FontWeight.w600),
                         overflow: TextOverflow.ellipsis,
@@ -170,7 +170,7 @@ class TodayDealProduct extends StatelessWidget {
                         children: [
                           Flexible(
                               child: Text(
-                            '\$${todayDealItem.priceAfterDiscount} ',
+                            '${context.locale.jordan_dinar} ${todayDealItem.priceAfterDiscount} ',
                             style: context.easyTheme.textTheme.bodyMedium!
                                 .copyWith(
                                     fontSize: 16.0,
@@ -178,7 +178,7 @@ class TodayDealProduct extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           )),
                           Text(
-                            '\$${todayDealItem.price}',
+                            '${context.locale.jordan_dinar} ${todayDealItem.price}',
                             style: context.easyTheme.textTheme.headlineMedium!
                                 .copyWith(
                               fontSize: 14.0.sp,

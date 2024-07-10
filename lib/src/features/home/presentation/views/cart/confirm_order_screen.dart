@@ -17,7 +17,7 @@ class ConfirmOrderScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(flex: 1),
-                const Center(child: DaakeshLogoWidget()),
+                const Center(child: GeneralDaakeshLogoWidget()),
                 const Spacer(flex: 1),
                 Assets.svg.creditCardLogoIcon.svg(),
                 const SizedBox(height: 30.0),

@@ -8,8 +8,12 @@ class ChangeLangEvent extends ProfileEvent {
 class SetValueLangEvent extends ProfileEvent {}
 
 class ActivateUpdateEvent extends ProfileEvent {
-  final bool isUpdatePersonalActive;
-  ActivateUpdateEvent({required this.isUpdatePersonalActive});
+  final bool? isUpdatePersonalActive;
+  final String? locationFlagEmoji;
+  ActivateUpdateEvent({
+    this.isUpdatePersonalActive,
+    this.locationFlagEmoji,
+  });
 }
 
 class ChangeLocationFlagEvent extends ProfileEvent {

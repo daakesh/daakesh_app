@@ -6,11 +6,13 @@ import '../../../../../src.export.dart';
 class HomeAppBarWidget extends StatefulWidget {
   final bool isActive;
   final bool isCart;
+  final SearchState? state;
 
   const HomeAppBarWidget({
     super.key,
     this.isActive = false,
     this.isCart = false,
+    this.state,
   });
 
   @override
@@ -61,7 +63,9 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                             readOnly: !widget.isActive,
                             onChanged: onChange,
                             onFieldSubmitted: (value) {
-                              if (value.isEmpty) {
+                              if (value.isEmpty ||
+                                  widget.state!.searchStateStatus ==
+                                      SearchStateStatus.NULL) {
                                 return;
                               }
                               SearchBloc.get

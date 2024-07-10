@@ -27,7 +27,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 const Spacer(
                   flex: 2,
                 ),
-                const Center(child: DaakeshLogoWidget()),
+                const Center(child: GeneralDaakeshLogoWidget()),
                 const Spacer(
                   flex: 1,
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -35,12 +36,21 @@ class SearchBarWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 53.0),
-                  Center(
-                    child: DaakeshLogoWidget(
-                      isLight: true,
-                      width: 184.0.w,
-                    ),
+                  SizedBox(height: Utils.isEnglish ? 50.0 : 30.0),
+                  BlocBuilder<ProfileBloc, ProfileState>(
+                    builder: (context, state) {
+                      return Center(
+                        child: state.switchLangValue
+                            ? ArabicDaakeshLogoWidget(
+                                isLight: true,
+                                width: 184.0.w,
+                              )
+                            : DaakeshLogoWidget(
+                                isLight: true,
+                                width: 184.0.w,
+                              ),
+                      );
+                    },
                   ),
                   state.homeScreenState.isProductDetails ||
                           state.homeScreenState.isCart ||

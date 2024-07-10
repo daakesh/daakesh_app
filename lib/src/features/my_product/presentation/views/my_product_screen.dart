@@ -13,12 +13,6 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
   final searchController = TextEditingController();
 
   @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
     getMyProductScreenData();
@@ -68,7 +62,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                             state: state, searchController: searchController),
                         SizedBox(height: 17.0.h),
                         SearchProductBarWidget(
-                            searchController: searchController),
+                            state: state, searchController: searchController),
                       ],
                     ),
                   ),

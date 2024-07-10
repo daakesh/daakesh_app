@@ -33,7 +33,7 @@ class _VerificationCompleteScreenState
                 const Spacer(
                   flex: 1,
                 ),
-                const Center(child: DaakeshLogoWidget()),
+                const Center(child: GeneralDaakeshLogoWidget()),
                 const Spacer(
                   flex: 1,
                 ),

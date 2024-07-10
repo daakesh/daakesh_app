@@ -86,14 +86,11 @@ class _ShopProductItemState extends State<ShopProductItem> {
                     alignment: AlignmentDirectional.centerEnd,
                     child: Padding(
                       padding: EdgeInsetsDirectional.only(end: 20.w, top: 10),
-                      child: Text(
-                        context.locale.edit,
-                        style: context.easyTheme.textTheme.bodyLarge!
-                            .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
-                      ),
+                      child: Assets.svg.editIcon.svg(width: 20, height: 20),
                     ),
                   ),
                 ),
+                const SizedBox(width: 10),
                 GestureDetector(
                   onTap: () => deleteItem(widget.myProductItem.id!),
                   child: Align(
@@ -101,10 +98,10 @@ class _ShopProductItemState extends State<ShopProductItem> {
                     child: Padding(
                       padding:
                           const EdgeInsetsDirectional.only(end: 20.0, top: 10),
-                      child: Text(
-                        context.locale.delete_item,
-                        style: context.easyTheme.textTheme.bodyLarge!
-                            .copyWith(fontSize: 14.0, color: ColorName.red),
+                      child: Assets.svg.deleteIcon.svg(
+                        color: ColorName.red,
+                        width: 20,
+                        height: 20,
                       ),
                     ),
                   ),
@@ -182,7 +179,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                           ? Row(
                               children: [
                                 Text(
-                                  '\$${widget.myProductItem.priceAfterDiscount!.toInt()}',
+                                  '${context.locale.jordan_dinar} ${widget.myProductItem.priceAfterDiscount!.toInt()}',
                                   style: context
                                       .easyTheme.textTheme.labelMedium!
                                       .copyWith(fontSize: 21.0.sp),
@@ -191,7 +188,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                   width: 6.0,
                                 ),
                                 Text(
-                                  '\$${widget.myProductItem.price}',
+                                  '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
                                   style: context
                                       .easyTheme.textTheme.labelMedium!
                                       .copyWith(
@@ -203,7 +200,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                               ],
                             )
                           : Text(
-                              '\$${widget.myProductItem.price}',
+                              '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
                               style: context.easyTheme.textTheme.labelMedium!
                                   .copyWith(fontSize: 21.0.sp),
                             ),
