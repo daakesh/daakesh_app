@@ -63,12 +63,12 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 32.0),
+                          padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                           child: CachedImage(
-                            imageUrl: widget.sendReceiveSwapReqItem.offerItems!
+                            imageUrl: widget.sendReceiveSwapReqItem.sourceItems!
                                         .itemImg !=
                                     null
-                                ? widget.sendReceiveSwapReqItem.offerItems!
+                                ? widget.sendReceiveSwapReqItem.sourceItems!
                                     .itemImg!.first
                                 : '',
                           ),
@@ -86,7 +86,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                             Padding(
                               padding: EdgeInsetsDirectional.only(end: 45.0.w),
                               child: Text(
-                                '${widget.sendReceiveSwapReqItem.offerItems!.title}',
+                                '${widget.sendReceiveSwapReqItem.sourceItems!.title}',
                                 maxLines: 3,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
@@ -111,7 +111,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.offerItems!.citySwap}, ${widget.sendReceiveSwapReqItem.offerItems!.countrySwap}',
+                                  '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.sourceItems!.citySwap}, ${widget.sendReceiveSwapReqItem.sourceItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0.sp),
                                   overflow: TextOverflow.fade,
@@ -181,7 +181,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                       const TextSpan(text: '('),
                       TextSpan(
                           text:
-                              '${widget.sendReceiveSwapReqItem.offerItems!.offerCount}',
+                              '${widget.sendReceiveSwapReqItem.sourceItems!.offerCount}',
                           style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(
                                   color: ColorName.red, fontSize: 15.0.sp)),
@@ -215,21 +215,21 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
       BuildContext context, SendReceiveSwapReqItem sendReceiveSwapReqItem) {
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
-      ..userName = sendReceiveSwapReqItem.offerUser!.name
-      ..itemImage = sendReceiveSwapReqItem.offerItems!.itemImg
-      ..title = sendReceiveSwapReqItem.offerItems!.title
-      ..sectionName = sendReceiveSwapReqItem.offerItems!.section!.name
-      ..sectionArName = sendReceiveSwapReqItem.offerItems!.section!.arName
-      ..brandName = sendReceiveSwapReqItem.offerItems!.brand!.brandName
-      ..brandArName = sendReceiveSwapReqItem.offerItems!.brand!.arName
-      ..categoryName = sendReceiveSwapReqItem.offerItems!.category!.name
-      ..categoryArName = sendReceiveSwapReqItem.offerItems!.category!.arName
-      ..year = sendReceiveSwapReqItem.offerItems!.year
-      ..description = sendReceiveSwapReqItem.offerItems!.description
-      ..citySwap = sendReceiveSwapReqItem.offerItems!.citySwap
-      ..countrySwap = sendReceiveSwapReqItem.offerItems!.countrySwap
+      ..userName = sendReceiveSwapReqItem.sourceUser!.name
+      ..itemImage = sendReceiveSwapReqItem.sourceItems!.itemImg
+      ..title = sendReceiveSwapReqItem.sourceItems!.title
+      ..sectionName = sendReceiveSwapReqItem.sourceItems!.section!.name
+      ..sectionArName = sendReceiveSwapReqItem.sourceItems!.section!.arName
+      ..brandName = sendReceiveSwapReqItem.sourceItems!.brand!.brandName
+      ..brandArName = sendReceiveSwapReqItem.sourceItems!.brand!.arName
+      ..categoryName = sendReceiveSwapReqItem.sourceItems!.category!.name
+      ..categoryArName = sendReceiveSwapReqItem.sourceItems!.category!.arName
+      ..year = sendReceiveSwapReqItem.sourceItems!.year
+      ..description = sendReceiveSwapReqItem.sourceItems!.description
+      ..citySwap = sendReceiveSwapReqItem.sourceItems!.citySwap
+      ..countrySwap = sendReceiveSwapReqItem.sourceItems!.countrySwap
       //..date = sendReceiveSwapReqItem.createdAt
-      ..offerCount = sendReceiveSwapReqItem.offerItems!.offerCount;
+      ..offerCount = sendReceiveSwapReqItem.sourceItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }

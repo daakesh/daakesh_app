@@ -75,10 +75,10 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                               padding: const EdgeInsets.only(top: 32.0),
                               child: CachedImage(
                                   imageUrl: widget.sendReceiveSwapReqItem
-                                              .sourceItems!.itemImg !=
+                                              .offerItems!.itemImg !=
                                           null
                                       ? widget.sendReceiveSwapReqItem
-                                          .sourceItems!.itemImg!.first
+                                          .offerItems!.itemImg!.first
                                           .toString()
                                       : ''),
                             ),
@@ -98,7 +98,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                   padding: const EdgeInsetsDirectional.only(
                                       end: 30.0),
                                   child: Text(
-                                    '${widget.sendReceiveSwapReqItem.sourceItems!.title}',
+                                    '${widget.sendReceiveSwapReqItem.offerItems!.title}',
                                     maxLines: 3,
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
@@ -123,7 +123,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                     ),
                                     Expanded(
                                         child: Text(
-                                      '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.sourceItems!.citySwap}, ${widget.sendReceiveSwapReqItem.sourceItems!.countrySwap}',
+                                      '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.offerItems!.citySwap}, ${widget.sendReceiveSwapReqItem.offerItems!.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(fontSize: 16.0.sp),
@@ -339,10 +339,10 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                               padding: const EdgeInsets.only(top: 32.0),
                               child: CachedImage(
                                   imageUrl: widget.sendReceiveSwapReqItem
-                                              .sourceItems!.itemImg !=
+                                              .offerItems!.itemImg !=
                                           null
                                       ? widget.sendReceiveSwapReqItem
-                                          .sourceItems!.itemImg!.first
+                                          .offerItems!.itemImg!.first
                                           .toString()
                                       : ''),
                             ),
@@ -362,7 +362,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                   padding: const EdgeInsetsDirectional.only(
                                       end: 30.0),
                                   child: Text(
-                                    '${widget.sendReceiveSwapReqItem.sourceItems!.title}',
+                                    '${widget.sendReceiveSwapReqItem.offerItems!.title}',
                                     maxLines: 3,
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
@@ -387,7 +387,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                     ),
                                     Expanded(
                                         child: Text(
-                                      '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.sourceItems!.citySwap}, ${widget.sendReceiveSwapReqItem.sourceItems!.countrySwap}',
+                                      '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.offerItems!.citySwap}, ${widget.sendReceiveSwapReqItem.offerItems!.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(fontSize: 16.0.sp),
@@ -415,7 +415,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                           TextSpan(
                                               text: widget
                                                   .sendReceiveSwapReqItem
-                                                  .sourceUser!
+                                                  .offerUser!
                                                   .name
                                                   .toString(),
                                               style: context.easyTheme.textTheme
@@ -572,23 +572,23 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
       BuildContext context, SendReceiveSwapReqItem sendReceiveSwapReqItem) {
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
-      ..userName = sendReceiveSwapReqItem.sourceUser!.name
-      ..itemImage = sendReceiveSwapReqItem.sourceItems!.itemImg
-      ..title = sendReceiveSwapReqItem.sourceItems!.title
+      ..userName = sendReceiveSwapReqItem.offerUser!.name
+      ..itemImage = sendReceiveSwapReqItem.offerItems!.itemImg
+      ..title = sendReceiveSwapReqItem.offerItems!.title
       ..sectionName =
-          sendReceiveSwapReqItem.sourceItems!.section!.name.toString()
+          sendReceiveSwapReqItem.offerItems!.section!.name.toString()
       ..sectionArName =
-          sendReceiveSwapReqItem.sourceItems!.section!.arName.toString()
-      ..brandName = sendReceiveSwapReqItem.sourceItems!.brand!.brandName
-      ..brandArName = sendReceiveSwapReqItem.sourceItems!.brand!.arName
-      ..categoryName = sendReceiveSwapReqItem.sourceItems!.category!.name
-      ..categoryArName = sendReceiveSwapReqItem.sourceItems!.category!.arName
-      ..year = sendReceiveSwapReqItem.sourceItems!.year
-      ..description = sendReceiveSwapReqItem.sourceItems!.description
-      ..citySwap = sendReceiveSwapReqItem.sourceItems!.citySwap
-      ..countrySwap = sendReceiveSwapReqItem.sourceItems!.countrySwap
-      ..date = sendReceiveSwapReqItem.sourceItems!.date
-      ..offerCount = sendReceiveSwapReqItem.sourceItems!.offerCount;
+          sendReceiveSwapReqItem.offerItems!.section!.arName.toString()
+      ..brandName = sendReceiveSwapReqItem.offerItems!.brand!.brandName
+      ..brandArName = sendReceiveSwapReqItem.offerItems!.brand!.arName
+      ..categoryName = sendReceiveSwapReqItem.offerItems!.category!.name
+      ..categoryArName = sendReceiveSwapReqItem.offerItems!.category!.arName
+      ..year = sendReceiveSwapReqItem.offerItems!.year
+      ..description = sendReceiveSwapReqItem.offerItems!.description
+      ..citySwap = sendReceiveSwapReqItem.offerItems!.citySwap
+      ..countrySwap = sendReceiveSwapReqItem.offerItems!.countrySwap
+      ..date = sendReceiveSwapReqItem.offerItems!.date
+      ..offerCount = sendReceiveSwapReqItem.offerItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
@@ -597,21 +597,21 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
       BuildContext context, SendReceiveSwapReqItem myProductItem) {
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
-      ..userName = myProductItem.sourceUser!.name
-      ..itemImage = myProductItem.sourceItems!.itemImg
-      ..title = myProductItem.sourceItems!.title
-      ..sectionName = myProductItem.sourceItems!.section!.name.toString()
-      ..sectionArName = myProductItem.sourceItems!.section!.arName.toString()
-      ..brandName = myProductItem.sourceItems!.brand!.brandName
-      ..brandArName = myProductItem.sourceItems!.brand!.arName
-      ..categoryName = myProductItem.sourceItems!.category!.name
-      ..categoryArName = myProductItem.sourceItems!.category!.arName
-      ..year = myProductItem.sourceItems!.year
-      ..description = myProductItem.sourceItems!.description
-      ..citySwap = myProductItem.sourceItems!.citySwap
-      ..countrySwap = myProductItem.sourceItems!.countrySwap
-      ..date = myProductItem.sourceItems!.date
-      ..offerCount = myProductItem.sourceItems!.offerCount;
+      ..userName = myProductItem.offerUser!.name
+      ..itemImage = myProductItem.offerItems!.itemImg
+      ..title = myProductItem.offerItems!.title
+      ..sectionName = myProductItem.offerItems!.section!.name.toString()
+      ..sectionArName = myProductItem.offerItems!.section!.arName.toString()
+      ..brandName = myProductItem.offerItems!.brand!.brandName
+      ..brandArName = myProductItem.offerItems!.brand!.arName
+      ..categoryName = myProductItem.offerItems!.category!.name
+      ..categoryArName = myProductItem.offerItems!.category!.arName
+      ..year = myProductItem.offerItems!.year
+      ..description = myProductItem.offerItems!.description
+      ..citySwap = myProductItem.offerItems!.citySwap
+      ..countrySwap = myProductItem.offerItems!.countrySwap
+      ..date = myProductItem.offerItems!.date
+      ..offerCount = myProductItem.offerItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
