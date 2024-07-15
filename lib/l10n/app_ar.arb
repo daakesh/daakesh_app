@@ -155,7 +155,7 @@
   "filter_apply_button": "تطبيق",
   "filter_clear_button": "مسح",
   "homeScreen": "*********الشاشة الرئيسية*********",
-  "search_hint_text_field": "بحث",
+  "search_hint_text_field": "بحث في منتجات الشراء",
   "home_popular_sections_title": "الأقسام الشائعة",
   "home_whats_new_section_title": "ما هو الجديد",
   "home_shop_by_brands_section_title": "تسوق حسب العلامات التجارية",
@@ -253,7 +253,7 @@
   "see_more_search": "شاهد المزيد",
   "swap_search_no_information_available": "لا توجد معلومات متاحة...",
   "swapScreen": "*********شاشة التبادل*********",
-  "swap_search_text_field_hint": "بحث",
+  "swap_search_text_field_hint": "بحث في منتجات التبادل",
   "swap_popular_swap_sections": "أقسام التبادل الشهيرة",
   "swap_trending_deals_to_swap": "العروض الرائجة للتبادل",
   "swap_trend_product_tag": "تبادل",
@@ -463,5 +463,7 @@
   "no_more_data_available": "لا يوجد المزيد من البيانات المتاحة...",
   "user_complaint": "مستخدم",
   "general_complaint": "عام",
-  "jordan_dinar": "د.أ"
+  "jordan_dinar": "د.أ",
+  "go_to_swap": "هذه الطلبات لشاشة المبادلة، يرجى الانتقال إلى المبادلة لرؤية طلباتك",
+  "go_to_swap_button": "انتقل إلى شاشة المبادلة"
 }

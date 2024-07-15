@@ -21,23 +21,41 @@ abstract class MainScreensList {
     ];
   }
 
-  static final List<Widget> shopScreens = [
-    const HomeScreen(),
-    const MyProductsScreen(),
-    const Scaffold(body: SizedBox()),
-    const MyOrderScreen(),
-    const ProfileScreen(),
-  ];
+  // static final List<Widget> shopScreens = [
+  //   const HomeScreen(),
+  //   const MyProductsScreen(),
+  //   const Scaffold(body: SizedBox()),
+  //   const MyOrderScreen(),
+  //   const ProfileScreen(),
+  // ];
 
-  static final List<Widget> swapScreens = [
-    const SwapScreen(),
-    const MyProductsScreen(),
-    const Scaffold(body: SizedBox()),
-    const MyOrderScreen(),
-    const ProfileScreen(),
-  ];
+  // static final List<Widget> swapScreens = [
+  //   const SwapScreen(),
+  //   const MyProductsScreen(),
+  //   const Scaffold(body: SizedBox()),
+  //   const MyOrderScreen(),
+  //   const ProfileScreen(),
+  // ];
 
-  static List<Widget> screensMethod(StoreType storeType) {
-    return storeType == StoreType.SHOP ? shopScreens : swapScreens;
+  static List<Widget> screensMethod(StoreType storeType, BuildContext context) {
+    return storeType == StoreType.SHOP
+        ? [
+            const HomeScreen(),
+            const MyProductsScreen(),
+            const Scaffold(body: SizedBox()),
+            MyOrderScreen(
+              externalContext: context,
+            ),
+            const ProfileScreen(),
+          ]
+        : [
+            const SwapScreen(),
+            const MyProductsScreen(),
+            const Scaffold(body: SizedBox()),
+            MyOrderScreen(
+              externalContext: context,
+            ),
+            const ProfileScreen(),
+          ];
   }
 }

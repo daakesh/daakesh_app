@@ -8,7 +8,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+    return BlocBuilder<HomeBloc, HomeState>(builder: (_, state) {
       return PersistentTabView(
         context,
         backgroundColor: ColorName.blueGray,
@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
           HomeBloc.get.add(SelectTabItemEvent(index: index));
         },
         screens: ValueConstants.userId.isNotEmpty
-            ? MainScreensList.screensMethod(state.storeType)
+            ? MainScreensList.screensMethod(state.storeType, context)
             : MainScreensList.guestScreensMEthod(state.storeType),
         items: MainScreenWidget.navBarsItems(
             context, state.tabIndex, state.storeType),

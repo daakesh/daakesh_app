@@ -155,7 +155,7 @@
   "filter_apply_button": "APPLY",
   "filter_clear_button": "CLEAR",
   "homeScreen": "*********HomeScreen*********",
-  "search_hint_text_field": "Search",
+  "search_hint_text_field": "Search On Purchase Products",
   "home_popular_sections_title": "Popular Sections",
   "home_whats_new_section_title": "What's New",
   "home_shop_by_brands_section_title": "Shop By Brands",
@@ -253,7 +253,7 @@
   "see_more_search": "See More",
   "swap_search_no_information_available": "No information available...",
   "swapScreen": "*********SwapScreen*********",
-  "swap_search_text_field_hint": "Search",
+  "swap_search_text_field_hint": "Search On Swap Products",
   "swap_popular_swap_sections": "Popular Swap Sections",
   "swap_trending_deals_to_swap": "Trending Deals To Swap with",
   "swap_trend_product_tag": "SWAP",
@@ -463,5 +463,7 @@
   "no_more_data_available": "No more Data Available...",
   "user_complaint": "User",
   "general_complaint": "General",
-  "jordan_dinar": "JOD"
+  "jordan_dinar": "JOD",
+  "go_to_swap": "This Orders For Swap Screen Please Go To Swap For See Your Orders",
+  "go_to_swap_button": "Go To Swap Scree"
 }
