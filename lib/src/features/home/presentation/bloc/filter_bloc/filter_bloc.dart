@@ -9,6 +9,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     on<PreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
     on<SelectCategoryItemEvent>(_selectItem);
     on<GetCitiesEvent>(_getCities);
+    on<GetSubCategoriesEvent>(_getSubCategories);
   }
   static FilterBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _clearFilterData(
@@ -17,9 +18,11 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
       country: "Jordan",
       city: "Amman",
       rate: 0,
+      isAllItems: true,
       fromPrice: 0.0,
       toPrice: 500.0,
       isFilterActive: false,
+      sortingType: SortingType.desc,
       type: FilterProductType.All,
     ));
   }
@@ -47,7 +50,9 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
           filterStateStatus: FilterStateStatus.LOADING,
           catID: event.catID,
           isMoreData: true,
+          isAllItems: event.isAllItems,
           isFilterActive: event.isFilterActive,
+          sortingType: event.sortingType,
           subCategoryListData: [],
           currentPage: 1));
     }
@@ -62,9 +67,11 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
         ..rate = '${state.rate}';
     }
 
-    final result = await getIt
-        .get<HomeUseCases>()
-        .getSubCategoryByCatID(state.catID, filterDataModel, state.currentPage);
+    final result = state.isAllItems
+        ? await getIt.get<HomeUseCases>().getSubCategoryByCatID(
+            state.catID, filterDataModel, state.currentPage, state.sortingType)
+        : await getIt.get<HomeUseCases>().getItemBySubCategoryID(
+            state.catID, filterDataModel, state.currentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(filterStateStatus: FilterStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -92,8 +99,6 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
         subCategoryListData: subCategoryListData,
         isMoreData: lastPage == state.currentPage,
       ));
-
-      emit(state.copyWith(subCategoryListData: subCategoryListData));
     });
   }
 
@@ -116,9 +121,25 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);
       List<CityItem> cityItemList = citiesModel.data!.toList();
-      emit(state.copyWith(
-          filterStateStatus: FilterStateStatus.SUCCESS,
-          cityItemList: cityItemList));
+      emit(state.copyWith(cityItemList: cityItemList));
+    });
+  }
+
+  FutureOr<void> _getSubCategories(
+      GetSubCategoriesEvent event, Emitter<FilterState> emit) async {
+    final result =
+        await getIt.get<HomeUseCases>().getSubCategories(event.catID);
+    result.fold((l) {
+      emit(state.copyWith(filterStateStatus: FilterStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      SubCategoryModel subCategory = SubCategoryModel.fromJson(r.data);
+      List<SubCategory> subCategoryList = subCategory.data!.toList();
+      emit(state.copyWith(subCategoryList: subCategoryList));
     });
   }
 }

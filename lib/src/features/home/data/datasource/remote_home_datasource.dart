@@ -26,13 +26,21 @@ class RemoteHomeDatasource implements HomeDatasource {
       int secID, int page) async {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/category/getCategoryBySection',
-        params: {"secID": secID.toString(), "page": page.toString()});
+        params: {
+          "secID": secID.toString(),
+          "page": page.toString(),
+          "withPaginate": "true",
+          "type": "sell"
+        });
     return result;
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page) async {
+      int catID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getItemByCategoryId',
           params: {"page": "$page"},
@@ -43,8 +51,8 @@ class RemoteHomeDatasource implements HomeDatasource {
             "catID": catID,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
-              "name": "created_at",
-              "operation": "desc",
+              "name": "price",
+              "operation": sortingType.name,
             },
           }),
         );
@@ -52,10 +60,57 @@ class RemoteHomeDatasource implements HomeDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
+  Future<Either<Failure, ValidResponse>> getItemBySubCategoryID(
+      int subID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getItemBySubCategoryId',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "subID": subID,
+            "Filter": filterDataModel.toJson(),
+            "orderBy": {
+              "name": "price",
+              "operation": sortingType.name,
+            },
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSubCategories(int catID) async {
     final result = await getIt.get<NetworkService>().get(
-        path: 'DaakeshServices/api/item/getHandmadeItems',
-        params: {"page": "$page"});
+        path: 'DaakeshServices/api/subCategory/getSubcategoryByCategoryId',
+        params: {"catID": "$catID"});
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+    FilterDataModel filterDataModel,
+    int page,
+    SortingType sortingType,
+  ) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getHandmadeItems',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "Filter": filterDataModel.toJson(),
+            "orderBy": {
+              "name": "price",
+              "operation": sortingType.name,
+            },
+          }),
+        );
     return result;
   }
 
@@ -85,10 +140,26 @@ class RemoteHomeDatasource implements HomeDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page) async {
-    final result = await getIt.get<NetworkService>().get(
-        path: 'DaakeshServices/api/item/getTodaysItems',
-        params: {"type": type.name, "page": "$page"});
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getTodaysItems',
+          params: {"type": type.name, "page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "type": "sell",
+            "owner": "normal",
+            "Filter": filterDataModel.toJson(),
+            "orderBy": {
+              "name": "price",
+              "operation": "$sortingType",
+            },
+          }),
+        );
     return result;
   }
 
@@ -99,6 +170,7 @@ class RemoteHomeDatasource implements HomeDatasource {
         .get<NetworkService>()
         .get(path: 'DaakeshServices/api/item/SearchItems', params: {
       "name": searchValue,
+      "type": "sell",
       "page": '$page',
     });
     return result;
@@ -106,14 +178,19 @@ class RemoteHomeDatasource implements HomeDatasource {
 
   ///Comments API.
   @override
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc) async {
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
     final result = await getIt
         .get<NetworkService>()
-        .post(path: 'DaakeshServices/api/comment/addComment', body: {
+        .post(path: 'DaakeshServices/api/comment/addCommentWithRate', params: {
+      "lang": ValueConstants.language
+    }, body: {
       "userID": userId,
       "itemID": "$itemId",
       "commentDesc": commentDesc,
+      "catID": "$catID",
+      "subID": "$subID",
+      "rateValue": "$rateValue",
     });
     return result;
   }
@@ -250,6 +327,112 @@ class RemoteHomeDatasource implements HomeDatasource {
     final result = await getIt.get<NetworkService>().get(
           path: 'DaakeshServices/api/item/getCites',
         );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/item/getItemDetails',
+      params: {
+        "id": "$itemId",
+        "userID": ValueConstants.userId,
+      },
+    );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/rate/getOverallRateForItem',
+      params: {
+        "itemID": "$itemId",
+      },
+    );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
+      int brandID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getItemByBrandId',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "brandID": brandID,
+            "Filter": filterDataModel.toJson(),
+            "orderBy": {
+              "name": "price",
+              "operation": sortingType.name,
+            },
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getSearchItemsResult',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "Filter": filterDataModel.toJson(),
+            "name": searchValue,
+            "orderBy": {
+              "name": "price",
+              "operation": sortingType.name,
+            },
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getAllTodayItems(
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getOfferedItems',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "Filter": filterDataModel.toJson(),
+            "orderBy": {
+              "name": "price",
+              "operation": sortingType.name,
+            },
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    final result = await getIt.get<NetworkService>().post(
+      path: 'DaakeshServices/api/advertisement/clickAdv',
+      body: {
+        "user_id": userID,
+        "adv_id": advID,
+      },
+    );
     return result;
   }
 }

@@ -11,6 +11,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    getHomeScreenData();
+  }
+
+  void getHomeScreenData() => HomeBloc.get.add(GetHomeScreenData());
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
@@ -21,7 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (ctx, state) {
-            return HomeDataWidget(state: state);
+            return RefreshIndicatorWidget(
+              onRefresh: () => getHomeScreenData(),
+              child: HomeDataWidget(state: state),
+            );
           },
         ),
       ),

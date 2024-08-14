@@ -22,6 +22,7 @@ class PassDataState extends Equatable {
   ///
   final bool isDaakeshTodayDeal;
   final double scale;
+  final double productScale;
 
   const PassDataState({
     this.passDataStateStatus = PassDataStateStatus.INITIAL,
@@ -36,6 +37,7 @@ class PassDataState extends Equatable {
     ///
     this.isDaakeshTodayDeal = false,
     this.scale = 1.0,
+    this.productScale = 1.0,
   });
 
   PassDataState copyWith({
@@ -49,6 +51,7 @@ class PassDataState extends Equatable {
     int? productSizeIndex,
     bool? isDaakeshTodayDeal,
     double? scale,
+    double? productScale,
   }) {
     return PassDataState(
       passDataStateStatus: passDataStateStatus ?? this.passDataStateStatus,
@@ -61,6 +64,7 @@ class PassDataState extends Equatable {
       ///
       isDaakeshTodayDeal: isDaakeshTodayDeal ?? this.isDaakeshTodayDeal,
       scale: scale ?? this.scale,
+      productScale: productScale ?? this.productScale,
     );
   }
 
@@ -76,5 +80,6 @@ class PassDataState extends Equatable {
         ///
         isDaakeshTodayDeal,
         scale,
+        productScale,
       ];
 }

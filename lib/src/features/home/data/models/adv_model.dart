@@ -19,8 +19,6 @@ class AdvModel {
           .toList();
     }
   }
-
-
 }
 
 class AdvItem {
@@ -35,5 +33,9 @@ class AdvItem {
     image = json['image'];
     link = json['link'];
   }
-
+  AdvItem.initValues() {
+    id = 0;
+    image = "Unknown";
+    link = "Unknown";
+  }
 }

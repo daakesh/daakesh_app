@@ -17,18 +17,14 @@ class HomeDataModel {
 class HomeData {
   List<SectionItemModel>? sections;
 
-  HomeData({
-    this.sections,
-  });
+  HomeData({this.sections});
 
   HomeData.fromJson(Map<String, dynamic> json) {
     if (json['sections'] != null) {
       sections = <SectionItemModel>[];
-      sections = (json['sections'] as List<dynamic>).map((v) => SectionItemModel.fromJson(v)).toList();
+      sections = (json['sections'] as List<dynamic>)
+          .map((v) => SectionItemModel.fromJson(v))
+          .toList();
     }
-
   }
-
-
 }
-

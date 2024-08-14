@@ -5,6 +5,8 @@ import '../../../../../src.export.dart';
 class MySwapProBloc extends Bloc<MySwapProEvent, MySwapProState> {
   MySwapProBloc() : super(const MySwapProState()) {
     on<GetMySwapProEvent>(_getMySwapPro);
+    on<ClearSwapDataEvent>(_clearSwapData);
+    on<RemoveSwapItemEvent>(_removeSwapItem);
   }
   static MySwapProBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -54,6 +56,34 @@ class MySwapProBloc extends Bloc<MySwapProEvent, MySwapProState> {
         myProductListData: myProductListData,
         isMoreData: lastPage == state.currentPage,
       ));
+    });
+  }
+
+  FutureOr<void> _clearSwapData(
+      ClearSwapDataEvent event, Emitter<MySwapProState> emit) {
+    emit(state.copyWith(
+      myProductListData: [],
+      isMoreData: true,
+    ));
+  }
+
+  FutureOr<void> _removeSwapItem(
+      RemoveSwapItemEvent event, Emitter<MySwapProState> emit) async {
+    ProgressCircleDialog.show();
+    final result = await getIt.get<MyProductUseCases>().removeProduct(event.id);
+    result.fold((l) {
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      ProgressCircleDialog.dismiss();
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      ShowToastSnackBar.showSnackBars(message: r.data['data'].toString());
+      List<MyProductItem> cartItemsList = state.mySwapProductListData.toList();
+      cartItemsList.removeWhere((item) => event.id == item.id);
+      emit(state.copyWith(myProductListData: []));
+      emit(state.copyWith(myProductListData: cartItemsList));
     });
   }
 }

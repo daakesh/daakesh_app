@@ -3,7 +3,12 @@ import '../../../../src.export.dart';
 
 class StartSwapScreen extends StatefulWidget {
   final SendReceiveSwapReqItem sendReceiveSwapReqItem;
-  const StartSwapScreen({super.key, required this.sendReceiveSwapReqItem});
+  final bool isPreviewer;
+  const StartSwapScreen({
+    super.key,
+    required this.sendReceiveSwapReqItem,
+    this.isPreviewer = false,
+  });
   @override
   State<StartSwapScreen> createState() => _StartSwapScreenState();
 }
@@ -16,6 +21,9 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
   }
 
   void getMyOffer() {
+    if (widget.isPreviewer) {
+      return;
+    }
     MySwapProBloc.get.add(GetMySwapProEvent());
   }
 
@@ -31,11 +39,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
               const SliverToBoxAdapter(
                 child: HeaderWidget(withArrowBack: true, isLight: true),
               ),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 15.0,
-                ),
-              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 15.0)),
               SliverToBoxAdapter(
                 child: Container(
                   width: double.infinity,
@@ -59,20 +63,18 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 32.0),
+                          padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                           child: CachedImage(
-                            imageUrl: widget.sendReceiveSwapReqItem.offerItems!
+                            imageUrl: widget.sendReceiveSwapReqItem.sourceItems!
                                         .itemImg !=
                                     null
-                                ? widget.sendReceiveSwapReqItem.offerItems!
+                                ? widget.sendReceiveSwapReqItem.sourceItems!
                                     .itemImg!.first
                                 : '',
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 18.0.w,
-                      ),
+                      SizedBox(width: 18.0.w),
                       Expanded(
                         flex: 2,
                         child: Column(
@@ -84,7 +86,8 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                             Padding(
                               padding: EdgeInsetsDirectional.only(end: 45.0.w),
                               child: Text(
-                                '${widget.sendReceiveSwapReqItem.offerItems!.title}\n',
+                                '${widget.sendReceiveSwapReqItem.sourceItems!.title}',
+                                maxLines: 3,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 20.0.sp,
@@ -99,15 +102,16 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Assets.svg.locationPinIcon.svg(
-                                    color: ColorName.amber,
-                                    height: 22.0,
-                                    width: 15.0.w),
+                                  color: ColorName.amber,
+                                  height: 20.0.h,
+                                  width: 20.0.w,
+                                ),
                                 SizedBox(
                                   width: 6.0.w,
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'Swap In ${widget.sendReceiveSwapReqItem.offerItems!.citySwap}, ${widget.sendReceiveSwapReqItem.offerItems!.countrySwap}',
+                                  '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.sourceItems!.citySwap}, ${widget.sendReceiveSwapReqItem.sourceItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0.sp),
                                   overflow: TextOverflow.fade,
@@ -115,12 +119,12 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               ],
                             ),
                             const SizedBox(
-                              height: 15.0,
+                              height: 8.0,
                             ),
                             Padding(
                                 padding:
                                     EdgeInsetsDirectional.only(start: 6.0.w),
-                                child: Text('Your Product',
+                                child: Text(context.locale.your_product,
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(fontSize: 20.0.sp))),
@@ -129,10 +133,13 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               child: Align(
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
-                                  text: 'See Details',
+                                  text: context.locale.see_details,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: ColorName.skyBlue,
+                                  ),
                                   onPressed: () => seeOfferDetails(
                                       context, widget.sendReceiveSwapReqItem),
-                                  isBold: true,
                                 ),
                               ),
                             ),
@@ -170,16 +177,16 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 15.0.sp),
                     children: [
-                      const TextSpan(
-                          text: 'Select The Product You Want To Trade\n'),
+                      TextSpan(text: '${context.locale.select_product}\n'),
                       const TextSpan(text: '('),
                       TextSpan(
-                          text: '25',
+                          text:
+                              '${widget.sendReceiveSwapReqItem.sourceItems!.offerCount}',
                           style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(
                                   color: ColorName.red, fontSize: 15.0.sp)),
                       const TextSpan(text: ') '),
-                      const TextSpan(text: 'Offers Submitted'),
+                      TextSpan(text: context.locale.offers_submitted),
                     ],
                   ),
                 ),
@@ -190,20 +197,8 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                 ),
               ),
               MySwapProductCardWidget(
-                sendReceiveSwapReqItem: widget.sendReceiveSwapReqItem,
-              ),
-              SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Assets.svg.iosArrowBack.svg(),
-                    const SizedBox(
-                      width: 6.0,
-                    ),
-                    Assets.svg.iosArrowForward.svg(),
-                  ],
-                ),
-              ),
+                  sendReceiveSwapReqItem: widget.sendReceiveSwapReqItem,
+                  isPreviewer: widget.isPreviewer),
               const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 50.0,
@@ -220,14 +215,21 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
       BuildContext context, SendReceiveSwapReqItem sendReceiveSwapReqItem) {
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
-      ..userName = sendReceiveSwapReqItem.offerUser!.name
-      ..itemImage = sendReceiveSwapReqItem.offerItems!.itemImg
-      ..title = sendReceiveSwapReqItem.offerItems!.title
-      ..brandName = "Unknown"
-      ..categoryName = "Unknown"
-      ..year = sendReceiveSwapReqItem.offerItems!.year
-      ..description = sendReceiveSwapReqItem.offerItems!.description
-      ..offerCount = 0;
+      ..userName = sendReceiveSwapReqItem.sourceUser!.name
+      ..itemImage = sendReceiveSwapReqItem.sourceItems!.itemImg
+      ..title = sendReceiveSwapReqItem.sourceItems!.title
+      ..sectionName = sendReceiveSwapReqItem.sourceItems!.section!.name
+      ..sectionArName = sendReceiveSwapReqItem.sourceItems!.section!.arName
+      ..brandName = sendReceiveSwapReqItem.sourceItems!.brand!.brandName
+      ..brandArName = sendReceiveSwapReqItem.sourceItems!.brand!.arName
+      ..categoryName = sendReceiveSwapReqItem.sourceItems!.category!.name
+      ..categoryArName = sendReceiveSwapReqItem.sourceItems!.category!.arName
+      ..year = sendReceiveSwapReqItem.sourceItems!.year
+      ..description = sendReceiveSwapReqItem.sourceItems!.description
+      ..citySwap = sendReceiveSwapReqItem.sourceItems!.citySwap
+      ..countrySwap = sendReceiveSwapReqItem.sourceItems!.countrySwap
+      //..date = sendReceiveSwapReqItem.createdAt
+      ..offerCount = sendReceiveSwapReqItem.sourceItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }

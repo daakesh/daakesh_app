@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daakesh/src/core/utils/widgets/zoom_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../src.export.dart';
+import 'package:collection/collection.dart';
 
 class SwapProductCarousalSlider extends StatelessWidget {
   final TrendDealsItem trendDealsItem;
@@ -40,12 +40,17 @@ class SwapProductCarousalSlider extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              GestureDetector(
-                onTap: () => SwapPassDataBloc.get.add(SwapZoomInOutEvent()),
-                child: Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: Assets.svg.zoomInIcon.svg(),
-                ),
+              BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () => SwapPassDataBloc.get.add(SwapZoomInOutEvent()),
+                    child: Align(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        child: state.scale != 3
+                            ? Assets.svg.zoomInIcon.svg()
+                            : Assets.svg.zoomOutIcon.svg()),
+                  );
+                },
               ),
             ],
           ),
@@ -64,7 +69,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
                 SwapPassDataBloc.get
                     .add(ChangeProductSliderIndex(sliderIndex: index));
               }),
-          items: trendDealsItem.itemImg!.map((i) {
+          items: trendDealsItem.itemImg!.mapIndexed((index, i) {
             return BlocBuilder<SwapPassDataBloc, SwapPassDataState>(
               builder: (context, state) {
                 return Builder(
@@ -72,7 +77,8 @@ class SwapProductCarousalSlider extends StatelessWidget {
                     return Transform.scale(
                       scale: state.scale,
                       child: GestureDetector(
-                        onTap: () => openZoomImage(i.toString()),
+                        onTap: () =>
+                            openZoomImage(trendDealsItem.itemImg!, index),
                         child: CachedImage(
                           imageUrl: i.toString(),
                         ),
@@ -112,7 +118,10 @@ class SwapProductCarousalSlider extends StatelessWidget {
     );
   }
 
-  openZoomImage(String imageUrl) {
-    Utils.openNewPage(ZoomImageWidget(imageUrl: imageUrl));
+  void openZoomImage(List<String> imageUrl, int index) {
+    Utils.openNewPage(ZoomImageWidget(
+      imageUrlList: imageUrl,
+      index: index,
+    ));
   }
 }

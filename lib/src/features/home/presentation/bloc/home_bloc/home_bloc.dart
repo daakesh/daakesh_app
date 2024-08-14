@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../src.export.dart';
@@ -9,6 +10,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<GetHomeScreenData>(_getHomeScreenData);
     on<SelectTabItemEvent>(_selectTabItem);
     on<ActivateSwapEvent>(_activateSwap);
+    on<BackToStoreEvent>(_backToStore);
   }
   static HomeBloc get get => BlocProvider.of(Utils.currentContext);
   static final controller = PersistentTabController();
@@ -73,9 +75,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HandmadeBloc.get.add(GetHandmadeDataEvent());
     BrandsBloc.get.add(GetBrandsDataEvent());
     TodayDealsBloc.get.add(GetToadyDealsDataEvent());
-    TodayDealsBloc.get.add(GetToadyDaakeshDealsDataEvent());
+    TodayDealsBloc.get.add(ResetViewAllEvent());
+    OfferDealsBloc.get.add(GetAllOfferDealsEvent());
+    OfferDealsBloc.get.add(ResetViewAllOfferDealsEvent());
+    //TodayDealsBloc.get.add(GetToadyDaakeshDealsDataEvent());
     if (ValueConstants.userId.isNotEmpty) {
-      CartBloc.get.add(GetCartItemsEvent());
+      //CartBloc.get.add(GetCartItemsEvent());
       ContactInfoBloc.get.add(GetContactInfoEvent());
     }
   }
@@ -90,14 +95,53 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> _activateSwap(
-      ActivateSwapEvent event, Emitter<HomeState> emit) {
-    //emit(state.copyWith(isSwapActive: !state.isSwapActive));
-    //print(state.isSwapActive);
-    if (controller.index == 2) {
-      controller.jumpToTab(state.tabIndex);
+      ActivateSwapEvent event, Emitter<HomeState> emit) async {
+    if (state.storeType == StoreType.SWAP) {
+      await Utils.showSwapOverLay(
+              event.context,
+              Utils.isEnglish
+                  ? Assets.png.shopModeEn.path
+                  : Assets.png.shopModeAr.path)
+          .then((value) {
+        Navigator.pushAndRemoveUntil(
+          event.context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) =>
+                const MainScreen(),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+          (route) => false,
+        );
+      });
+
+      controller.jumpToTab(0);
+      emit(state.copyWith(tabIndex: 0, storeType: StoreType.SHOP));
     } else {
-      controller.jumpToTab(2);
+      await Utils.showSwapOverLay(
+              event.context,
+              Utils.isEnglish
+                  ? Assets.png.swapModeEn.path
+                  : Assets.png.swapModeAr.path)
+          .then((value) {
+        Navigator.pushAndRemoveUntil(
+          event.context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) =>
+                const MainScreen(),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+          (route) => false,
+        );
+      });
+
+      controller.jumpToTab(0);
+      emit(state.copyWith(tabIndex: 0, storeType: StoreType.SWAP));
     }
-    emit(state.copyWith());
+  }
+
+  FutureOr<void> _backToStore(BackToStoreEvent event, Emitter<HomeState> emit) {
+    emit(state.copyWith(tabIndex: 0, storeType: event.storeType));
   }
 }

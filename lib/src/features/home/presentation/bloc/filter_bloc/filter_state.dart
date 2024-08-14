@@ -23,6 +23,8 @@ class FilterState extends Equatable {
   final double toPrice;
   final FilterProductType type;
   final bool isFilterActive;
+  final List<CityItem> cityItemList;
+  final SortingType sortingType;
 
   ///
   final int currentPage;
@@ -30,7 +32,8 @@ class FilterState extends Equatable {
 
   ///
   final int categoryIndex;
-  final List<CityItem> cityItemList;
+  final List<SubCategory> subCategoryList;
+  final bool isAllItems;
 
   const FilterState({
     this.filterStateStatus = FilterStateStatus.INITIAL,
@@ -47,6 +50,9 @@ class FilterState extends Equatable {
     this.isMoreData = true,
     this.categoryIndex = 0,
     this.cityItemList = const [],
+    this.sortingType = SortingType.desc,
+    this.subCategoryList = const [],
+    this.isAllItems = true,
   });
 
   FilterState copyWith({
@@ -64,6 +70,9 @@ class FilterState extends Equatable {
     bool? isMoreData,
     int? categoryIndex,
     List<CityItem>? cityItemList,
+    SortingType? sortingType,
+    List<SubCategory>? subCategoryList,
+    bool? isAllItems,
   }) {
     return FilterState(
       filterStateStatus: filterStateStatus ?? this.filterStateStatus,
@@ -80,6 +89,9 @@ class FilterState extends Equatable {
       isMoreData: isMoreData ?? this.isMoreData,
       categoryIndex: categoryIndex ?? this.categoryIndex,
       cityItemList: cityItemList ?? this.cityItemList,
+      sortingType: sortingType ?? this.sortingType,
+      subCategoryList: subCategoryList ?? this.subCategoryList,
+      isAllItems: isAllItems ?? this.isAllItems,
     );
   }
 
@@ -99,5 +111,8 @@ class FilterState extends Equatable {
         isMoreData,
         categoryIndex,
         cityItemList,
+        sortingType,
+        subCategoryList,
+        isAllItems,
       ];
 }

@@ -3,7 +3,9 @@ import '../../../../../../src.export.dart';
 
 class SendSwapWaitingItem extends StatelessWidget {
   final SendReceiveSwapReqItem sendSwapReqItem;
-  const SendSwapWaitingItem({super.key, required this.sendSwapReqItem});
+  final int approved;
+  const SendSwapWaitingItem(
+      {super.key, required this.sendSwapReqItem, required this.approved});
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,9 @@ class SendSwapWaitingItem extends StatelessWidget {
           SizedBox(height: 9.0.h),
           Row(
             children: [
-              SizedBox(
-                width: 14.0.w,
-              ),
+              SizedBox(width: 14.0.w),
               Text(
-                'Swap Requests:',
+                context.locale.swap_request_title,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 18.0.sp, color: ColorName.black),
               ),
@@ -38,7 +38,7 @@ class SendSwapWaitingItem extends StatelessWidget {
                 width: 3.0.w,
               ),
               Text(
-                '#12354',
+                '#${sendSwapReqItem.offerId ?? "12345"}',
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 18.0.sp, color: ColorName.black),
               ),
@@ -49,9 +49,11 @@ class SendSwapWaitingItem extends StatelessWidget {
                 flex: 1,
               ),
               Text(
-                'Waiting',
+                approved == 0
+                    ? context.locale.send_waiting_title
+                    : context.locale.send_rejected_title,
                 style: context.easyTheme.textTheme.headlineMedium!
-                    .copyWith(fontSize: 12.0.sp, color: ColorName.red),
+                    .copyWith(fontSize: 14.0.sp, color: ColorName.red),
               ),
               SizedBox(
                 width: 15.0.w,
@@ -61,7 +63,7 @@ class SendSwapWaitingItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.0.w),
             child: Text(
-              'Request In: ${Utils.formatDate(sendSwapReqItem.createdAt.toString())}',
+              '${context.locale.request_in} ${Utils.formatDate(sendSwapReqItem.createdAt.toString())}',
               style: context.easyTheme.textTheme.labelLarge!.copyWith(
                 fontSize: 14.0.sp,
                 color: ColorName.gray,
@@ -71,7 +73,7 @@ class SendSwapWaitingItem extends StatelessWidget {
           SizedBox(height: 8.0.h),
           Container(
             width: double.infinity,
-            height: 42.0.h,
+            height: 50.0.h,
             color: ColorName.lightGrayishBlue,
             child: Row(
               children: [
@@ -94,7 +96,7 @@ class SendSwapWaitingItem extends StatelessWidget {
                 ),
                 SizedBox(width: 50.0.w),
                 Text(
-                  'Product',
+                  context.locale.send_product_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
@@ -106,7 +108,7 @@ class SendSwapWaitingItem extends StatelessWidget {
           SizedBox(height: 4.0.h),
           Container(
             width: double.infinity,
-            height: 42.0.h,
+            height: 50.0.h,
             color: ColorName.white,
             child: Row(
               children: [
@@ -129,7 +131,7 @@ class SendSwapWaitingItem extends StatelessWidget {
                 ),
                 SizedBox(width: 50.0.w),
                 Text(
-                  'Offered',
+                  context.locale.send_offer_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
@@ -138,13 +140,11 @@ class SendSwapWaitingItem extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 4.0.h),
           Padding(
-            padding: EdgeInsetsDirectional.only(start: 60.0.w),
+            padding: EdgeInsetsDirectional.only(start: 78.0.w),
             child: TextButtonWidget(
-              text: 'See All Details',
+              text: context.locale.see_all_details,
               onPressed: () => seeAllDetails(context, sendSwapReqItem),
-              isBold: true,
             ),
           ),
           Divider(
@@ -157,8 +157,7 @@ class SendSwapWaitingItem extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 21.0.w),
               child: Text.rich(TextSpan(children: [
                 TextSpan(
-                    text:
-                        'The number has been hidden until your offer is approved',
+                    text: context.locale.hidden_number_title,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 14.0.sp)),
               ])),
@@ -170,9 +169,10 @@ class SendSwapWaitingItem extends StatelessWidget {
               SizedBox(width: 19.0.w),
               Expanded(
                 child: DefaultButtonWidget(
-                  text: 'CALL',
+                  text: context.locale.call_button,
                   onPressed: () {},
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
+                    minimumSize: MaterialStateProperty.all(const Size(387, 40)),
                     backgroundColor: MaterialStateProperty.all(
                         ColorName.blueGray.withOpacity(0.5)),
                   ),
@@ -183,9 +183,10 @@ class SendSwapWaitingItem extends StatelessWidget {
               ),
               Expanded(
                 child: DefaultButtonWidget(
-                  text: 'WhatsApp',
+                  text: context.locale.whatsApp_title,
                   onPressed: () {},
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
+                    minimumSize: MaterialStateProperty.all(const Size(387, 40)),
                     backgroundColor: MaterialStateProperty.all(
                         ColorName.amber.withOpacity(0.5)),
                   ),
@@ -205,6 +206,15 @@ class SendSwapWaitingItem extends StatelessWidget {
         context,
         SwapRequestDetailsScreen(
           sendSwapReqItem: sendSwapReqItem,
+          isSend: true,
         ));
+  }
+
+  void deleteItem(BuildContext context, int id) {
+    context.showRemoveDialog().then((value) {
+      if (value != null && value == true) {
+        MySwapOrderBloc.get.add(RemoveSendOfferItemEvent(id: id));
+      }
+    });
   }
 }

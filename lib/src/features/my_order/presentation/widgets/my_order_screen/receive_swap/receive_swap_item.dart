@@ -4,8 +4,10 @@ import '../../../../../../src.export.dart';
 
 class ReceiveSwapWaitingItem extends StatelessWidget {
   final SendReceiveSwapReqItem sendReceiveSwapReqItem;
-  const ReceiveSwapWaitingItem(
-      {super.key, required this.sendReceiveSwapReqItem});
+  const ReceiveSwapWaitingItem({
+    super.key,
+    required this.sendReceiveSwapReqItem,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
             child: Padding(
               padding: EdgeInsetsDirectional.only(end: 17.0.w, top: 7.0.h),
               child: Text(
-                'Waiting',
+                context.locale.receive_waiting,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 12.0.sp, color: ColorName.red),
               ),
@@ -74,9 +76,6 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                         color: ColorName.mediumSilver,
                       ),
                     ),
-                    SizedBox(
-                      height: 8.0.h,
-                    ),
                     Text.rich(
                       TextSpan(
                         children: [
@@ -87,7 +86,8 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                                       color: ColorName.gray,
                                       fontSize: 16.0.sp)),
                           TextSpan(
-                              text: '0',
+                              text:
+                                  '${sendReceiveSwapReqItem.offerItems!.offerCount}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.red, fontSize: 16.0.sp)),
@@ -98,7 +98,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                                       color: ColorName.gray,
                                       fontSize: 16.0.sp)),
                           TextSpan(
-                              text: 'Offers Submitted',
+                              text: context.locale.receive_offers_submitted,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.black,
@@ -118,7 +118,7 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.0.w),
             child: Center(
                 child: DefaultButtonWidget(
-                    text: 'START SWAP',
+                    text: context.locale.start_swap,
                     onPressed: () =>
                         onStartSwap(context, sendReceiveSwapReqItem))),
           ),
@@ -131,10 +131,15 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
   }
 
   void onStartSwap(context, SendReceiveSwapReqItem sendReceiveSwapReqItem) {
-    Utils.openNavNewPage(
-        context,
-        StartSwapScreen(
-          sendReceiveSwapReqItem: sendReceiveSwapReqItem,
-        ));
+    Utils.openNavNewPage(context,
+        StartSwapScreen(sendReceiveSwapReqItem: sendReceiveSwapReqItem));
+  }
+
+  void deleteItem(BuildContext context, int id) {
+    context.showRemoveDialog().then((value) {
+      if (value != null && value == true) {
+        MySwapOrderBloc.get.add(RemoveReceiveOfferItemEvent(id: id));
+      }
+    });
   }
 }

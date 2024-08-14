@@ -24,10 +24,29 @@ class SwapRepositoryImpl implements SwapRepository {
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, SwapFilterDataModel swapFilterDataModel, int page) async {
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype) async {
     return await getIt
         .get<SwapDatasource>()
-        .getSubCategoryByCatID(catID, swapFilterDataModel, page);
+        .getSubCategoryByCatID(catID, swapFilterDataModel, page, sortingtype);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSwapSubCategoiresByCatID(
+      int catID) async {
+    return await getIt.get<SwapDatasource>().getSwapSubCategoriesByCatID(catID);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsBySubCategoriesID(
+      int subID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype) async {
+    return await getIt.get<SwapDatasource>().getItemsBySubCategoriesID(
+        subID, swapFilterDataModel, page, sortingtype);
   }
 
   @override
@@ -41,8 +60,13 @@ class SwapRepositoryImpl implements SwapRepository {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
-    return await getIt.get<SwapDatasource>().getTodayItemsData(page);
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .getTodayItemsData(swapFilterDataModel, page, sortingType);
   }
 
   @override
@@ -118,5 +142,32 @@ class SwapRepositoryImpl implements SwapRepository {
   @override
   Future<Either<Failure, ValidResponse>> getCities() async {
     return await getIt.get<SwapDatasource>().getCities();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue,
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .getSearchItemsResult(searchValue, filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getOfferedItems(
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<SwapDatasource>()
+        .getOfferedItems(filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    return await getIt.get<SwapDatasource>().clickAdv(userID, advID);
   }
 }

@@ -18,6 +18,7 @@ class CommentState extends Equatable {
   final int currentPage;
   final bool isMoreData;
   final int itemId;
+  final int commentCount;
 
   const CommentState({
     this.commentStateStatus = CommentStateStatus.INITIAL,
@@ -25,6 +26,7 @@ class CommentState extends Equatable {
     this.currentPage = 1,
     this.isMoreData = true,
     this.itemId = 0,
+    this.commentCount = 0,
   });
 
   CommentState copyWith({
@@ -33,6 +35,7 @@ class CommentState extends Equatable {
     int? currentPage,
     bool? isMoreData,
     int? itemId,
+    int? commentCount,
   }) {
     return CommentState(
       commentStateStatus: commentStateStatus ?? this.commentStateStatus,
@@ -40,6 +43,7 @@ class CommentState extends Equatable {
       currentPage: currentPage ?? this.currentPage,
       isMoreData: isMoreData ?? this.isMoreData,
       itemId: itemId ?? this.itemId,
+      commentCount: commentCount ?? this.commentCount,
     );
   }
 
@@ -50,5 +54,6 @@ class CommentState extends Equatable {
         currentPage,
         isMoreData,
         itemId,
+        commentCount,
       ];
 }

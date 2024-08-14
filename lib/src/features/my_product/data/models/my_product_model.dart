@@ -39,7 +39,7 @@ class MyProductItem {
   List<String>? itemImg;
   String? date;
   String? title;
-  dynamic priceAfterDiscount;
+  double? priceAfterDiscount;
   String? discountPercentage;
   String? type;
   String? swapFor;
@@ -108,7 +108,11 @@ class MyProductItem {
     } else {
       itemImg = [''];
     }
-    priceAfterDiscount = json['price_after_discount'];
+    if (json['price_after_discount'] != null) {
+      priceAfterDiscount = json['price_after_discount'].toDouble();
+    } else {
+      priceAfterDiscount = 0.0;
+    }
     discountPercentage = json['discount_percentage'];
     description = json['description'] ?? "unKnown";
     date = json['date'] ?? "unKnown";
@@ -127,9 +131,18 @@ class MyProductItem {
     updatedAt = json['updated_at'] ?? "unKnown";
     quantity = json['quantity'] ?? 0;
     display = json['display'] ?? "unKnown";
-    rateCount = 4;
-    averageRating = 3.5;
-    offerCount = 0;
+    rateCount = json['rate_count'] ?? 0;
+    if (json['avarageRating'] != null) {
+      if (json['avarageRating'] is int) {
+        averageRating = json['avarageRating'].toDouble();
+      }
+      if (json['avarageRating'] is String) {
+        averageRating = double.parse(json['avarageRating']);
+      }
+    } else {
+      averageRating = 0.0;
+    }
+    offerCount = json['offers_count'] ?? 0;
     countrySwap = json['country_swap'] ?? "unKnown";
     citySwap = json['city_swap'] ?? "unKnown";
     user = json['user'] != null
@@ -142,7 +155,7 @@ class MyProductItem {
         ? BrandItem.fromJson(json['brand'])
         : BrandItem.initValues();
     subcategory = json['subcategory'] != null
-        ? SubCategory.fromJson(json['brand'])
+        ? SubCategory.fromJson(json['subcategory'])
         : SubCategory.initValues();
     section = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])
@@ -151,7 +164,7 @@ class MyProductItem {
   MyProductItem.initValues() {
     id = 0;
     itemImg = ['', ''];
-    priceAfterDiscount = "unKnown";
+    priceAfterDiscount = 0.0;
     discountPercentage = "unKnown";
     description = "unKnown";
     date = "unKnown";

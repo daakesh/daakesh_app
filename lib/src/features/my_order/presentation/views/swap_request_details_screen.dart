@@ -3,7 +3,9 @@ import '../../../../src.export.dart';
 
 class SwapRequestDetailsScreen extends StatelessWidget {
   final SendReceiveSwapReqItem sendSwapReqItem;
-  const SwapRequestDetailsScreen({super.key, required this.sendSwapReqItem});
+  final bool isSend;
+  const SwapRequestDetailsScreen(
+      {super.key, required this.sendSwapReqItem, this.isSend = false});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +17,17 @@ class SwapRequestDetailsScreen extends StatelessWidget {
           body: LayoutBuilderWidget(
             child: Column(
               children: [
-                const HeaderWidget(withArrowBack: true, isLight: true),
+                HeaderWidget(
+                  withArrowBack: true,
+                  isLight: true,
+                  requestID: sendSwapReqItem.id,
+                  isSend: isSend,
+                ),
                 SizedBox(
                   height: 16.0.h,
                 ),
                 Text(
-                  'Swap Requests Details',
+                  context.locale.swap_requests_details,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 22.0.sp),
                 ),
@@ -48,11 +55,13 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(top: 32.0.h),
-                          child: CachedImage(
-                            imageUrl: sendSwapReqItem
-                                .sourceItems!.itemImg!.first
-                                .toString(),
+                          padding: EdgeInsets.all(8.h),
+                          child: Center(
+                            child: CachedImage(
+                              imageUrl: sendSwapReqItem
+                                  .sourceItems!.itemImg!.first
+                                  .toString(),
+                            ),
                           ),
                         ),
                       ),
@@ -93,7 +102,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'Swap In ${sendSwapReqItem.sourceItems!.citySwap}, ${sendSwapReqItem.sourceItems!.countrySwap}',
+                                  '${context.locale.swap_in} ${sendSwapReqItem.sourceItems!.citySwap}, ${sendSwapReqItem.sourceItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(fontSize: 16.0.sp),
                                   overflow: TextOverflow.fade,
@@ -109,7 +118,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 TextSpan(
                                   children: [
                                     TextSpan(
-                                        text: 'By ',
+                                        text: '${context.locale.byTitle} ',
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
                                             .copyWith(
@@ -130,10 +139,14 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                               child: Align(
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
-                                  text: 'See Details',
+                                  text: context.locale.see_details,
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                    fontSize: 14.0.sp,
+                                    color: ColorName.skyBlue,
+                                  ),
                                   onPressed: () => seeSourceDetails(
                                       context, sendSwapReqItem),
-                                  isBold: true,
                                 ),
                               ),
                             ),
@@ -181,7 +194,10 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(top: 32.0.h),
+                              padding: sendSwapReqItem
+                                      .offerItems!.itemImg!.first.isNotEmpty
+                                  ? EdgeInsets.all(8.h)
+                                  : EdgeInsets.only(top: 32.h),
                               child: CachedImage(
                                   imageUrl: sendSwapReqItem
                                       .offerItems!.itemImg!.first
@@ -203,7 +219,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                   padding:
                                       EdgeInsetsDirectional.only(end: 45.0.w),
                                   child: Text(
-                                    '${sendSwapReqItem.offerItems!.title}\n',
+                                    '${sendSwapReqItem.offerItems!.title}',
+                                    maxLines: 3,
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
@@ -227,7 +244,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Text(
-                                      'Swap In ${sendSwapReqItem.offerItems!.citySwap}, ${sendSwapReqItem.offerItems!.countrySwap}',
+                                      '${context.locale.swap_in} ${sendSwapReqItem.offerItems!.citySwap}, ${sendSwapReqItem.offerItems!.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(fontSize: 16.0.sp),
@@ -236,12 +253,12 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 15.0.h,
+                                  height: 8.0.h,
                                 ),
                                 Padding(
                                   padding:
                                       EdgeInsetsDirectional.only(start: 6.0.w),
-                                  child: Text('Your Product',
+                                  child: Text(context.locale.your_product,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(fontSize: 20.0.sp)),
@@ -252,17 +269,15 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                   child: Align(
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: TextButtonWidget(
-                                      text: 'See Product Details',
+                                      text: context.locale.see_product_details,
                                       onPressed: () => seeOfferDetails(
                                           context, sendSwapReqItem),
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
                                         fontSize: 14.0.sp,
-                                        fontWeight: FontWeight.bold,
                                         color: ColorName.skyBlue,
                                       ),
-                                      isBold: true,
                                     ),
                                   ),
                                 ),
@@ -275,10 +290,10 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                         padding: EdgeInsetsDirectional.only(
                             start: 22.0.w, end: 14.0.w),
                         child: Text(
-                          'Your Comment',
+                          context.locale.your_comment,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
-                                  fontSize: 20.0.sp,
+                                  fontSize: 18.0.sp,
                                   color: ColorName.black.withOpacity(0.5)),
                         ),
                       ),
@@ -317,11 +332,18 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..userName = sendSwapReqItem.sourceUser!.name
       ..itemImage = sendSwapReqItem.sourceItems!.itemImg
       ..title = sendSwapReqItem.sourceItems!.title
-      ..brandName = "Unknown"
-      ..categoryName = "Unknown"
+      ..sectionName = sendSwapReqItem.sourceItems!.section!.name
+      ..sectionArName = sendSwapReqItem.sourceItems!.section!.arName
+      ..brandName = sendSwapReqItem.sourceItems!.brand!.brandName
+      ..brandArName = sendSwapReqItem.sourceItems!.brand!.arName
+      ..categoryName = sendSwapReqItem.sourceItems!.category!.name
+      ..categoryArName = sendSwapReqItem.sourceItems!.category!.arName
       ..year = sendSwapReqItem.sourceItems!.year
       ..description = sendSwapReqItem.sourceItems!.description
-      ..offerCount = 0;
+      ..citySwap = sendSwapReqItem.sourceItems!.citySwap
+      ..countrySwap = sendSwapReqItem.sourceItems!.countrySwap
+      ..date = sendSwapReqItem.createdAt
+      ..offerCount = sendSwapReqItem.sourceItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }
@@ -333,11 +355,18 @@ class SwapRequestDetailsScreen extends StatelessWidget {
       ..userName = sendSwapReqItem.offerUser!.name
       ..itemImage = sendSwapReqItem.offerItems!.itemImg
       ..title = sendSwapReqItem.offerItems!.title
-      ..brandName = "Unknown"
-      ..categoryName = "Unknown"
+      ..sectionName = sendSwapReqItem.offerItems!.section!.name
+      ..sectionArName = sendSwapReqItem.offerItems!.section!.arName
+      ..brandName = sendSwapReqItem.offerItems!.brand!.brandName
+      ..brandArName = sendSwapReqItem.offerItems!.brand!.arName
+      ..categoryName = sendSwapReqItem.offerItems!.category!.name
+      ..categoryArName = sendSwapReqItem.offerItems!.category!.arName
       ..year = sendSwapReqItem.offerItems!.year
       ..description = sendSwapReqItem.offerItems!.description
-      ..offerCount = 0;
+      ..citySwap = sendSwapReqItem.offerItems!.citySwap
+      ..countrySwap = sendSwapReqItem.offerItems!.countrySwap
+      ..date = sendSwapReqItem.createdAt
+      ..offerCount = sendSwapReqItem.offerItems!.offerCount;
     Utils.openNavNewPage(
         context, MySwapPreviewerScreen(previewerModel: previewerModel));
   }

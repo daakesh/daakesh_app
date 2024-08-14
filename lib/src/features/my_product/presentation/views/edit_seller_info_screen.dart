@@ -40,7 +40,7 @@ class _EditSellerInfoScreenState extends State<EditSellerInfoScreen> {
                   height: 108.0,
                 ),
                 Text(
-                  'Edit Your Info As Seller',
+                  context.locale.edit_info_seller,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 36.0),
                 ),
@@ -48,7 +48,7 @@ class _EditSellerInfoScreenState extends State<EditSellerInfoScreen> {
                   height: 14.0,
                 ),
                 Text(
-                  'Change your info',
+                  context.locale.change_info,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
@@ -56,14 +56,14 @@ class _EditSellerInfoScreenState extends State<EditSellerInfoScreen> {
                   height: 19.0,
                 ),
                 Text(
-                  'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                  context.locale.add_product_instruction,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 16.0),
                 ),
                 const SizedBox(
                   height: 21.0,
                 ),
-                Text('Name As Seller/Store',
+                Text(context.locale.name_as_seller_store,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                 TextFormFieldWidget(
@@ -74,7 +74,7 @@ class _EditSellerInfoScreenState extends State<EditSellerInfoScreen> {
                       context, nameSellerFocusNode, phoneFocusNode),
                 ),
                 const SizedBox(height: 33.0),
-                Text('Phone Number',
+                Text(context.locale.phone_number,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                 TextFormFieldWidget(
@@ -88,7 +88,7 @@ class _EditSellerInfoScreenState extends State<EditSellerInfoScreen> {
                   ],
                 ),
                 const SizedBox(height: 33.0),
-                Text('WhatsApp Number',
+                Text(context.locale.whatsApp_number,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 18.0, color: ColorName.darkGray)),
                 TextFormFieldWidget(
@@ -107,14 +107,16 @@ class _EditSellerInfoScreenState extends State<EditSellerInfoScreen> {
                 ),
                 Center(
                   child: DefaultButtonWidget(
-                      text: 'CHANGE', onPressed: () => onMakeEdit()),
+                      text: context.locale.change,
+                      onPressed: () => onMakeEdit()),
                 ),
                 const SizedBox(
                   height: 12.0,
                 ),
                 Center(
                   child: OutlineButtonWidget(
-                      text: 'RESET AND CANCEL', onPressed: () => cancel()),
+                      text: context.locale.reset_and_cancel,
+                      onPressed: () => cancel()),
                 ),
                 const SizedBox(
                   height: 50.0,

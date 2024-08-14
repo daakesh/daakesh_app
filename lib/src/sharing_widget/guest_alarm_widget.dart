@@ -18,22 +18,21 @@ class GuestAlarmWidget extends StatelessWidget {
             children: [
               const Spacer(flex: 1),
               Text(
-                'Welcome! To Daakesh',
+                context.locale.welcomeMessage,
                 style: context.easyTheme.textTheme.headlineLarge,
               ),
               const SizedBox(height: 12.0),
               Text(
-                'Unlock All Features by Logging In',
+                context.locale.unlockFeaturesMessage,
                 style: context.easyTheme.textTheme.headlineSmall,
               ),
               const SizedBox(height: 12.0),
-              Text(
-                  'Welcome! To unlock all features and personalize your experience, please log in or sign',
+              Text(context.locale.welcomeLoginMessage,
                   style: context.easyTheme.textTheme.bodyMedium),
               const SizedBox(height: 50.0),
               DefaultButtonWidget(
-                  text: 'LOGIN',
-                  onPressed: () => Utils.openNewPage(const WelcomeScreen())),
+                  text: context.locale.loginButton,
+                  onPressed: () => Utils.openNewPage(const LoginScreen())),
               const Spacer(flex: 1),
             ],
           ),

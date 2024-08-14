@@ -55,7 +55,6 @@ class _ShopProductItemState extends State<ShopProductItem> {
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 price.isNotEmpty
                     ? Container(
@@ -73,260 +72,253 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                 BorderRadius.all(Radius.circular(4.0.r))),
                         child: Center(
                           child: Text(
-                            '${widget.myProductItem.discountPercentage} OFF',
+                            '${widget.myProductItem.discountPercentage} ${context.locale.off}',
                             style: context.easyTheme.textTheme.labelLarge!
                                 .copyWith(fontSize: 15.0.sp),
                           ),
                         ),
                       )
-                    : const SizedBox(
-                        height: 30.0,
-                      ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+                    : const SizedBox(height: 30.0),
+                const Spacer(),
                 GestureDetector(
                   onTap: () => onEdit(widget.myProductItem),
                   child: Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        end: 20.0,
-                      ),
-                      child: Text(
-                        'Edit',
-                        style: context.easyTheme.textTheme.bodyLarge!
-                            .copyWith(fontSize: 12.0, color: ColorName.skyBlue),
+                      padding: EdgeInsetsDirectional.only(end: 20.w, top: 10),
+                      child: Assets.svg.editIcon.svg(width: 20, height: 20),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () => deleteItem(widget.myProductItem.id!),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.only(end: 20.0, top: 10),
+                      child: Assets.svg.deleteIcon.svg(
+                        color: ColorName.red,
+                        width: 20,
+                        height: 20,
                       ),
                     ),
                   ),
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(width: 12.0.w),
-                    Expanded(
-                        child: CachedImage(
-                      imageUrl: widget.myProductItem.itemImg != null
-                          ? widget.myProductItem.itemImg!.first.toString()
-                          : '',
-                      height: 80.0,
-                    )),
-                    SizedBox(width: 18.0.w),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(width: 12.0.w),
+                Expanded(
+                    child: CachedImage(
+                  imageUrl: widget.myProductItem.itemImg != null
+                      ? widget.myProductItem.itemImg!.first.toString()
+                      : '',
+                  fit: BoxFit.contain,
+                  height: 80.0,
+                )),
+                SizedBox(width: 18.0.w),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.only(end: 80.0.w),
+                        child: Text(
+                          '${widget.myProductItem.title}\n',
+                          style: context.easyTheme.textTheme.labelMedium!
+                              .copyWith(
+                                  fontSize: 16.0.sp,
+                                  color: ColorName.gray,
+                                  overflow: TextOverflow.ellipsis),
+                          maxLines: 2,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8.0.h,
+                      ),
+                      Row(
                         children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.only(end: 80.0.w),
-                            child: Text(
-                              '${widget.myProductItem.title}\n',
-                              style: context.easyTheme.textTheme.labelMedium!
-                                  .copyWith(
-                                      fontSize: 15.0.sp,
-                                      color: ColorName.gray,
-                                      overflow: TextOverflow.ellipsis),
-                              maxLines: 2,
+                          RatingBar.builder(
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            minRating: 1,
+                            maxRating: 5,
+                            ignoreGestures: true,
+                            initialRating:
+                                widget.myProductItem.averageRating!.toDouble(),
+                            itemSize: 20.0.h,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
                             ),
+                            onRatingUpdate: (rating) {},
                           ),
-                          SizedBox(
-                            height: 8.0.h,
+                          SizedBox(width: 8.0.w),
+                          Text(
+                            widget.myProductItem.averageRating!
+                                .toDouble()
+                                .toString(),
+                            style: context.easyTheme.textTheme.labelMedium!
+                                .copyWith(fontSize: 15.0.sp),
                           ),
-                          Row(
-                            children: [
-                              RatingBar.builder(
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                minRating: 1,
-                                maxRating: 5,
-                                ignoreGestures: true,
-                                initialRating: 5.0,
-                                itemSize: 14.6.h,
-                                itemBuilder: (context, _) => const Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                onRatingUpdate: (rating) {},
-                              ),
-                              SizedBox(width: 8.0.w),
-                              Text(
-                                '5.9',
-                                style: context.easyTheme.textTheme.labelMedium!
-                                    .copyWith(fontSize: 15.0.sp),
-                              ),
-                              SizedBox(width: 8.0.w),
-                              Text(
-                                '(200)',
-                                style: context.easyTheme.textTheme.labelMedium!
-                                    .copyWith(
-                                        fontSize: 13.0.sp,
-                                        color: ColorName.gray),
-                              )
-                            ],
-                          ),
-                          widget.myProductItem.discountPercentage! != '0%'
-                              ? Row(
-                                  children: [
-                                    Text(
-                                      '\$${widget.myProductItem.priceAfterDiscount}',
-                                      style: context
-                                          .easyTheme.textTheme.labelMedium!
-                                          .copyWith(fontSize: 21.0.sp),
-                                    ),
-                                    const SizedBox(
-                                      width: 6.0,
-                                    ),
-                                    Text(
-                                      '\$${widget.myProductItem.price}',
-                                      style: context
-                                          .easyTheme.textTheme.labelMedium!
-                                          .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.gray,
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : Text(
-                                  '\$${widget.myProductItem.price}',
+                          SizedBox(width: 8.0.w),
+                          Text(
+                            '(${widget.myProductItem.rateCount})',
+                            style: context.easyTheme.textTheme.labelMedium!
+                                .copyWith(
+                                    fontSize: 13.0.sp, color: ColorName.gray),
+                          )
+                        ],
+                      ),
+                      widget.myProductItem.discountPercentage! != '0%'
+                          ? Row(
+                              children: [
+                                Text(
+                                  '${context.locale.jordan_dinar} ${widget.myProductItem.priceAfterDiscount!.toInt()}',
                                   style: context
                                       .easyTheme.textTheme.labelMedium!
                                       .copyWith(fontSize: 21.0.sp),
                                 ),
-                        ],
-                      ),
+                                const SizedBox(
+                                  width: 6.0,
+                                ),
+                                Text(
+                                  '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
+                                  style: context
+                                      .easyTheme.textTheme.labelMedium!
+                                      .copyWith(
+                                    fontSize: 15.0.sp,
+                                    color: ColorName.gray,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Text(
+                              '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
+                              style: context.easyTheme.textTheme.labelMedium!
+                                  .copyWith(fontSize: 21.0.sp),
+                            ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(
+              color: ColorName.gray,
+              endIndent: 17.0.w,
+              indent: 17.0.w,
+            ),
+            SizedBox(
+              height: 4.0.h,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.0.w),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: context.locale.entry_date,
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                          fontSize: 15.0.sp,
+                                          color: ColorName.gray)),
+                              TextSpan(
+                                  text: Utils.formatDate(widget
+                                      .myProductItem.createdAt
+                                      .toString()),
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                          fontSize: 15.0.sp,
+                                          color: ColorName.black)),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 11.0),
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: context.locale.categories,
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                          fontSize: 15.0.sp,
+                                          color: ColorName.gray)),
+                              TextSpan(
+                                  text: Utils.isEnglish
+                                      ? '${widget.myProductItem.category!.name}'
+                                      : '${widget.myProductItem.category!.arName}',
+                                  style: context.easyTheme.textTheme.bodyMedium!
+                                      .copyWith(
+                                          fontSize: 15.0.sp,
+                                          color: ColorName.black)),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Divider(
-                  color: ColorName.gray,
-                  endIndent: 17.0.w,
-                  indent: 17.0.w,
-                ),
-                SizedBox(
-                  height: 15.0.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18.0.w),
-                  child: Row(
+                  ),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
+                      Text.rich(
+                        TextSpan(
                           children: [
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: 'Entry Date : ',
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray)),
-                                  TextSpan(
-                                      text: Utils.formatDate(widget
-                                          .myProductItem.createdAt
-                                          .toString()),
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.black)),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 11.0,
-                            ),
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: 'Categories : ',
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray)),
-                                  TextSpan(
-                                      text:
-                                          '${widget.myProductItem.category!.name}',
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.black)),
-                                ],
-                              ),
-                            ),
+                            TextSpan(
+                                text: context.locale.quantity,
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(
+                                        fontSize: 15.0.sp,
+                                        color: ColorName.gray)),
+                            TextSpan(
+                                text: ' ${widget.myProductItem.quantity}',
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(
+                                        fontSize: 15.0.sp,
+                                        color: ColorName.black)),
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
+                      const SizedBox(
+                        height: 11.0,
+                      ),
+                      Text.rich(
+                        TextSpan(
                           children: [
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: 'Quantity : ',
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray)),
-                                  TextSpan(
-                                      text: '${widget.myProductItem.quantity}',
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.black)),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 11.0,
-                            ),
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: 'Ship To : ',
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.gray)),
-                                  TextSpan(
-                                      text: '${widget.myProductItem.country}',
-                                      style: context
-                                          .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(
-                                              fontSize: 15.0.sp,
-                                              color: ColorName.black)),
-                                ],
-                              ),
-                            ),
+                            TextSpan(
+                                text: context.locale.ship,
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(
+                                        fontSize: 15.0.sp,
+                                        color: ColorName.gray)),
+                            TextSpan(
+                                text: ' ${widget.myProductItem.country}',
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(
+                                        fontSize: 15.0.sp,
+                                        color: ColorName.black)),
                           ],
                         ),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(height: 14.0.h),
-              ],
+                ],
+              ),
             ),
+            SizedBox(height: 20.0.h),
           ],
         ),
       ),
@@ -341,21 +333,39 @@ class _ShopProductItemState extends State<ShopProductItem> {
         productDisplayMethod: ProductDisplayMethod.Sell));
   }
 
+  void deleteItem(int id) async {
+    await context.showRemoveDialog().then((value) {
+      if (value != null && value == true) {
+        MyProBloc.get.add(RemoveItemEvent(id: id));
+      }
+    });
+  }
+
   void previewProduct(MyProductItem myProductItem) {
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
       ..userName = myProductItem.user!.name
       ..itemImage = myProductItem.itemImg
       ..title = myProductItem.title
+      ..sectionName = myProductItem.section!.name.toString()
+      ..sectionArName = myProductItem.section!.arName.toString()
       ..averageRating = myProductItem.averageRating
       ..rateCount = myProductItem.rateCount
       ..priceAfterDiscount = myProductItem.priceAfterDiscount
       ..brandName = myProductItem.brand!.brandName
+      ..brandArName = myProductItem.brand!.arName
       ..categoryName = myProductItem.category!.name
+      ..categoryArName = myProductItem.category!.arName
       ..year = myProductItem.year
       ..description = myProductItem.description
       ..itemId = myProductItem.id
-      ..categoryID = myProductItem.category!.id;
+      ..citySwap = myProductItem.citySwap
+      ..countrySwap = myProductItem.countrySwap
+      ..subID = myProductItem.subcategory!.id
+      ..date = myProductItem.date
+      ..categoryID = myProductItem.category!.id
+      ..discountPercentage = myProductItem.discountPercentage!
+      ..price = myProductItem.price!;
     Utils.openNavNewPage(
         context, MyProPreviewerScreen(previewerModel: previewerModel));
   }

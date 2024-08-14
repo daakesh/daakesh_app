@@ -42,7 +42,7 @@ class RegisterCardInfoScreen extends StatelessWidget {
                         ),
                   isLoggedIn
                       ? const SizedBox()
-                      : const Center(child: DaakeshLogoWidget()),
+                      : const Center(child: GeneralDaakeshLogoWidget()),
                   const SizedBox(
                     height: 38.0,
                   ),

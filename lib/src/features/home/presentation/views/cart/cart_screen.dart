@@ -130,6 +130,6 @@ class CartScreen extends StatelessWidget {
 
   void openCartScreen(context) {
     FocusScope.of(context).unfocus();
-    Utils.openNavNewPage(context, const SearchScreen());
+    Utils.openNavNewPage(context, SearchScreen());
   }
 }

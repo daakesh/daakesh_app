@@ -22,6 +22,15 @@ class BrandsState extends Equatable {
   final int itemsCurrentPage;
   final int brandID;
   final bool isMoreDataItems;
+  final String country;
+  final String city;
+  final int rate;
+  final double fromPrice;
+  final double toPrice;
+  final FilterProductType type;
+  final bool isFilterActive;
+  final List<CityItem> cityItemList;
+  final SortingType sortingType;
 
   const BrandsState({
     this.brandsStateStatus = BrandsStateStatus.INITIAL,
@@ -32,6 +41,15 @@ class BrandsState extends Equatable {
     this.itemsCurrentPage = 1,
     this.brandID = 0,
     this.isMoreDataItems = true,
+    this.country = '',
+    this.city = '',
+    this.rate = 0,
+    this.fromPrice = 0.0,
+    this.toPrice = 0.0,
+    this.type = FilterProductType.All,
+    this.isFilterActive = false,
+    this.cityItemList = const [],
+    this.sortingType = SortingType.desc,
   });
 
   BrandsState copyWith({
@@ -43,6 +61,15 @@ class BrandsState extends Equatable {
     int? itemsCurrentPage,
     bool? isMoreDataItems,
     int? brandID,
+    String? country,
+    String? city,
+    int? rate,
+    double? fromPrice,
+    double? toPrice,
+    FilterProductType? type,
+    bool? isFilterActive,
+    List<CityItem>? cityItemList,
+    SortingType? sortingType,
   }) {
     return BrandsState(
       brandsStateStatus: brandsStateStatus ?? this.brandsStateStatus,
@@ -53,6 +80,15 @@ class BrandsState extends Equatable {
       itemsCurrentPage: itemsCurrentPage ?? this.itemsCurrentPage,
       isMoreDataItems: isMoreDataItems ?? this.isMoreDataItems,
       brandID: brandID ?? this.brandID,
+      country: country ?? this.country,
+      city: city ?? this.city,
+      rate: rate ?? this.rate,
+      fromPrice: fromPrice ?? this.fromPrice,
+      toPrice: toPrice ?? this.toPrice,
+      type: type ?? this.type,
+      isFilterActive: isFilterActive ?? this.isFilterActive,
+      cityItemList: cityItemList ?? this.cityItemList,
+      sortingType: sortingType ?? this.sortingType,
     );
   }
 
@@ -66,5 +102,14 @@ class BrandsState extends Equatable {
         itemsCurrentPage,
         isMoreDataItems,
         brandID,
+        country,
+        city,
+        rate,
+        fromPrice,
+        toPrice,
+        type,
+        isFilterActive,
+        cityItemList,
+        sortingType,
       ];
 }

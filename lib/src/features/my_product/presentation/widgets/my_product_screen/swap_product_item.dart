@@ -29,19 +29,36 @@ class SwapProductItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              onTap: () => onEdit(myProductItem),
-              child: Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Padding(
-                  padding: EdgeInsetsDirectional.only(end: 20.0.w, top: 12.0.h),
-                  child: Text(
-                    'Edit',
-                    style: context.easyTheme.textTheme.bodyLarge!
-                        .copyWith(fontSize: 14.0, color: ColorName.skyBlue),
+            Row(
+              children: [
+                const Expanded(child: SizedBox()),
+                GestureDetector(
+                  onTap: () => onEdit(myProductItem),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.only(end: 20.w, top: 10),
+                      child: Assets.svg.editIcon.svg(width: 20, height: 20),
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () => deleteItem(context, myProductItem.id!),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.only(end: 20.0, top: 10),
+                      child: Assets.svg.deleteIcon.svg(
+                        color: ColorName.red,
+                        width: 20,
+                        height: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +69,7 @@ class SwapProductItem extends StatelessWidget {
                   imageUrl: myProductItem.itemImg != null
                       ? myProductItem.itemImg!.first
                       : '',
+                  fit: BoxFit.contain,
                   height: 80.0,
                 )),
                 SizedBox(width: 18.0.w),
@@ -77,37 +95,38 @@ class SwapProductItem extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                                text: 'Swap In :',
+                                text: context.locale.ship,
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 15.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.gray)),
                             TextSpan(
-                                text: '${myProductItem.countrySwap}',
+                                text: ' ${myProductItem.countrySwap}',
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 13.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.black)),
                           ],
                         ),
                       ),
                       const SizedBox(
-                        height: 6.0,
+                        height: 4.0,
                       ),
                       Text.rich(
                         TextSpan(
                           children: [
                             TextSpan(
-                                text: 'Display:',
+                                text: context.locale.display,
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 15.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.gray)),
                             TextSpan(
-                                text: '${myProductItem.display}',
+                                text:
+                                    ' : ${Utils.displayHandler(context, myProductItem.display.toString())}',
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 13.0.sp,
+                                        fontSize: 14.0.sp,
                                         color: ColorName.black)),
                           ],
                         ),
@@ -117,7 +136,7 @@ class SwapProductItem extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 18.0.h),
+            SizedBox(height: 20.0.h),
           ],
         ),
       ),
@@ -132,6 +151,14 @@ class SwapProductItem extends StatelessWidget {
         productDisplayMethod: ProductDisplayMethod.Swap));
   }
 
+  void deleteItem(BuildContext context, int id) {
+    context.showRemoveDialog().then((value) {
+      if (value != null && value == true) {
+        MySwapProBloc.get.add(RemoveSwapItemEvent(id: id));
+      }
+    });
+  }
+
   void previewProduct(BuildContext context) {
     ProPreviewerModel previewerModel = ProPreviewerModel();
     previewerModel
@@ -140,12 +167,19 @@ class SwapProductItem extends StatelessWidget {
       ..title = myProductItem.title
       ..averageRating = myProductItem.averageRating
       ..rateCount = myProductItem.rateCount
+      ..sectionName = myProductItem.section!.name.toString()
+      ..sectionArName = myProductItem.section!.arName.toString()
       ..priceAfterDiscount = myProductItem.priceAfterDiscount
       ..brandName = myProductItem.brand!.brandName
+      ..brandArName = myProductItem.brand!.arName
       ..categoryName = myProductItem.category!.name
+      ..categoryArName = myProductItem.category!.arName
+      ..citySwap = myProductItem.citySwap
+      ..countrySwap = myProductItem.countrySwap
       ..year = myProductItem.year
       ..description = myProductItem.description
       ..itemId = myProductItem.id
+      ..date = myProductItem.date
       ..categoryID = myProductItem.category!.id
       ..offerCount = myProductItem.offerCount;
     Utils.openNavNewPage(

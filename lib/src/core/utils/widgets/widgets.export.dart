@@ -8,3 +8,4 @@ export 'text_field_widget.dart';
 export 'cached_image.dart';
 export 'circular_progress_indicator_widget.dart';
 export 'drop_down_button_widget.dart';
+export 'refresh_indicator_widget.dart';

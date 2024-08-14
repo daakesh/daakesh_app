@@ -3,7 +3,7 @@ import '../../../../../src.export.dart';
 
 enum SwapPassDataStateStatus { INITIAL, LOADING, SUCCESS, ERROR }
 
-extension SwapPassDataStateStatusX on SwapPassDataStateStatus{
+extension SwapPassDataStateStatusX on SwapPassDataStateStatus {
   bool get isInitial => this == SwapPassDataStateStatus.INITIAL;
   bool get isSuccess => this == SwapPassDataStateStatus.SUCCESS;
   bool get isError => this == SwapPassDataStateStatus.ERROR;
@@ -20,17 +20,18 @@ class SwapPassDataState extends Equatable {
   final List<MyProductItem> mySwapProductData;
   final List<MyProductItem> itemSelected;
   final String comment;
+  final int itemIndex;
   const SwapPassDataState({
     this.swapPassDataStatus = SwapPassDataStateStatus.INITIAL,
-    this.swapCategoriesListData = const[],
-    this.swapSubCategoryListData = const[],
-    this.trendDealsListData = const[],
+    this.swapCategoriesListData = const [],
+    this.swapSubCategoryListData = const [],
+    this.trendDealsListData = const [],
     this.sliderIndex = 0,
     this.scale = 1.0,
-    this.mySwapProductData = const[],
-    this.itemSelected = const[],
+    this.mySwapProductData = const [],
+    this.itemSelected = const [],
     this.comment = '',
-
+    this.itemIndex = 0,
   });
 
   SwapPassDataState copyWith({
@@ -43,31 +44,35 @@ class SwapPassDataState extends Equatable {
     List<MyProductItem>? mySwapProductData,
     List<MyProductItem>? itemSelected,
     String? comment,
+    int? itemIndex,
   }) {
     return SwapPassDataState(
       swapPassDataStatus: swapPassDataStatus ?? this.swapPassDataStatus,
-      swapCategoriesListData: swapCategoriesListData ?? this.swapCategoriesListData,
-      swapSubCategoryListData: swapSubCategoryListData ?? this.swapSubCategoryListData,
+      swapCategoriesListData:
+          swapCategoriesListData ?? this.swapCategoriesListData,
+      swapSubCategoryListData:
+          swapSubCategoryListData ?? this.swapSubCategoryListData,
       trendDealsListData: trendDealsListData ?? this.trendDealsListData,
       sliderIndex: sliderIndex ?? this.sliderIndex,
       scale: scale ?? this.scale,
       mySwapProductData: mySwapProductData ?? this.mySwapProductData,
       itemSelected: itemSelected ?? this.itemSelected,
       comment: comment ?? this.comment,
-
+      itemIndex: itemIndex ?? this.itemIndex,
     );
   }
 
   @override
   List<Object?> get props => [
-    swapPassDataStatus,
-    swapCategoriesListData,
-    swapSubCategoryListData,
-    trendDealsListData,
-    sliderIndex,
-    scale,
-    mySwapProductData,
-    itemSelected,
-    comment,
-  ];
+        swapPassDataStatus,
+        swapCategoriesListData,
+        swapSubCategoryListData,
+        trendDealsListData,
+        sliderIndex,
+        scale,
+        mySwapProductData,
+        itemSelected,
+        comment,
+        itemIndex,
+      ];
 }

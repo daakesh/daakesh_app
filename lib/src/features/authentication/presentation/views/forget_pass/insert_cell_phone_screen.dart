@@ -25,10 +25,10 @@ class InsertCellPhoneScreen extends StatelessWidget {
                 child: Padding(
                   padding:
                       EdgeInsetsDirectional.only(start: 31.0.w, bottom: 20.0.h),
-                  child: Assets.svg.arrowBackIcon.svg(),
+                  child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                 ),
               ),
-              const Center(child: DaakeshLogoWidget()),
+              const Center(child: GeneralDaakeshLogoWidget()),
               const Spacer(
                 flex: 1,
               ),
@@ -60,7 +60,7 @@ class InsertCellPhoneScreen extends StatelessWidget {
                   children: [
                     Text(context.locale.forget_phone_number_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray)),
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: phoneNumberController,
                       keyboardType: TextInputType.number,

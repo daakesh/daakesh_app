@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../src.export.dart';
+import '../../../../../src.export.dart';
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({
+class SwapSearchScreen extends StatelessWidget {
+  const SwapSearchScreen({
     super.key,
   });
 
@@ -13,22 +13,23 @@ class SearchScreen extends StatelessWidget {
       canPop: true,
       onPopInvoked: (value) {
         FocusScope.of(context).unfocus();
-        SearchBloc.get.add(EmptySearchEvent());
+        SwapSearchBloc.get.add(SwapEmptySearchEvent());
       },
       child: Scaffold(
-        body: BlocBuilder<SearchBloc, SearchState>(builder: (_, state) {
+        body: BlocBuilder<SwapSearchBloc, SwapSearchState>(builder: (_, state) {
           return CustomScrollView(
             slivers: [
-              const HomeAppBarWidget(isActive: true),
+              SwapAppBarWidget(isActive: true, searchState: state),
               const SliverPadding(
                   padding: EdgeInsetsDirectional.only(top: 21.0)),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 31.0),
+                  padding:
+                      const EdgeInsetsDirectional.only(start: 31.0, end: 23.0),
                   child: Align(
                       alignment: AlignmentDirectional.bottomStart,
                       child: Text(
-                        context.locale.search_title,
+                        context.locale.swap_search_title,
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.57)),
                       )),
@@ -41,12 +42,12 @@ class SearchScreen extends StatelessWidget {
                   padding: EdgeInsetsDirectional.only(top: 55.0)),
               SliverToBoxAdapter(
                 child: !state.isMoreData
-                    ? !state.searchStateStatus.isLoadingMore
+                    ? !state.swapSearchStateStatus.isLoadingMore
                         ? Center(
                             child: InkWell(
                               onTap: () => seeMore(state.searchValue),
                               child: Text(
-                                context.locale.see_more_text_button,
+                                context.locale.see_more_search,
                                 style: context.easyTheme.textTheme.bodyLarge!
                                     .copyWith(
                                   fontSize: 16.0,
@@ -67,46 +68,52 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
+  void openFilterScreen(context) {
+    FocusScope.of(context).unfocus();
+    Utils.openNavNewPage(context, SwapFilterScreen());
+  }
+
   void seeMore(String searchValue) {
-    SearchBloc.get
-        .add(SearchOnItemsEvent(searchValue: searchValue, isSeeMore: true));
+    SwapSearchBloc.get.add(SwapSearchOnItemsEvent(
+      searchValue: searchValue,
+      isSeeMore: true,
+    ));
   }
 }
 
 class _SearchResultHandler extends StatelessWidget {
-  final SearchState state;
+  final SwapSearchState state;
   const _SearchResultHandler({required this.state});
 
   @override
   Widget build(BuildContext context) {
-    switch (state.searchStateStatus) {
-      case SearchStateStatus.LOADING:
+    switch (state.swapSearchStateStatus) {
+      case SwapSearchStateStatus.LOADING:
         return const SliverToBoxAdapter(
             child: CircularProgressIndicatorWidget());
-      case SearchStateStatus.NULL:
+      case SwapSearchStateStatus.NULL:
         return SliverToBoxAdapter(
             child: Center(
-                child: Text(context.locale.no_information_available_title)));
+                child:
+                    Text(context.locale.swap_search_no_information_available)));
       default:
         return SliverList(
           delegate: SliverChildBuilderDelegate((_, index) {
-            TodayItem searchModelData = state.searchResultList[index];
-            return state.searchResultList.isEmpty
+            TrendDealsItem swapSearchModelData =
+                state.swapSearchResultList[index];
+            return state.swapSearchResultList.isEmpty
                 ? const SizedBox()
-                : GestureDetector(
-                    onTap: () {
-                      CommentBloc.get.add(
-                          GetCommentByItemEvent(itemId: searchModelData.id));
-                      Utils.openNavNewPage(
-                          context,
-                          MoreInfoProductScreen(
-                            todayDealItem: searchModelData,
-                            isDaakeshTodayDeal: true,
-                          ));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 20.0, left: 31.0, right: 31.0),
+                : Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 31.0, end: 23.0, bottom: 20.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        SwapSearchBloc.get.add(SwapSearchFilterEvent(
+                            searchValue: swapSearchModelData.title.toString()));
+                        SwapFilterBloc.get.add(GetSwapCitiesEvent());
+                        Utils.openNavNewPage(
+                            context, const SwapSearchItemsScreen());
+                      },
                       child: SizedBox(
                         width: double.infinity,
                         child: Row(
@@ -117,9 +124,7 @@ class _SearchResultHandler extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                searchModelData.title
-                                    .toString()
-                                    .replaceAll('\n', ' '),
+                                swapSearchModelData.title.toString(),
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 18.0,
@@ -127,13 +132,13 @@ class _SearchResultHandler extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis),
                               ),
                             ),
-                            Assets.svg.arrowUpRight.svg()
+                            Assets.svg.arrowUpRight.svg(),
                           ],
                         ),
                       ),
                     ),
                   );
-          }, childCount: state.searchResultList.length),
+          }, childCount: state.swapSearchResultList.length),
         );
     }
   }

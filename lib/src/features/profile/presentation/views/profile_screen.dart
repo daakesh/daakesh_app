@@ -1,3 +1,4 @@
+import 'package:daakesh/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
@@ -13,9 +14,7 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const HeaderWidget(withArrowBack: false),
-            const SizedBox(
-              height: 21.0,
-            ),
+            const SizedBox(height: 21.0),
             BlocBuilder<UserDataBloc, UserDataState>(
               builder: (context, state) {
                 return Row(
@@ -75,30 +74,28 @@ class ProfileScreen extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(
-              height: 31.0,
-            ),
+            const SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text(
-                'Your Account',
+                context.locale.your_account,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 20.0),
               ),
             ),
             const SizedBox(
-              height: 31.0,
+              height: 20.0,
             ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(const PersonalInfoScreen()),
-              title: 'Personal Info',
-              icon: Assets.svg.personIcon.svg(),
+              title: context.locale.personal_info_title,
+              icon: Assets.svg.personIcon.svg(width: 24.0, height: 24.0),
             ),
-            CategoryItemWidget(
-              onTap: () => Utils.openNewPage(ContactInfoScreen()),
-              title: 'Contact Info',
-              icon: Assets.svg.profilePhoneIcon.svg(),
-            ),
+            //CategoryItemWidget(
+            //  onTap: () => Utils.openNewPage(ContactInfoScreen()),
+            //  title: context.locale.contact_info_title,
+            //  icon: Assets.svg.profilePhoneIcon.svg(),
+            //),
             // CategoryItemWidget(
             //   onTap: () => Utils.openNewPage(const CardAndAccountScreen()),
             //   title: 'Card and Accounts',
@@ -106,76 +103,53 @@ class ProfileScreen extends StatelessWidget {
             // ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(const LocationScreen()),
-              title: 'Location',
-              icon: Assets.svg.locationPinIcon.svg(),
+              title: context.locale.location_profile_title,
+              icon: Assets.svg.locationPinIcon.svg(width: 24.0, height: 24.0),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text(
-                'Support',
+                context.locale.support,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 20.0),
               ),
             ),
             const SizedBox(
-              height: 29.0,
+              height: 20.0,
             ),
             CategoryItemWidget(
               onTap: () => Utils.openNewPage(ComplaintScreen()),
-              title: 'Complaint',
-              icon: Assets.svg.commentIcon.svg(),
+              title: context.locale.complaint_title,
+              icon: Assets.svg.commentIcon.svg(width: 24.0, height: 24.0),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text(
-                'Setting',
+                context.locale.setting,
                 style: context.easyTheme.textTheme.headlineMedium!
                     .copyWith(fontSize: 20.0),
               ),
             ),
             const SizedBox(
-              height: 29.0,
+              height: 20.0,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 43.0),
+              padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Row(
                 children: [
-                  Assets.png.langIcon.image(width: 30.0, height: 30.0),
+                  Assets.png.langIcon.image(width: 24.0, height: 24.0),
                   const SizedBox(
                     width: 12.0,
                   ),
                   Text(
-                    'Language',
+                    context.locale.language,
                     style: context.easyTheme.textTheme.labelLarge!
                         .copyWith(fontSize: 16.0, color: ColorName.blueGray),
                   ),
                   const Spacer(
                     flex: 1,
                   ),
-                  Text(
-                    'English',
-                    style: context.easyTheme.textTheme.labelLarge!
-                        .copyWith(fontSize: 12.0, color: ColorName.blueGray),
-                  ),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
-                    return Switch.adaptive(
-                        value: state.switchLangValue,
-                        onChanged: (value) {
-                          ProfileBloc.get
-                              .add(ChangeLangEvent(switchLangValue: value));
-                        });
-                  }),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  Text(
-                    'عربي',
-                    style: context.easyTheme.textTheme.labelLarge!
-                        .copyWith(fontSize: 12.0, color: ColorName.blueGray),
-                  ),
+                  const LanguageSwapWidget(),
                 ],
               ),
             ),
@@ -189,7 +163,7 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Center(
                   child: DefaultButtonWidget(
-                      text: 'LOG OUT',
+                      text: context.locale.log_out,
                       onPressed: () =>
                           UserDataBloc.get.add(LogoutUserEvent()))),
             ),
@@ -202,6 +176,63 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class LanguageSwapWidget extends StatelessWidget {
+  final MainAxisAlignment mainAxisAlignment;
+  const LanguageSwapWidget(
+      {super.key, this.mainAxisAlignment = MainAxisAlignment.start});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: mainAxisAlignment,
+      children: [
+        Text(
+          'English',
+          style: context.easyTheme.textTheme.labelLarge!
+              .copyWith(fontSize: 12.0, color: ColorName.blueGray),
+        ),
+        const SizedBox(
+          width: 8.0,
+        ),
+        BlocBuilder<ProfileBloc, ProfileState>(builder: (_, state) {
+          return Switch(
+              value: state.switchLangValue,
+              activeColor: ColorName.blueGray,
+              inactiveThumbColor: ColorName.blueGray,
+              inactiveTrackColor: ColorName.gainsboro,
+              focusColor: ColorName.gainsboro,
+              hoverColor: ColorName.gainsboro,
+              activeTrackColor: ColorName.gainsboro,
+              trackOutlineColor: MaterialStateProperty.resolveWith(
+                (final Set<MaterialState> states) {
+                  if (states.contains(MaterialState.selected)) {
+                    return null;
+                  }
+                  return ColorName.transparent;
+                },
+              ),
+              thumbColor: MaterialStateProperty.all(ColorName.blueGray),
+              thumbIcon: MaterialStateProperty.all(const Icon(
+                Icons.abc,
+                color: ColorName.blueGray,
+              )),
+              onChanged: (value) {
+                ProfileBloc.get.add(ChangeLangEvent(switchLangValue: value));
+              });
+        }),
+        const SizedBox(
+          width: 8.0,
+        ),
+        Text(
+          'عربي',
+          style: context.easyTheme.textTheme.labelLarge!
+              .copyWith(fontSize: 12.0, color: ColorName.blueGray),
+        ),
+      ],
     );
   }
 }

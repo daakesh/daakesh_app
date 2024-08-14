@@ -13,11 +13,48 @@ class HomemadeScreen extends StatelessWidget {
           body: CustomScrollView(
             slivers: [
               const HomeAppBarWidget(),
-              const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
+              const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(context.locale.results_title,
+                            style: context.easyTheme.textTheme.headlineMedium),
+                      ),
+                      GestureDetector(
+                        onTap: () => openFilterScreen(context),
+                        child: Assets.png.filterIcon.image(
+                          width: 40.w,
+                          height: 40.h,
+                        ),
+                      ),
+                      const SizedBox(width: 11),
+                      GestureDetector(
+                        onTap: () => state.sortingType == SortingType.desc
+                            ? HandmadeBloc.get.add(GetHandmadeDataEvent(
+                                sortingType: SortingType.asc))
+                            : HandmadeBloc.get.add(GetHandmadeDataEvent(
+                                sortingType: SortingType.desc)),
+                        child:
+                            Assets.svg.sortIcon.svg(width: 30.w, height: 30.h),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 11)),
               SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
-                HandmadeItem handmadeItem = state.handmadeListData[index];
-                return HandmadeItemWidget(handmadeItem: handmadeItem);
+                TodayItem handmadeItem = state.handmadeListData[index];
+                return Padding(
+                  padding:
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  child: GestureDetector(
+                      onTap: () => openMoreInfoScreen(context, handmadeItem),
+                      child: ResultItemWidget(todayItem: handmadeItem)),
+                );
               }, childCount: state.handmadeListData.length)),
               const SliverToBoxAdapter(child: SizedBox(height: 30.0)),
               SliverToBoxAdapter(child: seeMoreHandler(state, context)),
@@ -27,6 +64,14 @@ class HomemadeScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  void openMoreInfoScreen(BuildContext context, TodayItem todayItem) {
+    CommentBloc.get.add(GetCommentByItemEvent(itemId: todayItem.id));
+    Utils.openNavNewPage(
+        context,
+        MoreInfoProductScreen(
+            todayDealItem: todayItem, isDaakeshTodayDeal: true));
   }
 
   void onSeeMore() =>
@@ -47,7 +92,20 @@ class HomemadeScreen extends StatelessWidget {
             ));
         }
       default:
-        return const SizedBox();
+        return state.handmadeStateStatus.isLoading
+            ? const CircularProgressIndicatorWidget()
+            : state.handmadeStateStatus.isNull
+                ? Center(
+                    child: Text(
+                      context.locale.results_no_data,
+                      style: context.easyTheme.textTheme.headlineMedium,
+                    ),
+                  )
+                : const SizedBox();
     }
+  }
+
+  void openFilterScreen(BuildContext context) {
+    Utils.openNavNewPage(context, HandmadeFilterScreen());
   }
 }

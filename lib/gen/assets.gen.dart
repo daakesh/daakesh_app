@@ -8,8 +8,9 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class $AssetsPngGen {
   const $AssetsPngGen();
@@ -55,6 +56,9 @@ class $AssetsPngGen {
   /// File path: assets/png/lang_icon.png
   AssetGenImage get langIcon => const AssetGenImage('assets/png/lang_icon.png');
 
+  /// File path: assets/png/line.png
+  AssetGenImage get line => const AssetGenImage('assets/png/line.png');
+
   /// File path: assets/png/mastercard_icon.png
   AssetGenImage get mastercardIcon =>
       const AssetGenImage('assets/png/mastercard_icon.png');
@@ -63,12 +67,32 @@ class $AssetsPngGen {
   AssetGenImage get productIcon =>
       const AssetGenImage('assets/png/product_icon.png');
 
+  /// File path: assets/png/shop_by_brand.png
+  AssetGenImage get shopByBrand =>
+      const AssetGenImage('assets/png/shop_by_brand.png');
+
+  /// File path: assets/png/shop_mode_ar.gif
+  AssetGenImage get shopModeAr =>
+      const AssetGenImage('assets/png/shop_mode_ar.gif');
+
+  /// File path: assets/png/shop_mode_en.gif
+  AssetGenImage get shopModeEn =>
+      const AssetGenImage('assets/png/shop_mode_en.gif');
+
   /// File path: assets/png/splash_screen_background.png
   AssetGenImage get splashScreenBackground =>
       const AssetGenImage('assets/png/splash_screen_background.png');
 
   /// File path: assets/png/swap_icon.png
   AssetGenImage get swapIcon => const AssetGenImage('assets/png/swap_icon.png');
+
+  /// File path: assets/png/swap_mode_ar.gif
+  AssetGenImage get swapModeAr =>
+      const AssetGenImage('assets/png/swap_mode_ar.gif');
+
+  /// File path: assets/png/swap_mode_en.gif
+  AssetGenImage get swapModeEn =>
+      const AssetGenImage('assets/png/swap_mode_en.gif');
 
   /// File path: assets/png/visa_icon.png
   AssetGenImage get visaIcon => const AssetGenImage('assets/png/visa_icon.png');
@@ -86,10 +110,16 @@ class $AssetsPngGen {
         googleIcon,
         handmadeIcon,
         langIcon,
+        line,
         mastercardIcon,
         productIcon,
+        shopByBrand,
+        shopModeAr,
+        shopModeEn,
         splashScreenBackground,
         swapIcon,
+        swapModeAr,
+        swapModeEn,
         visaIcon
       ];
 }
@@ -136,6 +166,14 @@ class $AssetsSvgGen {
   SvgGenImage get daakeshLogo =>
       const SvgGenImage('assets/svg/daakesh_logo.svg');
 
+  /// File path: assets/svg/dark_arabic_logo.svg
+  SvgGenImage get darkArabicLogo =>
+      const SvgGenImage('assets/svg/dark_arabic_logo.svg');
+
+  /// File path: assets/svg/delete_icon copy.svg
+  SvgGenImage get deleteIconCopy =>
+      const SvgGenImage('assets/svg/delete_icon copy.svg');
+
   /// File path: assets/svg/delete_icon.svg
   SvgGenImage get deleteIcon => const SvgGenImage('assets/svg/delete_icon.svg');
 
@@ -150,6 +188,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/disable_profile_icon.svg
   SvgGenImage get disableProfileIcon =>
       const SvgGenImage('assets/svg/disable_profile_icon.svg');
+
+  /// File path: assets/svg/edit_icon.svg
+  SvgGenImage get editIcon => const SvgGenImage('assets/svg/edit_icon.svg');
 
   /// File path: assets/svg/empty_image_icon.svg
   SvgGenImage get emptyImageIcon =>
@@ -191,9 +232,16 @@ class $AssetsSvgGen {
   SvgGenImage get iosArrowForward =>
       const SvgGenImage('assets/svg/ios_arrow_forward.svg');
 
+  /// File path: assets/svg/light_arabic_logo.svg
+  SvgGenImage get lightArabicLogo =>
+      const SvgGenImage('assets/svg/light_arabic_logo.svg');
+
   /// File path: assets/svg/light_daakesh_logo.svg
   SvgGenImage get lightDaakeshLogo =>
       const SvgGenImage('assets/svg/light_daakesh_logo.svg');
+
+  /// File path: assets/svg/line.svg
+  SvgGenImage get line => const SvgGenImage('assets/svg/line.svg');
 
   /// File path: assets/svg/location_pin_icon.svg
   SvgGenImage get locationPinIcon =>
@@ -219,12 +267,20 @@ class $AssetsSvgGen {
   /// File path: assets/svg/send_icon.svg
   SvgGenImage get sendIcon => const SvgGenImage('assets/svg/send_icon.svg');
 
+  /// File path: assets/svg/shop_by_brand.svg
+  SvgGenImage get shopByBrand =>
+      const SvgGenImage('assets/svg/shop_by_brand.svg');
+
   /// File path: assets/svg/sort_icon.svg
   SvgGenImage get sortIcon => const SvgGenImage('assets/svg/sort_icon.svg');
 
   /// File path: assets/svg/zoom_in_icon.svg
   SvgGenImage get zoomInIcon =>
       const SvgGenImage('assets/svg/zoom_in_icon.svg');
+
+  /// File path: assets/svg/zoom_out_icon.svg
+  SvgGenImage get zoomOutIcon =>
+      const SvgGenImage('assets/svg/zoom_out_icon.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [
@@ -238,10 +294,13 @@ class $AssetsSvgGen {
         creditCardIcon,
         creditCardLogoIcon,
         daakeshLogo,
+        darkArabicLogo,
+        deleteIconCopy,
         deleteIcon,
         disableHomeIcon,
         disableProductIcon,
         disableProfileIcon,
+        editIcon,
         emptyImageIcon,
         enableHomeIcon,
         enableProductIcon,
@@ -252,7 +311,9 @@ class $AssetsSvgGen {
         imagePickerIcon,
         iosArrowBack,
         iosArrowForward,
+        lightArabicLogo,
         lightDaakeshLogo,
+        line,
         locationPinIcon,
         personIcon,
         plusIcon,
@@ -260,8 +321,10 @@ class $AssetsSvgGen {
         profilePhoneIcon,
         searchIcon,
         sendIcon,
+        shopByBrand,
         sortIcon,
-        zoomInIcon
+        zoomInIcon,
+        zoomOutIcon
       ];
 }
 
@@ -273,9 +336,11 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(this._assetName, {this.size = null});
 
   final String _assetName;
+
+  final Size? size;
 
   Image image({
     Key? key,
@@ -347,9 +412,20 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(this._assetName);
+  const SvgGenImage(
+    this._assetName, {
+    this.size = null,
+  }) : _isVecFormat = false;
+
+  const SvgGenImage.vec(
+    this._assetName, {
+    this.size = null,
+  }) : _isVecFormat = true;
 
   final String _assetName;
+
+  final Size? size;
+  final bool _isVecFormat;
 
   SvgPicture svg({
     Key? key,
@@ -364,19 +440,21 @@ class SvgGenImage {
     WidgetBuilder? placeholderBuilder,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    SvgTheme theme = const SvgTheme(),
+    SvgTheme? theme,
     ColorFilter? colorFilter,
     Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
     @deprecated bool cacheColorFilter = false,
   }) {
-    return SvgPicture.asset(
-      _assetName,
+    return SvgPicture(
+      _isVecFormat
+          ? AssetBytesLoader(_assetName,
+              assetBundle: bundle, packageName: package)
+          : SvgAssetLoader(_assetName,
+              assetBundle: bundle, packageName: package),
       key: key,
       matchTextDirection: matchTextDirection,
-      bundle: bundle,
-      package: package,
       width: width,
       height: height,
       fit: fit,
@@ -386,9 +464,8 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      colorFilter: colorFilter,
-      color: color,
-      colorBlendMode: colorBlendMode,
+      colorFilter: colorFilter ??
+          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );

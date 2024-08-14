@@ -5,18 +5,17 @@ class AddProModel {
   String? proId;
   String? title;
   String? description;
-  String? secID;
-  String? catID;
-  String? subID;
-  String? brandID;
+  int? secID;
+  int? catID;
+  int? subID;
+  int? brandID;
   String? tradeOrSell;
   String? tradeFor;
   String? price;
   String? condition;
   String? city;
   String? year;
-  String? discountFrom;
-  String? discountTo;
+
   String? discount;
   String? country;
   String? quantity;
@@ -41,8 +40,6 @@ class AddProModel {
       this.condition,
       this.city,
       this.year,
-      this.discountFrom,
-      this.discountTo,
       this.discount,
       this.country,
       this.quantity,
@@ -51,14 +48,23 @@ class AddProModel {
       this.citySwap,
       this.itemFileImg,
       this.itemImageList});
+
   Map<String, dynamic> addItemToJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['userID'] = userID.toString();
     data['description'] = description.toString();
     data['catID'] = catID.toString();
-    data['subID'] = subID.toString();
     data['secID'] = secID.toString();
-    data['brandID'] = brandID.toString();
+    if (subID != null && subID != 1000) {
+      data['subID'] = subID;
+    } else {
+      data['subID'] = null;
+    }
+    if (brandID != null && brandID != 1000) {
+      data['brandID'] = brandID;
+    } else {
+      data['brandID'] = null;
+    }
     data['title'] = title.toString();
     data['tradeOrSell'] = tradeOrSell.toString();
     data['tradeFor'] = tradeFor.toString();
@@ -66,8 +72,6 @@ class AddProModel {
     data['condition'] = condition.toString();
     data['city'] = city.toString();
     data['year'] = year.toString();
-    data['discount_from'] = discountFrom.toString();
-    data['discount_to'] = discountTo.toString();
     data['discount'] = discount.toString();
     data['country'] = country.toString();
     data['quantity'] = quantity.toString();
@@ -84,23 +88,33 @@ class AddProModel {
     data['description'] = description.toString();
     data['catID'] = catID.toString();
     data['secID'] = secID.toString();
-    data['subID'] = subID.toString();
-    data['brandID'] = brandID.toString();
+
+    if (subID != null && subID != 1000) {
+      data['subID'] = subID;
+    } else {
+      data['subID'] = null;
+    }
+    if (brandID != null && brandID != 1000) {
+      data['brandID'] = brandID;
+    } else {
+      data['brandID'] = null;
+    }
     data['title'] = title.toString();
     data['type'] = tradeOrSell.toString();
     data['price'] = price.toString();
     data['condition'] = condition.toString();
     data['city'] = city.toString();
     data['year'] = year.toString();
-    data['discount_from'] = discountFrom.toString();
-    data['discount_to'] = discountTo.toString();
+
     data['discount'] = discount.toString();
     data['country'] = country.toString();
     data['quantity'] = quantity.toString();
     data['display'] = display.toString();
     data['country_swap'] = countrySwap.toString();
     data['city_swap'] = citySwap.toString();
-    //data['itemImg'] = itemImageList!.join(',');
+    if (itemImageList!.isNotEmpty && itemImageList != null) {
+      data['itemImg'] = itemImageList!.join(',');
+    }
     return data;
   }
 }

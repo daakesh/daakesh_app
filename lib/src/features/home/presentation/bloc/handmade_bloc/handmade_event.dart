@@ -1,8 +1,14 @@
+import '../../../../../src.export.dart';
+
 abstract class HandmadeEvent {}
 
 class GetHandmadeDataEvent extends HandmadeEvent {
   final bool isSeeMore;
-  GetHandmadeDataEvent({this.isSeeMore = false});
+  final bool? isFilterActive;
+  final SortingType? sortingType;
+
+  GetHandmadeDataEvent(
+      {this.isFilterActive, this.isSeeMore = false, this.sortingType});
 }
 
 class GetItemsByHomemadeEvent extends HandmadeEvent {
@@ -12,3 +18,23 @@ class GetItemsByHomemadeEvent extends HandmadeEvent {
 }
 
 class ResetHandmadeValueEvent extends HandmadeEvent {}
+
+class SetHandmadeFilterDataEvent extends HandmadeEvent {
+  final String? city;
+  final int? rate;
+  final double? fromPrice;
+  final double? toPrice;
+  final FilterProductType? productType;
+
+  SetHandmadeFilterDataEvent({
+    this.city,
+    this.rate,
+    this.fromPrice,
+    this.toPrice,
+    this.productType,
+  });
+}
+
+class ClearHandmadeFilterDataEvent extends HandmadeEvent {}
+
+class GetHandmadeCitiesEvent extends HandmadeEvent {}

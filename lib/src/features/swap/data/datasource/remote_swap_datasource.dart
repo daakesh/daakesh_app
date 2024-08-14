@@ -31,13 +31,17 @@ class RemoteSwapDatasource implements SwapDatasource {
           "type": "swap",
           "secID": secID.toString(),
           "page": page.toString(),
+          "withPaginate": "true"
         });
     return result;
   }
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, SwapFilterDataModel swapFilterDataModel, int page) async {
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingtype) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getItemByCategoryId',
           params: {"page": "$page"},
@@ -49,10 +53,44 @@ class RemoteSwapDatasource implements SwapDatasource {
             "Filter": swapFilterDataModel.toJson(),
             "orderBy": {
               "name": "created_at",
-              "operation": "desc",
+              "operation": sortingtype.name,
             },
           }),
         );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsBySubCategoriesID(
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getItemBySubCategoryId',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "subID": catID,
+            "Filter": swapFilterDataModel.toJson(),
+            "orderBy": {
+              "name": "created_at",
+              "operation": sortingType.name,
+            },
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSwapSubCategoriesByCatID(
+      int catID) async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/subCategory/getSubcategoryByCategoryId',
+      params: {"catID": "$catID"},
+    );
     return result;
   }
 
@@ -73,10 +111,26 @@ class RemoteSwapDatasource implements SwapDatasource {
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page) async {
-    final result = await getIt.get<NetworkService>().get(
-        path: 'DaakeshServices/api/item/getTodaysItems',
-        params: {"type": "swap", "page": "$page"});
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getTodaysItems',
+          params: {"type": "swap", "page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "type": "swap",
+            "owner": "normal",
+            "Filter": swapFilterDataModel.toJson(),
+            "orderBy": {
+              "name": "price",
+              "operation": sortingType.name,
+            },
+          }),
+        );
     return result;
   }
 
@@ -95,9 +149,13 @@ class RemoteSwapDatasource implements SwapDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> getMySwapProduct(int page) async {
-    final result = await getIt.get<NetworkService>().get(
-        path: 'DaakeshServices/api/item/getItemsByUser',
-        params: {"id": ValueConstants.userId, "type": "SWAP", "page": "$page"});
+    final result = await getIt
+        .get<NetworkService>()
+        .get(path: 'DaakeshServices/api/item/getItemsByUser', params: {
+      "id": ValueConstants.userId,
+      "type": "SWAP",
+      "page": "$page",
+    });
     return result;
   }
 
@@ -206,6 +264,67 @@ class RemoteSwapDatasource implements SwapDatasource {
     final result = await getIt
         .get<NetworkService>()
         .get(path: 'DaakeshServices/api/item/getCites');
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue,
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getSearchItemsResult',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(
+            {
+              "Filter": filterDataModel.toJson(),
+              "name": searchValue,
+              "orderBy": {
+                "name": "created_at",
+                "operation": sortingType.name,
+              },
+            },
+          ),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getOfferedItems(
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    final result = await getIt.get<NetworkService>().post(
+          path: 'DaakeshServices/api/item/getOfferedItems',
+          params: {"page": "$page"},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({
+            "Filter": filterDataModel.toJson(),
+            "orderBy": {
+              "name": "created_at",
+              "operation": sortingType.name,
+            },
+          }),
+        );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    final result = await getIt.get<NetworkService>().post(
+      path: 'DaakeshServices/api/advertisement/clickAdv',
+      body: {
+        "user_id": userID,
+        "adv_id": advID,
+      },
+    );
     return result;
   }
 }

@@ -39,13 +39,14 @@ class ContactInfoData {
   });
 
   ContactInfoData.fromJson(Map<String, dynamic> json) {
-    personalPhoneNumber = json['personal_phone_number'];
-    commercialPhoneNumber = json['commercial_phone_number'];
-    whatsappPhoneNumber = json['whatsapp_commercial_phone_number'];
-    personalPhoneNumberCountryCode = json['personal_phone_number_country_code'];
+    personalPhoneNumber = json['personal_phone_number'] ?? "";
+    commercialPhoneNumber = json['commercial_phone_number'] ?? "";
+    whatsappPhoneNumber = json['whatsapp_commercial_phone_number'] ?? "";
+    personalPhoneNumberCountryCode =
+        json['personal_phone_number_country_code'] ?? "";
     commercialPhoneNumberCountryCode =
-        json['commercial_phone_number_country_code'];
+        json['commercial_phone_number_country_code'] ?? "";
     whatsappPhoneNumberCountryCode =
-        json['whatsapp_commercial_phone_number_country_code'];
+        json['whatsapp_commercial_phone_number_country_code'] ?? "";
   }
 }

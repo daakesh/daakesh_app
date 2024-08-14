@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -61,8 +60,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       productQuantity: event.productQuantity,
       productPrice: event.productPrice,
       productDiscount: discount,
-      fromDate: event.fromDate,
-      toDate: event.toDate,
     ));
   }
 
@@ -105,8 +102,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       ..quantity = state.productQuantity
       ..price = state.productPrice
       ..discount = state.productDiscount
-      ..discountFrom = state.fromDate
-      ..discountTo = state.toDate
       ..country = state.shipToCountry
       ..display = state.displayProduct
       ..countrySwap = state.swapCountry
@@ -128,7 +123,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       }
       int id = r.data['data']['id'];
       MyProductItem myProductItem = MyProductItem();
-
       final itemData = await getIt.get<MyProductUseCases>().getItemById(id);
       itemData.fold((l) {
         emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
@@ -142,7 +136,6 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       });
 
       ProgressCircleDialog.dismiss();
-      getIt.get<EditProduct>().clearData();
       MyProFuncBloc.get.add(ResetValuesEvent());
       Utils.openNewPage(
           ProAddSuccessScreen(
@@ -152,20 +145,18 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
           popPreviousPages: true);
       emit(state.copyWith(
         addProStateStatus: AddProStateStatus.SUCCESS,
-        productSecID: '',
+        productSecID: 1000,
         productName: '',
         productDescription: '',
-        productCatID: '',
-        productSubCatID: '',
-        productBrandID: '',
+        productCatID: 1000,
+        productSubCatID: 1000,
+        productBrandID: 1000,
         productModelYear: '',
         proImages: [],
         displayMethod: ProductDisplayMethod.Sell,
         productQuantity: '',
         productPrice: '',
         productDiscount: '',
-        fromDate: '',
-        toDate: '',
         displayProduct: '',
         swapCountry: 'Jordan',
         swapCity: 'Amman',

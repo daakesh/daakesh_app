@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:daakesh/src/core/core.export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -59,8 +57,19 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
         return;
       }
       GetItUtils.user.logOut();
+      clearAllData();
+      await Future.delayed(const Duration(seconds: 1));
+      HomeBloc.controller.jumpToTab(0);
+      HomeBloc.get.add(SelectTabItemEvent(index: 0));
       emit(state.copyWith(userDataStateStatus: UserDataStateStatus.SUCCESS));
     });
+  }
+
+  void clearAllData() {
+    MyProBloc.get.add(ClearDataEvent());
+    MySwapProBloc.get.add(ClearSwapDataEvent());
+    MyProFuncBloc.get.add(EmptyProductSearchEvent(value: '', isClear: true));
+    MySwapOrderBloc.get.add(EmptyMyOrderDataEvent());
   }
 
   FutureOr<void> _setUserData(

@@ -32,7 +32,7 @@ class CardItem extends StatelessWidget {
       child: Container(
         width: double.infinity,
         margin: margin,
-        height: 51.0,
+        height: 51,
         decoration: const BoxDecoration(
           color: ColorName.white,
           borderRadius: BorderRadius.all(Radius.circular(10.0)),

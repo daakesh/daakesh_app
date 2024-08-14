@@ -19,11 +19,13 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
         sectionsStateStatus: SectionsStateStatus.LOADINGMORE,
       ));
     } else {
+      ProgressCircleDialog.show();
       emit(state.copyWith(
         sectionsStateStatus: SectionsStateStatus.LOADING,
         secID: event.secID,
         sectionIndex: event.sectionIndex,
         categoryTitle: event.categoryTitle,
+        arCategoryTitle: event.arCategoryTitle,
         categoriesListData: [],
         currentPage: 1,
       ));
@@ -35,6 +37,9 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
       emit(state.copyWith(sectionsStateStatus: SectionsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
+      if (!event.isSeeMore) {
+        ProgressCircleDialog.dismiss();
+      }
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;

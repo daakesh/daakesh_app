@@ -35,26 +35,29 @@ class PopularCategoriesWidget extends StatelessWidget {
                     color: Color.fromRGBO(0, 0, 0, 0.16)),
               ],
             ),
-            child: Column(
+            child: Stack(
+              alignment: AlignmentDirectional.bottomCenter,
               children: [
+                CachedImage(
+                  imageUrl: data.secImg.toString(),
+                  fit: BoxFit.fill,
+                  borderRadius: const BorderRadius.only(
+                      bottomRight: Radius.circular(18.0),
+                      bottomLeft: Radius.circular(18.0)),
+                ),
                 Align(
                   alignment: AlignmentDirectional.topStart,
                   child: Padding(
                     padding: const EdgeInsetsDirectional.only(start: 11.0),
-                    child: Text(data.name.toString(),
+                    child: Text(
+                        Utils.isEnglish
+                            ? data.name.toString()
+                            : data.arName.toString(),
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 15.0,
                             color: state.sectionIndex == index
-                                ? ColorName.white
-                                : ColorName.black)),
-                  ),
-                ),
-                Expanded(
-                  child: CachedImage(
-                    imageUrl: data.secImg.toString(),
-                    borderRadius: const BorderRadius.only(
-                        bottomRight: Radius.circular(18.0),
-                        bottomLeft: Radius.circular(18.0)),
+                                ? Colors.white
+                                : ColorName.blueGray)),
                   ),
                 ),
               ],

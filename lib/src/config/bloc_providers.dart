@@ -33,11 +33,16 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
       BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
       BlocProvider<SectionsBloc>(create: (_) => SectionsBloc()),
+
+      ///
       BlocProvider<BrandsBloc>(create: (_) => BrandsBloc()),
       BlocProvider<HandmadeBloc>(create: (_) => HandmadeBloc()),
-      BlocProvider<TodayDealsBloc>(create: (_) => TodayDealsBloc()),
-      BlocProvider<PassDataBloc>(create: (_) => PassDataBloc()),
       BlocProvider<AdvBloc>(create: (_) => AdvBloc()),
+      BlocProvider<TodayDealsBloc>(create: (_) => TodayDealsBloc()),
+      BlocProvider<OfferDealsBloc>(create: (_) => OfferDealsBloc()),
+
+      ///
+      BlocProvider<PassDataBloc>(create: (_) => PassDataBloc()),
       BlocProvider<ShippingBloc>(create: (_) => ShippingBloc()),
       BlocProvider<CartBloc>(create: (_) => CartBloc()),
       BlocProvider<FilterBloc>(create: (_) => FilterBloc()),

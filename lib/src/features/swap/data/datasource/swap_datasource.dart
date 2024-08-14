@@ -7,10 +7,24 @@ abstract class SwapDatasource {
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, SwapFilterDataModel swapFilterDataModel, int page);
+      int catID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getItemsBySubCategoriesID(
+      int subID,
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType);
+
+  Future<Either<Failure, ValidResponse>> getSwapSubCategoriesByCatID(int catID);
+
   Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
-  Future<Either<Failure, ValidResponse>> getTodayItemsData(int page);
+  Future<Either<Failure, ValidResponse>> getTodayItemsData(
+      SwapFilterDataModel swapFilterDataModel,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> searchOnItems(
       String searchValue, int page, int perPage);
   Future<Either<Failure, ValidResponse>> getMySwapProduct(int page);
@@ -31,4 +45,12 @@ abstract class SwapDatasource {
   Future<Either<Failure, ValidResponse>> getRateByItem(int itemId, int userId);
   Future<Either<Failure, ValidResponse>> editRate(int id, int rateValue);
   Future<Either<Failure, ValidResponse>> getCities();
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue,
+      SwapFilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getOfferedItems(
+      SwapFilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> clickAdv(String userID, String advID);
 }

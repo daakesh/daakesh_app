@@ -31,7 +31,9 @@ class HandmadeData {
     lastPage = json['last_page'];
     if (json['data'] != null) {
       handmadeItemList = <HandmadeItem>[];
-      handmadeItemList = (json['data'] as List<dynamic>).map((e) => HandmadeItem.fromJson(e)).toList();
+      handmadeItemList = (json['data'] as List<dynamic>)
+          .map((e) => HandmadeItem.fromJson(e))
+          .toList();
     }
   }
 }
@@ -95,10 +97,20 @@ class HandmadeItem {
     discountFrom = json['discount_from'];
     discountTo = json['discount_to'];
     country = json['country'];
-    section = json['section'] != null ? SectionItemModel.fromJson(json['section']) : null;
-    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    category = json['category'] != null ? CategoryItem.fromJson(json['category']) : null;
-    brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
-    subcategory = json['subcategory'] != null ? SubCategory.fromJson(json['subcategory']) : null;
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : SectionItemModel.initValues();
+    user = json['user'] != null
+        ? UserModel.fromJson(json['user'])
+        : UserModel.initValues();
+    category = json['category'] != null
+        ? CategoryItem.fromJson(json['category'])
+        : CategoryItem.initValues();
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['brand'])
+        : BrandItem.initValues();
+    subcategory = json['subcategory'] != null
+        ? SubCategory.fromJson(json['subcategory'])
+        : SubCategory.initValues();
   }
 }

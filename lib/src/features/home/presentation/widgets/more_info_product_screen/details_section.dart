@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../../../../src.export.dart';
 
 class DetailsSection extends StatelessWidget {
@@ -16,92 +18,102 @@ class DetailsSection extends StatelessWidget {
               .copyWith(fontSize: 22.0),
         ),
         const SizedBox(
-          height: 21.0,
+          height: 10.0,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.locale.more_info_product_brand_title,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            Expanded(
+              child: Text(
+                context.locale.more_info_product_brand_title,
+                style: context.easyTheme.textTheme.bodyLarge!
+                    .copyWith(color: ColorName.gray, fontSize: 18.sp),
+              ),
             ),
             Text(
-              '${todayDealItem.brand?.brandName}',
+              Utils.isEnglish
+                  ? '${todayDealItem.brand!.brandName}'
+                  : '${todayDealItem.brand!.arName}',
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0),
+                  .copyWith(fontSize: 18.sp),
             ),
           ],
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.locale.more_info_product_model_title,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            Expanded(
+              child: Text(
+                context.locale.more_info_product_model_title,
+                style: context.easyTheme.textTheme.bodyLarge!
+                    .copyWith(color: ColorName.gray, fontSize: 18.sp),
+              ),
             ),
             Text(
-              'Mac Cosmetics',
+              Utils.isEnglish
+                  ? todayDealItem.section!.name.toString()
+                  : todayDealItem.section!.arName.toString(),
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0),
+                  .copyWith(fontSize: 18.sp),
             ),
           ],
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.locale.more_info_product_category_title,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            Expanded(
+              child: Text(
+                context.locale.more_info_product_category_title,
+                style: context.easyTheme.textTheme.bodyLarge!
+                    .copyWith(color: ColorName.gray, fontSize: 18.sp),
+              ),
             ),
             Text(
-              '${todayDealItem.category!.name}',
+              Utils.isEnglish
+                  ? '${todayDealItem.category!.name}'
+                  : '${todayDealItem.category!.arName}',
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0),
+                  .copyWith(fontSize: 18.sp),
             ),
           ],
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.locale.more_info_product_year_title,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0),
+            Expanded(
+              child: Text(
+                context.locale.more_info_product_year_title,
+                style: context.easyTheme.textTheme.bodyLarge!
+                    .copyWith(color: ColorName.gray, fontSize: 18.sp),
+              ),
             ),
             Text(
               '${todayDealItem.year}',
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0),
+                  .copyWith(fontSize: 18.sp),
             ),
           ],
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Text(
           context.locale.more_info_product_description_title,
           style: context.easyTheme.textTheme.bodyLarge!
-              .copyWith(color: ColorName.gray, fontSize: 18.0),
+              .copyWith(color: ColorName.gray, fontSize: 18.sp),
         ),
         const SizedBox(
-          height: 13.0,
+          height: 6.0,
         ),
         Text(
           '${todayDealItem.description}',
           style:
-              context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.0),
+              context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.sp),
         ),
         const SizedBox(
           height: 29.0,

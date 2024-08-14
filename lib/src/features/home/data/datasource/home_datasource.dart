@@ -6,20 +6,26 @@ abstract class HomeDatasource {
   Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
-  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page);
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
+  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(int catID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getItemBySubCategoryID(int subID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getItemsByBrands(
       int page, int brandId);
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page);
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> searchOnItems(
       String searchValue, int page, int perPage);
 
   ///Comment API
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc);
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue);
   Future<Either<Failure, ValidResponse>> getCommentsByItem(
       int itemID, int page);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
@@ -44,4 +50,17 @@ abstract class HomeDatasource {
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList);
   Future<Either<Failure, ValidResponse>> getCities();
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId);
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId);
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(int brandID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getAllTodayItems(
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getSubCategories(int catID);
+  Future<Either<Failure, ValidResponse>> clickAdv(String userID, String advID);
 }

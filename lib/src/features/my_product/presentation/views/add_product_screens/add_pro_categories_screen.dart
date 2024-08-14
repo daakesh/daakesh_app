@@ -13,11 +13,11 @@ class AddProCategoriesScreen extends StatefulWidget {
 class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
   final productModelYearController =
       TextEditingController(text: DateTime.now().year.toString());
-  String? productSecID;
-  String? productCatID;
-  String? productSubCatID;
-  String? productBrandID;
-  String? productModelYear;
+  int? productSecID;
+  int? productCatID;
+  int? productSubCatID;
+  int? productBrandID;
+  int? productModelYear;
 
   @override
   void initState() {
@@ -36,49 +36,52 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 108.0,
+                SizedBox(
+                  height: 70.0.h,
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: Assets.svg.arrowBackIcon.svg(),
+                  child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                 ),
                 const SizedBox(
                   height: 11.0,
                 ),
                 Text(
-                  'Add Product',
+                  context.locale.add_product,
                   style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 36.0),
+                      .copyWith(fontSize: 36.0.sp),
                 ),
                 const SizedBox(
                   height: 14.0,
                 ),
                 Text(
-                  'Add Product Categories',
+                  context.locale.add_product_categories,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
                 const SizedBox(
                   height: 19.0,
                 ),
-                Text(
-                  'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(fontSize: 16.0),
+                BlocBuilder<AddProBloc, AddProState>(
+                  builder: (context, state) {
+                    return Text(
+                      context.locale.add_product_instruction,
+                      style: context.easyTheme.textTheme.bodyMedium!
+                          .copyWith(fontSize: 16.0),
+                    );
+                  },
                 ),
-                const SizedBox(
-                  height: 21.0,
-                ),
+                const SizedBox(height: 21.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Product Section',
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        context.locale.product_section,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_, state) {
@@ -87,109 +90,121 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                           }
                         },
                         builder: (context, state) {
-                          return DropDownButtonWidget<String>(
+                          return DropDownButtonWidget<int>(
                             onChange: (value) {
                               debugPrint(value.toString());
-                              productSecID = value.toString();
-                              getProBrand(value.toString());
-                              getProCategory(value.toString());
+                              productSecID = value;
+                              getProBrand(value!);
+                              getProCategory(value);
                             },
                             value: productSecID,
                             items: state.sectionListData
-                                .map((e) => DropdownMenuItem(
-                                    value: e.id.toString(),
-                                    child: Text(e.name.toString())))
+                                .map((e) => DropdownMenuItem<int>(
+                                    value: e.id,
+                                    child: Text(Utils.isEnglish
+                                        ? e.name.toString()
+                                        : e.arName.toString())))
                                 .toList(),
                           );
                         },
                       ),
                       const SizedBox(
-                        height: 21.0,
+                        height: 15.0,
                       ),
                       Text(
-                        'Product Categories',
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        context.locale.product_categories,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_, state) {
                           productCatID = state.productCatID;
                         },
                         builder: (context, state) {
-                          return DropDownButtonWidget<String>(
+                          return DropDownButtonWidget<int>(
                             onChange: (value) {
-                              productCatID = value.toString();
-                              getProSubCategory(value.toString());
+                              productCatID = value;
+                              getProSubCategory(value!);
                             },
                             value: state.productCatID,
                             items: state.proCategoryListData
-                                .map((e) => DropdownMenuItem(
-                                    value: e.id.toString(),
-                                    child: Text(e.name.toString())))
+                                .map((e) => DropdownMenuItem<int>(
+                                    value: e.id,
+                                    child: Text(Utils.isEnglish
+                                        ? e.name.toString()
+                                        : e.arName.toString())))
                                 .toList(),
                           );
                         },
                       ),
                       const SizedBox(
-                        height: 21.0,
+                        height: 15.0,
                       ),
                       Text(
-                        'Sup Categories',
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        context.locale.sup_categories,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_, state) {
                           productSubCatID = state.productSubCatID;
                         },
                         builder: (context, state) {
-                          return DropDownButtonWidget<String>(
+                          return DropDownButtonWidget<int>(
                             onChange: (value) {
-                              productSubCatID = value.toString();
+                              productSubCatID = value;
                             },
                             value: state.productSubCatID,
                             items: state.proSubCategoryListData
-                                .map<DropdownMenuItem<String>>((e) =>
+                                .map<DropdownMenuItem<int>>((e) =>
                                     DropdownMenuItem(
-                                        value: e.id.toString(),
-                                        child: Text(e.name.toString())))
+                                        value: e.id,
+                                        child: Text(Utils.isEnglish
+                                            ? e.name.toString()
+                                            : e.arName.toString())))
                                 .toList(),
                           );
                         },
                       ),
                       const SizedBox(
-                        height: 21.0,
+                        height: 15.0,
                       ),
                       Text(
-                        'Product Brand',
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        context.locale.product_brand,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       BlocConsumer<ProDetailsBloc, ProDetailsState>(
                         listener: (_, state) {
                           productBrandID = state.productBrandID;
                         },
                         builder: (context, state) {
-                          return DropDownButtonWidget<String>(
+                          return DropDownButtonWidget<int>(
                             onChange: (value) {
-                              productBrandID = value.toString();
+                              productBrandID = value;
                             },
                             value: state.productBrandID,
                             items: state.proBrandListData
-                                .map((e) => DropdownMenuItem(
-                                    value: e.id.toString(),
-                                    child: Text(e.name.toString())))
+                                .map((e) => DropdownMenuItem<int>(
+                                    value: e.id,
+                                    child: Text(Utils.isEnglish
+                                        ? e.name.toString()
+                                        : e.arName.toString())))
                                 .toList(),
                           );
                         },
                       ),
                       const SizedBox(
-                        height: 21.0,
+                        height: 15.0,
                       ),
                       Text(
-                        'Product Model Year',
-                        style: context.easyTheme.textTheme.bodyMedium!
-                            .copyWith(color: ColorName.black.withOpacity(0.5)),
+                        context.locale.product_model_year,
+                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.0,
+                            color: ColorName.black.withOpacity(0.5)),
                       ),
                       TextFormFieldWidget(
                         controller: productModelYearController,
@@ -203,24 +218,24 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                         onTap: () => selectModelYear(context),
                       ),
                       const SizedBox(
-                        height: 70.0,
+                        height: 20.0,
                       ),
                     ],
                   ),
                 ),
-                const Spacer(
-                  flex: 1,
-                ),
+                const Spacer(flex: 1),
                 Center(
                   child: DefaultButtonWidget(
-                      text: 'NEXT', onPressed: () => onNext()),
+                      text: context.locale.next_button,
+                      onPressed: () => onNext()),
                 ),
                 const SizedBox(
                   height: 12.0,
                 ),
                 Center(
                   child: OutlineButtonWidget(
-                      text: 'CANCEL', onPressed: () => cancel()),
+                      text: context.locale.cancel_button,
+                      onPressed: () => cancel()),
                 ),
                 const SizedBox(
                   height: 50.0,
@@ -237,11 +252,15 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
   }
 
   void onNext() async {
+    if (productSecID == null || productCatID == null) {
+      ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
+      return;
+    }
     AddProBloc.get.add(AddProCategoriesEvent(
-      productSecID: productSecID.toString(),
-      productCatID: productCatID.toString(),
-      productSubCatID: productSubCatID.toString(),
-      productBrandID: productBrandID.toString(),
+      productSecID: productSecID!,
+      productCatID: productCatID!,
+      productSubCatID: productSubCatID,
+      productBrandID: productBrandID,
       productModelYear: productModelYearController.text,
     ));
     Utils.openNewPage(const AddProImagesScreen());
@@ -252,16 +271,19 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
     resetData();
   }
 
-  void resetData() {}
-  void getProCategory(String secID) {
+  void resetData() {
+    ProDetailsBloc.get.add(ResetCategoriesDataEvent());
+  }
+
+  void getProCategory(int secID) {
     ProDetailsBloc.get.add(GetProCategoryEvent(secID: secID));
   }
 
-  void getProBrand(String secID) {
+  void getProBrand(int secID) {
     ProDetailsBloc.get.add(GetBrandsBySectionEvent(secID: secID));
   }
 
-  void getProSubCategory(String catID) {
+  void getProSubCategory(int catID) {
     ProDetailsBloc.get.add(GetProSubCategoryEvent(catID: catID));
   }
 

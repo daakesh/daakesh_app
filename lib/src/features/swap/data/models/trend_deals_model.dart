@@ -57,7 +57,6 @@ class TrendDealsItem {
   String? countrySwap;
   String? citySwap;
   int? offerCount;
-
   SectionItemModel? section;
   UserModel? user;
   CategoryItem? category;
@@ -91,6 +90,8 @@ class TrendDealsItem {
       itemImg = <String>[];
       itemImg =
           (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+    } else {
+      itemImg = [''];
     }
     description = json['description'] ?? "Unknown";
     date = json['date'] ?? "Unknown";

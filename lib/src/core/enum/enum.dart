@@ -18,7 +18,7 @@ enum UserType {
 }
 
 enum ProductTapBar {
-  SHOP,
+  SELL,
   SWAP,
 }
 
@@ -84,5 +84,10 @@ enum FilterProductType {
 
 enum ComplaintType {
   User,
-  Seller,
+  General,
+}
+
+enum SortingType {
+  desc,
+  asc,
 }

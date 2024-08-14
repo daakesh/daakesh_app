@@ -2,9 +2,16 @@ import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../src.export.dart';
 
-enum MyProFuncStateStatus { INITIAL, LOADING, SUCCESS, ERROR,LOADINGMORE,NULL }
+enum MyProFuncStateStatus {
+  INITIAL,
+  LOADING,
+  SUCCESS,
+  ERROR,
+  LOADINGMORE,
+  NULL
+}
 
-extension MyProductStateStatusX on MyProFuncStateStatus{
+extension MyProductStateStatusX on MyProFuncStateStatus {
   bool get isInitial => this == MyProFuncStateStatus.INITIAL;
   bool get isSuccess => this == MyProFuncStateStatus.SUCCESS;
   bool get isError => this == MyProFuncStateStatus.ERROR;
@@ -24,34 +31,34 @@ class MyProFuncState extends Equatable {
   final bool isAlreadyAddedCountry;
   final List<XFile> imagesList;
   final List<MyProductItem> myProductItem;
+
   ///Search
   final List<MyProductItem> searchResultList;
   final int currentSearchPage;
   final String searchValue;
   final bool isMoreData;
+
   ///
   final bool discountSwitchButton;
 
-
-
   const MyProFuncState({
     this.myProFuncStateStatus = MyProFuncStateStatus.INITIAL,
-    this.productTapBar = ProductTapBar.SHOP,
+    this.productTapBar = ProductTapBar.SELL,
     this.productDisplayMethod = ProductDisplayMethod.Sell,
     this.swapFlagEmoji = '🇯🇴',
     this.shipFlagEmoji = '🇯🇴',
     this.selectedShipCountry = 'Jordan',
     this.selectedShipToCountries = const [],
     this.isAlreadyAddedCountry = false,
-    this.imagesList = const[],
-    this.myProductItem = const[],
+    this.imagesList = const [],
+    this.myProductItem = const [],
+
     ///Search
-    this.searchResultList = const[],
+    this.searchResultList = const [],
     this.currentSearchPage = 1,
     this.searchValue = '',
     this.isMoreData = true,
     this.discountSwitchButton = false,
-
   });
 
   MyProFuncState copyWith({
@@ -65,14 +72,13 @@ class MyProFuncState extends Equatable {
     bool? isAlreadyAddedCountry,
     List<XFile>? imagesList,
     List<MyProductItem>? myProductItem,
+
     ///Search
     List<MyProductItem>? searchResultList,
     int? currentSearchPage,
     String? searchValue,
     bool? isMoreData,
     bool? discountSwitchButton,
-
-
   }) {
     return MyProFuncState(
       myProFuncStateStatus: myProFuncStateStatus ?? this.myProFuncStateStatus,
@@ -81,8 +87,10 @@ class MyProFuncState extends Equatable {
       swapFlagEmoji: swapFlagEmoji ?? this.swapFlagEmoji,
       shipFlagEmoji: shipFlagEmoji ?? this.shipFlagEmoji,
       selectedShipCountry: selectedShipCountry ?? this.selectedShipCountry,
-      selectedShipToCountries: selectedShipToCountries ?? this.selectedShipToCountries,
-      isAlreadyAddedCountry: isAlreadyAddedCountry ?? this.isAlreadyAddedCountry,
+      selectedShipToCountries:
+          selectedShipToCountries ?? this.selectedShipToCountries,
+      isAlreadyAddedCountry:
+          isAlreadyAddedCountry ?? this.isAlreadyAddedCountry,
       imagesList: imagesList ?? this.imagesList,
       myProductItem: myProductItem ?? this.myProductItem,
       searchResultList: searchResultList ?? this.searchResultList,
@@ -90,7 +98,6 @@ class MyProFuncState extends Equatable {
       searchValue: searchValue ?? this.searchValue,
       isMoreData: isMoreData ?? this.isMoreData,
       discountSwitchButton: discountSwitchButton ?? this.discountSwitchButton,
-
     );
   }
 
@@ -106,11 +113,13 @@ class MyProFuncState extends Equatable {
         isAlreadyAddedCountry,
         imagesList,
         myProductItem,
+
         ///
         searchResultList,
         currentSearchPage,
         searchValue,
         isMoreData,
+
         ///
         discountSwitchButton,
       ];

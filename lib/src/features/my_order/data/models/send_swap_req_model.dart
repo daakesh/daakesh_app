@@ -1,3 +1,5 @@
+import 'package:daakesh/src/features/features.export.dart';
+
 class SendReceiveSwapReqModel {
   bool? status;
   String? error;
@@ -40,7 +42,7 @@ class SendReceiveSwapReqItem {
   int? approved;
   String? note;
   String? status;
-  String? offerId;
+  int? offerId;
   String? createdAt;
   String? updatedAt;
   SourceItems? sourceItems;
@@ -67,10 +69,10 @@ class SendReceiveSwapReqItem {
     offerItem = json['offer_item'];
     sourceUser = json['source_user'] != null
         ? SourceUser.fromJson(json['source_user'])
-        : null;
+        : SourceUser.initValues();
     offerUser = json['offer_user'] != null
         ? OfferUser.fromJson(json['offer_user'])
-        : null;
+        : OfferUser.initValues();
     approved = json['approved'];
     note = json['note'];
     status = json['status'];
@@ -79,10 +81,10 @@ class SendReceiveSwapReqItem {
     updatedAt = json['updated_at'];
     sourceItems = json['source_items'] != null
         ? SourceItems.fromJson(json['source_items'])
-        : null;
+        : SourceItems.initValues();
     offerItems = json['offer_items'] != null
         ? OfferItems.fromJson(json['offer_items'])
-        : null;
+        : OfferItems.initValues();
   }
 }
 
@@ -100,7 +102,7 @@ class SourceUser {
   String? country;
   String? city;
   String? location;
-  String? nikname;
+  String? nickname;
   String? whatsappNumber;
 
   SourceUser(
@@ -117,7 +119,7 @@ class SourceUser {
       this.country,
       this.city,
       this.location,
-      this.nikname,
+      this.nickname,
       this.whatsappNumber});
 
   SourceUser.fromJson(Map<String, dynamic> json) {
@@ -134,8 +136,25 @@ class SourceUser {
     country = json['country'];
     city = json['city'];
     location = json['location'];
-    nikname = json['nikname'];
+    nickname = json['nikname'];
     whatsappNumber = json['whatsappNumber'];
+  }
+  SourceUser.initValues() {
+    id = "Unknown";
+    name = "Unknown";
+    phoneNumber = "Unknown";
+    password = "Unknown";
+    active = 1;
+    userType = "Unknown";
+    token = "Unknown";
+    email = "Unknown";
+    img = "Unknown";
+    deviceToken = "Unknown";
+    country = "Unknown";
+    city = "Unknown";
+    location = "Unknown";
+    nickname = "Unknown";
+    whatsappNumber = "Unknown";
   }
 }
 
@@ -190,6 +209,23 @@ class OfferUser {
     nikname = json['nikname'];
     whatsappNumber = json['whatsappNumber'];
   }
+  OfferUser.initValues() {
+    id = "Unknown";
+    name = "Unknown";
+    phoneNumber = "Unknown";
+    password = "Unknown";
+    active = 1;
+    userType = "Unknown";
+    token = "Unknown";
+    email = "Unknown";
+    img = "Unknown";
+    deviceToken = "Unknown";
+    country = "Unknown";
+    city = "Unknown";
+    location = "Unknown";
+    nikname = "Unknown";
+    whatsappNumber = "Unknown";
+  }
 }
 
 class SourceItems {
@@ -217,6 +253,11 @@ class SourceItems {
   String? storeType;
   dynamic priceAfterDiscount;
   String? discountPercentage;
+  int? offerId;
+  int? offerCount;
+  BrandItem? brand;
+  CategoryItem? category;
+  SectionItemModel? section;
 
   SourceItems(
       {this.id,
@@ -242,6 +283,11 @@ class SourceItems {
       this.citySwap,
       this.storeType,
       this.priceAfterDiscount,
+      this.offerCount,
+      this.brand,
+      this.offerId,
+      this.category,
+      this.section,
       this.discountPercentage});
 
   SourceItems.fromJson(Map<String, dynamic> json) {
@@ -254,27 +300,68 @@ class SourceItems {
     } else {
       itemImg = <String>[];
     }
-    date = json['date'];
-    title = json['Title'];
-    type = json['Type'];
-    swapFor = json['Swap For'];
-    city = json['City'];
-    year = json['Year'];
-    condition = json['Condition'];
-    price = json['Price'];
-    discount = json['discount'];
-    discountFrom = json['discount_from'];
-    discountTo = json['discount_to'];
-    country = json['country'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    quantity = json['quantity'];
-    display = json['display'];
-    countrySwap = json['country_swap'];
-    citySwap = json['city_swap'];
-    storeType = json['store_type'];
-    priceAfterDiscount = json['price_after_discount'];
-    discountPercentage = json['discount_percentage'];
+    date = json['date'] ?? "UnKnown";
+    title = json['Title'] ?? "UnKnown";
+    type = json['Type'] ?? "UnKnown";
+    swapFor = json['Swap For'] ?? "UnKnown";
+    city = json['City'] ?? "UnKnown";
+    year = json['Year'] ?? "UnKnown";
+    condition = json['Condition'] ?? "UnKnown";
+    price = json['Price'] ?? "UnKnown";
+    discount = json['discount'] ?? "UnKnown";
+    discountFrom = json['discount_from'] ?? "UnKnown";
+    discountTo = json['discount_to'] ?? "UnKnown";
+    country = json['country'] ?? "UnKnown";
+    createdAt = json['created_at'] ?? "UnKnown";
+    updatedAt = json['updated_at'] ?? "UnKnown";
+    quantity = json['quantity'] ?? "UnKnown";
+    display = json['display'] ?? "UnKnown";
+    countrySwap = json['country_swap'] ?? "UnKnown";
+    offerId = json['offer_id'] ?? 12345;
+    citySwap = json['city_swap'] ?? "UnKnown";
+    storeType = json['store_type'] ?? "UnKnown";
+    priceAfterDiscount = json['price_after_discount'] ?? "UnKnown";
+    offerCount = json['offers_count'] ?? 0;
+    discountPercentage = json['discount_percentage'] ?? "UnKnown";
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['brand'])
+        : BrandItem.initValues();
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : SectionItemModel.initValues();
+    category = json['category'] != null
+        ? CategoryItem.fromJson(json['category'])
+        : CategoryItem.initValues();
+  }
+  SourceItems.initValues() {
+    id = 0;
+    description = "UnKnown";
+    itemImg = [''];
+    date = "UnKnown";
+    title = "UnKnown";
+    type = "UnKnown";
+    swapFor = "UnKnown";
+    city = "UnKnown";
+    year = "UnKnown";
+    condition = "UnKnown";
+    price = "UnKnown";
+    discount = "UnKnown";
+    discountFrom = "UnKnown";
+    discountTo = "UnKnown";
+    country = "UnKnown";
+    createdAt = "UnKnown";
+    updatedAt = "UnKnown";
+    quantity = "UnKnown";
+    display = "UnKnown";
+    countrySwap = "UnKnown";
+    citySwap = "UnKnown";
+    storeType = "UnKnown";
+    offerCount = 0;
+    priceAfterDiscount = "UnKnown";
+    discountPercentage = "UnKnown";
+    brand = BrandItem.initValues();
+    section = SectionItemModel.initValues();
+    category = CategoryItem.initValues();
   }
 }
 
@@ -303,6 +390,11 @@ class OfferItems {
   String? storeType;
   dynamic priceAfterDiscount;
   String? discountPercentage;
+  int? offerId;
+  int? offerCount;
+  BrandItem? brand;
+  CategoryItem? category;
+  SectionItemModel? section;
 
   OfferItems(
       {this.id,
@@ -328,36 +420,84 @@ class OfferItems {
       this.citySwap,
       this.storeType,
       this.priceAfterDiscount,
+      this.offerCount,
+      this.brand,
+      this.offerId,
+      this.category,
+      this.section,
       this.discountPercentage});
 
   OfferItems.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    description = json['description'];
+    id = json['id'] ?? 0;
+    description = json['description'] ?? "UnKnown";
     if (json['itemImg'] != null) {
       itemImg = <String>[];
       itemImg =
           (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+    } else {
+      itemImg = [''];
     }
-    date = json['date'];
-    title = json['Title'];
-    type = json['Type'];
-    swapFor = json['Swap For'];
-    city = json['City'];
-    year = json['Year'];
-    condition = json['Condition'];
+    date = json['date'] ?? "UnKnown";
+    title = json['Title'] ?? "UnKnown";
+    type = json['Type'] ?? "UnKnown";
+    swapFor = json['Swap For'] ?? "UnKnown";
+    city = json['City'] ?? "UnKnown";
+    year = json['Year'] ?? "UnKnown";
+    condition = json['Condition'] ?? "UnKnown";
     price = json['Price'];
-    discount = json['discount'];
-    discountFrom = json['discount_from'];
-    discountTo = json['discount_to'];
-    country = json['country'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    quantity = json['quantity'];
-    display = json['display'];
-    countrySwap = json['country_swap'];
-    citySwap = json['city_swap'];
-    storeType = json['store_type'];
-    priceAfterDiscount = json['price_after_discount'];
-    discountPercentage = json['discount_percentage'];
+    discount = json['discount'] ?? "UnKnown";
+    discountFrom = json['discount_from'] ?? "UnKnown";
+    discountTo = json['discount_to'] ?? "UnKnown";
+    country = json['country'] ?? "UnKnown";
+    createdAt = json['created_at'] ?? "UnKnown";
+    updatedAt = json['updated_at'] ?? "UnKnown";
+    quantity = json['quantity'] ?? "UnKnown";
+    display = json['display'] ?? "UnKnown";
+    countrySwap = json['country_swap'] ?? "UnKnown";
+    citySwap = json['city_swap'] ?? "UnKnown";
+    storeType = json['store_type'] ?? "UnKnown";
+    priceAfterDiscount = json['price_after_discount'] ?? "UnKnown";
+    discountPercentage = json['discount_percentage'] ?? "UnKnown";
+    offerId = json['offer_id'] ?? 12345;
+    offerCount = json['offers_count'] ?? 0;
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['brand'])
+        : BrandItem.initValues();
+    category = json['category'] != null
+        ? CategoryItem.fromJson(json['category'])
+        : CategoryItem.initValues();
+    section = json['section'] != null
+        ? SectionItemModel.fromJson(json['section'])
+        : SectionItemModel.initValues();
+  }
+  OfferItems.initValues() {
+    id = 0;
+    description = "UnKnown";
+    itemImg = [''];
+    date = "UnKnown";
+    title = "UnKnown";
+    type = "UnKnown";
+    swapFor = "UnKnown";
+    city = "UnKnown";
+    year = "UnKnown";
+    condition = "UnKnown";
+    price = 0.0;
+    discount = "UnKnown";
+    discountFrom = "UnKnown";
+    discountTo = "UnKnown";
+    country = "UnKnown";
+    createdAt = "UnKnown";
+    updatedAt = "UnKnown";
+    quantity = "UnKnown";
+    display = "UnKnown";
+    countrySwap = "UnKnown";
+    citySwap = "UnKnown";
+    storeType = "UnKnown";
+    priceAfterDiscount = "UnKnown";
+    discountPercentage = "UnKnown";
+    offerCount = 0;
+    brand = BrandItem.initValues();
+    section = SectionItemModel.initValues();
+    category = CategoryItem.initValues();
   }
 }

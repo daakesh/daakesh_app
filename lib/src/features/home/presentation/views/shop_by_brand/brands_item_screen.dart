@@ -1,7 +1,6 @@
-import 'package:daakesh/src/core/core.export.dart';
-import 'package:daakesh/src/features/features.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../src.export.dart';
 
 class BrandsItemScreen extends StatelessWidget {
   const BrandsItemScreen({super.key});
@@ -13,6 +12,35 @@ class BrandsItemScreen extends StatelessWidget {
         return CustomScrollView(
           slivers: [
             const HomeAppBarWidget(),
+            const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(context.locale.results_title,
+                          style: context.easyTheme.textTheme.headlineMedium),
+                    ),
+                    GestureDetector(
+                        onTap: () => openFilterScreen(context),
+                        child: Assets.png.filterIcon
+                            .image(width: 40.w, height: 40.h)),
+                    const SizedBox(
+                      width: 11,
+                    ),
+                    GestureDetector(
+                      onTap: () => state.sortingType == SortingType.desc
+                          ? BrandsBloc.get.add(GetItemsByBrandsEvent(
+                              sortingType: SortingType.asc))
+                          : BrandsBloc.get.add(GetItemsByBrandsEvent(
+                              sortingType: SortingType.desc)),
+                      child: Assets.svg.sortIcon.svg(height: 30.h, width: 30.w),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => GestureDetector(
@@ -20,7 +48,7 @@ class BrandsItemScreen extends StatelessWidget {
                       openMoreInfoScreen(context, state.itemByBrandList[index]),
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(left: 17.0, right: 17.0, top: 17),
+                        const EdgeInsets.only(left: 17.0, right: 17.0, top: 12),
                     child: ResultItemWidget(
                       todayItem: state.itemByBrandList[index],
                     ),
@@ -77,5 +105,9 @@ class BrandsItemScreen extends StatelessWidget {
               )
             : const SizedBox();
     }
+  }
+
+  void openFilterScreen(BuildContext context) {
+    Utils.openNavNewPage(context, BrandFilterScreen());
   }
 }

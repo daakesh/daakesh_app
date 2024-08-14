@@ -1,6 +1,6 @@
 abstract class RateEvent {}
 
-class AddRateEvent extends RateEvent{
+class AddRateEvent extends RateEvent {
   final String userId;
   final int itemId;
   final int catID;
@@ -14,7 +14,7 @@ class AddRateEvent extends RateEvent{
   });
 }
 
-class GetRateByItemEvent extends RateEvent{
+class GetRateByItemEvent extends RateEvent {
   final int itemId;
   final int userId;
 
@@ -24,7 +24,7 @@ class GetRateByItemEvent extends RateEvent{
   });
 }
 
-class EditRateEvent extends RateEvent{
+class EditRateEvent extends RateEvent {
   final int id;
   final int rateValue;
   EditRateEvent({
@@ -33,4 +33,11 @@ class EditRateEvent extends RateEvent{
   });
 }
 
+class GetOverAllRateItemsEvent extends RateEvent {
+  final int itemID;
+  GetOverAllRateItemsEvent({
+    required this.itemID,
+  });
+}
 
+class EmptyDataEvent extends RateEvent {}

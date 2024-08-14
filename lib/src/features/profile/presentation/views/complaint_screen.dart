@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../src.export.dart';
+import 'package:collection/collection.dart';
 
 // ignore: must_be_immutable
 class ComplaintScreen extends StatelessWidget {
@@ -13,13 +14,17 @@ class ComplaintScreen extends StatelessWidget {
   final FocusNode remarkFocusNode = FocusNode();
   final List<ComplaintType> complaintTypeList = [
     ComplaintType.User,
-    ComplaintType.Seller,
+    ComplaintType.General,
   ];
 
   String? complaintValue;
 
   @override
   Widget build(BuildContext context) {
+    final List<String> complaintValues = [
+      context.locale.user_complaint,
+      context.locale.general_complaint,
+    ];
     return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
@@ -29,11 +34,9 @@ class ComplaintScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 108.0,
-                ),
+                SizedBox(height: 60.0.sp),
                 Text(
-                  'Complaint',
+                  context.locale.complaint,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 36.0),
                 ),
@@ -41,7 +44,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 14.0,
                 ),
                 Text(
-                  'Location info',
+                  context.locale.location_info,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
@@ -49,7 +52,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 19.0,
                 ),
                 Text(
-                  'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                  context.locale.profile_instruction,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 16.0),
                 ),
@@ -57,9 +60,9 @@ class ComplaintScreen extends StatelessWidget {
                   height: 21.0,
                 ),
                 Text(
-                  'Complaint Type',
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.black.withOpacity(0.5)),
+                  context.locale.complaint_type,
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
                 ),
                 DropDownButtonWidget<String>(
                   onChange: (value) {
@@ -67,32 +70,18 @@ class ComplaintScreen extends StatelessWidget {
                   },
                   value: complaintValue,
                   items: complaintTypeList
-                      .map((e) => DropdownMenuItem(
+                      .mapIndexed((index, e) => DropdownMenuItem(
                           value: e.index.toString(),
-                          child: Text(e.name.toString())))
+                          child: Text(complaintValues[index])))
                       .toList(),
                 ),
                 const SizedBox(
-                  height: 25.0,
+                  height: 10.0,
                 ),
                 Text(
-                  'Seller Name',
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.black.withOpacity(0.5)),
-                ),
-                TextFormFieldWidget(
-                  controller: sellerNameController,
-                  focusNode: sellerNameFocusNode,
-                  onFieldSubmitted: (value) => Utils.fieldFocusChange(
-                      context, sellerNameFocusNode, subjectFocusNode),
-                ),
-                const SizedBox(
-                  height: 25.0,
-                ),
-                Text(
-                  'Subject',
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.black.withOpacity(0.5)),
+                  context.locale.subject,
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
                 ),
                 TextFormFieldWidget(
                   controller: subjectController,
@@ -101,34 +90,35 @@ class ComplaintScreen extends StatelessWidget {
                       context, subjectFocusNode, remarkFocusNode),
                 ),
                 const SizedBox(
-                  height: 25.0,
+                  height: 10.0,
                 ),
                 Text(
-                  'Remark',
-                  style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.black.withOpacity(0.5)),
+                  context.locale.remark,
+                  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
                 ),
                 TextFormFieldWidget(
                   controller: remarkController,
                   focusNode: remarkFocusNode,
                 ),
                 const SizedBox(
-                  height: 44.0,
+                  height: 20.0,
                 ),
                 const Spacer(
                   flex: 1,
                 ),
                 Center(
                   child: DefaultButtonWidget(
-                    text: 'SEND',
-                    onPressed: onSend,
+                    text: context.locale.send,
+                    onPressed: () => onSend(context),
                   ),
                 ),
                 const SizedBox(
-                  height: 12.0,
+                  height: 10.0,
                 ),
                 Center(
-                  child: OutlineButtonWidget(text: 'Cancel', onPressed: cancel),
+                  child: OutlineButtonWidget(
+                      text: context.locale.cancel, onPressed: cancel),
                 ),
                 const SizedBox(
                   height: 50.0,
@@ -145,12 +135,12 @@ class ComplaintScreen extends StatelessWidget {
     Utils.getBack();
   }
 
-  void onSend() {
+  void onSend(BuildContext context) {
     if (complaintTypeController.text.isEmpty ||
         sellerNameController.text.isEmpty ||
         subjectController.text.isEmpty ||
         remarkController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Fill all data firstly');
+      ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
       return;
     }
     ComplaintBloc.get.add(AddComplaintEvent(

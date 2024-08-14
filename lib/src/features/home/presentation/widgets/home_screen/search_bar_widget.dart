@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -14,38 +15,59 @@ class SearchBarWidget extends StatelessWidget {
     return Container(
       height: 180.0,
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: ColorName.blueGray,
-        image: DecorationImage(
-          image: AssetImage(Assets.png.authScreensBackground.path),
-          alignment: AlignmentDirectional.centerEnd,
-        ),
       ),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Stack(
+          alignment: AlignmentDirectional.bottomEnd,
           children: [
-            const SizedBox(height: 53.0),
-            Center(
-              child: DaakeshLogoWidget(
-                isLight: true,
-                width: 184.0.w,
+            Opacity(
+              opacity: 0.3,
+              child: Assets.svg.line.svg(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  fit: BoxFit.fitHeight,
+                  height: 160.h,
+                  width: 160.w),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: Utils.isEnglish ? 50.0 : 30.0),
+                  BlocBuilder<ProfileBloc, ProfileState>(
+                    builder: (context, state) {
+                      return Center(
+                        child: state.switchLangValue
+                            ? ArabicDaakeshLogoWidget(
+                                isLight: true,
+                                width: 184.0.w,
+                              )
+                            : DaakeshLogoWidget(
+                                isLight: true,
+                                width: 184.0.w,
+                              ),
+                      );
+                    },
+                  ),
+                  state.homeScreenState.isProductDetails ||
+                          state.homeScreenState.isCart ||
+                          state.homeScreenState.isSections ||
+                          state.homeScreenState.isShopByBrands ||
+                          state.homeScreenState.isHomemade ||
+                          state.homeScreenState.isSubCategoryResult
+                      ? IconButton(
+                          onPressed: () => onBack(state),
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: ColorName.white,
+                          ))
+                      : const SizedBox(),
+                ],
               ),
             ),
-            state.homeScreenState.isProductDetails ||
-                    state.homeScreenState.isCart ||
-                    state.homeScreenState.isSections ||
-                    state.homeScreenState.isShopByBrands ||
-                    state.homeScreenState.isHomemade ||
-                    state.homeScreenState.isSubCategoryResult
-                ? IconButton(
-                    onPressed: () => onBack(state),
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: ColorName.white,
-                    ))
-                : const SizedBox(),
           ],
         ),
       ),

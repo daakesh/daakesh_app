@@ -1,1 +1,10 @@
-{"bricks":{"feature":{"path":"D:/Flutter/ProjectForFlutter/daakesh_app/bricks/feature"},"bloc":{"path":"bricks/bloc"}}}
+{
+    "bricks": {
+        "feature": {
+            "path": "D:/StudioProjects/daakesh_app/bricks/feature"
+        },
+        "bloc": {
+            "path": "bricks/bloc"
+        }
+    }
+}

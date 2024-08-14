@@ -38,17 +38,20 @@ class CommentRateModelItem {
   String? commentDesc;
   String? date;
   UserModel? user;
-  Item? item;
+  Rate? rate;
 
   CommentRateModelItem(
-      {this.id, this.commentDesc, this.date, this.user, this.item});
+      {this.id, this.commentDesc, this.date, this.user, this.rate});
 
   CommentRateModelItem.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    commentDesc = json['commentDesc'];
-    date = json['date'];
-    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    item = json['item'] != null ? Item.fromJson(json['item']) : null;
+    id = json['id'] ?? 0;
+    commentDesc = json['commentDesc'] ?? "Unknown";
+    date = json['date'] ?? "Unknown";
+    user = json['user'] != null
+        ? UserModel.fromJson(json['user'])
+        : UserModel.initValues();
+    rate =
+        json['rate'] != null ? Rate.fromJson(json['rate']) : Rate.initValue();
   }
 }
 
@@ -107,38 +110,42 @@ class Item {
       this.rate});
 
   Item.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['id'] ?? 0;
     description = json['description'];
     if (json['itemImg'] != null) {
       itemImg = <String>[];
       itemImg =
           (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+    } else {
+      itemImg = [''];
     }
-    date = json['date'];
-    title = json['Title'];
-    type = json['Type'];
-    swapFor = json['Swap For'];
-    city = json['City'];
-    year = json['Year'];
-    condition = json['Condition'];
+    date = json['date'] ?? "Unknown";
+    title = json['Title'] ?? "Unknown";
+    type = json['Type'] ?? "Unknown";
+    swapFor = json['Swap For'] ?? "Unknown";
+    city = json['City'] ?? "Unknown";
+    year = json['Year'] ?? "Unknown";
+    condition = json['Condition'] ?? "Unknown";
     price = json['Price'];
-    discount = json['discount'];
-    discountFrom = json['discount_from'];
-    discountTo = json['discount_to'];
-    country = json['country'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    quantity = json['quantity'];
-    display = json['display'];
-    countrySwap = json['country_swap'];
-    citySwap = json['city_swap'];
-    storeType = json['store_type'];
-    priceAfterDiscount = json['price_after_discount'];
-    discountPercentage = json['discount_percentage'];
+    discount = json['discount'] ?? 0.0;
+    discountFrom = json['discount_from'] ?? "Unknown";
+    discountTo = json['discount_to'] ?? "Unknown";
+    country = json['country'] ?? "Unknown";
+    createdAt = json['created_at'] ?? "Unknown";
+    updatedAt = json['updated_at'] ?? "Unknown";
+    quantity = json['quantity'] ?? 0;
+    display = json['display'] ?? "Unknown";
+    countrySwap = json['country_swap'] ?? "Unknown";
+    citySwap = json['city_swap'] ?? "Unknown";
+    storeType = json['store_type'] ?? "Unknown";
+    priceAfterDiscount = json['price_after_discount'] ?? "Unknown";
+    discountPercentage = json['discount_percentage'] ?? "0%";
     if (json['rate'] != null) {
       rate = <Rate>[];
       rate =
           (json['rate'] as List<dynamic>).map((e) => Rate.fromJson(e)).toList();
+    } else {
+      rate = [];
     }
   }
 }
@@ -151,8 +158,15 @@ class Rate {
   Rate({this.id, this.rateValue, this.user});
 
   Rate.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    rateValue = json['rateValue'];
-    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
+    id = json['id'] ?? 0;
+    rateValue = json['rateValue'] ?? 0;
+    user = json['user'] != null
+        ? UserModel.fromJson(json['user'])
+        : UserModel.initValues();
+  }
+  Rate.initValue() {
+    id = 0;
+    rateValue = 0;
+    user = UserModel.initValues();
   }
 }

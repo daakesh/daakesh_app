@@ -39,11 +39,21 @@ class TodayDealsState extends Equatable {
   final bool isMoreDaakeshData;
 
   ///
-  final int productSliderIndex;
-  final int productSizeIndex;
+  final bool isDaakeshTodayDeal;
 
   ///
-  final bool isDaakeshTodayDeal;
+  final List<TodayItem> allTodayDealsListData;
+  final int itemsCurrentPage;
+  final bool isMoreDataItems;
+  final String country;
+  final String city;
+  final int rate;
+  final double fromPrice;
+  final double toPrice;
+  final FilterProductType type;
+  final bool isFilterActive;
+  final List<CityItem> cityItemList;
+  final SortingType sortingType;
 
   const TodayDealsState({
     this.todayDealsStateStatus = TodayDealsStateStatus.INITIAL,
@@ -57,11 +67,21 @@ class TodayDealsState extends Equatable {
     this.isMoreDaakeshData = true,
 
     ///
-    this.productSliderIndex = 0,
-    this.productSizeIndex = 0,
+    this.isDaakeshTodayDeal = false,
 
     ///
-    this.isDaakeshTodayDeal = false,
+    this.allTodayDealsListData = const [],
+    this.itemsCurrentPage = 1,
+    this.isMoreDataItems = true,
+    this.country = "Jordan",
+    this.city = "Amman",
+    this.rate = 0,
+    this.fromPrice = 0.0,
+    this.toPrice = 500.0,
+    this.type = FilterProductType.All,
+    this.isFilterActive = false,
+    this.cityItemList = const [],
+    this.sortingType = SortingType.desc,
   });
 
   TodayDealsState copyWith({
@@ -76,9 +96,21 @@ class TodayDealsState extends Equatable {
     bool? isMoreDaakeshData,
 
     ///
-    int? productSliderIndex,
-    int? productSizeIndex,
     bool? isDaakeshTodayDeal,
+
+    ///
+    List<TodayItem>? allTodayDealsListData,
+    int? itemsCurrentPage,
+    bool? isMoreDataItems,
+    String? country,
+    String? city,
+    int? rate,
+    double? fromPrice,
+    double? toPrice,
+    FilterProductType? type,
+    bool? isFilterActive,
+    List<CityItem>? cityItemList,
+    SortingType? sortingType,
   }) {
     return TodayDealsState(
       todayDealsStateStatus:
@@ -94,11 +126,23 @@ class TodayDealsState extends Equatable {
       isMoreDaakeshData: isMoreDaakeshData ?? this.isMoreDaakeshData,
 
       ///
-      productSliderIndex: productSliderIndex ?? this.productSliderIndex,
-      productSizeIndex: productSizeIndex ?? this.productSizeIndex,
-
       ///
       isDaakeshTodayDeal: isDaakeshTodayDeal ?? this.isDaakeshTodayDeal,
+
+      ///
+      allTodayDealsListData:
+          allTodayDealsListData ?? this.allTodayDealsListData,
+      itemsCurrentPage: itemsCurrentPage ?? this.itemsCurrentPage,
+      isMoreDataItems: isMoreDataItems ?? this.isMoreDataItems,
+      country: country ?? this.country,
+      city: city ?? this.city,
+      rate: rate ?? this.rate,
+      fromPrice: fromPrice ?? this.fromPrice,
+      toPrice: toPrice ?? this.toPrice,
+      type: type ?? this.type,
+      isFilterActive: isFilterActive ?? this.isFilterActive,
+      cityItemList: cityItemList ?? this.cityItemList,
+      sortingType: sortingType ?? this.sortingType,
     );
   }
 
@@ -110,16 +154,23 @@ class TodayDealsState extends Equatable {
         isMoreData,
 
         ///
-        ///
         daakeshTodayDealsListData,
         daakeshCurrentPage,
         isMoreDaakeshData,
 
         ///
-        productSliderIndex,
-        productSizeIndex,
-
-        ///
-        isDaakeshTodayDeal
+        isDaakeshTodayDeal,
+        allTodayDealsListData,
+        itemsCurrentPage,
+        isMoreDataItems,
+        country,
+        city,
+        rate,
+        fromPrice,
+        toPrice,
+        type,
+        isFilterActive,
+        cityItemList,
+        sortingType,
       ];
 }

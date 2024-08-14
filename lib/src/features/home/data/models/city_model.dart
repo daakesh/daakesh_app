@@ -38,13 +38,13 @@ class CityItem {
       this.ar});
 
   CityItem.fromJson(Map<String, dynamic> json) {
-    city = json['city'];
+    city = json['city'] ?? "Unknown";
     country = json['country'];
     pop2024 = json['pop2024'];
     latitude = json['latitude'];
     longitude = json['longitude'];
     cityDisp = json['cityDisp'];
     pop2024Disp = json['pop2024Disp'];
-    ar = json['ar'];
+    ar = json['ar'] ?? json['city'];
   }
 }

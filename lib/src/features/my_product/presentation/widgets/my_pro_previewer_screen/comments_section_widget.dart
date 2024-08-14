@@ -11,7 +11,7 @@ class CommentsSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CommentBloc, CommentState>(
+    return BlocBuilder<MyProBloc, MyProState>(
       builder: (context, state) {
         return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
@@ -81,7 +81,9 @@ class CommentsSectionWidget extends StatelessWidget {
                               minRating: 1,
                               maxRating: 5,
                               ignoreGestures: true,
-                              initialRating: 5,
+                              initialRating: commentRateModelItem
+                                  .rate!.rateValue!
+                                  .toDouble(),
                               itemSize: 15.0,
                               tapOnlyMode: true,
                               itemBuilder: (context, _) => const Icon(
@@ -94,10 +96,10 @@ class CommentsSectionWidget extends StatelessWidget {
                               width: 6.0,
                             ),
                             Text(
-                              '5.0',
-                              //commentRateModelItem.item!.rate!.first.rateValue!
-                              //    .toDouble()
-                              //    .toString(),
+                              Utils.appToStringAsFixed(
+                                  commentRateModelItem.rate!.rateValue!
+                                      .toDouble(),
+                                  1),
                               style: context.easyTheme.textTheme.labelMedium!
                                   .copyWith(
                                       fontSize: 14.0,

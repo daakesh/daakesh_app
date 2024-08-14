@@ -7,6 +7,8 @@ class BrandsBloc extends Bloc<BrandsEvent, BrandsState> {
     on<GetBrandsDataEvent>(_getBrandsData);
     on<GetItemsByBrandsEvent>(_getItemsByBrands);
     on<ResetValueEvent>(_resetValue);
+    on<SetBrandFilterData>(_setFilterData);
+    on<GetBrandsCitiesEvent>(_getBrandsCities);
   }
   static BrandsBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -65,17 +67,30 @@ class BrandsBloc extends Bloc<BrandsEvent, BrandsState> {
       ));
     } else {
       emit(state.copyWith(
-        brandsStateStatus: BrandsStateStatus.LOADING,
-        itemByBrandList: [],
-        brandID: event.brandID,
-        itemsCurrentPage: 1,
-      ));
+          brandsStateStatus: BrandsStateStatus.LOADING,
+          brandID: event.brandID,
+          isMoreDataItems: true,
+          sortingType: event.sortingType,
+          isFilterActive: event.isFilterActive,
+          itemByBrandList: [],
+          itemsCurrentPage: 1));
+    }
+    FilterDataModel filterDataModel = FilterDataModel();
+    if (state.isFilterActive) {
+      filterDataModel
+        ..type = state.type.name
+        ..fromPrice = '${state.fromPrice.toInt()}'
+        ..toPrice = '${state.toPrice.toInt()}'
+        ..country = state.country
+        ..city = state.city
+        ..rate = '${state.rate}';
     }
 
-    final result = await getIt.get<HomeUseCases>().getItemsByBrands(
-          state.itemsCurrentPage,
-          state.brandID,
-        );
+    final result = await getIt.get<HomeUseCases>().getItemsByBrandID(
+        state.brandID,
+        filterDataModel,
+        state.itemsCurrentPage,
+        state.sortingType);
     result.fold((l) {
       emit(state.copyWith(brandsStateStatus: BrandsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -84,31 +99,65 @@ class BrandsBloc extends Bloc<BrandsEvent, BrandsState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      TodayItemModel todayItemModel = TodayItemModel.fromJson(r.data);
-      int lastPage = todayItemModel.data!.lastPage!;
-      List<TodayItem> newResultList =
-          todayItemModel.data!.todayItemList!.toList();
-      List<TodayItem> todayItemData = state.itemByBrandList.toList();
+      TodayItemModel brandModel = TodayItemModel.fromJson(r.data);
+      int lastPage = brandModel.data!.lastPage!;
+      List<TodayItem> newResultList = brandModel.data!.todayItemList!.toList();
+      List<TodayItem> itemByBrandList = state.itemByBrandList.toList();
       if (newResultList.isEmpty) {
         emit(state.copyWith(
           brandsStateStatus: BrandsStateStatus.NULL,
-          isMoreDataItems: lastPage == state.currentPage,
+          isMoreDataItems: lastPage == state.itemsCurrentPage,
         ));
         return;
       }
-      todayItemData.addAll(newResultList);
+      itemByBrandList.addAll(newResultList);
       emit(state.copyWith(
         brandsStateStatus: BrandsStateStatus.SUCCESS,
-        itemByBrandList: todayItemData,
+        itemByBrandList: itemByBrandList,
         isMoreDataItems: lastPage == state.itemsCurrentPage,
       ));
     });
+  }
+
+  FutureOr<void> _setFilterData(
+      SetBrandFilterData event, Emitter<BrandsState> emit) {
+    emit(state.copyWith(
+      city: event.city,
+      rate: event.rate,
+      fromPrice: event.fromPrice,
+      toPrice: event.toPrice,
+      type: event.productType,
+    ));
   }
 
   FutureOr<void> _resetValue(ResetValueEvent event, Emitter<BrandsState> emit) {
     emit(state.copyWith(
       itemByBrandList: [],
       isMoreDataItems: true,
+      country: "Jordan",
+      city: "Amman",
+      rate: 0,
+      fromPrice: 0.0,
+      toPrice: 500.0,
+      isFilterActive: false,
+      type: FilterProductType.All,
     ));
+  }
+
+  FutureOr<void> _getBrandsCities(
+      GetBrandsCitiesEvent event, Emitter<BrandsState> emit) async {
+    final result = await getIt.get<HomeUseCases>().getCities();
+    result.fold((l) {
+      emit(state.copyWith(brandsStateStatus: BrandsStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      CitiesModel citiesModel = CitiesModel.fromJson(r.data);
+      List<CityItem> cityItemList = citiesModel.data!.toList();
+      emit(state.copyWith(cityItemList: cityItemList));
+    });
   }
 }

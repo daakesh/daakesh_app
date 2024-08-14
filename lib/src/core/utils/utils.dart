@@ -1,8 +1,9 @@
 import 'dart:io';
-
+import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gif/gif.dart';
 import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,6 +34,49 @@ class Utils {
     });
   }
 
+  static Future<void> showSwapOverLay(
+      BuildContext context, String gifImage) async {
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry overlayEntry = OverlayEntry(
+        builder: (context) => Container(
+              alignment: Alignment.center,
+              width: Utils.getScreenWidth(context),
+              height: Utils.getScreenHeight(context),
+              color: Colors.white,
+              child: Gif(
+                image: AssetImage(gifImage),
+                autostart: Autostart.once,
+              ),
+            ));
+    overlayState.insert(overlayEntry);
+    await Future.delayed(const Duration(seconds: 3));
+    overlayEntry.remove();
+  }
+
+  static Future<void> openPageWithoutAnimation(Widget widget,
+      {bool popPreviousPages = false}) {
+    return Future<dynamic>.delayed(Duration.zero, () {
+      if (!popPreviousPages) {
+        return navigatorKey.currentState!.push(
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => widget,
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+        );
+      }
+      return navigatorKey.currentState!.pushAndRemoveUntil(
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => widget,
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+          (Route<dynamic> route) => false);
+    });
+  }
+
+  static bool get isEnglish => ValueConstants.language == 'en';
+
   static Future<void> openNavNewPage(BuildContext context, Widget screen,
       {withNavBar = true}) async {
     PersistentNavBarNavigator.pushNewScreen(
@@ -45,11 +89,25 @@ class Utils {
   static GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'Key to navigate without context');
 
+  static Widget flipWidget(Widget icon) {
+    if (isEnglish) {
+      return icon;
+    }
+    return Transform(
+      alignment: Alignment.center,
+      transform: Matrix4.rotationY(math.pi),
+      child: icon,
+    );
+  }
+
   static BuildContext currentContext = navigatorKey.currentState!.context;
 
   static AppLocalizations get locale => AppLocalizations.of(currentContext)!;
 
   static String formatDate(String dateString) {
+    if (dateString.isEmpty) {
+      dateString = "2024-05-01 20:27:02";
+    }
     DateTime date = DateFormat('yyyy-mm-dd').parse(dateString);
     return DateFormat('mm/dd/yyyy').format(date);
   }
@@ -77,6 +135,14 @@ class Utils {
         return countryCodeToEmoji('Algeria');
       default:
         return countryCodeToEmoji('Jordan');
+    }
+  }
+
+  static String displayHandler(BuildContext context, String value) {
+    if (value == "Public") {
+      return isEnglish ? 'Public' : 'عام';
+    } else {
+      return isEnglish ? 'Private' : 'خاص';
     }
   }
 

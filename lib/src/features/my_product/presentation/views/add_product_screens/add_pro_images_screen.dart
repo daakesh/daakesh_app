@@ -30,26 +30,26 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 108.0,
+                  SizedBox(
+                    height: 70.0.h,
                   ),
                   GestureDetector(
                     onTap: cancel,
-                    child: Assets.svg.arrowBackIcon.svg(),
+                    child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                   ),
                   const SizedBox(
                     height: 11.0,
                   ),
                   Text(
-                    'Add Product',
+                    context.locale.add_product,
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 36.0),
+                        .copyWith(fontSize: 36.0.sp),
                   ),
                   const SizedBox(
                     height: 14.0,
                   ),
                   Text(
-                    'Add Image',
+                    context.locale.add_image,
                     style: context.easyTheme.textTheme.headlineMedium!
                         .copyWith(fontSize: 25.0),
                   ),
@@ -57,7 +57,7 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                     height: 19.0,
                   ),
                   Text(
-                    'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                    context.locale.add_product_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 16.0),
                   ),
@@ -100,7 +100,7 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                               height: 16.0,
                             ),
                             Text(
-                              'Add Image',
+                              context.locale.add_image,
                               style: context.easyTheme.textTheme.bodyLarge,
                             ),
                           ],
@@ -147,14 +147,16 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                   ),
                   Center(
                     child: DefaultButtonWidget(
-                        text: 'NEXT', onPressed: () => onNext()),
+                        text: context.locale.next_button,
+                        onPressed: () => onNext()),
                   ),
                   const SizedBox(
                     height: 12.0,
                   ),
                   Center(
                     child: OutlineButtonWidget(
-                        text: 'CANCEL', onPressed: () => cancel()),
+                        text: context.locale.cancel_button,
+                        onPressed: () => cancel()),
                   ),
                   const SizedBox(
                     height: 50.0,

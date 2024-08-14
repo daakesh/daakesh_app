@@ -28,3 +28,5 @@ class PassSwapCommentEvent extends SwapPassDataEvent {
   final String comment;
   PassSwapCommentEvent({required this.comment});
 }
+
+class ResetSwapPassValuesEvent extends SwapPassDataEvent {}

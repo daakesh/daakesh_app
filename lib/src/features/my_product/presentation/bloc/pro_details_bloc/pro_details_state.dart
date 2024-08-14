@@ -1,7 +1,14 @@
 import 'package:equatable/equatable.dart';
 import '../../../../../src.export.dart';
 
-enum ProDetailsStateStatus { INITIAL, LOADING, SUCCESS, ERROR,LOADINGMORE,NULL }
+enum ProDetailsStateStatus {
+  INITIAL,
+  LOADING,
+  SUCCESS,
+  ERROR,
+  LOADINGMORE,
+  NULL
+}
 
 extension ProDetailsStateStatusX on ProDetailsStateStatus {
   bool get isInitial => this == ProDetailsStateStatus.INITIAL;
@@ -18,28 +25,28 @@ class ProDetailsState extends Equatable {
   final List<ProCategoryItem> proCategoryListData;
   final List<ProSubCategoryItem> proSubCategoryListData;
   final List<ProBrandItem> proBrandListData;
+
   ///
-  final String? productSecID;
-  final String? productCatID;
-  final String? productSubCatID;
-  final String? productBrandID;
-  final String? productModelYear;
+  final int productSecID;
+  final int productCatID;
+  final int productSubCatID;
+  final int productBrandID;
+  final String productModelYear;
 
   const ProDetailsState({
     this.proDetailsStateStatus = ProDetailsStateStatus.INITIAL,
-    this.sectionListData = const[],
-    this.proCategoryListData = const[],
-    this.proSubCategoryListData = const[],
-    this.proBrandListData = const[],
+    this.sectionListData = const [],
+    this.proCategoryListData = const [],
+    this.proSubCategoryListData = const [],
+    this.proBrandListData = const [],
+
     ///
-    this.productSecID,
-    this.productCatID,
-    this.productSubCatID,
-    this.productBrandID,
-    this.productModelYear,
-
+    this.productSecID = 1000,
+    this.productCatID = 1000,
+    this.productSubCatID = 1000,
+    this.productBrandID = 1000,
+    this.productModelYear = '2024',
   });
-
 
   ProDetailsState copyWith({
     ProDetailsStateStatus? proDetailsStateStatus,
@@ -47,39 +54,41 @@ class ProDetailsState extends Equatable {
     List<ProCategoryItem>? proCategoryListData,
     List<ProSubCategoryItem>? proSubCategoryListData,
     List<ProBrandItem>? proBrandListData,
-    String? productSecID,
-    String? productCatID,
-    String? productSubCatID,
-    String? productBrandID,
+    int? productSecID,
+    int? productCatID,
+    int? productSubCatID,
+    int? productBrandID,
     String? productModelYear,
   }) {
     return ProDetailsState(
-      proDetailsStateStatus: proDetailsStateStatus ?? this.proDetailsStateStatus,
+      proDetailsStateStatus:
+          proDetailsStateStatus ?? this.proDetailsStateStatus,
       sectionListData: sectionListData ?? this.sectionListData,
       proCategoryListData: proCategoryListData ?? this.proCategoryListData,
-      proSubCategoryListData: proSubCategoryListData ?? this.proSubCategoryListData,
+      proSubCategoryListData:
+          proSubCategoryListData ?? this.proSubCategoryListData,
       proBrandListData: proBrandListData ?? this.proBrandListData,
+
       ///
       productSecID: productSecID ?? this.productSecID,
       productCatID: productCatID ?? this.productCatID,
       productSubCatID: productSubCatID ?? this.productSubCatID,
       productBrandID: productBrandID ?? this.productBrandID,
-      productModelYear: productModelYear ?? this. productModelYear,
-
+      productModelYear: productModelYear ?? this.productModelYear,
     );
   }
 
   @override
   List<Object?> get props => [
-    proDetailsStateStatus,
-    sectionListData,
-    proCategoryListData,
-    proSubCategoryListData,
-    proBrandListData,
-    productSecID,
-    productCatID,
-    productSubCatID,
-    productBrandID,
-    productModelYear,
-  ];
+        proDetailsStateStatus,
+        sectionListData,
+        proCategoryListData,
+        proSubCategoryListData,
+        proBrandListData,
+        productSecID,
+        productCatID,
+        productSubCatID,
+        productBrandID,
+        productModelYear,
+      ];
 }

@@ -20,14 +20,13 @@ class SwapSectionData {
   SwapSectionData.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <SwapSectionItemModel>[];
-      data = (json['data'] as List<dynamic>).map((v) => SwapSectionItemModel.fromJson(v)).toList();
+      data = (json['data'] as List<dynamic>)
+          .map((v) => SwapSectionItemModel.fromJson(v))
+          .toList();
     }
     lastPage = json['last_page'];
-
   }
-
 }
-
 
 class SwapSectionItemModel {
   int? id;
@@ -49,12 +48,12 @@ class SwapSectionItemModel {
   });
 
   SwapSectionItemModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    description = json['description'];
-    secImg = json['secImg'];
-    date = json['date'];
-    secOrder = json['secOrder'];
-    arName = json['arName'];
+    id = json['id'] ?? 0;
+    name = json['name'] ?? "Unknown";
+    description = json['description'] ?? "Unknown";
+    secImg = json['secImg'] ?? "Unknown";
+    date = json['date'] ?? "Unknown";
+    secOrder = json['secOrder'] ?? 0;
+    arName = json['arName'] ?? "Unknown";
   }
 }

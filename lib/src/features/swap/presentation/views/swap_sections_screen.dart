@@ -17,7 +17,7 @@ class SwapSectionScreen extends StatelessWidget {
           body: CustomScrollView(
             slivers: [
               const SwapAppBarWidget(),
-              const SliverToBoxAdapter(child: SizedBox(height: 26.0)),
+              const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 17.0),
@@ -41,8 +41,11 @@ class SwapSectionScreen extends StatelessWidget {
                         SwapSectionItemModel sectionModel =
                             swapState.swapSectionListData[index];
                         return GestureDetector(
-                          onTap: () => getSectionCategories(sectionModel.id!,
-                              index, sectionModel.name.toString()),
+                          onTap: () => getSectionCategories(
+                              sectionModel.id!,
+                              index,
+                              sectionModel.name.toString(),
+                              sectionModel.arName.toString()),
                           child: SwapPopularCategoriesWidget(
                             data: sectionModel,
                             index: index,
@@ -55,7 +58,7 @@ class SwapSectionScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 29.5)),
+              const SliverToBoxAdapter(child: SizedBox(height: 6.0)),
               SliverToBoxAdapter(
                 child: Divider(
                   color: ColorName.gray.withOpacity(0.36),
@@ -63,20 +66,20 @@ class SwapSectionScreen extends StatelessWidget {
                   indent: 46.0,
                 ),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 29.5)),
+              const SliverToBoxAdapter(child: SizedBox(height: 10.0)),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 31.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
                   child: Text(
-                    '${state.categoryTitle} ${context.locale.swap_category_title}',
+                    '${Utils.isEnglish ? state.categoryTitle : state.arCategoryTitle} ${context.locale.swap_category_title}',
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                      fontSize: 24.0,
+                      fontSize: 20.0.sp,
                       color: ColorName.black.withOpacity(0.57),
                     ),
                   ),
                 ),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 15.0)),
+              const SliverToBoxAdapter(child: SizedBox(height: 4.0)),
               state.swapCategoriesListData.isNotEmpty
                   ? SliverList(
                       delegate: SliverChildBuilderDelegate(
@@ -103,11 +106,14 @@ class SwapSectionScreen extends StatelessWidget {
     );
   }
 
-  void getSectionCategories(int secID, int sectionIndex, String categoryTitle) {
+  void getSectionCategories(int secID, int sectionIndex, String categoryTitle,
+      String arCategoryTitle) {
     SwapSectionsBloc.get.add(SwapGetCategoryBySectionIDEvent(
-        secID: secID,
-        sectionIndex: sectionIndex,
-        categoryTitle: categoryTitle));
+      secID: secID,
+      sectionIndex: sectionIndex,
+      categoryTitle: categoryTitle,
+      arCategoryTitle: arCategoryTitle,
+    ));
   }
 
   void onSeeMore() => SwapSectionsBloc.get
@@ -115,12 +121,13 @@ class SwapSectionScreen extends StatelessWidget {
 
   void openSubCategories(context, List<SwapCategoryItem> swapCategoriesListData,
       int catID, int index) {
-    SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: index));
+    SwapFilterBloc.get.add(SwapClearFilterDataEvent());
+    SwapFilterBloc.get.add(SwapSelectCategoryItemEvent(index: -1));
     SwapFilterBloc.get.add(GetSwapCitiesEvent());
+    SwapFilterBloc.get.add(GetSwapSubCategoriesEvent(catID: catID));
     SwapFilterBloc.get.add(SwapPreviewSectionSubCategoriesEvent(
         catID: catID, isFilterActive: false));
-    Utils.openNavNewPage(context,
-        SwapResultsScreen(swapCategoriesListData: swapCategoriesListData));
+    Utils.openNavNewPage(context, SwapResultsScreen(catID: catID));
   }
 
   Widget seeMoreHandler(SwapSectionsState state, BuildContext context) {

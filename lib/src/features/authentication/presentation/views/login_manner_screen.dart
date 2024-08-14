@@ -17,7 +17,7 @@ class LoginMannerScreen extends StatelessWidget {
               const Spacer(
                 flex: 5,
               ),
-              const Center(child: DaakeshLogoWidget()),
+              const Center(child: GeneralDaakeshLogoWidget()),
               const Spacer(
                 flex: 6,
               ),

@@ -38,6 +38,10 @@ class SwapFilterState extends Equatable {
   ///
   final int categoryIndex;
   final List<CityItem> cityItemList;
+  final SortingType sortingType;
+  final bool isAllItems;
+  final List<SubCategory> subCategoryList;
+
   const SwapFilterState({
     this.swapFilterStateStatus = SwapFilterStateStatus.INITIAL,
     this.subCategoryListData = const [],
@@ -46,31 +50,36 @@ class SwapFilterState extends Equatable {
     this.city = 'Amman',
     this.rate = 0,
     this.fromPrice = 0.0,
-    this.toPrice = 500.0,
+    this.toPrice = 1000.0,
     this.type = FilterProductType.All,
     this.isFilterActive = false,
     this.currentPage = 1,
     this.isMoreData = true,
     this.categoryIndex = 0,
     this.cityItemList = const [],
+    this.sortingType = SortingType.desc,
+    this.isAllItems = true,
+    this.subCategoryList = const [],
   });
 
-  SwapFilterState copyWith({
-    SwapFilterStateStatus? swapFilterStateStatus,
-    List<TrendDealsItem>? subCategoryListData,
-    int? catID,
-    String? country,
-    String? city,
-    int? rate,
-    double? fromPrice,
-    double? toPrice,
-    FilterProductType? type,
-    bool? isFilterActive,
-    int? currentPage,
-    bool? isMoreData,
-    int? categoryIndex,
-    List<CityItem>? cityItemList,
-  }) {
+  SwapFilterState copyWith(
+      {SwapFilterStateStatus? swapFilterStateStatus,
+      List<TrendDealsItem>? subCategoryListData,
+      int? catID,
+      String? country,
+      String? city,
+      int? rate,
+      double? fromPrice,
+      double? toPrice,
+      FilterProductType? type,
+      bool? isFilterActive,
+      int? currentPage,
+      bool? isMoreData,
+      int? categoryIndex,
+      List<CityItem>? cityItemList,
+      bool? isAllItems,
+      List<SubCategory>? subCategoryList,
+      SortingType? sortingType}) {
     return SwapFilterState(
       swapFilterStateStatus:
           swapFilterStateStatus ?? this.swapFilterStateStatus,
@@ -87,6 +96,9 @@ class SwapFilterState extends Equatable {
       isMoreData: isMoreData ?? this.isMoreData,
       categoryIndex: categoryIndex ?? this.categoryIndex,
       cityItemList: cityItemList ?? this.cityItemList,
+      sortingType: sortingType ?? this.sortingType,
+      isAllItems: isAllItems ?? this.isAllItems,
+      subCategoryList: subCategoryList ?? this.subCategoryList,
     );
   }
 
@@ -106,5 +118,8 @@ class SwapFilterState extends Equatable {
         isMoreData,
         categoryIndex,
         cityItemList,
+        sortingType,
+        isAllItems,
+        subCategoryList,
       ];
 }

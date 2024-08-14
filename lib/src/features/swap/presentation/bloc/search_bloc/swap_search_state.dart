@@ -4,20 +4,26 @@ import '../../../../../src.export.dart';
 
 enum SwapSearchStateStatus {
   INITIAL,
+  SEARCHLOADING,
+  NULLSEARCH,
   LOADING,
   SUCCESS,
   ERROR,
   LOADINGMORE,
-  NULL
+  NULL,
+  ITEMLOADING,
 }
 
 extension SwapSearchStateStatusX on SwapSearchStateStatus {
-  bool get isInitial => this == SwapSearchStateStatus.INITIAL;
-  bool get isSuccess => this == SwapSearchStateStatus.SUCCESS;
-  bool get isError => this == SwapSearchStateStatus.ERROR;
-  bool get isLoading => this == SwapSearchStateStatus.LOADING;
-  bool get isLoadingMore => this == SwapSearchStateStatus.LOADINGMORE;
-  bool get isNull => this == SwapSearchStateStatus.NULL;
+  bool get isInitial => this == SearchStateStatus.INITIAL;
+  bool get isSuccess => this == SearchStateStatus.SUCCESS;
+  bool get isError => this == SearchStateStatus.ERROR;
+  bool get isLoading => this == SearchStateStatus.LOADING;
+  bool get isItemLoading => this == SearchStateStatus.ITEMLOADING;
+  bool get isSearchLoading => this == SearchStateStatus.SEARCHLOADING;
+  bool get isNullSearch => this == SearchStateStatus.NULLSEARCH;
+  bool get isLoadingMore => this == SearchStateStatus.LOADINGMORE;
+  bool get isNull => this == SearchStateStatus.NULL;
 }
 
 class SwapSearchState extends Equatable {
@@ -26,6 +32,17 @@ class SwapSearchState extends Equatable {
   final int currentSearchPage;
   final String searchValue;
   final bool isMoreData;
+  final String country;
+  final String city;
+  final int rate;
+  final double fromPrice;
+  final double toPrice;
+  final FilterProductType type;
+  final bool isFilterActive;
+  final int filterCurrentPage;
+  final List<TrendDealsItem> filterDataList;
+  final bool isMoreDataItems;
+  final SortingType sortingType;
 
   const SwapSearchState({
     this.swapSearchStateStatus = SwapSearchStateStatus.INITIAL,
@@ -33,15 +50,36 @@ class SwapSearchState extends Equatable {
     this.currentSearchPage = 1,
     this.searchValue = '',
     this.isMoreData = true,
+    this.country = 'Jordan',
+    this.city = 'Amman',
+    this.rate = 0,
+    this.fromPrice = 0.0,
+    this.toPrice = 500.0,
+    this.type = FilterProductType.All,
+    this.isFilterActive = false,
+    this.filterCurrentPage = 1,
+    this.filterDataList = const [],
+    this.isMoreDataItems = true,
+    this.sortingType = SortingType.desc,
   });
 
-  SwapSearchState copyWith({
-    SwapSearchStateStatus? swapSearchStateStatus,
-    List<TrendDealsItem>? swapSearchResultList,
-    int? currentSearchPage,
-    String? searchValue,
-    bool? isMoreData,
-  }) {
+  SwapSearchState copyWith(
+      {SwapSearchStateStatus? swapSearchStateStatus,
+      List<TrendDealsItem>? swapSearchResultList,
+      int? currentSearchPage,
+      String? searchValue,
+      bool? isMoreData,
+      String? country,
+      String? city,
+      int? rate,
+      double? fromPrice,
+      double? toPrice,
+      FilterProductType? type,
+      bool? isFilterActive,
+      int? filterCurrentPage,
+      List<TrendDealsItem>? filterDataList,
+      bool? isMoreDataItems,
+      SortingType? sortingType}) {
     return SwapSearchState(
       swapSearchStateStatus:
           swapSearchStateStatus ?? this.swapSearchStateStatus,
@@ -49,6 +87,17 @@ class SwapSearchState extends Equatable {
       currentSearchPage: currentSearchPage ?? this.currentSearchPage,
       searchValue: searchValue ?? this.searchValue,
       isMoreData: isMoreData ?? this.isMoreData,
+      country: country ?? this.country,
+      city: city ?? this.city,
+      rate: rate ?? this.rate,
+      fromPrice: fromPrice ?? this.fromPrice,
+      toPrice: toPrice ?? this.toPrice,
+      type: type ?? this.type,
+      isFilterActive: isFilterActive ?? this.isFilterActive,
+      filterCurrentPage: filterCurrentPage ?? this.filterCurrentPage,
+      filterDataList: filterDataList ?? this.filterDataList,
+      isMoreDataItems: isMoreDataItems ?? this.isMoreDataItems,
+      sortingType: sortingType ?? this.sortingType,
     );
   }
 
@@ -59,5 +108,15 @@ class SwapSearchState extends Equatable {
         currentSearchPage,
         searchValue,
         isMoreData,
+        country,
+        city,
+        rate,
+        fromPrice,
+        toPrice,
+        type,
+        isFilterActive,
+        filterDataList,
+        isMoreDataItems,
+        sortingType,
       ];
 }

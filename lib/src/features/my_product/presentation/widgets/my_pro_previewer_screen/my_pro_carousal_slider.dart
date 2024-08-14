@@ -3,13 +3,22 @@ import 'package:daakesh/src/core/utils/widgets/zoom_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
+import 'package:collection/collection.dart';
 
-class ProductSlider extends StatelessWidget {
+class ProductSlider extends StatefulWidget {
   final ProPreviewerModel previewerModel;
-  ProductSlider({
+
+  const ProductSlider({
     super.key,
     required this.previewerModel,
   });
+
+  @override
+  State<ProductSlider> createState() => _ProductSliderState();
+}
+
+class _ProductSliderState extends State<ProductSlider> {
+  int currentIndex = 0;
 
   final controller = CarouselController();
 
@@ -32,19 +41,24 @@ class ProductSlider extends StatelessWidget {
                 width: 6.0,
               ),
               Text(
-                previewerModel.userName!,
+                widget.previewerModel.userName!,
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0),
               ),
               const Spacer(
                 flex: 1,
               ),
-              GestureDetector(
-                onTap: () => PassDataBloc.get.add(ZoomInOutEvent()),
-                child: Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: Assets.svg.zoomInIcon.svg(),
-                ),
+              BlocBuilder<PassDataBloc, PassDataState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () => PassDataBloc.get.add(ProductZoomInOutEvent()),
+                    child: Align(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        child: state.productScale != 3
+                            ? Assets.svg.zoomInIcon.svg()
+                            : Assets.svg.zoomOutIcon.svg()),
+                  );
+                },
               ),
             ],
           ),
@@ -58,18 +72,19 @@ class ProductSlider extends StatelessWidget {
               viewportFraction: 1,
               height: 250.0,
               onPageChanged: (index, reason) {
-                PassDataBloc.get.add(
-                    SelectProductPropertiesEvent(productSliderIndex: index));
+                currentIndex = index;
+                setState(() {});
               }),
-          items: previewerModel.itemImage != null
-              ? previewerModel.itemImage!.map((i) {
+          items: widget.previewerModel.itemImage != null
+              ? widget.previewerModel.itemImage!.mapIndexed((index, i) {
                   return Builder(builder: (context) {
                     return BlocBuilder<PassDataBloc, PassDataState>(
                       builder: (context, state) {
                         return Transform.scale(
-                          scale: state.scale,
+                          scale: state.productScale,
                           child: GestureDetector(
-                            onTap: () => openImage(i.toString()),
+                            onTap: () => openImage(
+                                widget.previewerModel.itemImage!, index),
                             child: CachedImage(
                               imageUrl: i.toString(),
                             ),
@@ -86,8 +101,8 @@ class ProductSlider extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: previewerModel.itemImage != null
-              ? previewerModel.itemImage!.asMap().entries.map((entry) {
+          children: widget.previewerModel.itemImage != null
+              ? widget.previewerModel.itemImage!.asMap().entries.map((entry) {
                   return BlocBuilder<PassDataBloc, PassDataState>(
                     builder: (context, state) {
                       return Container(
@@ -97,7 +112,7 @@ class ProductSlider extends StatelessWidget {
                             vertical: 8.0, horizontal: 4.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: state.productSliderIndex == entry.key
+                          color: currentIndex == entry.key
                               ? ColorName.lightOrange
                               : ColorName.silverGray,
                         ),
@@ -120,7 +135,7 @@ class ProductSlider extends StatelessWidget {
     );
   }
 
-  void openImage(String imageUrl) {
-    Utils.openNewPage(ZoomImageWidget(imageUrl: imageUrl));
+  void openImage(List<String> imageUrl, int index) {
+    Utils.openNewPage(ZoomImageWidget(imageUrlList: imageUrl, index: index));
   }
 }

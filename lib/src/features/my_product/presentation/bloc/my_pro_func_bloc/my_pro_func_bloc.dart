@@ -101,9 +101,7 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
   ///Event to search on products at [MyProductsScreen]
   FutureOr<void> _searchOnProduct(
       SearchOnProductEvent event, Emitter<MyProFuncState> emit) async {
-    emit(state.copyWith(
-      searchValue: event.searchValue,
-    ));
+    emit(state.copyWith(searchValue: event.searchValue));
     if (event.isSeeMore) {
       emit(state.copyWith(
           currentSearchPage: state.currentSearchPage + 1,
@@ -113,9 +111,10 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
           myProFuncStateStatus: MyProFuncStateStatus.LOADING,
           currentSearchPage: 1));
     }
-    final result = await getIt
-        .get<MyProductUseCases>()
-        .searchOnProduct(event.searchValue.toString(), state.currentSearchPage);
+    final result = await getIt.get<MyProductUseCases>().searchOnProduct(
+        event.searchValue.toString(),
+        state.currentSearchPage,
+        state.productTapBar);
     result.fold((l) {
       emit(state.copyWith(myProFuncStateStatus: MyProFuncStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -154,6 +153,7 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
         searchResultList: [],
         searchValue: event.value.isEmpty ? '' : event.value,
         currentSearchPage: 1,
+        productTapBar: event.isClear ? ProductTapBar.SELL : state.productTapBar,
         isMoreData: true));
   }
 

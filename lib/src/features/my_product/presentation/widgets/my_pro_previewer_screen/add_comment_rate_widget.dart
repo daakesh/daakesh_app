@@ -3,14 +3,22 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
 // ignore: must_be_immutable
-class AddCommentRateWidget extends StatelessWidget {
+class AddCommentRateWidget extends StatefulWidget {
   final int itemId;
   final int catID;
-  AddCommentRateWidget({
+  final int subID;
+  const AddCommentRateWidget({
     super.key,
     required this.itemId,
     required this.catID,
+    required this.subID,
   });
+
+  @override
+  State<AddCommentRateWidget> createState() => _AddCommentRateWidgetState();
+}
+
+class _AddCommentRateWidgetState extends State<AddCommentRateWidget> {
   final commentController = TextEditingController();
 
   double rateValue = 5;
@@ -52,7 +60,7 @@ class AddCommentRateWidget extends StatelessWidget {
                     allowHalfRating: true,
                     minRating: 1,
                     maxRating: 5,
-                    initialRating: 5,
+                    initialRating: rateValue,
                     itemSize: 25.0,
                     itemBuilder: (context, _) => const Icon(
                       Icons.star,
@@ -102,25 +110,21 @@ class AddCommentRateWidget extends StatelessWidget {
       context.showLoginDialog;
       return;
     }
-
     addComment();
-    addRate();
   }
 
   void addComment() {
-    CommentBloc.get.add(AddCommentEvent(
+    MyProBloc.get.add(AddProCommentEvent(
       userId: ValueConstants.userId,
-      itemId: itemId,
+      itemId: widget.itemId,
       commentDesc: commentController.text,
-    ));
-  }
-
-  void addRate() {
-    RateBloc.get.add(AddRateEvent(
-      userId: ValueConstants.userId,
-      itemId: itemId,
-      catID: catID,
+      catID: widget.catID,
+      subID: widget.subID,
       rateValue: rateValue,
     ));
+    context.disMissKeyboard;
+    commentController.clear();
+    rateValue = 5;
+    setState(() {});
   }
 }

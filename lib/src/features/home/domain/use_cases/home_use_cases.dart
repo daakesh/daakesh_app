@@ -7,22 +7,29 @@ abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> getSectionData(int page);
   Future<Either<Failure, ValidResponse>> getCategoryBySectionID(
       int secID, int page);
-  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page);
+  Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(int catID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getItemBySubCategoryID(int subID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getSubCategories(int catID);
 
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page);
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
   Future<Either<Failure, ValidResponse>> getBrandsData(int page);
   Future<Either<Failure, ValidResponse>> getItemsByBrands(
       int page, int brandId);
 
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page);
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType);
   Future<Either<Failure, ValidResponse>> searchOnItems(
       String searchValue, int page, int perPage);
 
   ///Comment API
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc);
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue);
   Future<Either<Failure, ValidResponse>> getCommentsByItem(
       int itemID, int page);
   Future<Either<Failure, ValidResponse>> removeComments(int id);
@@ -46,6 +53,18 @@ abstract class HomeUseCases {
   Future<Either<Failure, ValidResponse>> addOrder(
       List<Map<String, dynamic>> orderList);
   Future<Either<Failure, ValidResponse>> getCities();
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId);
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId);
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(int brandID,
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> getAllTodayItems(
+      FilterDataModel filterDataModel, int page, SortingType sortingType);
+  Future<Either<Failure, ValidResponse>> clickAdv(String userID, String advID);
 }
 
 @dev
@@ -54,6 +73,12 @@ class HomeUseCasesImpl implements HomeUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getAdvertisementData() async {
     return await getIt.get<HomeRepository>().getAdvertisementData();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    return await getIt.get<HomeRepository>().clickAdv(userID, advID);
   }
 
   @override
@@ -71,15 +96,39 @@ class HomeUseCasesImpl implements HomeUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page) async {
+      int catID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<HomeRepository>()
-        .getSubCategoryByCatID(catID, filterDataModel, page);
+        .getSubCategoryByCatID(catID, filterDataModel, page, sortingType);
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
-    return await getIt.get<HomeRepository>().getHandmadeData(page);
+  Future<Either<Failure, ValidResponse>> getItemBySubCategoryID(
+      int subID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getItemBySubCategoryID(subID, filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSubCategories(int catID) async {
+    return await getIt.get<HomeRepository>().getSubCategories(catID);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getHandmadeData(filterDataModel, page, sortingType);
   }
 
   @override
@@ -95,8 +144,13 @@ class HomeUseCasesImpl implements HomeUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page) async {
-    return await getIt.get<HomeRepository>().getTodayItemsData(type, page);
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getTodayItemsData(filterDataModel, type, page, sortingType);
   }
 
   @override
@@ -109,11 +163,16 @@ class HomeUseCasesImpl implements HomeUseCases {
 
   ///Comment API.
   @override
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc) async {
-    return await getIt
-        .get<HomeRepository>()
-        .addComment(userId, itemId, commentDesc);
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
+    return await getIt.get<HomeRepository>().addComment(
+          userId,
+          itemId,
+          commentDesc,
+          catID,
+          subID,
+          rateValue,
+        );
   }
 
   @override
@@ -189,5 +248,47 @@ class HomeUseCasesImpl implements HomeUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getCities() async {
     return await getIt.get<HomeRepository>().getCities();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId) async {
+    return await getIt.get<HomeRepository>().getCommentCountItem(itemId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId) async {
+    return await getIt.get<HomeRepository>().getOverAllRateItem(itemId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
+      int brandID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getItemsByBrandID(brandID, filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getSearchItemsResult(searchValue, filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getAllTodayItems(
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeRepository>()
+        .getAllTodayItems(filterDataModel, page, sortingType);
   }
 }

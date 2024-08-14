@@ -98,24 +98,19 @@ class SwapTrendDealProduct extends StatelessWidget {
                     '${trendDealsItem.title}\n',
                     maxLines: 2,
                     style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                        fontSize: 14.0.sp,
+                        fontSize: 15.0.sp,
                         color: ColorName.gray,
                         overflow: TextOverflow.ellipsis),
                   ),
                 ),
-                SizedBox(
-                  height: 2.0.h,
-                ),
                 Text(
                   '${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap} ',
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                      fontSize: 14.0,
+                      fontSize: 13.0.sp,
                       color: ColorName.mediumSilver,
                       overflow: TextOverflow.ellipsis),
                 ),
-                const SizedBox(
-                  height: 11.0,
-                ),
+                const SizedBox(height: 1.0),
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Padding(
@@ -201,9 +196,11 @@ class SwapTrendDealProduct extends StatelessWidget {
     );
   }
 
-  void openMoreInfoProductScreen(context) => Utils.openNavNewPage(
-      context,
-      SwapMoreInfoScreen(
-        trendDealsItem: trendDealsItem,
-      ));
+  void openMoreInfoProductScreen(context) {
+    Utils.openNavNewPage(
+        context,
+        SwapMoreInfoScreen(
+          trendDealsItem: trendDealsItem,
+        ));
+  }
 }

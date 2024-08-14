@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import '../../../../../src.export.dart';
 
 class HandmadeItemWidget extends StatelessWidget {
-  final HandmadeItem handmadeItem;
+  final TodayItem handmadeItem;
   const HandmadeItemWidget({super.key, required this.handmadeItem});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => getItemsByHandMade(context, handmadeItem.id!),
+      onTap: () => openMoreInfoScreen(context, handmadeItem),
       child: Padding(
         padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
         child: Container(
@@ -65,6 +65,17 @@ class HandmadeItemWidget extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void openMoreInfoScreen(BuildContext context, TodayItem todayItem) {
+    CommentBloc.get.add(GetCommentByItemEvent(itemId: todayItem.id));
+    Utils.openNavNewPage(
+      context,
+      MoreInfoProductScreen(
+        todayDealItem: todayItem,
+        isDaakeshTodayDeal: true,
       ),
     );
   }

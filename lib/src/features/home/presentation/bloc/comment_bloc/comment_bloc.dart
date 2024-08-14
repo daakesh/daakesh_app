@@ -7,7 +7,8 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     on<AddCommentEvent>(_addComment);
     on<GetCommentByItemEvent>(_getCommentsByItem);
     on<RemoveCommentsEvent>(_removeComments);
-    on<EditCommentEvent>(_editComments);
+    on<GetCommentCountEvent>(_getCommentCount);
+    on<EmptyCommentDataEvent>(_emptyCommentData);
   }
   static CommentBloc get get =>
       BlocProvider.of(Utils.navigatorKey.currentState!.context);
@@ -17,14 +18,22 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     String userId = event.userId;
     int itemId = event.itemId;
     String commentDesc = event.commentDesc;
+    int catID = event.catID;
+    int subID = event.subID;
+    double rateValue = event.rateValue;
     emit(state.copyWith(commentStateStatus: CommentStateStatus.LOADING));
     ProgressCircleDialog.show();
 
-    final result =
-        await getIt.get<HomeUseCases>().addComment(userId, itemId, commentDesc);
+    final result = await getIt.get<HomeUseCases>().addComment(
+          userId,
+          itemId,
+          commentDesc,
+          catID,
+          subID,
+          rateValue,
+        );
     result.fold((l) {
       ProgressCircleDialog.dismiss();
-
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
@@ -33,12 +42,13 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      CommentRateModelItem commentRateModel =
-          CommentRateModelItem.fromJson(r.data['data']);
-      state.commentList.insert(0, commentRateModel);
+      RateBloc.get.add(GetOverAllRateItemsEvent(itemID: itemId));
+      CommentBloc.get.add(GetCommentByItemEvent());
+
       emit(state.copyWith(
           commentStateStatus: CommentStateStatus.SUCCESS,
-          commentList: state.commentList));
+          commentList: state.commentList,
+          commentCount: state.commentCount + 1));
     });
   }
 
@@ -109,13 +119,11 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     });
   }
 
-  FutureOr<void> _editComments(
-      EditCommentEvent event, Emitter<CommentState> emit) async {
-    int id = event.id;
-    String commentDesc = event.commentDesc;
+  FutureOr<void> _getCommentCount(
+      GetCommentCountEvent event, Emitter<CommentState> emit) async {
+    int itemId = event.itemId;
     emit(state.copyWith(commentStateStatus: CommentStateStatus.LOADING));
-    final result =
-        await getIt.get<HomeUseCases>().editComments(id, commentDesc);
+    final result = await getIt.get<HomeUseCases>().getCommentCountItem(itemId);
     result.fold((l) {
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -124,7 +132,15 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
-      emit(state.copyWith(commentStateStatus: CommentStateStatus.SUCCESS));
+      int commentCount = r.data['data']['comment_count'];
+      emit(state.copyWith(
+          commentStateStatus: CommentStateStatus.SUCCESS,
+          commentCount: commentCount));
     });
+  }
+
+  FutureOr<void> _emptyCommentData(
+      EmptyCommentDataEvent event, Emitter<CommentState> emit) {
+    emit(state.copyWith(commentCount: 0));
   }
 }

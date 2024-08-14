@@ -19,11 +19,13 @@ class SwapSectionsBloc extends Bloc<SwapSectionsEvent, SwapSectionsState> {
         swapSectionsStateStatus: SwapSectionsStateStatus.LOADINGMORE,
       ));
     } else {
+      ProgressCircleDialog.show();
       emit(state.copyWith(
         swapSectionsStateStatus: SwapSectionsStateStatus.LOADING,
         secID: event.secID,
         sectionIndex: event.sectionIndex,
         categoryTitle: event.categoryTitle,
+        arCategoryTitle: event.arCategoryTitle,
         swapCategoriesListData: [],
         currentPage: 1,
       ));
@@ -36,6 +38,9 @@ class SwapSectionsBloc extends Bloc<SwapSectionsEvent, SwapSectionsState> {
           swapSectionsStateStatus: SwapSectionsStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
+      if (!event.isSeeMore) {
+        ProgressCircleDialog.dismiss();
+      }
       if (!r.status!) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;

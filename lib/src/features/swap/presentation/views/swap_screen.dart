@@ -30,7 +30,10 @@ class _SwapScreenState extends State<SwapScreen> {
           return [const SwapAppBarWidget()];
         },
         body: BlocBuilder<SwapBloc, SwapState>(builder: (ctx, state) {
-          return SwapDataWidget(state: state);
+          return RefreshIndicatorWidget(
+            onRefresh: () => getSwapScreenData(),
+            child: SwapDataWidget(state: state),
+          );
         }),
       ),
     );

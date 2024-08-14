@@ -35,20 +35,20 @@ class _ShipToScreenState extends State<ShipToScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 108.0.h,
+                      height: 70.0.h,
                     ),
                     InkWell(
                       focusColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
                       splashColor: ColorName.transparent,
                       onTap: cancel,
-                      child: Assets.svg.arrowBackIcon.svg(),
+                      child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                     ),
                     SizedBox(
                       height: 11.0.h,
                     ),
                     Text(
-                      'Add Product',
+                      context.locale.add_product,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 36.0.sp),
                     ),
@@ -56,7 +56,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                       height: 14.0.h,
                     ),
                     Text(
-                      'Ship To',
+                      context.locale.ship_to,
                       style: context.easyTheme.textTheme.headlineMedium!
                           .copyWith(fontSize: 25.0.sp),
                     ),
@@ -64,7 +64,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                       height: 19.0.h,
                     ),
                     Text(
-                      'This information is required to allow your customers to communicate with you. Your account information is used if it is not changed',
+                      context.locale.add_product_instruction,
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 16.0.sp),
                     ),
@@ -83,9 +83,10 @@ class _ShipToScreenState extends State<ShipToScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Country',
+                          Text(context.locale.country,
                               style: context.easyTheme.textTheme.bodyMedium!
                                   .copyWith(
+                                      fontSize: 18,
                                       color: ColorName.black.withOpacity(0.5))),
                           TextFormFieldWidget(
                             controller: countryController,
@@ -194,7 +195,8 @@ class _ShipToScreenState extends State<ShipToScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
-                    text: 'NEXT', onPressed: () => onNext()),
+                    text: context.locale.next_button,
+                    onPressed: () => onNext()),
               ),
               SizedBox(
                 height: 12.0.h,
@@ -202,7 +204,8 @@ class _ShipToScreenState extends State<ShipToScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: OutlineButtonWidget(
-                    text: 'CANCEL', onPressed: () => cancel()),
+                    text: context.locale.cancel_button,
+                    onPressed: () => cancel()),
               ),
               SizedBox(
                 height: 50.0.h,
@@ -257,7 +260,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
 
   void onNext() async {
     if (countriesList.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: 'Add at least one country...');
+      ShowToastSnackBar.showSnackBars(message: context.locale.add_one_country);
       return;
     }
     AddProBloc.get.add(AddProductEvent(context: context));

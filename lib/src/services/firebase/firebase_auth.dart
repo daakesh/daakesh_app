@@ -62,9 +62,10 @@ class FirebaseAuthentication {
       await firebaseAuth.signInWithCredential(credential);
       ProgressCircleDialog.dismiss();
       if (authManner.isSignUpIn) {
+        GetItUtils.user.saveUserToken;
         Future.delayed(Duration.zero).then(
             (value) => AuthBloc.get.add(ActivateUserEvent(context: context)));
-        GetItUtils.user.saveUserToken;
+
         Utils.openNewPage(const VerificationScreen(), popPreviousPages: true);
       }
       if (authManner.isForgetPassword) {

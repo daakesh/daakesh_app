@@ -30,11 +30,11 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
       emit(state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
     }, (r) async {
-      ProgressCircleDialog.dismiss();
-      //if (!r.data['data']) {
-      //  ShowToastSnackBar.showSnackBars(message: r.message.toString());
-      //  return;
-      //}
+      if (!r.status!) {
+        ProgressCircleDialog.dismiss();
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
       FirebaseAuthentication.verifyPhoneNumber(
           '+${state.phoneCode}$phoneNumber',
           AuthManner.FORGETPASSWORD,
@@ -87,6 +87,9 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
         return;
       }
       ProgressCircleDialog.dismiss();
+      await getIt
+          .get<AuthUseCases>()
+          .activateUser(r.data['data']['id'].toString());
       Utils.openNewPage(const ResetPassSuccessScreen(), popPreviousPages: true);
       emit(
           state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.SUCCESS));

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../src.export.dart';
@@ -34,10 +35,19 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 60.h,
+                ),
+                const Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: LanguageSwapWidget(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                  ),
+                ),
                 const Spacer(
                   flex: 5,
                 ),
-                const Center(child: DaakeshLogoWidget()),
+                const Center(child: GeneralDaakeshLogoWidget()),
                 const Spacer(
                   flex: 4,
                 ),
@@ -55,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         context.locale.login_email_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray),
+                            fontSize: 18.0, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: emailController,
@@ -71,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         context.locale.login_password_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray),
+                            fontSize: 18.0, color: ColorName.darkGray),
                       ),
                       TextFormFieldWidget(
                         controller: passwordController,

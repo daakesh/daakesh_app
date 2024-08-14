@@ -88,47 +88,57 @@ class TodayItem {
       this.category,
       this.brand,
       this.subcategory});
-
   TodayItem.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    description = json['description'];
+    id = json['id'] ?? 0;
+    description = json['description'] ?? "Unknown";
     if (json['itemImg'] != null) {
       itemImg = <String>[];
       itemImg =
           (json['itemImg'] as List<dynamic>).map((e) => e.toString()).toList();
+    } else {
+      itemImg = [''];
     }
-    priceAfterDiscount = json['price_after_discount'];
-    discountPercentage = json['discount_percentage'];
-    date = json['date'];
-    title = json['Title'];
-    type = json['Type'];
-    swapFor = json['Swap For'];
-    city = json['City'];
-    year = json['Year'];
-    condition = json['Condition'];
+    priceAfterDiscount = json['price_after_discount'] ?? 0.0;
+    discountPercentage = json['discount_percentage'] ?? "0%";
+    date = json['date'] ?? "Unknown";
+    title = json['Title'] ?? "Unknown";
+    type = json['Type'] ?? "Unknown";
+    swapFor = json['Swap For'] ?? "Unknown";
+    city = json['City'] ?? "Unknown";
+    year = json['Year'] ?? "Unknown";
+    condition = json['Condition'] ?? "Unknown";
     price = json['Price'];
-    discount = json['discount'];
-    discountFrom = json['discount_from'];
-    discountTo = json['discount_to'];
-    country = json['country'];
-    rateCount = json['rate_count'];
-    if (json['avarageRating'] is int) {
-      averageRating = json['avarageRating'].toDouble();
+    discount = json['discount'] ?? 0.0;
+    discountFrom = json['discount_from'] ?? "Unknown";
+    discountTo = json['discount_to'] ?? "Unknown";
+    country = json['country'] ?? "Jordan";
+    rateCount = json['rate_count'] ?? 0;
+    if (json['avarageRating'] != null) {
+      if (json['avarageRating'] is int) {
+        averageRating = json['avarageRating'].toDouble();
+      }
+      if (json['avarageRating'] is String) {
+        averageRating = double.parse(json['avarageRating']);
+      }
+    } else {
+      averageRating = 0.0;
     }
-    if (json['avarageRating'] is String) {
-      averageRating = double.parse(json['avarageRating']);
-    }
+
     //json['avarageRating'] ?? 0.0;
     section = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])
-        : null;
-    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
+        : SectionItemModel.initValues();
+    user = json['user'] != null
+        ? UserModel.fromJson(json['user'])
+        : UserModel.initValues();
     category = json['category'] != null
         ? CategoryItem.fromJson(json['category'])
-        : null;
-    brand = json['brand'] != null ? BrandItem.fromJson(json['brand']) : null;
+        : CategoryItem.initValues();
+    brand = json['brand'] != null
+        ? BrandItem.fromJson(json['brand'])
+        : BrandItem.initValues();
     subcategory = json['subcategory'] != null
         ? SubCategory.fromJson(json['subcategory'])
-        : null;
+        : SubCategory.initValues();
   }
 }

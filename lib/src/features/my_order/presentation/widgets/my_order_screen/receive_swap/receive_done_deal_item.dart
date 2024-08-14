@@ -3,7 +3,12 @@ import '../../../../../../src.export.dart';
 
 class ReceiveDoneDealItem extends StatelessWidget {
   final SendReceiveSwapReqItem receiveSwapReqItem;
-  const ReceiveDoneDealItem({super.key, required this.receiveSwapReqItem});
+  final int approved;
+  const ReceiveDoneDealItem({
+    super.key,
+    required this.receiveSwapReqItem,
+    required this.approved,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,23 +70,27 @@ class ReceiveDoneDealItem extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 12.0.h,
+                      height: 2.0.h,
                     ),
                     Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
-                              text: 'You Made A Deal With ',
+                              text: approved == 1
+                                  ? context.locale.you_made_a_deal_title
+                                  : context.locale.you_not_made_a_deal_title,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
-                                      color: ColorName.springGreen,
-                                      fontSize: 16.0.sp)),
+                                      color: approved == 1
+                                          ? ColorName.springGreen
+                                          : ColorName.red,
+                                      fontSize: 14.0.sp)),
                           TextSpan(
                               text: '${receiveSwapReqItem.offerUser!.name}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
                                       color: ColorName.black,
-                                      fontSize: 15.0.sp)),
+                                      fontSize: 14.0.sp)),
                         ],
                       ),
                     ),
@@ -98,20 +107,26 @@ class ReceiveDoneDealItem extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 15.0.w),
-                child: Text('Swap Product',
+                child: Text(context.locale.swap_product_title,
                     style: context.easyTheme.textTheme.labelLarge!
                         .copyWith(fontSize: 15.0.sp, color: ColorName.black)),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(end: 15.0.w),
                 child: TextButtonWidget(
-                  text: 'See Offer Details',
+                  text: context.locale.see_offer_details,
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                     fontSize: 14.0.sp,
                     color: ColorName.skyBlue,
-                    fontFamily: FontFamily.apercuBold,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Utils.openNavNewPage(
+                        context,
+                        StartSwapScreen(
+                          sendReceiveSwapReqItem: receiveSwapReqItem,
+                          isPreviewer: true,
+                        ));
+                  },
                   isBold: true,
                 ),
               ),
@@ -122,7 +137,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            height: 42.0.h,
+            height: 50.0.h,
             color: ColorName.lightGrayishBlue,
             child: Row(
               children: [
@@ -145,7 +160,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                 ),
                 SizedBox(width: 15.0.w),
                 Text(
-                  'Product',
+                  context.locale.product_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14.0.sp, color: ColorName.burgundy),
@@ -157,45 +172,66 @@ class ReceiveDoneDealItem extends StatelessWidget {
           SizedBox(
             height: 17.0.h,
           ),
-          Divider(
-            color: ColorName.gray,
-            indent: 15.0.w,
-            endIndent: 15.0.w,
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 17.0.w,
-              ),
-              Expanded(
-                  child: DefaultButtonWidget(
-                      text: 'CALL',
-                      onPressed: () => Utils.lunchCall(receiveSwapReqItem
-                          .offerUser!.phoneNumber
-                          .toString()))),
-              SizedBox(
-                width: 9.0.w,
-              ),
-              Expanded(
-                child: DefaultButtonWidget(
-                  text: 'WhatsApp',
-                  onPressed: () => Utils.lunchWhatsApp(
-                      receiveSwapReqItem.offerUser!.phoneNumber.toString()),
-                  style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
-                      backgroundColor:
-                          MaterialStateProperty.all(ColorName.amber)),
-                ),
-              ),
-              SizedBox(
-                width: 17.0.w,
-              ),
-            ],
-          ),
+          approved == 1
+              ? Divider(
+                  color: ColorName.gray,
+                  indent: 15.0.w,
+                  endIndent: 15.0.w,
+                )
+              : const SizedBox(),
+          approved == 1
+              ? Row(
+                  children: [
+                    SizedBox(
+                      width: 17.0.w,
+                    ),
+                    Expanded(
+                        child: DefaultButtonWidget(
+                            text: context.locale.call_button_title,
+                            style: context.easyTheme.elevatedButtonTheme.style!
+                                .copyWith(
+                              minimumSize: MaterialStateProperty.all(
+                                  const Size(387.0, 40)),
+                            ),
+                            onPressed: () => Utils.lunchCall(receiveSwapReqItem
+                                .offerUser!.phoneNumber
+                                .toString()))),
+                    SizedBox(
+                      width: 9.0.w,
+                    ),
+                    Expanded(
+                      child: DefaultButtonWidget(
+                        text: context.locale.whatsApp_button_title,
+                        onPressed: () => Utils.lunchWhatsApp(receiveSwapReqItem
+                            .offerUser!.phoneNumber
+                            .toString()),
+                        style: context.easyTheme.elevatedButtonTheme.style!
+                            .copyWith(
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(387.0, 40)),
+                                backgroundColor:
+                                    MaterialStateProperty.all(ColorName.amber)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 17.0.w,
+                    ),
+                  ],
+                )
+              : const SizedBox(),
           SizedBox(
             height: 16.0.h,
           ),
         ],
       ),
     );
+  }
+
+  void deleteItem(BuildContext context, int id) {
+    context.showRemoveDialog().then((value) {
+      if (value != null && value == true) {
+        MySwapOrderBloc.get.add(RemoveReceiveOfferItemEvent(id: id));
+      }
+    });
   }
 }

@@ -157,8 +157,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
       UserModel userData =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
-      //ValueConstants.userId = userData.id.toString();
-      //ValueConstants.token = userData.token.toString();
       GetItUtils.user.setUserData(userData);
       emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
     });

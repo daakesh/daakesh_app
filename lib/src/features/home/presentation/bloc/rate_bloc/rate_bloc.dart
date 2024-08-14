@@ -7,6 +7,8 @@ class RateBloc extends Bloc<RateEvent, RateState> {
     on<AddRateEvent>(_addRate);
     on<GetRateByItemEvent>(_getRateByItem);
     on<EditRateEvent>(_editRate);
+    on<GetOverAllRateItemsEvent>(_getOverAllRateItems);
+    on<EmptyDataEvent>(_emptyDataEvent);
   }
   static RateBloc get get =>
       BlocProvider.of(Utils.navigatorKey.currentState!.context);
@@ -66,5 +68,31 @@ class RateBloc extends Bloc<RateEvent, RateState> {
       }
       emit(state.copyWith(rateStateStatus: RateStateStatus.SUCCESS));
     });
+  }
+
+  FutureOr<void> _getOverAllRateItems(
+      GetOverAllRateItemsEvent event, Emitter<RateState> emit) async {
+    int itemID = event.itemID;
+    emit(state.copyWith(rateStateStatus: RateStateStatus.LOADING));
+    final result = await getIt.get<HomeUseCases>().getOverAllRateItem(itemID);
+    result.fold((l) {
+      emit(state.copyWith(rateStateStatus: RateStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      OverAllRateModel overAllRateModel = OverAllRateModel.fromJson(r.data);
+      emit(state.copyWith(
+        rateStateStatus: RateStateStatus.SUCCESS,
+        rateAverage: overAllRateModel.data!.average,
+      ));
+    });
+  }
+
+  FutureOr<void> _emptyDataEvent(
+      EmptyDataEvent event, Emitter<RateState> emit) {
+    emit(state.copyWith(rateAverage: 0.0));
   }
 }

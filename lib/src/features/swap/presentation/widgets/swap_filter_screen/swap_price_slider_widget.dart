@@ -29,8 +29,6 @@ class _SwapPriceSliderWidgetState extends State<SwapPriceSliderWidget> {
             divisions: 10,
             min: widget.minValue,
             max: widget.maxValue,
-            labels: RangeLabels(
-                '\$${state.fromPrice.round()}', '\$${state.toPrice.round()}'),
             activeColor: ColorName.amber,
             inactiveColor: ColorName.sliver,
             onChanged: (value) {

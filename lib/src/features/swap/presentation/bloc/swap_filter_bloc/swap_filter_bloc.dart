@@ -9,6 +9,7 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     on<SwapPreviewSectionSubCategoriesEvent>(_previewSectionSubCategories);
     on<SwapSelectCategoryItemEvent>(_swapSelectCategoryItem);
     on<GetSwapCitiesEvent>(_getSwapCities);
+    on<GetSwapSubCategoriesEvent>(_getSwapSubCategories);
   }
   static SwapFilterBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _clearFilterData(
@@ -17,6 +18,7 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
       country: "Jordan",
       city: "Amman",
       rate: 0,
+      isAllItems: true,
       fromPrice: 0.0,
       toPrice: 500.0,
       isFilterActive: false,
@@ -48,6 +50,8 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
           swapFilterStateStatus: SwapFilterStateStatus.LOADING,
           catID: event.catID,
           isMoreData: true,
+          isAllItems: event.isAllItems,
+          sortingType: event.sortingType,
           isFilterActive: event.isFilterActive,
           subCategoryListData: [],
           currentPage: 1));
@@ -62,8 +66,11 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
         ..city = state.city
         ..rate = '${state.rate}';
     }
-    final result = await getIt.get<SwapUseCases>().getSubCategoryByCatID(
-        state.catID, swapFilterDataModel, state.currentPage);
+    final result = state.isAllItems
+        ? await getIt.get<SwapUseCases>().getSubCategoryByCatID(state.catID,
+            swapFilterDataModel, state.currentPage, state.sortingType)
+        : await getIt.get<SwapUseCases>().getItemsBySubCategoriesID(state.catID,
+            swapFilterDataModel, state.currentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -103,7 +110,6 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
 
   FutureOr<void> _getSwapCities(
       GetSwapCitiesEvent event, Emitter<SwapFilterState> emit) async {
-    emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.LOADING));
     final result = await getIt.get<SwapUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
@@ -115,9 +121,29 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);
       List<CityItem> cityItemList = citiesModel.data!.toList();
-      emit(state.copyWith(
-          swapFilterStateStatus: SwapFilterStateStatus.SUCCESS,
-          cityItemList: cityItemList));
+      emit(state.copyWith(cityItemList: cityItemList));
+    });
+  }
+
+  FutureOr<void> _getSwapSubCategories(
+      GetSwapSubCategoriesEvent event, Emitter<SwapFilterState> emit) async {
+    emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.LOADING));
+
+    final result = await getIt
+        .get<SwapUseCases>()
+        .getSwapSubCategoiresByCatID(event.catID);
+    result.fold((l) {
+      emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
+
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      SubCategoryModel subCategory = SubCategoryModel.fromJson(r.data);
+      List<SubCategory> subCategoryList = subCategory.data!.toList();
+      emit(state.copyWith(subCategoryList: subCategoryList));
     });
   }
 }

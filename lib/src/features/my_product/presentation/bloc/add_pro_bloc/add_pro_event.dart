@@ -22,17 +22,17 @@ class AddProInfoEvent extends AddProEvent {
 }
 
 class AddProCategoriesEvent extends AddProEvent {
-  final String productSecID;
-  final String productCatID;
-  final String productSubCatID;
-  final String productBrandID;
+  final int productSecID;
+  final int productCatID;
+  final int? productSubCatID;
+  final int? productBrandID;
   final String productModelYear;
 
   AddProCategoriesEvent({
     required this.productSecID,
     required this.productCatID,
-    required this.productSubCatID,
-    required this.productBrandID,
+    this.productSubCatID,
+    this.productBrandID,
     required this.productModelYear,
   });
 }
@@ -55,15 +55,11 @@ class AddSaleInfoEvent extends AddProEvent {
   final String productQuantity;
   final String productPrice;
   final String? productDiscount;
-  final String? fromDate;
-  final String? toDate;
 
   AddSaleInfoEvent({
     required this.productQuantity,
     required this.productPrice,
     this.productDiscount,
-    this.fromDate,
-    this.toDate,
   });
 }
 

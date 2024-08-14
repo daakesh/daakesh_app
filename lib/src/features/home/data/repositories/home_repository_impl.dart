@@ -24,15 +24,39 @@ class HomeRepositoryImpl implements HomeRepository {
 
   @override
   Future<Either<Failure, ValidResponse>> getSubCategoryByCatID(
-      int catID, FilterDataModel filterDataModel, int page) async {
+      int catID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
     return await getIt
         .get<HomeDatasource>()
-        .getSubCategoryByCatID(catID, filterDataModel, page);
+        .getSubCategoryByCatID(catID, filterDataModel, page, sortingType);
   }
 
   @override
-  Future<Either<Failure, ValidResponse>> getHandmadeData(int page) async {
-    return await getIt.get<HomeDatasource>().getHandmadeData(page);
+  Future<Either<Failure, ValidResponse>> getItemBySubCategoryID(
+      int subID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getItemBySubCategoryID(subID, filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSubCategories(int catID) async {
+    return await getIt.get<HomeDatasource>().getSubCategories(catID);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getHandmadeData(
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getHandmadeData(filterDataModel, page, sortingType);
   }
 
   @override
@@ -48,8 +72,13 @@ class HomeRepositoryImpl implements HomeRepository {
 
   @override
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      HomeTodayItemType type, int page) async {
-    return await getIt.get<HomeDatasource>().getTodayItemsData(type, page);
+      FilterDataModel filterDataModel,
+      HomeTodayItemType type,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getTodayItemsData(filterDataModel, type, page, sortingType);
   }
 
   @override
@@ -62,11 +91,11 @@ class HomeRepositoryImpl implements HomeRepository {
 
   ///Comment API.
   @override
-  Future<Either<Failure, ValidResponse>> addComment(
-      String userId, int itemId, String commentDesc) async {
+  Future<Either<Failure, ValidResponse>> addComment(String userId, int itemId,
+      String commentDesc, int catID, int subID, double rateValue) async {
     return await getIt
         .get<HomeDatasource>()
-        .addComment(userId, itemId, commentDesc);
+        .addComment(userId, itemId, commentDesc, catID, subID, rateValue);
   }
 
   @override
@@ -141,5 +170,53 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<Either<Failure, ValidResponse>> getCities() async {
     return await getIt.get<HomeDatasource>().getCities();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getCommentCountItem(int itemId) async {
+    return await getIt.get<HomeDatasource>().getCommentCountItem(itemId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getOverAllRateItem(int itemId) async {
+    return await getIt.get<HomeDatasource>().getOverAllRateItem(itemId);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getItemsByBrandID(
+      int brandID,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getItemsByBrandID(brandID, filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getSearchItemsResult(
+      String searchValue,
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getSearchItemsResult(searchValue, filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getAllTodayItems(
+      FilterDataModel filterDataModel,
+      int page,
+      SortingType sortingType) async {
+    return await getIt
+        .get<HomeDatasource>()
+        .getAllTodayItems(filterDataModel, page, sortingType);
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> clickAdv(
+      String userID, String advID) async {
+    return await getIt.get<HomeDatasource>().clickAdv(userID, advID);
   }
 }

@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../../src.export.dart';
 
-enum AddProStateStatus { INITIAL, LOADING, SUCCESS, ERROR,LOADINGMORE,NULL }
+enum AddProStateStatus { INITIAL, LOADING, SUCCESS, ERROR, LOADINGMORE, NULL }
 
 extension AddProStateStatusX on AddProStateStatus {
   bool get isInitial => this == AddProStateStatus.INITIAL;
@@ -21,19 +21,19 @@ class AddProState extends Equatable {
   final AdjustProduct adjustProduct;
   final String productName;
   final String productDescription;
-  final String productSecID;
-  final String productCatID;
-  final String productSubCatID;
-  final String productBrandID;
+  final int productSecID;
+  final int productCatID;
+  final int productSubCatID;
+  final int productBrandID;
   final String productModelYear;
   final List<XFile> proImages;
   final ProductDisplayMethod displayMethod;
+
   ///Sale data
   final String productQuantity;
   final String productPrice;
   final String productDiscount;
-  final String fromDate;
-  final String toDate;
+
   ///Swap data
   final String displayProduct;
   final String swapCountry;
@@ -43,26 +43,26 @@ class AddProState extends Equatable {
   const AddProState({
     this.addProStateStatus = AddProStateStatus.INITIAL,
     this.adjustProduct = AdjustProduct.ADD,
-    this.productName='',
-    this.productDescription='',
-    this.productSecID='',
-    this.productCatID='',
-    this.productSubCatID='',
-    this.productBrandID='',
-    this.productModelYear='',
-    this.proImages=const[],
-    this.displayMethod=ProductDisplayMethod.Sell,
-    this.productQuantity='',
-    this.productPrice='',
-    this.productDiscount='',
-    this.fromDate='',
-    this.toDate='',
+    this.productName = '',
+    this.productDescription = '',
+    this.productSecID = 1000,
+    this.productCatID = 1000,
+    this.productSubCatID = 1000,
+    this.productBrandID = 1000,
+    this.productModelYear = '',
+    this.proImages = const [],
+    this.displayMethod = ProductDisplayMethod.Sell,
+    this.productQuantity = '',
+    this.productPrice = '',
+    this.productDiscount = '',
+
     ///Swap data
-    this.displayProduct='',
-    this.swapCountry='Jordan',
-    this.swapCity='Amman',
+    this.displayProduct = '',
+    this.swapCountry = 'Jordan',
+    this.swapCity = 'Amman',
+
     ///
-    this.shipToCountry='',
+    this.shipToCountry = '',
   });
 
   AddProState copyWith({
@@ -70,51 +70,52 @@ class AddProState extends Equatable {
     AdjustProduct? adjustProduct,
     String? productName,
     String? productDescription,
-    String? productSecID,
-    String? productCatID,
-    String? productSubCatID,
-    String? productBrandID,
+    int? productSecID,
+    int? productCatID,
+    int? productSubCatID,
+    int? productBrandID,
     String? productModelYear,
     List<XFile>? proImages,
     ProductDisplayMethod? displayMethod,
+
     ///Sale Data
     String? productQuantity,
     String? productPrice,
     String? productDiscount,
-    String? fromDate,
-    String? toDate,
+
     ///Swap Data
     String? displayProduct,
     String? swapCountry,
     String? swapCity,
+
     ///
     String? shipToCountry,
-
   }) {
     return AddProState(
       addProStateStatus: addProStateStatus ?? this.addProStateStatus,
       adjustProduct: adjustProduct ?? this.adjustProduct,
-      productName:productName ?? this.productName,
-      productDescription:productDescription ?? this.productDescription,
-      productSecID:productSecID ?? this.productSecID,
-      productCatID:productCatID ?? this.productCatID,
-      productSubCatID:productSubCatID ?? this.productSubCatID,
-      productBrandID:productBrandID ?? this.productBrandID,
-      productModelYear:productModelYear ?? this.productModelYear,
-      proImages:proImages ?? this.proImages,
-      displayMethod:displayMethod ?? this.displayMethod,
+      productName: productName ?? this.productName,
+      productDescription: productDescription ?? this.productDescription,
+      productSecID: productSecID ?? this.productSecID,
+      productCatID: productCatID ?? this.productCatID,
+      productSubCatID: productSubCatID ?? this.productSubCatID,
+      productBrandID: productBrandID ?? this.productBrandID,
+      productModelYear: productModelYear ?? this.productModelYear,
+      proImages: proImages ?? this.proImages,
+      displayMethod: displayMethod ?? this.displayMethod,
+
       ///
-      productQuantity:productQuantity?? this.productQuantity,
-      productPrice:productPrice?? this.productPrice,
-      productDiscount:productDiscount?? this.productDiscount,
-      fromDate:fromDate?? this.fromDate,
-      toDate:toDate?? this.toDate,
+      productQuantity: productQuantity ?? this.productQuantity,
+      productPrice: productPrice ?? this.productPrice,
+      productDiscount: productDiscount ?? this.productDiscount,
+
       ///
-      displayProduct:displayProduct ?? this.displayProduct,
-      swapCountry:swapCountry ?? this.swapCountry,
-      swapCity:swapCity ?? this.swapCity,
+      displayProduct: displayProduct ?? this.displayProduct,
+      swapCountry: swapCountry ?? this.swapCountry,
+      swapCity: swapCity ?? this.swapCity,
+
       ///
-      shipToCountry:shipToCountry ?? this.shipToCountry,
+      shipToCountry: shipToCountry ?? this.shipToCountry,
     );
   }
 
@@ -129,20 +130,22 @@ class AddProState extends Equatable {
         productSubCatID,
         productBrandID,
         productModelYear,
+
         ///
         proImages,
         displayMethod,
+
         ///
         productQuantity,
         productPrice,
         productDiscount,
-        fromDate,
-        toDate,
+
         ///
         displayProduct,
         swapCountry,
         swapCity,
-    ///
-    shipToCountry,
+
+        ///
+        shipToCountry,
       ];
 }

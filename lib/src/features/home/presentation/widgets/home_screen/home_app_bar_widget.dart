@@ -6,10 +6,13 @@ import '../../../../../src.export.dart';
 class HomeAppBarWidget extends StatefulWidget {
   final bool isActive;
   final bool isCart;
+  final SearchState? state;
+
   const HomeAppBarWidget({
     super.key,
     this.isActive = false,
     this.isCart = false,
+    this.state,
   });
 
   @override
@@ -26,7 +29,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
       return SliverAppBar(
         backgroundColor: ColorName.blueGray,
         leading: const SizedBox(),
-        expandedHeight: 160.0,
+        expandedHeight: 150.h,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
           background: SearchBarWidget(state: state),
@@ -55,9 +58,23 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                           padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                           child: TextFormFieldWidget(
                             controller: searchController,
+                            textInputAction: TextInputAction.search,
                             isSuffixPrefixOn: true,
                             readOnly: !widget.isActive,
                             onChanged: onChange,
+                            onFieldSubmitted: (value) {
+                              if (value.isEmpty ||
+                                  widget.state!.searchStateStatus ==
+                                      SearchStateStatus.NULL) {
+                                return;
+                              }
+                              SearchBloc.get
+                                  .add(SearchFilterEvent(searchValue: value));
+                              FilterBloc.get.add(GetCitiesEvent());
+
+                              Utils.openNavNewPage(
+                                  context, const SearchItemsScreen());
+                            },
                             inputFormatters: [
                               RegExpValidator.beginWhitespace,
                             ],
@@ -121,10 +138,17 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
     FocusScope.of(context).unfocus();
     searchController.clear();
     SearchBloc.get.add(EmptySearchEvent());
+    Navigator.pop(context);
   }
 
   void openSearchScreen() {
-    FocusScope.of(context).unfocus();
-    Utils.openNavNewPage(context, const SearchScreen());
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => const SearchScreen(),
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+      ),
+    );
   }
 }

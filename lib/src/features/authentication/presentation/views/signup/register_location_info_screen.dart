@@ -40,7 +40,7 @@ class _RegisterLocationInfoScreenState
                 flex: 1,
               ),
               SizedBox(height: 44.0.h),
-              const Center(child: DaakeshLogoWidget()),
+              const Center(child: GeneralDaakeshLogoWidget()),
               const Spacer(
                 flex: 1,
               ),
@@ -69,7 +69,7 @@ class _RegisterLocationInfoScreenState
                   children: [
                     Text(context.locale.country_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray)),
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: countryController,
                       focusNode: countryFocusNode,
@@ -105,7 +105,7 @@ class _RegisterLocationInfoScreenState
                     SizedBox(height: 33.0.h),
                     Text(context.locale.city_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray)),
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: cityController,
                       focusNode: cityFocusNode,
@@ -118,7 +118,7 @@ class _RegisterLocationInfoScreenState
                     SizedBox(height: 33.0.h),
                     Text(context.locale.address_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray)),
+                            fontSize: 18.0, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: addressController,
                       focusNode: addressFocusNode,
@@ -126,14 +126,14 @@ class _RegisterLocationInfoScreenState
                       inputFormatters: [
                         RegExpValidator.beginWhitespace,
                       ],
-                      suffixIcon: GestureDetector(
-                        onTap: () => Utils.openNewPage(const MapScreen()),
-                        child: SizedBox(
-                            width: 20.0.w,
-                            height: 20.0.h,
-                            child: Center(
-                                child: Assets.svg.locationPinIcon.svg())),
-                      ),
+                      // suffixIcon: GestureDetector(
+                      //   onTap: () => Utils.openNewPage(const MapScreen()),
+                      //   child: SizedBox(
+                      //       width: 20.0.w,
+                      //       height: 20.0.h,
+                      //       child: Center(
+                      //           child: Assets.svg.locationPinIcon.svg())),
+                      // ),
                     ),
                   ],
                 ),

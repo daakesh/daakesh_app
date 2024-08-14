@@ -49,7 +49,9 @@ class SectionCategoryItem extends StatelessWidget {
                     height: 10.0,
                   ),
                   Text(
-                    categoryItem.name.toString(),
+                    Utils.isEnglish
+                        ? categoryItem.name.toString()
+                        : categoryItem.arName.toString(),
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
                         fontSize: 20.0,
                         color: ColorName.black.withOpacity(0.68)),
