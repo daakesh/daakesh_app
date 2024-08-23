@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../../src.export.dart';
 
@@ -112,6 +114,33 @@ class _RegisterPersonalInfoScreenState
               ),
               SizedBox(height: 40.0.h),
               const AlreadyHaveAccountWidget(),
+              SizedBox(height: 20.0.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.0.w),
+                child: Text.rich(
+                    textAlign: TextAlign.center,
+                    TextSpan(
+                        style: context.easyTheme.textTheme.bodyLarge!.copyWith(
+                          fontSize: 14,
+                          color: ColorName.black.withOpacity(0.4),
+                        ),
+                        children: [
+                          TextSpan(
+                            text: context.locale.term_and_condition,
+                          ),
+                          TextSpan(
+                            style: context.easyTheme.textTheme.bodyLarge!
+                                .copyWith(
+                                    fontSize: 14,
+                                    color: ColorName.black,
+                                    decoration: TextDecoration.underline),
+                            text: context.locale.terms_and_condition_button,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => openTermsAndCondition(),
+                          ),
+                          TextSpan(text: context.locale.daakesh_title),
+                        ])),
+              ),
               const Spacer(
                 flex: 3,
               ),
@@ -121,6 +150,10 @@ class _RegisterPersonalInfoScreenState
         ),
       ),
     );
+  }
+
+  void openTermsAndCondition() {
+    Utils.openNewPage(const TermsAndConditionWebView());
   }
 
   void onNext(BuildContext context) async {
@@ -148,5 +181,37 @@ class _RegisterPersonalInfoScreenState
       password: passwordController.text,
     ));
     Utils.openNewPage(const RegisterLocationInfoScreen());
+  }
+}
+
+class TermsAndConditionWebView extends StatelessWidget {
+  const TermsAndConditionWebView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
+        child: WebViewWidget(
+            controller: WebViewController()
+              ..setJavaScriptMode(JavaScriptMode.unrestricted)
+              ..setNavigationDelegate(
+                NavigationDelegate(
+                  onProgress: (int progress) {},
+                  onPageStarted: (String url) {},
+                  onPageFinished: (String url) {},
+                  onHttpError: (HttpResponseError error) {},
+                  onWebResourceError: (WebResourceError error) {},
+                  onNavigationRequest: (NavigationRequest request) {
+                    return NavigationDecision.navigate;
+                  },
+                ),
+              )
+              ..loadRequest(
+                  Uri.parse('https://daakesh.com/Tearms&Conditions2'))),
+      ),
+    );
   }
 }
