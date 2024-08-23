@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../../src.export.dart';
@@ -122,58 +123,57 @@ class _RegisterPersonalInfoScreenState
               SizedBox(height: 20.0.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.0.w),
-                child: Column(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      context.locale.term_and_condition,
-                      style: context.easyTheme.textTheme.bodyLarge!.copyWith(
-                        fontSize: 14,
-                        color: ColorName.black.withOpacity(0.4),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6.0),
+                      child: SizedBox(
+                        width: 10,
+                        height: 10,
+                        child: Checkbox(
+                          value: isAgree,
+                          activeColor: Colors.amber,
+                          onChanged: (value) {
+                            setState(() {
+                              isAgree = !isAgree;
+                            });
+                          },
+                        ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text.rich(
-                            textAlign: TextAlign.center,
-                            TextSpan(
-                                style: context.easyTheme.textTheme.bodyLarge!
-                                    .copyWith(
-                                  fontSize: 14,
-                                  color: ColorName.black.withOpacity(0.4),
-                                ),
-                                children: [
-                                  const TextSpan(text: '('),
-                                  TextSpan(
-                                    style: context
-                                        .easyTheme.textTheme.bodyLarge!
-                                        .copyWith(
-                                            fontSize: 14,
-                                            color: ColorName.black,
-                                            decoration:
-                                                TextDecoration.underline),
-                                    text: context
-                                        .locale.terms_and_condition_button,
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () => openTermsAndCondition(),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text.rich(
+                          textAlign: TextAlign.center,
+                          TextSpan(
+                              style: context.easyTheme.textTheme.bodyLarge!
+                                  .copyWith(
+                                fontSize: 14,
+                                color: ColorName.black.withOpacity(0.4),
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: context.locale.term_and_condition,
+                                  style: context.easyTheme.textTheme.bodyLarge!
+                                      .copyWith(
+                                    fontSize: 14,
+                                    color: ColorName.black.withOpacity(0.4),
                                   ),
-                                  TextSpan(text: context.locale.daakesh_title),
-                                ])),
-                        const SizedBox(width: 12),
-                        SizedBox(
-                          width: 10,
-                          height: 10,
-                          child: Checkbox(
-                            value: isAgree,
-                            activeColor: Colors.amber,
-                            onChanged: (value) {
-                              setState(() {
-                                isAgree = !isAgree;
-                              });
-                            },
-                          ),
-                        )
-                      ],
+                                ),
+                                TextSpan(
+                                  style: context.easyTheme.textTheme.bodyLarge!
+                                      .copyWith(
+                                          fontSize: 14,
+                                          color: ColorName.black,
+                                          decoration: TextDecoration.underline),
+                                  text:
+                                      context.locale.terms_and_condition_button,
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () => openTermsAndCondition(),
+                                ),
+                                TextSpan(text: context.locale.daakesh_title),
+                              ])),
                     ),
                   ],
                 ),
