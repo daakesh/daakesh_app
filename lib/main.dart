@@ -11,5 +11,6 @@ void main() async {
   configureDependencies(env: ValueConstants.dev);
   runApp(const AppWidget());
   //runApp(DevicePreview(builder: (BuildContext context) => const AppWidget()));
+  //
   Bloc.observer = MyBlocObserver();
 }
