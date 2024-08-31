@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../src.export.dart';
 
 class MainScreen extends StatelessWidget {
@@ -13,6 +12,7 @@ class MainScreen extends StatelessWidget {
         context,
         backgroundColor: ColorName.blueGray,
         controller: HomeBloc.controller,
+        padding: const EdgeInsets.all(5),
         onItemSelected: (index) {
           HomeBloc.get.add(SelectTabItemEvent(index: index));
         },
@@ -23,12 +23,7 @@ class MainScreen extends StatelessWidget {
             context, state.tabIndex, state.storeType),
         resizeToAvoidBottomInset: false,
         stateManagement: true,
-        hideNavigationBarWhenKeyboardShows: true,
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
         navBarStyle: NavBarStyle.style15,
-        padding: const NavBarPadding.only(bottom: 12.0),
-        popAllScreensOnTapAnyTabs: false,
         navBarHeight: Utils.isOpenKeyboard(context) ? 77 : 0.0,
         decoration: const NavBarDecoration(
             boxShadow: [
