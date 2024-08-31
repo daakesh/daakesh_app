@@ -2,12 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class SwapSectionScreen extends StatelessWidget {
+class SwapSectionScreen extends StatefulWidget {
   final SwapState swapState;
   const SwapSectionScreen({
     super.key,
     required this.swapState,
   });
+
+  @override
+  State<SwapSectionScreen> createState() => _SwapSectionScreenState();
+}
+
+class _SwapSectionScreenState extends State<SwapSectionScreen> {
+  final controller = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    scrollListener();
+  }
+
+  void scrollListener() {
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        loadMore();
+      }
+    });
+  }
+
+  void loadMore() {
+    SwapBloc.get.add(SwapGetSectionDataEvent(isSeeMore: true));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,34 +53,41 @@ class SwapSectionScreen extends StatelessWidget {
                 ),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 12.0)),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding:
-                      const EdgeInsetsDirectional.symmetric(horizontal: 17.0),
-                  child: SizedBox(
-                    height: 150.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (ctx, index) {
-                        SwapSectionItemModel sectionModel =
-                            swapState.swapSectionListData[index];
-                        return GestureDetector(
-                          onTap: () => getSectionCategories(
-                              sectionModel.id!,
-                              index,
-                              sectionModel.name.toString(),
-                              sectionModel.arName.toString()),
-                          child: SwapPopularCategoriesWidget(
-                            data: sectionModel,
-                            index: index,
-                            secIndex: state.sectionIndex,
-                          ),
-                        );
-                      },
-                      itemCount: swapState.swapSectionListData.length,
+              BlocBuilder<SwapBloc, SwapState>(
+                builder: (context, state) {
+                  return SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: 20.0),
+                      child: SizedBox(
+                        height: 150.0,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          controller: controller,
+                          itemBuilder: (ctx, index) {
+                            if (index < state.swapSectionListData.length) {
+                              SwapSectionItemModel swapSectionItemModel =
+                                  state.swapSectionListData[index];
+                              return SwapPopularCategoriesWidget(
+                                data: state.swapSectionListData[index],
+                              );
+                            } else {
+                              return !state.isMoreData
+                                  ? const Padding(
+                                      padding: EdgeInsetsDirectional.only(
+                                        end: 20.0,
+                                      ),
+                                      child: CircularProgressIndicatorWidget(),
+                                    )
+                                  : const SizedBox();
+                            }
+                          },
+                          itemCount: state.swapSectionListData.length + 1,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 6.0)),
               SliverToBoxAdapter(

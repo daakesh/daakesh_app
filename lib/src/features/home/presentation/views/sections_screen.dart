@@ -2,9 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
 
-class SectionScreen extends StatelessWidget {
+class SectionScreen extends StatefulWidget {
   final HomeState homeState;
   const SectionScreen({super.key, required this.homeState});
+
+  @override
+  State<SectionScreen> createState() => _SectionScreenState();
+}
+
+class _SectionScreenState extends State<SectionScreen> {
+  final controller = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollListener();
+  }
+
+  void scrollListener() {
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        loadMore();
+      }
+    });
+  }
+
+  void loadMore() {
+    print('4564545465446545');
+    HomeBloc.get.add(GetSectionDataEvent(isSeeMore: true));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,33 +52,41 @@ class SectionScreen extends StatelessWidget {
                 ),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 12.0)),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding:
-                      const EdgeInsetsDirectional.symmetric(horizontal: 17.0),
-                  child: SizedBox(
-                    height: 150.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (ctx, index) {
-                        SectionItemModel sectionModel =
-                            homeState.sectionListData[index];
-                        return GestureDetector(
-                          onTap: () => getSectionCategories(
-                              sectionModel.id!,
-                              index,
-                              sectionModel.name.toString(),
-                              sectionModel.arName.toString()),
-                          child: PopularCategoriesWidget(
-                            data: sectionModel,
-                            index: index,
-                          ),
-                        );
-                      },
-                      itemCount: homeState.sectionListData.length,
+              BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  return SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: 20.0),
+                      child: SizedBox(
+                        height: 150.0,
+                        child: ListView.builder(
+                          controller: controller,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (ctx, index) {
+                            if (index < state.sectionListData.length) {
+                              SectionItemModel sectionItem =
+                                  state.sectionListData[index];
+                              return PopularCategoriesWidget(
+                                data: state.sectionListData[index],
+                              );
+                            } else {
+                              return !state.isMoreData
+                                  ? const Padding(
+                                      padding: EdgeInsetsDirectional.only(
+                                        end: 20.0,
+                                      ),
+                                      child: CircularProgressIndicatorWidget(),
+                                    )
+                                  : const SizedBox();
+                            }
+                          },
+                          itemCount: state.sectionListData.length + 1,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 6.0)),
               SliverToBoxAdapter(
