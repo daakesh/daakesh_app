@@ -67,8 +67,17 @@ class _SectionScreenState extends State<SectionScreen> {
                             if (index < state.sectionListData.length) {
                               SectionItemModel sectionItem =
                                   state.sectionListData[index];
-                              return PopularCategoriesWidget(
-                                data: state.sectionListData[index],
+                              return InkWell(
+                                highlightColor: ColorName.transparent,
+                                splashColor: ColorName.transparent,
+                                onTap: () {
+                                  getSectionCategories(sectionItem.id!, index,
+                                      sectionItem.name!, sectionItem.arName!);
+                                },
+                                child: PopularCategoriesWidget(
+                                  data: state.sectionListData[index],
+                                  index: index,
+                                ),
                               );
                             } else {
                               return !state.isMoreData

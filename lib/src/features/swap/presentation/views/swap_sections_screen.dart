@@ -68,8 +68,20 @@ class _SwapSectionScreenState extends State<SwapSectionScreen> {
                             if (index < state.swapSectionListData.length) {
                               SwapSectionItemModel swapSectionItemModel =
                                   state.swapSectionListData[index];
-                              return SwapPopularCategoriesWidget(
-                                data: state.swapSectionListData[index],
+                              return InkWell(
+                                highlightColor: ColorName.transparent,
+                                splashColor: ColorName.transparent,
+                                onTap: () {
+                                  getSectionCategories(
+                                      swapSectionItemModel.id!,
+                                      index,
+                                      swapSectionItemModel.name!,
+                                      swapSectionItemModel.arName!);
+                                },
+                                child: SwapPopularCategoriesWidget(
+                                  data: state.swapSectionListData[index],
+                                  index: index,
+                                ),
                               );
                             } else {
                               return !state.isMoreData

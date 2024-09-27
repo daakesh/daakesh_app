@@ -126,54 +126,56 @@ class _RegisterPersonalInfoScreenState
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6.0),
-                      child: SizedBox(
-                        width: 10,
-                        height: 10,
-                        child: Checkbox(
-                          value: isAgree,
-                          activeColor: Colors.amber,
-                          onChanged: (value) {
-                            setState(() {
-                              isAgree = !isAgree;
-                            });
-                          },
-                        ),
+                    SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: Checkbox(
+                        value: isAgree,
+                        activeColor: Colors.amber,
+                        onChanged: (value) {
+                          setState(() {
+                            isAgree = !isAgree;
+                          });
+                        },
                       ),
                     ),
-                    const SizedBox(width: 8),
                     Expanded(
-                      child: Text.rich(
-                          textAlign: TextAlign.center,
-                          TextSpan(
-                              style: context.easyTheme.textTheme.bodyLarge!
-                                  .copyWith(
-                                fontSize: 14,
-                                color: ColorName.black.withOpacity(0.4),
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: context.locale.term_and_condition,
-                                  style: context.easyTheme.textTheme.bodyLarge!
-                                      .copyWith(
-                                    fontSize: 14,
-                                    color: ColorName.black.withOpacity(0.4),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: Text.rich(
+                            textAlign: TextAlign.center,
+                            TextSpan(
+                                style: context.easyTheme.textTheme.bodyLarge!
+                                    .copyWith(
+                                  fontSize: 14,
+                                  color: ColorName.black.withOpacity(0.4),
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: context.locale.term_and_condition,
+                                    style: context
+                                        .easyTheme.textTheme.bodyLarge!
+                                        .copyWith(
+                                      fontSize: 14,
+                                      color: ColorName.black.withOpacity(0.4),
+                                    ),
                                   ),
-                                ),
-                                TextSpan(
-                                  style: context.easyTheme.textTheme.bodyLarge!
-                                      .copyWith(
-                                          fontSize: 14,
-                                          color: ColorName.black,
-                                          decoration: TextDecoration.underline),
-                                  text:
-                                      context.locale.terms_and_condition_button,
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () => openTermsAndCondition(),
-                                ),
-                                TextSpan(text: context.locale.daakesh_title),
-                              ])),
+                                  TextSpan(
+                                    style: context
+                                        .easyTheme.textTheme.bodyLarge!
+                                        .copyWith(
+                                            fontSize: 14,
+                                            color: ColorName.black,
+                                            decoration:
+                                                TextDecoration.underline),
+                                    text: context
+                                        .locale.terms_and_condition_button,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () => openTermsAndCondition(),
+                                  ),
+                                  TextSpan(text: context.locale.daakesh_title),
+                                ])),
+                      ),
                     ),
                   ],
                 ),

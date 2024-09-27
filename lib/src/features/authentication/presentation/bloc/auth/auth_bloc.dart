@@ -115,7 +115,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       saveRememberData(state.rememberMeValue, state.email, state.password);
       UserModel userModel =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
-      GetItUtils.user.setUserDataAndCheckIsActive(userModel, event.context);
+      GetItUtils.user.setUserData(userModel);
+      AuthBloc.get.add(ActivateUserEvent(context: event.context));
       emit(state.copyWith(
           authStateStatus: AuthStateStatus.SUCCESS,
           phone: userModel.phoneNumber));
@@ -157,7 +158,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
       UserModel userData =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
+      ValueConstants.userId = userData.id.toString();
       GetItUtils.user.setUserData(userData);
+      UserDataBloc.get.add(SetUserDataEvent(userData: userData));
+      GetItUtils.user.saveUserToken;
+      Utils.openNewPage(const MainScreen(), popPreviousPages: true);
       emit(state.copyWith(authStateStatus: AuthStateStatus.SUCCESS));
     });
   }
