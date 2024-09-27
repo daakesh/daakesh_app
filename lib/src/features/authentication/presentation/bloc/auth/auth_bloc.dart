@@ -156,6 +156,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+      //
       UserModel userData =
           UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
       ValueConstants.userId = userData.id.toString();
