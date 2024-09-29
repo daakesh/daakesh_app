@@ -7,6 +7,7 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     on<GetUserDataEvent>(_getUserData);
     on<LogoutUserEvent>(_logoutUser);
     on<SetUserDataEvent>(_setUserData);
+    on<DeleteAccountEvent>(_deleteAccount);
   }
 
   static UserDataBloc get get => BlocProvider.of(Utils.currentContext);
@@ -53,6 +54,30 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       ProgressCircleDialog.dismiss();
 
       if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+      GetItUtils.user.logOut();
+      clearAllData();
+      await Future.delayed(const Duration(seconds: 1));
+      HomeBloc.controller.jumpToTab(0);
+      HomeBloc.get.add(SelectTabItemEvent(index: 0));
+      emit(state.copyWith(userDataStateStatus: UserDataStateStatus.SUCCESS));
+    });
+  }
+
+  FutureOr<void> _deleteAccount(
+      DeleteAccountEvent event, Emitter<UserDataState> emit) async {
+    emit(state.copyWith(userDataStateStatus: UserDataStateStatus.LOADING));
+    ProgressCircleDialog.show();
+    final result = await getIt.get<AuthUseCases>().removeAccount();
+    result.fold((l) {
+      ProgressCircleDialog.dismiss();
+      emit(state.copyWith(userDataStateStatus: UserDataStateStatus.ERROR));
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      ProgressCircleDialog.dismiss();
+      if (r.statusCode != 200) {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }

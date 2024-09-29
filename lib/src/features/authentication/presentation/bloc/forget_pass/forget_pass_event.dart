@@ -35,6 +35,13 @@ class ResendCodeEvent extends ForgetPassEvent {
 }
 
 class ResetPasswordEvent extends ForgetPassEvent {
+  final BuildContext context;
   final String password;
-  ResetPasswordEvent({required this.password});
+  final String email;
+  final String phoneNumber;
+  ResetPasswordEvent(
+      {required this.context,
+      required this.email,
+      required this.phoneNumber,
+      required this.password});
 }

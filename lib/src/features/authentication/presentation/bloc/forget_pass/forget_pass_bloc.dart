@@ -69,13 +69,11 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
 
   FutureOr<void> _resetPassword(
       ResetPasswordEvent event, Emitter<ForgetPassState> emit) async {
-    String password = event.password;
     emit(state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.LOADING));
     ProgressCircleDialog.show();
     await Future.delayed(const Duration(seconds: 1));
-    final result = await getIt
-        .get<AuthUseCases>()
-        .updatePassword('+${state.phoneCode + state.phone}', password);
+    final result = await getIt.get<AuthUseCases>().updatePassword(
+        '+${state.phoneCode + event.phoneNumber}', event.password, event.email);
     result.fold((l) {
       emit(state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.ERROR));
       ShowToastSnackBar.showSnackBars(message: l.message.toString());
@@ -87,10 +85,9 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
         return;
       }
       ProgressCircleDialog.dismiss();
-      await getIt
-          .get<AuthUseCases>()
-          .activateUser(r.data['data']['id'].toString());
-      Utils.openNewPage(const ResetPassSuccessScreen(), popPreviousPages: true);
+      UserModel userModel =
+          UserModel.fromJson(r.data['data'] as Map<String, dynamic>);
+      GetItUtils.user.setUserDataAndCheckIsActive(userModel, event.context);
       emit(
           state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.SUCCESS));
     });

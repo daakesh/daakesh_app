@@ -168,6 +168,19 @@ class ProfileScreen extends StatelessWidget {
                           UserDataBloc.get.add(LogoutUserEvent()))),
             ),
             const SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Center(
+                  child: DefaultButtonWidget(
+                      text: context.locale.delete_account,
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red)),
+                      onPressed: () => context.showRemoveAccountDialog)),
+            ),
+            const SizedBox(
               height: 30.0,
             ),
             const Spacer(

@@ -18,9 +18,10 @@ abstract class AuthUseCases {
   Future<Either<Failure, ValidResponse>> activateUser(String id);
   Future<Either<Failure, ValidResponse>> isPhoneNumberExist(String phoneNumber);
   Future<Either<Failure, ValidResponse>> updatePassword(
-      String phoneNumber, String password);
+      String phoneNumber, String password, String email);
   Future<Either<Failure, ValidResponse>> getUserData();
   Future<Either<Failure, ValidResponse>> logout();
+  Future<Either<Failure, ValidResponse>> removeAccount();
 }
 
 @dev
@@ -68,10 +69,10 @@ class AuthUseCasesImpl implements AuthUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> updatePassword(
-      String phoneNumber, String password) async {
+      String phoneNumber, String password, String email) async {
     return await getIt
         .get<AuthRepository>()
-        .updatePassword(phoneNumber, password);
+        .updatePassword(phoneNumber, password, email);
   }
 
   @override
@@ -82,5 +83,10 @@ class AuthUseCasesImpl implements AuthUseCases {
   @override
   Future<Either<Failure, ValidResponse>> logout() async {
     return await getIt.get<AuthRepository>().logout();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeAccount() async {
+    return await getIt.get<AuthRepository>().removeAccount();
   }
 }

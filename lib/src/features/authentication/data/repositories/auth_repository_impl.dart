@@ -46,10 +46,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, ValidResponse>> updatePassword(
-      String phoneNumber, String password) async {
+      String phoneNumber, String password, String email) async {
     return await getIt
         .get<AuthDatasource>()
-        .updatePassword(phoneNumber, password);
+        .updatePassword(phoneNumber, password, email);
   }
 
   @override
@@ -60,5 +60,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, ValidResponse>> logout() async {
     return await getIt.get<AuthDatasource>().logout();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeAccount() async {
+    return await getIt.get<AuthDatasource>().removeAccount();
   }
 }
