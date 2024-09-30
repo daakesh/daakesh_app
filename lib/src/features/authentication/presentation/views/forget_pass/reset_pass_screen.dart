@@ -115,7 +115,10 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
           message: context.locale.password_confirmation_failed);
       return;
     }
-    ForgetPassBloc.get
-        .add(ResetPasswordEvent(password: confirmPassController.text));
+    ForgetPassBloc.get.add(ResetPasswordEvent(
+        password: confirmPassController.text,
+        context: context,
+        email: '',
+        phoneNumber: ''));
   }
 }

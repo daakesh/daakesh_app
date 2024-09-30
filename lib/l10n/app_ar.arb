@@ -435,6 +435,7 @@
   "setting": "الإعدادات",
   "language": "اللغة",
   "log_out": "تسجيل الخروج",
+  "delete_account": "حذف الحساب",
   "removeDialog": "*********RemoveDialog*********",
   "alarm": "تنبيه ",
   "are_you_sure_you_wanna_remove_the_item": "هل أنت متأكد أنك تريد إزالة العنصر.",
@@ -468,5 +469,6 @@
   "go_to_swap_button": "انتقل إلى شاشة المبادلة",
   "term_and_condition": "من خلال إنشاء حساب فإنك توافق على (",
   "terms_and_condition_button": "الشروط والأحكام",
-  "daakesh_title": ") الخاصة بـداكيش"
+  "daakesh_title": ") الخاصة بـداكيش",
+  "are_you_sure_you_want_to_delete_the_account": "هل أنت متأكد أنك تريد حذف الحساب؟"
 }

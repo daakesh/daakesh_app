@@ -64,12 +64,13 @@ class RemoteAuthDatasource implements AuthDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> updatePassword(
-      String phoneNumber, String password) async {
+      String phoneNumber, String password, String email) async {
     final result = await getIt
         .get<NetworkService>()
-        .post(path: 'DaakeshServices/api/user/updatePassword', body: {
+        .post(path: 'DaakeshServices/api/user/ForgetPassword', body: {
       "phoneNumber": phoneNumber.toString(),
       "password": password.toString(),
+      "email": email.toString()
     });
     return result;
   }
@@ -87,6 +88,18 @@ class RemoteAuthDatasource implements AuthDatasource {
   Future<Either<Failure, ValidResponse>> logout() async {
     final result = await getIt.get<NetworkService>().get(
       path: 'DaakeshServices/api/user/logout',
+      params: {"id": ValueConstants.userId},
+    );
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> removeAccount() async {
+    final result = await getIt.get<NetworkService>().get(
+      path: 'DaakeshServices/api/user/RemoveAccount',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
       params: {"id": ValueConstants.userId},
     );
     return result;

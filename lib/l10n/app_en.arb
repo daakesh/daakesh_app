@@ -435,6 +435,7 @@
   "setting": "Setting",
   "language": "Language",
   "log_out": "LOG OUT",
+  "delete_account": "Delete Account",
   "removeDialog": "*********RemoveDialog*********",
   "alarm": "Alarm",
   "are_you_sure_you_wanna_remove_the_item": "Are you sure you wanna remove the item.",
@@ -468,5 +469,6 @@
   "go_to_swap_button": "Go To Swap Scree",
   "term_and_condition": "By creating an account you're agreeing on the (",
   "terms_and_condition_button": "terms and conditions",
-  "daakesh_title": ") of Daakesh"
+  "daakesh_title": ") of Daakesh",
+  "are_you_sure_you_want_to_delete_the_account": "Are you Sure you wanna to delete account"
 }

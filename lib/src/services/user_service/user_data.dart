@@ -19,10 +19,11 @@ class UserDataImpl implements UserData {
   @override
   void setUserDataAndCheckIsActive(UserModel userData, BuildContext context) {
     this.userData = userData;
-    if (userData.active == 0) {
-      activateUser(context);
-      return;
-    }
+
+    ///if (userData.active == 0) {
+    ///  activateUser(context);
+    ///  return;
+    ///}
     ValueConstants.userId = userData.id.toString();
     ValueConstants.token = userData.token.toString();
     saveUserToken;

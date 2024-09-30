@@ -130,6 +130,48 @@ extension ShowDialog on BuildContext {
           );
         },
       );
+  void get showRemoveAccountDialog => showDialog(
+        context: this,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              context.locale.alarm,
+              textAlign: TextAlign.center,
+              style: context.easyTheme.textTheme.headlineMedium,
+            ),
+            content: Text(
+              context.locale.are_you_sure_you_want_to_delete_the_account,
+              textAlign: TextAlign.center,
+              style: context.easyTheme.textTheme.bodyMedium!
+                  .copyWith(fontSize: 18.0, fontWeight: FontWeight.w100),
+            ),
+            actions: [
+              Center(
+                child: TextButton(
+                  child: Text(context.locale.close,
+                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.bold, fontSize: 18.0)),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+              Center(
+                child: TextButton(
+                  child: Text(context.locale.delete_account,
+                      style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.red,
+                      )),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    UserDataBloc.get.add(DeleteAccountEvent());
+                  },
+                ),
+              ),
+            ],
+          );
+        },
+      );
 
   Future<bool?> showRemoveDialog() async {
     return await showDialog(

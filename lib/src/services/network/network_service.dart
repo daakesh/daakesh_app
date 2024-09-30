@@ -55,7 +55,7 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
       return Right(
         ValidResponse(
           statusCode: response.statusCode,
-          data: json.decode(str),
+          data: json.decode(str) ?? '',
           message: data['error'] ?? '',
           status: data['status'] ?? false,
         ),
@@ -65,10 +65,11 @@ class NetworkServiceImpl with NetworksLogs implements NetworkService {
       return Left(Failure(statusCode: 500, message: e.message));
     } on ValidResponse catch (e) {
       return Right(ValidResponse(
-          statusCode: e.statusCode,
-          data: e.data,
-          message: e.message,
-          status: e.status));
+        statusCode: e.statusCode ?? 500,
+        data: e.data ?? '',
+        message: e.message ?? '',
+        status: e.status ?? false,
+      ));
     } on Exception catch (e) {
       traceError(path, 'GET', params!, {}, e.toString());
       return Left(Failure(statusCode: 500, message: e.toString()));
