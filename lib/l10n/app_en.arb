@@ -470,5 +470,8 @@
   "term_and_condition": "By creating an account you're agreeing on the (",
   "terms_and_condition_button": "terms and conditions",
   "daakesh_title": ") of Daakesh",
-  "are_you_sure_you_want_to_delete_the_account": "Are you Sure you wanna to delete account"
+  "are_you_sure_you_want_to_delete_the_account": "Are you Sure you wanna to delete account",
+  "bad_format": "Bad email formate",
+  "password_validation": "Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
+  "terms_and_condition": "You must agree to the terms and conditions."
 }

@@ -470,5 +470,8 @@
   "term_and_condition": "من خلال إنشاء حساب فإنك توافق على (",
   "terms_and_condition_button": "الشروط والأحكام",
   "daakesh_title": ") الخاصة بـداكيش",
-  "are_you_sure_you_want_to_delete_the_account": "هل أنت متأكد أنك تريد حذف الحساب؟"
+  "are_you_sure_you_want_to_delete_the_account": "هل أنت متأكد أنك تريد حذف الحساب؟",
+  "bad_format": "تنسيق البريد الإلكتروني سيئ",
+  "password_validation": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل وحرف كبير وصغير، وما لا يقل عن 8 أحرف أو أكثر",
+  "terms_and_condition": "يجب عليك الموافقة على الشروط والأحكام."
 }

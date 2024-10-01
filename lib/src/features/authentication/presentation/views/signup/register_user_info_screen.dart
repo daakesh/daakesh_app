@@ -111,39 +111,50 @@ class _RegisterPersonalInfoScreenState
               ),
               DefaultButtonWidget(
                 text: context.locale.next_button_title,
-                onPressed: isAgree ? () => onNext(context) : () {},
+                onPressed: () => onNext(context),
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                  isAgree
-                      ? ColorName.blueGray
-                      : ColorName.blueGray.withOpacity(0.6),
+                  ColorName.blueGray,
                 )),
                 padding: EdgeInsetsDirectional.symmetric(horizontal: 21.1.w),
               ),
               SizedBox(height: 20.0.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.0.w),
+                padding: EdgeInsets.symmetric(horizontal: 20.0.w),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: 30,
-                      height: 30,
-                      child: Checkbox(
-                        value: isAgree,
-                        activeColor: Colors.amber,
-                        onChanged: (value) {
-                          setState(() {
-                            isAgree = !isAgree;
-                          });
-                        },
+                    InkWell(
+                      highlightColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      onTap: () {
+                        isAgree = !isAgree;
+                        setState(() {});
+                      },
+                      child: Column(
+                        children: [
+                          IgnorePointer(
+                            child: Transform.scale(
+                              scale: 1.2,
+                              child: Checkbox(
+                                value: isAgree,
+                                activeColor: Colors.amber,
+                                onChanged: (value) {
+                                  isAgree = !isAgree;
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 3),
+                        padding: const EdgeInsets.only(top: 10),
                         child: Text.rich(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.start,
                             TextSpan(
                                 style: context.easyTheme.textTheme.bodyLarge!
                                     .copyWith(
@@ -206,13 +217,17 @@ class _RegisterPersonalInfoScreenState
       return;
     }
     if (!RegExpValidator.isValidEmail(email: emailController.text)) {
-      ShowToastSnackBar.showSnackBars(message: 'Bad email formate');
+      ShowToastSnackBar.showSnackBars(message: context.locale.bad_format);
       return;
     }
     if (!RegExpValidator.passwordStrength(password: passwordController.text)) {
       ShowToastSnackBar.showSnackBars(
-          message:
-              'Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters');
+          message: context.locale.password_validation);
+      return;
+    }
+    if (!isAgree) {
+      ShowToastSnackBar.showSnackBars(
+          message: context.locale.terms_and_condition);
       return;
     }
 
