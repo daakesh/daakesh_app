@@ -473,5 +473,7 @@
   "are_you_sure_you_want_to_delete_the_account": "Are you Sure you wanna to delete account",
   "bad_format": "Bad email formate",
   "password_validation": "Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
-  "terms_and_condition": "You must agree to the terms and conditions."
+  "terms_and_condition": "You must agree to the terms and conditions.",
+  "complaint_send_successfully": "complaint sent successfully",
+  "complaint_details": "Complaint details"
 }

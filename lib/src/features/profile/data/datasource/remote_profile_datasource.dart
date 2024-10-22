@@ -72,7 +72,7 @@ class RemoteProfileDatasource implements ProfileDatasource {
         body: {
           "user_id": ValueConstants.userId,
           "type": complaintType,
-          "seller_name": sellerName,
+          "seller_name": 'seller name is null',
           "subject": subject,
           "remark": remark,
         });
