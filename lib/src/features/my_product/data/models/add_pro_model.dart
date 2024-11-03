@@ -115,9 +115,6 @@ class AddProModel {
     data['display'] = display.toString();
     data['country_swap'] = countrySwap.toString();
     data['city_swap'] = citySwap.toString();
-    if (oldItemImageList!.isNotEmpty) {
-      itemImageList!.addAll(oldItemImageList!);
-    }
     if (itemImageList!.isNotEmpty && itemImageList != null) {
       data['itemImg'] = itemImageList!.join(',');
     }

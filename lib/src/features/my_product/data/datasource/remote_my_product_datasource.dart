@@ -125,6 +125,7 @@ class RemoteMyProductDatasource implements MyProductDatasource {
       }
     }
     addProData.itemImageList = images;
+    addProData.itemImageList?.addAll(addProModel.oldItemImageList!);
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/updateItem',
           headers: {

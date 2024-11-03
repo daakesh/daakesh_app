@@ -22,8 +22,10 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
   }
 
   void setOldImage() {
+    MyProFuncBloc.get.add(SetOldImageEvent());
+
     if (getIt.get<EditProduct>().myProductItem != null) {
-      if (getIt.get<EditProduct>().myProductItem!.itemImg!.length == 1 &&
+      if (getIt.get<EditProduct>().myProductItem!.itemImg!.length != 1 ||
           getIt.get<EditProduct>().myProductItem!.itemImg!.first.isNotEmpty) {
         MyProFuncBloc.get.add(SetOldImageEvent());
         oldImageList =
@@ -134,7 +136,7 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                     return Wrap(
                       children: [
                         ...List.generate(
-                          state.oldImage.length == 1 &&
+                          state.oldImage.length != 1 ||
                                   state.oldImage.first.isNotEmpty
                               ? state.oldImage.length
                               : 0,
@@ -334,6 +336,7 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
 
   void deleteOldImage(int index) {
     oldImageList.removeAt(index);
+    setState(() {});
     MyProFuncBloc.get.add(RemoveOldImageEvent(oldImageList));
   }
 }

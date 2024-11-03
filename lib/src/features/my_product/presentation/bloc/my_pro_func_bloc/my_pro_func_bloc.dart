@@ -168,12 +168,15 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
 
   FutureOr<void> _setOldImage(
       SetOldImageEvent event, Emitter<MyProFuncState> emit) {
-    List<String> oldImages = getIt.get<EditProduct>().myProductItem!.itemImg!;
-    emit(state.copyWith(oldImage: oldImages));
+    final oldImageList = getIt.get<EditProduct>().myProductItem!.itemImg!;
+    emit(state.copyWith(oldImage: oldImageList));
   }
 
   FutureOr<void> _removeOldImage(
       RemoveOldImageEvent event, Emitter<MyProFuncState> emit) {
+    print('************************************************');
+    print(event.oldImages.toString());
+    print('************************************************');
     emit(state.copyWith(oldImage: event.oldImages));
   }
 }
