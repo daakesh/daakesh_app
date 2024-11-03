@@ -67,7 +67,7 @@ class TextFormFieldWidget extends StatelessWidget {
         controller: controller,
         textCapitalization: textCapitalization,
         textAlignVertical: textAlignVertical,
-        textInputAction: textInputAction ?? TextInputAction.done,
+        textInputAction: textInputAction,
         style: style ??
             context.easyTheme.textTheme.labelMedium!
                 .copyWith(fontSize: 18.0.sp),

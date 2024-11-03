@@ -43,6 +43,7 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
       }
       MyProductModel myProductModel = MyProductModel.fromJson(r.data);
       int lastPage = myProductModel.data!.lastPage!;
+
       List<MyProductItem> newResultList =
           myProductModel.data!.myProductListData!.toList();
       List<MyProductItem> myProductListData = state.myProductListData.toList();
@@ -53,7 +54,8 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
         ));
         return;
       }
-      myProductListData.addAll(newResultList);
+      myProductListData.addAll(newResultList.reversed);
+
       emit(state.copyWith(
         myProStateStatus: MyProStateStatus.SUCCESS,
         myProductListData: myProductListData,

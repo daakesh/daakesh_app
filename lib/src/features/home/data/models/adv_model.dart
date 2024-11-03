@@ -35,7 +35,7 @@ class AdvItem {
   }
   AdvItem.initValues() {
     id = 0;
-    image = "Unknown";
-    link = "Unknown";
+    image = "others";
+    link = "others";
   }
 }

@@ -85,7 +85,7 @@ class RemoteMyProductDatasource implements MyProductDatasource {
   Future<Either<Failure, ValidResponse>> addProduct(
       AddProModel addProModel) async {
     AddProModel addProData = addProModel;
-    List<String> images = <String>[];
+    List<String> images = [];
     if (addProModel.itemFileImg!.isNotEmpty) {
       for (var image in addProModel.itemFileImg!) {
         File imagePath = File(image.path);
@@ -97,6 +97,7 @@ class RemoteMyProductDatasource implements MyProductDatasource {
         );
       }
     }
+
     addProData.itemImageList = images;
     final result = await getIt.get<NetworkService>().post(
         path: 'DaakeshServices/api/item/addItem',

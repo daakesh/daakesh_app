@@ -49,11 +49,11 @@ class SwapSectionItemModel {
 
   SwapSectionItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    name = json['name'] ?? "Unknown";
-    description = json['description'] ?? "Unknown";
-    secImg = json['secImg'] ?? "Unknown";
-    date = json['date'] ?? "Unknown";
+    name = json['name'] ?? "others";
+    description = json['description'] ?? "others";
+    secImg = json['secImg'] ?? "others";
+    date = json['date'] ?? "others";
     secOrder = json['secOrder'] ?? 0;
-    arName = json['arName'] ?? "Unknown";
+    arName = json['arName'] ?? "others";
   }
 }

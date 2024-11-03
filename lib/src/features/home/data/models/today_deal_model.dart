@@ -90,7 +90,7 @@ class TodayItem {
       this.subcategory});
   TodayItem.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    description = json['description'] ?? "Unknown";
+    description = json['description'] ?? "others";
     if (json['itemImg'] != null) {
       itemImg = <String>[];
       itemImg =
@@ -100,17 +100,17 @@ class TodayItem {
     }
     priceAfterDiscount = json['price_after_discount'] ?? 0.0;
     discountPercentage = json['discount_percentage'] ?? "0%";
-    date = json['date'] ?? "Unknown";
-    title = json['Title'] ?? "Unknown";
-    type = json['Type'] ?? "Unknown";
-    swapFor = json['Swap For'] ?? "Unknown";
-    city = json['City'] ?? "Unknown";
-    year = json['Year'] ?? "Unknown";
-    condition = json['Condition'] ?? "Unknown";
+    date = json['date'] ?? "others";
+    title = json['Title'] ?? "others";
+    type = json['Type'] ?? "others";
+    swapFor = json['Swap For'] ?? "others";
+    city = json['City'] ?? "others";
+    year = json['Year'] ?? "others";
+    condition = json['Condition'] ?? "others";
     price = json['Price'];
     discount = json['discount'] ?? 0.0;
-    discountFrom = json['discount_from'] ?? "Unknown";
-    discountTo = json['discount_to'] ?? "Unknown";
+    discountFrom = json['discount_from'] ?? "others";
+    discountTo = json['discount_to'] ?? "others";
     country = json['country'] ?? "Jordan";
     rateCount = json['rate_count'] ?? 0;
     if (json['avarageRating'] != null) {

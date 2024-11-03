@@ -93,21 +93,21 @@ class TrendDealsItem {
     } else {
       itemImg = [''];
     }
-    description = json['description'] ?? "Unknown";
-    date = json['date'] ?? "Unknown";
-    title = json['Title'] ?? "Unknown";
-    type = json['Type'] ?? "Unknown";
-    swapFor = json['Swap For'] ?? "Unknown";
-    city = json['City'] ?? "Unknown";
-    year = json['Year'] ?? "Unknown";
-    condition = json['Condition'] ?? "Unknown";
-    price = json['Price'] ?? "Unknown";
+    description = json['description'] ?? "others";
+    date = json['date'] ?? "others";
+    title = json['Title'] ?? "others";
+    type = json['Type'] ?? "others";
+    swapFor = json['Swap For'] ?? "others";
+    city = json['City'] ?? "others";
+    year = json['Year'] ?? "others";
+    condition = json['Condition'] ?? "others";
+    price = json['Price'] ?? "others";
     discount = json['discount'];
-    discountFrom = json['discount_from'] ?? "Unknown";
-    discountTo = json['discount_to'] ?? "Unknown";
-    country = json['country'] ?? "Unknown";
-    countrySwap = json['country_swap'] ?? "Unknown";
-    citySwap = json['city_swap'] ?? "Unknown";
+    discountFrom = json['discount_from'] ?? "others";
+    discountTo = json['discount_to'] ?? "others";
+    country = json['country'] ?? "others";
+    countrySwap = json['country_swap'] ?? "others";
+    citySwap = json['city_swap'] ?? "others";
     offerCount = json['offers_count'] ?? 0;
     section = json['section'] != null
         ? SectionItemModel.fromJson(json['section'])

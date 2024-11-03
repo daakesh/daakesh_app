@@ -45,8 +45,8 @@ class CommentRateModelItem {
 
   CommentRateModelItem.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    commentDesc = json['commentDesc'] ?? "Unknown";
-    date = json['date'] ?? "Unknown";
+    commentDesc = json['commentDesc'] ?? "others";
+    date = json['date'] ?? "others";
     user = json['user'] != null
         ? UserModel.fromJson(json['user'])
         : UserModel.initValues();
@@ -119,26 +119,26 @@ class Item {
     } else {
       itemImg = [''];
     }
-    date = json['date'] ?? "Unknown";
-    title = json['Title'] ?? "Unknown";
-    type = json['Type'] ?? "Unknown";
-    swapFor = json['Swap For'] ?? "Unknown";
-    city = json['City'] ?? "Unknown";
-    year = json['Year'] ?? "Unknown";
-    condition = json['Condition'] ?? "Unknown";
+    date = json['date'] ?? "others";
+    title = json['Title'] ?? "others";
+    type = json['Type'] ?? "others";
+    swapFor = json['Swap For'] ?? "others";
+    city = json['City'] ?? "others";
+    year = json['Year'] ?? "others";
+    condition = json['Condition'] ?? "others";
     price = json['Price'];
     discount = json['discount'] ?? 0.0;
-    discountFrom = json['discount_from'] ?? "Unknown";
-    discountTo = json['discount_to'] ?? "Unknown";
-    country = json['country'] ?? "Unknown";
-    createdAt = json['created_at'] ?? "Unknown";
-    updatedAt = json['updated_at'] ?? "Unknown";
+    discountFrom = json['discount_from'] ?? "others";
+    discountTo = json['discount_to'] ?? "others";
+    country = json['country'] ?? "others";
+    createdAt = json['created_at'] ?? "others";
+    updatedAt = json['updated_at'] ?? "others";
     quantity = json['quantity'] ?? 0;
-    display = json['display'] ?? "Unknown";
-    countrySwap = json['country_swap'] ?? "Unknown";
-    citySwap = json['city_swap'] ?? "Unknown";
-    storeType = json['store_type'] ?? "Unknown";
-    priceAfterDiscount = json['price_after_discount'] ?? "Unknown";
+    display = json['display'] ?? "others";
+    countrySwap = json['country_swap'] ?? "others";
+    citySwap = json['city_swap'] ?? "others";
+    storeType = json['store_type'] ?? "others";
+    priceAfterDiscount = json['price_after_discount'] ?? "others";
     discountPercentage = json['discount_percentage'] ?? "0%";
     if (json['rate'] != null) {
       rate = <Rate>[];

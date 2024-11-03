@@ -30,6 +30,7 @@ class MyProFuncState extends Equatable {
   final List<String> selectedShipToCountries;
   final bool isAlreadyAddedCountry;
   final List<XFile> imagesList;
+  final List<String> oldImage;
   final List<MyProductItem> myProductItem;
 
   ///Search
@@ -52,6 +53,7 @@ class MyProFuncState extends Equatable {
     this.isAlreadyAddedCountry = false,
     this.imagesList = const [],
     this.myProductItem = const [],
+    this.oldImage = const [],
 
     ///Search
     this.searchResultList = const [],
@@ -71,6 +73,7 @@ class MyProFuncState extends Equatable {
     List<String>? selectedShipToCountries,
     bool? isAlreadyAddedCountry,
     List<XFile>? imagesList,
+    List<String>? oldImage,
     List<MyProductItem>? myProductItem,
 
     ///Search
@@ -87,6 +90,7 @@ class MyProFuncState extends Equatable {
       swapFlagEmoji: swapFlagEmoji ?? this.swapFlagEmoji,
       shipFlagEmoji: shipFlagEmoji ?? this.shipFlagEmoji,
       selectedShipCountry: selectedShipCountry ?? this.selectedShipCountry,
+      oldImage: oldImage ?? this.oldImage,
       selectedShipToCountries:
           selectedShipToCountries ?? this.selectedShipToCountries,
       isAlreadyAddedCountry:
@@ -119,6 +123,7 @@ class MyProFuncState extends Equatable {
         currentSearchPage,
         searchValue,
         isMoreData,
+        oldImage,
 
         ///
         discountSwitchButton,

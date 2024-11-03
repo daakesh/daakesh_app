@@ -30,7 +30,7 @@ class SwapAdvItem {
 
   SwapAdvItem.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    image = json['image'] ?? "Unknown";
-    link = json['link'] ?? "Unknown";
+    image = json['image'] ?? "others";
+    link = json['link'] ?? "others";
   }
 }

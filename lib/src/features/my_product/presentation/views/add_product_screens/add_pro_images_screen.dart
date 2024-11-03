@@ -13,6 +13,24 @@ class AddProImagesScreen extends StatefulWidget {
 
 class _AddProImagesScreenState extends State<AddProImagesScreen> {
   List<XFile> imagesList = [];
+  List<String> oldImageList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    setOldImage();
+  }
+
+  void setOldImage() {
+    if (getIt.get<EditProduct>().myProductItem != null) {
+      if (getIt.get<EditProduct>().myProductItem!.itemImg!.length == 1 &&
+          getIt.get<EditProduct>().myProductItem!.itemImg!.first.isNotEmpty) {
+        MyProFuncBloc.get.add(SetOldImageEvent());
+        oldImageList =
+            getIt.get<EditProduct>().myProductItem!.itemImg!.toList();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,29 +132,56 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                   BlocBuilder<MyProFuncBloc, MyProFuncState>(
                       builder: (_, state) {
                     return Wrap(
-                      children: List.generate(
-                        state.imagesList.length,
-                        (index) => state.imagesList.isNotEmpty
-                            ? GestureDetector(
-                                onTap: () => deleteImage(index),
-                                child: Container(
-                                  width: 85.0,
-                                  height: 55.0,
-                                  margin: const EdgeInsetsDirectional.only(
-                                      end: 12.0, bottom: 8.0),
-                                  decoration: BoxDecoration(
-                                    color: ColorName.paleGray,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(4.0)),
-                                    border: Border.all(color: ColorName.gray),
+                      children: [
+                        ...List.generate(
+                          state.oldImage.length == 1 &&
+                                  state.oldImage.first.isNotEmpty
+                              ? state.oldImage.length
+                              : 0,
+                          (index) => state.oldImage.isNotEmpty
+                              ? GestureDetector(
+                                  onTap: () => deleteOldImage(index),
+                                  child: Container(
+                                    width: 85.0,
+                                    height: 55.0,
+                                    margin: const EdgeInsetsDirectional.only(
+                                        end: 12.0, bottom: 8.0),
+                                    decoration: BoxDecoration(
+                                      color: ColorName.paleGray,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(4.0)),
+                                      border: Border.all(color: ColorName.gray),
+                                    ),
+                                    child: Image.network(state.oldImage[index],
+                                        fit: BoxFit.cover),
                                   ),
-                                  child: Image.file(
-                                      File(state.imagesList[index].path),
-                                      fit: BoxFit.cover),
-                                ),
-                              )
-                            : const SizedBox(),
-                      ),
+                                )
+                              : const SizedBox(),
+                        ),
+                        ...List.generate(
+                          state.imagesList.length,
+                          (index) => state.imagesList.isNotEmpty
+                              ? GestureDetector(
+                                  onTap: () => deleteImage(index),
+                                  child: Container(
+                                    width: 85.0,
+                                    height: 55.0,
+                                    margin: const EdgeInsetsDirectional.only(
+                                        end: 12.0, bottom: 8.0),
+                                    decoration: BoxDecoration(
+                                      color: ColorName.paleGray,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(4.0)),
+                                      border: Border.all(color: ColorName.gray),
+                                    ),
+                                    child: Image.file(
+                                        File(state.imagesList[index].path),
+                                        fit: BoxFit.cover),
+                                  ),
+                                )
+                              : const SizedBox(),
+                        )
+                      ],
                     );
                   }),
                   const SizedBox(
@@ -265,7 +310,10 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
   }
 
   void onNext() async {
-    AddProBloc.get.add(AddProImagesEvent(proImages: imagesList));
+    AddProBloc.get.add(AddProImagesEvent(
+      proImages: imagesList,
+      oldImages: oldImageList,
+    ));
     Utils.openNewPage(const SelectProMethodScreen());
   }
 
@@ -282,5 +330,10 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
   void deleteImage(int index) {
     imagesList.removeAt(index);
     onAddImage(imagesList);
+  }
+
+  void deleteOldImage(int index) {
+    oldImageList.removeAt(index);
+    MyProFuncBloc.get.add(RemoveOldImageEvent(oldImageList));
   }
 }

@@ -39,8 +39,10 @@ class AddProCategoriesEvent extends AddProEvent {
 
 class AddProImagesEvent extends AddProEvent {
   final List<XFile> proImages;
+  final List<String> oldImages;
   AddProImagesEvent({
     required this.proImages,
+    required this.oldImages,
   });
 }
 

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract class ProfileEvent {}
 
 class ChangeLangEvent extends ProfileEvent {
@@ -24,10 +26,12 @@ class ChangeLocationFlagEvent extends ProfileEvent {
 }
 
 class UpdateLocationEvent extends ProfileEvent {
+  final BuildContext context;
   final String country;
   final String city;
   final String address;
-  UpdateLocationEvent({
+  UpdateLocationEvent(
+    this.context, {
     required this.country,
     required this.city,
     required this.address,
