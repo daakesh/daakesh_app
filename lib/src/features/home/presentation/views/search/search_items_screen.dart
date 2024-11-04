@@ -62,8 +62,12 @@ class SearchItemsScreen extends StatelessWidget {
                         childCount: state.filterDataList.length,
                       ),
                     )
-                  : const SliverToBoxAdapter(
-                      child: Center(child: CircularProgressIndicatorWidget())),
+                  : SliverToBoxAdapter(
+                      child: Center(
+                          child: state.searchStateStatus ==
+                                  SearchStateStatus.ITEMLOADING
+                              ? const CircularProgressIndicatorWidget()
+                              : const SizedBox())),
               const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
               SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverPadding(padding: EdgeInsets.only(top: 60.0)),

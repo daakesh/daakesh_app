@@ -18,11 +18,11 @@ class SwapFilterDataModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['Type'] = 'Swap';
-    data['FromPrice'] = '';
-    data['ToPrice'] = '';
+    // data['FromPrice'] = '';
+    //data['ToPrice'] = '';
     data['Country'] = country ?? '';
     data['City'] = city ?? '';
-    data['Rate'] = rate ?? '';
+    // data['Rate'] = rate ?? '';
     data['StoreType'] = type ?? 'All';
     return data;
   }

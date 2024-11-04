@@ -91,45 +91,45 @@ class SwapFilterScreen extends StatelessWidget {
                         );
                       }),
                       const SizedBox(height: 20.0),
-                      Text(
-                        context.locale.swap_filter_rate_title,
-                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0,
-                            color: ColorName.black.withOpacity(0.5)),
-                      ),
-                      const SizedBox(height: 12.0),
-                      const SwapSelectRateWidget(),
-                      const SizedBox(height: 16.0),
-                      Text(
-                        context.locale.swap_filter_price_slider,
-                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0,
-                            color: ColorName.black.withOpacity(0.5)),
-                      ),
-                      const SwapPriceSliderWidget(
-                          minValue: 0.0, maxValue: 1000.0),
-                      BlocBuilder<SwapFilterBloc, SwapFilterState>(
-                        builder: (context, state) {
-                          return Row(
-                            children: [
-                              const SizedBox(width: 10.0),
-                              Text(
-                                '\$${state.fromPrice.toInt()}',
-                                style: context.easyTheme.textTheme.bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              const Spacer(flex: 1),
-                              Text(
-                                '\$${state.toPrice.toInt()}',
-                                style: context.easyTheme.textTheme.bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(width: 10),
-                            ],
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 10.0),
+                      //Text(
+                      //  context.locale.swap_filter_rate_title,
+                      //  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      //      fontSize: 18.0,
+                      //      color: ColorName.black.withOpacity(0.5)),
+                      //),
+                      //const SizedBox(height: 12.0),
+                      //const SwapSelectRateWidget(),
+                      //const SizedBox(height: 16.0),
+                      //Text(
+                      //  context.locale.swap_filter_price_slider,
+                      //  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      //      fontSize: 18.0,
+                      //      color: ColorName.black.withOpacity(0.5)),
+                      //),
+                      //const SwapPriceSliderWidget(
+                      //    minValue: 0.0, maxValue: 1000.0),
+                      //BlocBuilder<SwapFilterBloc, SwapFilterState>(
+                      //  builder: (context, state) {
+                      //    return Row(
+                      //      children: [
+                      //        const SizedBox(width: 10.0),
+                      //        Text(
+                      //          '\$${state.fromPrice.toInt()}',
+                      //          style: context.easyTheme.textTheme.bodyMedium!
+                      //              .copyWith(fontWeight: FontWeight.bold),
+                      //        ),
+                      //        const Spacer(flex: 1),
+                      //        Text(
+                      //          '\$${state.toPrice.toInt()}',
+                      //          style: context.easyTheme.textTheme.bodyMedium!
+                      //              .copyWith(fontWeight: FontWeight.bold),
+                      //        ),
+                      //        const SizedBox(width: 10),
+                      //      ],
+                      //    );
+                      //  },
+                      //),
+                      //const SizedBox(height: 10.0),
                       Text(
                         context.locale.swap_filter_product_type,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
