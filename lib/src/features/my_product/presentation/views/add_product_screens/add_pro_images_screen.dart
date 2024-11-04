@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../src.export.dart';
@@ -141,21 +142,56 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                               ? state.oldImage.length
                               : 0,
                           (index) => state.oldImage.isNotEmpty
-                              ? GestureDetector(
-                                  onTap: () => deleteOldImage(index),
-                                  child: Container(
-                                    width: 85.0,
-                                    height: 55.0,
-                                    margin: const EdgeInsetsDirectional.only(
-                                        end: 12.0, bottom: 8.0),
-                                    decoration: BoxDecoration(
-                                      color: ColorName.paleGray,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(4.0)),
-                                      border: Border.all(color: ColorName.gray),
+                              ? Padding(
+                                  padding:
+                                      const EdgeInsetsDirectional.only(end: 4),
+                                  child: SizedBox(
+                                    height: 90,
+                                    width: 90,
+                                    child: Stack(
+                                      alignment: AlignmentDirectional.topEnd,
+                                      children: [
+                                        Center(
+                                          child: Container(
+                                            width: 85.0,
+                                            height: 60.0,
+                                            margin: const EdgeInsetsDirectional
+                                                .only(end: 12.0, bottom: 8.0),
+                                            decoration: BoxDecoration(
+                                              color: ColorName.paleGray,
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(4.0)),
+                                              border: Border.all(
+                                                  color: ColorName.gray),
+                                            ),
+                                            child: Image.network(
+                                                state.oldImage[index],
+                                                fit: BoxFit.cover),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 0,
+                                          child: InkWell(
+                                            onTap: () => deleteOldImage(index),
+                                            child: Container(
+                                              width: 25,
+                                              height: 25,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.amber,
+                                                  shape: BoxShape.circle),
+                                              child: const Center(
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color: Colors.white,
+                                                  size: 15,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    child: Image.network(state.oldImage[index],
-                                        fit: BoxFit.cover),
                                   ),
                                 )
                               : const SizedBox(),
@@ -163,22 +199,57 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                         ...List.generate(
                           state.imagesList.length,
                           (index) => state.imagesList.isNotEmpty
-                              ? GestureDetector(
-                                  onTap: () => deleteImage(index),
-                                  child: Container(
-                                    width: 85.0,
-                                    height: 55.0,
-                                    margin: const EdgeInsetsDirectional.only(
-                                        end: 12.0, bottom: 8.0),
-                                    decoration: BoxDecoration(
-                                      color: ColorName.paleGray,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(4.0)),
-                                      border: Border.all(color: ColorName.gray),
+                              ? Padding(
+                                  padding:
+                                      const EdgeInsetsDirectional.only(end: 4),
+                                  child: SizedBox(
+                                    width: 90,
+                                    height: 90,
+                                    child: Stack(
+                                      alignment: AlignmentDirectional.topEnd,
+                                      children: [
+                                        Center(
+                                          child: Container(
+                                            width: 85.0,
+                                            height: 60.0,
+                                            margin: const EdgeInsetsDirectional
+                                                .only(end: 12.0, bottom: 8.0),
+                                            decoration: BoxDecoration(
+                                              color: ColorName.paleGray,
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(4.0)),
+                                              border: Border.all(
+                                                  color: ColorName.gray),
+                                            ),
+                                            child: Image.file(
+                                                File(state
+                                                    .imagesList[index].path),
+                                                fit: BoxFit.cover),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 0,
+                                          child: InkWell(
+                                            onTap: () => deleteImage(index),
+                                            child: Container(
+                                              width: 25,
+                                              height: 25,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.amber,
+                                                  shape: BoxShape.circle),
+                                              child: const Center(
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color: Colors.white,
+                                                  size: 15,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    child: Image.file(
-                                        File(state.imagesList[index].path),
-                                        fit: BoxFit.cover),
                                   ),
                                 )
                               : const SizedBox(),

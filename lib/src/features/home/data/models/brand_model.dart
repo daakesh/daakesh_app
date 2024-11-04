@@ -57,7 +57,7 @@ class BrandItem {
 
   BrandItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    brandName = json['brandName'] ?? "Unknown";
+    brandName = json['brandName'] ?? "Others";
     description = json['description'];
     brandImg = json['brandImg'];
     date = json['date'];
@@ -67,10 +67,10 @@ class BrandItem {
 
   BrandItem.initValues() {
     id = 0;
-    brandName = "Null";
-    description = "Unknown";
-    brandImg = "Unknown";
-    date = "Unknown";
+    brandName = "Others";
+    description = "Others";
+    brandImg = "Others";
+    date = "Others";
     secID = 0;
     arName = "بدون";
   }

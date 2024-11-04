@@ -35,7 +35,9 @@ class RemoteAuthDatasource implements AuthDatasource {
       "password": password.toString(),
       "userType": userType.toString(),
       "email": email.toString(),
-      "location": "$country, $city, $address"
+      "country": country,
+      "city": city,
+      "location": address,
     });
     return result;
   }

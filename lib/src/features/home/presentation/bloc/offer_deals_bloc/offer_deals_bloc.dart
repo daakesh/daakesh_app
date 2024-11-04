@@ -9,6 +9,7 @@ class OfferDealsBloc extends Bloc<OfferDealsEvent, OfferDealsState> {
     on<ResetViewAllOfferDealsEvent>(_resetViewAllOfferDeals);
     on<SetViewAllOfferDealsFilterEvent>(_setViewAllOfferDealsFilter);
     on<GetViewAllOfferDealsCitiesEvent>(_getViewAllOfferDealsCities);
+    on<UpdateTodayDealsItemEvent>(_updateTodayDealsItem);
   }
   static OfferDealsBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _getAllOfferDeals(
@@ -134,5 +135,22 @@ class OfferDealsBloc extends Bloc<OfferDealsEvent, OfferDealsState> {
       List<CityItem> cityItemList = citiesModel.data!.toList();
       emit(state.copyWith(cityItemList: cityItemList));
     });
+  }
+
+  FutureOr<void> _updateTodayDealsItem(
+      UpdateTodayDealsItemEvent event, Emitter<OfferDealsState> emit) {
+    List<TodayItem> updatedTodayDealList =
+        List.from(state.homeTodayDealsListData);
+    int index =
+        updatedTodayDealList.indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealList[index] = updatedTodayDealList[index]
+          .copyWith(averageRating: event.avgRating, rateCount: event.rateCount);
+      emit(state.copyWith(
+        offerDealsStateStatus: OfferDealsStateStatus.SUCCESS,
+        homeTodayDealsListData: updatedTodayDealList,
+      ));
+    }
   }
 }

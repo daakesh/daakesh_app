@@ -121,6 +121,7 @@ class TodayDealProduct extends StatelessWidget {
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
+                      ignoreGestures: true,
                       itemCount: 5,
                       itemSize: 20.0.r,
                       itemBuilder: (context, _) => const Icon(

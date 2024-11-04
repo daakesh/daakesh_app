@@ -10,6 +10,7 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
     on<ResetViewAllEvent>(_resetViewAll);
     on<SetViewAllFilterEvent>(_setViewAllFilter);
     on<GetViewAllCitiesEvent>(_getViewAllCities);
+    on<UpdateTodayDealsItem>(_updateTodayDealsItem);
   }
 
   static TodayDealsBloc get get => BlocProvider.of(Utils.currentContext);
@@ -216,5 +217,21 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
       List<CityItem> cityItemList = citiesModel.data!.toList();
       emit(state.copyWith(cityItemList: cityItemList));
     });
+  }
+
+  FutureOr<void> _updateTodayDealsItem(
+      UpdateTodayDealsItem event, Emitter<TodayDealsState> emit) {
+    List<TodayItem> updatedTodayDealList = List.from(state.todayDealsListData);
+    int index =
+        updatedTodayDealList.indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealList[index] = updatedTodayDealList[index]
+          .copyWith(averageRating: event.avgRating, rateCount: event.rateCount);
+      emit(state.copyWith(
+        todayDealsStateStatus: TodayDealsStateStatus.SUCCESS,
+        todayDealsListData: updatedTodayDealList,
+      ));
+    }
   }
 }
