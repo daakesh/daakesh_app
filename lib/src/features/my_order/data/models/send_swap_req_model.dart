@@ -140,21 +140,21 @@ class SourceUser {
     whatsappNumber = json['whatsappNumber'];
   }
   SourceUser.initValues() {
-    id = "Unknown";
-    name = "Unknown";
-    phoneNumber = "Unknown";
-    password = "Unknown";
+    id = "others";
+    name = "others";
+    phoneNumber = "others";
+    password = "others";
     active = 1;
-    userType = "Unknown";
-    token = "Unknown";
-    email = "Unknown";
-    img = "Unknown";
-    deviceToken = "Unknown";
-    country = "Unknown";
-    city = "Unknown";
-    location = "Unknown";
-    nickname = "Unknown";
-    whatsappNumber = "Unknown";
+    userType = "others";
+    token = "others";
+    email = "others";
+    img = "others";
+    deviceToken = "others";
+    country = "others";
+    city = "others";
+    location = "others";
+    nickname = "others";
+    whatsappNumber = "others";
   }
 }
 
@@ -210,21 +210,21 @@ class OfferUser {
     whatsappNumber = json['whatsappNumber'];
   }
   OfferUser.initValues() {
-    id = "Unknown";
-    name = "Unknown";
-    phoneNumber = "Unknown";
-    password = "Unknown";
+    id = "others";
+    name = "others";
+    phoneNumber = "others";
+    password = "others";
     active = 1;
-    userType = "Unknown";
-    token = "Unknown";
-    email = "Unknown";
-    img = "Unknown";
-    deviceToken = "Unknown";
-    country = "Unknown";
-    city = "Unknown";
-    location = "Unknown";
-    nikname = "Unknown";
-    whatsappNumber = "Unknown";
+    userType = "others";
+    token = "others";
+    email = "others";
+    img = "others";
+    deviceToken = "others";
+    country = "others";
+    city = "others";
+    location = "others";
+    nikname = "others";
+    whatsappNumber = "others";
   }
 }
 

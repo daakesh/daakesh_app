@@ -12,6 +12,7 @@
   "email_text_field": "Email",
   "password_text_field": "Password",
   "next_button_title": "Next",
+  "finish_button_title": "Finish",
   "fill_personal_data_snack_bars": "Please complete your personal details",
   "insertCellPhoneScreen": "*********InsertCellPhoneScreen*********",
   "forget_password_title": "Forgot Password!",
@@ -419,6 +420,7 @@
   "location_country": "Country",
   "location_city": "City",
   "location_address": "Address",
+  "update_location_message": "Location data updated successfully",
   "personalInfoScreen": "*********PersonalInfoScreen*********",
   "personal_info": "Personal Info",
   "change_photo": "Change Photo",
@@ -473,5 +475,7 @@
   "are_you_sure_you_want_to_delete_the_account": "Are you Sure you wanna to delete account",
   "bad_format": "Bad email formate",
   "password_validation": "Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
-  "terms_and_condition": "You must agree to the terms and conditions."
+  "terms_and_condition": "You must agree to the terms and conditions.",
+  "complaint_send_successfully": "complaint sent successfully",
+  "complaint_details": "Complaint details"
 }

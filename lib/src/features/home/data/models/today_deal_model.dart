@@ -75,6 +75,8 @@ class TodayItem {
       this.swapFor,
       this.city,
       this.year,
+      this.priceAfterDiscount,
+      this.discountPercentage,
       this.condition,
       this.price,
       this.discount,
@@ -90,7 +92,7 @@ class TodayItem {
       this.subcategory});
   TodayItem.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    description = json['description'] ?? "Unknown";
+    description = json['description'] ?? "others";
     if (json['itemImg'] != null) {
       itemImg = <String>[];
       itemImg =
@@ -100,17 +102,17 @@ class TodayItem {
     }
     priceAfterDiscount = json['price_after_discount'] ?? 0.0;
     discountPercentage = json['discount_percentage'] ?? "0%";
-    date = json['date'] ?? "Unknown";
-    title = json['Title'] ?? "Unknown";
-    type = json['Type'] ?? "Unknown";
-    swapFor = json['Swap For'] ?? "Unknown";
-    city = json['City'] ?? "Unknown";
-    year = json['Year'] ?? "Unknown";
-    condition = json['Condition'] ?? "Unknown";
+    date = json['date'] ?? "others";
+    title = json['Title'] ?? "others";
+    type = json['Type'] ?? "others";
+    swapFor = json['Swap For'] ?? "others";
+    city = json['City'] ?? "others";
+    year = json['Year'] ?? "others";
+    condition = json['Condition'] ?? "others";
     price = json['Price'];
     discount = json['discount'] ?? 0.0;
-    discountFrom = json['discount_from'] ?? "Unknown";
-    discountTo = json['discount_to'] ?? "Unknown";
+    discountFrom = json['discount_from'] ?? "others";
+    discountTo = json['discount_to'] ?? "others";
     country = json['country'] ?? "Jordan";
     rateCount = json['rate_count'] ?? 0;
     if (json['avarageRating'] != null) {
@@ -140,5 +142,58 @@ class TodayItem {
     subcategory = json['subcategory'] != null
         ? SubCategory.fromJson(json['subcategory'])
         : SubCategory.initValues();
+  }
+  TodayItem copyWith({
+    int? id,
+    String? description,
+    List<String>? itemImg,
+    String? date,
+    dynamic priceAfterDiscount,
+    String? discountPercentage,
+    String? title,
+    String? type,
+    String? swapFor,
+    String? city,
+    String? year,
+    String? condition,
+    dynamic price,
+    double? discount,
+    String? discountFrom,
+    String? discountTo,
+    String? country,
+    int? rateCount,
+    double? averageRating,
+    SectionItemModel? section,
+    UserModel? user,
+    CategoryItem? category,
+    BrandItem? brand,
+    SubCategory? subcategory,
+  }) {
+    return TodayItem(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      itemImg: itemImg ?? this.itemImg,
+      date: date ?? this.date,
+      priceAfterDiscount: priceAfterDiscount ?? this.priceAfterDiscount,
+      discountPercentage: discountPercentage ?? this.discountPercentage,
+      title: title ?? this.title,
+      type: type ?? this.type,
+      swapFor: swapFor ?? this.swapFor,
+      city: city ?? this.city,
+      year: year ?? this.year,
+      condition: condition ?? this.condition,
+      price: price ?? this.price,
+      discount: discount ?? this.discount,
+      discountFrom: discountFrom ?? this.discountFrom,
+      discountTo: discountTo ?? this.discountTo,
+      country: country ?? this.country,
+      rateCount: rateCount ?? this.rateCount,
+      averageRating: averageRating ?? this.averageRating,
+      section: section ?? this.section,
+      user: user ?? this.user,
+      category: category ?? this.category,
+      brand: brand ?? this.brand,
+      subcategory: subcategory ?? this.subcategory,
+    );
   }
 }

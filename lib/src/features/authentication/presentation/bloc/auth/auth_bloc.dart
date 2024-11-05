@@ -100,9 +100,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           state.password,
           '+${state.phoneCode}${state.phone}',
           'Normal',
-          state.address,
-          state.city,
           state.country,
+          state.city,
+          state.address,
         );
     result.fold((l) {
       emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));

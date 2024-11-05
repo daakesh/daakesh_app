@@ -74,6 +74,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
       UserDataBloc.get.add(GetUserDataEvent());
       ProfileBloc.get.add(ActivateUpdateEvent(isUpdatePersonalActive: false));
+      ShowToastSnackBar.showSnackBars(
+          message: event.context.locale.update_location_message);
       emit(state.copyWith(profileStateStatus: ProfileStateStatus.SUCCESS));
     });
   }

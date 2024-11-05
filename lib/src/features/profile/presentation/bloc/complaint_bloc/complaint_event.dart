@@ -1,11 +1,15 @@
-abstract class ComplaintEvent{}
+import 'package:flutter/material.dart';
 
-class AddComplaintEvent extends ComplaintEvent{
+abstract class ComplaintEvent {}
+
+class AddComplaintEvent extends ComplaintEvent {
+  final BuildContext context;
   final String complaintType;
   final String sellerName;
   final String subject;
   final String remark;
   AddComplaintEvent({
+    required this.context,
     required this.complaintType,
     required this.sellerName,
     required this.subject,
@@ -13,5 +17,4 @@ class AddComplaintEvent extends ComplaintEvent{
   });
 }
 
-class GetAllComplaintEvent extends ComplaintEvent{}
-
+class GetAllComplaintEvent extends ComplaintEvent {}

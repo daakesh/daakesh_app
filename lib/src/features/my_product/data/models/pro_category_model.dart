@@ -32,7 +32,7 @@ class ProCategoryItem {
 
   ProCategoryItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "Unknown";
+    name = Utils.isEnglish ? json['name'] : json['arName'] ?? "others";
     arName = json['arName'];
   }
 }

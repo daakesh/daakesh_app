@@ -121,6 +121,7 @@ class TodayDealProduct extends StatelessWidget {
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
+                      ignoreGestures: true,
                       itemCount: 5,
                       itemSize: 20.0.r,
                       itemBuilder: (context, _) => const Icon(
@@ -177,15 +178,15 @@ class TodayDealProduct extends StatelessWidget {
                                     fontWeight: FontWeight.w600),
                             overflow: TextOverflow.ellipsis,
                           )),
-                          Text(
-                            '${context.locale.jordan_dinar} ${todayDealItem.price}',
-                            style: context.easyTheme.textTheme.headlineMedium!
-                                .copyWith(
-                              fontSize: 14.0.sp,
-                              decoration: TextDecoration.lineThrough,
-                              color: ColorName.gray,
-                            ),
-                          ),
+                          //Text(
+                          //  '${context.locale.jordan_dinar} ${todayDealItem.price}',
+                          //  style: context.easyTheme.textTheme.headlineMedium!
+                          //      .copyWith(
+                          //    fontSize: 14.0.sp,
+                          //    decoration: TextDecoration.lineThrough,
+                          //    color: ColorName.gray,
+                          //  ),
+                          //),
                         ],
                       ),
                 const SizedBox(

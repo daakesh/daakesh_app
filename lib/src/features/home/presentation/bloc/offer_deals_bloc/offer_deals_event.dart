@@ -39,3 +39,12 @@ class SetViewAllOfferDealsFilterEvent extends OfferDealsEvent {
 }
 
 class GetViewAllOfferDealsCitiesEvent extends OfferDealsEvent {}
+
+class UpdateTodayDealsItemEvent extends OfferDealsEvent {
+  final int id;
+  final double avgRating;
+  final int rateCount;
+
+  UpdateTodayDealsItemEvent(
+      {required this.id, required this.avgRating, required this.rateCount});
+}

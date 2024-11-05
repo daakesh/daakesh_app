@@ -46,6 +46,8 @@ class ComplaintBloc extends Bloc<ComplaintEvent, ComplaintState> {
         ShowToastSnackBar.showSnackBars(message: r.message.toString());
         return;
       }
+      ShowToastSnackBar.showSnackBars(
+          message: event.context.locale.complaint_send_successfully);
       emit(state.copyWith(complaintStateStatus: ComplaintStateStatus.SUCCESS));
     });
   }

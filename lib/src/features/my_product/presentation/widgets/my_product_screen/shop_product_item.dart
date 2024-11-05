@@ -175,35 +175,41 @@ class _ShopProductItemState extends State<ShopProductItem> {
                           )
                         ],
                       ),
-                      widget.myProductItem.discountPercentage! != '0%'
-                          ? Row(
-                              children: [
-                                Text(
-                                  '${context.locale.jordan_dinar} ${widget.myProductItem.priceAfterDiscount!.toInt()}',
-                                  style: context
-                                      .easyTheme.textTheme.labelMedium!
-                                      .copyWith(fontSize: 21.0.sp),
-                                ),
-                                const SizedBox(
-                                  width: 6.0,
-                                ),
-                                Text(
-                                  '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
-                                  style: context
-                                      .easyTheme.textTheme.labelMedium!
-                                      .copyWith(
-                                    fontSize: 15.0.sp,
-                                    color: ColorName.gray,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Text(
-                              '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
-                              style: context.easyTheme.textTheme.labelMedium!
-                                  .copyWith(fontSize: 21.0.sp),
-                            ),
+                      Text(
+                        '${context.locale.jordan_dinar} ${widget.myProductItem.priceAfterDiscount!}',
+                        style: context.easyTheme.textTheme.labelMedium!
+                            .copyWith(fontSize: 21.0.sp),
+                      ),
+
+                      ///widget.myProductItem.discountPercentage! != '0%'
+                      ///    ? Row(
+                      ///        children: [
+                      ///          Text(
+                      ///            '${context.locale.jordan_dinar} ${widget.myProductItem.priceAfterDiscount!}',
+                      ///            style: context
+                      ///                .easyTheme.textTheme.labelMedium!
+                      ///                .copyWith(fontSize: 21.0.sp),
+                      ///          ),
+                      ///          const SizedBox(
+                      ///            width: 6.0,
+                      ///          ),
+                      ///          Text(
+                      ///            '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
+                      ///            style: context
+                      ///                .easyTheme.textTheme.labelMedium!
+                      ///                .copyWith(
+                      ///              fontSize: 15.0.sp,
+                      ///              color: ColorName.gray,
+                      ///              decoration: TextDecoration.lineThrough,
+                      ///            ),
+                      ///          ),
+                      ///        ],
+                      ///      )
+                      ///    : Text(
+                      ///        '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
+                      ///        style: context.easyTheme.textTheme.labelMedium!
+                      ///            .copyWith(fontSize: 21.0.sp),
+                      ///      ),
                     ],
                   ),
                 ),

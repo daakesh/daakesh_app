@@ -16,18 +16,18 @@ class SwapSubCategory {
 
   SwapSubCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    name = json['name'] ?? "UnKnown";
-    description = json['description'] ?? "UnKnown";
-    subImg = json['subImg'] ?? "UnKnown";
-    date = json['date'] ?? "UnKnown";
-    arName = json['arName'] ?? "UnKnown";
+    name = json['name'] ?? "others";
+    description = json['description'] ?? "others";
+    subImg = json['subImg'] ?? "others";
+    date = json['date'] ?? "others";
+    arName = json['arName'] ?? "others";
   }
   SwapSubCategory.initValues() {
     id = 0;
-    name = "UnKnown";
-    description = "UnKnown";
-    subImg = "UnKnown";
-    date = "UnKnown";
-    arName = "UnKnown";
+    name = "others";
+    description = "others";
+    subImg = "others";
+    date = "others";
+    arName = "others";
   }
 }

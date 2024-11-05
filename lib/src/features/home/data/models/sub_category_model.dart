@@ -35,19 +35,19 @@ class SubCategory {
 
   SubCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    name = json['name'] ?? "Unknown";
-    description = json['description'] ?? "Unknown";
-    subImg = json['subImg'] ?? "Unknown";
-    date = json['date'] ?? "Unknown";
+    name = json['name'] ?? "others";
+    description = json['description'] ?? "others";
+    subImg = json['subImg'] ?? "others";
+    date = json['date'] ?? "others";
     arName = json['arName'] ?? json['name'];
   }
 
   SubCategory.initValues() {
     id = 0;
-    name = "Unknown";
-    description = "Unknown";
-    subImg = "Unknown";
-    date = "Unknown";
-    arName = "Unknown";
+    name = "others";
+    description = "others";
+    subImg = "others";
+    date = "others";
+    arName = "others";
   }
 }

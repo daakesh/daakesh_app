@@ -40,7 +40,8 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
 
   FutureOr<void> _addProImages(
       AddProImagesEvent event, Emitter<AddProState> emit) {
-    emit(state.copyWith(proImages: event.proImages));
+    emit(
+        state.copyWith(proImages: event.proImages, oldImages: event.oldImages));
   }
 
   FutureOr<void> _addProDisplayMethod(
@@ -106,6 +107,7 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
       ..display = state.displayProduct
       ..countrySwap = state.swapCountry
       ..citySwap = state.swapCity
+      ..oldItemImageList = state.oldImages
       ..itemFileImg = state.proImages.toList();
     final result = state.adjustProduct.isEdit
         ? await getIt.get<MyProductUseCases>().updateProduct(addProModel)
@@ -161,6 +163,7 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
         swapCountry: 'Jordan',
         swapCity: 'Amman',
         shipToCountry: '',
+        oldImages: [],
       ));
     });
   }

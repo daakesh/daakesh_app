@@ -24,30 +24,33 @@ class AddProModel {
   String? citySwap;
   List<XFile>? itemFileImg;
   List<String>? itemImageList;
+  List<String>? oldItemImageList;
 
-  AddProModel(
-      {this.userID,
-      this.proId,
-      this.title,
-      this.description,
-      this.secID,
-      this.catID,
-      this.subID,
-      this.brandID,
-      this.tradeOrSell,
-      this.tradeFor,
-      this.price,
-      this.condition,
-      this.city,
-      this.year,
-      this.discount,
-      this.country,
-      this.quantity,
-      this.display,
-      this.countrySwap,
-      this.citySwap,
-      this.itemFileImg,
-      this.itemImageList});
+  AddProModel({
+    this.userID,
+    this.proId,
+    this.title,
+    this.description,
+    this.secID,
+    this.catID,
+    this.subID,
+    this.brandID,
+    this.tradeOrSell,
+    this.tradeFor,
+    this.price,
+    this.condition,
+    this.city,
+    this.year,
+    this.discount,
+    this.country,
+    this.quantity,
+    this.display,
+    this.countrySwap,
+    this.citySwap,
+    this.itemFileImg,
+    this.itemImageList,
+    this.oldItemImageList,
+  });
 
   Map<String, dynamic> addItemToJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -115,6 +118,7 @@ class AddProModel {
     if (itemImageList!.isNotEmpty && itemImageList != null) {
       data['itemImg'] = itemImageList!.join(',');
     }
+
     return data;
   }
 }

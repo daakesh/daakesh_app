@@ -17,6 +17,8 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
     on<SearchOnProductEvent>(_searchOnProduct);
     on<EmptyProductSearchEvent>(_emptyProductSearch);
     on<OnOffDiscountEvent>(_onOffDiscount);
+    on<SetOldImageEvent>(_setOldImage);
+    on<RemoveOldImageEvent>(_removeOldImage);
   }
   static MyProFuncBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -72,6 +74,7 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
         shipFlagEmoji: '🇯🇴',
         discountSwitchButton: false,
         imagesList: [],
+        oldImage: [],
         productDisplayMethod: ProductDisplayMethod.Sell,
       ),
     );
@@ -161,5 +164,19 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
   FutureOr<void> _onOffDiscount(
       OnOffDiscountEvent event, Emitter<MyProFuncState> emit) {
     emit(state.copyWith(discountSwitchButton: event.value));
+  }
+
+  FutureOr<void> _setOldImage(
+      SetOldImageEvent event, Emitter<MyProFuncState> emit) {
+    final oldImageList = getIt.get<EditProduct>().myProductItem!.itemImg!;
+    emit(state.copyWith(oldImage: oldImageList));
+  }
+
+  FutureOr<void> _removeOldImage(
+      RemoveOldImageEvent event, Emitter<MyProFuncState> emit) {
+    print('************************************************');
+    print(event.oldImages.toString());
+    print('************************************************');
+    emit(state.copyWith(oldImage: event.oldImages));
   }
 }

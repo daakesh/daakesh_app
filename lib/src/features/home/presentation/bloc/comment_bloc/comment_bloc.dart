@@ -44,11 +44,16 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       }
       RateBloc.get.add(GetOverAllRateItemsEvent(itemID: itemId));
       CommentBloc.get.add(GetCommentByItemEvent());
+      int commentCount = state.commentCount + 1;
+      TodayDealsBloc.get.add(UpdateTodayDealsItem(
+          id: itemId, avgRating: rateValue, rateCount: commentCount));
+      OfferDealsBloc.get.add(UpdateTodayDealsItemEvent(
+          id: itemId, avgRating: rateValue, rateCount: commentCount));
 
       emit(state.copyWith(
           commentStateStatus: CommentStateStatus.SUCCESS,
           commentList: state.commentList,
-          commentCount: state.commentCount + 1));
+          commentCount: commentCount));
     });
   }
 

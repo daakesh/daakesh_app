@@ -86,6 +86,10 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                     TextFormFieldWidget(
                       controller: productQuantityController,
                       keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        RegExpValidator.clearZero,
+                      ],
                     ),
                     SizedBox(
                       height: 22.0.h,
@@ -98,6 +102,10 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       controller: productPriceController,
                       isSuffixPrefixOn: true,
                       keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        RegExpValidator.clearZero,
+                      ],
                     ),
                     SizedBox(
                       height: 21.0.h,

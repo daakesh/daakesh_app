@@ -41,9 +41,7 @@ class _RegisterLocationInfoScreenState
               ),
               SizedBox(height: 44.0.h),
               const Center(child: GeneralDaakeshLogoWidget()),
-              const Spacer(
-                flex: 1,
-              ),
+              SizedBox(height: 44.0.h),
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 26.0.w, end: 13.0.w),
                 child: Column(

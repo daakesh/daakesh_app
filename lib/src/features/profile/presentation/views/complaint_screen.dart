@@ -44,7 +44,7 @@ class ComplaintScreen extends StatelessWidget {
                   height: 14.0,
                 ),
                 Text(
-                  context.locale.location_info,
+                  context.locale.complaint_details,
                   style: context.easyTheme.textTheme.headlineMedium!
                       .copyWith(fontSize: 25.0),
                 ),
@@ -137,13 +137,13 @@ class ComplaintScreen extends StatelessWidget {
 
   void onSend(BuildContext context) {
     if (complaintTypeController.text.isEmpty ||
-        sellerNameController.text.isEmpty ||
         subjectController.text.isEmpty ||
         remarkController.text.isEmpty) {
       ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
       return;
     }
     ComplaintBloc.get.add(AddComplaintEvent(
+      context: context,
       complaintType: complaintTypeController.text,
       sellerName: sellerNameController.text,
       subject: subjectController.text,

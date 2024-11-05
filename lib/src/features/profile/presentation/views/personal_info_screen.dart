@@ -115,7 +115,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       ),
                       Center(
                           child: Text(
-                        context.locale.change_photo,
+                        state.isUpdateActive ? context.locale.change_photo : '',
                         style: context.easyTheme.textTheme.bodyMedium!
                             .copyWith(color: ColorName.black.withOpacity(0.5)),
                       )),
@@ -148,18 +148,23 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      Text(
-                        context.locale.password,
-                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18,
-                            color: ColorName.black.withOpacity(0.5)),
-                      ),
-                      TextFormFieldWidget(
-                        controller: passwordController,
-                        enabled: state.isUpdateActive,
-                        obscureText: true,
-                        maxLines: 1,
-                      ),
+                      state.isUpdateActive
+                          ? Text(
+                              context.locale.password,
+                              style: context.easyTheme.textTheme.bodyMedium!
+                                  .copyWith(
+                                      fontSize: 18,
+                                      color: ColorName.black.withOpacity(0.5)),
+                            )
+                          : const SizedBox(),
+                      state.isUpdateActive
+                          ? TextFormFieldWidget(
+                              controller: passwordController,
+                              enabled: state.isUpdateActive,
+                              obscureText: true,
+                              maxLines: 1,
+                            )
+                          : const SizedBox(),
                       const SizedBox(
                         height: 10.0,
                       ),

@@ -90,46 +90,46 @@ class ViewAllFilterScreen extends StatelessWidget {
                         );
                       }),
                       const SizedBox(height: 20.0),
-                      Text(
-                        context.locale.filter_rate,
-                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0,
-                            color: ColorName.black.withOpacity(0.5)),
-                      ),
-                      const SizedBox(height: 12.0),
-                      const ViewAllSelectRate(),
-                      const SizedBox(height: 16.0),
-                      Text(
-                        context.locale.filter_price_slider,
-                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                          fontSize: 18.0,
-                          color: ColorName.black.withOpacity(0.5),
-                        ),
-                      ),
-                      const SizedBox(height: 12.0),
-                      const ViewAllPriceSlider(minValue: 0.0, maxValue: 1000.0),
-                      BlocBuilder<TrendDealsBloc, TrendDealsState>(
-                        builder: (context, state) {
-                          return Row(
-                            children: [
-                              const SizedBox(width: 10),
-                              Text(
-                                '\$${state.fromPrice.toInt()}',
-                                style: context.easyTheme.textTheme.bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              const Spacer(flex: 1),
-                              Text(
-                                '\$${state.toPrice.toInt()}',
-                                style: context.easyTheme.textTheme.bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(width: 10),
-                            ],
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 10.0),
+                      //Text(
+                      //  context.locale.filter_rate,
+                      //  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      //      fontSize: 18.0,
+                      //      color: ColorName.black.withOpacity(0.5)),
+                      //),
+                      //const SizedBox(height: 12.0),
+                      //const ViewAllSelectRate(),
+                      //const SizedBox(height: 16.0),
+                      //Text(
+                      //  context.locale.filter_price_slider,
+                      //  style: context.easyTheme.textTheme.bodyMedium!.copyWith(
+                      //    fontSize: 18.0,
+                      //    color: ColorName.black.withOpacity(0.5),
+                      //  ),
+                      //),
+                      //const SizedBox(height: 12.0),
+                      //const ViewAllPriceSlider(minValue: 0.0, maxValue: 1000.0),
+                      //BlocBuilder<TrendDealsBloc, TrendDealsState>(
+                      //  builder: (context, state) {
+                      //    return Row(
+                      //      children: [
+                      //        const SizedBox(width: 10),
+                      //        Text(
+                      //          '\$${state.fromPrice.toInt()}',
+                      //          style: context.easyTheme.textTheme.bodyMedium!
+                      //              .copyWith(fontWeight: FontWeight.bold),
+                      //        ),
+                      //        const Spacer(flex: 1),
+                      //        Text(
+                      //          '\$${state.toPrice.toInt()}',
+                      //          style: context.easyTheme.textTheme.bodyMedium!
+                      //              .copyWith(fontWeight: FontWeight.bold),
+                      //        ),
+                      //        const SizedBox(width: 10),
+                      //      ],
+                      //    );
+                      //  },
+                      //),
+                      //const SizedBox(height: 10.0),
                       Text(
                         context.locale.filter_product_type,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(

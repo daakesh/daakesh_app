@@ -76,3 +76,10 @@ class OnOffDiscountEvent extends MyProFuncEvent {
   final bool value;
   OnOffDiscountEvent({required this.value});
 }
+
+class SetOldImageEvent extends MyProFuncEvent {}
+
+class RemoveOldImageEvent extends MyProFuncEvent {
+  final List<String> oldImages;
+  RemoveOldImageEvent(this.oldImages);
+}

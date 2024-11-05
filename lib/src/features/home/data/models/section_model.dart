@@ -49,20 +49,20 @@ class SectionItemModel {
 
   SectionItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    name = json['name'] ?? "Unknown";
-    description = json['description'] ?? "Unknown";
-    secImg = json['secImg'] ?? "Unknown";
-    date = json['date'] ?? "Unknown";
+    name = json['name'] ?? "others";
+    description = json['description'] ?? "others";
+    secImg = json['secImg'] ?? "others";
+    date = json['date'] ?? "others";
     secOrder = json['secOrder'] ?? 0;
     arName = json['arName'] ?? json['name'];
   }
   SectionItemModel.initValues() {
     id = 0;
-    name = "Unknown";
-    description = "Unknown";
-    secImg = "Unknown";
-    date = "Unknown";
+    name = "others";
+    description = "others";
+    secImg = "others";
+    date = "others";
     secOrder = 0;
-    arName = "Unknown";
+    arName = "others";
   }
 }

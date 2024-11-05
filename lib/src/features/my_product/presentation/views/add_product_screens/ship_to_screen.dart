@@ -195,7 +195,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.0.w),
                 child: DefaultButtonWidget(
-                    text: context.locale.next_button,
+                    text: context.locale.finish_button_title,
                     onPressed: () => onNext()),
               ),
               SizedBox(

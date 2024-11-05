@@ -30,9 +30,9 @@ class SellerInfoData {
   });
 
   SellerInfoData.fromJson(Map<String, dynamic> json) {
-    userName = json['User Name'] ?? "Unknown";
-    usedPhone = json['Used Phone'] ?? "Unknown";
-    id = json['id'] ?? "Unknown";
+    userName = json['User Name'] ?? "others";
+    usedPhone = json['Used Phone'] ?? "others";
+    id = json['id'] ?? "others";
     active = json['active'] ?? 1;
     storeRate = json['storeRate'] ?? 0;
     if (json['rate'] != null) {

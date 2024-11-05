@@ -121,6 +121,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
                       isUnderlineOn: true,
                       expands: true,
                       textAlignVertical: TextAlignVertical.top,
+                      keyboardType: TextInputType.multiline,
                     ),
                   ),
                   const SizedBox(

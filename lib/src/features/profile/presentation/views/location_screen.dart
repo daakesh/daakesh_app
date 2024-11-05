@@ -78,12 +78,14 @@ class _LocationScreenState extends State<LocationScreen> {
                       focusNode: countryFocusNode,
                       isSuffixPrefixOn: true,
                       enabled: state.isUpdatePersonalActive,
-                      suffixIcon: SizedBox(
-                        height: 9.0,
-                        width: 16.0,
-                        child:
-                            Center(child: Assets.svg.arrowDropDownIcon.svg()),
-                      ),
+                      suffixIcon: state.isUpdatePersonalActive
+                          ? SizedBox(
+                              height: 9.0,
+                              width: 16.0,
+                              child: Center(
+                                  child: Assets.svg.arrowDropDownIcon.svg()),
+                            )
+                          : const SizedBox(),
                       prefixIcon: SizedBox(
                           width: 30.0,
                           height: 30.0,
@@ -206,6 +208,7 @@ class _LocationScreenState extends State<LocationScreen> {
   void onSave() {
     ProfileBloc.get.add(
       UpdateLocationEvent(
+        context,
         country: countryController.text,
         city: cityController.text,
         address: addressController.text,

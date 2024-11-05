@@ -105,20 +105,10 @@ class _RegisterPersonalInfoScreenState
                       obscureText: true,
                       maxLines: 1,
                     ),
-                    SizedBox(height: 60.0.h),
+                    SizedBox(height: 20.0.h),
                   ],
                 ),
               ),
-              DefaultButtonWidget(
-                text: context.locale.next_button_title,
-                onPressed: () => onNext(context),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                  ColorName.blueGray,
-                )),
-                padding: EdgeInsetsDirectional.symmetric(horizontal: 21.1.w),
-              ),
-              SizedBox(height: 20.0.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0.w),
                 child: Row(
@@ -190,6 +180,16 @@ class _RegisterPersonalInfoScreenState
                     ),
                   ],
                 ),
+              ),
+              SizedBox(height: 40.0.h),
+              DefaultButtonWidget(
+                text: context.locale.next_button_title,
+                onPressed: () => onNext(context),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                  ColorName.blueGray,
+                )),
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 21.1.w),
               ),
               SizedBox(height: 40.0.h),
               const AlreadyHaveAccountWidget(),
