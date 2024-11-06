@@ -23,6 +23,7 @@ class MyProState extends Equatable {
   final bool isCommentsMoreData;
   final int itemId;
   final double rateAverage;
+  final int rateCount;
 
   const MyProState({
     this.myProStateStatus = MyProStateStatus.INITIAL,
@@ -35,6 +36,7 @@ class MyProState extends Equatable {
     this.isCommentsMoreData = true,
     this.itemId = 0,
     this.rateAverage = 0.0,
+    this.rateCount = 0,
   });
 
   MyProState copyWith({
@@ -48,6 +50,7 @@ class MyProState extends Equatable {
     bool? isCommentsMoreData,
     int? itemId,
     double? rateAverage,
+    int? rateCount,
   }) {
     return MyProState(
       myProStateStatus: myProStateStatus ?? this.myProStateStatus,
@@ -60,6 +63,7 @@ class MyProState extends Equatable {
       isCommentsMoreData: isCommentsMoreData ?? this.isCommentsMoreData,
       itemId: itemId ?? this.itemId,
       rateAverage: rateAverage ?? this.rateAverage,
+      rateCount: rateCount ?? this.rateCount,
     );
   }
 
@@ -75,5 +79,6 @@ class MyProState extends Equatable {
         isCommentsMoreData,
         itemId,
         rateAverage,
+        rateCount,
       ];
 }

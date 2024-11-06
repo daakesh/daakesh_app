@@ -84,6 +84,8 @@ class RateBloc extends Bloc<RateEvent, RateState> {
         return;
       }
       OverAllRateModel overAllRateModel = OverAllRateModel.fromJson(r.data);
+      CommentBloc.get
+          .add(SetAvgRateEvent(avgRate: overAllRateModel.data!.average!));
       emit(state.copyWith(
         rateStateStatus: RateStateStatus.SUCCESS,
         rateAverage: overAllRateModel.data!.average,

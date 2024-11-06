@@ -9,9 +9,16 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     on<RemoveCommentsEvent>(_removeComments);
     on<GetCommentCountEvent>(_getCommentCount);
     on<EmptyCommentDataEvent>(_emptyCommentData);
+    on<SetAvgRateEvent>(_setAvgRate);
   }
   static CommentBloc get get =>
       BlocProvider.of(Utils.navigatorKey.currentState!.context);
+  FutureOr<void> _setAvgRate(
+      SetAvgRateEvent event, Emitter<CommentState> emit) {
+    emit(state.copyWith(
+        commentStateStatus: CommentStateStatus.SUCCESS,
+        avgRate: event.avgRate));
+  }
 
   FutureOr<void> _addComment(
       AddCommentEvent event, Emitter<CommentState> emit) async {
@@ -44,16 +51,28 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       }
       RateBloc.get.add(GetOverAllRateItemsEvent(itemID: itemId));
       CommentBloc.get.add(GetCommentByItemEvent());
-      int commentCount = state.commentCount + 1;
-      TodayDealsBloc.get.add(UpdateTodayDealsItem(
-          id: itemId, avgRating: rateValue, rateCount: commentCount));
-      OfferDealsBloc.get.add(UpdateTodayDealsItemEvent(
-          id: itemId, avgRating: rateValue, rateCount: commentCount));
-
+      CommentBloc.get.add(GetCommentCountEvent(itemId: itemId));
+      int commentCount = state.commentCount;
       emit(state.copyWith(
           commentStateStatus: CommentStateStatus.SUCCESS,
           commentList: state.commentList,
           commentCount: commentCount));
+      await Future.delayed(const Duration(seconds: 2));
+      double avgRate = state.avgRate;
+      TodayDealsBloc.get.add(UpdateTodayDealsItem(
+          id: itemId, avgRating: avgRate, rateCount: state.rateCount));
+      OfferDealsBloc.get.add(UpdateTodayDealsItemEvent(
+          id: itemId, avgRating: avgRate, rateCount: state.rateCount));
+      FilterBloc.get.add(UpdateSubCategoryEvent(
+          id: itemId, avgRating: avgRate, rateCount: state.rateCount));
+      BrandsBloc.get.add(UpdateBrandItemEvent(
+          id: itemId, avgRating: avgRate, rateCount: state.rateCount));
+      HandmadeBloc.get.add(UpdateHandMadeItemEvent(
+          id: itemId, avgRating: avgRate, rateCount: state.rateCount));
+      SearchBloc.get.add(UpdateSearchItemEvent(
+          id: itemId, avgRating: avgRate, rateCount: state.rateCount));
+      MyProBloc.get.add(UpdateMyProductItemEvent(
+          id: itemId, avgRating: avgRate, rateCount: state.rateCount));
     });
   }
 
@@ -138,9 +157,11 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
         return;
       }
       int commentCount = r.data['data']['comment_count'];
+      int rateCount = r.data['data']['rate_count'];
       emit(state.copyWith(
           commentStateStatus: CommentStateStatus.SUCCESS,
-          commentCount: commentCount));
+          commentCount: commentCount,
+          rateCount: rateCount));
     });
   }
 

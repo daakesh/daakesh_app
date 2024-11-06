@@ -9,6 +9,7 @@ class BrandsBloc extends Bloc<BrandsEvent, BrandsState> {
     on<ResetValueEvent>(_resetValue);
     on<SetBrandFilterData>(_setFilterData);
     on<GetBrandsCitiesEvent>(_getBrandsCities);
+    on<UpdateBrandItemEvent>(_updateBrandItem);
   }
   static BrandsBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -159,5 +160,21 @@ class BrandsBloc extends Bloc<BrandsEvent, BrandsState> {
       List<CityItem> cityItemList = citiesModel.data!.toList();
       emit(state.copyWith(cityItemList: cityItemList));
     });
+  }
+
+  FutureOr<void> _updateBrandItem(
+      UpdateBrandItemEvent event, Emitter<BrandsState> emit) {
+    List<TodayItem> updatedTodayDealList = List.from(state.itemByBrandList);
+    int index =
+        updatedTodayDealList.indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealList[index] = updatedTodayDealList[index]
+          .copyWith(averageRating: event.avgRating, rateCount: event.rateCount);
+      emit(state.copyWith(
+        brandsStateStatus: BrandsStateStatus.SUCCESS,
+        itemByBrandList: updatedTodayDealList,
+      ));
+    }
   }
 }

@@ -10,6 +10,7 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
     on<SetHandmadeFilterDataEvent>(_setFilterData);
     on<ClearHandmadeFilterDataEvent>(_clearHandmadeFilterData);
     on<GetHandmadeCitiesEvent>(_getHandmadeCities);
+    on<UpdateHandMadeItemEvent>(_updateHandMadeItem);
   }
   static HandmadeBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -169,5 +170,21 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
       itemByHandmadeList: [],
       isMoreDataItems: true,
     ));
+  }
+
+  FutureOr<void> _updateHandMadeItem(
+      UpdateHandMadeItemEvent event, Emitter<HandmadeState> emit) async {
+    List<TodayItem> updatedTodayDealList = List.from(state.handmadeListData);
+    int index =
+        updatedTodayDealList.indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealList[index] = updatedTodayDealList[index]
+          .copyWith(averageRating: event.avgRating, rateCount: event.rateCount);
+      emit(state.copyWith(
+        handmadeStateStatus: HandmadeStateStatus.SUCCESS,
+        handmadeListData: updatedTodayDealList,
+      ));
+    }
   }
 }

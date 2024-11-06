@@ -83,3 +83,12 @@ class RemoveOldImageEvent extends MyProFuncEvent {
   final List<String> oldImages;
   RemoveOldImageEvent(this.oldImages);
 }
+
+class UpdateMySearchProductItemEvent extends MyProFuncEvent {
+  final int id;
+  final double avgRating;
+  final int rateCount;
+
+  UpdateMySearchProductItemEvent(
+      {required this.rateCount, required this.id, required this.avgRating});
+}

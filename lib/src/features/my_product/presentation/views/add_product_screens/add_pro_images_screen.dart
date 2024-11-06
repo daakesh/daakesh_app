@@ -383,6 +383,11 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
   }
 
   void onNext() async {
+    if (imagesList.isEmpty && oldImageList.isEmpty) {
+      ShowToastSnackBar.showSnackBars(
+          message: 'Please add at least single image');
+      return;
+    }
     AddProBloc.get.add(AddProImagesEvent(
       proImages: imagesList,
       oldImages: oldImageList,

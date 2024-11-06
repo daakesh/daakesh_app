@@ -9,6 +9,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<SetSearchFilterDataEvent>(_setSearchFilterData);
     on<ClearSearchFilterDataEvent>(_clearSearchFilterData);
     on<EmptySearchEvent>(_emptySearch);
+    on<UpdateSearchItemEvent>(_updateSearchItem);
   }
   static SearchBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -152,5 +153,21 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       isFilterActive: false,
       type: FilterProductType.All,
     ));
+  }
+
+  FutureOr<void> _updateSearchItem(
+      UpdateSearchItemEvent event, Emitter<SearchState> emit) {
+    List<TodayItem> updatedTodayDealList = List.from(state.filterDataList);
+    int index =
+        updatedTodayDealList.indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealList[index] = updatedTodayDealList[index]
+          .copyWith(averageRating: event.avgRating, rateCount: event.rateCount);
+      emit(state.copyWith(
+        searchStateStatus: SearchStateStatus.SUCCESS,
+        filterDataList: updatedTodayDealList,
+      ));
+    }
   }
 }

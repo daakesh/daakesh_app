@@ -43,3 +43,8 @@ class GetCommentCountEvent extends CommentEvent {
 }
 
 class EmptyCommentDataEvent extends CommentEvent {}
+
+class SetAvgRateEvent extends CommentEvent {
+  final double avgRate;
+  SetAvgRateEvent({required this.avgRate});
+}

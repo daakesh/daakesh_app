@@ -41,3 +41,12 @@ class SetBrandFilterData extends BrandsEvent {
 }
 
 class GetBrandsCitiesEvent extends BrandsEvent {}
+
+class UpdateBrandItemEvent extends BrandsEvent {
+  final int id;
+  final double avgRating;
+  final int rateCount;
+
+  UpdateBrandItemEvent(
+      {required this.rateCount, required this.id, required this.avgRating});
+}
