@@ -25,8 +25,10 @@ class AddProCommentEvent extends MyProEvent {
 
 class GetProCommentCountEvent extends MyProEvent {
   final int itemId;
+  final bool isEdit;
   GetProCommentCountEvent({
     required this.itemId,
+    this.isEdit = false,
   });
 }
 
@@ -55,4 +57,13 @@ class RemoveItemEvent extends MyProEvent {
   final int id;
 
   RemoveItemEvent({required this.id});
+}
+
+class UpdateMyProductItemEvent extends MyProEvent {
+  final int id;
+  final double avgRating;
+  final int rateCount;
+
+  UpdateMyProductItemEvent(
+      {required this.rateCount, required this.id, required this.avgRating});
 }

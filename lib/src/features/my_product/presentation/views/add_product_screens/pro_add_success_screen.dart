@@ -126,6 +126,8 @@ class ProAddSuccessScreen extends StatelessWidget {
       ..countrySwap = myProductItem.countrySwap
       ..itemId = myProductItem.id
       ..categoryID = myProductItem.category!.id
+      ..price = myProductItem.price
+      ..discountPercentage = myProductItem.discountPercentage
       ..citySwap = myProductItem.citySwap
       ..countrySwap = myProductItem.countrySwap
       ..date = myProductItem.date

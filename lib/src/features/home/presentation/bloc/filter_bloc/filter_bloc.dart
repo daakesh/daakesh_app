@@ -10,6 +10,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     on<SelectCategoryItemEvent>(_selectItem);
     on<GetCitiesEvent>(_getCities);
     on<GetSubCategoriesEvent>(_getSubCategories);
+    on<UpdateSubCategoryEvent>(_updateSubCategory);
   }
   static FilterBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _clearFilterData(
@@ -141,5 +142,21 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
       List<SubCategory> subCategoryList = subCategory.data!.toList();
       emit(state.copyWith(subCategoryList: subCategoryList));
     });
+  }
+
+  FutureOr<void> _updateSubCategory(
+      UpdateSubCategoryEvent event, Emitter<FilterState> emit) {
+    List<TodayItem> updatedTodayDealList = List.from(state.subCategoryListData);
+    int index =
+        updatedTodayDealList.indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealList[index] = updatedTodayDealList[index]
+          .copyWith(averageRating: event.avgRating, rateCount: event.rateCount);
+      emit(state.copyWith(
+        filterStateStatus: FilterStateStatus.SUCCESS,
+        subCategoryListData: updatedTodayDealList,
+      ));
+    }
   }
 }

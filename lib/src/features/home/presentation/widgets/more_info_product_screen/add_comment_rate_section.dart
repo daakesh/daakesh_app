@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../src.export.dart';
 
@@ -80,20 +81,24 @@ class _AddCommentRateSectionState extends State<AddCommentRateSection> {
               const SizedBox(
                 height: 18.0,
               ),
-              Container(
-                height: 103.0,
-                width: double.infinity,
-                padding: const EdgeInsetsDirectional.only(
-                    start: 10.0, end: 10, top: 7.0),
-                decoration: const BoxDecoration(
-                    color: ColorName.white,
-                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                child: TextFormFieldWidget(
-                  controller: commentController,
-                  hintText: context.locale.more_info_product_comment,
-                  isUnderlineOn: true,
-                  maxLines: 5,
-                ),
+              BlocBuilder<RateBloc, RateState>(
+                builder: (context, state) {
+                  return Container(
+                    height: 103.0,
+                    width: double.infinity,
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 10.0, end: 10, top: 7.0),
+                    decoration: const BoxDecoration(
+                        color: ColorName.white,
+                        borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                    child: TextFormFieldWidget(
+                      controller: commentController,
+                      hintText: context.locale.more_info_product_comment,
+                      isUnderlineOn: true,
+                      maxLines: 5,
+                    ),
+                  );
+                },
               ),
             ],
           ),

@@ -12,6 +12,7 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
     on<EmptyProDataEvent>(_emptyProDataEvent);
     on<ClearDataEvent>(_clearData);
     on<RemoveItemEvent>(_removeItem);
+    on<UpdateMyProductItemEvent>(_updateMyProductItem);
   }
   static MyProBloc get get => BlocProvider.of(Utils.currentContext);
   FutureOr<void> _getMyProduct(
@@ -54,7 +55,7 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
         ));
         return;
       }
-      myProductListData.addAll(newResultList.reversed);
+      myProductListData.addAll(newResultList);
 
       emit(state.copyWith(
         myProStateStatus: MyProStateStatus.SUCCESS,
@@ -94,12 +95,15 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
       }
       MyProBloc.get.add(GetProOverAllRateItemsEvent(itemID: itemId));
       MyProBloc.get.add(GetProCommentByItemEvent());
+      MyProBloc.get.add(GetProCommentCountEvent(itemId: itemId, isEdit: true));
+
       //CommentRateModelItem commentRateModel =CommentRateModelItem.fromJson(r.data['data']);
       //state.commentList.insert(0, commentRateModel);
       emit(state.copyWith(
           myProStateStatus: MyProStateStatus.SUCCESS,
           commentList: state.commentList,
           commentCount: state.commentCount + 1));
+      await Future.delayed(const Duration(seconds: 2));
     });
   }
 
@@ -117,9 +121,25 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
         return;
       }
       int commentCount = r.data['data']['comment_count'];
+      int rateCount = r.data['data']['rate_count'];
+      if (event.isEdit) {
+        MyProBloc.get.add(UpdateMyProductItemEvent(
+          rateCount: state.rateCount,
+          id: itemId,
+          avgRating: state.rateAverage,
+        ));
+        MyProFuncBloc.get.add(UpdateMySearchProductItemEvent(
+          rateCount: state.rateCount,
+          id: itemId,
+          avgRating: state.rateAverage,
+        ));
+      }
+
       emit(state.copyWith(
-          myProStateStatus: MyProStateStatus.SUCCESS,
-          commentCount: commentCount));
+        myProStateStatus: MyProStateStatus.SUCCESS,
+        commentCount: commentCount,
+        rateCount: rateCount,
+      ));
     });
   }
 
@@ -220,5 +240,24 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
       emit(state.copyWith(myProductListData: []));
       emit(state.copyWith(myProductListData: cartItemsList));
     });
+  }
+
+  FutureOr<void> _updateMyProductItem(
+      UpdateMyProductItemEvent event, Emitter<MyProState> emit) {
+    List<MyProductItem> updatedTodayDealList =
+        List.from(state.myProductListData);
+    int index =
+        updatedTodayDealList.indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealList[index] = updatedTodayDealList[index].copyWith(
+        averageRating: event.avgRating,
+        rateCount: event.rateCount,
+      );
+      emit(state.copyWith(
+        myProStateStatus: MyProStateStatus.SUCCESS,
+        myProductListData: updatedTodayDealList,
+      ));
+    }
   }
 }

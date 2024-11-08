@@ -47,3 +47,12 @@ class GetSubCategoriesEvent extends FilterEvent {
   final int catID;
   GetSubCategoriesEvent({required this.catID});
 }
+
+class UpdateSubCategoryEvent extends FilterEvent {
+  final int id;
+  final double avgRating;
+  final int rateCount;
+
+  UpdateSubCategoryEvent(
+      {required this.rateCount, required this.id, required this.avgRating});
+}

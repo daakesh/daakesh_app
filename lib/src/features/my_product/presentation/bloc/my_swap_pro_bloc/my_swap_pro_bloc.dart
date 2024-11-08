@@ -50,7 +50,7 @@ class MySwapProBloc extends Bloc<MySwapProEvent, MySwapProState> {
         ));
         return;
       }
-      myProductListData.addAll(newResultList.reversed);
+      myProductListData.addAll(newResultList);
       emit(state.copyWith(
         mySwapProStateStatus: MySwapProStateStatus.SUCCESS,
         myProductListData: myProductListData,

@@ -38,3 +38,12 @@ class SetHandmadeFilterDataEvent extends HandmadeEvent {
 class ClearHandmadeFilterDataEvent extends HandmadeEvent {}
 
 class GetHandmadeCitiesEvent extends HandmadeEvent {}
+
+class UpdateHandMadeItemEvent extends HandmadeEvent {
+  final int id;
+  final double avgRating;
+  final int rateCount;
+
+  UpdateHandMadeItemEvent(
+      {required this.rateCount, required this.id, required this.avgRating});
+}

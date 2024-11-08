@@ -19,6 +19,8 @@ class CommentState extends Equatable {
   final bool isMoreData;
   final int itemId;
   final int commentCount;
+  final double avgRate;
+  final int rateCount;
 
   const CommentState({
     this.commentStateStatus = CommentStateStatus.INITIAL,
@@ -27,6 +29,8 @@ class CommentState extends Equatable {
     this.isMoreData = true,
     this.itemId = 0,
     this.commentCount = 0,
+    this.avgRate = 0,
+    this.rateCount = 0,
   });
 
   CommentState copyWith({
@@ -36,6 +40,8 @@ class CommentState extends Equatable {
     bool? isMoreData,
     int? itemId,
     int? commentCount,
+    double? avgRate,
+    int? rateCount,
   }) {
     return CommentState(
       commentStateStatus: commentStateStatus ?? this.commentStateStatus,
@@ -44,6 +50,8 @@ class CommentState extends Equatable {
       isMoreData: isMoreData ?? this.isMoreData,
       itemId: itemId ?? this.itemId,
       commentCount: commentCount ?? this.commentCount,
+      avgRate: avgRate ?? this.avgRate,
+      rateCount: rateCount ?? this.rateCount,
     );
   }
 
@@ -55,5 +63,7 @@ class CommentState extends Equatable {
         isMoreData,
         itemId,
         commentCount,
+        avgRate,
+        rateCount
       ];
 }

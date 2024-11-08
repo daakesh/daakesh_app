@@ -66,7 +66,7 @@ class PriceRateSection extends StatelessWidget {
                   builder: (context, state) {
                     return Flexible(
                       child: Text(
-                        '(${state.commentCount})',
+                        '(${state.rateCount})',
                         style: context.easyTheme.textTheme.labelLarge!.copyWith(
                             fontSize: 21.0,
                             color: ColorName.gray,

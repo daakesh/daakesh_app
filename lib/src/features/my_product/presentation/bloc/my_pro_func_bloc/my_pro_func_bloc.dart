@@ -19,6 +19,7 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
     on<OnOffDiscountEvent>(_onOffDiscount);
     on<SetOldImageEvent>(_setOldImage);
     on<RemoveOldImageEvent>(_removeOldImage);
+    on<UpdateMySearchProductItemEvent>(_updateMySearchProductItem);
   }
   static MyProFuncBloc get get => BlocProvider.of(Utils.currentContext);
 
@@ -174,9 +175,25 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
 
   FutureOr<void> _removeOldImage(
       RemoveOldImageEvent event, Emitter<MyProFuncState> emit) {
-    print('************************************************');
-    print(event.oldImages.toString());
-    print('************************************************');
     emit(state.copyWith(oldImage: event.oldImages));
+  }
+
+  FutureOr<void> _updateMySearchProductItem(
+      UpdateMySearchProductItemEvent event, Emitter<MyProFuncState> emit) {
+    List<MyProductItem> updatedTodayDealList =
+        List.from(state.searchResultList);
+    int index =
+        updatedTodayDealList.indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealList[index] = updatedTodayDealList[index].copyWith(
+        averageRating: event.avgRating,
+        rateCount: event.rateCount,
+      );
+      emit(state.copyWith(
+        myProFuncStateStatus: MyProFuncStateStatus.SUCCESS,
+        searchResultList: updatedTodayDealList,
+      ));
+    }
   }
 }

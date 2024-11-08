@@ -42,3 +42,12 @@ class SetSearchFilterDataEvent extends SearchEvent {
 }
 
 class ClearSearchFilterDataEvent extends SearchEvent {}
+
+class UpdateSearchItemEvent extends SearchEvent {
+  final int id;
+  final double avgRating;
+  final int rateCount;
+
+  UpdateSearchItemEvent(
+      {required this.rateCount, required this.id, required this.avgRating});
+}
