@@ -13,7 +13,7 @@ class GuestAlarmWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: LayoutBuilderWidget(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(flex: 1),
@@ -24,6 +24,7 @@ class GuestAlarmWidget extends StatelessWidget {
               const SizedBox(height: 12.0),
               Text(
                 context.locale.unlockFeaturesMessage,
+                textAlign: TextAlign.start,
                 style: context.easyTheme.textTheme.headlineSmall,
               ),
               const SizedBox(height: 12.0),

@@ -16,15 +16,19 @@ class AppWidget extends StatelessWidget {
           builder: (_, child) {
             return BlocBuilder<ProfileBloc, ProfileState>(
               builder: (context, state) {
-                return MaterialApp(
-                  title: 'Daakesh',
-                  debugShowCheckedModeBanner: false,
-                  locale: Locale(state.switchLangValue ? 'ar' : 'en'),
-                  theme: AppTheme.lightMode,
-                  localizationsDelegates: context.localizationsDelegates,
-                  supportedLocales: context.supportedLocales,
-                  navigatorKey: Utils.navigatorKey,
-                  home: const SplashScreen(),
+                return MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: MaterialApp(
+                    title: 'Daakesh',
+                    debugShowCheckedModeBanner: false,
+                    locale: Locale(state.switchLangValue ? 'ar' : 'en'),
+                    theme: AppTheme.lightMode,
+                    localizationsDelegates: context.localizationsDelegates,
+                    supportedLocales: context.supportedLocales,
+                    navigatorKey: Utils.navigatorKey,
+                    home: const SplashScreen(),
+                  ),
                 );
               },
             );

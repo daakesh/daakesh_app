@@ -90,7 +90,8 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                             const Spacer(flex: 1),
                             CachedImage(
                               imageUrl: i.image.toString(),
-                              width: 190,
+                              width: 190.h,
+                              fit: BoxFit.scaleDown,
                             ),
                           ],
                         )),
