@@ -25,8 +25,7 @@ class ViewAllTodayDealsScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => openFilterScreen(context),
-                      child: Assets.png.filterIcon
-                          .image(width: 40.w, height: 40.h),
+                      child: Assets.png.filterIcon.image(width: 40, height: 40),
                     ),
                     const SizedBox(width: 11),
                     GestureDetector(
@@ -35,7 +34,7 @@ class ViewAllTodayDealsScreen extends StatelessWidget {
                               sortingType: SortingType.asc))
                           : TodayDealsBloc.get.add(GetViewAllItemsEvent(
                               sortingType: SortingType.desc)),
-                      child: Assets.svg.sortIcon.svg(width: 30.w, height: 30.h),
+                      child: Assets.svg.sortIcon.svg(width: 30, height: 30),
                     ),
                   ],
                 ),

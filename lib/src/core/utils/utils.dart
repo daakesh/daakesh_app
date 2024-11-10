@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gif/gif.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +11,12 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../src.export.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Utils {
+abstract class Utils {
+  static void get immobilizeDeviceOrientation =>
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitUp,
+      ]);
   static Future<void> openNewPage(Widget widget,
       {bool popPreviousPages = false}) {
     return Future<dynamic>.delayed(Duration.zero, () {

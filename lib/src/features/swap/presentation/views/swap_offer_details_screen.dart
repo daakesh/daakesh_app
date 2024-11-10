@@ -37,7 +37,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                       const SizedBox(width: 11.0),
                       Expanded(
                         child: Padding(
-                            padding: EdgeInsets.all(8.h),
+                            padding: const EdgeInsets.all(8),
                             child: CachedImage(
                               imageUrl: trendDealsItem.itemImg != null
                                   ? trendDealsItem.itemImg!.first
@@ -73,8 +73,8 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                               children: [
                                 Assets.svg.locationPinIcon.svg(
                                     color: ColorName.amber,
-                                    height: 20.sp,
-                                    width: 20.sp),
+                                    height: 20,
+                                    width: 20),
                                 const SizedBox(
                                   width: 6.0,
                                 ),
@@ -82,7 +82,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                     child: Text(
                                   '${context.locale.swap_offer_swap_in_title} ${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
-                                      .copyWith(fontSize: 16.0.sp),
+                                      .copyWith(fontSize: 16),
                                   overflow: TextOverflow.fade,
                                 )),
                               ],
@@ -124,7 +124,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
                                           color: ColorName.skyBlue,
-                                          fontSize: 13.0.sp),
+                                          fontSize: 13),
                                   onPressed: () =>
                                       seeDetails(context, trendDealsItem),
                                 ),
@@ -184,7 +184,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsets.all(8.h),
+                                    padding: const EdgeInsets.all(8),
                                     child: CachedImage(
                                         imageUrl: state
                                             .itemSelected.first.itemImg!.first),
@@ -224,10 +224,10 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                       Container(
                                         constraints: const BoxConstraints(
                                             maxWidth: 66.0),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: ColorName.red,
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(4.0.r)),
+                                              Radius.circular(4)),
                                         ),
                                         child: Center(
                                           child: Text(
@@ -259,7 +259,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                   context.locale.swap_offer_your_comment_title,
                                   style: context.easyTheme.textTheme.bodyLarge!
                                       .copyWith(
-                                          fontSize: 20.0.sp,
+                                          fontSize: 20,
                                           color:
                                               ColorName.black.withOpacity(0.5)),
                                 ),
@@ -269,7 +269,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                 Container(
                                   width: double.infinity,
                                   constraints:
-                                      BoxConstraints(minHeight: 80.0.h),
+                                      const BoxConstraints(minHeight: 80),
                                   margin: const EdgeInsetsDirectional.only(
                                       end: 14.0),
                                   decoration: BoxDecoration(
@@ -285,7 +285,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
-                                              fontSize: 14.0.sp,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.normal,
                                               color: ColorName.blueGray),
                                     ),
@@ -306,6 +306,8 @@ class SwapOfferDetailsScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Center(
                     child: DefaultButtonWidget(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 16),
                         text: context.locale.swap_offer_continue_button_title,
                         onPressed: () => onContinue(
                               context,

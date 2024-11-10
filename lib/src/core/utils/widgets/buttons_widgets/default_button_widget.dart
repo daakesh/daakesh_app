@@ -24,15 +24,15 @@ class DefaultButtonWidget extends StatelessWidget {
         onPressed: onPressed,
         style: style ??
             ElevatedButton.styleFrom(
-              minimumSize: Size(387.0.w, 56.0.h),
+              minimumSize: const Size(387.0, 56.0),
               backgroundColor: ColorName.blueGray,
               foregroundColor: ColorName.white,
-              textStyle: TextStyle(
+              textStyle: const TextStyle(
                 fontFamily: FontFamily.apercuRegular,
-                fontSize: 20.0.sp,
+                fontSize: 20.0,
               ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0.r),
+                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
         child: Text(

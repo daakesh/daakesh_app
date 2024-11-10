@@ -65,9 +65,9 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                                       .easyTheme.textTheme.headlineMedium!
                                       .copyWith(color: ColorName.white),
                                 ),
-                                const SizedBox(height: 35.0),
+                                const SizedBox(height: 10.0),
                                 Container(
-                                  height: 36.0.h,
+                                  height: 36,
                                   constraints:
                                       const BoxConstraints(minWidth: 108.0),
                                   padding:
@@ -78,10 +78,13 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(4.0))),
                                   child: Center(
-                                    child: Text(
-                                      '23% OFF',
-                                      style: context
-                                          .easyTheme.textTheme.labelLarge,
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        '23% OFF',
+                                        style: context
+                                            .easyTheme.textTheme.labelLarge,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -90,7 +93,7 @@ class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
                             const Spacer(flex: 1),
                             CachedImage(
                               imageUrl: i.image.toString(),
-                              width: 190.h,
+                              width: 160,
                               fit: BoxFit.scaleDown,
                             ),
                           ],

@@ -24,14 +24,14 @@ class SwapDetailsSection extends StatelessWidget {
             Text(
               context.locale.swap_offer_brand_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.sp),
+                  .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
               Utils.isEnglish
                   ? '${trendDealsItem.brand!.brandName}'
                   : '${trendDealsItem.brand!.arName}',
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.sp),
+              style:
+                  context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -44,14 +44,14 @@ class SwapDetailsSection extends StatelessWidget {
             Text(
               context.locale.swap_offer_model_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.sp),
+                  .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
               Utils.isEnglish
                   ? trendDealsItem.section!.name.toString()
                   : trendDealsItem.section!.arName.toString(),
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.sp),
+              style:
+                  context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -64,14 +64,14 @@ class SwapDetailsSection extends StatelessWidget {
             Text(
               context.locale.swap_offer_category_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.sp),
+                  .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
               Utils.isEnglish
                   ? '${trendDealsItem.category!.name}'
                   : '${trendDealsItem.category!.arName}',
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.sp),
+              style:
+                  context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -84,12 +84,12 @@ class SwapDetailsSection extends StatelessWidget {
             Text(
               context.locale.swap_offer_year_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.sp),
+                  .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
               '${trendDealsItem.year}',
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.sp),
+              style:
+                  context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -99,15 +99,14 @@ class SwapDetailsSection extends StatelessWidget {
         Text(
           context.locale.swap_offer_description_title,
           style: context.easyTheme.textTheme.bodyLarge!
-              .copyWith(color: ColorName.gray, fontSize: 18.sp),
+              .copyWith(color: ColorName.gray, fontSize: 18),
         ),
         const SizedBox(
           height: 6.0,
         ),
         Text(
           '${trendDealsItem.description}',
-          style:
-              context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18.sp),
+          style: context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
         ),
         const SizedBox(
           height: 29.0,

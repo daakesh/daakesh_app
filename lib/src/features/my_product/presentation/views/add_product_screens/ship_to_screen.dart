@@ -30,12 +30,12 @@ class _ShipToScreenState extends State<ShipToScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 26.0.w, end: 22.0.w),
+                padding: const EdgeInsetsDirectional.only(start: 26, end: 22),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 70.0.h,
+                    const SizedBox(
+                      height: 70,
                     ),
                     InkWell(
                       focusColor: ColorName.transparent,
@@ -44,32 +44,32 @@ class _ShipToScreenState extends State<ShipToScreen> {
                       onTap: cancel,
                       child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                     ),
-                    SizedBox(
-                      height: 11.0.h,
+                    const SizedBox(
+                      height: 11,
                     ),
                     Text(
                       context.locale.add_product,
                       style: context.easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 36.0.sp),
+                          .copyWith(fontSize: 36),
                     ),
-                    SizedBox(
-                      height: 14.0.h,
+                    const SizedBox(
+                      height: 14,
                     ),
                     Text(
                       context.locale.ship_to,
                       style: context.easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 25.0.sp),
+                          .copyWith(fontSize: 25),
                     ),
-                    SizedBox(
-                      height: 19.0.h,
+                    const SizedBox(
+                      height: 19,
                     ),
                     Text(
                       context.locale.add_product_instruction,
                       style: context.easyTheme.textTheme.bodyMedium!
-                          .copyWith(fontSize: 16.0.sp),
+                          .copyWith(fontSize: 16),
                     ),
-                    SizedBox(
-                      height: 33.0.h,
+                    const SizedBox(
+                      height: 33,
                     ),
                   ],
                 ),
@@ -79,7 +79,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32.0.w),
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -99,7 +99,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                                   ? () {}
                                   : () => addCountries(countryController.text),
                               child: Transform.scale(
-                                scale: 0.8.sp,
+                                scale: 0.8,
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: state.isAlreadyAddedCountry
@@ -107,33 +107,33 @@ class _ShipToScreenState extends State<ShipToScreen> {
                                         : ColorName.amber,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Icon(Icons.add_rounded,
-                                      color: ColorName.white, size: 40.0.sp),
+                                  child: const Icon(Icons.add_rounded,
+                                      color: ColorName.white, size: 40),
                                 ),
                               ),
                             ),
                             prefixIcon: SizedBox(
-                                width: 30.0.w,
-                                height: 30.0.h,
+                                width: 30,
+                                height: 30,
                                 child: Center(
                                     child: Text(state.shipFlagEmoji,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: ColorName.blueGray,
-                                            fontSize: 24.0.sp)))),
+                                            fontSize: 24)))),
                             readOnly: true,
                             onTap: () => showCountryDialog(),
                             inputFormatters: [
                               RegExpValidator.beginWhitespace,
                             ],
                           ),
-                          SizedBox(
-                            height: 26.0.h,
+                          const SizedBox(
+                            height: 26,
                           ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 35.0.w),
+                      padding: const EdgeInsets.symmetric(horizontal: 35),
                       child: Wrap(
                         children: List.generate(
                             state.selectedShipToCountries.length,
@@ -146,19 +146,19 @@ class _ShipToScreenState extends State<ShipToScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Container(
-                                        constraints: BoxConstraints(
-                                            minHeight: 38.0.h,
-                                            minWidth: 120.0.w,
-                                            maxWidth: 140.0.w),
-                                        margin: EdgeInsetsDirectional.only(
-                                            end: 10.0.w, bottom: 10.0.h),
-                                        padding:
-                                            EdgeInsetsDirectional.symmetric(
-                                                horizontal: 10.0.w),
-                                        decoration: BoxDecoration(
+                                        constraints: const BoxConstraints(
+                                            minHeight: 38,
+                                            minWidth: 120,
+                                            maxWidth: 140),
+                                        margin:
+                                            const EdgeInsetsDirectional.only(
+                                                end: 10, bottom: 10),
+                                        padding: const EdgeInsetsDirectional
+                                            .symmetric(horizontal: 10),
+                                        decoration: const BoxDecoration(
                                           color: ColorName.paleGray,
                                           borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0.r),
+                                            Radius.circular(10),
                                           ),
                                         ),
                                         child: Row(
@@ -173,7 +173,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
                                                     style: context.easyTheme
                                                         .textTheme.bodyLarge!
                                                         .copyWith(
-                                                            fontSize: 18.0.sp,
+                                                            fontSize: 18,
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis)),
@@ -190,25 +190,25 @@ class _ShipToScreenState extends State<ShipToScreen> {
                   ],
                 );
               }),
-              SizedBox(height: 77.0.h),
+              const SizedBox(height: 77),
               const Spacer(flex: 1),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: const EdgeInsets.symmetric(horizontal: 21),
                 child: DefaultButtonWidget(
                     text: context.locale.finish_button_title,
                     onPressed: () => onNext()),
               ),
-              SizedBox(
-                height: 12.0.h,
+              const SizedBox(
+                height: 12,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: const EdgeInsets.symmetric(horizontal: 21),
                 child: OutlineButtonWidget(
                     text: context.locale.cancel_button,
                     onPressed: () => cancel()),
               ),
-              SizedBox(
-                height: 50.0.h,
+              const SizedBox(
+                height: 50,
               ),
             ],
           ),

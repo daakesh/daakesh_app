@@ -12,12 +12,11 @@ class OrderTypeTabBar extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: 50.0.h,
-          margin: EdgeInsetsDirectional.only(
-              start: 13.0.w, end: 13.0.w, top: 16.0.h),
+          height: 50,
+          margin: EdgeInsetsDirectional.only(start: 13, end: 13, top: 16),
           decoration: BoxDecoration(
               color: ColorName.paleGray,
-              borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
           child: Row(
             children: [
               Expanded(
@@ -25,12 +24,12 @@ class OrderTypeTabBar extends StatelessWidget {
                   onTap: () => toggleTabBar(MyOrderTapBar.MYORDER),
                   child: Container(
                     width: double.infinity,
-                    height: 50.0.h,
+                    height: 50,
                     decoration: BoxDecoration(
                         color: state.myOrderTapBar.isMyOrder
                             ? ColorName.amber
                             : ColorName.paleGray,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
                     child: Center(
                         child: Text(
                       'My Order',
@@ -51,12 +50,12 @@ class OrderTypeTabBar extends StatelessWidget {
                   onTap: () => toggleTabBar(MyOrderTapBar.SWAPREQUEST),
                   child: Container(
                     width: double.infinity,
-                    height: 50.0.h,
+                    height: 50,
                     decoration: BoxDecoration(
                         color: state.myOrderTapBar.isSwapRequest
                             ? ColorName.amber
                             : ColorName.paleGray,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
                     child: Center(
                         child: Text(
                       'Swap Requests',
@@ -77,8 +76,8 @@ class OrderTypeTabBar extends StatelessWidget {
         ),
         state.myOrderTapBar.isSwapRequest
             ? Padding(
-                padding: EdgeInsetsDirectional.only(
-                    start: 17.0.w, end: 13.0.w, top: 13.0.h),
+                padding:
+                    EdgeInsetsDirectional.only(start: 17, end: 13, top: 13),
                 child: Row(
                   children: [
                     Text(

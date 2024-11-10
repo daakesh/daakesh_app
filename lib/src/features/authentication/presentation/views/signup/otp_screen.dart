@@ -39,22 +39,22 @@ class _OTPScreenState extends State<OTPScreen> {
               children: [
                 const Spacer(flex: 1),
                 const Center(child: GeneralDaakeshLogoWidget()),
-                SizedBox(height: 60.0.h),
+                SizedBox(height: 60),
                 Padding(
-                  padding: EdgeInsetsDirectional.only(start: 26.0.w),
+                  padding: EdgeInsetsDirectional.only(start: 26),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(context.locale.otp_title,
                           style: context.easyTheme.textTheme.headlineLarge!
-                              .copyWith(fontSize: 40.0.sp)),
+                              .copyWith(fontSize: 40.0)),
                       SizedBox(
-                        height: 8.0.h,
+                        height: 8,
                       ),
                       Text(context.locale.otp_instruction,
                           style: context.easyTheme.textTheme.headlineMedium!
-                              .copyWith(fontSize: 25.0.sp)),
-                      SizedBox(height: 19.0.h),
+                              .copyWith(fontSize: 25.0)),
+                      SizedBox(height: 19),
                       widget.authManner.isSignUpIn
                           ? BlocBuilder<AuthBloc, AuthState>(
                               builder: (context, state) {
@@ -62,7 +62,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                     context.locale.otp_body_text(state.phone),
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
-                                        .copyWith(fontSize: 18.0.sp));
+                                        .copyWith(fontSize: 18.0));
                               },
                             )
                           : BlocBuilder<ForgetPassBloc, ForgetPassState>(
@@ -72,15 +72,15 @@ class _OTPScreenState extends State<OTPScreen> {
                                         '+${state.phoneCode + state.phone}'),
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
-                                        .copyWith(fontSize: 18.0.sp));
+                                        .copyWith(fontSize: 18.0));
                               },
                             ),
                     ],
                   ),
                 ),
-                SizedBox(height: 39.0.h),
+                SizedBox(height: 39),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32.0.w),
+                  padding: EdgeInsets.symmetric(horizontal: 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -91,7 +91,7 @@ class _OTPScreenState extends State<OTPScreen> {
                               style: context.easyTheme.textTheme.labelMedium!
                                   .copyWith(
                                       fontFamily: FontFamily.apercuBold,
-                                      fontSize: 27.0.sp),
+                                      fontSize: 27.0),
                               controller: firstDigitController,
                               focusNode: firstTextField,
                               inputFormatters: [
@@ -106,7 +106,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             ),
                           ),
                           SizedBox(
-                            width: 16.0.h,
+                            width: 16,
                           ),
                           Expanded(
                               child: TextFormFieldWidget(
@@ -114,7 +114,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(
                                     fontFamily: FontFamily.apercuBold,
-                                    fontSize: 27.0.sp),
+                                    fontSize: 27.0),
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(1),
                               FilteringTextInputFormatter.digitsOnly,
@@ -128,7 +128,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 nextFocus: thirdTextField),
                           )),
                           SizedBox(
-                            width: 16.0.h,
+                            width: 16,
                           ),
                           Expanded(
                               child: TextFormFieldWidget(
@@ -136,7 +136,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(
                                     fontFamily: FontFamily.apercuBold,
-                                    fontSize: 27.0.sp),
+                                    fontSize: 27.0),
                             focusNode: thirdTextField,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(1),
@@ -150,14 +150,14 @@ class _OTPScreenState extends State<OTPScreen> {
                                 nextFocus: fourthTextField),
                           )),
                           SizedBox(
-                            width: 16.0.h,
+                            width: 16,
                           ),
                           Expanded(
                               child: TextFormFieldWidget(
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(
                                     fontFamily: FontFamily.apercuBold,
-                                    fontSize: 27.0.sp),
+                                    fontSize: 27.0),
                             focusNode: fourthTextField,
                             controller: fourthDigitController,
                             inputFormatters: [
@@ -172,14 +172,14 @@ class _OTPScreenState extends State<OTPScreen> {
                                 nextFocus: fifthTextField),
                           )),
                           SizedBox(
-                            width: 16.0.h,
+                            width: 16,
                           ),
                           Expanded(
                               child: TextFormFieldWidget(
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(
                                     fontFamily: FontFamily.apercuBold,
-                                    fontSize: 27.0.sp),
+                                    fontSize: 27.0),
                             focusNode: fifthTextField,
                             controller: fifthDigitController,
                             inputFormatters: [
@@ -194,14 +194,14 @@ class _OTPScreenState extends State<OTPScreen> {
                                 previousFocus: fourthTextField),
                           )),
                           SizedBox(
-                            width: 16.0.h,
+                            width: 16,
                           ),
                           Expanded(
                               child: TextFormFieldWidget(
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(
                                     fontFamily: FontFamily.apercuBold,
-                                    fontSize: 27.0.sp),
+                                    fontSize: 27.0),
                             focusNode: sixthTextField,
                             controller: sixthDigitController,
                             inputFormatters: [
@@ -216,7 +216,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           )),
                         ],
                       ),
-                      SizedBox(height: 39.0.h),
+                      SizedBox(height: 39),
                       TextButtonWidget(
                           text: context.locale.text_button_send_code_again,
                           onPressed: resendSMSCode),
@@ -224,17 +224,17 @@ class _OTPScreenState extends State<OTPScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 100.h,
+                  height: 1,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                  padding: EdgeInsets.symmetric(horizontal: 21),
                   child: DefaultButtonWidget(
                       text: context.locale.validate_button_title,
                       onPressed: () => onValidate(context)),
                 ),
-                SizedBox(height: 44.0.h),
+                SizedBox(height: 44),
                 const AlreadyHaveAccountWidget(),
-                SizedBox(height: 55.0.h),
+                SizedBox(height: 55),
               ],
             ),
           ),

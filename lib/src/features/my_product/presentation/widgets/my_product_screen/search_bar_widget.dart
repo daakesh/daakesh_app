@@ -25,30 +25,28 @@ class _SearchProductBarWidgetState extends State<SearchProductBarWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-          EdgeInsetsDirectional.only(start: 16.0.w, end: 13.0.w, bottom: 0.0),
+          const EdgeInsetsDirectional.only(start: 16, end: 13, bottom: 0.0),
       child: Row(
         children: [
           Expanded(
             child: Container(
               width: double.infinity,
-              height: 50.0.h,
-              margin: EdgeInsetsDirectional.only(end: 8.0.w),
-              decoration: BoxDecoration(
+              height: 50,
+              margin: const EdgeInsetsDirectional.only(end: 8),
+              decoration: const BoxDecoration(
                 color: ColorName.white,
-                borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: Row(
                 children: [
-                  SizedBox(
-                    width: 20.0.w,
+                  const SizedBox(
+                    width: 20,
                   ),
                   Assets.svg.searchIcon.svg(
-                      color: ColorName.charcoalGray,
-                      width: 20.0.w,
-                      height: 20.0.h),
+                      color: ColorName.charcoalGray, width: 20, height: 20),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TextFormFieldWidget(
                         controller: widget.searchController,
                         isUnderlineOn: true,

@@ -25,8 +25,8 @@ class SwapSearchBarWidget extends StatelessWidget {
               opacity: 0.3,
               child: Assets.svg.line.svg(
                 alignment: AlignmentDirectional.bottomEnd,
-                width: 160.w,
-                height: 160.h,
+                width: 160,
+                height: 160,
               ),
             ),
             Padding(
@@ -39,13 +39,13 @@ class SwapSearchBarWidget extends StatelessWidget {
                     builder: (context, state) {
                       return Center(
                         child: state.switchLangValue
-                            ? ArabicDaakeshLogoWidget(
+                            ? const ArabicDaakeshLogoWidget(
                                 isLight: true,
-                                width: 184.0.w,
+                                width: 184,
                               )
-                            : DaakeshLogoWidget(
+                            : const DaakeshLogoWidget(
                                 isLight: true,
-                                width: 184.0.w,
+                                width: 184,
                               ),
                       );
                     },

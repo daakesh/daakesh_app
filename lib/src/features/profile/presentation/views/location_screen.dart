@@ -45,7 +45,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 60.0.sp),
+                    const SizedBox(height: 60),
                     Text(
                       context.locale.location,
                       style: context.easyTheme.textTheme.headlineMedium!

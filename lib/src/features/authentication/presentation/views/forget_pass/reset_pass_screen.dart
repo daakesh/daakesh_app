@@ -34,7 +34,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 Text(
                   context.locale.reset_pass_title,
                   style: context.easyTheme.textTheme.headlineLarge!
-                      .copyWith(fontSize: 40.0.sp),
+                      .copyWith(fontSize: 40),
                 ),
                 const SizedBox(height: 4.0),
                 FittedBox(
@@ -42,14 +42,14 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     child: Text(
                       context.locale.reset_pass_instruction,
                       style: context.easyTheme.textTheme.headlineLarge!
-                          .copyWith(fontSize: 25.0.sp),
+                          .copyWith(fontSize: 25),
                     )),
                 const Spacer(
                   flex: 1,
                 ),
-                SizedBox(height: 22.0.h),
+                SizedBox(height: 22),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -70,7 +70,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                           RegExpValidator.clearWhitespace,
                         ],
                       ),
-                      SizedBox(height: 33.0.h),
+                      SizedBox(height: 33),
                       Text(
                         context.locale.confirm_pass_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
@@ -86,7 +86,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 20.0.sp,
+                  height: 20,
                 ),
                 const Spacer(
                   flex: 1,
@@ -96,7 +96,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                         text: context.locale.reset_button_title,
                         onPressed: () => resetPassword(context))),
                 SizedBox(
-                  height: 20.0.sp,
+                  height: 20,
                 ),
                 const Spacer(
                   flex: 1,

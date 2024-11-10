@@ -30,12 +30,12 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 26.0.w, end: 22.0.w),
+                padding: const EdgeInsetsDirectional.only(start: 26, end: 22),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 70.0.h,
+                    const SizedBox(
+                      height: 70,
                     ),
                     InkWell(
                       focusColor: ColorName.transparent,
@@ -44,38 +44,38 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       onTap: () => Navigator.pop(context),
                       child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                     ),
-                    SizedBox(
-                      height: 11.0.h,
+                    const SizedBox(
+                      height: 11,
                     ),
                     Text(
                       context.locale.add_product,
                       style: context.easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 36.0.sp),
+                          .copyWith(fontSize: 36),
                     ),
-                    SizedBox(
-                      height: 14.0.h,
+                    const SizedBox(
+                      height: 14,
                     ),
                     Text(
                       context.locale.swap_title,
                       style: context.easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 25.0.sp),
+                          .copyWith(fontSize: 25),
                     ),
-                    SizedBox(
-                      height: 19.0.h,
+                    const SizedBox(
+                      height: 19,
                     ),
                     Text(
                       context.locale.add_product_instruction,
                       style: context.easyTheme.textTheme.bodyMedium!
-                          .copyWith(fontSize: 16.0.sp),
+                          .copyWith(fontSize: 16),
                     ),
-                    SizedBox(
-                      height: 25.0.h,
+                    const SizedBox(
+                      height: 25,
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0.w),
+                padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -99,8 +99,8 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                         displayProductController.text = value.toString();
                       },
                     ),
-                    SizedBox(
-                      height: 22.0.h,
+                    const SizedBox(
+                      height: 22,
                     ),
                     Text(context.locale.country_swap,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
@@ -110,21 +110,21 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                       controller: countryController,
                       isSuffixPrefixOn: true,
                       suffixIcon: SizedBox(
-                        height: 9.0.h,
-                        width: 16.0.w,
+                        height: 9,
+                        width: 16,
                         child:
                             Center(child: Assets.svg.arrowDropDownIcon.svg()),
                       ),
                       prefixIcon: BlocBuilder<MyProFuncBloc, MyProFuncState>(
                           builder: (_, state) {
                         return SizedBox(
-                            width: 30.0.w,
-                            height: 30.0.h,
+                            width: 30,
+                            height: 30,
                             child: Center(
                                 child: Text(
                               state.swapFlagEmoji,
-                              style: TextStyle(
-                                  color: ColorName.blueGray, fontSize: 24.0.sp),
+                              style: const TextStyle(
+                                  color: ColorName.blueGray, fontSize: 24),
                             )));
                       }),
                       readOnly: true,
@@ -133,43 +133,43 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    SizedBox(
-                      height: 21.0.h,
+                    const SizedBox(
+                      height: 21,
                     ),
                     Text(context.locale.city_swap,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18,
                             color: ColorName.black.withOpacity(0.5))),
                     TextFormFieldWidget(controller: cityController),
-                    SizedBox(
-                      height: 21.0.h,
+                    const SizedBox(
+                      height: 21,
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 77.0.h,
+              const SizedBox(
+                height: 77,
               ),
               const Spacer(
                 flex: 1,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: const EdgeInsets.symmetric(horizontal: 21),
                 child: DefaultButtonWidget(
                     text: context.locale.next_button,
                     onPressed: () => onNext()),
               ),
-              SizedBox(
-                height: 12.0.h,
+              const SizedBox(
+                height: 12,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: const EdgeInsets.symmetric(horizontal: 21),
                 child: OutlineButtonWidget(
                     text: context.locale.cancel_button,
                     onPressed: () => cancel()),
               ),
-              SizedBox(
-                height: 50.0.h,
+              const SizedBox(
+                height: 50,
               ),
             ],
           ),

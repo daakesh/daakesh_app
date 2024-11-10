@@ -37,21 +37,21 @@ class _ResetPassSuccessScreenState extends State<ResetPassSuccessScreen> {
                   flex: 1,
                 ),
                 Container(
-                  width: 150.0.w,
-                  height: 150.0.h,
+                  width: 150,
+                  height: 150,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(Assets.png.checkIcon.path))),
                 ),
                 SizedBox(
-                  height: 19.0.h,
+                  height: 19,
                 ),
                 Text(context.locale.reset_pass_success_title,
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 32.0.sp)),
+                        .copyWith(fontSize: 32)),
                 Text(context.locale.reset_pass_success_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontSize: 17.0.sp)),
+                        .copyWith(fontSize: 17)),
                 const Spacer(
                   flex: 2,
                 ),

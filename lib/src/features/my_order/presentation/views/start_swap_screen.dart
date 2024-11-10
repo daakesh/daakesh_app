@@ -47,19 +47,19 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                       const EdgeInsetsDirectional.symmetric(horizontal: 21.0),
                   decoration: BoxDecoration(
                       color: ColorName.white,
-                      borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
                       boxShadow: [
                         BoxShadow(
                           color: const Color.fromRGBO(0, 0, 0, 0.16),
                           offset: const Offset(0, 3),
-                          blurRadius: 6.0.r,
+                          blurRadius: 6,
                         )
                       ]),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 11.0.w,
+                        width: 11,
                       ),
                       Expanded(
                         child: Padding(
@@ -74,7 +74,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 18.0.w),
+                      SizedBox(width: 18),
                       Expanded(
                         flex: 2,
                         child: Column(
@@ -84,13 +84,13 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               height: 20.0,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.only(end: 45.0.w),
+                              padding: EdgeInsetsDirectional.only(end: 45),
                               child: Text(
                                 '${widget.sendReceiveSwapReqItem.sourceItems!.title}',
                                 maxLines: 3,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                        fontSize: 20.0.sp,
+                                        fontSize: 20,
                                         color: ColorName.gray,
                                         overflow: TextOverflow.fade),
                               ),
@@ -103,17 +103,17 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               children: [
                                 Assets.svg.locationPinIcon.svg(
                                   color: ColorName.amber,
-                                  height: 20.0.h,
-                                  width: 20.0.w,
+                                  height: 20,
+                                  width: 20,
                                 ),
                                 SizedBox(
-                                  width: 6.0.w,
+                                  width: 6,
                                 ),
                                 Expanded(
                                     child: Text(
                                   '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.sourceItems!.citySwap}, ${widget.sendReceiveSwapReqItem.sourceItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
-                                      .copyWith(fontSize: 16.0.sp),
+                                      .copyWith(fontSize: 16),
                                   overflow: TextOverflow.fade,
                                 )),
                               ],
@@ -122,20 +122,19 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                               height: 8.0,
                             ),
                             Padding(
-                                padding:
-                                    EdgeInsetsDirectional.only(start: 6.0.w),
+                                padding: EdgeInsetsDirectional.only(start: 6),
                                 child: Text(context.locale.your_product,
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
-                                        .copyWith(fontSize: 20.0.sp))),
+                                        .copyWith(fontSize: 20))),
                             Padding(
-                              padding: EdgeInsetsDirectional.only(end: 13.0.w),
+                              padding: EdgeInsetsDirectional.only(end: 13),
                               child: Align(
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
                                   text: context.locale.see_details,
                                   style: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: ColorName.skyBlue,
                                   ),
                                   onPressed: () => seeOfferDetails(
@@ -175,7 +174,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                   textAlign: TextAlign.center,
                   TextSpan(
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 15.0.sp),
+                        .copyWith(fontSize: 15),
                     children: [
                       TextSpan(text: '${context.locale.select_product}\n'),
                       const TextSpan(text: '('),
@@ -183,8 +182,7 @@ class _StartSwapScreenState extends State<StartSwapScreen> {
                           text:
                               '${widget.sendReceiveSwapReqItem.sourceItems!.offerCount}',
                           style: context.easyTheme.textTheme.headlineMedium!
-                              .copyWith(
-                                  color: ColorName.red, fontSize: 15.0.sp)),
+                              .copyWith(color: ColorName.red, fontSize: 15)),
                       const TextSpan(text: ') '),
                       TextSpan(text: context.locale.offers_submitted),
                     ],

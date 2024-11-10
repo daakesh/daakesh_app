@@ -69,8 +69,7 @@ class TextFormFieldWidget extends StatelessWidget {
         textAlignVertical: textAlignVertical,
         textInputAction: textInputAction,
         style: style ??
-            context.easyTheme.textTheme.labelMedium!
-                .copyWith(fontSize: 18.0.sp),
+            context.easyTheme.textTheme.labelMedium!.copyWith(fontSize: 18.0),
         inputFormatters: inputFormatters,
         obscureText: obscureText,
         textAlign: textAlign,
@@ -99,7 +98,7 @@ class TextFormFieldWidget extends StatelessWidget {
                 isCollapsed: true,
                 hintText: hintText,
                 hintStyle: context.easyTheme.textTheme.labelMedium!.copyWith(
-                    color: ColorName.black.withOpacity(0.3), fontSize: 18.0.sp),
+                    color: ColorName.black.withOpacity(0.3), fontSize: 18.0),
                 suffixIcon: suffixIcon,
                 prefixIcon: prefixIcon,
               )
@@ -108,7 +107,7 @@ class TextFormFieldWidget extends StatelessWidget {
                     hintText: hintText,
                     hintStyle: hintStyle ??
                         context.easyTheme.textTheme.labelMedium!
-                            .copyWith(fontSize: 18.0.sp),
+                            .copyWith(fontSize: 18.0),
                     enabledBorder: const UnderlineInputBorder(
                       borderSide:
                           BorderSide(color: ColorName.darkGray, width: 1.5),
@@ -123,7 +122,7 @@ class TextFormFieldWidget extends StatelessWidget {
                 : InputDecoration(
                     hintText: hintText,
                     hintStyle: context.easyTheme.textTheme.labelMedium!
-                        .copyWith(fontSize: 18.0.sp),
+                        .copyWith(fontSize: 18.0),
                     enabledBorder: const UnderlineInputBorder(
                       borderSide:
                           BorderSide(color: ColorName.darkGray, width: 1.5),

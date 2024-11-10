@@ -17,9 +17,9 @@ class SwapTrendDealProduct extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: ColorName.lavenderGray,
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   offset: Offset(0, 3),
                   blurRadius: 6.0,
@@ -27,8 +27,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                 ),
               ],
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.0.r),
-                  topRight: Radius.circular(10.0.r)),
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,14 +35,14 @@ class SwapTrendDealProduct extends StatelessWidget {
                 Align(
                   alignment: AlignmentDirectional.topStart,
                   child: Container(
-                    constraints: BoxConstraints(maxWidth: 75.0.w),
-                    height: 22.0.h,
+                    constraints: const BoxConstraints(maxWidth: 75),
+                    height: 22,
                     margin:
                         const EdgeInsetsDirectional.only(top: 1.0, start: 4.0),
-                    padding: EdgeInsets.only(top: 2.0.h),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.only(top: 2),
+                    decoration: const BoxDecoration(
                       color: ColorName.red,
-                      borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -51,8 +50,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                         context.locale.swap_trend_product_tag,
                         textAlign: TextAlign.center,
                         style: context.easyTheme.textTheme.headlineMedium!
-                            .copyWith(
-                                fontSize: 14.0.sp, color: ColorName.white),
+                            .copyWith(fontSize: 14, color: ColorName.white),
                       ),
                     ),
                   ),
@@ -69,12 +67,12 @@ class SwapTrendDealProduct extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsetsDirectional.only(
-              start: 16.0.w,
+            padding: const EdgeInsetsDirectional.only(
+              start: 16,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: ColorName.white,
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   offset: Offset(0, 3),
                   blurRadius: 6.0,
@@ -82,15 +80,15 @@ class SwapTrendDealProduct extends StatelessWidget {
                 ),
               ],
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10.0.r),
-                bottomRight: Radius.circular(10.0.r),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
               ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 2.0.h,
+                const SizedBox(
+                  height: 2,
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.only(end: 28.0),
@@ -98,7 +96,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                     '${trendDealsItem.title}\n',
                     maxLines: 2,
                     style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                        fontSize: 15.0.sp,
+                        fontSize: 15,
                         color: ColorName.gray,
                         overflow: TextOverflow.ellipsis),
                   ),
@@ -106,7 +104,7 @@ class SwapTrendDealProduct extends StatelessWidget {
                 Text(
                   '${trendDealsItem.citySwap}, ${trendDealsItem.countrySwap} ',
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                      fontSize: 13.0.sp,
+                      fontSize: 13,
                       color: ColorName.mediumSilver,
                       overflow: TextOverflow.ellipsis),
                 ),
@@ -150,34 +148,33 @@ class SwapTrendDealProduct extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.phone,
                       color: ColorName.silverChalice,
-                      size: 20.0.sp,
+                      size: 20,
                     ),
-                    SizedBox(
-                      width: 10.0.sp,
+                    const SizedBox(
+                      width: 10,
                     ),
                     Expanded(
                       child: SizedBox(
-                        width: 100.0.w,
+                        width: 100,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(context.locale.swap_trend_product_by_title,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                        fontSize: 13.0.sp,
-                                        color: ColorName.gray)),
+                                        fontSize: 13, color: ColorName.gray)),
                             Flexible(
                                 child: Text('${trendDealsItem.user!.name}',
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontSize: 13.0.sp,
+                                            fontSize: 13,
                                             overflow: TextOverflow.ellipsis))),
-                            SizedBox(
-                              width: 8.0.w,
+                            const SizedBox(
+                              width: 8,
                             ),
                           ],
                         ),

@@ -35,15 +35,15 @@ class _ShopProductItemState extends State<ShopProductItem> {
       onTap: () => previewProduct(widget.myProductItem),
       child: Container(
         width: double.infinity,
-        margin: EdgeInsetsDirectional.only(
-          start: 15.0.w,
-          end: 15.0.w,
-          bottom: 13.0.h,
+        margin: const EdgeInsetsDirectional.only(
+          start: 15,
+          end: 15,
+          bottom: 13,
         ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: ColorName.white,
-          borderRadius: BorderRadius.all(Radius.circular(8.0.r)),
-          boxShadow: const [
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          boxShadow: [
             BoxShadow(
                 offset: Offset(0, 3),
                 color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -58,23 +58,22 @@ class _ShopProductItemState extends State<ShopProductItem> {
               children: [
                 price.isNotEmpty
                     ? Container(
-                        height: 30.0.h,
-                        constraints: BoxConstraints(
-                          minWidth: 70.0.w,
+                        height: 30,
+                        constraints: const BoxConstraints(
+                          minWidth: 70,
                         ),
-                        margin:
-                            EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
-                        padding:
-                            EdgeInsetsDirectional.symmetric(horizontal: 6.0.w),
-                        decoration: BoxDecoration(
+                        margin: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 6),
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 6),
+                        decoration: const BoxDecoration(
                             color: ColorName.red,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0.r))),
+                            borderRadius: BorderRadius.all(Radius.circular(4))),
                         child: Center(
                           child: Text(
                             '${widget.myProductItem.discountPercentage} ${context.locale.off}',
                             style: context.easyTheme.textTheme.labelLarge!
-                                .copyWith(fontSize: 15.0.sp),
+                                .copyWith(fontSize: 15),
                           ),
                         ),
                       )
@@ -85,7 +84,8 @@ class _ShopProductItemState extends State<ShopProductItem> {
                   child: Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: Padding(
-                      padding: EdgeInsetsDirectional.only(end: 20.w, top: 10),
+                      padding:
+                          const EdgeInsetsDirectional.only(end: 20, top: 10),
                       child: Assets.svg.editIcon.svg(width: 20, height: 20),
                     ),
                   ),
@@ -111,7 +111,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 12.0.w),
+                const SizedBox(width: 12),
                 Expanded(
                     child: CachedImage(
                   imageUrl: widget.myProductItem.itemImg != null
@@ -120,26 +120,26 @@ class _ShopProductItemState extends State<ShopProductItem> {
                   fit: BoxFit.contain,
                   height: 80.0,
                 )),
-                SizedBox(width: 18.0.w),
+                const SizedBox(width: 18),
                 Expanded(
                   flex: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.only(end: 80.0.w),
+                        padding: const EdgeInsetsDirectional.only(end: 80),
                         child: Text(
                           '${widget.myProductItem.title}\n',
                           style: context.easyTheme.textTheme.labelMedium!
                               .copyWith(
-                                  fontSize: 16.0.sp,
+                                  fontSize: 16,
                                   color: ColorName.gray,
                                   overflow: TextOverflow.ellipsis),
                           maxLines: 2,
                         ),
                       ),
-                      SizedBox(
-                        height: 8.0.h,
+                      const SizedBox(
+                        height: 8,
                       ),
                       Row(
                         children: [
@@ -151,34 +151,33 @@ class _ShopProductItemState extends State<ShopProductItem> {
                             ignoreGestures: true,
                             initialRating:
                                 widget.myProductItem.averageRating!.toDouble(),
-                            itemSize: 20.0.h,
+                            itemSize: 20,
                             itemBuilder: (context, _) => const Icon(
                               Icons.star,
                               color: Colors.amber,
                             ),
                             onRatingUpdate: (rating) {},
                           ),
-                          SizedBox(width: 8.0.w),
+                          const SizedBox(width: 8),
                           Text(
                             widget.myProductItem.averageRating!
                                 .toDouble()
                                 .toString(),
                             style: context.easyTheme.textTheme.labelMedium!
-                                .copyWith(fontSize: 15.0.sp),
+                                .copyWith(fontSize: 15),
                           ),
-                          SizedBox(width: 8.0.w),
+                          const SizedBox(width: 8),
                           Text(
                             '(${widget.myProductItem.rateCount})',
                             style: context.easyTheme.textTheme.labelMedium!
-                                .copyWith(
-                                    fontSize: 13.0.sp, color: ColorName.gray),
+                                .copyWith(fontSize: 13, color: ColorName.gray),
                           )
                         ],
                       ),
                       Text(
                         '${context.locale.jordan_dinar} ${widget.myProductItem.priceAfterDiscount!}',
                         style: context.easyTheme.textTheme.labelMedium!
-                            .copyWith(fontSize: 21.0.sp),
+                            .copyWith(fontSize: 21),
                       ),
 
                       ///widget.myProductItem.discountPercentage! != '0%'
@@ -188,7 +187,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                       ///            '${context.locale.jordan_dinar} ${widget.myProductItem.priceAfterDiscount!}',
                       ///            style: context
                       ///                .easyTheme.textTheme.labelMedium!
-                      ///                .copyWith(fontSize: 21.0.sp),
+                      ///                .copyWith(fontSize: 21),
                       ///          ),
                       ///          const SizedBox(
                       ///            width: 6.0,
@@ -198,7 +197,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                       ///            style: context
                       ///                .easyTheme.textTheme.labelMedium!
                       ///                .copyWith(
-                      ///              fontSize: 15.0.sp,
+                      ///              fontSize: 15,
                       ///              color: ColorName.gray,
                       ///              decoration: TextDecoration.lineThrough,
                       ///            ),
@@ -208,23 +207,23 @@ class _ShopProductItemState extends State<ShopProductItem> {
                       ///    : Text(
                       ///        '${context.locale.jordan_dinar} ${widget.myProductItem.price}',
                       ///        style: context.easyTheme.textTheme.labelMedium!
-                      ///            .copyWith(fontSize: 21.0.sp),
+                      ///            .copyWith(fontSize: 21),
                       ///      ),
                     ],
                   ),
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               color: ColorName.gray,
-              endIndent: 17.0.w,
-              indent: 17.0.w,
+              endIndent: 17,
+              indent: 17,
             ),
-            SizedBox(
-              height: 4.0.h,
+            const SizedBox(
+              height: 4,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.0.w),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Row(
                 children: [
                   Expanded(
@@ -239,15 +238,14 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                   text: context.locale.entry_date,
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
-                                          fontSize: 15.0.sp,
-                                          color: ColorName.gray)),
+                                          fontSize: 15, color: ColorName.gray)),
                               TextSpan(
                                   text: Utils.formatDate(widget
                                       .myProductItem.createdAt
                                       .toString()),
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
-                                          fontSize: 15.0.sp,
+                                          fontSize: 15,
                                           color: ColorName.black)),
                             ],
                           ),
@@ -260,15 +258,14 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                   text: context.locale.categories,
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
-                                          fontSize: 15.0.sp,
-                                          color: ColorName.gray)),
+                                          fontSize: 15, color: ColorName.gray)),
                               TextSpan(
                                   text: Utils.isEnglish
                                       ? '${widget.myProductItem.category!.name}'
                                       : '${widget.myProductItem.category!.arName}',
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
-                                          fontSize: 15.0.sp,
+                                          fontSize: 15,
                                           color: ColorName.black)),
                             ],
                           ),
@@ -287,14 +284,12 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                 text: context.locale.quantity,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.gray)),
+                                        fontSize: 15, color: ColorName.gray)),
                             TextSpan(
                                 text: ' ${widget.myProductItem.quantity}',
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.black)),
+                                        fontSize: 15, color: ColorName.black)),
                           ],
                         ),
                       ),
@@ -308,14 +303,12 @@ class _ShopProductItemState extends State<ShopProductItem> {
                                 text: context.locale.ship,
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.gray)),
+                                        fontSize: 15, color: ColorName.gray)),
                             TextSpan(
                                 text: ' ${widget.myProductItem.country}',
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                        fontSize: 15.0.sp,
-                                        color: ColorName.black)),
+                                        fontSize: 15, color: ColorName.black)),
                           ],
                         ),
                       ),
@@ -324,7 +317,7 @@ class _ShopProductItemState extends State<ShopProductItem> {
                 ],
               ),
             ),
-            SizedBox(height: 20.0.h),
+            const SizedBox(height: 20),
           ],
         ),
       ),

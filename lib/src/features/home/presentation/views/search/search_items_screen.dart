@@ -30,7 +30,7 @@ class SearchItemsScreen extends StatelessWidget {
                       GestureDetector(
                           onTap: () => openFilterScreen(context),
                           child: Assets.png.filterIcon
-                              .image(width: 40.w, height: 40.h)),
+                              .image(width: 40, height: 40)),
                       const SizedBox(width: 11),
                       GestureDetector(
                         onTap: () => state.sortingType == SortingType.desc
@@ -38,8 +38,7 @@ class SearchItemsScreen extends StatelessWidget {
                                 SearchFilterEvent(sortingType: SortingType.asc))
                             : SearchBloc.get.add(SearchFilterEvent(
                                 sortingType: SortingType.desc)),
-                        child:
-                            Assets.svg.sortIcon.svg(width: 30.w, height: 30.h),
+                        child: Assets.svg.sortIcon.svg(width: 30, height: 30),
                       ),
                     ],
                   ),

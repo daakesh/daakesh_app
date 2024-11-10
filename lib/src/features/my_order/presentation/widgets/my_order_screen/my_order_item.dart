@@ -14,7 +14,7 @@ class MyOrderItem extends StatelessWidget {
           start: 15.0, end: 15.0, bottom: 11.0),
       decoration: BoxDecoration(
           color: ColorName.white,
-          borderRadius: BorderRadius.all(Radius.circular(11.0.r)),
+          borderRadius: BorderRadius.all(Radius.circular(11)),
           boxShadow: const [
             BoxShadow(
                 offset: Offset(0, 3),

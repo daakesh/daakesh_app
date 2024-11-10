@@ -28,11 +28,11 @@ class TextButtonWidget extends StatelessWidget {
           style: style ??
               (!isBold
                   ? context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(color: ColorName.skyBlue, fontSize: 17.0.sp)
+                      .copyWith(color: ColorName.skyBlue, fontSize: 17.0)
                   : context.easyTheme.textTheme.bodyMedium!.copyWith(
                       color: ColorName.skyBlue,
                       fontFamily: FontFamily.apercuBold,
-                      fontSize: 17.0.sp)),
+                      fontSize: 17.0)),
         ),
       ),
     );

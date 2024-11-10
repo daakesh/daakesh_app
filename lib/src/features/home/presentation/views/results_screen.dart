@@ -85,8 +85,8 @@ class ResultsScreen extends StatelessWidget {
                       GestureDetector(
                           onTap: () => openFilterScreen(context),
                           child: SizedBox(
-                            height: 40.h,
-                            width: 40.w,
+                            height: 40,
+                            width: 40,
                             child: Assets.png.filterIcon.image(
                               color: ColorName.blueGray,
                             ),
@@ -105,8 +105,8 @@ class ResultsScreen extends StatelessWidget {
                                     PreviewSectionSubCategoriesEvent(
                                         sortingType: SortingType.desc)),
                             child: SizedBox(
-                                width: 30.w,
-                                height: 30.h,
+                                width: 30,
+                                height: 30,
                                 child: Assets.svg.sortIcon.svg()),
                           );
                         },

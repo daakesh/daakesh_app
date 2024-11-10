@@ -29,7 +29,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
       return SliverAppBar(
         backgroundColor: ColorName.blueGray,
         leading: const SizedBox(),
-        expandedHeight: 150.h,
+        expandedHeight: 150,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
           background: SearchBarWidget(state: state),
@@ -47,7 +47,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 12.0.w,
+                        width: 12,
                       ),
                       Assets.svg.searchIcon.svg(
                           color: state.homeScreenState.isSearch
@@ -55,7 +55,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                               : ColorName.charcoalGray),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                          padding: EdgeInsets.symmetric(horizontal: 16),
                           child: TextFormFieldWidget(
                             controller: searchController,
                             textInputAction: TextInputAction.search,

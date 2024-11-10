@@ -42,7 +42,7 @@ class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
               ),
               !widget.isDaakeshTodayDeal
                   ? DaakeshLogoWidget(
-                      width: 140.0.w,
+                      width: 140,
                     )
                   : Text(
                       '${widget.todayDealItem.user!.name}',

@@ -15,15 +15,15 @@ class FloatingAddProductWidget extends StatelessWidget {
         searchController.clear();
       },
       child: SizedBox(
-        width: 120.0.w,
-        height: 120.0.h,
+        width: 120,
+        height: 120,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 70.5.w,
-              height: 70.5.h,
+              width: 60.5,
+              height: 60.5,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: ColorName.amber,
@@ -34,11 +34,11 @@ class FloatingAddProductWidget extends StatelessWidget {
                       color: Color.fromRGBO(0, 0, 0, 0.16))
                 ],
               ),
-              child: Center(
+              child: const Center(
                 child: SizedBox(
-                    width: 70.0.w,
-                    height: 70.0.h,
-                    child: const FittedBox(
+                    width: 60,
+                    height: 60,
+                    child: FittedBox(
                         child: Icon(
                       Icons.add_rounded,
                       color: ColorName.white,

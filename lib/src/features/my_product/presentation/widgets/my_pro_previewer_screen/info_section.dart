@@ -24,14 +24,14 @@ class InfoSection extends StatelessWidget {
             Text(
               context.locale.more_info_product_brand_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0.sp),
+                  .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
               Utils.isEnglish
                   ? previewerModel.brandName.toString()
                   : previewerModel.brandArName.toString(),
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0.sp),
+              style:
+                  context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -44,14 +44,14 @@ class InfoSection extends StatelessWidget {
             Text(
               context.locale.more_info_product_model_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0.sp),
+                  .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
               Utils.isEnglish
                   ? previewerModel.sectionName!.toString()
                   : previewerModel.sectionArName!.toString(),
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0.sp),
+              style:
+                  context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -64,14 +64,14 @@ class InfoSection extends StatelessWidget {
             Text(
               context.locale.more_info_product_category_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0.sp),
+                  .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
               Utils.isEnglish
                   ? previewerModel.categoryName!
                   : previewerModel.categoryArName!,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0.sp),
+              style:
+                  context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -84,12 +84,12 @@ class InfoSection extends StatelessWidget {
             Text(
               context.locale.more_info_product_year_title,
               style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(color: ColorName.gray, fontSize: 18.0.sp),
+                  .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
               previewerModel.year!,
-              style: context.easyTheme.textTheme.bodyLarge!
-                  .copyWith(fontSize: 18.0.sp),
+              style:
+                  context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
           ],
         ),
@@ -99,15 +99,14 @@ class InfoSection extends StatelessWidget {
         Text(
           context.locale.more_info_product_description_title,
           style: context.easyTheme.textTheme.bodyLarge!
-              .copyWith(color: ColorName.gray, fontSize: 18.0.sp),
+              .copyWith(color: ColorName.gray, fontSize: 18),
         ),
         const SizedBox(
           height: 6.0,
         ),
         Text(
           previewerModel.description!,
-          style: context.easyTheme.textTheme.bodyLarge!
-              .copyWith(fontSize: 18.0.sp),
+          style: context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
         ),
         const SizedBox(
           height: 29.0,

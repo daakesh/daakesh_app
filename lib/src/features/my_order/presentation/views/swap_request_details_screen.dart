@@ -23,39 +23,39 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                   requestID: sendSwapReqItem.id,
                   isSend: isSend,
                 ),
-                SizedBox(
-                  height: 16.0.h,
+                const SizedBox(
+                  height: 16,
                 ),
                 Text(
                   context.locale.swap_requests_details,
                   style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 22.0.sp),
+                      .copyWith(fontSize: 22),
                 ),
-                SizedBox(
-                  height: 21.0.h,
+                const SizedBox(
+                  height: 21,
                 ),
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsetsDirectional.symmetric(horizontal: 21.0.w),
-                  decoration: BoxDecoration(
+                  margin: const EdgeInsetsDirectional.symmetric(horizontal: 21),
+                  decoration: const BoxDecoration(
                       color: ColorName.white,
-                      borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.16),
-                          offset: const Offset(0, 3),
-                          blurRadius: 6.0.r,
+                          color: Color.fromRGBO(0, 0, 0, 0.16),
+                          offset: Offset(0, 3),
+                          blurRadius: 6,
                         )
                       ]),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: 11.0.w,
+                      const SizedBox(
+                        width: 11,
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(8.h),
+                          padding: const EdgeInsets.all(8),
                           child: Center(
                             child: CachedImage(
                               imageUrl: sendSwapReqItem
@@ -65,55 +65,57 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 18.0.w,
+                      const SizedBox(
+                        width: 18,
                       ),
                       Expanded(
                         flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              height: 20.0.h,
+                            const SizedBox(
+                              height: 20,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.only(end: 45.0.w),
+                              padding:
+                                  const EdgeInsetsDirectional.only(end: 45),
                               child: Text(
                                 '${sendSwapReqItem.sourceItems!.title}',
                                 style: context.easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                        fontSize: 20.0.sp,
+                                        fontSize: 20,
                                         color: ColorName.gray,
                                         overflow: TextOverflow.fade),
                               ),
                             ),
-                            SizedBox(
-                              height: 10.0.h,
+                            const SizedBox(
+                              height: 10,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Assets.svg.locationPinIcon.svg(
                                     color: ColorName.amber,
-                                    height: 22.0.h,
-                                    width: 15.0.w),
-                                SizedBox(
-                                  width: 6.0.w,
+                                    height: 22,
+                                    width: 15),
+                                const SizedBox(
+                                  width: 6,
                                 ),
                                 Expanded(
                                     child: Text(
                                   '${context.locale.swap_in} ${sendSwapReqItem.sourceItems!.citySwap}, ${sendSwapReqItem.sourceItems!.countrySwap}',
                                   style: context.easyTheme.textTheme.bodyMedium!
-                                      .copyWith(fontSize: 16.0.sp),
+                                      .copyWith(fontSize: 16),
                                   overflow: TextOverflow.fade,
                                 )),
                               ],
                             ),
-                            SizedBox(
-                              height: 15.0.h,
+                            const SizedBox(
+                              height: 15,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.only(start: 6.0.w),
+                              padding:
+                                  const EdgeInsetsDirectional.only(start: 6),
                               child: Text.rich(
                                 TextSpan(
                                   children: [
@@ -122,27 +124,28 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
                                             .copyWith(
-                                                fontSize: 20.0.sp,
+                                                fontSize: 20,
                                                 color: ColorName.gray)),
                                     TextSpan(
                                         text:
                                             '${sendSwapReqItem.sourceUser!.name}',
                                         style: context
                                             .easyTheme.textTheme.bodyMedium!
-                                            .copyWith(fontSize: 20.0.sp)),
+                                            .copyWith(fontSize: 20)),
                                   ],
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.only(end: 13.0.w),
+                              padding:
+                                  const EdgeInsetsDirectional.only(end: 13),
                               child: Align(
                                 alignment: AlignmentDirectional.centerEnd,
                                 child: TextButtonWidget(
                                   text: context.locale.see_details,
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
-                                    fontSize: 14.0.sp,
+                                    fontSize: 14,
                                     color: ColorName.skyBlue,
                                   ),
                                   onPressed: () => seeSourceDetails(
@@ -150,8 +153,8 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 12.0.h,
+                            const SizedBox(
+                              height: 12,
                             ),
                           ],
                         ),
@@ -159,28 +162,28 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 13.0.h,
+                const SizedBox(
+                  height: 13,
                 ),
                 SizedBox(
-                  height: 50.0.h,
-                  width: 50.0.w,
+                  height: 50,
+                  width: 50,
                   child: Assets.png.swapIcon.image(),
                 ),
-                SizedBox(
-                  height: 13.0.h,
+                const SizedBox(
+                  height: 13,
                 ),
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsetsDirectional.symmetric(horizontal: 21.0.w),
-                  decoration: BoxDecoration(
+                  margin: const EdgeInsetsDirectional.symmetric(horizontal: 21),
+                  decoration: const BoxDecoration(
                       color: ColorName.white,
-                      borderRadius: BorderRadius.all(Radius.circular(4.0.r)),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.16),
-                          offset: const Offset(0, 3),
-                          blurRadius: 6.0.r,
+                          color: Color.fromRGBO(0, 0, 0, 0.16),
+                          offset: Offset(0, 3),
+                          blurRadius: 6,
                         )
                       ]),
                   child: Column(
@@ -189,83 +192,83 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: 11.0.w,
+                          const SizedBox(
+                            width: 11,
                           ),
                           Expanded(
                             child: Padding(
                               padding: sendSwapReqItem
                                       .offerItems!.itemImg!.first.isNotEmpty
-                                  ? EdgeInsets.all(8.h)
-                                  : EdgeInsets.only(top: 32.h),
+                                  ? const EdgeInsets.all(8)
+                                  : const EdgeInsets.only(top: 32),
                               child: CachedImage(
                                   imageUrl: sendSwapReqItem
                                       .offerItems!.itemImg!.first
                                       .toString()),
                             ),
                           ),
-                          SizedBox(
-                            width: 18.0.w,
+                          const SizedBox(
+                            width: 18,
                           ),
                           Expanded(
                             flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 20.0.h,
+                                const SizedBox(
+                                  height: 20,
                                 ),
                                 Padding(
                                   padding:
-                                      EdgeInsetsDirectional.only(end: 45.0.w),
+                                      const EdgeInsetsDirectional.only(end: 45),
                                   child: Text(
                                     '${sendSwapReqItem.offerItems!.title}',
                                     maxLines: 3,
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontSize: 20.0.sp,
+                                            fontSize: 20,
                                             color: ColorName.gray,
                                             overflow: TextOverflow.fade),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10.0.h,
+                                const SizedBox(
+                                  height: 10,
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Assets.svg.locationPinIcon.svg(
                                         color: ColorName.amber,
-                                        height: 22.0.h,
-                                        width: 15.0.w),
-                                    SizedBox(
-                                      width: 6.0.w,
+                                        height: 22,
+                                        width: 15),
+                                    const SizedBox(
+                                      width: 6,
                                     ),
                                     Expanded(
                                         child: Text(
                                       '${context.locale.swap_in} ${sendSwapReqItem.offerItems!.citySwap}, ${sendSwapReqItem.offerItems!.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(fontSize: 16.0.sp),
+                                          .copyWith(fontSize: 16),
                                       overflow: TextOverflow.fade,
                                     )),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 8.0.h,
+                                const SizedBox(
+                                  height: 8,
                                 ),
                                 Padding(
-                                  padding:
-                                      EdgeInsetsDirectional.only(start: 6.0.w),
+                                  padding: const EdgeInsetsDirectional.only(
+                                      start: 6),
                                   child: Text(context.locale.your_product,
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(fontSize: 20.0.sp)),
+                                          .copyWith(fontSize: 20)),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.only(
-                                      end: 13.0.w, top: 14.0.h),
+                                  padding: const EdgeInsetsDirectional.only(
+                                      end: 13, top: 14),
                                   child: Align(
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: TextButtonWidget(
@@ -275,7 +278,7 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
-                                        fontSize: 14.0.sp,
+                                        fontSize: 14,
                                         color: ColorName.skyBlue,
                                       ),
                                     ),
@@ -287,35 +290,35 @@ class SwapRequestDetailsScreen extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            start: 22.0.w, end: 14.0.w),
+                        padding: const EdgeInsetsDirectional.only(
+                            start: 22, end: 14),
                         child: Text(
                           context.locale.your_comment,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
-                                  fontSize: 18.0.sp,
+                                  fontSize: 18,
                                   color: ColorName.black.withOpacity(0.5)),
                         ),
                       ),
-                      SizedBox(
-                        height: 13.0.h,
+                      const SizedBox(
+                        height: 13,
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            start: 22.0.w, end: 14.0.w, bottom: 20.0.h),
+                        padding: const EdgeInsetsDirectional.only(
+                            start: 22, end: 14, bottom: 20),
                         child: Text(
                           '${sendSwapReqItem.note}\n',
                           style:
                               context.easyTheme.textTheme.bodyLarge!.copyWith(
-                            fontSize: 14.0.sp,
+                            fontSize: 14,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 50.0.h,
+                const SizedBox(
+                  height: 50,
                 ),
               ],
             ),

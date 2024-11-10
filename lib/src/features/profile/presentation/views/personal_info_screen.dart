@@ -52,7 +52,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 60.0.sp),
+                      const SizedBox(height: 60),
                       Text(
                         context.locale.personal_info,
                         style: context.easyTheme.textTheme.headlineMedium!
@@ -180,7 +180,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         hintText: '+962770099773',
                         hintStyle: context.easyTheme.textTheme.labelMedium!
                             .copyWith(
-                                fontSize: 18.0.sp,
+                                fontSize: 18,
                                 color: ColorName.gray.withOpacity(0.6)),
                         enabled: state.isUpdateActive,
                         // suffixIcon: GestureDetector(
@@ -239,9 +239,6 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                 ? context.locale.cancel
                                 : context.locale.reset_and_cancel_contact,
                             onPressed: () => cancel()),
-                      ),
-                      const Spacer(
-                        flex: 2,
                       ),
                       const SizedBox(
                         height: 40.0,

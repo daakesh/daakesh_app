@@ -25,13 +25,13 @@ class OutlineButtonWidget extends StatelessWidget {
             OutlinedButton.styleFrom(
               foregroundColor: ColorName.blueGray,
               side: const BorderSide(color: ColorName.blueGray),
-              minimumSize: Size(387.0.w, 56.0.h),
-              textStyle: TextStyle(
+              minimumSize: const Size(387.0, 56.0),
+              textStyle: const TextStyle(
                 fontFamily: FontFamily.apercuMedium,
-                fontSize: 20.0.sp,
+                fontSize: 20.0,
               ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0.r),
+                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
         child: Text(

@@ -13,7 +13,7 @@ class GuestAlarmWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: LayoutBuilderWidget(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(flex: 1),
@@ -31,9 +31,11 @@ class GuestAlarmWidget extends StatelessWidget {
               Text(context.locale.welcomeLoginMessage,
                   style: context.easyTheme.textTheme.bodyMedium),
               const SizedBox(height: 50.0),
-              DefaultButtonWidget(
-                  text: context.locale.loginButton,
-                  onPressed: () => Utils.openNewPage(const LoginScreen())),
+              Center(
+                child: DefaultButtonWidget(
+                    text: context.locale.loginButton,
+                    onPressed: () => Utils.openNewPage(const LoginScreen())),
+              ),
               const Spacer(flex: 1),
             ],
           ),

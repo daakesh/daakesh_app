@@ -116,7 +116,7 @@ class _SwapSectionScreenState extends State<SwapSectionScreen> {
                   child: Text(
                     '${Utils.isEnglish ? state.categoryTitle : state.arCategoryTitle} ${context.locale.swap_category_title}',
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                      fontSize: 20.0.sp,
+                      fontSize: 20,
                       color: ColorName.black.withOpacity(0.57),
                     ),
                   ),

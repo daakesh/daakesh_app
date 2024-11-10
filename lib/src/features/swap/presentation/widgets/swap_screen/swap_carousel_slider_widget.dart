@@ -69,10 +69,10 @@ class _SwapCarouselSliderWidgetState extends State<SwapCarouselSliderWidget> {
                                       .copyWith(color: ColorName.white),
                                 ),
                                 const SizedBox(
-                                  height: 35.0,
+                                  height: 10.0,
                                 ),
                                 Container(
-                                  height: 36.0.h,
+                                  height: 36,
                                   constraints:
                                       const BoxConstraints(minWidth: 108.0),
                                   padding:
@@ -83,10 +83,13 @@ class _SwapCarouselSliderWidgetState extends State<SwapCarouselSliderWidget> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(4.0))),
                                   child: Center(
-                                    child: Text(
-                                      '23% OFF',
-                                      style: context
-                                          .easyTheme.textTheme.labelLarge,
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        '23% OFF',
+                                        style: context
+                                            .easyTheme.textTheme.labelLarge,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -97,7 +100,8 @@ class _SwapCarouselSliderWidgetState extends State<SwapCarouselSliderWidget> {
                             ),
                             CachedImage(
                               imageUrl: i.image.toString(),
-                              width: 190.0,
+                              width: 150.0,
+                              fit: BoxFit.scaleDown,
                             ),
                           ],
                         )),

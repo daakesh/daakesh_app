@@ -28,8 +28,8 @@ class SearchBarWidget extends StatelessWidget {
               child: Assets.svg.line.svg(
                   alignment: AlignmentDirectional.bottomEnd,
                   fit: BoxFit.fitHeight,
-                  height: 160.h,
-                  width: 160.w),
+                  height: 160,
+                  width: 160),
             ),
             Padding(
               padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
@@ -43,11 +43,11 @@ class SearchBarWidget extends StatelessWidget {
                         child: state.switchLangValue
                             ? ArabicDaakeshLogoWidget(
                                 isLight: true,
-                                width: 184.0.w,
+                                width: 184,
                               )
                             : DaakeshLogoWidget(
                                 isLight: true,
-                                width: 184.0.w,
+                                width: 184,
                               ),
                       );
                     },

@@ -29,13 +29,12 @@ class ProAddSuccessScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 110.0.h,
+                  const SizedBox(
+                    height: 110,
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.only(start: 58.0.w, end: 97.0.w),
-                    child: const DaakeshLogoWidget(),
+                  const Padding(
+                    padding: EdgeInsetsDirectional.only(start: 58, end: 97),
+                    child: DaakeshLogoWidget(),
                   ),
                   const Spacer(
                     flex: 1,
@@ -52,7 +51,7 @@ class ProAddSuccessScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.symmetric(horizontal: 21.0.w),
+                        const EdgeInsetsDirectional.symmetric(horizontal: 21),
                     child: Text(
                       getIt.get<EditProduct>().myProductItem == null
                           ? context.locale.your_product_added_successfully
@@ -69,7 +68,7 @@ class ProAddSuccessScreen extends StatelessWidget {
                     flex: 1,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                    padding: const EdgeInsets.symmetric(horizontal: 21),
                     child: DefaultButtonWidget(
                         text: context.locale.add_new_product,
                         onPressed: addNewProduct),
@@ -78,7 +77,7 @@ class ProAddSuccessScreen extends StatelessWidget {
                     height: 9.0,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                    padding: const EdgeInsets.symmetric(horizontal: 21),
                     child: OutlineButtonWidget(
                         text: context.locale.see_my_product,
                         onPressed: () => seeMyProduct(context)),

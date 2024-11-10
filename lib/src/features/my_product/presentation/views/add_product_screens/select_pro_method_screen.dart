@@ -16,8 +16,8 @@ class SelectProMethodScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 70.0.h,
+                const SizedBox(
+                  height: 70,
                 ),
                 InkWell(
                   focusColor: ColorName.transparent,
@@ -32,7 +32,7 @@ class SelectProMethodScreen extends StatelessWidget {
                 Text(
                   context.locale.add_product,
                   style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 36.0.sp),
+                      .copyWith(fontSize: 36),
                 ),
                 const SizedBox(
                   height: 14.0,

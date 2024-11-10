@@ -26,7 +26,7 @@ class ContactInfoWidget extends StatelessWidget {
               text: context.locale.more_info_product_whatsapp,
               onPressed: () => lunchWhatsApp(context),
               style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
-                minimumSize: MaterialStateProperty.all(Size(40.0.w, 56.0.h)),
+                minimumSize: MaterialStateProperty.all(Size(40, 56)),
                 backgroundColor: MaterialStateProperty.all(ColorName.amber),
               )),
         ],
