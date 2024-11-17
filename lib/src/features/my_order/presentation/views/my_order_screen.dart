@@ -202,40 +202,62 @@ class MySwapOrderWidget extends StatelessWidget {
         state.sendReceiveFlag
             ? BlocBuilder<MySwapOrderBloc, MySwapOrderState>(
                 builder: (context, state) {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        (context, index) =>
-                            state.receiveSwapReqList[index].approved == 0
-                                ? ReceiveSwapWaitingItem(
-                                    sendReceiveSwapReqItem:
-                                        state.receiveSwapReqList[index])
-                                : ReceiveDoneDealItem(
-                                    receiveSwapReqItem:
-                                        state.receiveSwapReqList[index],
-                                    approved: state
-                                        .receiveSwapReqList[index].approved!,
-                                  ),
-                        childCount: state.receiveSwapReqList.length),
-                  );
+                  return state.receiveSwapReqList.isEmpty
+                      ? SliverFillRemaining(
+                          child: Center(
+                              child: Text(
+                            context.locale.no_data_available,
+                            style: context.easyTheme.textTheme.headlineLarge!
+                                .copyWith(fontSize: 26),
+                          )),
+                        )
+                      : SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                              (context, index) =>
+                                  state.receiveSwapReqList[index].approved == 0
+                                      ? ReceiveSwapWaitingItem(
+                                          sendReceiveSwapReqItem:
+                                              state.receiveSwapReqList[index])
+                                      : ReceiveDoneDealItem(
+                                          receiveSwapReqItem:
+                                              state.receiveSwapReqList[index],
+                                          approved: state
+                                              .receiveSwapReqList[index]
+                                              .approved!,
+                                        ),
+                              childCount: state.receiveSwapReqList.length),
+                        );
                 },
               )
             : BlocBuilder<MySwapOrderBloc, MySwapOrderState>(
                 builder: (context, state) {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        (context, index) => state
-                                        .sendSwapReqList[index].approved ==
-                                    0 ||
-                                state.sendSwapReqList[index].approved == -1
-                            ? SendSwapWaitingItem(
-                                sendSwapReqItem: state.sendSwapReqList[index],
-                                approved:
-                                    state.sendSwapReqList[index].approved!,
-                              )
-                            : SendSwapAcceptedItem(
-                                sendSwapReqItem: state.sendSwapReqList[index]),
-                        childCount: state.sendSwapReqList.length),
-                  );
+                  return state.sendSwapReqList.isEmpty
+                      ? SliverFillRemaining(
+                          child: Center(
+                              child: Text(
+                            context.locale.no_data_available,
+                            style: context.easyTheme.textTheme.headlineLarge!
+                                .copyWith(fontSize: 26),
+                          )),
+                        )
+                      : SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                              (context, index) =>
+                                  state.sendSwapReqList[index].approved == 0 ||
+                                          state.sendSwapReqList[index]
+                                                  .approved ==
+                                              -1
+                                      ? SendSwapWaitingItem(
+                                          sendSwapReqItem:
+                                              state.sendSwapReqList[index],
+                                          approved: state
+                                              .sendSwapReqList[index].approved!,
+                                        )
+                                      : SendSwapAcceptedItem(
+                                          sendSwapReqItem:
+                                              state.sendSwapReqList[index]),
+                              childCount: state.sendSwapReqList.length),
+                        );
                 },
               ),
         const SliverPadding(

@@ -477,5 +477,8 @@
   "password_validation": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل وحرف كبير وصغير، وما لا يقل عن 8 أحرف أو أكثر",
   "terms_and_condition": "يجب عليك الموافقة على الشروط والأحكام.",
   "complaint_send_successfully": "تم إرسال الشكوى بنجاح",
-  "complaint_details": "معلومات الشكوى"
+  "complaint_details": "معلومات الشكوى",
+  "no_data_avaliable": "لا توجد بيانات متاحة...",
+  "tutorial_video": "فيديو توضيحي",
+  "other": "اخرى"
 }

@@ -174,7 +174,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontSize: 13,
+                                            fontSize: 15,
                                             color: ColorName.skyBlue),
                                     onPressed: () => seeSourceDetails(
                                         context, widget.trendDealsItem),
@@ -336,7 +336,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                               style: context.easyTheme.textTheme
                                                   .bodyMedium!
                                                   .copyWith(
-                                                      fontSize: 14.0,
+                                                      fontSize: 15.0,
                                                       color: ColorName.skyBlue),
                                             ),
                                             const SizedBox(
@@ -477,7 +477,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                             style: context
                                                 .easyTheme.textTheme.bodyMedium!
                                                 .copyWith(
-                                                    fontSize: 13,
+                                                    fontSize: 15,
                                                     color: ColorName.skyBlue),
                                           ),
                                           const SizedBox(

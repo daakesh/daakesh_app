@@ -124,7 +124,7 @@ class SwapOfferDetailsScreen extends StatelessWidget {
                                   style: context.easyTheme.textTheme.bodyMedium!
                                       .copyWith(
                                           color: ColorName.skyBlue,
-                                          fontSize: 13),
+                                          fontSize: 15),
                                   onPressed: () =>
                                       seeDetails(context, trendDealsItem),
                                 ),
