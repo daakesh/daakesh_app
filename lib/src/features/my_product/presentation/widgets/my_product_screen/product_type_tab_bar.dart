@@ -11,11 +11,11 @@ class ProductTypeTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 50.0.h,
-      margin: EdgeInsetsDirectional.symmetric(horizontal: 13.0.h),
-      decoration: BoxDecoration(
+      height: 50,
+      margin: const EdgeInsetsDirectional.symmetric(horizontal: 13),
+      decoration: const BoxDecoration(
           color: ColorName.paleGray,
-          borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+          borderRadius: BorderRadius.all(Radius.circular(8))),
       child: Row(
         children: [
           Expanded(
@@ -23,17 +23,17 @@ class ProductTypeTabBar extends StatelessWidget {
               onTap: () => swapTabBar(ProductTapBar.SELL),
               child: Container(
                 width: double.infinity,
-                height: 50.0.h,
+                height: 50,
                 decoration: BoxDecoration(
                     color: state.productTapBar == ProductTapBar.SELL
                         ? ColorName.amber
                         : ColorName.paleGray,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+                    borderRadius: const BorderRadius.all(Radius.circular(8))),
                 child: Center(
                     child: Text(
                   context.locale.shop_tab_bar,
                   style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                      fontSize: 18.0.sp,
+                      fontSize: 18,
                       color: state.productTapBar == ProductTapBar.SELL
                           ? ColorName.white
                           : ColorName.blueGray),
@@ -46,17 +46,17 @@ class ProductTypeTabBar extends StatelessWidget {
               onTap: () => swapTabBar(ProductTapBar.SWAP),
               child: Container(
                 width: double.infinity,
-                height: 50.0.h,
+                height: 50,
                 decoration: BoxDecoration(
                     color: state.productTapBar == ProductTapBar.SWAP
                         ? ColorName.amber
                         : ColorName.paleGray,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+                    borderRadius: const BorderRadius.all(Radius.circular(8))),
                 child: Center(
                     child: Text(
                   context.locale.swap_tab_bar,
                   style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                    fontSize: 18.0.sp,
+                    fontSize: 18,
                     color: state.productTapBar == ProductTapBar.SWAP
                         ? ColorName.white
                         : ColorName.blueGray,

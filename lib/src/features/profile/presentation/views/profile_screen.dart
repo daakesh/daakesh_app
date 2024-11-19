@@ -1,6 +1,7 @@
 import 'package:daakesh/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../src.export.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -118,7 +119,7 @@ class ProfileScreen extends StatelessWidget {
               height: 20.0,
             ),
             CategoryItemWidget(
-              onTap: () => Utils.openNewPage(ComplaintScreen()),
+              onTap: () => Utils.openNewPage(const ComplaintScreen()),
               title: context.locale.complaint_title,
               icon: Assets.svg.commentIcon.svg(width: 24.0, height: 24.0),
             ),
@@ -133,6 +134,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 20.0,
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Row(
@@ -153,8 +155,35 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            ///
             const SizedBox(
-              height: 71.0,
+              height: 22.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 23.0),
+              child: Text(
+                context.locale.other,
+                style: context.easyTheme.textTheme.headlineMedium!
+                    .copyWith(fontSize: 20.0),
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            CategoryItemWidget(
+              onTap: () async =>
+                  await launchUrl(Uri.parse('https://daakesh.com/tutorial')),
+              title: context.locale.tutorial_video,
+              icon: const Icon(
+                Icons.book_online_outlined,
+                size: 27,
+                color: ColorName.blueGray,
+              ),
+            ),
+
+            const SizedBox(
+              height: 20.0,
             ),
             const Spacer(
               flex: 1,

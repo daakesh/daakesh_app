@@ -24,15 +24,18 @@ class GuestAlarmWidget extends StatelessWidget {
               const SizedBox(height: 12.0),
               Text(
                 context.locale.unlockFeaturesMessage,
+                textAlign: TextAlign.start,
                 style: context.easyTheme.textTheme.headlineSmall,
               ),
               const SizedBox(height: 12.0),
               Text(context.locale.welcomeLoginMessage,
                   style: context.easyTheme.textTheme.bodyMedium),
               const SizedBox(height: 50.0),
-              DefaultButtonWidget(
-                  text: context.locale.loginButton,
-                  onPressed: () => Utils.openNewPage(const LoginScreen())),
+              Center(
+                child: DefaultButtonWidget(
+                    text: context.locale.loginButton,
+                    onPressed: () => Utils.openNewPage(const LoginScreen())),
+              ),
               const Spacer(flex: 1),
             ],
           ),

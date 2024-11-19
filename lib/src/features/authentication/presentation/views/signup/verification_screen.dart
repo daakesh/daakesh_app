@@ -35,29 +35,29 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   flex: 1,
                 ),
                 Container(
-                  width: 150.0.w,
-                  height: 150.0.h,
+                  width: 150,
+                  height: 150,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(Assets.png.checkIcon.path))),
                 ),
                 SizedBox(
-                  height: 19.0.h,
+                  height: 19,
                 ),
                 Text(context.locale.verification_title,
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 32.0.sp)),
+                        .copyWith(fontSize: 32)),
                 SizedBox(
-                  height: 9.0.h,
+                  height: 9,
                 ),
                 Text(context.locale.verification_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontSize: 18.0.sp)),
+                        .copyWith(fontSize: 18)),
                 const Spacer(
                   flex: 1,
                 ),
                 SizedBox(
-                  height: 100.0.h,
+                  height: 100,
                 ),
               ],
             ),

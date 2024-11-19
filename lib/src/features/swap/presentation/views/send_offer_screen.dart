@@ -1,6 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
+import 'package:collection/collection.dart';
 
 // ignore: must_be_immutable
 class SendOfferScreen extends StatefulWidget {
@@ -80,7 +82,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.all(8.0.h),
+                            padding: const EdgeInsets.all(8),
                             child: CachedImage(
                                 imageUrl: widget.trendDealsItem.itemImg != null
                                     ? widget.trendDealsItem.itemImg!.first
@@ -120,8 +122,8 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                 children: [
                                   Assets.svg.locationPinIcon.svg(
                                       color: ColorName.amber,
-                                      height: 22.h,
-                                      width: 22.w),
+                                      height: 22,
+                                      width: 22),
                                   const SizedBox(
                                     width: 6.0,
                                   ),
@@ -130,7 +132,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                     '${context.locale.swap_in_title} ${widget.trendDealsItem.citySwap}, ${widget.trendDealsItem.countrySwap}',
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
-                                        .copyWith(fontSize: 14.0.sp),
+                                        .copyWith(fontSize: 14),
                                     overflow: TextOverflow.fade,
                                   )),
                                 ],
@@ -150,14 +152,14 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                           style: context
                                               .easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                                  fontSize: 20.0.sp,
+                                                  fontSize: 20,
                                                   color: ColorName.gray)),
                                       TextSpan(
                                           text:
                                               '${widget.trendDealsItem.user!.name}',
                                           style: context
                                               .easyTheme.textTheme.bodyMedium!
-                                              .copyWith(fontSize: 20.0.sp)),
+                                              .copyWith(fontSize: 20)),
                                     ],
                                   ),
                                 ),
@@ -172,7 +174,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                     style: context
                                         .easyTheme.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontSize: 13.0.sp,
+                                            fontSize: 15,
                                             color: ColorName.skyBlue),
                                     onPressed: () => seeSourceDetails(
                                         context, widget.trendDealsItem),
@@ -203,7 +205,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                   context.locale.swap_offer_instruction,
                   textAlign: TextAlign.center,
                   style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                    fontSize: 20.0.sp,
+                    fontSize: 20,
                   ),
                 ),
               ),
@@ -213,150 +215,152 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 height: 15.0,
               ),
             ),
-            // BlocBuilder<SwapProBloc, SwapProState>(
-            //   builder: (context, state) {
-            //     return SliverToBoxAdapter(
-            //       child: state.mySwapProductListData.isNotEmpty
-            //           ? CarouselSlider(
-            //               options: CarouselOptions(
-            //                 viewportFraction: 0.85,
-            //                 initialPage: 0,
-            //                 enableInfiniteScroll: false,
-            //                 scrollDirection: Axis.horizontal,
-            //                 onPageChanged: (index, reason) {
-            //                   SwapPassDataBloc.get
-            //                       .add(PassMySwapProductDataEvent(index: index));
-            //                   this.index = index;
-            //                 },
-            //               ),
-            //               items:
-            //                   state.mySwapProductListData.mapIndexed((index, i) {
-            //                 return BlocBuilder<SwapPassDataBloc,
-            //                     SwapPassDataState>(
-            //                   builder: (context, passState) {
-            //                     return Container(
-            //                       width: double.infinity,
-            //                       margin: const EdgeInsetsDirectional.only(
-            //                           start: 8, end: 8.0, bottom: 8.0),
-            //                       decoration: BoxDecoration(
-            //                           color: ColorName.white,
-            //                           borderRadius: const BorderRadius.all(
-            //                               Radius.circular(4.0)),
-            //                           border: passState.itemIndex == index
-            //                               ? Border.all(
-            //                                   color: Colors.amber, width: 2.0)
-            //                               : null,
-            //                           boxShadow: const [
-            //                             BoxShadow(
-            //                               color: Color.fromRGBO(0, 0, 0, 0.16),
-            //                               offset: Offset(0, 3),
-            //                               blurRadius: 6.0,
-            //                             )
-            //                           ]),
-            //                       child: Row(
-            //                         crossAxisAlignment: CrossAxisAlignment.start,
-            //                         children: [
-            //                           const SizedBox(
-            //                             width: 11.0,
-            //                           ),
-            //                           Expanded(
-            //                             child: Padding(
-            //                               padding:
-            //                                   const EdgeInsets.only(top: 32.0),
-            //                               child: CachedImage(
-            //                                   imageUrl:
-            //                                       i.itemImg!.first.toString()),
-            //                             ),
-            //                           ),
-            //                           const SizedBox(
-            //                             width: 18.0,
-            //                           ),
-            //                           Expanded(
-            //                             flex: 2,
-            //                             child: Column(
-            //                               crossAxisAlignment:
-            //                                   CrossAxisAlignment.start,
-            //                               children: [
-            //                                 const SizedBox(
-            //                                   height: 20.0,
-            //                                 ),
-            //                                 Flexible(
-            //                                   child: Padding(
-            //                                     padding:
-            //                                         const EdgeInsetsDirectional
-            //                                             .only(end: 8.0),
-            //                                     child: Text(
-            //                                       '${i.title}\n\n\n',
-            //                                       maxLines: 3,
-            //                                       style: context.easyTheme
-            //                                           .textTheme.bodyMedium!
-            //                                           .copyWith(
-            //                                               fontSize: 20.0,
-            //                                               color: ColorName.gray,
-            //                                               overflow: TextOverflow
-            //                                                   .ellipsis),
-            //                                     ),
-            //                                   ),
-            //                                 ),
-            //                                 const SizedBox(
-            //                                   height: 10.0,
-            //                                 ),
-            //                                 Container(
-            //                                   constraints: const BoxConstraints(
-            //                                       maxWidth: 66.0),
-            //                                   decoration: BoxDecoration(
-            //                                     color: ColorName.red,
-            //                                     borderRadius: BorderRadius.all(
-            //                                         Radius.circular(4.0.r)),
-            //                                   ),
-            //                                   child: Center(
-            //                                     child: Text(
-            //                                       context.locale.swap_tag_title,
-            //                                       textAlign: TextAlign.center,
-            //                                       style: context.easyTheme
-            //                                           .textTheme.headlineMedium!
-            //                                           .copyWith(
-            //                                               fontSize: 14.0,
-            //                                               color: ColorName.white),
-            //                                     ),
-            //                                   ),
-            //                                 ),
-            //                                 const SizedBox(
-            //                                   height: 6.0,
-            //                                 ),
-            //                                 TextButtonWidget(
-            //                                   text: context.locale
-            //                                       .see_details_my_swap_product,
-            //                                   onPressed: () =>
-            //                                       seeOfferDetails(context, i),
-            //                                   style: context
-            //                                       .easyTheme.textTheme.bodyMedium!
-            //                                       .copyWith(
-            //                                           fontSize: 14.0,
-            //                                           color: ColorName.skyBlue),
-            //                                 ),
-            //                                 const SizedBox(
-            //                                   height: 12.0,
-            //                                 ),
-            //                               ],
-            //                             ),
-            //                           ),
-            //                         ],
-            //                       ),
-            //                     );
-            //                   },
-            //                 );
-            //               }).toList(),
-            //             )
-            //           : const SizedBox(),
-            //     );
-            //   },
-            // ),
+            BlocBuilder<SwapProBloc, SwapProState>(
+              builder: (context, state) {
+                return SliverToBoxAdapter(
+                  child: state.mySwapProductListData.isNotEmpty
+                      ? CarouselSlider(
+                          options: CarouselOptions(
+                            viewportFraction: 0.85,
+                            initialPage: 0,
+                            enableInfiniteScroll: false,
+                            scrollDirection: Axis.horizontal,
+                            onPageChanged: (index, reason) {
+                              SwapPassDataBloc.get.add(
+                                  PassMySwapProductDataEvent(index: index));
+                              this.index = index;
+                            },
+                          ),
+                          items: state.mySwapProductListData
+                              .mapIndexed((index, i) {
+                            return BlocBuilder<SwapPassDataBloc,
+                                SwapPassDataState>(
+                              builder: (context, passState) {
+                                return Container(
+                                  width: double.infinity,
+                                  margin: const EdgeInsetsDirectional.only(
+                                      start: 8, end: 8.0, bottom: 8.0),
+                                  decoration: BoxDecoration(
+                                      color: ColorName.white,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(4.0)),
+                                      border: passState.itemIndex == index
+                                          ? Border.all(
+                                              color: Colors.amber, width: 2.0)
+                                          : null,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.16),
+                                          offset: Offset(0, 3),
+                                          blurRadius: 6.0,
+                                        )
+                                      ]),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        width: 11.0,
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 32.0),
+                                          child: CachedImage(
+                                              imageUrl:
+                                                  i.itemImg!.first.toString()),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 18.0,
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: 20.0,
+                                            ),
+                                            Flexible(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .only(end: 8.0),
+                                                child: Text(
+                                                  '${i.title}\n\n\n',
+                                                  maxLines: 3,
+                                                  style: context.easyTheme
+                                                      .textTheme.bodyMedium!
+                                                      .copyWith(
+                                                          fontSize: 20.0,
+                                                          color: ColorName.gray,
+                                                          overflow: TextOverflow
+                                                              .ellipsis),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            Container(
+                                              constraints: const BoxConstraints(
+                                                  maxWidth: 66.0),
+                                              decoration: const BoxDecoration(
+                                                color: ColorName.red,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(4)),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  context.locale.swap_tag_title,
+                                                  textAlign: TextAlign.center,
+                                                  style: context.easyTheme
+                                                      .textTheme.headlineMedium!
+                                                      .copyWith(
+                                                          fontSize: 14.0,
+                                                          color:
+                                                              ColorName.white),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 6.0,
+                                            ),
+                                            TextButtonWidget(
+                                              text: context.locale
+                                                  .see_details_my_swap_product,
+                                              onPressed: () =>
+                                                  seeOfferDetails(context, i),
+                                              style: context.easyTheme.textTheme
+                                                  .bodyMedium!
+                                                  .copyWith(
+                                                      fontSize: 15.0,
+                                                      color: ColorName.skyBlue),
+                                            ),
+                                            const SizedBox(
+                                              height: 12.0,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          }).toList(),
+                        )
+                      : const SizedBox(),
+                );
+              },
+            ),
             SliverToBoxAdapter(
               child: BlocBuilder<SwapProBloc, SwapProState>(
                 builder: (context, state) {
                   return SizedBox(
-                    height: 200.h,
+                    height: 2,
                     child: PageView.builder(
                         controller: controller,
                         itemCount: !state.isMoreData
@@ -445,10 +449,10 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                           Container(
                                             constraints: const BoxConstraints(
                                                 maxWidth: 66.0),
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: ColorName.red,
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(4.0.r)),
+                                                  Radius.circular(4)),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -473,7 +477,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                                             style: context
                                                 .easyTheme.textTheme.bodyMedium!
                                                 .copyWith(
-                                                    fontSize: 13.sp,
+                                                    fontSize: 15,
                                                     color: ColorName.skyBlue),
                                           ),
                                           const SizedBox(
@@ -506,11 +510,11 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Assets.svg.iosArrowBack.svg(width: 20.w, height: 20.h),
+                  Assets.svg.iosArrowBack.svg(width: 20, height: 20),
                   const SizedBox(
                     width: 6.0,
                   ),
-                  Assets.svg.iosArrowForward.svg(width: 20.w, height: 20.h),
+                  Assets.svg.iosArrowForward.svg(width: 20, height: 20),
                 ],
               ),
             ),
@@ -559,19 +563,21 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
               child: BlocBuilder<SwapProBloc, SwapProState>(
                 builder: (context, state) {
                   return Center(
-                      child: DefaultButtonWidget(
-                          text: context.locale.send_offer_button_title,
-                          style: context.easyTheme.elevatedButtonTheme.style!
-                              .copyWith(
-                            backgroundColor: MaterialStateProperty.all(
-                                state.mySwapProductListData.isNotEmpty
-                                    ? ColorName.blueGray
-                                    : ColorName.blueGray.withOpacity(0.5)),
-                          ),
-                          onPressed: () =>
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: DefaultButtonWidget(
+                        text: context.locale.send_offer_button_title,
+                        style: context.easyTheme.elevatedButtonTheme.style!
+                            .copyWith(
+                          backgroundColor: MaterialStateProperty.all(
                               state.mySwapProductListData.isNotEmpty
-                                  ? sendOffer(context, index)
-                                  : () {}));
+                                  ? ColorName.blueGray
+                                  : ColorName.blueGray.withOpacity(0.5)),
+                        ),
+                        onPressed: () => state.mySwapProductListData.isNotEmpty
+                            ? sendOffer(context, index)
+                            : () {}),
+                  ));
                 },
               ),
             ),

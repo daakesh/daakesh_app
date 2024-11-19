@@ -30,8 +30,8 @@ class SwapSearchItemsScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () => openFilterScreen(context),
-                        child: Assets.png.filterIcon
-                            .image(width: 40.w, height: 40.h),
+                        child:
+                            Assets.png.filterIcon.image(width: 40, height: 40),
                       ),
                       const SizedBox(width: 11),
                       GestureDetector(
@@ -40,8 +40,7 @@ class SwapSearchItemsScreen extends StatelessWidget {
                                 sortingType: SortingType.asc))
                             : SwapSearchBloc.get.add(SwapSearchFilterEvent(
                                 sortingType: SortingType.desc)),
-                        child:
-                            Assets.svg.sortIcon.svg(width: 30.w, height: 30.h),
+                        child: Assets.svg.sortIcon.svg(width: 30, height: 30),
                       ),
                     ],
                   ),

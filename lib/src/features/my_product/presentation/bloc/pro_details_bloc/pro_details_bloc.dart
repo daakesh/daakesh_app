@@ -124,7 +124,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
 
       proSubCategoryListData = proSubCategoryModel.data!.toList();
       proSubCategoryListData.insert(proSubCategoryListData.length,
-          ProSubCategoryItem(id: 1000, name: "null", arName: "بدون"));
+          ProSubCategoryItem(id: 1000, name: "None", arName: "بدون"));
       //proSubCategoryListData.insert(0, ProSubCategoryItem(id: -1, name: "null", arName: "بدون"));
       int subID;
       try {
@@ -181,7 +181,7 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
       ProBrandModel proBrandModel = ProBrandModel.fromJson(r.data);
       List<ProBrandItem> proBrandListData = proBrandModel.data!.toList();
       proBrandListData.insert(proBrandListData.length,
-          ProBrandItem(id: 1000, name: "null", arName: "بدون"));
+          ProBrandItem(id: 1000, name: "None", arName: "بدون"));
       emit(state.copyWith(
         proDetailsStateStatus: ProDetailsStateStatus.SUCCESS,
         proBrandListData: proBrandListData,

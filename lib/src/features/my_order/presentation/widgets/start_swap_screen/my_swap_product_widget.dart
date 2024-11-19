@@ -30,14 +30,14 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                 child: Container(
                   margin:
                       const EdgeInsetsDirectional.only(end: 20.0, bottom: 20.0),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: ColorName.white,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0.r)),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.16),
-                          offset: const Offset(0, 3),
-                          blurRadius: 6.0.r,
+                          color: Color.fromRGBO(0, 0, 0, 0.16),
+                          offset: Offset(0, 3),
+                          blurRadius: 6,
                         )
                       ]),
                   child: Column(
@@ -46,20 +46,20 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                       Row(
                         children: [
                           Container(
-                            margin: EdgeInsetsDirectional.only(
-                                top: 3.0, start: 12.0.w),
-                            constraints: BoxConstraints(
-                                minHeight: 22.0, minWidth: 66.0.w),
-                            decoration: BoxDecoration(
+                            margin: const EdgeInsetsDirectional.only(
+                                top: 3.0, start: 12),
+                            constraints: const BoxConstraints(
+                                minHeight: 22.0, minWidth: 66),
+                            decoration: const BoxDecoration(
                               color: ColorName.darkGreen,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0.r)),
+                                  BorderRadius.all(Radius.circular(4)),
                             ),
                             child: Center(
                                 child: Text(
                               context.locale.new_title,
                               style: context.easyTheme.textTheme.labelLarge!
-                                  .copyWith(fontSize: 14.0.sp),
+                                  .copyWith(fontSize: 14),
                             )),
                           ),
                         ],
@@ -67,8 +67,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: 11.0.w,
+                          const SizedBox(
+                            width: 11,
                           ),
                           Expanded(
                             child: Padding(
@@ -83,8 +83,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                       : ''),
                             ),
                           ),
-                          SizedBox(
-                            width: 18.0.w,
+                          const SizedBox(
+                            width: 18,
                           ),
                           Expanded(
                             flex: 2,
@@ -116,17 +116,17 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                   children: [
                                     Assets.svg.locationPinIcon.svg(
                                         color: ColorName.amber,
-                                        height: 20.h,
-                                        width: 20.w),
-                                    SizedBox(
-                                      width: 6.0.w,
+                                        height: 20,
+                                        width: 20),
+                                    const SizedBox(
+                                      width: 6,
                                     ),
                                     Expanded(
                                         child: Text(
                                       '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.offerItems!.citySwap}, ${widget.sendReceiveSwapReqItem.offerItems!.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(fontSize: 16.0.sp),
+                                          .copyWith(fontSize: 16),
                                       overflow: TextOverflow.fade,
                                     )),
                                   ],
@@ -135,8 +135,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                   height: 15.0,
                                 ),
                                 Padding(
-                                    padding: EdgeInsetsDirectional.only(
-                                        start: 6.0.w),
+                                    padding: const EdgeInsetsDirectional.only(
+                                        start: 6),
                                     child: Text.rich(
                                       TextSpan(
                                         children: [
@@ -146,7 +146,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                               style: context.easyTheme.textTheme
                                                   .bodyMedium!
                                                   .copyWith(
-                                                      fontSize: 20.0.sp,
+                                                      fontSize: 20,
                                                       color: ColorName.gray)),
                                           TextSpan(
                                               text: widget
@@ -156,13 +156,13 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                                   .toString(),
                                               style: context.easyTheme.textTheme
                                                   .bodyMedium!
-                                                  .copyWith(fontSize: 20.0.sp)),
+                                                  .copyWith(fontSize: 20)),
                                         ],
                                       ),
                                     )),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.only(
-                                      end: 13.0.w, top: 14.0),
+                                  padding: const EdgeInsetsDirectional.only(
+                                      end: 13, top: 14.0),
                                   child: Align(
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: TextButtonWidget(
@@ -172,7 +172,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
-                                        fontSize: 12.0.sp,
+                                        fontSize: 12,
                                         color: ColorName.skyBlue,
                                       ),
                                       isBold: true,
@@ -185,13 +185,13 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            start: 22.0.w, end: 14.0.w),
+                        padding: const EdgeInsetsDirectional.only(
+                            start: 22, end: 14),
                         child: Text(
                           context.locale.your_comment,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
-                                  fontSize: 20.0.sp,
+                                  fontSize: 20,
                                   color: ColorName.black.withOpacity(0.5)),
                         ),
                       ),
@@ -199,8 +199,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                         height: 5.0,
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            start: 22.0.w, end: 22.0.w, bottom: 17.0),
+                        padding: const EdgeInsetsDirectional.only(
+                            start: 22, end: 22, bottom: 17.0),
                         child: Container(
                           height: 150.0,
                           width: double.infinity,
@@ -221,8 +221,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                       ),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 13.0.w,
+                          const SizedBox(
+                            width: 13,
                           ),
                           Expanded(
                             child: DefaultButtonWidget(
@@ -234,7 +234,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                     const Size(387.0, 40)),
                                 textStyle: MaterialStateProperty.all(context
                                     .easyTheme.textTheme.bodyMedium!
-                                    .copyWith(fontSize: 13.0.sp)),
+                                    .copyWith(fontSize: 13)),
                               ),
                               onPressed: () => acceptOffer(
                                   context,
@@ -249,8 +249,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                   controller.text),
                             ),
                           ),
-                          SizedBox(
-                            width: 8.0.w,
+                          const SizedBox(
+                            width: 8,
                           ),
                           Expanded(
                             child: DefaultButtonWidget(
@@ -263,7 +263,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                 textStyle: MaterialStateProperty.all(context
                                     .easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                  fontSize: 13.0.sp,
+                                  fontSize: 13,
                                 )),
                                 backgroundColor:
                                     MaterialStateProperty.all(ColorName.red),
@@ -277,8 +277,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                           widget.sendReceiveSwapReqItem.id!)),
                             ),
                           ),
-                          SizedBox(
-                            width: 13.0.w,
+                          const SizedBox(
+                            width: 13,
                           ),
                         ],
                       ),
@@ -294,14 +294,14 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                 child: Container(
                   margin:
                       const EdgeInsetsDirectional.only(end: 20.0, bottom: 20.0),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: ColorName.white,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0.r)),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.16),
-                          offset: const Offset(0, 3),
-                          blurRadius: 6.0.r,
+                          color: Color.fromRGBO(0, 0, 0, 0.16),
+                          offset: Offset(0, 3),
+                          blurRadius: 6,
                         )
                       ]),
                   child: Column(
@@ -310,20 +310,20 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                       Row(
                         children: [
                           Container(
-                            margin: EdgeInsetsDirectional.only(
-                                top: 3.0, start: 12.0.w),
-                            constraints: BoxConstraints(
-                                minHeight: 22.0, minWidth: 66.0.w),
-                            decoration: BoxDecoration(
+                            margin: const EdgeInsetsDirectional.only(
+                                top: 3.0, start: 12),
+                            constraints: const BoxConstraints(
+                                minHeight: 22.0, minWidth: 66),
+                            decoration: const BoxDecoration(
                               color: ColorName.darkGreen,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0.r)),
+                                  BorderRadius.all(Radius.circular(4)),
                             ),
                             child: Center(
                                 child: Text(
                               context.locale.new_title,
                               style: context.easyTheme.textTheme.labelLarge!
-                                  .copyWith(fontSize: 14.0.sp),
+                                  .copyWith(fontSize: 14),
                             )),
                           ),
                         ],
@@ -331,8 +331,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: 11.0.w,
+                          const SizedBox(
+                            width: 11,
                           ),
                           Expanded(
                             child: Padding(
@@ -347,8 +347,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                       : ''),
                             ),
                           ),
-                          SizedBox(
-                            width: 18.0.w,
+                          const SizedBox(
+                            width: 18,
                           ),
                           Expanded(
                             flex: 2,
@@ -380,17 +380,17 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                   children: [
                                     Assets.svg.locationPinIcon.svg(
                                         color: ColorName.amber,
-                                        height: 20.0.h,
-                                        width: 20.0.w),
-                                    SizedBox(
-                                      width: 6.0.w,
+                                        height: 20,
+                                        width: 20),
+                                    const SizedBox(
+                                      width: 6,
                                     ),
                                     Expanded(
                                         child: Text(
                                       '${context.locale.swap_in} ${widget.sendReceiveSwapReqItem.offerItems!.citySwap}, ${widget.sendReceiveSwapReqItem.offerItems!.countrySwap}',
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
-                                          .copyWith(fontSize: 16.0.sp),
+                                          .copyWith(fontSize: 16),
                                       overflow: TextOverflow.fade,
                                     )),
                                   ],
@@ -399,8 +399,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                   height: 8.0,
                                 ),
                                 Padding(
-                                    padding: EdgeInsetsDirectional.only(
-                                        start: 4.0.w),
+                                    padding: const EdgeInsetsDirectional.only(
+                                        start: 4),
                                     child: Text.rich(
                                       TextSpan(
                                         children: [
@@ -410,7 +410,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                               style: context.easyTheme.textTheme
                                                   .bodyMedium!
                                                   .copyWith(
-                                                      fontSize: 20.0.sp,
+                                                      fontSize: 20,
                                                       color: ColorName.gray)),
                                           TextSpan(
                                               text: widget
@@ -420,13 +420,13 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                                   .toString(),
                                               style: context.easyTheme.textTheme
                                                   .bodyMedium!
-                                                  .copyWith(fontSize: 20.0.sp)),
+                                                  .copyWith(fontSize: 20)),
                                         ],
                                       ),
                                     )),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.only(
-                                      end: 13.0.w, top: 14.0),
+                                  padding: const EdgeInsetsDirectional.only(
+                                      end: 13, top: 14.0),
                                   child: Align(
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: TextButtonWidget(
@@ -437,7 +437,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                       style: context
                                           .easyTheme.textTheme.bodyMedium!
                                           .copyWith(
-                                        fontSize: 14.0.sp,
+                                        fontSize: 14,
                                         color: ColorName.skyBlue,
                                       ),
                                       isBold: true,
@@ -450,13 +450,13 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            start: 22.0.w, end: 14.0.w),
+                        padding: const EdgeInsetsDirectional.only(
+                            start: 22, end: 14),
                         child: Text(
                           context.locale.your_comment,
                           style: context.easyTheme.textTheme.bodyLarge!
                               .copyWith(
-                                  fontSize: 20.0.sp,
+                                  fontSize: 20,
                                   color: ColorName.black.withOpacity(0.5)),
                         ),
                       ),
@@ -464,23 +464,23 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                         height: 5.0,
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            start: 22.0.w, end: 12.0.w, bottom: 17.0),
+                        padding: const EdgeInsetsDirectional.only(
+                            start: 22, end: 12, bottom: 17.0),
                         child: Text(
                           '${widget.sendReceiveSwapReqItem.note}',
                           maxLines: 7,
                           overflow: TextOverflow.fade,
                           style:
                               context.easyTheme.textTheme.bodyLarge!.copyWith(
-                            fontSize: 14.0.sp,
+                            fontSize: 14,
                           ),
                         ),
                       ),
                       !widget.isPreviewer
                           ? Row(
                               children: [
-                                SizedBox(
-                                  width: 13.0.w,
+                                const SizedBox(
+                                  width: 13,
                                 ),
                                 Expanded(
                                   child: DefaultButtonWidget(
@@ -491,13 +491,13 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                       textStyle: MaterialStateProperty.all(
                                           context
                                               .easyTheme.textTheme.bodyMedium!
-                                              .copyWith(fontSize: 13.0.sp)),
+                                              .copyWith(fontSize: 13)),
                                     ),
                                     onPressed: () {},
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 8.0.w,
+                                const SizedBox(
+                                  width: 8,
                                 ),
                                 Expanded(
                                   child: DefaultButtonWidget(
@@ -509,7 +509,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                           context
                                               .easyTheme.textTheme.bodyMedium!
                                               .copyWith(
-                                        fontSize: 13.0.sp,
+                                        fontSize: 13,
                                       )),
                                       backgroundColor:
                                           MaterialStateProperty.all(
@@ -524,8 +524,8 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                                 .sendReceiveSwapReqItem.id!)),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 13.0.w,
+                                const SizedBox(
+                                  width: 13,
                                 ),
                               ],
                             )

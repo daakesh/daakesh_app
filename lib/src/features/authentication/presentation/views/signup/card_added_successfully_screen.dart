@@ -13,7 +13,7 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 22.0.w),
+              padding: EdgeInsets.symmetric(horizontal: 22.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -21,20 +21,20 @@ class CardAddedSuccessfullyScreen extends StatelessWidget {
                   const GeneralDaakeshLogoWidget(),
                   const Spacer(flex: 1),
                   Assets.png.checkIcon.image(),
-                  SizedBox(height: 19.0.h),
+                  SizedBox(height: 19),
                   Text(
                     context.locale.add_payment_success_title,
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 26.0.sp),
+                        .copyWith(fontSize: 26.0),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 9.0.h),
+                  SizedBox(height: 9),
                   const Spacer(flex: 1),
                   Center(
                       child: DefaultButtonWidget(
                           text: context.locale.start_shopping_button_title,
                           onPressed: onStartShopping)),
-                  SizedBox(height: 72.0.h),
+                  SizedBox(height: 72),
                 ],
               ),
             ),

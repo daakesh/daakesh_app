@@ -39,7 +39,7 @@ class PriceRateSection extends StatelessWidget {
                   maxRating: 5,
                   ignoreGestures: true,
                   initialRating: state.rateAverage,
-                  itemSize: 25.0.sp,
+                  itemSize: 25,
                   tapOnlyMode: true,
                   itemBuilder: (context, _) => const Icon(
                     Icons.star,
@@ -104,7 +104,7 @@ class PriceRateSection extends StatelessWidget {
                         '${context.locale.jordan_dinar} ${todayDealItem.price}',
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
-                          fontSize: 20.0.sp,
+                          fontSize: 20,
                           decoration: TextDecoration.lineThrough,
                           color: ColorName.gray,
                         ),

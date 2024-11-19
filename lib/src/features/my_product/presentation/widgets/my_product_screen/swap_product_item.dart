@@ -11,15 +11,15 @@ class SwapProductItem extends StatelessWidget {
       onTap: () => previewProduct(context),
       child: Container(
         width: double.infinity,
-        margin: EdgeInsetsDirectional.only(
-          start: 15.0.w,
-          end: 15.0.w,
-          bottom: 13.0.h,
+        margin: const EdgeInsetsDirectional.only(
+          start: 15,
+          end: 15,
+          bottom: 13,
         ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: ColorName.white,
-          borderRadius: BorderRadius.all(Radius.circular(8.0.r)),
-          boxShadow: const [
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          boxShadow: [
             BoxShadow(
                 offset: Offset(0, 3),
                 color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -37,7 +37,8 @@ class SwapProductItem extends StatelessWidget {
                   child: Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: Padding(
-                      padding: EdgeInsetsDirectional.only(end: 20.w, top: 10),
+                      padding:
+                          const EdgeInsetsDirectional.only(end: 20, top: 10),
                       child: Assets.svg.editIcon.svg(width: 20, height: 20),
                     ),
                   ),
@@ -63,7 +64,7 @@ class SwapProductItem extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 7.0.w),
+                const SizedBox(width: 7),
                 Expanded(
                     child: CachedImage(
                   imageUrl: myProductItem.itemImg != null
@@ -72,25 +73,25 @@ class SwapProductItem extends StatelessWidget {
                   fit: BoxFit.contain,
                   height: 80.0,
                 )),
-                SizedBox(width: 18.0.w),
+                const SizedBox(width: 18),
                 Expanded(
                   flex: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.only(end: 80.0.w),
+                        padding: const EdgeInsetsDirectional.only(end: 80),
                         child: Text(
                           '${myProductItem.title!}\n',
                           style: context.easyTheme.textTheme.labelMedium!
                               .copyWith(
-                                  fontSize: 15.0.sp,
+                                  fontSize: 15,
                                   color: ColorName.gray,
                                   overflow: TextOverflow.ellipsis),
                           maxLines: 2,
                         ),
                       ),
-                      SizedBox(height: 9.0.h),
+                      const SizedBox(height: 9),
                       Text.rich(
                         TextSpan(
                           children: [
@@ -98,14 +99,12 @@ class SwapProductItem extends StatelessWidget {
                                 text: context.locale.ship,
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 14.0.sp,
-                                        color: ColorName.gray)),
+                                        fontSize: 14, color: ColorName.gray)),
                             TextSpan(
                                 text: ' ${myProductItem.countrySwap}',
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 14.0.sp,
-                                        color: ColorName.black)),
+                                        fontSize: 14, color: ColorName.black)),
                           ],
                         ),
                       ),
@@ -119,15 +118,13 @@ class SwapProductItem extends StatelessWidget {
                                 text: context.locale.display,
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 14.0.sp,
-                                        color: ColorName.gray)),
+                                        fontSize: 14, color: ColorName.gray)),
                             TextSpan(
                                 text:
                                     ' : ${Utils.displayHandler(context, myProductItem.display.toString())}',
                                 style: context.easyTheme.textTheme.labelLarge!
                                     .copyWith(
-                                        fontSize: 14.0.sp,
-                                        color: ColorName.black)),
+                                        fontSize: 14, color: ColorName.black)),
                           ],
                         ),
                       ),
@@ -136,7 +133,7 @@ class SwapProductItem extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20.0.h),
+            const SizedBox(height: 20),
           ],
         ),
       ),

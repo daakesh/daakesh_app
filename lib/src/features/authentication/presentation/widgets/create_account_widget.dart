@@ -26,7 +26,7 @@ class CreateAccountWidget extends StatelessWidget {
                 TextSpan(
                     text: context.locale.have_an_account_title,
                     style: context.easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontSize: 17.0.sp)),
+                        .copyWith(fontSize: 17)),
                 TextSpan(
                     text: context.locale.create_one_text_button_title,
                     recognizer: TapGestureRecognizer()
@@ -34,10 +34,10 @@ class CreateAccountWidget extends StatelessWidget {
                     style: isBold
                         ? context.easyTheme.textTheme.bodyMedium!.copyWith(
                             color: ColorName.skyBlue,
-                            fontSize: 17.0.sp,
+                            fontSize: 17,
                             fontWeight: FontWeight.bold)
-                        : context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            color: ColorName.skyBlue, fontSize: 17.0.sp))
+                        : context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.skyBlue, fontSize: 17))
               ])),
         ),
       ],

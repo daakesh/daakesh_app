@@ -31,13 +31,13 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                   children: [
                     Text(context.locale.phone_number_title,
                         style: context.easyTheme.textTheme.headlineLarge!
-                            .copyWith(fontSize: 40.0.sp)),
+                            .copyWith(fontSize: 40)),
                     const SizedBox(
                       height: 10.0,
                     ),
                     Text(context.locale.phone_number_instruction,
                         style: context.easyTheme.textTheme.headlineMedium!
-                            .copyWith(fontSize: 25.0.sp)),
+                            .copyWith(fontSize: 25)),
                   ],
                 ),
               ),
@@ -48,8 +48,8 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(context.locale.phone_number_text_field,
-                        style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.0.sp, color: ColorName.darkGray)),
+                        style: context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(fontSize: 18, color: ColorName.darkGray)),
                     TextFormFieldWidget(
                       controller: phoneNumberController,
                       keyboardType: TextInputType.number,
@@ -59,19 +59,18 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                         return InkWell(
                           onTap: () => selectCountry(context),
                           child: SizedBox(
-                            width: 65.0.w,
+                            width: 65,
                             child: Row(
                               children: [
                                 Text(
                                   state.phoneFlag,
                                   style: TextStyle(
-                                      color: ColorName.blueGray,
-                                      fontSize: 24.0.sp),
+                                      color: ColorName.blueGray, fontSize: 24),
                                 ),
                                 Icon(
                                   Icons.arrow_drop_down_outlined,
                                   color: ColorName.blueGray,
-                                  size: 35.0.sp,
+                                  size: 35,
                                 ),
                               ],
                             ),
@@ -97,9 +96,9 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                       onPressed: () => onNext(context)),
                 ),
               ),
-              SizedBox(height: 44.0.h),
+              SizedBox(height: 44),
               const AlreadyHaveAccountWidget(),
-              SizedBox(height: 55.0.h),
+              SizedBox(height: 55),
             ],
           ),
         ),

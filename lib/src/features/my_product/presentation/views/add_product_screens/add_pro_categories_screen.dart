@@ -36,8 +36,8 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 70.0.h,
+                const SizedBox(
+                  height: 70,
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
@@ -49,7 +49,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
                 Text(
                   context.locale.add_product,
                   style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 36.0.sp),
+                      .copyWith(fontSize: 36),
                 ),
                 const SizedBox(
                   height: 14.0,

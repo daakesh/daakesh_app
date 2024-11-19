@@ -14,22 +14,22 @@ class ThirdPartyAuthenticationWidget extends StatelessWidget {
           flex: 2,
         ),
         Assets.png.googleIcon.image(
-          height: 36.0.w,
-          width: 36.0.w,
+          height: 36,
+          width: 36,
         ),
         const Spacer(
           flex: 1,
         ),
         Assets.svg.facebookIcon.svg(
-          height: 36.0.w,
-          width: 36.0.w,
+          height: 36,
+          width: 36,
         ),
         const Spacer(
           flex: 1,
         ),
         Assets.svg.appleIcon.svg(
-          height: 36.0.w,
-          width: 36.0.w,
+          height: 36,
+          width: 36,
         ),
         const Spacer(
           flex: 2,

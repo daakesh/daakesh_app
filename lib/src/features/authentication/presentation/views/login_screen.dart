@@ -31,12 +31,12 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Padding(
-            padding: EdgeInsetsDirectional.symmetric(horizontal: 20.0.w),
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 60.h,
+                  height: 60,
                 ),
                 const Directionality(
                   textDirection: TextDirection.ltr,
@@ -54,11 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   context.locale.login_title,
                   style: context.easyTheme.textTheme.headlineLarge!
-                      .copyWith(fontSize: 40.0.sp),
+                      .copyWith(fontSize: 40.0),
                 ),
-                SizedBox(height: 22.0.h),
+                const SizedBox(height: 22),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           RegExpValidator.clearWhitespace,
                         ],
                       ),
-                      SizedBox(height: 33.0.h),
+                      const SizedBox(height: 33),
                       Text(
                         context.locale.login_password_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocBuilder<AuthBloc, AuthState>(
                             builder: (context, state) {
                               return Transform.scale(
-                                scale: 1.1.w,
+                                scale: 1.1,
                                 child: Checkbox(
                                   onChanged: (bool? value) {
                                     AuthBloc.get.add(ToggleRememberMeValueEvent(
@@ -112,14 +112,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ),
                           SizedBox(
-                            width: 2.0.w,
+                            width: 2,
                           ),
                           Expanded(
                             child: Text(
                               context.locale.remember_me_title,
                               style: context.easyTheme.textTheme.bodyMedium!
                                   .copyWith(
-                                      fontSize: 18.0.sp,
+                                      fontSize: 18,
                                       overflow: TextOverflow.ellipsis),
                             ),
                           )
@@ -135,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: DefaultButtonWidget(
                         text: context.locale.login_button_title,
                         onPressed: () => onLogin(context))),
-                SizedBox(height: 25.0.h),
+                const SizedBox(height: 25),
                 Center(
                     child: TextButtonWidget(
                         text: context.locale.forget_password_text_button,

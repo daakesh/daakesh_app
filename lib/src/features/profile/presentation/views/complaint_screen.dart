@@ -3,8 +3,14 @@ import '../../../../src.export.dart';
 import 'package:collection/collection.dart';
 
 // ignore: must_be_immutable
-class ComplaintScreen extends StatelessWidget {
-  ComplaintScreen({super.key});
+class ComplaintScreen extends StatefulWidget {
+  const ComplaintScreen({super.key});
+
+  @override
+  State<ComplaintScreen> createState() => _ComplaintScreenState();
+}
+
+class _ComplaintScreenState extends State<ComplaintScreen> {
   final complaintTypeController = TextEditingController();
   final sellerNameController = TextEditingController();
   final subjectController = TextEditingController();
@@ -12,19 +18,21 @@ class ComplaintScreen extends StatelessWidget {
   final FocusNode sellerNameFocusNode = FocusNode();
   final FocusNode subjectFocusNode = FocusNode();
   final FocusNode remarkFocusNode = FocusNode();
-  final List<ComplaintType> complaintTypeList = [
+  List<ComplaintType> complaintTypeList = [
     ComplaintType.User,
     ComplaintType.General,
   ];
-
   String? complaintValue;
-
   @override
   Widget build(BuildContext context) {
     final List<String> complaintValues = [
       context.locale.user_complaint,
       context.locale.general_complaint,
     ];
+    //complaintTypeList = [
+    //  ComplaintType.User,
+    //  ComplaintType.General,
+    //];
     return DefaultBackgroundWidget(
       child: Scaffold(
         backgroundColor: ColorName.transparent,
@@ -34,7 +42,7 @@ class ComplaintScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 60.0.sp),
+                const SizedBox(height: 60),
                 Text(
                   context.locale.complaint,
                   style: context.easyTheme.textTheme.headlineMedium!
@@ -64,7 +72,7 @@ class ComplaintScreen extends StatelessWidget {
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                       fontSize: 18.0, color: ColorName.black.withOpacity(0.5)),
                 ),
-                DropDownButtonWidget<String>(
+                DropDownButtonWidget<String?>(
                   onChange: (value) {
                     complaintTypeController.text = value.toString();
                   },
@@ -110,7 +118,7 @@ class ComplaintScreen extends StatelessWidget {
                 Center(
                   child: DefaultButtonWidget(
                     text: context.locale.send,
-                    onPressed: () => onSend(context),
+                    onPressed: () async => await onSend(context),
                   ),
                 ),
                 const SizedBox(
@@ -135,7 +143,7 @@ class ComplaintScreen extends StatelessWidget {
     Utils.getBack();
   }
 
-  void onSend(BuildContext context) {
+  Future<void> onSend(BuildContext context) async {
     if (complaintTypeController.text.isEmpty ||
         subjectController.text.isEmpty ||
         remarkController.text.isEmpty) {
@@ -149,5 +157,11 @@ class ComplaintScreen extends StatelessWidget {
       subject: subjectController.text,
       remark: remarkController.text,
     ));
+
+    await Future.delayed(const Duration(seconds: 1));
+    complaintTypeController.clear();
+    sellerNameController.clear();
+    subjectController.clear();
+    remarkController.clear();
   }
 }

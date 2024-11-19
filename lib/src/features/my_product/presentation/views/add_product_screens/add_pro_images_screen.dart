@@ -51,8 +51,8 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 70.0.h,
+                  const SizedBox(
+                    height: 70,
                   ),
                   GestureDetector(
                     onTap: cancel,
@@ -64,7 +64,7 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                   Text(
                     context.locale.add_product,
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 36.0.sp),
+                        .copyWith(fontSize: 36),
                   ),
                   const SizedBox(
                     height: 14.0,
@@ -312,20 +312,20 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width: 80.0.w,
-                        height: 80.0.h,
+                        width: 80,
+                        height: 80,
                         decoration: const BoxDecoration(
                           color: ColorName.gray,
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.camera_alt,
-                          size: 40.0.sp,
+                          size: 40,
                           color: ColorName.white,
                         ),
                       ),
-                      SizedBox(
-                        height: 10.0.h,
+                      const SizedBox(
+                        height: 10,
                       ),
                       Text('Camera',
                           style: context.easyTheme.textTheme.bodyLarge)
@@ -347,20 +347,20 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width: 80.0.w,
-                        height: 80.0.h,
+                        width: 80,
+                        height: 80,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: ColorName.gray,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.image,
-                          size: 40.0.sp,
+                          size: 40,
                           color: ColorName.white,
                         ),
                       ),
-                      SizedBox(
-                        height: 10.0.h,
+                      const SizedBox(
+                        height: 10,
                       ),
                       Text(
                         'Gallery',

@@ -17,8 +17,8 @@ class DaakeshLogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return !isLight
-        ? Assets.svg.daakeshLogo.svg(width: width ?? 272.0.w)
-        : Assets.svg.lightDaakeshLogo.svg(width: width ?? 272.0.w);
+        ? Assets.svg.daakeshLogo.svg(width: width ?? 272)
+        : Assets.svg.lightDaakeshLogo.svg(width: width ?? 272);
   }
 }
 
@@ -37,8 +37,8 @@ class ArabicDaakeshLogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return !isLight
-        ? Assets.svg.darkArabicLogo.svg(width: width ?? 272.0.w)
-        : Assets.svg.lightArabicLogo.svg(width: width ?? 272.0.w);
+        ? Assets.svg.darkArabicLogo.svg(width: width ?? 272)
+        : Assets.svg.lightArabicLogo.svg(width: width ?? 272);
   }
 }
 

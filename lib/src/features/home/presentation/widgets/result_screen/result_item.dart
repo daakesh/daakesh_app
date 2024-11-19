@@ -64,7 +64,7 @@ class ResultItemWidget extends StatelessWidget {
                           .copyWith(fontSize: 13.0),
                     )
                   : DaakeshLogoWidget(
-                      width: 68.0.w,
+                      width: 68,
                     ),
               const SizedBox(
                 width: 12.0,

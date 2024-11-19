@@ -13,13 +13,13 @@ class SellerInfoCard extends StatelessWidget {
         return state.sellerInfoModel.isNotEmpty
             ? Container(
                 width: double.infinity,
-                margin: EdgeInsetsDirectional.symmetric(horizontal: 21.0.w),
-                padding: EdgeInsetsDirectional.only(
-                    start: 16.0.w, end: 13.0.w, bottom: 15.0.h, top: 11.0.h),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                margin: const EdgeInsetsDirectional.symmetric(horizontal: 21),
+                padding: const EdgeInsetsDirectional.only(
+                    start: 16, end: 13, bottom: 15, top: 11),
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: ColorName.white,
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
                         offset: Offset(0, 3),
                         blurRadius: 3.0,
@@ -34,7 +34,7 @@ class SellerInfoCard extends StatelessWidget {
                             child: Text(
                           context.locale.seller_info,
                           style: context.easyTheme.textTheme.headlineMedium!
-                              .copyWith(fontSize: 19.0.sp),
+                              .copyWith(fontSize: 19),
                         )),
                         InkWell(
                           onTap: () =>
@@ -43,14 +43,13 @@ class SellerInfoCard extends StatelessWidget {
                             context.locale.edit_button,
                             style: context.easyTheme.textTheme.headlineMedium!
                                 .copyWith(
-                                    fontSize: 14.0.sp,
-                                    color: ColorName.skyBlue),
+                                    fontSize: 14, color: ColorName.skyBlue),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 9.0.h,
+                    const SizedBox(
+                      height: 9,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -65,15 +64,15 @@ class SellerInfoCard extends StatelessWidget {
                                 style: context.easyTheme.textTheme.bodySmall!
                                     .copyWith(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 13.0.sp),
+                                        fontSize: 13),
                               ),
-                              SizedBox(
-                                height: 2.0.h,
+                              const SizedBox(
+                                height: 2,
                               ),
                               Text(
                                 '${state.sellerInfoModel.first.userName}',
                                 style: context.easyTheme.textTheme.bodyMedium!
-                                    .copyWith(fontSize: 14.0.sp),
+                                    .copyWith(fontSize: 14),
                               ),
                             ],
                           ),
@@ -87,34 +86,33 @@ class SellerInfoCard extends StatelessWidget {
                                 style: context.easyTheme.textTheme.bodySmall!
                                     .copyWith(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 13.0.sp),
+                                        fontSize: 13),
                               ),
-                              SizedBox(
-                                height: 2.0.h,
+                              const SizedBox(
+                                height: 2,
                               ),
                               Text(
                                 '${state.sellerInfoModel.first.usedPhone}',
                                 style: context.easyTheme.textTheme.bodyMedium!
-                                    .copyWith(fontSize: 14.0.sp),
+                                    .copyWith(fontSize: 14),
                               ),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 8.0.h,
+                    const SizedBox(
+                      height: 8,
                     ),
                     Row(
                       children: [
                         Text(
                           context.locale.your_store_rate,
                           style: context.easyTheme.textTheme.bodyMedium!
-                              .copyWith(
-                                  fontSize: 13.0.sp, color: ColorName.grayish),
+                              .copyWith(fontSize: 13, color: ColorName.grayish),
                         ),
-                        SizedBox(
-                          width: 8.0.w,
+                        const SizedBox(
+                          width: 8,
                         ),
                         RatingBar.builder(
                           direction: Axis.horizontal,
@@ -124,7 +122,7 @@ class SellerInfoCard extends StatelessWidget {
                           ignoreGestures: true,
                           initialRating:
                               state.sellerInfoModel.first.storeRate!.toDouble(),
-                          itemSize: 14.0.sp,
+                          itemSize: 14,
                           tapOnlyMode: true,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
@@ -132,15 +130,14 @@ class SellerInfoCard extends StatelessWidget {
                           ),
                           onRatingUpdate: (rating) {},
                         ),
-                        SizedBox(
-                          width: 9.0.sp,
+                        const SizedBox(
+                          width: 9,
                         ),
                         Expanded(
                             child: Text(
                           '${state.sellerInfoModel.first.storeRate!.toDouble()}',
                           style: context.easyTheme.textTheme.labelLarge!
-                              .copyWith(
-                                  fontSize: 13.0.sp, color: ColorName.black),
+                              .copyWith(fontSize: 13, color: ColorName.black),
                         )),
                         Text(
                           state.sellerInfoModel.first.active == 1
@@ -148,7 +145,7 @@ class SellerInfoCard extends StatelessWidget {
                               : context.locale.inActive,
                           style:
                               context.easyTheme.textTheme.labelMedium!.copyWith(
-                            fontSize: 16.0.sp,
+                            fontSize: 16,
                             color: state.sellerInfoModel.first.active == 1
                                 ? ColorName.darkGreen
                                 : ColorName.red,

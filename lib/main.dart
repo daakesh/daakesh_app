@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Utils.immobilizeDeviceOrientation;
   await Firebase.initializeApp();
   configureDependencies(env: ValueConstants.dev);
   runApp(const AppWidget());

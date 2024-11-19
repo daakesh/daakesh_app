@@ -17,15 +17,15 @@ class AppTheme {
     ///ElevatedButtonTheme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(387.0.w, 56.0.h),
+        minimumSize: const Size(387.0, 56.0),
         backgroundColor: ColorName.blueGray,
         foregroundColor: ColorName.white,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontFamily: FontFamily.apercuRegular,
-          fontSize: 20.0.sp,
+          fontSize: 20.0,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0.r),
+          borderRadius: BorderRadius.circular(8.0),
         ),
       ),
     ),
@@ -35,13 +35,13 @@ class AppTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: ColorName.blueGray,
         side: const BorderSide(color: ColorName.blueGray),
-        minimumSize: Size(387.0.w, 56.0.h),
-        textStyle: TextStyle(
+        minimumSize: const Size(387.0, 56.0),
+        textStyle: const TextStyle(
           fontFamily: FontFamily.apercuMedium,
-          fontSize: 20.0.sp,
+          fontSize: 20.0,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0.r),
+          borderRadius: BorderRadius.circular(8.0),
         ),
       ),
     ),
@@ -53,63 +53,63 @@ class AppTheme {
       ///sfProDisplaySemiBold
       labelSmall: TextStyle(
         fontFamily: FontFamily.sfProDisplaySemiBold,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
         color: ColorName.black,
       ),
 
       ///labelMedium
       labelMedium: TextStyle(
         fontFamily: FontFamily.sfProDisplayRegular,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
         color: ColorName.black,
       ),
 
       ///labelLarge
       labelLarge: TextStyle(
         fontFamily: FontFamily.segoeUISemiBold,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 22.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 22.0),
         color: ColorName.white,
       ),
 
       ///bodySmall => apercuLight
       bodySmall: TextStyle(
         fontFamily: FontFamily.apercuLight,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 14.0),
         color: ColorName.ashGray,
       ),
 
       ///bodyMedium
       bodyMedium: TextStyle(
         fontFamily: FontFamily.apercuRegular,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 17.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 17.0),
         color: ColorName.blueGray,
       ),
 
       ///bodyLarge
       bodyLarge: TextStyle(
         fontFamily: FontFamily.apercuMedium,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 20.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 20.0),
         color: ColorName.blueGray,
       ),
 
       ///headlineSmall
       headlineSmall: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 18.0),
         color: ColorName.blueGray,
       ),
 
       ///headlineMedium
       headlineMedium: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 25.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 25.0),
         color: ColorName.blueGray,
       ),
 
       ///headlineLarge
       headlineLarge: TextStyle(
         fontFamily: FontFamily.apercuBold,
-        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 40.0.sp),
+        fontSize: ResponsiveText.getResponsiveFontSize(fontSize: 40.0),
         color: ColorName.blueGray,
       ),
     ),

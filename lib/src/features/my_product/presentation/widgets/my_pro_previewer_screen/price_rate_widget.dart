@@ -102,7 +102,7 @@ class PriceRateWidget extends StatelessWidget {
                         '${context.locale.jordan_dinar} ${previewerModel.price}',
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
-                          fontSize: 20.0.sp,
+                          fontSize: 20,
                           decoration: TextDecoration.lineThrough,
                           color: ColorName.gray,
                         ),

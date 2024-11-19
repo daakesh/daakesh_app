@@ -27,22 +27,22 @@ class WelcomeScreen extends StatelessWidget {
                 flex: 3,
               ),
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 16.0.w, end: 26.0.w),
+                padding: const EdgeInsetsDirectional.only(start: 16, end: 26),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       context.locale.welcome_title,
                       style: context.easyTheme.textTheme.headlineLarge!
-                          .copyWith(fontSize: 40.0.sp),
+                          .copyWith(fontSize: 40),
                     ),
-                    SizedBox(
-                      height: 20.86.h,
+                    const SizedBox(
+                      height: 20.86,
                     ),
                     Text(
                       context.locale.welcome_body_title,
                       style: context.easyTheme.textTheme.bodyMedium!
-                          .copyWith(fontSize: 18.0.sp),
+                          .copyWith(fontSize: 18),
                     ),
                   ],
                 ),
@@ -61,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               //const ThirdPartyAuthenticationWidget(),
               SizedBox(
-                height: 44.0.h,
+                height: 44,
               ),
               const AlreadyHaveAccountWidget(),
               const Spacer(

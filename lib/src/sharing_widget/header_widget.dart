@@ -26,7 +26,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.isLight ? 110.h : 140.h,
+      height: widget.isLight ? 110 : 140,
       width: double.infinity,
       decoration: BoxDecoration(
         color: widget.isLight ? ColorName.white : ColorName.blueGray,
@@ -43,8 +43,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   child: Assets.svg.line.svg(
                       alignment: AlignmentDirectional.bottomEnd,
                       color: widget.isLight ? Colors.grey : null,
-                      width: 160.w,
-                      height: 160.h),
+                      width: 160,
+                      height: 160),
                 ),
                 widget.withArrowBack
                     ? Stack(
@@ -54,16 +54,16 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 20.0.h,
+                                  height: 20.0,
                                 ),
                                 state.switchLangValue
                                     ? ArabicDaakeshLogoWidget(
                                         isLight: widget.isLight ? false : true,
-                                        width: 184.0.w,
+                                        width: 184,
                                       )
                                     : DaakeshLogoWidget(
                                         isLight: widget.isLight ? false : true,
-                                        width: 184.0.w,
+                                        width: 184,
                                       ),
                               ],
                             ),
@@ -72,13 +72,13 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                             onTap: () => Navigator.pop(context),
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 18.0.w, vertical: 16.0.h),
+                                  horizontal: 18, vertical: 16.0),
                               child: Assets.svg.arrowBackIcon.svg(
                                   color: widget.isLight
                                       ? ColorName.blueGray
                                       : ColorName.white,
-                                  height: 20.0.h,
-                                  width: 20.0.w),
+                                  height: 20.0,
+                                  width: 20),
                             ),
                           ),
                         ],
@@ -91,11 +91,11 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                             child: state.switchLangValue
                                 ? ArabicDaakeshLogoWidget(
                                     isLight: widget.isLight ? false : true,
-                                    width: 184.0.w,
+                                    width: 184,
                                   )
                                 : DaakeshLogoWidget(
                                     isLight: widget.isLight ? false : true,
-                                    width: 184.0.w,
+                                    width: 184,
                                   ),
                           ),
                         ],
@@ -105,7 +105,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                         onTap: () => deleteItem(context, widget.requestID ?? 0),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 18.0.w, vertical: 16.0.h),
+                              horizontal: 18, vertical: 16.0),
                           child: Assets.svg.deleteIcon.svg(
                             color: ColorName.red,
                             width: 24,

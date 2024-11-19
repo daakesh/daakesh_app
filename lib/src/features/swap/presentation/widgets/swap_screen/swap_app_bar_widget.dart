@@ -28,7 +28,7 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
     return BlocBuilder<SwapBloc, SwapState>(builder: (_, state) {
       return SliverAppBar(
         backgroundColor: ColorName.blueGray,
-        expandedHeight: 150.h,
+        expandedHeight: 150,
         leading: const SizedBox(),
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
@@ -46,8 +46,8 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
-                        width: 12.0.w,
+                      const SizedBox(
+                        width: 12,
                       ),
                       Assets.svg.searchIcon.svg(
                           color: state.swapScreenState.isSearch
@@ -55,7 +55,7 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
                               : ColorName.charcoalGray),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: TextFormFieldWidget(
                             textInputAction: TextInputAction.search,
                             controller: controller,

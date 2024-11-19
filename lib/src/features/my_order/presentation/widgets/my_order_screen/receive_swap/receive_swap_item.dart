@@ -13,12 +13,11 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsetsDirectional.only(
-          start: 15.0.w, end: 15.0.w, bottom: 11.0.h),
-      decoration: BoxDecoration(
+      margin: const EdgeInsetsDirectional.only(start: 15, end: 15, bottom: 11),
+      decoration: const BoxDecoration(
           color: ColorName.white,
-          borderRadius: BorderRadius.all(Radius.circular(11.0.r)),
-          boxShadow: const [
+          borderRadius: BorderRadius.all(Radius.circular(11)),
+          boxShadow: [
             BoxShadow(
                 offset: Offset(0, 3),
                 blurRadius: 3.0,
@@ -30,49 +29,49 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: Padding(
-              padding: EdgeInsetsDirectional.only(end: 17.0.w, top: 7.0.h),
+              padding: const EdgeInsetsDirectional.only(end: 17, top: 7),
               child: Text(
                 context.locale.receive_waiting,
                 style: context.easyTheme.textTheme.headlineMedium!
-                    .copyWith(fontSize: 12.0.sp, color: ColorName.red),
+                    .copyWith(fontSize: 12, color: ColorName.red),
               ),
             ),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(width: 12.0.w),
+              const SizedBox(width: 12),
               Expanded(
                   child: CachedImage(
                       imageUrl: sendReceiveSwapReqItem.offerItems!.itemImg !=
                               null
                           ? sendReceiveSwapReqItem.offerItems!.itemImg!.first
                           : '')),
-              SizedBox(width: 18.0.w),
+              const SizedBox(width: 18),
               Expanded(
                 flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.only(end: 80.0.w),
+                      padding: const EdgeInsetsDirectional.only(end: 80),
                       child: Text(
                         '${sendReceiveSwapReqItem.offerItems!.title}\n',
                         style: context.easyTheme.textTheme.labelMedium!
                             .copyWith(
-                                fontSize: 15.0.sp,
+                                fontSize: 15,
                                 color: ColorName.gray,
                                 overflow: TextOverflow.ellipsis),
                         maxLines: 2,
                       ),
                     ),
-                    SizedBox(
-                      height: 1.0.h,
+                    const SizedBox(
+                      height: 1,
                     ),
                     Text(
                       '${sendReceiveSwapReqItem.offerItems!.citySwap}, ${sendReceiveSwapReqItem.offerItems!.countrySwap}',
                       style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                        fontSize: 13.0.sp,
+                        fontSize: 13,
                         color: ColorName.mediumSilver,
                       ),
                     ),
@@ -83,26 +82,23 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
                               text: '(',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
-                                      color: ColorName.gray,
-                                      fontSize: 16.0.sp)),
+                                      color: ColorName.gray, fontSize: 16)),
                           TextSpan(
                               text:
                                   '${sendReceiveSwapReqItem.offerItems!.offerCount}',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
-                                      color: ColorName.red, fontSize: 16.0.sp)),
+                                      color: ColorName.red, fontSize: 16)),
                           TextSpan(
                               text: ') ',
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
-                                      color: ColorName.gray,
-                                      fontSize: 16.0.sp)),
+                                      color: ColorName.gray, fontSize: 16)),
                           TextSpan(
                               text: context.locale.receive_offers_submitted,
                               style: context.easyTheme.textTheme.labelLarge!
                                   .copyWith(
-                                      color: ColorName.black,
-                                      fontSize: 15.0.sp)),
+                                      color: ColorName.black, fontSize: 15)),
                         ],
                       ),
                     ),
@@ -111,19 +107,19 @@ class ReceiveSwapWaitingItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 23.0.h,
+          const SizedBox(
+            height: 23,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Center(
                 child: DefaultButtonWidget(
                     text: context.locale.start_swap,
                     onPressed: () =>
                         onStartSwap(context, sendReceiveSwapReqItem))),
           ),
-          SizedBox(
-            height: 16.0.h,
+          const SizedBox(
+            height: 16,
           ),
         ],
       ),

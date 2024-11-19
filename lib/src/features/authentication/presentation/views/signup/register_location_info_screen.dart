@@ -39,29 +39,29 @@ class _RegisterLocationInfoScreenState
               const Spacer(
                 flex: 1,
               ),
-              SizedBox(height: 44.0.h),
+              SizedBox(height: 44),
               const Center(child: GeneralDaakeshLogoWidget()),
-              SizedBox(height: 44.0.h),
+              SizedBox(height: 44),
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 26.0.w, end: 13.0.w),
+                padding: EdgeInsetsDirectional.only(start: 26, end: 13),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(context.locale.location_title,
                         style: context.easyTheme.textTheme.headlineLarge!
-                            .copyWith(fontSize: 40.0.sp)),
+                            .copyWith(fontSize: 40.0)),
                     SizedBox(
-                      height: 10.0.h,
+                      height: 10,
                     ),
                     Text(context.locale.location_instruction,
                         style: context.easyTheme.textTheme.headlineMedium!
-                            .copyWith(fontSize: 25.0.sp)),
+                            .copyWith(fontSize: 25.0)),
                   ],
                 ),
               ),
-              SizedBox(height: 20.0.h),
+              SizedBox(height: 20),
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 32.0.w, end: 29.0.w),
+                padding: EdgeInsetsDirectional.only(start: 32, end: 29),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -73,21 +73,21 @@ class _RegisterLocationInfoScreenState
                       focusNode: countryFocusNode,
                       isSuffixPrefixOn: true,
                       suffixIcon: SizedBox(
-                        height: 9.0.h,
-                        width: 16.0.w,
+                        height: 9,
+                        width: 16,
                         child:
                             Center(child: Assets.svg.arrowDropDownIcon.svg()),
                       ),
                       prefixIcon:
                           BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
                         return SizedBox(
-                            width: 30.0.w,
-                            height: 30.0.h,
+                            width: 30,
+                            height: 30,
                             child: Center(
                                 child: Text(
                               state.flagEmoji,
                               style: TextStyle(
-                                  color: ColorName.blueGray, fontSize: 24.0.sp),
+                                  color: ColorName.blueGray, fontSize: 24.0),
                             )));
                       }),
                       onFieldSubmitted: (value) => Utils.fieldFocusChange(
@@ -100,7 +100,7 @@ class _RegisterLocationInfoScreenState
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    SizedBox(height: 33.0.h),
+                    SizedBox(height: 33),
                     Text(context.locale.city_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0, color: ColorName.darkGray)),
@@ -113,7 +113,7 @@ class _RegisterLocationInfoScreenState
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    SizedBox(height: 33.0.h),
+                    SizedBox(height: 33),
                     Text(context.locale.address_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0, color: ColorName.darkGray)),
@@ -127,8 +127,8 @@ class _RegisterLocationInfoScreenState
                       // suffixIcon: GestureDetector(
                       //   onTap: () => Utils.openNewPage(const MapScreen()),
                       //   child: SizedBox(
-                      //       width: 20.0.w,
-                      //       height: 20.0.h,
+                      //       width: 20,
+                      //       height: 20,
                       //       child: Center(
                       //           child: Assets.svg.locationPinIcon.svg())),
                       // ),
@@ -139,9 +139,9 @@ class _RegisterLocationInfoScreenState
               const Spacer(
                 flex: 1,
               ),
-              SizedBox(height: 43.0.h),
+              SizedBox(height: 43),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: EdgeInsets.symmetric(horizontal: 21),
                 child: DefaultButtonWidget(
                     text: context.locale.location_next_button_title,
                     onPressed: () => onNext(context)),
@@ -149,9 +149,9 @@ class _RegisterLocationInfoScreenState
               const Spacer(
                 flex: 1,
               ),
-              SizedBox(height: 20.0.h),
+              SizedBox(height: 20),
               const AlreadyHaveAccountWidget(),
-              SizedBox(height: 20.0.h),
+              SizedBox(height: 20),
               const Spacer(flex: 1),
             ],
           ),

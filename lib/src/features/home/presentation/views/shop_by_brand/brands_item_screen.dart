@@ -24,8 +24,8 @@ class BrandsItemScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                         onTap: () => openFilterScreen(context),
-                        child: Assets.png.filterIcon
-                            .image(width: 40.w, height: 40.h)),
+                        child:
+                            Assets.png.filterIcon.image(width: 40, height: 40)),
                     const SizedBox(
                       width: 11,
                     ),
@@ -35,7 +35,7 @@ class BrandsItemScreen extends StatelessWidget {
                               sortingType: SortingType.asc))
                           : BrandsBloc.get.add(GetItemsByBrandsEvent(
                               sortingType: SortingType.desc)),
-                      child: Assets.svg.sortIcon.svg(height: 30.h, width: 30.w),
+                      child: Assets.svg.sortIcon.svg(height: 30, width: 30),
                     ),
                   ],
                 ),

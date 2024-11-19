@@ -113,8 +113,6 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () => onShopByBrands(context),
-
-                    ///ShopByBrand
                     child: ShopByBrand(
                       title: context.locale.home_shop_by_brands_section_title,
                     ),

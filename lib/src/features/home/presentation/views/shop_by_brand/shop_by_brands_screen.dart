@@ -27,8 +27,8 @@ class ShopByBrandsScreen extends StatelessWidget {
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 16.w,
-                  mainAxisSpacing: 16.h,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
                 ),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 30.0)),

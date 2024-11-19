@@ -26,7 +26,7 @@ class AlreadyHaveAccountWidget extends StatelessWidget {
                 TextSpan(
                     text: context.locale.already_have_an_account,
                     style: context.easyTheme.textTheme.bodyMedium!
-                        .copyWith(fontSize: 17.0.sp)),
+                        .copyWith(fontSize: 17)),
                 TextSpan(
                     text: context.locale.login_text_button_title,
                     recognizer: TapGestureRecognizer()
@@ -34,10 +34,10 @@ class AlreadyHaveAccountWidget extends StatelessWidget {
                     style: isBold
                         ? context.easyTheme.textTheme.bodyMedium!.copyWith(
                             color: ColorName.skyBlue,
-                            fontSize: 17.0.sp,
+                            fontSize: 17,
                             fontWeight: FontWeight.bold)
-                        : context.easyTheme.textTheme.bodyMedium!.copyWith(
-                            color: ColorName.skyBlue, fontSize: 17.0.sp))
+                        : context.easyTheme.textTheme.bodyMedium!
+                            .copyWith(color: ColorName.skyBlue, fontSize: 17))
               ])),
         ),
       ],

@@ -9,12 +9,12 @@ class MainScreenWidget {
         icon: bottomNavBarItem(
           context: context,
           icon: SizedBox(
-            height: 28.0.h,
+            height: 24,
             child: 0 == index
                 ? Assets.svg.enableHomeIcon
-                    .svg(width: 28.0, height: 24.0, fit: BoxFit.fill)
+                    .svg(width: 24.0, height: 24.0, fit: BoxFit.fill)
                 : Assets.svg.disableHomeIcon
-                    .svg(width: 28.0, height: 24.0, fit: BoxFit.fill),
+                    .svg(width: 24.0, height: 24.0, fit: BoxFit.fill),
           ),
           title: context.locale.home_bottom_nav_tab,
         ),
@@ -23,7 +23,7 @@ class MainScreenWidget {
         icon: bottomNavBarItem(
             context: context,
             icon: SizedBox(
-                height: 28.0.h,
+                height: 24,
                 child: 1 == index
                     ? Assets.svg.enableProductIcon
                         .svg(width: 24.0, height: 24.0, fit: BoxFit.fill)
@@ -55,7 +55,7 @@ class MainScreenWidget {
         icon: bottomNavBarItem(
           context: context,
           icon: SizedBox(
-              height: 28.0.h,
+              height: 24,
               child: 3 == index
                   ? Assets.png.enableMyOrderIcon
                       .image(width: 26.0, height: 24.0, fit: BoxFit.fill)
@@ -68,7 +68,7 @@ class MainScreenWidget {
         icon: bottomNavBarItem(
             context: context,
             icon: SizedBox(
-                height: 28.0.h,
+                height: 24,
                 child: 4 == index
                     ? Assets.svg.enableProfileIcon
                         .svg(width: 26.0, height: 24.0, fit: BoxFit.fill)
@@ -103,7 +103,7 @@ class MainScreenWidget {
               color: ColorName.transparent,
               child: Text(title,
                   style: context.easyTheme.textTheme.bodyMedium!
-                      .copyWith(fontSize: 14.0.sp, color: Colors.white)))
+                      .copyWith(fontSize: 14.0, color: Colors.white)))
         ],
       );
 }

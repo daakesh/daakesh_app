@@ -22,17 +22,17 @@ class AddPaymentCardScreen extends StatelessWidget {
                 ),
                 Assets.svg.creditCardLogoIcon.svg(),
                 SizedBox(
-                  height: 35.0.h,
+                  height: 35,
                 ),
                 Text(context.locale.add_payment_card_title,
                     style: context.easyTheme.textTheme.headlineMedium!
-                        .copyWith(fontSize: 28.0.sp)),
+                        .copyWith(fontSize: 28)),
                 SizedBox(
-                  height: 9.0.h,
+                  height: 9,
                 ),
                 Text(context.locale.add_payment_card_instruction,
                     style: context.easyTheme.textTheme.bodyMedium!.copyWith(
-                      fontSize: 15.0.sp,
+                      fontSize: 15,
                     )),
                 const Spacer(
                   flex: 1,
@@ -41,13 +41,13 @@ class AddPaymentCardScreen extends StatelessWidget {
                     text: context.locale.add_payment_button_title,
                     onPressed: addPaymentCard),
                 SizedBox(
-                  height: 9.0.h,
+                  height: 9,
                 ),
                 OutlineButtonWidget(
                     text: context.locale.later_button_title,
                     onPressed: onLater),
                 SizedBox(
-                  height: 72.0.h,
+                  height: 72,
                 ),
               ],
             ),

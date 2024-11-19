@@ -112,7 +112,7 @@ class _SectionScreenState extends State<SectionScreen> {
                   child: Text(
                     '${Utils.isEnglish ? state.categoryTitle : state.arCategoryTitle} ${context.locale.category_title}',
                     style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                      fontSize: 20.0.sp,
+                      fontSize: 20.0,
                       color: ColorName.black.withOpacity(0.57),
                     ),
                   ),

@@ -32,11 +32,11 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 26.0.w, end: 22.0.w),
+                padding: const EdgeInsetsDirectional.only(start: 26, end: 22),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 70.0.h),
+                    const SizedBox(height: 70),
                     InkWell(
                       focusColor: ColorName.transparent,
                       highlightColor: ColorName.transparent,
@@ -44,38 +44,38 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       onTap: () => Navigator.pop(context),
                       child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                     ),
-                    SizedBox(
-                      height: 11.0.h,
+                    const SizedBox(
+                      height: 11,
                     ),
                     Text(
                       context.locale.add_product,
                       style: context.easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 36.0.sp),
+                          .copyWith(fontSize: 36),
                     ),
-                    SizedBox(
-                      height: 14.0.h,
+                    const SizedBox(
+                      height: 14,
                     ),
                     Text(
                       context.locale.for_sale_info,
                       style: context.easyTheme.textTheme.headlineMedium!
-                          .copyWith(fontSize: 25.0.sp),
+                          .copyWith(fontSize: 25),
                     ),
-                    SizedBox(
-                      height: 19.0.h,
+                    const SizedBox(
+                      height: 19,
                     ),
                     Text(
                       context.locale.add_product_instruction,
                       style: context.easyTheme.textTheme.bodyMedium!
-                          .copyWith(fontSize: 16.0.sp),
+                          .copyWith(fontSize: 16),
                     ),
-                    SizedBox(
-                      height: 25.0.h,
+                    const SizedBox(
+                      height: 25,
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0.w),
+                padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -91,8 +91,8 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                         RegExpValidator.clearZero,
                       ],
                     ),
-                    SizedBox(
-                      height: 22.0.h,
+                    const SizedBox(
+                      height: 22,
                     ),
                     Text(context.locale.product_price,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
@@ -107,8 +107,8 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                         RegExpValidator.clearZero,
                       ],
                     ),
-                    SizedBox(
-                      height: 21.0.h,
+                    const SizedBox(
+                      height: 21,
                     ),
                     BlocBuilder<MyProFuncBloc, MyProFuncState>(
                       builder: (context, state) {
@@ -137,14 +137,14 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                                       PercentInputFormatter(),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 22.0.h,
+                                  const SizedBox(
+                                    height: 22,
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              width: 10.0.w,
+                            const SizedBox(
+                              width: 10,
                             ),
                             Expanded(
                                 child: Align(
@@ -176,35 +176,35 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                         );
                       },
                     ),
-                    SizedBox(
-                      height: 21.0.h,
+                    const SizedBox(
+                      height: 21,
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 77.0.h,
+              const SizedBox(
+                height: 77,
               ),
               const Spacer(
                 flex: 1,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: const EdgeInsets.symmetric(horizontal: 21),
                 child: DefaultButtonWidget(
                     text: context.locale.next_button,
                     onPressed: () => onNext()),
               ),
-              SizedBox(
-                height: 12.0.h,
+              const SizedBox(
+                height: 12,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 21.0.w),
+                padding: const EdgeInsets.symmetric(horizontal: 21),
                 child: OutlineButtonWidget(
                     text: context.locale.cancel_button,
                     onPressed: () => cancel()),
               ),
-              SizedBox(
-                height: 50.0.h,
+              const SizedBox(
+                height: 50,
               ),
             ],
           ),
