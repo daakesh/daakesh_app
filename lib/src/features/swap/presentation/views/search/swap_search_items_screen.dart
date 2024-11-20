@@ -17,7 +17,7 @@ class SwapSearchItemsScreen extends StatelessWidget {
             builder: (context, state) {
           return CustomScrollView(
             slivers: [
-              const HomeAppBarWidget(),
+              const SwapAppBarWidget(),
               const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
               SliverToBoxAdapter(
                 child: Padding(
@@ -63,8 +63,12 @@ class SwapSearchItemsScreen extends StatelessWidget {
                         childCount: state.filterDataList.length,
                       ),
                     )
-                  : const SliverToBoxAdapter(
-                      child: Center(child: CircularProgressIndicatorWidget())),
+                  : SliverToBoxAdapter(
+                      child: Center(
+                          child: state.swapSearchStateStatus ==
+                                  SwapSearchStateStatus.ITEMLOADING
+                              ? const CircularProgressIndicatorWidget()
+                              : const SizedBox())),
               const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
               SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverPadding(padding: EdgeInsets.only(top: 60.0)),
