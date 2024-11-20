@@ -443,7 +443,7 @@
   "are_you_sure_you_wanna_remove_the_item": "Are you sure you wanna remove the item.",
   "remove": "Remove",
   "cancel_remove_item": "Cancel",
-  "loginDialog": "*********LoginDialog*********",
+  "login_dialog": "*********LoginDialog*********",
   "login_instruction": "Welcome! To unlock all features and personalize your experience, please log in or sign",
   "close": "Close",
   "login": "Login",
@@ -478,7 +478,7 @@
   "terms_and_condition": "You must agree to the terms and conditions.",
   "complaint_send_successfully": "complaint sent successfully",
   "complaint_details": "Complaint details",
-  "no_data_available": "No Data Available ...",
+  "no_data_avaliable": "No Data Available ...",
   "tutorial_video": "Tutorial Video",
   "other": "Other"
 }

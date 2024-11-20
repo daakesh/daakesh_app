@@ -66,7 +66,7 @@ class SearchItemsScreen extends StatelessWidget {
                           child: state.searchStateStatus ==
                                   SearchStateStatus.ITEMLOADING
                               ? const CircularProgressIndicatorWidget()
-                              : const SizedBox())),
+                              : Text(context.locale.no_data_avaliable))),
               const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
               SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverPadding(padding: EdgeInsets.only(top: 60.0)),
@@ -110,7 +110,7 @@ class SearchItemsScreen extends StatelessWidget {
         return state.searchStateStatus.isNull
             ? Center(
                 child: Text(
-                  context.locale.results_no_data,
+                  '',
                   style: context.easyTheme.textTheme.headlineMedium,
                 ),
               )

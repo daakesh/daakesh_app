@@ -68,7 +68,7 @@ class SwapSearchItemsScreen extends StatelessWidget {
                           child: state.swapSearchStateStatus ==
                                   SwapSearchStateStatus.ITEMLOADING
                               ? const CircularProgressIndicatorWidget()
-                              : const SizedBox())),
+                              : Text(context.locale.no_data_avaliable))),
               const SliverPadding(padding: EdgeInsets.only(top: 30.0)),
               SliverToBoxAdapter(child: seeMoreHandler(state, context)),
               const SliverPadding(padding: EdgeInsets.only(top: 60.0)),
