@@ -270,9 +270,9 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                         ? state.homeTodayDealsListData.length
                         : 4,
                   ),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.65,
+                      childAspectRatio: isTablet ? 1.3 :   0.65,
                       mainAxisSpacing: 8.0,
                       crossAxisSpacing: 8.0)),
             );
@@ -302,6 +302,10 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
         const SliverPadding(padding: EdgeInsets.only(top: 50.0)),
       ],
     );
+  }
+
+  bool get isTablet {
+    return MediaQuery.of(context).size.width >= 600; // 600px is a common breakpoint for tablets.
   }
 
   void exploreSection(context, int secID, int sectionIndex,
