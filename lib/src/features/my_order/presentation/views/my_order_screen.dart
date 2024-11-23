@@ -206,7 +206,7 @@ class MySwapOrderWidget extends StatelessWidget {
                       ? SliverFillRemaining(
                           child: Center(
                               child: Text(
-                            context.locale.no_data_available,
+                            context.locale.no_data_avaliable,
                             style: context.easyTheme.textTheme.headlineLarge!
                                 .copyWith(fontSize: 26),
                           )),
@@ -235,7 +235,7 @@ class MySwapOrderWidget extends StatelessWidget {
                       ? SliverFillRemaining(
                           child: Center(
                               child: Text(
-                            context.locale.no_data_available,
+                            context.locale.no_data_avaliable,
                             style: context.easyTheme.textTheme.headlineLarge!
                                 .copyWith(fontSize: 26),
                           )),

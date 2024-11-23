@@ -46,7 +46,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       Assets.svg.searchIcon.svg(
@@ -55,7 +55,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                               : ColorName.charcoalGray),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: TextFormFieldWidget(
                             controller: searchController,
                             textInputAction: TextInputAction.search,
@@ -64,16 +64,18 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
                             onChanged: onChange,
                             onFieldSubmitted: (value) {
                               if (value.isEmpty ||
-                                  widget.state!.searchStateStatus ==
+                                  widget.state?.searchStateStatus ==
                                       SearchStateStatus.NULL) {
                                 return;
                               }
                               SearchBloc.get
                                   .add(SearchFilterEvent(searchValue: value));
                               FilterBloc.get.add(GetCitiesEvent());
+                              print('///////////////////////////////////////');
 
                               Utils.openNavNewPage(
                                   context, const SearchItemsScreen());
+                              print('///////////////////////////////////////');
                             },
                             inputFormatters: [
                               RegExpValidator.beginWhitespace,

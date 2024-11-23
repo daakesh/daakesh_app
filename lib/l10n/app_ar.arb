@@ -443,7 +443,7 @@
   "are_you_sure_you_wanna_remove_the_item": "هل أنت متأكد أنك تريد إزالة العنصر.",
   "remove": "إزالة",
   "cancel_remove_item": "إلغاء",
-  "loginDialog": "*********LoginDialog*********",
+  "login_dialog": "*********LoginDialog*********",
   "login_instruction": "مرحبًا! لفتح جميع الميزات وتخصيص تجربتك، يُرجى تسجيل الدخول أو التسجيل",
   "close": "إغلاق",
   "login": "تسجيل الدخول",
