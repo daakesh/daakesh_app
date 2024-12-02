@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>311956579675-bu8jb2uu7pt4ajp1een51er0sca2362m.apps.googleusercontent.com</string>
+	<string>311956579675-30g8hqea1lp74m03l4ndshg83ukvnvl7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.311956579675-bu8jb2uu7pt4ajp1een51er0sca2362m</string>
+	<string>com.googleusercontent.apps.311956579675-30g8hqea1lp74m03l4ndshg83ukvnvl7</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>311956579675-3kmh6vu4fursj3hit1m9rng1vrplfchs.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,11 +15,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.daakesh</string>
+	<string>com.daakesh.app</string>
 	<key>PROJECT_ID</key>
 	<string>daakesh-af3a0</string>
 	<key>STORAGE_BUCKET</key>
-	<string>daakesh-af3a0.appspot.com</string>
+	<string>daakesh-af3a0.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:311956579675:ios:495b6c92f99cbcd1dc267e</string>
+	<string>1:311956579675:ios:b1ce4895be08f7d5dc267e</string>
 </dict>
 </plist>
