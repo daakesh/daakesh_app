@@ -103,7 +103,6 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       isSuffixPrefixOn: true,
                       keyboardType: TextInputType.number,
                       inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
                         RegExpValidator.clearZero,
                       ],
                     ),
