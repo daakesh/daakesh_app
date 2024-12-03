@@ -104,6 +104,8 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                       keyboardType: TextInputType.number,
                       inputFormatters: [
                         RegExpValidator.clearZero,
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^[0-9]*(\.[0-9]*)?$')),
                       ],
                     ),
                     const SizedBox(
