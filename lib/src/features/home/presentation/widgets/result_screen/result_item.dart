@@ -63,7 +63,7 @@ class ResultItemWidget extends StatelessWidget {
                       style: context.easyTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 13.0),
                     )
-                  : DaakeshLogoWidget(
+                  : const DaakeshLogoWidget(
                       width: 68,
                     ),
               const SizedBox(
@@ -150,13 +150,13 @@ class ResultItemWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            '\$${todayItem.priceAfterDiscount!.toInt()} ',
+                            '${context.locale.jordan_dinar} ${todayItem.priceAfterDiscount!.toInt()} ',
                             style: context.easyTheme.textTheme.labelMedium!
                                 .copyWith(fontSize: 21.0),
                           ),
                           todayItem.discountPercentage != "0%"
                               ? Text(
-                                  '\$${todayItem.price}',
+                                  '${context.locale.jordan_dinar} ${todayItem.price}',
                                   style: context
                                       .easyTheme.textTheme.labelMedium!
                                       .copyWith(
