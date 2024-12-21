@@ -201,24 +201,38 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                       Padding(
                         padding: const EdgeInsetsDirectional.only(
                             start: 22, end: 22, bottom: 17.0),
-                        child: Container(
-                          height: 150.0,
-                          width: double.infinity,
-                          padding: const EdgeInsetsDirectional.only(
-                              start: 10.0, end: 10, top: 7.0),
-                          decoration: BoxDecoration(
-                              color: ColorName.white,
-                              border: Border.all(
-                                  color: ColorName.gray.withOpacity(0.15)),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(6.0))),
-                          child: TextFormFieldWidget(
-                            controller: controller,
-                            isUnderlineOn: true,
-                            maxLines: 5,
+                        child: Text(
+                          widget.sendReceiveSwapReqItem.note ?? '',
+                          maxLines: 7,
+                          overflow: TextOverflow.fade,
+                          style:
+                              context.easyTheme.textTheme.bodyLarge!.copyWith(
+                            fontSize: 14,
                           ),
                         ),
                       ),
+
+                      /// Padding(
+                      ///   padding: const EdgeInsetsDirectional.only(
+                      ///       start: 22, end: 22, bottom: 17.0),
+                      ///   child: Container(
+                      ///     height: 150.0,
+                      ///     width: double.infinity,
+                      ///     padding: const EdgeInsetsDirectional.only(
+                      ///         start: 10.0, end: 10, top: 7.0),
+                      ///     decoration: BoxDecoration(
+                      ///         color: ColorName.white,
+                      ///         border: Border.all(
+                      ///             color: ColorName.gray.withOpacity(0.15)),
+                      ///         borderRadius:
+                      ///             const BorderRadius.all(Radius.circular(6.0))),
+                      ///     child: TextFormFieldWidget(
+                      ///       controller: controller,
+                      ///       isUnderlineOn: true,
+                      ///       maxLines: 5,
+                      ///     ),
+                      ///   ),
+                      /// ),
                       Row(
                         children: [
                           const SizedBox(
@@ -263,7 +277,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                 textStyle: MaterialStateProperty.all(context
                                     .easyTheme.textTheme.bodyMedium!
                                     .copyWith(
-                                  fontSize: 13,
+                                  fontSize: 12,
                                 )),
                                 backgroundColor:
                                     MaterialStateProperty.all(ColorName.red),
@@ -278,7 +292,7 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                             ),
                           ),
                           const SizedBox(
-                            width: 13,
+                            width: 12,
                           ),
                         ],
                       ),
