@@ -35,6 +35,11 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
+  Future<Either<Failure, ValidResponse>> getLanguageData() async {
+    return await getIt.get<ProfileDatasource>().getLanguageData();
+  }
+
+  @override
   Future<Either<Failure, ValidResponse>> getContactInfo() async {
     return await getIt.get<ProfileDatasource>().getContactInfo();
   }

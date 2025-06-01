@@ -13,6 +13,9 @@ abstract class AuthDatasource {
     String country,
     String city,
     String address,
+    double latitude,
+    double longitude,
+    String deviceToken,
   );
   Future<Either<Failure, ValidResponse>> activateUser(String id);
   Future<Either<Failure, ValidResponse>> isPhoneNumberExist(String phoneNumber);

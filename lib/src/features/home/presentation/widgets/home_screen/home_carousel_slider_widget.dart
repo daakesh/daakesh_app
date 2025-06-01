@@ -15,7 +15,7 @@ class HomeCarouselSliderWidget extends StatefulWidget {
 }
 
 class _HomeCarouselSliderWidgetState extends State<HomeCarouselSliderWidget> {
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
   int _current = 0;
 
   @override

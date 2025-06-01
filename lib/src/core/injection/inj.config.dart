@@ -18,6 +18,16 @@ import 'package:daakesh/src/features/authentication/data/repositories/auth_repos
     as _i492;
 import 'package:daakesh/src/features/authentication/domain/use_cases/auth_use_cases.dart'
     as _i119;
+import 'package:daakesh/src/features/favourite/data/datasourse/favourite_datasource.dart'
+    as _i62;
+import 'package:daakesh/src/features/favourite/data/datasourse/remote_favourite_datasource.dart'
+    as _i760;
+import 'package:daakesh/src/features/favourite/data/repositories/favourite_repository_impl.dart'
+    as _i277;
+import 'package:daakesh/src/features/favourite/domin/repositories/favourite_repository.dart'
+    as _i51;
+import 'package:daakesh/src/features/favourite/domin/usecases/favourite_usecases.dart'
+    as _i934;
 import 'package:daakesh/src/features/home/data/datasource/remote_home_datasource.dart'
     as _i279;
 import 'package:daakesh/src/features/home/data/repositories/home_repository_impl.dart'
@@ -76,6 +86,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i9.RemoteMyProductDatasource());
     gh.lazySingleton<_i467.HomeDatasource>(() => _i279.RemoteHomeDatasource());
     gh.singleton<_i853.CacheHelper>(() => _i853.CacheHelperImpl());
+    gh.lazySingleton<_i62.FavouriteDataSource>(
+        () => _i760.RemoteFavouriteDataSource());
+    gh.lazySingleton<_i51.FavouriteRepository>(
+        () => _i277.FavouriteRepositoryImpl());
     gh.singleton<_i971.ConnectivityService>(
         () => _i971.ConnectivityServiceImpl());
     gh.lazySingleton<_i467.MyOrderDatasource>(
@@ -85,6 +99,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i467.AuthDatasource>(() => _i933.RemoteAuthDatasource());
     gh.lazySingleton<_i561.HomeUseCases>(
       () => _i561.HomeUseCasesImpl(),
+      registerFor: {_dev},
+    );
+    gh.lazySingleton<_i934.FavouriteUseCases>(
+      () => _i934.FavouriteUseCasesImpl(),
       registerFor: {_dev},
     );
     gh.lazySingleton<_i467.SwapDatasource>(() => _i526.RemoteSwapDatasource());

@@ -1,3 +1,4 @@
+import 'package:daakesh/src/widgets/is_empty_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
@@ -61,41 +62,45 @@ class _SwapSectionScreenState extends State<SwapSectionScreen> {
                           horizontal: 20.0),
                       child: SizedBox(
                         height: 150.0,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          controller: controller,
-                          itemBuilder: (ctx, index) {
-                            if (index < state.swapSectionListData.length) {
-                              SwapSectionItemModel swapSectionItemModel =
-                                  state.swapSectionListData[index];
-                              return InkWell(
-                                highlightColor: ColorName.transparent,
-                                splashColor: ColorName.transparent,
-                                onTap: () {
-                                  getSectionCategories(
-                                      swapSectionItemModel.id!,
-                                      index,
-                                      swapSectionItemModel.name!,
-                                      swapSectionItemModel.arName!);
-                                },
-                                child: SwapPopularCategoriesWidget(
-                                  data: state.swapSectionListData[index],
-                                  index: index,
-                                ),
-                              );
-                            } else {
-                              return !state.isMoreData
-                                  ? const Padding(
-                                      padding: EdgeInsetsDirectional.only(
-                                        end: 20.0,
+                        child: state.swapSectionListData.isEmpty
+                            ? const IsEmptyDataWidget(name: 'Swap')
+                            : ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                controller: controller,
+                                itemBuilder: (ctx, index) {
+                                  if (index <
+                                      state.swapSectionListData.length) {
+                                    SwapSectionItemModel swapSectionItemModel =
+                                        state.swapSectionListData[index];
+                                    return InkWell(
+                                      highlightColor: ColorName.transparent,
+                                      splashColor: ColorName.transparent,
+                                      onTap: () {
+                                        getSectionCategories(
+                                            swapSectionItemModel.id!,
+                                            index,
+                                            swapSectionItemModel.name!,
+                                            swapSectionItemModel.arName!);
+                                      },
+                                      child: SwapPopularCategoriesWidget(
+                                        data: state.swapSectionListData[index],
+                                        index: index,
                                       ),
-                                      child: CircularProgressIndicatorWidget(),
-                                    )
-                                  : const SizedBox();
-                            }
-                          },
-                          itemCount: state.swapSectionListData.length + 1,
-                        ),
+                                    );
+                                  } else {
+                                    return !state.isMoreData
+                                        ? const Padding(
+                                            padding: EdgeInsetsDirectional.only(
+                                              end: 20.0,
+                                            ),
+                                            child:
+                                                CircularProgressIndicatorWidget(),
+                                          )
+                                        : const SizedBox();
+                                  }
+                                },
+                                itemCount: state.swapSectionListData.length + 1,
+                              ),
                       ),
                     ),
                   );

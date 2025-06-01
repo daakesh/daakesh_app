@@ -22,6 +22,11 @@ enum ProductTapBar {
   SWAP,
 }
 
+enum FavouriteTapBarENUM {
+  SELL,
+  SWAP,
+}
+
 enum MyOrderTapBar {
   MYORDER,
   SWAPREQUEST,

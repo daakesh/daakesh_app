@@ -26,6 +26,9 @@ class RemoteAuthDatasource implements AuthDatasource {
     String country,
     String city,
     String address,
+    double latitude,
+    double longitude,
+    String deviceToken,
   ) async {
     final result = await getIt
         .get<NetworkService>()
@@ -38,6 +41,9 @@ class RemoteAuthDatasource implements AuthDatasource {
       "country": country,
       "city": city,
       "location": address,
+      "latitude": latitude.toString(),
+      "longitude": longitude.toString(),
+      "deviceToken": deviceToken.toString(),
     });
     return result;
   }

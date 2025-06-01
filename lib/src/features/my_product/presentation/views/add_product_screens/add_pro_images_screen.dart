@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:daakesh/src/widgets/custom_message_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,174 +86,204 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
                   const SizedBox(
                     height: 29.0,
                   ),
-                  GestureDetector(
-                    onTap: () => showImagePickerOption(context),
-                    child: Stack(
-                      alignment: AlignmentDirectional.center,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 250.0,
-                          decoration: const BoxDecoration(
-                            color: ColorName.whiteSmoke,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 27.0, vertical: 18.2),
-                            child: SizedBox(
-                                width: double.infinity,
-                                height: double.infinity,
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(4.0)),
-                                  child: CustomPaint(
-                                    painter: CornerPainter(),
-                                  ),
-                                )),
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            Assets.svg.imagePickerIcon
-                                .svg(height: 27.0, width: 36.0),
-                            const SizedBox(
-                              height: 16.0,
-                            ),
-                            Text(
-                              context.locale.add_image,
-                              style: context.easyTheme.textTheme.bodyLarge,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 24.0,
-                  ),
                   BlocBuilder<MyProFuncBloc, MyProFuncState>(
                       builder: (_, state) {
-                    return Wrap(
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ...List.generate(
-                          state.oldImage.length != 1 ||
-                                  state.oldImage.first.isNotEmpty
-                              ? state.oldImage.length
-                              : 0,
-                          (index) => state.oldImage.isNotEmpty
-                              ? Padding(
-                                  padding:
-                                      const EdgeInsetsDirectional.only(end: 4),
+                        GestureDetector(
+                          onTap: () {
+                            if (state.imagesList.length >= 3) {
+                              showMessageDialog(
+                                  barrierDismissible: true,
+                                  context: context,
+                                  child: const Column(
+                                    children: [
+                                      Text('You can add three images only'),
+                                    ],
+                                  ));
+                            } else {
+                              showImagePickerOption(context);
+                            }
+                          },
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: 250.0,
+                                decoration: const BoxDecoration(
+                                  color: ColorName.whiteSmoke,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12.0)),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 27.0, vertical: 18.2),
                                   child: SizedBox(
-                                    height: 90,
-                                    width: 90,
-                                    child: Stack(
-                                      alignment: AlignmentDirectional.topEnd,
-                                      children: [
-                                        Center(
-                                          child: Container(
-                                            width: 85.0,
-                                            height: 60.0,
-                                            margin: const EdgeInsetsDirectional
-                                                .only(end: 12.0, bottom: 8.0),
-                                            decoration: BoxDecoration(
-                                              color: ColorName.paleGray,
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(4.0)),
-                                              border: Border.all(
-                                                  color: ColorName.gray),
-                                            ),
-                                            child: Image.network(
-                                                state.oldImage[index],
-                                                fit: BoxFit.cover),
-                                          ),
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(4.0)),
+                                        child: CustomPaint(
+                                          painter: CornerPainter(),
                                         ),
-                                        Positioned(
-                                          top: 0,
-                                          child: InkWell(
-                                            onTap: () => deleteOldImage(index),
-                                            child: Container(
-                                              width: 25,
-                                              height: 25,
-                                              decoration: const BoxDecoration(
-                                                  color: Colors.amber,
-                                                  shape: BoxShape.circle),
-                                              child: const Center(
-                                                child: Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                  size: 15,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )),
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Assets.svg.imagePickerIcon
+                                      .svg(height: 27.0, width: 36.0),
+                                  const SizedBox(
+                                    height: 16.0,
                                   ),
-                                )
-                              : const SizedBox(),
+                                  Text(
+                                    context.locale.add_image,
+                                    style:
+                                        context.easyTheme.textTheme.bodyLarge,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                        ...List.generate(
-                          state.imagesList.length,
-                          (index) => state.imagesList.isNotEmpty
-                              ? Padding(
-                                  padding:
-                                      const EdgeInsetsDirectional.only(end: 4),
-                                  child: SizedBox(
-                                    width: 90,
-                                    height: 90,
-                                    child: Stack(
-                                      alignment: AlignmentDirectional.topEnd,
-                                      children: [
-                                        Center(
-                                          child: Container(
-                                            width: 85.0,
-                                            height: 60.0,
-                                            margin: const EdgeInsetsDirectional
-                                                .only(end: 12.0, bottom: 8.0),
-                                            decoration: BoxDecoration(
-                                              color: ColorName.paleGray,
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(4.0)),
-                                              border: Border.all(
-                                                  color: ColorName.gray),
-                                            ),
-                                            child: Image.file(
-                                                File(state
-                                                    .imagesList[index].path),
-                                                fit: BoxFit.cover),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 0,
-                                          child: InkWell(
-                                            onTap: () => deleteImage(index),
-                                            child: Container(
-                                              width: 25,
-                                              height: 25,
-                                              decoration: const BoxDecoration(
-                                                  color: Colors.amber,
-                                                  shape: BoxShape.circle),
-                                              child: const Center(
-                                                child: Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                  size: 15,
+                        const SizedBox(
+                          height: 24.0,
+                        ),
+                        Wrap(
+                          children: [
+                            ...List.generate(
+                              state.oldImage.length != 1 ||
+                                      state.oldImage.first.isNotEmpty
+                                  ? state.oldImage.length
+                                  : 0,
+                              (index) => state.oldImage.isNotEmpty
+                                  ? Padding(
+                                      padding: const EdgeInsetsDirectional.only(
+                                          end: 4),
+                                      child: SizedBox(
+                                        height: 90,
+                                        width: 90,
+                                        child: Stack(
+                                          alignment:
+                                              AlignmentDirectional.topEnd,
+                                          children: [
+                                            Center(
+                                              child: Container(
+                                                width: 85.0,
+                                                height: 60.0,
+                                                margin:
+                                                    const EdgeInsetsDirectional
+                                                        .only(
+                                                        end: 12.0, bottom: 8.0),
+                                                decoration: BoxDecoration(
+                                                  color: ColorName.paleGray,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(4.0)),
+                                                  border: Border.all(
+                                                      color: ColorName.gray),
                                                 ),
+                                                child: Image.network(
+                                                    state.oldImage[index],
+                                                    fit: BoxFit.cover),
                                               ),
                                             ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              : const SizedBox(),
+                                            Positioned(
+                                              top: 0,
+                                              child: InkWell(
+                                                onTap: () =>
+                                                    deleteOldImage(index),
+                                                child: Container(
+                                                  width: 25,
+                                                  height: 25,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          color: Colors.amber,
+                                                          shape:
+                                                              BoxShape.circle),
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.close,
+                                                      color: Colors.white,
+                                                      size: 15,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            ),
+                            ...List.generate(
+                              state.imagesList.length,
+                              (index) => state.imagesList.isNotEmpty
+                                  ? Padding(
+                                      padding: const EdgeInsetsDirectional.only(
+                                          end: 4),
+                                      child: SizedBox(
+                                        width: 90,
+                                        height: 90,
+                                        child: Stack(
+                                          alignment:
+                                              AlignmentDirectional.topEnd,
+                                          children: [
+                                            Center(
+                                              child: Container(
+                                                width: 85.0,
+                                                height: 60.0,
+                                                margin:
+                                                    const EdgeInsetsDirectional
+                                                        .only(
+                                                        end: 12.0, bottom: 8.0),
+                                                decoration: BoxDecoration(
+                                                  color: ColorName.paleGray,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(4.0)),
+                                                  border: Border.all(
+                                                      color: ColorName.gray),
+                                                ),
+                                                child: Image.file(
+                                                    File(state.imagesList[index]
+                                                        .path),
+                                                    fit: BoxFit.cover),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 0,
+                                              child: InkWell(
+                                                onTap: () => deleteImage(index),
+                                                child: Container(
+                                                  width: 25,
+                                                  height: 25,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          color: Colors.amber,
+                                                          shape:
+                                                              BoxShape.circle),
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.close,
+                                                      color: Colors.white,
+                                                      size: 15,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            )
+                          ],
                         )
                       ],
                     );

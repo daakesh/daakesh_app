@@ -160,7 +160,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
                                           focusColor: ColorName.amber,
                                           inactiveThumbColor: ColorName.white,
                                           inactiveTrackColor: ColorName.gray,
-                                          thumbColor: MaterialStateProperty.all(
+                                          thumbColor: WidgetStateProperty.all(
                                               ColorName.white),
                                           onChanged: (value) {
                                             MyProFuncBloc.get.add(
@@ -272,7 +272,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
       productPrice: productPriceController.text,
       productDiscount: productDiscountController.text,
     ));
-    Utils.openNewPage(const ShipToScreen());
+    Utils.openNewPage(ShipToScreen());
   }
 
   void cancel() {

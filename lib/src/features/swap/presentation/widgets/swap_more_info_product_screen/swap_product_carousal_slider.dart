@@ -12,7 +12,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
     required this.trendDealsItem,
   });
 
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {

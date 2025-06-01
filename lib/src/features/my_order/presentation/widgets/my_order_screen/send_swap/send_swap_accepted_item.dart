@@ -157,7 +157,7 @@ class SendSwapAcceptedItem extends StatelessWidget {
                   onPressed: () => Utils.lunchCall(
                       sendSwapReqItem.sourceUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
-                    minimumSize: MaterialStateProperty.all(const Size(387, 40)),
+                    minimumSize: WidgetStateProperty.all(const Size(387, 40)),
                   ),
                 ),
               ),
@@ -170,8 +170,8 @@ class SendSwapAcceptedItem extends StatelessWidget {
                   onPressed: () => Utils.lunchWhatsApp(
                       sendSwapReqItem.sourceUser!.phoneNumber.toString()),
                   style: context.easyTheme.elevatedButtonTheme.style!.copyWith(
-                    backgroundColor: MaterialStateProperty.all(ColorName.amber),
-                    minimumSize: MaterialStateProperty.all(const Size(387, 40)),
+                    backgroundColor: WidgetStateProperty.all(ColorName.amber),
+                    minimumSize: WidgetStateProperty.all(const Size(387, 40)),
                   ),
                 ),
               ),

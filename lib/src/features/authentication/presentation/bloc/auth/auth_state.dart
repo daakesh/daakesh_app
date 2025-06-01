@@ -29,6 +29,9 @@ class AuthState extends Equatable {
   ///
   final String emailController;
   final String passwordController;
+  final double latitude;
+  final double longitude;
+  final String deviceToken;
 
   const AuthState({
     this.authStateStatus = AuthStateStatus.INITIAL,
@@ -46,6 +49,9 @@ class AuthState extends Equatable {
     this.rememberMeValue = false,
     this.emailController = '',
     this.passwordController = '',
+    this.latitude = 0,
+    this.longitude = 0,
+    this.deviceToken = '',
   });
 
   AuthState copyWith({
@@ -64,6 +70,9 @@ class AuthState extends Equatable {
     bool? rememberMeValue,
     String? emailController,
     String? passwordController,
+    double? latitude,
+    double? longitude,
+    String? deviceToken,
   }) {
     return AuthState(
       authStateStatus: authStateStatus ?? this.authStateStatus,
@@ -81,6 +90,9 @@ class AuthState extends Equatable {
       rememberMeValue: rememberMeValue ?? this.rememberMeValue,
       emailController: emailController ?? this.emailController,
       passwordController: passwordController ?? this.passwordController,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      deviceToken: deviceToken ?? this.deviceToken,
     );
   }
 
@@ -103,5 +115,8 @@ class AuthState extends Equatable {
         rememberMeValue,
         emailController,
         passwordController,
+        latitude,
+        longitude,
+        deviceToken,
       ];
 }

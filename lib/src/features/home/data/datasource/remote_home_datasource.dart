@@ -48,6 +48,7 @@ class RemoteHomeDatasource implements HomeDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "catID": catID,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
@@ -72,6 +73,7 @@ class RemoteHomeDatasource implements HomeDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "subID": subID,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
@@ -104,6 +106,7 @@ class RemoteHomeDatasource implements HomeDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
               "name": "price",
@@ -131,6 +134,7 @@ class RemoteHomeDatasource implements HomeDatasource {
           },
           params: {"page": "$page"},
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "brandID": "$brandId",
             "Filter": {"Type": "Sell"},
           }),
@@ -151,6 +155,7 @@ class RemoteHomeDatasource implements HomeDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "type": "sell",
             "owner": "normal",
             "Filter": filterDataModel.toJson(),
@@ -366,6 +371,7 @@ class RemoteHomeDatasource implements HomeDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "brandID": brandID,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
@@ -385,7 +391,7 @@ class RemoteHomeDatasource implements HomeDatasource {
       SortingType sortingType) async {
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getSearchItemsResult',
-          params: {"page": "$page"},
+          params: {"page": "$page", "userID": ValueConstants.userId},
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -413,6 +419,7 @@ class RemoteHomeDatasource implements HomeDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
               "name": "price",

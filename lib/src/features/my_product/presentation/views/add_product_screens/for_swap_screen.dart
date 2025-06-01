@@ -1,4 +1,5 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:daakesh/src/features/my_product/presentation/widgets/pick_location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
@@ -13,6 +14,8 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
   final displayProductController = TextEditingController();
   final countryController = TextEditingController();
   final cityController = TextEditingController();
+  final String _latitude = '';
+  final String _longitude = '';
 
   @override
   void initState() {
@@ -106,31 +109,62 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18,
                             color: ColorName.black.withOpacity(0.5))),
-                    TextFormFieldWidget(
-                      controller: countryController,
-                      isSuffixPrefixOn: true,
-                      suffixIcon: SizedBox(
-                        height: 9,
-                        width: 16,
-                        child:
-                            Center(child: Assets.svg.arrowDropDownIcon.svg()),
-                      ),
-                      prefixIcon: BlocBuilder<MyProFuncBloc, MyProFuncState>(
-                          builder: (_, state) {
-                        return SizedBox(
-                            width: 30,
-                            height: 30,
-                            child: Center(
-                                child: Text(
-                              state.swapFlagEmoji,
-                              style: const TextStyle(
-                                  color: ColorName.blueGray, fontSize: 24),
-                            )));
-                      }),
-                      readOnly: true,
-                      onTap: () => showCountryDialog(),
-                      inputFormatters: [
-                        RegExpValidator.beginWhitespace,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: TextFormFieldWidget(
+                            controller: countryController,
+                            isSuffixPrefixOn: true,
+                            suffixIcon: SizedBox(
+                              height: 9,
+                              width: 16,
+                              child: Center(
+                                  child: Assets.svg.arrowDropDownIcon.svg()),
+                            ),
+                            prefixIcon:
+                                BlocBuilder<MyProFuncBloc, MyProFuncState>(
+                                    builder: (_, state) {
+                              return SizedBox(
+                                  width: 30,
+                                  height: 30,
+                                  child: Center(
+                                      child: Text(
+                                    state.swapFlagEmoji,
+                                    style: const TextStyle(
+                                        color: ColorName.blueGray,
+                                        fontSize: 24),
+                                  )));
+                            }),
+                            readOnly: true,
+                            onTap: () => showCountryDialog(),
+                            inputFormatters: [
+                              RegExpValidator.beginWhitespace,
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                        // TextButtonWidget(
+                        //     isBold: true,
+                        //     text: 'Pick location',
+                        //     onPressed: () {
+                        //       Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //             builder: (context) => PickLocationScreen(
+                        //               onSelectPosition:
+                        //                   (double latitude, double longitude) {
+                        //                 setState(() {
+                        //                   _latitude = latitude.toString();
+                        //                   _longitude = longitude.toString();
+                        //                 });
+
+                        //                 print(latitude);
+                        //                 print(longitude);
+                        //               },
+                        //             ),
+                        //           ));
+                        //     }),
                       ],
                     ),
                     const SizedBox(
@@ -212,6 +246,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
       swapCountry: countryController.text,
       swapCity: cityController.text,
     ));
+
     Utils.openNewPage(const ShipToScreen());
   }
 

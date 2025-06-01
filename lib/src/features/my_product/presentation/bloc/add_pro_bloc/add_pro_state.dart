@@ -40,6 +40,8 @@ class AddProState extends Equatable {
   final String swapCountry;
   final String swapCity;
   final String shipToCountry;
+  final String latitude;
+  final String longitude;
 
   const AddProState({
     this.addProStateStatus = AddProStateStatus.INITIAL,
@@ -65,6 +67,8 @@ class AddProState extends Equatable {
 
     ///
     this.shipToCountry = '',
+    this.latitude = '',
+    this.longitude = '',
   });
 
   AddProState copyWith({
@@ -93,6 +97,8 @@ class AddProState extends Equatable {
 
     ///
     String? shipToCountry,
+    String? latitude,
+    String? longitude,
   }) {
     return AddProState(
       addProStateStatus: addProStateStatus ?? this.addProStateStatus,
@@ -120,6 +126,8 @@ class AddProState extends Equatable {
 
       ///
       shipToCountry: shipToCountry ?? this.shipToCountry,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
     );
   }
 
@@ -152,5 +160,7 @@ class AddProState extends Equatable {
 
         ///
         shipToCountry,
+        latitude,
+        longitude,
       ];
 }

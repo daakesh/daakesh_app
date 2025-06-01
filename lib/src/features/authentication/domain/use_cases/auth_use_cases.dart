@@ -14,6 +14,9 @@ abstract class AuthUseCases {
     String country,
     String city,
     String address,
+    double latitude,
+    double longitude,
+    String deviceToken,
   );
   Future<Either<Failure, ValidResponse>> activateUser(String id);
   Future<Either<Failure, ValidResponse>> isPhoneNumberExist(String phoneNumber);
@@ -35,25 +38,29 @@ class AuthUseCasesImpl implements AuthUseCases {
 
   @override
   Future<Either<Failure, ValidResponse>> addUser(
-    String name,
-    String email,
-    String password,
-    String phoneNumber,
-    String userType,
-    String country,
-    String city,
-    String address,
-  ) async {
+      String name,
+      String email,
+      String password,
+      String phoneNumber,
+      String userType,
+      String country,
+      String city,
+      String address,
+      double latitude,
+      double longitude,
+      String deviceToken) async {
     return await getIt.get<AuthRepository>().addUser(
-          name,
-          email,
-          password,
-          phoneNumber,
-          userType,
-          country,
-          city,
-          address,
-        );
+        name,
+        email,
+        password,
+        phoneNumber,
+        userType,
+        country,
+        city,
+        address,
+        latitude,
+        longitude,
+        deviceToken);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:daakesh/src/features/my_product/presentation/widgets/pick_location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
@@ -13,6 +14,8 @@ class ShipToScreen extends StatefulWidget {
 class _ShipToScreenState extends State<ShipToScreen> {
   final countryController = TextEditingController();
   List<String> countriesList = [];
+  String _latitude = '';
+  String _longitude = '';
 
   @override
   void initState() {
@@ -190,6 +193,78 @@ class _ShipToScreenState extends State<ShipToScreen> {
                   ],
                 );
               }),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButtonWidget(
+                    padding: const EdgeInsets.all(30),
+                    isBold: true,
+                    text: 'Pick location',
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PickLocationScreen(
+                              onSelectPosition:
+                                  (double latitude, double longitude) {
+                                setState(() {
+                                  _latitude = latitude.toString();
+                                  _longitude = longitude.toString();
+                                });
+
+                                AddProBloc.get.latitudePicked =
+                                    latitude.toString();
+                                AddProBloc.get.longitudePicked =
+                                    longitude.toString();
+
+                                print(latitude);
+                                print(longitude);
+                              },
+                            ),
+                          ));
+                    }),
+              ),
+              _latitude != '' && _longitude != ''
+                  ? Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Latitude',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextFormFieldWidget(
+                                  controller: TextEditingController(
+                                      text: _latitude.substring(1, 12))),
+                            ],
+                          )),
+                          const SizedBox(width: 20),
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Longitude',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextFormFieldWidget(
+                                  controller: TextEditingController(
+                                      text: _longitude.substring(1, 12))),
+                            ],
+                          ))
+                        ],
+                      ),
+                    )
+                  : const SizedBox(),
               const SizedBox(height: 77),
               const Spacer(flex: 1),
               Padding(
@@ -263,6 +338,7 @@ class _ShipToScreenState extends State<ShipToScreen> {
       ShowToastSnackBar.showSnackBars(message: context.locale.add_one_country);
       return;
     }
+
     AddProBloc.get.add(AddProductEvent(context: context));
   }
 

@@ -62,27 +62,34 @@ class TrendDealsItem {
   CategoryItem? category;
   BrandItem? brand;
   SwapSubCategory? subcategory;
-  TrendDealsItem(
-      {this.id,
-      this.description,
-      this.itemImg,
-      this.date,
-      this.title,
-      this.type,
-      this.swapFor,
-      this.city,
-      this.year,
-      this.condition,
-      this.price,
-      this.discount,
-      this.discountFrom,
-      this.discountTo,
-      this.country,
-      this.section,
-      this.user,
-      this.category,
-      this.brand,
-      this.subcategory});
+  bool? isFavorite;
+  String? longitude;
+  String? latitude;
+  TrendDealsItem({
+    this.id,
+    this.description,
+    this.itemImg,
+    this.date,
+    this.title,
+    this.type,
+    this.swapFor,
+    this.city,
+    this.year,
+    this.condition,
+    this.price,
+    this.discount,
+    this.discountFrom,
+    this.discountTo,
+    this.country,
+    this.section,
+    this.user,
+    this.category,
+    this.brand,
+    this.subcategory,
+    this.isFavorite,
+    this.latitude,
+    this.longitude,
+  });
 
   TrendDealsItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -124,5 +131,9 @@ class TrendDealsItem {
     subcategory = json['subcategory'] != null
         ? SwapSubCategory.fromJson(json['subcategory'])
         : SwapSubCategory.initValues();
+
+    isFavorite = json['isFavorite'] ?? false;
+    latitude = json['latitude'].toString();
+    longitude = json['longitude'].toString();
   }
 }

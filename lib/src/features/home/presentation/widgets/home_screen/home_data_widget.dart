@@ -1,3 +1,4 @@
+import 'package:daakesh/src/widgets/is_empty_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
@@ -59,37 +60,39 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
             padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
             child: SizedBox(
               height: 150.0,
-              child: ListView.builder(
-                controller: controller,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (ctx, index) {
-                  if (index < widget.state.sectionListData.length) {
-                    SectionItemModel sectionItem =
-                        widget.state.sectionListData[index];
-                    return GestureDetector(
-                      onTap: () => exploreSection(
-                          context,
-                          sectionItem.id!,
-                          index,
-                          sectionItem.name.toString(),
-                          sectionItem.arName.toString()),
-                      child: PopularCategoriesWidget(
-                        data: widget.state.sectionListData[index],
-                      ),
-                    );
-                  } else {
-                    return !widget.state.isMoreData
-                        ? const Padding(
-                            padding: EdgeInsetsDirectional.only(
-                              end: 20.0,
+              child: widget.state.sectionListData.isEmpty
+                  ? const IsEmptyDataWidget(name: 'Popular')
+                  : ListView.builder(
+                      controller: controller,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (ctx, index) {
+                        if (index < widget.state.sectionListData.length) {
+                          SectionItemModel sectionItem =
+                              widget.state.sectionListData[index];
+                          return GestureDetector(
+                            onTap: () => exploreSection(
+                                context,
+                                sectionItem.id!,
+                                index,
+                                sectionItem.name.toString(),
+                                sectionItem.arName.toString()),
+                            child: PopularCategoriesWidget(
+                              data: widget.state.sectionListData[index],
                             ),
-                            child: CircularProgressIndicatorWidget(),
-                          )
-                        : const SizedBox();
-                  }
-                },
-                itemCount: widget.state.sectionListData.length + 1,
-              ),
+                          );
+                        } else {
+                          return !widget.state.isMoreData
+                              ? const Padding(
+                                  padding: EdgeInsetsDirectional.only(
+                                    end: 20.0,
+                                  ),
+                                  child: CircularProgressIndicatorWidget(),
+                                )
+                              : const SizedBox();
+                        }
+                      },
+                      itemCount: widget.state.sectionListData.length + 1,
+                    ),
             ),
           ),
         ),
@@ -270,9 +273,9 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
                         ? state.homeTodayDealsListData.length
                         : 4,
                   ),
-                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: isTablet ? 1.3 :   0.65,
+                      childAspectRatio: isTablet ? 1.3 : 0.65,
                       mainAxisSpacing: 8.0,
                       crossAxisSpacing: 8.0)),
             );
@@ -305,7 +308,8 @@ class _HomeDataWidgetState extends State<HomeDataWidget> {
   }
 
   bool get isTablet {
-    return MediaQuery.of(context).size.width >= 600; // 600px is a common breakpoint for tablets.
+    return MediaQuery.of(context).size.width >=
+        600; // 600px is a common breakpoint for tablets.
   }
 
   void exploreSection(context, int secID, int sectionIndex,

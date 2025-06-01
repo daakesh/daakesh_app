@@ -65,31 +65,38 @@ class TodayItem {
   CategoryItem? category;
   BrandItem? brand;
   SubCategory? subcategory;
-  TodayItem(
-      {this.id,
-      this.description,
-      this.itemImg,
-      this.date,
-      this.title,
-      this.type,
-      this.swapFor,
-      this.city,
-      this.year,
-      this.priceAfterDiscount,
-      this.discountPercentage,
-      this.condition,
-      this.price,
-      this.discount,
-      this.discountFrom,
-      this.rateCount,
-      this.averageRating,
-      this.discountTo,
-      this.country,
-      this.section,
-      this.user,
-      this.category,
-      this.brand,
-      this.subcategory});
+  bool? isFavorite;
+  String? longitude;
+  String? latitude;
+  TodayItem({
+    this.id,
+    this.description,
+    this.itemImg,
+    this.date,
+    this.title,
+    this.type,
+    this.swapFor,
+    this.city,
+    this.year,
+    this.priceAfterDiscount,
+    this.discountPercentage,
+    this.condition,
+    this.price,
+    this.discount,
+    this.discountFrom,
+    this.rateCount,
+    this.averageRating,
+    this.discountTo,
+    this.country,
+    this.section,
+    this.user,
+    this.category,
+    this.brand,
+    this.subcategory,
+    this.isFavorite,
+    this.latitude,
+    this.longitude,
+  });
   TodayItem.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     description = json['description'] ?? "others";
@@ -142,6 +149,10 @@ class TodayItem {
     subcategory = json['subcategory'] != null
         ? SubCategory.fromJson(json['subcategory'])
         : SubCategory.initValues();
+
+    isFavorite = json['isFavorite'];
+    latitude = json['latitude'].toString();
+    longitude = json['longitude'].toString();
   }
   TodayItem copyWith({
     int? id,

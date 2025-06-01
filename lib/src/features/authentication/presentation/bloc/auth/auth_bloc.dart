@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
@@ -69,6 +70,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       name: event.name,
       email: event.email,
       password: event.password,
+      deviceToken: event.deviceToken,
     ));
   }
 
@@ -79,6 +81,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       country: event.country,
       city: event.city,
       address: event.address,
+      latitude: event.latitude,
+      longitude: event.longitude,
     ));
   }
 
@@ -95,15 +99,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(phone: event.phoneNumber));
     ProgressCircleDialog.show();
     final result = await getIt.get<AuthUseCases>().addUser(
-          state.name,
-          state.email,
-          state.password,
-          '+${state.phoneCode}${state.phone}',
-          'Normal',
-          state.country,
-          state.city,
-          state.address,
-        );
+        state.name,
+        state.email,
+        state.password,
+        '+${state.phoneCode}${state.phone}',
+        'Normal',
+        state.country,
+        state.city,
+        state.address,
+        state.latitude,
+        state.longitude,
+        state.deviceToken);
     result.fold((l) {
       emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
     }, (r) {

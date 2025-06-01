@@ -122,6 +122,7 @@ class RemoteSwapDatasource implements SwapDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "type": "swap",
             "owner": "normal",
             "Filter": swapFilterDataModel.toJson(),
@@ -305,6 +306,7 @@ class RemoteSwapDatasource implements SwapDatasource {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
+            "userID": ValueConstants.userId,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
               "name": "created_at",

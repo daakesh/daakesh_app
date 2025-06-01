@@ -1,4 +1,4 @@
-import 'package:daakesh/gen/colors.gen.dart';
+import 'package:daakesh/src/features/favourite/presentation/views/favourite/favourite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -107,6 +107,17 @@ class ProfileScreen extends StatelessWidget {
               title: context.locale.location_profile_title,
               icon: Assets.svg.locationPinIcon.svg(width: 24.0, height: 24.0),
             ),
+//!________________________________________
+            CategoryItemWidget(
+              onTap: () {
+                print(ValueConstants.userId);
+                Utils.openNewPage(const FavouriteScreen());
+              },
+              title: 'Favourite',
+              icon: Assets.svg.locationPinIcon.svg(width: 24.0, height: 24.0),
+            ),
+
+            //!________________________________________
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: Text(
@@ -205,8 +216,7 @@ class ProfileScreen extends StatelessWidget {
                   child: DefaultButtonWidget(
                       text: context.locale.delete_account,
                       style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.red)),
+                          backgroundColor: WidgetStateProperty.all(Colors.red)),
                       onPressed: () => context.showRemoveAccountDialog)),
             ),
             const SizedBox(
@@ -249,16 +259,16 @@ class LanguageSwapWidget extends StatelessWidget {
               focusColor: ColorName.gainsboro,
               hoverColor: ColorName.gainsboro,
               activeTrackColor: ColorName.gainsboro,
-              trackOutlineColor: MaterialStateProperty.resolveWith(
-                (final Set<MaterialState> states) {
-                  if (states.contains(MaterialState.selected)) {
+              trackOutlineColor: WidgetStateProperty.resolveWith(
+                (final Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
                     return null;
                   }
                   return ColorName.transparent;
                 },
               ),
-              thumbColor: MaterialStateProperty.all(ColorName.blueGray),
-              thumbIcon: MaterialStateProperty.all(const Icon(
+              thumbColor: WidgetStateProperty.all(ColorName.blueGray),
+              thumbIcon: WidgetStateProperty.all(const Icon(
                 Icons.abc,
                 color: ColorName.blueGray,
               )),

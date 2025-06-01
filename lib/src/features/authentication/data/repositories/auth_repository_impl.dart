@@ -20,6 +20,9 @@ class AuthRepositoryImpl implements AuthRepository {
     String country,
     String city,
     String address,
+    double latitude,
+    double longitude,
+    String deviceToken,
   ) async {
     return await getIt.get<AuthDatasource>().addUser(
           name,
@@ -30,6 +33,9 @@ class AuthRepositoryImpl implements AuthRepository {
           country,
           city,
           address,
+          latitude,
+          longitude,
+          deviceToken,
         );
   }
 

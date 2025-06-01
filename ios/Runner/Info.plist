@@ -16,13 +16,6 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>daakesh</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Daakesh needs to access your photo library to upload product images</string>
-    <key>ITSAppUsesNonExemptEncryption</key>
-    <false/>
-    <key>NSCameraUsageDescription</key>
-    <string>Daakesh needs to access your camera to upload product images</string>
-
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -42,14 +35,59 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+
+	<!-- Firebase settings -->
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/> 
+	<key>firebase_messaging_auto_init_enabled</key>
+    <true/>
+
+
+	<!-- Google Maps API Key -->
+	<key>GMSApiKey</key>
+	<string>AIzaSyC6SJM1WwxBYZkBQ0VyuSfA0SWUWoLB4_o</string>
+
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+
+	<!-- Permissions -->
+	<key>NSCameraUsageDescription</key>
+	<string>Daakesh needs to access your camera to upload product images.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We use your location even when the app is in the background.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to provide services nearby.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Daakesh needs to access your photo library to upload product images.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier will be used to deliver personalized ads to you.</string>
+
+	<!-- App Transport Security -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+
+	<!-- Background modes -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+		<string>location</string>
+		<string>fetch</string>
+		<string>processing</string>
+	</array>
+
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+
+	<!-- Orientation -->
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -63,5 +101,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
+	<!-- Flutter platform views -->
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>

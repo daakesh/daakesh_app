@@ -19,7 +19,7 @@ class ProductCarousalSlider extends StatefulWidget {
 }
 
 class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
   int currentIndex = 0;
 
   @override
@@ -41,7 +41,7 @@ class _ProductCarousalSliderState extends State<ProductCarousalSlider> {
                 width: 6.0,
               ),
               !widget.isDaakeshTodayDeal
-                  ? DaakeshLogoWidget(
+                  ? const DaakeshLogoWidget(
                       width: 140,
                     )
                   : Text(

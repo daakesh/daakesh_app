@@ -88,6 +88,20 @@ class RemoteProfileDatasource implements ProfileDatasource {
   }
 
   @override
+  Future<Either<Failure, ValidResponse>> getLanguageData() async {
+    String lang = ValueConstants.language;
+
+    // print(' ValueConstants.language  :::   $lang');
+    final result = await getIt.get<NetworkService>().get(
+        headers: {
+          "Accept-Language": lang,
+        },
+        baseUrl: NetworkConstants.baseUrl,
+        path: 'DaakeshServices/api/lang/getLang');
+    return result;
+  }
+
+  @override
   Future<Either<Failure, ValidResponse>> getContactInfo() async {
     final result = await getIt.get<NetworkService>().get(
         baseUrl: NetworkConstants.baseUrl,

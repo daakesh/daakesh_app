@@ -1,16 +1,38 @@
 import 'dart:async';
+import 'package:daakesh/src/features/profile/data/models/language_data_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(const ProfileState()) {
+    on<SetValueLangEvent>(_setValueLang);
     on<ActivateUpdateEvent>(_activateUpdate);
     on<ChangeLocationFlagEvent>(_changeLocationFlag);
     on<ChangeLangEvent>(_changeLang);
-    on<SetValueLangEvent>(_setValueLang);
+
     on<UpdateLocationEvent>(_updateLocation);
+    on<GetLanguageDataEvent>(_getLanguageData);
   }
   static ProfileBloc get get => BlocProvider.of(Utils.currentContext);
+
+  FutureOr<void> _getLanguageData(
+      GetLanguageDataEvent event, Emitter<ProfileState> emit) async {
+    final result = await getIt.get<ProfileUseCases>().getLanguageData();
+
+    result.fold((l) {
+      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+    }, (r) async {
+      if (!r.status!) {
+        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        return;
+      }
+
+      LanguageResponseModel languageResponseModel =
+          LanguageResponseModel.fromJson(r.data);
+
+      print(languageResponseModel.data);
+    });
+  }
 
   ///The initial value is disabled for editing data, This event allows users to make edits when desired for all screens.
   FutureOr<void> _activateUpdate(
@@ -40,6 +62,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     await GetItUtils.prefs
         .setBool(SharedPrefKeys.language, event.switchLangValue);
     emit(state.copyWith(switchLangValue: event.switchLangValue));
+
+    add(GetLanguageDataEvent());
+    print(' ValueConstants.language  :::   ${ValueConstants.language}');
   }
 
   FutureOr<void> _setValueLang(
@@ -49,6 +74,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     bool? isEnLang =
         GetItUtils.prefs.getBoolean(SharedPrefKeys.language) ?? false;
     emit(state.copyWith(switchLangValue: isEnLang));
+
+    add(GetLanguageDataEvent());
+    print(' ValueConstants.language  :::   ${ValueConstants.language}');
   }
 
   FutureOr<void> _updateLocation(

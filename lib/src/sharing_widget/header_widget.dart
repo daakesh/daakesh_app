@@ -26,95 +26,100 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.isLight ? 110 : 140,
+      height: widget.isLight ? 110 : 160,
       width: double.infinity,
       decoration: BoxDecoration(
         color: widget.isLight ? ColorName.white : ColorName.blueGray,
       ),
       child: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
-          return Directionality(
-            textDirection: TextDirection.ltr,
-            child: Stack(
-              alignment: AlignmentDirectional.bottomEnd,
-              children: [
-                Opacity(
-                  opacity: 0.3,
-                  child: Assets.svg.line.svg(
-                      alignment: AlignmentDirectional.bottomEnd,
-                      color: widget.isLight ? Colors.grey : null,
-                      width: 160,
-                      height: 160),
-                ),
-                widget.withArrowBack
-                    ? Stack(
-                        alignment: AlignmentDirectional.bottomStart,
-                        children: [
-                          Center(
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                state.switchLangValue
-                                    ? ArabicDaakeshLogoWidget(
-                                        isLight: widget.isLight ? false : true,
-                                        width: 184,
-                                      )
-                                    : DaakeshLogoWidget(
-                                        isLight: widget.isLight ? false : true,
-                                        width: 184,
-                                      ),
-                              ],
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () => Navigator.pop(context),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 18, vertical: 16.0),
-                              child: Assets.svg.arrowBackIcon.svg(
-                                  color: widget.isLight
-                                      ? ColorName.blueGray
-                                      : ColorName.white,
-                                  height: 20.0,
-                                  width: 20),
-                            ),
-                          ),
-                        ],
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: state.switchLangValue
-                                ? ArabicDaakeshLogoWidget(
-                                    isLight: widget.isLight ? false : true,
-                                    width: 184,
-                                  )
-                                : DaakeshLogoWidget(
-                                    isLight: widget.isLight ? false : true,
-                                    width: 184,
+          return SafeArea(
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Stack(
+                alignment: AlignmentDirectional.bottomEnd,
+                children: [
+                  Opacity(
+                    opacity: 0.3,
+                    child: Assets.svg.line.svg(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        color: widget.isLight ? Colors.grey : null,
+                        width: 160,
+                        height: 160),
+                  ),
+                  widget.withArrowBack
+                      ? Stack(
+                          alignment: AlignmentDirectional.bottomStart,
+                          children: [
+                            Center(
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 20.0,
                                   ),
-                          ),
-                        ],
-                      ),
-                widget.isSend
-                    ? GestureDetector(
-                        onTap: () => deleteItem(context, widget.requestID ?? 0),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 18, vertical: 16.0),
-                          child: Assets.svg.deleteIcon.svg(
-                            color: ColorName.red,
-                            width: 24,
-                            height: 24,
-                          ),
+                                  state.switchLangValue
+                                      ? ArabicDaakeshLogoWidget(
+                                          isLight:
+                                              widget.isLight ? false : true,
+                                          width: 184,
+                                        )
+                                      : DaakeshLogoWidget(
+                                          isLight:
+                                              widget.isLight ? false : true,
+                                          width: 160,
+                                        ),
+                                ],
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 18, vertical: 16.0),
+                                child: Assets.svg.arrowBackIcon.svg(
+                                    color: widget.isLight
+                                        ? ColorName.blueGray
+                                        : ColorName.white,
+                                    height: 20.0,
+                                    width: 20),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Center(
+                              child: state.switchLangValue
+                                  ? ArabicDaakeshLogoWidget(
+                                      isLight: widget.isLight ? false : true,
+                                      width: 184,
+                                    )
+                                  : DaakeshLogoWidget(
+                                      isLight: widget.isLight ? false : true,
+                                      width: 184,
+                                    ),
+                            ),
+                          ],
                         ),
-                      )
-                    : const SizedBox(),
-              ],
+                  widget.isSend
+                      ? GestureDetector(
+                          onTap: () =>
+                              deleteItem(context, widget.requestID ?? 0),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 16.0),
+                            child: Assets.svg.deleteIcon.svg(
+                              color: ColorName.red,
+                              width: 24,
+                              height: 24,
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
+                ],
+              ),
             ),
           );
         },

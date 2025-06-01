@@ -20,7 +20,7 @@ class ProductSlider extends StatefulWidget {
 class _ProductSliderState extends State<ProductSlider> {
   int currentIndex = 0;
 
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {

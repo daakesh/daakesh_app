@@ -15,7 +15,7 @@ class SwapCarouselSliderWidget extends StatefulWidget {
 }
 
 class _SwapCarouselSliderWidgetState extends State<SwapCarouselSliderWidget> {
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
   int _current = 0;
 
   @override

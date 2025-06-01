@@ -25,6 +25,8 @@ class AddProModel {
   List<XFile>? itemFileImg;
   List<String>? itemImageList;
   List<String>? oldItemImageList;
+  String? latitude;
+  String? longitude;
 
   AddProModel({
     this.userID,
@@ -50,6 +52,8 @@ class AddProModel {
     this.itemFileImg,
     this.itemImageList,
     this.oldItemImageList,
+    this.latitude,
+    this.longitude,
   });
 
   Map<String, dynamic> addItemToJson() {
@@ -82,6 +86,9 @@ class AddProModel {
     data['country_swap'] = countrySwap.toString();
     data['city_swap'] = citySwap.toString();
     data['itemImg'] = itemImageList!.join(',');
+
+    data['latitude'] = latitude.toString();
+    data['longitude'] = longitude.toString();
     return data;
   }
 
@@ -115,6 +122,8 @@ class AddProModel {
     data['display'] = display.toString();
     data['country_swap'] = countrySwap.toString();
     data['city_swap'] = citySwap.toString();
+    data['latitude'] = latitude.toString();
+    data['longitude'] = longitude.toString();
     if (itemImageList!.isNotEmpty && itemImageList != null) {
       data['itemImg'] = itemImageList!.join(',');
     }

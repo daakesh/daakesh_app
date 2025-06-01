@@ -14,11 +14,11 @@ class ReceiveDoneDealItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsetsDirectional.only(start: 15, end: 15, bottom: 11),
-      decoration: BoxDecoration(
+      margin: const EdgeInsetsDirectional.only(start: 15, end: 15, bottom: 11),
+      decoration: const BoxDecoration(
           color: ColorName.white,
           borderRadius: BorderRadius.all(Radius.circular(11)),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
                 offset: Offset(0, 3),
                 blurRadius: 3.0,
@@ -27,27 +27,27 @@ class ReceiveDoneDealItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 19,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: CachedImage(
                     imageUrl: receiveSwapReqItem.offerItems!.itemImg != null
                         ? receiveSwapReqItem.offerItems!.itemImg!.first
                         : ''),
               ),
-              SizedBox(width: 18),
+              const SizedBox(width: 18),
               Expanded(
                 flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.only(end: 80),
+                      padding: const EdgeInsetsDirectional.only(end: 80),
                       child: Text(
                         '${receiveSwapReqItem.offerItems!.title}\n',
                         style: context.easyTheme.textTheme.labelMedium!
@@ -58,7 +58,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                         maxLines: 2,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 1,
                     ),
                     Text(
@@ -68,7 +68,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
                         color: ColorName.mediumSilver,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
                     Text.rich(
@@ -97,20 +97,20 @@ class ReceiveDoneDealItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 18,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 15),
+                padding: const EdgeInsetsDirectional.only(start: 15),
                 child: Text(context.locale.swap_product_title,
                     style: context.easyTheme.textTheme.labelLarge!
                         .copyWith(fontSize: 15, color: ColorName.black)),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.only(end: 15),
+                padding: const EdgeInsetsDirectional.only(end: 15),
                 child: TextButtonWidget(
                   text: context.locale.see_offer_details,
                   style: context.easyTheme.textTheme.bodyMedium!.copyWith(
@@ -130,7 +130,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 3,
           ),
           Container(
@@ -139,14 +139,14 @@ class ReceiveDoneDealItem extends StatelessWidget {
             color: ColorName.lightGrayishBlue,
             child: Row(
               children: [
-                SizedBox(width: 14),
+                const SizedBox(width: 14),
                 Expanded(
                   child: CachedImage(
                       imageUrl: receiveSwapReqItem.sourceItems!.itemImg != null
                           ? receiveSwapReqItem.sourceItems!.itemImg!.first
                           : ''),
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Expanded(
                   flex: 4,
                   child: Text(
@@ -156,22 +156,22 @@ class ReceiveDoneDealItem extends StatelessWidget {
                         .copyWith(fontSize: 14, color: ColorName.gray),
                   ),
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Text(
                   context.locale.product_title,
                   overflow: TextOverflow.ellipsis,
                   style: context.easyTheme.textTheme.bodyMedium!
                       .copyWith(fontSize: 14, color: ColorName.burgundy),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 17,
           ),
           approved == 1
-              ? Divider(
+              ? const Divider(
                   color: ColorName.gray,
                   indent: 15,
                   endIndent: 15,
@@ -180,7 +180,7 @@ class ReceiveDoneDealItem extends StatelessWidget {
           approved == 1
               ? Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 17,
                     ),
                     Expanded(
@@ -188,13 +188,13 @@ class ReceiveDoneDealItem extends StatelessWidget {
                             text: context.locale.call_button_title,
                             style: context.easyTheme.elevatedButtonTheme.style!
                                 .copyWith(
-                              minimumSize: MaterialStateProperty.all(
+                              minimumSize: WidgetStateProperty.all(
                                   const Size(387.0, 40)),
                             ),
                             onPressed: () => Utils.lunchCall(receiveSwapReqItem
                                 .offerUser!.phoneNumber
                                 .toString()))),
-                    SizedBox(
+                    const SizedBox(
                       width: 9,
                     ),
                     Expanded(
@@ -205,19 +205,19 @@ class ReceiveDoneDealItem extends StatelessWidget {
                             .toString()),
                         style: context.easyTheme.elevatedButtonTheme.style!
                             .copyWith(
-                                minimumSize: MaterialStateProperty.all(
+                                minimumSize: WidgetStateProperty.all(
                                     const Size(387.0, 40)),
                                 backgroundColor:
-                                    MaterialStateProperty.all(ColorName.amber)),
+                                    WidgetStateProperty.all(ColorName.amber)),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 17,
                     ),
                   ],
                 )
               : const SizedBox(),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
         ],

@@ -1,10 +1,12 @@
+import 'package:daakesh/src/features/favourite/presentation/bloc/favourite_bloc/favourite_bloc.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../src.export.dart';
 
-class PriceRateSection extends StatelessWidget {
+class PriceRateSection extends StatefulWidget {
   final TodayItem todayDealItem;
   final bool isDaakeshTodayDeal;
   const PriceRateSection(
@@ -13,6 +15,11 @@ class PriceRateSection extends StatelessWidget {
       required this.isDaakeshTodayDeal});
 
   @override
+  State<PriceRateSection> createState() => _PriceRateSectionState();
+}
+
+class _PriceRateSectionState extends State<PriceRateSection> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,10 +27,28 @@ class PriceRateSection extends StatelessWidget {
         const SizedBox(
           height: 30.0,
         ),
-        Text(
-          todayDealItem.title.toString(),
-          style: context.easyTheme.textTheme.bodyMedium!
-              .copyWith(fontSize: 24.0, color: ColorName.gray),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              widget.todayDealItem.title.toString(),
+              style: context.easyTheme.textTheme.bodyMedium!
+                  .copyWith(fontSize: 24.0, color: ColorName.gray),
+            ),
+            TextButtonWidget(
+                text: 'Show on map',
+                onPressed: () async {
+                  final googleMapsUrl = Uri.parse(
+                      "https://www.google.com/maps/search/?api=1&query=${widget.todayDealItem.latitude},${widget.todayDealItem.longitude}");
+
+                  if (await canLaunchUrl(googleMapsUrl)) {
+                    await launchUrl(googleMapsUrl,
+                        mode: LaunchMode.externalApplication);
+                  } else {
+                    throw 'Could not open the map.';
+                  }
+                }),
+          ],
         ),
         const SizedBox(
           height: 10.0,
@@ -62,6 +87,7 @@ class PriceRateSection extends StatelessWidget {
                 const SizedBox(
                   width: 12.0,
                 ),
+
                 BlocBuilder<CommentBloc, CommentState>(
                   builder: (context, state) {
                     return Flexible(
@@ -75,6 +101,48 @@ class PriceRateSection extends StatelessWidget {
                     );
                   },
                 ),
+                const Spacer(),
+
+                //!!_______________________________ Favourite button
+
+                BlocProvider(
+                  create: (_) => FavouriteBloc(
+                    isFromProdScreen: true,
+                    isFavouriteFromProd:
+                        widget.todayDealItem.isFavorite ?? false,
+                    itemID: widget.todayDealItem.id ?? 0,
+                  ),
+                  child: BlocBuilder<FavouriteBloc, FavouriteState>(
+                    builder: (context, state) {
+                      return IconButton(
+                        onPressed: () {
+                          final bloc = context.read<FavouriteBloc>();
+                          bloc.add(SetFavouriteEvent(
+                              isFavourite: bloc.isFavouriteItem));
+
+                          if (context.read<FavouriteBloc>().isFavouriteItem ==
+                              false) {
+                            context.read<FavouriteBloc>().add(AddFavouriteEvent(
+                                  itemId: widget.todayDealItem.id ?? 0,
+                                ));
+                          } else {
+                            context
+                                .read<FavouriteBloc>()
+                                .add(RemoveFavouriteEvent(
+                                  itemId: bloc.favouriteItemId,
+                                ));
+                          }
+                        },
+                        icon: Icon(
+                          Icons.favorite,
+                          color: context.read<FavouriteBloc>().isFavouriteItem
+                              ? Colors.red
+                              : Colors.grey,
+                        ),
+                      );
+                    },
+                  ),
+                )
               ],
             );
           },
@@ -85,9 +153,9 @@ class PriceRateSection extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            todayDealItem.discountPercentage == '0%'
+            widget.todayDealItem.discountPercentage == '0%'
                 ? Text(
-                    '${context.locale.jordan_dinar} ${todayDealItem.priceAfterDiscount} ',
+                    '${context.locale.jordan_dinar} ${widget.todayDealItem.priceAfterDiscount} ',
                     style: context.easyTheme.textTheme.bodyMedium!
                         .copyWith(fontSize: 30.0, fontWeight: FontWeight.w600),
                     overflow: TextOverflow.ellipsis,
@@ -95,13 +163,13 @@ class PriceRateSection extends StatelessWidget {
                 : Row(
                     children: [
                       Text(
-                        '${context.locale.jordan_dinar} ${todayDealItem.priceAfterDiscount} ',
+                        '${context.locale.jordan_dinar} ${widget.todayDealItem.priceAfterDiscount} ',
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 30.0, fontWeight: FontWeight.w600),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        '${context.locale.jordan_dinar} ${todayDealItem.price}',
+                        '${context.locale.jordan_dinar} ${widget.todayDealItem.price}',
                         style: context.easyTheme.textTheme.headlineMedium!
                             .copyWith(
                           fontSize: 20,
@@ -114,7 +182,7 @@ class PriceRateSection extends StatelessWidget {
             const Spacer(
               flex: 1,
             ),
-            !isDaakeshTodayDeal
+            !widget.isDaakeshTodayDeal
                 ? Assets.svg.creditCardIcon.svg(
                     width: 30.0,
                     height: 22.0,

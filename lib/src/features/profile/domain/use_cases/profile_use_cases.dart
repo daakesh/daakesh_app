@@ -16,6 +16,8 @@ abstract class ProfileUseCases {
       AddContactInfoModel addContactInfoModel);
   Future<Either<Failure, ValidResponse>> updateLocation(
       String country, String city, String address);
+
+  Future<Either<Failure, ValidResponse>> getLanguageData();
 }
 
 @dev
@@ -48,6 +50,11 @@ class ProfileUseCasesImpl implements ProfileUseCases {
   @override
   Future<Either<Failure, ValidResponse>> getAllComplaints() async {
     return await getIt.get<ProfileRepository>().getAllComplaints();
+  }
+
+  @override
+  Future<Either<Failure, ValidResponse>> getLanguageData() async {
+    return await getIt.get<ProfileRepository>().getLanguageData();
   }
 
   @override

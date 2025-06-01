@@ -1,0 +1,2 @@
+/Users/moneebdawwas/Desktop/daakesh_app/android/app/.cxx/RelWithDebInfo/s6j6z3j4/x86/CMakeFiles/edit_cache.dir
+/Users/moneebdawwas/Desktop/daakesh_app/android/app/.cxx/RelWithDebInfo/s6j6z3j4/x86/CMakeFiles/rebuild_cache.dir

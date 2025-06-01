@@ -1,0 +1,18 @@
+package com.daakesh;
+
+import androidx.annotation.NonNull;
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.FlutterEngine;
+
+public class MainActivity extends FlutterActivity {
+    // Use cached engine from DaakeshApplication
+    @Override
+    public String getCachedEngineId() {
+        return DaakeshApplication.FLUTTER_ENGINE_ID;
+    }
+    
+    @Override
+    public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+        // Don't call super as we're using a cached engine and plugins are already registered
+    }
+}

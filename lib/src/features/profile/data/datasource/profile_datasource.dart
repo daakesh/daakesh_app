@@ -19,4 +19,6 @@ abstract class ProfileDatasource {
       AddContactInfoModel addContactInfoModel);
   Future<Either<Failure, ValidResponse>> updateLocation(
       String country, String city, String address);
+
+  Future<Either<Failure, ValidResponse>> getLanguageData();
 }

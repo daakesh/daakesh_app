@@ -1,4 +1,7 @@
+import 'package:daakesh/src/features/favourite/presentation/bloc/favourite_bloc/favourite_bloc.export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../src.export.dart';
 
 class SwapMoreInfoScreen extends StatelessWidget {
@@ -31,40 +34,114 @@ class SwapMoreInfoScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '${trendDealsItem.title}',
-                      style: context.easyTheme.textTheme.bodyMedium!
-                          .copyWith(fontSize: 24.0, color: ColorName.gray),
+                    //!!
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${trendDealsItem.title}',
+                          style: context.easyTheme.textTheme.bodyMedium!
+                              .copyWith(fontSize: 24.0, color: ColorName.gray),
+                        ),
+
+                        //!!_______________________________ Favourite button
+
+                        BlocProvider(
+                          create: (_) => FavouriteBloc(
+                            isFromProdScreen: true,
+                            isFavouriteFromProd:
+                                trendDealsItem.isFavorite ?? false,
+                            itemID: trendDealsItem.id ?? 0,
+                          ),
+                          child: BlocBuilder<FavouriteBloc, FavouriteState>(
+                            builder: (context, state) {
+                              return IconButton(
+                                onPressed: () {
+                                  final bloc = context.read<FavouriteBloc>();
+                                  bloc.add(SetFavouriteEvent(
+                                      isFavourite: bloc.isFavouriteItem));
+
+                                  if (context
+                                          .read<FavouriteBloc>()
+                                          .isFavouriteItem ==
+                                      false) {
+                                    context
+                                        .read<FavouriteBloc>()
+                                        .add(AddFavouriteEvent(
+                                          itemId: trendDealsItem.id ?? 0,
+                                        ));
+                                  } else {
+                                    context
+                                        .read<FavouriteBloc>()
+                                        .add(RemoveFavouriteEvent(
+                                          itemId: bloc.favouriteItemId,
+                                        ));
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: context
+                                          .read<FavouriteBloc>()
+                                          .isFavouriteItem
+                                      ? Colors.red
+                                      : Colors.grey,
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 18.0),
-                    Row(
-                      children: [
-                        Assets.svg.locationPinIcon.svg(
-                            height: 21.0, width: 21.0, color: ColorName.amber),
-                        const SizedBox(
-                          width: 6.5,
-                        ),
-                        Text.rich(
-                          TextSpan(
-                            style: context.easyTheme.textTheme.bodyMedium!
-                                .copyWith(
-                              fontSize: 16.0,
+                    InkWell(
+                      onTap: trendDealsItem.latitude != '' &&
+                              trendDealsItem.longitude != ''
+                          ? () async {
+                              final googleMapsUrl = Uri.parse(
+                                  "https://www.google.com/maps/search/?api=1&query=${trendDealsItem.latitude},${trendDealsItem.longitude}");
+
+                              if (await canLaunchUrl(googleMapsUrl)) {
+                                await launchUrl(googleMapsUrl,
+                                    mode: LaunchMode.externalApplication);
+                              } else {
+                                throw 'Could not open the map.';
+                              }
+                            }
+                          : null,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            Assets.svg.locationPinIcon.svg(
+                                height: 21.0,
+                                width: 21.0,
+                                color: ColorName.amber),
+                            const SizedBox(
+                              width: 6.5,
                             ),
-                            children: [
+                            Text.rich(
                               TextSpan(
-                                text:
-                                    context.locale.swap_more_info_swap_in_title,
+                                style: context.easyTheme.textTheme.bodyMedium!
+                                    .copyWith(
+                                  fontSize: 16.0,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: context
+                                        .locale.swap_more_info_swap_in_title,
+                                  ),
+                                  TextSpan(
+                                    text: ' ${trendDealsItem.citySwap} , ',
+                                  ),
+                                  TextSpan(
+                                    text: '${trendDealsItem.countrySwap}',
+                                  ),
+                                ],
                               ),
-                              TextSpan(
-                                text: ' ${trendDealsItem.citySwap} , ',
-                              ),
-                              TextSpan(
-                                text: '${trendDealsItem.countrySwap}',
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                     const SizedBox(height: 8.0),
                     Row(
@@ -128,7 +205,7 @@ class SwapMoreInfoScreen extends StatelessWidget {
                             text: context.locale.swap_offer_create_button,
                             style: context.easyTheme.elevatedButtonTheme.style!
                                 .copyWith(
-                                    backgroundColor: MaterialStateProperty.all(
+                                    backgroundColor: WidgetStateProperty.all(
                                         ColorName.blueGray.withOpacity(0.5))),
                             onPressed: () {},
                           )),

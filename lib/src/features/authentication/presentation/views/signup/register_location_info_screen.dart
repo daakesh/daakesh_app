@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
 
 class RegisterLocationInfoScreen extends StatefulWidget {
-  const RegisterLocationInfoScreen({super.key});
+  final double longitude;
+  final double latitude;
+  const RegisterLocationInfoScreen(
+      {super.key, required this.longitude, required this.latitude});
 
   @override
   State<RegisterLocationInfoScreen> createState() =>
@@ -39,18 +42,18 @@ class _RegisterLocationInfoScreenState
               const Spacer(
                 flex: 1,
               ),
-              SizedBox(height: 44),
+              const SizedBox(height: 44),
               const Center(child: GeneralDaakeshLogoWidget()),
-              SizedBox(height: 44),
+              const SizedBox(height: 44),
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 26, end: 13),
+                padding: const EdgeInsetsDirectional.only(start: 26, end: 13),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(context.locale.location_title,
                         style: context.easyTheme.textTheme.headlineLarge!
                             .copyWith(fontSize: 40.0)),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(context.locale.location_instruction,
@@ -59,9 +62,9 @@ class _RegisterLocationInfoScreenState
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 32, end: 29),
+                padding: const EdgeInsetsDirectional.only(start: 32, end: 29),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -86,7 +89,7 @@ class _RegisterLocationInfoScreenState
                             child: Center(
                                 child: Text(
                               state.flagEmoji,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: ColorName.blueGray, fontSize: 24.0),
                             )));
                       }),
@@ -100,7 +103,7 @@ class _RegisterLocationInfoScreenState
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    SizedBox(height: 33),
+                    const SizedBox(height: 33),
                     Text(context.locale.city_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0, color: ColorName.darkGray)),
@@ -113,7 +116,7 @@ class _RegisterLocationInfoScreenState
                         RegExpValidator.beginWhitespace,
                       ],
                     ),
-                    SizedBox(height: 33),
+                    const SizedBox(height: 33),
                     Text(context.locale.address_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
                             fontSize: 18.0, color: ColorName.darkGray)),
@@ -139,9 +142,9 @@ class _RegisterLocationInfoScreenState
               const Spacer(
                 flex: 1,
               ),
-              SizedBox(height: 43),
+              const SizedBox(height: 43),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 21),
+                padding: const EdgeInsets.symmetric(horizontal: 21),
                 child: DefaultButtonWidget(
                     text: context.locale.location_next_button_title,
                     onPressed: () => onNext(context)),
@@ -149,9 +152,9 @@ class _RegisterLocationInfoScreenState
               const Spacer(
                 flex: 1,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               const AlreadyHaveAccountWidget(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               const Spacer(flex: 1),
             ],
           ),
@@ -172,6 +175,8 @@ class _RegisterLocationInfoScreenState
       country: countryController.text,
       city: cityController.text,
       address: addressController.text,
+      longitude: widget.longitude,
+      latitude: widget.latitude,
     ));
     Utils.openNewPage(RegisterPhoneNumberScreen());
   }

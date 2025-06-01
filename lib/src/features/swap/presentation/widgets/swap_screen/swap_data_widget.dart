@@ -1,3 +1,4 @@
+import 'package:daakesh/src/widgets/is_empty_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../src.export.dart';
@@ -34,7 +35,6 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-
         const SliverPadding(padding: EdgeInsets.only(top: 14.0)),
 
         ///Swap Carousel slider.
@@ -58,38 +58,40 @@ class _SwapDataWidgetState extends State<SwapDataWidget> {
             padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
             child: SizedBox(
               height: 150.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                controller: controller,
-                itemBuilder: (ctx, index) {
-                  if (index < widget.state.swapSectionListData.length) {
-                    SwapSectionItemModel swapSectionItemModel =
-                        widget.state.swapSectionListData[index];
-                    return GestureDetector(
-                      onTap: () => exploreSection(
-                          context,
-                          widget.state,
-                          swapSectionItemModel.id!,
-                          index,
-                          swapSectionItemModel.name.toString(),
-                          swapSectionItemModel.arName.toString()),
-                      child: SwapPopularCategoriesWidget(
-                        data: widget.state.swapSectionListData[index],
-                      ),
-                    );
-                  } else {
-                    return !widget.state.isMoreData
-                        ? const Padding(
-                            padding: EdgeInsetsDirectional.only(
-                              end: 20.0,
+              child: widget.state.swapSectionListData.isEmpty
+                  ? const IsEmptyDataWidget(name: 'Popular Swap')
+                  : ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      controller: controller,
+                      itemBuilder: (ctx, index) {
+                        if (index < widget.state.swapSectionListData.length) {
+                          SwapSectionItemModel swapSectionItemModel =
+                              widget.state.swapSectionListData[index];
+                          return GestureDetector(
+                            onTap: () => exploreSection(
+                                context,
+                                widget.state,
+                                swapSectionItemModel.id!,
+                                index,
+                                swapSectionItemModel.name.toString(),
+                                swapSectionItemModel.arName.toString()),
+                            child: SwapPopularCategoriesWidget(
+                              data: widget.state.swapSectionListData[index],
                             ),
-                            child: CircularProgressIndicatorWidget(),
-                          )
-                        : const SizedBox();
-                  }
-                },
-                itemCount: widget.state.swapSectionListData.length + 1,
-              ),
+                          );
+                        } else {
+                          return !widget.state.isMoreData
+                              ? const Padding(
+                                  padding: EdgeInsetsDirectional.only(
+                                    end: 20.0,
+                                  ),
+                                  child: CircularProgressIndicatorWidget(),
+                                )
+                              : const SizedBox();
+                        }
+                      },
+                      itemCount: widget.state.swapSectionListData.length + 1,
+                    ),
             ),
           ),
         ),

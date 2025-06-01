@@ -37,3 +37,5 @@ class UpdateLocationEvent extends ProfileEvent {
     required this.address,
   });
 }
+
+class GetLanguageDataEvent extends ProfileEvent {}

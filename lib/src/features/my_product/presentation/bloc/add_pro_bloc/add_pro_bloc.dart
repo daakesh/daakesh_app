@@ -14,7 +14,12 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
     on<AddShipToCountryEvent>(_addShipToCountry);
     on<AddProductEvent>(_addProduct);
   }
+
   static AddProBloc get get => BlocProvider.of(Utils.currentContext);
+
+  String latitudePicked = '';
+  String longitudePicked = '';
+
   FutureOr<void> _addEditState(
       AddEditStateEvent event, Emitter<AddProState> emit) {
     emit(state.copyWith(adjustProduct: event.adjustProduct));
@@ -40,8 +45,10 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
 
   FutureOr<void> _addProImages(
       AddProImagesEvent event, Emitter<AddProState> emit) {
-    emit(
-        state.copyWith(proImages: event.proImages, oldImages: event.oldImages));
+    emit(state.copyWith(
+      proImages: event.proImages,
+      oldImages: event.oldImages,
+    ));
   }
 
   FutureOr<void> _addProDisplayMethod(
@@ -52,8 +59,8 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
   FutureOr<void> _addSaleInfo(
       AddSaleInfoEvent event, Emitter<AddProState> emit) {
     String discount = '';
-    if (event.productDiscount!.isNotEmpty) {
-      int productDiscount =
+    if (event.productDiscount?.isNotEmpty ?? false) {
+      final productDiscount =
           int.parse(event.productDiscount!.replaceAll('%', ''));
       discount = (productDiscount / 100).toString();
     }
@@ -78,55 +85,48 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
     emit(state.copyWith(shipToCountry: event.shipToCountry));
   }
 
-  FutureOr<void> _addProduct(
+  Future<void> _addProduct(
       AddProductEvent event, Emitter<AddProState> emit) async {
     String? proID;
     if (state.adjustProduct.isEdit) {
-      proID = getIt.get<EditProduct>().myProductItem!.id.toString();
+      proID = getIt.get<EditProduct>().myProductItem?.id.toString();
     }
-    ProgressCircleDialog.show();
-    AddProModel addProModel = AddProModel();
-    addProModel
-      ..userID = ValueConstants.userId
-      ..proId = proID
-      ..title = state.productName
-      ..tradeFor = 'TV'
-      ..condition = 'NEW'
-      ..city = 'Amman'
-      ..description = state.productDescription
-      ..secID = state.productSecID
-      ..catID = state.productCatID
-      ..subID = state.productSubCatID
-      ..brandID = state.productBrandID
-      ..year = state.productModelYear
-      ..tradeOrSell = state.displayMethod.name
-      ..quantity = state.productQuantity
-      ..price = state.productPrice
-      ..discount = state.productDiscount
-      ..country = state.shipToCountry
-      ..display = state.displayProduct
-      ..countrySwap = state.swapCountry
-      ..citySwap = state.swapCity
-      ..oldItemImageList = state.oldImages
-      ..itemFileImg = state.proImages.toList();
-    final result = state.adjustProduct.isEdit
-        ? await getIt.get<MyProductUseCases>().updateProduct(addProModel)
-        : await getIt.get<MyProductUseCases>().addProduct(addProModel);
 
-    result.fold((l) {
-      ProgressCircleDialog.dismiss();
-      emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
-    }, (r) async {
-      if (!r.status!) {
-        ProgressCircleDialog.dismiss();
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
-        return;
-      }
-      int id = r.data['data']['id'];
-      MyProductItem myProductItem = MyProductItem();
-      final itemData = await getIt.get<MyProductUseCases>().getItemById(id);
-      itemData.fold((l) {
+    ProgressCircleDialog.show();
+    try {
+      AddProModel addProModel = AddProModel()
+        ..userID = ValueConstants.userId
+        ..proId = proID
+        ..title = state.productName
+        ..tradeFor = 'TV'
+        ..condition = 'NEW'
+        ..city = 'Amman'
+        ..description = state.productDescription
+        ..secID = state.productSecID
+        ..catID = state.productCatID
+        ..subID = state.productSubCatID
+        ..brandID = state.productBrandID
+        ..year = state.productModelYear
+        ..tradeOrSell = state.displayMethod.name
+        ..quantity = state.productQuantity
+        ..price = state.productPrice
+        ..discount = state.productDiscount
+        ..country = state.shipToCountry
+        ..display = state.displayProduct
+        ..countrySwap = state.swapCountry
+        ..citySwap = state.swapCity
+        ..latitude = latitudePicked
+        ..longitude = longitudePicked
+        ..oldItemImageList = state.oldImages
+        ..itemFileImg = state.proImages.toList();
+
+      final result = state.adjustProduct.isEdit
+          ? await getIt.get<MyProductUseCases>().updateProduct(addProModel)
+          : await getIt.get<MyProductUseCases>().addProduct(addProModel);
+
+      if (emit.isDone) return;
+
+      await result.fold((l) async {
         emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
         ShowToastSnackBar.showSnackBars(message: l.message.toString());
       }, (r) async {
@@ -134,37 +134,60 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
           ShowToastSnackBar.showSnackBars(message: r.message.toString());
           return;
         }
-        myProductItem = MyProductItem.fromJson(r.data['data']);
-      });
 
+        final id = r.data['data']['id'];
+        final itemData = await getIt.get<MyProductUseCases>().getItemById(id);
+
+        if (emit.isDone) return;
+
+        itemData.fold((l) {
+          emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
+          ShowToastSnackBar.showSnackBars(message: l.message.toString());
+        }, (r) {
+          if (!r.status!) {
+            ShowToastSnackBar.showSnackBars(message: r.message.toString());
+            return;
+          }
+
+          final myProductItem = MyProductItem.fromJson(r.data['data']);
+
+          MyProFuncBloc.get.add(ResetValuesEvent());
+          Utils.openNewPage(
+            ProAddSuccessScreen(
+              displayMethod: state.displayMethod,
+              myProductItem: myProductItem,
+            ),
+            popPreviousPages: true,
+          );
+
+          emit(state.copyWith(
+            addProStateStatus: AddProStateStatus.SUCCESS,
+            productSecID: 1000,
+            productName: '',
+            productDescription: '',
+            productCatID: 1000,
+            productSubCatID: 1000,
+            productBrandID: 1000,
+            productModelYear: '',
+            proImages: [],
+            displayMethod: ProductDisplayMethod.Sell,
+            productQuantity: '',
+            productPrice: '',
+            productDiscount: '',
+            displayProduct: '',
+            swapCountry: 'Jordan',
+            swapCity: 'Amman',
+            shipToCountry: '',
+            oldImages: [],
+          ));
+        });
+      });
+    } catch (e) {
+      ShowToastSnackBar.showSnackBars(message: 'Something went wrong.');
+      emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
+    } finally {
+      // ✅ Always dismiss loading spinner
       ProgressCircleDialog.dismiss();
-      MyProFuncBloc.get.add(ResetValuesEvent());
-      Utils.openNewPage(
-          ProAddSuccessScreen(
-            displayMethod: state.displayMethod,
-            myProductItem: myProductItem,
-          ),
-          popPreviousPages: true);
-      emit(state.copyWith(
-        addProStateStatus: AddProStateStatus.SUCCESS,
-        productSecID: 1000,
-        productName: '',
-        productDescription: '',
-        productCatID: 1000,
-        productSubCatID: 1000,
-        productBrandID: 1000,
-        productModelYear: '',
-        proImages: [],
-        displayMethod: ProductDisplayMethod.Sell,
-        productQuantity: '',
-        productPrice: '',
-        productDiscount: '',
-        displayProduct: '',
-        swapCountry: 'Jordan',
-        swapCity: 'Amman',
-        shipToCountry: '',
-        oldImages: [],
-      ));
-    });
+    }
   }
 }

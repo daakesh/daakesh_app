@@ -20,11 +20,13 @@ class EnterPersonalInfoEvent extends AuthEvent {
   final String name;
   final String email;
   final String password;
+  final String deviceToken;
 
   EnterPersonalInfoEvent({
     required this.name,
     required this.email,
     required this.password,
+    required this.deviceToken,
   });
 }
 
@@ -32,11 +34,15 @@ class EnterLocationInfoEvent extends AuthEvent {
   final String country;
   final String city;
   final String address;
+  final double latitude;
+  final double longitude;
 
   EnterLocationInfoEvent({
     required this.country,
     required this.city,
     required this.address,
+    required this.latitude,
+    required this.longitude,
   });
 }
 

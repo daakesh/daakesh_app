@@ -5,15 +5,17 @@ abstract class AuthRepository {
   Future<Either<Failure, ValidResponse>> onLogin(
       String email, String passwordNumber);
   Future<Either<Failure, ValidResponse>> addUser(
-    String name,
-    String email,
-    String password,
-    String phoneNumber,
-    String userType,
-    String country,
-    String city,
-    String address,
-  );
+      String name,
+      String email,
+      String password,
+      String phoneNumber,
+      String userType,
+      String country,
+      String city,
+      String address,
+      double latitude,
+      double longitude,
+      String deviceToken);
   Future<Either<Failure, ValidResponse>> activateUser(String id);
   Future<Either<Failure, ValidResponse>> isPhoneNumberExist(String phoneNumber);
   Future<Either<Failure, ValidResponse>> updatePassword(

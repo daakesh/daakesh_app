@@ -1,59 +1,26 @@
 {
   "project_info": {
-    "project_number": "311956579675",
-    "project_id": "daakesh-af3a0",
-    "storage_bucket": "daakesh-af3a0.appspot.com"
+    "project_number": "513509044682",
+    "project_id": "daakeshapp",
+    "storage_bucket": "daakeshapp.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:311956579675:android:8511d34a5aa2c71edc267e",
+        "mobilesdk_app_id": "1:513509044682:android:826244a972abebde5d5f33",
         "android_client_info": {
-          "package_name": "com.daakesh"
+          "package_name": "com.daakesh.daakesh"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "311956579675-eubh65ncskv249hv775b0tg13dpngb9r.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.daakesh",
-            "certificate_hash": "daf2467c38968e25a9ad20c65dbf646b114fa917"
-          }
-        },
-        {
-          "client_id": "311956579675-i4j6plvkcanicnitbuhk0sk4jr4708fl.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.daakesh",
-            "certificate_hash": "153d64f30328f3e9ec5af2c0f54a554ae1d0b0ec"
-          }
-        },
-        {
-          "client_id": "311956579675-j7u6mhtd3t9i7d10blpc02sauqupp7f7.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDpDXfVlGG-OW-6oogrEdVXCyq_LxeY2aQ"
+          "current_key": "AIzaSyDS9Cj5fW799cB42X_iK52cqKqwX2c0PlI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "311956579675-j7u6mhtd3t9i7d10blpc02sauqupp7f7.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "311956579675-arfufcsof1suvthfqpg61q6rueanmg9v.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.daakesh"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
