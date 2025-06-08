@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../src.export.dart';
+import 'notifications_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -91,6 +92,11 @@ class ProfileScreen extends StatelessWidget {
               onTap: () => Utils.openNewPage(const PersonalInfoScreen()),
               title: context.locale.personal_info_title,
               icon: Assets.svg.personIcon.svg(width: 24.0, height: 24.0),
+            ),
+            CategoryItemWidget(
+              onTap: () => Utils.openNewPage(const NotificationsScreen()),
+              title: 'Notifications',
+              icon: Assets.svg.commentIcon.svg(width: 24.0, height: 24.0),
             ),
             //CategoryItemWidget(
             //  onTap: () => Utils.openNewPage(ContactInfoScreen()),

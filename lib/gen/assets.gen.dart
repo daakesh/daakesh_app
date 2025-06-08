@@ -99,29 +99,29 @@ class $AssetsPngGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        americanExpressIcon,
-        authScreensBackground,
-        babyIcon,
-        checkIcon,
-        disableMyOrderIcon,
-        enableMyOrderIcon,
-        filterIcon,
-        glasses,
-        googleIcon,
-        handmadeIcon,
-        langIcon,
-        line,
-        mastercardIcon,
-        productIcon,
-        shopByBrand,
-        shopModeAr,
-        shopModeEn,
-        splashScreenBackground,
-        swapIcon,
-        swapModeAr,
-        swapModeEn,
-        visaIcon
-      ];
+    americanExpressIcon,
+    authScreensBackground,
+    babyIcon,
+    checkIcon,
+    disableMyOrderIcon,
+    enableMyOrderIcon,
+    filterIcon,
+    glasses,
+    googleIcon,
+    handmadeIcon,
+    langIcon,
+    line,
+    mastercardIcon,
+    productIcon,
+    shopByBrand,
+    shopModeAr,
+    shopModeEn,
+    splashScreenBackground,
+    swapIcon,
+    swapModeAr,
+    swapModeEn,
+    visaIcon,
+  ];
 }
 
 class $AssetsSvgGen {
@@ -284,63 +284,59 @@ class $AssetsSvgGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
-        appleIcon,
-        arrowBackIcon,
-        arrowDropDownIcon,
-        arrowRightIcon,
-        arrowUpRight,
-        cartAddIcon,
-        commentIcon,
-        creditCardIcon,
-        creditCardLogoIcon,
-        daakeshLogo,
-        darkArabicLogo,
-        deleteIconCopy,
-        deleteIcon,
-        disableHomeIcon,
-        disableProductIcon,
-        disableProfileIcon,
-        editIcon,
-        emptyImageIcon,
-        enableHomeIcon,
-        enableProductIcon,
-        enableProfileIcon,
-        exchangeLogo,
-        facebookIcon,
-        furtherInfoIcon,
-        imagePickerIcon,
-        iosArrowBack,
-        iosArrowForward,
-        lightArabicLogo,
-        lightDaakeshLogo,
-        line,
-        locationPinIcon,
-        personIcon,
-        plusIcon,
-        profileCreditCardIcon,
-        profilePhoneIcon,
-        searchIcon,
-        sendIcon,
-        shopByBrand,
-        sortIcon,
-        zoomInIcon,
-        zoomOutIcon
-      ];
+    appleIcon,
+    arrowBackIcon,
+    arrowDropDownIcon,
+    arrowRightIcon,
+    arrowUpRight,
+    cartAddIcon,
+    commentIcon,
+    creditCardIcon,
+    creditCardLogoIcon,
+    daakeshLogo,
+    darkArabicLogo,
+    deleteIconCopy,
+    deleteIcon,
+    disableHomeIcon,
+    disableProductIcon,
+    disableProfileIcon,
+    editIcon,
+    emptyImageIcon,
+    enableHomeIcon,
+    enableProductIcon,
+    enableProfileIcon,
+    exchangeLogo,
+    facebookIcon,
+    furtherInfoIcon,
+    imagePickerIcon,
+    iosArrowBack,
+    iosArrowForward,
+    lightArabicLogo,
+    lightDaakeshLogo,
+    line,
+    locationPinIcon,
+    personIcon,
+    plusIcon,
+    profileCreditCardIcon,
+    profilePhoneIcon,
+    searchIcon,
+    sendIcon,
+    shopByBrand,
+    sortIcon,
+    zoomInIcon,
+    zoomOutIcon,
+  ];
 }
 
 class Assets {
-  Assets._();
+  const Assets._();
 
   static const $AssetsPngGen png = $AssetsPngGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
 
@@ -368,7 +364,7 @@ class AssetGenImage {
     bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
-    FilterQuality filterQuality = FilterQuality.low,
+    FilterQuality filterQuality = FilterQuality.medium,
     int? cacheWidth,
     int? cacheHeight,
   }) {
@@ -400,15 +396,8 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;
@@ -417,17 +406,11 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = false;
+  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = false;
 
-  const SvgGenImage.vec(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = true;
+  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = true;
 
   final String _assetName;
   final Size? size;
@@ -481,7 +464,8 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ??
+      colorFilter:
+          colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,

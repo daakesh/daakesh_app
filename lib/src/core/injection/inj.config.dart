@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -46,10 +47,16 @@ import 'package:daakesh/src/features/my_product/data/repositories/my_product_rep
     as _i717;
 import 'package:daakesh/src/features/my_product/domain/use_cases/my_product_use_cases.dart'
     as _i895;
+import 'package:daakesh/src/features/profile/data/datasource/remote_notifications_datasource.dart'
+    as _i425;
 import 'package:daakesh/src/features/profile/data/datasource/remote_profile_datasource.dart'
     as _i365;
+import 'package:daakesh/src/features/profile/data/repositories/notifications_repository_impl.dart'
+    as _i584;
 import 'package:daakesh/src/features/profile/data/repositories/profile_repository_impl.dart'
     as _i865;
+import 'package:daakesh/src/features/profile/domain/use_cases/notifications_use_cases.dart'
+    as _i351;
 import 'package:daakesh/src/features/profile/domain/use_cases/profile_use_cases.dart'
     as _i471;
 import 'package:daakesh/src/features/swap/data/datasource/remote_swap_datasource.dart'
@@ -94,6 +101,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i971.ConnectivityServiceImpl());
     gh.lazySingleton<_i467.MyOrderDatasource>(
         () => _i354.RemoteMyOrderDatasource());
+    gh.lazySingleton<_i351.NotificationsUseCases>(
+        () => _i351.NotificationsUseCasesImpl());
     gh.lazySingleton<_i467.SwapRepository>(() => _i416.SwapRepositoryImpl());
     gh.lazySingleton<_i467.HomeRepository>(() => _i1054.HomeRepositoryImpl());
     gh.lazySingleton<_i467.AuthDatasource>(() => _i933.RemoteAuthDatasource());
@@ -132,9 +141,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i119.AuthUseCasesImpl(),
       registerFor: {_dev},
     );
+    gh.lazySingleton<_i467.NotificationsDatasource>(
+        () => _i425.RemoteNotificationsDatasource());
     gh.lazySingleton<_i467.ProfileRepository>(
         () => _i865.ProfileRepositoryImpl());
     gh.singleton<_i803.EditProduct>(() => _i803.EditProductImpl());
+    gh.lazySingleton<_i467.NotificationsRepository>(
+        () => _i584.NotificationsRepositoryImpl());
     gh.lazySingleton<_i895.MyProductUseCases>(
       () => _i895.MyProductUseCasesImpl(),
       registerFor: {_dev},

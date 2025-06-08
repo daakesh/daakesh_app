@@ -16,6 +16,7 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<PersonalInfoBloc>(create: (_) => PersonalInfoBloc()),
       BlocProvider<ComplaintBloc>(create: (_) => ComplaintBloc()),
       BlocProvider<ContactInfoBloc>(create: (_) => ContactInfoBloc()),
+      BlocProvider<NotificationsBloc>(create: (_) => NotificationsBloc()),
 
       ///My Order-Blocs
       BlocProvider<MyOrderBloc>(create: (_) => MyOrderBloc()),
