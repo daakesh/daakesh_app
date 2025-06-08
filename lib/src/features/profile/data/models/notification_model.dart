@@ -37,16 +37,13 @@ class NotificationModel {
       isRead:
           json['seen'] == 1 || json['isRead'] == true || json['read'] == true,
       type: _parseNotificationType(notificationType, itemType),
-      itemType:
-          item?['Type']?.toString(), // Store the actual item type from API
-      imageUrl:
-          _extractFirstImage(item), // Extract first image from itemImg array
+      itemType: item?['Type']?.toString(),
+      imageUrl: _extractFirstImage(item),
     );
   }
 
   static String _buildTitle(Map<String, dynamic> json,
       Map<String, dynamic>? item, String notificationType) {
-    // Use explicit title first, then item title, then generate based on type
     if (json['title'] != null && json['title'].toString().isNotEmpty) {
       return json['title'].toString();
     }
