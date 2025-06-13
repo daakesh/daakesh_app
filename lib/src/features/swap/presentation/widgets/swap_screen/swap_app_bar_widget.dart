@@ -28,16 +28,33 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
     return BlocBuilder<SwapBloc, SwapState>(builder: (_, state) {
       return SliverAppBar(
         backgroundColor: ColorName.blueGray,
-        expandedHeight: 150,
+        expandedHeight: MediaQuery.of(context).size.height * 0.15,
         leading: const SizedBox(),
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
           background: SwapSearchBarWidget(state: state),
           expandedTitleScale: 1.0,
-          title: Row(
-            children: [
-              Expanded(
-                child: Container(
+          title: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 10),
+                BlocBuilder<ProfileBloc, ProfileState>(
+                  builder: (context, state) {
+                    return Center(
+                      child: state.switchLangValue
+                          ? const ArabicDaakeshLogoWidget(
+                              isLight: true,
+                              width: 150,
+                            )
+                          : const DaakeshLogoWidget(
+                              isLight: true,
+                              width: 184,
+                            ),
+                    );
+                  },
+                ),
+                Container(
                   width: double.infinity,
                   height: 40.0,
                   decoration: const BoxDecoration(
@@ -100,8 +117,8 @@ class _SwapAppBarWidgetState extends State<SwapAppBarWidget> {
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           titlePadding: const EdgeInsetsDirectional.only(
             end: 19.0,

@@ -12,61 +12,48 @@ class SwapSearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 180.0,
-      width: double.infinity,
-      decoration: const BoxDecoration(color: ColorName.blueGray),
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Stack(
-          alignment: AlignmentDirectional.bottomEnd,
-          children: [
-            Opacity(
-              opacity: 0.3,
-              child: Assets.svg.line.svg(
-                alignment: AlignmentDirectional.bottomEnd,
-                width: 160,
-                height: 160,
+    return SafeArea(
+      child: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(color: ColorName.blueGray),
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Stack(
+            alignment: AlignmentDirectional.bottomEnd,
+            children: [
+              Opacity(
+                opacity: 0.3,
+                child: Assets.svg.line.svg(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  width: 160,
+                  height: 160,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: Utils.isEnglish ? 50.0 : 30.0),
-                  BlocBuilder<ProfileBloc, ProfileState>(
-                    builder: (context, state) {
-                      return Center(
-                        child: state.switchLangValue
-                            ? const ArabicDaakeshLogoWidget(
-                                isLight: true,
-                                width: 184,
-                              )
-                            : const DaakeshLogoWidget(
-                                isLight: true,
-                                width: 184,
-                              ),
-                      );
-                    },
-                  ),
-                  state.swapScreenState.isProductDetails ||
-                          state.swapScreenState.isCart ||
-                          state.swapScreenState.isSections ||
-                          state.swapScreenState.isSubCategoryResult ||
-                          state.swapScreenState.isSendOffer ||
-                          state.swapScreenState.isOfferDetails
-                      ? IconButton(
-                          onPressed: () => onBack(state),
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: ColorName.white,
-                          ))
-                      : const SizedBox(),
-                ],
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.symmetric(horizontal: 22.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: Utils.isEnglish ? 50.0 : 30.0),
+                    state.swapScreenState.isProductDetails ||
+                            state.swapScreenState.isCart ||
+                            state.swapScreenState.isSections ||
+                            state.swapScreenState.isSubCategoryResult ||
+                            state.swapScreenState.isSendOffer ||
+                            state.swapScreenState.isOfferDetails
+                        ? IconButton(
+                            onPressed: () => onBack(state),
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              color: ColorName.white,
+                            ))
+                        : const SizedBox(),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

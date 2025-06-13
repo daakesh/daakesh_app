@@ -42,9 +42,6 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
               const SliverToBoxAdapter(
                 child: HeaderWidget(withArrowBack: false),
               ),
-
-              ///SliverPadding(padding: EdgeInsetsDirectional.only(top: 16)),
-              ///const SliverToBoxAdapter(child: SellerInfoCard()),
               SliverAppBar(
                 backgroundColor: ColorName.whiteSmoke,
                 pinned: true,
@@ -54,17 +51,15 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
                 ),
                 surfaceTintColor: ColorName.whiteSmoke,
                 flexibleSpace: FlexibleSpaceBar(
-                  title: SizedBox(
-                    height: 130.0,
-                    child: Column(
-                      children: [
-                        ProductTypeTabBar(
-                            state: state, searchController: searchController),
-                        const SizedBox(height: 17),
-                        SearchProductBarWidget(
-                            state: state, searchController: searchController),
-                      ],
-                    ),
+                  title: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      ProductTypeTabBar(
+                          state: state, searchController: searchController),
+                      const SizedBox(height: 17),
+                      SearchProductBarWidget(
+                          state: state, searchController: searchController),
+                    ],
                   ),
                   titlePadding:
                       const EdgeInsetsDirectional.symmetric(vertical: 5),

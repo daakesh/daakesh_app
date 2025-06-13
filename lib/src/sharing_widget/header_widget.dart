@@ -26,7 +26,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.isLight ? 110 : 160,
+      height: MediaQuery.of(context).size.height * 0.18,
       width: double.infinity,
       decoration: BoxDecoration(
         color: widget.isLight ? ColorName.white : ColorName.blueGray,
@@ -42,10 +42,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   Opacity(
                     opacity: 0.3,
                     child: Assets.svg.line.svg(
-                        alignment: AlignmentDirectional.bottomEnd,
-                        color: widget.isLight ? Colors.grey : null,
-                        width: 160,
-                        height: 160),
+                      alignment: AlignmentDirectional.bottomEnd,
+                      color: widget.isLight ? Colors.grey : null,
+                    ),
                   ),
                   widget.withArrowBack
                       ? Stack(
@@ -61,7 +60,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                                       ? ArabicDaakeshLogoWidget(
                                           isLight:
                                               widget.isLight ? false : true,
-                                          width: 184,
+                                          width: 150,
                                         )
                                       : DaakeshLogoWidget(
                                           isLight:
@@ -94,7 +93,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                               child: state.switchLangValue
                                   ? ArabicDaakeshLogoWidget(
                                       isLight: widget.isLight ? false : true,
-                                      width: 184,
+                                      width: 150,
                                     )
                                   : DaakeshLogoWidget(
                                       isLight: widget.isLight ? false : true,

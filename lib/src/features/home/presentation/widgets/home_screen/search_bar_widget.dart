@@ -41,11 +41,11 @@ class SearchBarWidget extends StatelessWidget {
                     builder: (context, state) {
                       return Center(
                         child: state.switchLangValue
-                            ? ArabicDaakeshLogoWidget(
+                            ? const ArabicDaakeshLogoWidget(
                                 isLight: true,
-                                width: 184,
+                                width: 150,
                               )
-                            : DaakeshLogoWidget(
+                            : const DaakeshLogoWidget(
                                 isLight: true,
                                 width: 184,
                               ),
