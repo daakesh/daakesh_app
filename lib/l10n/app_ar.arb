@@ -480,5 +480,8 @@
   "complaint_details": "معلومات الشكوى",
   "no_data_avaliable": "لا توجد بيانات متاحة...",
   "tutorial_video": "فيديو توضيحي",
-  "other": "اخرى"
+  "other": "اخرى",
+  "error_title": "خطأ",
+  "success_title": "نجح",
+  "ok": "موافق"
 }

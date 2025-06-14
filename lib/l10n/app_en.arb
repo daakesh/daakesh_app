@@ -480,5 +480,8 @@
   "complaint_details": "Complaint details",
   "no_data_avaliable": "No Data Available ...",
   "tutorial_video": "Tutorial Video",
-  "other": "Other"
+  "other": "Other",
+  "error_title": "Error",
+  "success_title": "Success",
+  "ok": "OK"
 }

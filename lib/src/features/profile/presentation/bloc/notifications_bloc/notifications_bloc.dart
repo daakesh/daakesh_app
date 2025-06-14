@@ -31,6 +31,12 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
       await result.fold(
         (failure) async {
+          // Show error dialog for API failures
+          ShowToastSnackBar.showErrorDialog(
+            message: 'Failed to load notifications: ${failure.message}',
+            title: 'Network Error',
+          );
+
           // If API fails, fallback to static data for now
           final staticNotifications = _generateStaticNotifications();
           final unreadCount = staticNotifications

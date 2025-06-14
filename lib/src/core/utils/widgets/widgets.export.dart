@@ -1,4 +1,5 @@
 export 'corner_painter.dart';
+export 'custom_error_dialog.dart';
 export 'daakesh_logo_widget.dart';
 export 'fade_in_image_widget.dart';
 export 'buttons_widgets/buttons_widget.export.dart';

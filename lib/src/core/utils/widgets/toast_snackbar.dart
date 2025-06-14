@@ -38,4 +38,34 @@ class ShowToastSnackBar {
               : null,
     ));
   }
+
+  /// Show custom error dialog instead of snack bar
+  static void showErrorDialog({
+    required String message,
+    String? title,
+    VoidCallback? onOkPressed,
+    bool barrierDismissible = true,
+  }) {
+    CustomErrorDialog.show(
+      message: message,
+      title: title,
+      onOkPressed: onOkPressed,
+      barrierDismissible: barrierDismissible,
+    );
+  }
+
+  /// Show custom success dialog instead of snack bar
+  static void showSuccessDialog({
+    required String message,
+    String? title,
+    VoidCallback? onOkPressed,
+    bool barrierDismissible = true,
+  }) {
+    CustomErrorDialog.showSuccess(
+      message: message,
+      title: title,
+      onOkPressed: onOkPressed,
+      barrierDismissible: barrierDismissible,
+    );
+  }
 }
