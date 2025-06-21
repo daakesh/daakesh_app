@@ -7,6 +7,8 @@ class NotificationModel {
   final NotificationType type;
   final String? itemType; // Add this field to store "Sell" or "Swap"
   final String? imageUrl; // Add this field to store the first item image
+  final Map<String, dynamic>? itemData; // Store the original item json
+  final int? offerId; // Add this field to store offerID
 
   const NotificationModel({
     required this.id,
@@ -17,10 +19,11 @@ class NotificationModel {
     required this.type,
     this.itemType,
     this.imageUrl,
+    this.itemData,
+    this.offerId,
   });
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
-    // Extract item details for better context
     final item = json['item'] as Map<String, dynamic>?;
     final comment = json['comment'] as Map<String, dynamic>?;
     final from = json['from'] as Map<String, dynamic>?;
@@ -39,6 +42,10 @@ class NotificationModel {
       type: _parseNotificationType(notificationType, itemType),
       itemType: item?['Type']?.toString(),
       imageUrl: _extractFirstImage(item),
+      itemData: item, // Store the full item json
+      offerId: json['offerID'] != null
+          ? int.tryParse(json['offerID'].toString())
+          : null,
     );
   }
 
@@ -147,6 +154,8 @@ class NotificationModel {
       case 'promotion':
       case 'promo':
         return NotificationType.promotion;
+      case 'offer':
+        return NotificationType.offer; // Add this
       default:
         // If notification type is not clear, use item type to infer
         if (itemType != null) {
@@ -173,6 +182,20 @@ class NotificationModel {
 
     return null;
   }
+
+  // Add a helper to get itemId for navigation
+  int? get itemId {
+    try {
+      final item = (this as dynamic)._rawItem;
+      if (item != null && item['id'] != null) {
+        return int.tryParse(item['id'].toString());
+      }
+    } catch (_) {}
+    return null;
+  }
+
+  // Helper to expose the item JSON for navigation
+  Map<String, dynamic>? get itemJson => itemData;
 
   Map<String, dynamic> toJson() {
     return {
@@ -216,6 +239,7 @@ enum NotificationType {
   system,
   promotion,
   comment,
+  offer, // Add this
 }
 
 extension NotificationTypeExtension on NotificationType {
@@ -231,6 +255,8 @@ extension NotificationTypeExtension on NotificationType {
         return 'Promotion';
       case NotificationType.comment:
         return 'Comment';
+      case NotificationType.offer: // Add this
+        return 'Offer';
     }
   }
 }

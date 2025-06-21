@@ -32,10 +32,13 @@ class FirebaseMessagingService {
     _instance._setupMessageListeners();
   }
 
+  static void Function(Map<String, dynamic> data)? onNotificationTap;
+
   /// Listens for foreground and interaction messages
   void _setupMessageListeners() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      debugPrint('📨 Foreground message: ${message.messageId}');
+      debugPrint(
+          '📨 Foreground message: [35m[1m[4m${message.messageId}[0m');
       if (message.notification != null) {
         _showNotification(
           title: message.notification?.title,
@@ -48,6 +51,9 @@ class FirebaseMessagingService {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       debugPrint('📬 Message opened app: ${message.data}');
       // Handle app open via notification
+      if (onNotificationTap != null) {
+        onNotificationTap!(message.data);
+      }
     });
   }
 

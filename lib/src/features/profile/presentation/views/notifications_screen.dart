@@ -290,7 +290,42 @@ class NotificationItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        // Custom navigation for comment notifications
+        if (notification.type == NotificationType.comment) {
+          // Use itemJson if available, fallback to itemId
+          if (notification.itemJson != null) {
+            Utils.openNavNewPage(
+              context,
+              MoreInfoProductScreen(
+                todayDealItem: TodayItem.fromJson(notification.itemJson!),
+                isDaakeshTodayDeal: true,
+              ),
+            );
+            return;
+          } else if (notification.itemId != null) {
+            Utils.openNavNewPage(
+              context,
+              MoreInfoProductScreen(
+                todayDealItem: TodayItem(id: notification.itemId),
+                isDaakeshTodayDeal: true,
+              ),
+            );
+            return;
+          }
+        }
+        // Custom navigation for offer notifications
+        if (notification.type == NotificationType.offer &&
+            notification.offerId != null) {
+          // Navigate to MyOrderScreen (receive tab) for offer notifications
+          Utils.openNavNewPage(
+            context,
+            MyOrderScreen(externalContext: context),
+          );
+          return;
+        }
+        onTap();
+      },
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -487,6 +522,8 @@ class NotificationItemWidget extends StatelessWidget {
         return Colors.purple;
       case NotificationType.comment:
         return Colors.indigo;
+      case NotificationType.offer:
+        return Colors.teal;
     }
   }
 
@@ -502,6 +539,8 @@ class NotificationItemWidget extends StatelessWidget {
         return Icons.local_offer_outlined;
       case NotificationType.comment:
         return Icons.comment_outlined;
+      case NotificationType.offer:
+        return Icons.local_offer;
     }
   }
 

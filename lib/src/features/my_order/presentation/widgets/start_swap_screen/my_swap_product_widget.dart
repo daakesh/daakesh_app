@@ -244,23 +244,40 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                               style: context
                                   .easyTheme.elevatedButtonTheme.style!
                                   .copyWith(
-                                minimumSize: MaterialStateProperty.all(
+                                minimumSize: WidgetStateProperty.all(
                                     const Size(387.0, 40)),
-                                textStyle: MaterialStateProperty.all(context
+                                textStyle: WidgetStateProperty.all(context
                                     .easyTheme.textTheme.bodyMedium!
                                     .copyWith(fontSize: 13)),
                               ),
-                              onPressed: () => acceptOffer(
+                              onPressed: () {
+                                final sourceItem =
+                                    widget.sendReceiveSwapReqItem.sourceItem ??
+                                        0;
+                                final offerItem =
+                                    widget.sendReceiveSwapReqItem.offerItem ??
+                                        0;
+                                final sourceUser = widget
+                                        .sendReceiveSwapReqItem.sourceUser?.id
+                                        ?.toString() ??
+                                    '';
+                                final offerUser = widget
+                                        .sendReceiveSwapReqItem.offerUser?.id
+                                        ?.toString() ??
+                                    '';
+                                final itemId =
+                                    widget.sendReceiveSwapReqItem.id ?? 0;
+                                acceptOffer(
                                   context,
-                                  widget.sendReceiveSwapReqItem.sourceItem!,
-                                  widget.sendReceiveSwapReqItem.offerItem!,
+                                  sourceItem,
+                                  offerItem,
                                   1,
-                                  widget.sendReceiveSwapReqItem.sourceUser!.id
-                                      .toString(),
-                                  widget.sendReceiveSwapReqItem.offerUser!.id
-                                      .toString(),
-                                  widget.sendReceiveSwapReqItem.id!,
-                                  controller.text),
+                                  sourceUser,
+                                  offerUser,
+                                  itemId,
+                                  controller.text,
+                                );
+                              },
                             ),
                           ),
                           const SizedBox(
@@ -272,15 +289,15 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                               style: context
                                   .easyTheme.elevatedButtonTheme.style!
                                   .copyWith(
-                                minimumSize: MaterialStateProperty.all(
+                                minimumSize: WidgetStateProperty.all(
                                     const Size(387.0, 40)),
-                                textStyle: MaterialStateProperty.all(context
+                                textStyle: WidgetStateProperty.all(context
                                     .easyTheme.textTheme.bodyMedium!
                                     .copyWith(
                                   fontSize: 12,
                                 )),
                                 backgroundColor:
-                                    MaterialStateProperty.all(ColorName.red),
+                                    WidgetStateProperty.all(ColorName.red),
                               ),
                               onPressed: () => MySwapOrderBloc.get.add(
                                   UpdateOfferEvent(
@@ -502,10 +519,9 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                     style: context
                                         .easyTheme.elevatedButtonTheme.style!
                                         .copyWith(
-                                      textStyle: MaterialStateProperty.all(
-                                          context
-                                              .easyTheme.textTheme.bodyMedium!
-                                              .copyWith(fontSize: 13)),
+                                      textStyle: WidgetStateProperty.all(context
+                                          .easyTheme.textTheme.bodyMedium!
+                                          .copyWith(fontSize: 13)),
                                     ),
                                     onPressed: () {},
                                   ),
@@ -519,15 +535,13 @@ class _MySwapProductCardWidgetState extends State<MySwapProductCardWidget> {
                                     style: context
                                         .easyTheme.elevatedButtonTheme.style!
                                         .copyWith(
-                                      textStyle: MaterialStateProperty.all(
-                                          context
-                                              .easyTheme.textTheme.bodyMedium!
-                                              .copyWith(
+                                      textStyle: WidgetStateProperty.all(context
+                                          .easyTheme.textTheme.bodyMedium!
+                                          .copyWith(
                                         fontSize: 13,
                                       )),
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              ColorName.red),
+                                      backgroundColor: WidgetStateProperty.all(
+                                          ColorName.red),
                                     ),
                                     onPressed: () => MySwapOrderBloc.get.add(
                                         UpdateOfferEvent(

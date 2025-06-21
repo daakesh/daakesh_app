@@ -150,7 +150,15 @@ class TodayItem {
         ? SubCategory.fromJson(json['subcategory'])
         : SubCategory.initValues();
 
-    isFavorite = json['isFavorite'];
+    // Fix isFavorite assignment to handle int or bool
+    final fav = json['isFavorite'];
+    if (fav is bool) {
+      isFavorite = fav;
+    } else if (fav is int) {
+      isFavorite = fav == 1;
+    } else {
+      isFavorite = false;
+    }
     latitude = json['latitude'].toString();
     longitude = json['longitude'].toString();
   }
