@@ -115,13 +115,12 @@ class ProfileScreen extends StatelessWidget {
             ),
 //!________________________________________
             CategoryItemWidget(
-              onTap: () {
-                print(ValueConstants.userId);
-                Utils.openNewPage(const FavouriteScreen());
-              },
-              title: 'Favourite',
-              icon: Assets.svg.locationPinIcon.svg(width: 24.0, height: 24.0),
-            ),
+                onTap: () {
+                  print(ValueConstants.userId);
+                  Utils.openNewPage(const FavouriteScreen());
+                },
+                title: 'Favourite',
+                icon: const Icon(Icons.favorite)),
 
             //!________________________________________
             Padding(

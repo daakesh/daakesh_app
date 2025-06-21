@@ -10,7 +10,7 @@ class IsEmptyDataWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.data_array),
+        //const Icon(Icons.data_array),
         const SizedBox(height: 30),
         Text('No $name Items')
       ],

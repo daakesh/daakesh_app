@@ -99,29 +99,29 @@ class $AssetsPngGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-    americanExpressIcon,
-    authScreensBackground,
-    babyIcon,
-    checkIcon,
-    disableMyOrderIcon,
-    enableMyOrderIcon,
-    filterIcon,
-    glasses,
-    googleIcon,
-    handmadeIcon,
-    langIcon,
-    line,
-    mastercardIcon,
-    productIcon,
-    shopByBrand,
-    shopModeAr,
-    shopModeEn,
-    splashScreenBackground,
-    swapIcon,
-    swapModeAr,
-    swapModeEn,
-    visaIcon,
-  ];
+        americanExpressIcon,
+        authScreensBackground,
+        babyIcon,
+        checkIcon,
+        disableMyOrderIcon,
+        enableMyOrderIcon,
+        filterIcon,
+        glasses,
+        googleIcon,
+        handmadeIcon,
+        langIcon,
+        line,
+        mastercardIcon,
+        productIcon,
+        shopByBrand,
+        shopModeAr,
+        shopModeEn,
+        splashScreenBackground,
+        swapIcon,
+        swapModeAr,
+        swapModeEn,
+        visaIcon,
+      ];
 }
 
 class $AssetsSvgGen {
@@ -247,6 +247,10 @@ class $AssetsSvgGen {
   SvgGenImage get locationPinIcon =>
       const SvgGenImage('assets/svg/location_pin_icon.svg');
 
+  /// File path: assets/svg/location_pin_icon.svg
+  SvgGenImage get favouriteIcon =>
+      const SvgGenImage('assets/svg/favourite.svg');
+
   /// File path: assets/svg/person_icon.svg
   SvgGenImage get personIcon => const SvgGenImage('assets/svg/person_icon.svg');
 
@@ -284,48 +288,48 @@ class $AssetsSvgGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
-    appleIcon,
-    arrowBackIcon,
-    arrowDropDownIcon,
-    arrowRightIcon,
-    arrowUpRight,
-    cartAddIcon,
-    commentIcon,
-    creditCardIcon,
-    creditCardLogoIcon,
-    daakeshLogo,
-    darkArabicLogo,
-    deleteIconCopy,
-    deleteIcon,
-    disableHomeIcon,
-    disableProductIcon,
-    disableProfileIcon,
-    editIcon,
-    emptyImageIcon,
-    enableHomeIcon,
-    enableProductIcon,
-    enableProfileIcon,
-    exchangeLogo,
-    facebookIcon,
-    furtherInfoIcon,
-    imagePickerIcon,
-    iosArrowBack,
-    iosArrowForward,
-    lightArabicLogo,
-    lightDaakeshLogo,
-    line,
-    locationPinIcon,
-    personIcon,
-    plusIcon,
-    profileCreditCardIcon,
-    profilePhoneIcon,
-    searchIcon,
-    sendIcon,
-    shopByBrand,
-    sortIcon,
-    zoomInIcon,
-    zoomOutIcon,
-  ];
+        appleIcon,
+        arrowBackIcon,
+        arrowDropDownIcon,
+        arrowRightIcon,
+        arrowUpRight,
+        cartAddIcon,
+        commentIcon,
+        creditCardIcon,
+        creditCardLogoIcon,
+        daakeshLogo,
+        darkArabicLogo,
+        deleteIconCopy,
+        deleteIcon,
+        disableHomeIcon,
+        disableProductIcon,
+        disableProfileIcon,
+        editIcon,
+        emptyImageIcon,
+        enableHomeIcon,
+        enableProductIcon,
+        enableProfileIcon,
+        exchangeLogo,
+        facebookIcon,
+        furtherInfoIcon,
+        imagePickerIcon,
+        iosArrowBack,
+        iosArrowForward,
+        lightArabicLogo,
+        lightDaakeshLogo,
+        line,
+        locationPinIcon,
+        personIcon,
+        plusIcon,
+        profileCreditCardIcon,
+        profilePhoneIcon,
+        searchIcon,
+        sendIcon,
+        shopByBrand,
+        sortIcon,
+        zoomInIcon,
+        zoomOutIcon,
+      ];
 }
 
 class Assets {
@@ -407,10 +411,10 @@ class AssetGenImage {
 
 class SvgGenImage {
   const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
-    : _isVecFormat = false;
+      : _isVecFormat = false;
 
   const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
-    : _isVecFormat = true;
+      : _isVecFormat = true;
 
   final String _assetName;
   final Size? size;
@@ -464,8 +468,7 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter:
-          colorFilter ??
+      colorFilter: colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
