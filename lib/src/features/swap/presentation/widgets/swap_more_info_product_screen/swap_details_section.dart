@@ -28,8 +28,8 @@ class SwapDetailsSection extends StatelessWidget {
             ),
             Text(
               Utils.isEnglish
-                  ? '${trendDealsItem.brand!.brandName}'
-                  : '${trendDealsItem.brand!.arName}',
+                  ? (trendDealsItem.brand?.brandName ?? '-')
+                  : (trendDealsItem.brand?.arName ?? '-'),
               style:
                   context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
@@ -48,8 +48,8 @@ class SwapDetailsSection extends StatelessWidget {
             ),
             Text(
               Utils.isEnglish
-                  ? trendDealsItem.section!.name.toString()
-                  : trendDealsItem.section!.arName.toString(),
+                  ? (trendDealsItem.section?.name ?? '-')
+                  : (trendDealsItem.section?.arName ?? '-'),
               style:
                   context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
@@ -68,8 +68,8 @@ class SwapDetailsSection extends StatelessWidget {
             ),
             Text(
               Utils.isEnglish
-                  ? '${trendDealsItem.category!.name}'
-                  : '${trendDealsItem.category!.arName}',
+                  ? (trendDealsItem.category?.name ?? '-')
+                  : (trendDealsItem.category?.arName ?? '-'),
               style:
                   context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
@@ -87,7 +87,7 @@ class SwapDetailsSection extends StatelessWidget {
                   .copyWith(color: ColorName.gray, fontSize: 18),
             ),
             Text(
-              '${trendDealsItem.year}',
+              trendDealsItem.year ?? '-',
               style:
                   context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
@@ -105,7 +105,7 @@ class SwapDetailsSection extends StatelessWidget {
           height: 6.0,
         ),
         Text(
-          '${trendDealsItem.description}',
+          trendDealsItem.description ?? '-',
           style: context.easyTheme.textTheme.bodyLarge!.copyWith(fontSize: 18),
         ),
         const SizedBox(

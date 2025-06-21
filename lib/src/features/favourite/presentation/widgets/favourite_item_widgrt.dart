@@ -2,6 +2,10 @@ import 'package:daakesh/src/core/utils/utils.dart';
 import 'package:daakesh/src/core/utils/widgets/cached_image.dart';
 import 'package:daakesh/src/features/favourite/data/moldels/favourite_response.dart';
 import 'package:daakesh/src/features/home/presentation/presentation.export.dart';
+import 'package:daakesh/src/features/swap/data/models/trend_deals_model.dart';
+import 'package:daakesh/src/features/home/data/models/today_deal_model.dart';
+import 'package:daakesh/src/features/swap/presentation/views/swap_more_info_screen.dart';
+import 'package:daakesh/src/features/home/presentation/views/more_info_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,13 +25,59 @@ class FavouriteItemWidget extends StatelessWidget {
         builder: (context, state) {
       return GestureDetector(
         onTap: () {
-          // CommentBloc.get.add(GetCommentByItemEvent(itemId: todayDealItem.id!));
-          // Utils.openNavNewPage(
-          //     context,
-          //     MoreInfoProductScreen(
-          //       todayDealItem: todayDealItem,
-          //       isDaakeshTodayDeal: isDaakeshTodayDeal,
-          //     ));
+          // Navigate to item details page
+          if (item.item?.Type?.toLowerCase() == 'swap') {
+            final swapItem = TrendDealsItem(
+              id: item.item?.id,
+              description: item.item?.description,
+              itemImg: item.item?.itemImg?.whereType<String>().toList(),
+              date: item.item?.date,
+              title: item.item?.Title,
+              type: item.item?.Type,
+              swapFor: item.item?.SwapFor,
+              city: item.item?.City,
+              year: item.item?.Year,
+              condition: item.item?.Condition,
+              price: item.item?.Price,
+              discount: double.tryParse(item.item?.discount ?? '0'),
+              discountFrom: item.item?.discountFrom,
+              discountTo: item.item?.discountTo,
+              country: item.item?.country,
+              // section, user, category, brand, subcategory, isFavorite, latitude, longitude can be added if needed
+            );
+            // Set additional fields if needed
+            // swapItem.countrySwap = item.item?.countrySwap;
+            // swapItem.citySwap = item.item?.citySwap;
+            // swapItem.offerCount = int.tryParse(item.item?.offersCount ?? '0');
+            Utils.openNavNewPage(
+                context, SwapMoreInfoScreen(trendDealsItem: swapItem));
+          } else {
+            // Convert FavouriteResponseModelDataItem to TodayItem
+            final todayItem = TodayItem(
+              id: item.item?.id,
+              description: item.item?.description,
+              itemImg: item.item?.itemImg?.whereType<String>().toList(),
+              date: item.item?.date,
+              title: item.item?.Title,
+              type: item.item?.Type,
+              swapFor: item.item?.SwapFor,
+              city: item.item?.City,
+              year: item.item?.Year,
+              condition: item.item?.Condition,
+              price: item.item?.Price,
+              discount: double.tryParse(item.item?.discount ?? '0'),
+              discountFrom: item.item?.discountFrom,
+              discountTo: item.item?.discountTo,
+              country: item.item?.country,
+              priceAfterDiscount: item.item?.priceAfterDiscount,
+              discountPercentage: item.item?.discountPercentage,
+              // Add more fields as needed
+            );
+            Utils.openNavNewPage(
+                context,
+                MoreInfoProductScreen(
+                    todayDealItem: todayItem, isDaakeshTodayDeal: false));
+          }
         },
         child: Stack(
           children: [

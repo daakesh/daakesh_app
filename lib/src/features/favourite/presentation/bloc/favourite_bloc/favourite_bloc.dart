@@ -264,6 +264,16 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       // Save full list
       _allFavouriteItems = favouriteResponseModel.data ?? [];
 
+      // Deduplicate by item id
+      final seen = <int>{};
+      _allFavouriteItems = _allFavouriteItems.where((fav) {
+        final id = fav.item?.id;
+        if (id == null) return false;
+        if (seen.contains(id)) return false;
+        seen.add(id);
+        return true;
+      }).toList();
+
       // Filter based on currentTab (SELL or SWAP)
       favouriteItems = _allFavouriteItems.where((value) {
         final type = value.item?.Type?.toLowerCase();
@@ -302,16 +312,12 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       emit(FavouriteErrorState(message: l.message.toString()));
     }, (r) {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
         return;
       }
-
-      favouriteItems.removeWhere((item) => item.id == event.itemId);
-      _allFavouriteItems.removeWhere((item) => item.id == event.itemId);
-
-      ShowToastSnackBar.showSnackBars(message: r.message ?? "Item Deleted");
-
-      emit(FavouriteLoadedState());
+      ShowToastSnackBar.showSuccessDialog(message: r.message ?? "Item Deleted");
+      // Refresh the list after removal
+      add(GetFavouriteDataEvent());
     });
   }
 
@@ -325,11 +331,12 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       emit(FavouriteErrorState(message: l.message.toString()));
     }, (r) {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
         return;
       }
-
-      ShowToastSnackBar.showSnackBars(message: r.message ?? "Item Added");
+      ShowToastSnackBar.showSuccessDialog(message: r.message ?? "Item Added");
+      // Refresh the list after addition
+      add(GetFavouriteDataEvent());
     });
   }
 

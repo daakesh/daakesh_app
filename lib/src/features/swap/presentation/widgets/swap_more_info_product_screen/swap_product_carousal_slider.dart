@@ -33,7 +33,7 @@ class SwapProductCarousalSlider extends StatelessWidget {
                 width: 6.0,
               ),
               Text(
-                '${trendDealsItem.user!.name}',
+                trendDealsItem.user?.name ?? '-',
                 style: context.easyTheme.textTheme.bodyMedium!
                     .copyWith(fontSize: 20.0),
               ),

@@ -113,6 +113,15 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
         return;
       }
       trendDealListData.addAll(newResultList);
+      // Deduplicate by id
+      final seen = <int>{};
+      trendDealListData = trendDealListData.where((item) {
+        final id = item.id;
+        if (id == null) return false;
+        if (seen.contains(id)) return false;
+        seen.add(id);
+        return true;
+      }).toList();
       emit(state.copyWith(
         swapTodayDealsStateStatus: SwapTodayDealsStateStatus.SUCCESS,
         trendDealListData: trendDealListData,

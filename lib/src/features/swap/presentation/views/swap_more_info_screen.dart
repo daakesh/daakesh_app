@@ -195,7 +195,7 @@ class SwapMoreInfoScreen extends StatelessWidget {
                     SwapDetailsSection(
                       trendDealsItem: trendDealsItem,
                     ),
-                    ValueConstants.userId != trendDealsItem.user!.id
+                    ValueConstants.userId != (trendDealsItem.user?.id ?? '')
                         ? Center(
                             child: DefaultButtonWidget(
                                 text: context.locale.swap_offer_create_button,
