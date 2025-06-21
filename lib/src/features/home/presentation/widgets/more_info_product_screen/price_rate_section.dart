@@ -35,19 +35,37 @@ class _PriceRateSectionState extends State<PriceRateSection> {
               style: context.easyTheme.textTheme.bodyMedium!
                   .copyWith(fontSize: 24.0, color: ColorName.gray),
             ),
-            TextButtonWidget(
-                text: 'Show on map',
-                onPressed: () async {
-                  final googleMapsUrl = Uri.parse(
-                      "https://www.google.com/maps/search/?api=1&query=${widget.todayDealItem.latitude},${widget.todayDealItem.longitude}");
+            (widget.todayDealItem.latitude != null &&
+                    widget.todayDealItem.longitude != null &&
+                    widget.todayDealItem.latitude.toString().isNotEmpty &&
+                    widget.todayDealItem.longitude.toString().isNotEmpty &&
+                    double.tryParse(widget.todayDealItem.latitude.toString()) !=
+                        null &&
+                    double.tryParse(
+                            widget.todayDealItem.longitude.toString()) !=
+                        null &&
+                    double.tryParse(widget.todayDealItem.latitude.toString()) !=
+                        0.0 &&
+                    double.tryParse(
+                            widget.todayDealItem.longitude.toString()) !=
+                        0.0)
+                ? TextButtonWidget(
+                    text: 'Show on map',
+                    onPressed: () async {
+                      print('Lat ${widget.todayDealItem.latitude}');
+                      print('Long ${widget.todayDealItem.longitude}');
 
-                  if (await canLaunchUrl(googleMapsUrl)) {
-                    await launchUrl(googleMapsUrl,
-                        mode: LaunchMode.externalApplication);
-                  } else {
-                    throw 'Could not open the map.';
-                  }
-                }),
+                      final googleMapsUrl = Uri.parse(
+                          "https://www.google.com/maps/search/?api=1&query=${widget.todayDealItem.latitude},${widget.todayDealItem.longitude}");
+
+                      if (await canLaunchUrl(googleMapsUrl)) {
+                        await launchUrl(googleMapsUrl,
+                            mode: LaunchMode.externalApplication);
+                      } else {
+                        throw 'Could not open the map.';
+                      }
+                    })
+                : const SizedBox.shrink(),
           ],
         ),
         const SizedBox(
