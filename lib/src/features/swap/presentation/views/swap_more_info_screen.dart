@@ -55,6 +55,19 @@ class SwapMoreInfoScreen extends StatelessWidget {
                           ),
                           child: BlocBuilder<FavouriteBloc, FavouriteState>(
                             builder: (context, state) {
+                              // Show loading indicator when determining favorite status
+                              if (state is FavouriteLoadingState) {
+                                return Container(
+                                  width: 48.0,
+                                  height: 48.0,
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: const CircularProgressIndicator(
+                                    strokeWidth: 2.0,
+                                    color: Colors.red,
+                                  ),
+                                );
+                              }
+
                               return IconButton(
                                 onPressed: () {
                                   final bloc = context.read<FavouriteBloc>();
@@ -75,6 +88,7 @@ class SwapMoreInfoScreen extends StatelessWidget {
                                         .read<FavouriteBloc>()
                                         .add(RemoveFavouriteEvent(
                                           itemId: bloc.favouriteItemId,
+                                          actualItemId: trendDealsItem.id ?? 0,
                                         ));
                                   }
                                 },

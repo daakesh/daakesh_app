@@ -13,6 +13,8 @@ class PickLocationScreen extends StatefulWidget {
 class _PickLocationScreenState extends State<PickLocationScreen> {
   LatLng? selectedLatLng;
   GoogleMapController? _mapController;
+  bool _isMapLoading = false;
+  String _errorMessage = '';
 
   @override
   void initState() {
@@ -20,32 +22,55 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
     _determinePosition();
   }
 
-  LatLng _initialLatLng = const LatLng(31.963158, 35.930359); // Default Amman
+  final LatLng _initialLatLng =
+      const LatLng(31.963158, 35.930359); // Default Amman
 
   Future<void> _determinePosition() async {
-    LocationPermission permission;
-
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      await Geolocator.openLocationSettings();
-      return;
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      permission = await Geolocator.requestPermission();
-      if (permission != LocationPermission.always &&
-          permission != LocationPermission.whileInUse) return;
-    }
-
-    final position = await Geolocator.getCurrentPosition();
     setState(() {
-      _initialLatLng = LatLng(position.latitude, position.longitude);
-      selectedLatLng = _initialLatLng;
+      _isMapLoading = true;
+      _errorMessage = '';
     });
-
-    _mapController?.animateCamera(CameraUpdate.newLatLng(_initialLatLng));
+    try {
+      LocationPermission permission;
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        setState(() {
+          _errorMessage = 'Location services are disabled.';
+          _isMapLoading = false;
+        });
+        await Geolocator.openLocationSettings();
+        return;
+      }
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        permission = await Geolocator.requestPermission();
+        if (permission != LocationPermission.always &&
+            permission != LocationPermission.whileInUse) {
+          setState(() {
+            _errorMessage = 'Location permissions are denied.';
+            _isMapLoading = false;
+          });
+          return;
+        }
+      }
+      final position = await Geolocator.getCurrentPosition();
+      final newLatLng = LatLng(position.latitude, position.longitude);
+      setState(() {
+        selectedLatLng = newLatLng;
+        _isMapLoading = false;
+      });
+      if (_mapController != null) {
+        await _mapController!.animateCamera(
+          CameraUpdate.newLatLng(newLatLng),
+        );
+      }
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Error getting location: $e';
+        _isMapLoading = false;
+      });
+    }
   }
 
   @override

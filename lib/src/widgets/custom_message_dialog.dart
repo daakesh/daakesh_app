@@ -8,7 +8,7 @@ showMessageDialog({
   double horizontalPadding = 35,
   double verticalPadding = 25,
 }) async {
-  await showDialog(
+  return await showDialog(
     context: context,
     barrierDismissible: barrierDismissible,
     // barrierColor: AppColors.barrierColorWithOpacity,

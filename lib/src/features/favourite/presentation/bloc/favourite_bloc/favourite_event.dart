@@ -24,8 +24,12 @@ class AddFavouriteEvent extends FavouriteEvent {
 
 class RemoveFavouriteEvent extends FavouriteEvent {
   final int itemId;
+  final int? actualItemId; // The actual item ID (for lookup in favorites)
 
-  RemoveFavouriteEvent({required this.itemId});
+  RemoveFavouriteEvent({
+    required this.itemId,
+    this.actualItemId,
+  });
 }
 
 class SetFavouriteEvent extends FavouriteEvent {

@@ -51,3 +51,13 @@ class UpdateTodayDealsItem extends TodayDealsEvent {
   UpdateTodayDealsItem(
       {required this.rateCount, required this.id, required this.avgRating});
 }
+
+class UpdateTodayDealsItemFavoriteEvent extends TodayDealsEvent {
+  final int id;
+  final bool isFavorite;
+
+  UpdateTodayDealsItemFavoriteEvent({
+    required this.id,
+    required this.isFavorite,
+  });
+}

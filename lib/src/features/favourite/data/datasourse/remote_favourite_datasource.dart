@@ -24,6 +24,7 @@ class RemoteFavouriteDataSource extends FavouriteDataSource {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/favorite/getFavoriteForUser',
         params: {"userID": ValueConstants.userId});
+
     return result;
   }
 
@@ -32,6 +33,7 @@ class RemoteFavouriteDataSource extends FavouriteDataSource {
     final result = await getIt.get<NetworkService>().get(
         path: 'DaakeshServices/api/favorite/removeFavorite',
         params: {"id": "$itemId"});
+
     return result;
   }
 }

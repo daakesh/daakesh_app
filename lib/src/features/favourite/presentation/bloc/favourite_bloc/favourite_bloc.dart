@@ -231,7 +231,6 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   void _onSwapTab(
       SwapTabBarFavouriteTypeEvent event, Emitter<FavouriteState> emit) {
     currentTab = event.favouriteTapBarENUM;
-    print('currentTab: $currentTab');
     emit(FavouriteTabBarChangedState());
     add(GetFavouriteDataEvent());
   }
@@ -239,7 +238,6 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   FutureOr<void> _onSetItemFavourite(
       SetFavouriteEvent event, Emitter<FavouriteState> emit) {
     isFavouriteItem = !isFavouriteItem;
-    print('isFavouriteItem: $isFavouriteItem');
     emit(FavouriteItemChangeState());
   }
 
@@ -282,21 +280,19 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
             : type == 'swap';
       }).toList();
 
-      print('Filtered favouriteItems: $favouriteItems');
-
       // Handle from product screen
-      if (event.isFromProdScreen && favouriteItems.isNotEmpty) {
+      if (event.isFromProdScreen) {
         if (event.isFavouriteFromProd) {
           isFavouriteItem = true;
         }
 
-        final matchedItem = favouriteItems.firstWhere(
+        // Look for the item in ALL favorites (not just filtered ones)
+        final matchedItem = _allFavouriteItems.firstWhere(
           (value) => value.item?.id == event.itemID,
           orElse: () => FavouriteResponseModelData(),
         );
 
         favouriteItemId = matchedItem.id ?? 0;
-        print('Matched favouriteItemId: $favouriteItemId');
       }
 
       emit(FavouriteLoadedState());
@@ -305,19 +301,100 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
   FutureOr<void> _removeFavouriteItem(
       RemoveFavouriteEvent event, Emitter<FavouriteState> emit) async {
-    final result =
-        await getIt.get<FavouriteUseCases>().removeFavouriteItem(event.itemId);
+    emit(FavouriteLoadingState());
+
+    int favoriteRecordId = event.itemId;
+
+    // If actualItemId is provided, we need to find the favorite record ID by looking up the item
+    if (event.actualItemId != null) {
+      final matchedFavorite = _allFavouriteItems.firstWhere(
+        (fav) => fav.item?.id == event.actualItemId,
+        orElse: () => FavouriteResponseModelData(),
+      );
+
+      if (matchedFavorite.id != null && matchedFavorite.id! > 0) {
+        favoriteRecordId = matchedFavorite.id!;
+      } else {
+        ShowToastSnackBar.showSnackBars(
+            message: "Cannot remove favorite: Item not found in favorites",
+            isError: true);
+        emit(FavouriteLoadedState());
+        return;
+      }
+    }
+
+    // Validate favoriteRecordId before making API call
+    if (favoriteRecordId <= 0) {
+      ShowToastSnackBar.showSnackBars(
+          message: "Cannot remove favorite: Invalid ID", isError: true);
+      emit(FavouriteLoadedState());
+      return;
+    }
+
+    final result = await getIt
+        .get<FavouriteUseCases>()
+        .removeFavouriteItem(favoriteRecordId);
 
     result.fold((l) {
       emit(FavouriteErrorState(message: l.message.toString()));
+      ShowToastSnackBar.showSnackBars(
+          message: l.message.toString(), isError: true);
     }, (r) {
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showSnackBars(
+            message: r.message.toString(), isError: true);
+        emit(FavouriteLoadedState());
         return;
       }
-      ShowToastSnackBar.showSuccessDialog(message: r.message ?? "Item Deleted");
-      // Refresh the list after removal
-      add(GetFavouriteDataEvent());
+      ShowToastSnackBar.showSnackBars(
+          message: "Item removed from favourite", isSuccess: true);
+
+      // Find the item to get its ID for updating the source blocs
+      final item = _allFavouriteItems.firstWhere(
+        (fav) => fav.id == favoriteRecordId,
+        orElse: () => FavouriteResponseModelData(),
+      );
+
+      if (item.item?.id != null) {
+        final itemId = item.item!.id!;
+        final itemType = item.item!.Type?.toLowerCase();
+
+        // Update the source blocs to reflect the favorite removal
+        if (itemType == 'sell') {
+          // Update TodayDealsBloc for sell items
+          try {
+            TodayDealsBloc.get.add(UpdateTodayDealsItemFavoriteEvent(
+              id: itemId,
+              isFavorite: false,
+            ));
+          } catch (e) {
+            // Handle case where bloc might not be available
+          }
+        } else if (itemType == 'swap') {
+          // Update TrendDealsBloc for swap items
+          try {
+            TrendDealsBloc.get.add(UpdateTrendDealsItemFavoriteEvent(
+              id: itemId,
+              isFavorite: false,
+            ));
+          } catch (e) {
+            // Handle case where bloc might not be available
+          }
+        }
+      }
+
+      // Update local lists and emit state
+      _allFavouriteItems.removeWhere((fav) => fav.id == favoriteRecordId);
+
+      // Re-filter the favouriteItems based on currentTab after removal
+      favouriteItems = _allFavouriteItems.where((value) {
+        final type = value.item?.Type?.toLowerCase();
+        return currentTab == FavouriteTapBarENUM.SELL
+            ? type == 'sell'
+            : type == 'swap';
+      }).toList();
+
+      emit(FavouriteLoadedState());
     });
   }
 
@@ -331,10 +408,34 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       emit(FavouriteErrorState(message: l.message.toString()));
     }, (r) {
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showSnackBars(
+            message: r.message.toString(), isError: true);
         return;
       }
-      ShowToastSnackBar.showSuccessDialog(message: r.message ?? "Item Added");
+      ShowToastSnackBar.showSnackBars(
+          message: "Item added to favourite", isSuccess: true);
+
+      // Update the source blocs to reflect the favorite addition
+      // Since we know the itemId, we need to determine if it's a sell or swap item
+      // We can try updating both blocs safely with try-catch
+      try {
+        TodayDealsBloc.get.add(UpdateTodayDealsItemFavoriteEvent(
+          id: event.itemId,
+          isFavorite: true,
+        ));
+      } catch (e) {
+        // Handle case where bloc might not be available or item not found
+      }
+
+      try {
+        TrendDealsBloc.get.add(UpdateTrendDealsItemFavoriteEvent(
+          id: event.itemId,
+          isFavorite: true,
+        ));
+      } catch (e) {
+        // Handle case where bloc might not be available or item not found
+      }
+
       // Refresh the list after addition
       add(GetFavouriteDataEvent());
     });

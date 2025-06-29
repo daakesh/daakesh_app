@@ -2,10 +2,18 @@ import 'package:daakesh/src/core/utils/utils.dart';
 import 'package:daakesh/src/core/utils/widgets/cached_image.dart';
 import 'package:daakesh/src/features/favourite/data/moldels/favourite_response.dart';
 import 'package:daakesh/src/features/home/presentation/presentation.export.dart';
-import 'package:daakesh/src/features/swap/data/models/trend_deals_model.dart';
 import 'package:daakesh/src/features/home/data/models/today_deal_model.dart';
-import 'package:daakesh/src/features/swap/presentation/views/swap_more_info_screen.dart';
+import 'package:daakesh/src/features/swap/data/models/trend_deals_model.dart';
 import 'package:daakesh/src/features/home/presentation/views/more_info_product_screen.dart';
+import 'package:daakesh/src/features/swap/presentation/views/swap_more_info_screen.dart';
+import 'package:daakesh/src/features/home/presentation/bloc/comment_bloc/comment_bloc.dart';
+import 'package:daakesh/src/features/home/presentation/bloc/comment_bloc/comment_event.dart';
+import 'package:daakesh/src/features/authentication/data/models/user_model.dart';
+import 'package:daakesh/src/features/home/data/models/section_model.dart';
+import 'package:daakesh/src/features/home/data/models/category_model.dart';
+import 'package:daakesh/src/features/home/data/models/brand_model.dart';
+import 'package:daakesh/src/features/home/data/models/sub_category_model.dart';
+import 'package:daakesh/src/features/swap/data/models/swap_sub_category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,69 +33,18 @@ class FavouriteItemWidget extends StatelessWidget {
         builder: (context, state) {
       return GestureDetector(
         onTap: () {
-          // Navigate to item details page
-          if (item.item?.Type?.toLowerCase() == 'swap') {
-            final swapItem = TrendDealsItem(
-              id: item.item?.id,
-              description: item.item?.description,
-              itemImg: item.item?.itemImg?.whereType<String>().toList(),
-              date: item.item?.date,
-              title: item.item?.Title,
-              type: item.item?.Type,
-              swapFor: item.item?.SwapFor,
-              city: item.item?.City,
-              year: item.item?.Year,
-              condition: item.item?.Condition,
-              price: item.item?.Price,
-              discount: double.tryParse(item.item?.discount ?? '0'),
-              discountFrom: item.item?.discountFrom,
-              discountTo: item.item?.discountTo,
-              country: item.item?.country,
-              // section, user, category, brand, subcategory, isFavorite, latitude, longitude can be added if needed
-            );
-            // Set additional fields if needed
-            // swapItem.countrySwap = item.item?.countrySwap;
-            // swapItem.citySwap = item.item?.citySwap;
-            // swapItem.offerCount = int.tryParse(item.item?.offersCount ?? '0');
-            Utils.openNavNewPage(
-                context, SwapMoreInfoScreen(trendDealsItem: swapItem));
-          } else {
-            // Convert FavouriteResponseModelDataItem to TodayItem
-            final todayItem = TodayItem(
-              id: item.item?.id,
-              description: item.item?.description,
-              itemImg: item.item?.itemImg?.whereType<String>().toList(),
-              date: item.item?.date,
-              title: item.item?.Title,
-              type: item.item?.Type,
-              swapFor: item.item?.SwapFor,
-              city: item.item?.City,
-              year: item.item?.Year,
-              condition: item.item?.Condition,
-              price: item.item?.Price,
-              discount: double.tryParse(item.item?.discount ?? '0'),
-              discountFrom: item.item?.discountFrom,
-              discountTo: item.item?.discountTo,
-              country: item.item?.country,
-              priceAfterDiscount: item.item?.priceAfterDiscount,
-              discountPercentage: item.item?.discountPercentage,
-              // Add more fields as needed
-            );
-            Utils.openNavNewPage(
-                context,
-                MoreInfoProductScreen(
-                    todayDealItem: todayItem, isDaakeshTodayDeal: false));
-          }
+          _navigateToItemDetail(context);
         },
         child: Stack(
           children: [
             Dismissible(
-              key: Key(item.id.toString()),
-              // Must be unique
+              key: ValueKey(
+                  '${item.id}_${item.item?.id}_${DateTime.now().millisecondsSinceEpoch}'),
+              // Ensure unique key
               direction: DismissDirection.endToStart, // Left to right
               confirmDismiss: (direction) async {
-                await onPressedDelete();
-                return null;
+                onPressedDelete();
+                return false; // Never actually dismiss via swipe, let the bloc handle removal
               },
               background: Container(
                 alignment: Alignment.centerLeft,
@@ -143,8 +100,12 @@ class FavouriteItemWidget extends StatelessWidget {
                             ),
                             const Spacer(),
                             const Icon(Icons.favorite, color: Colors.red),
-                            const SizedBox(height: 10),
-                            const Icon(Icons.phone, color: Colors.grey),
+                            // const SizedBox(height: 10),
+                            // GestureDetector(
+                            //   onTap: () => _showLocationOnMap(context),
+                            //   child: const Icon(Icons.location_on,
+                            //       color: Colors.blue),
+                            // ),
                           ],
                         ),
                       ),
@@ -180,6 +141,112 @@ class FavouriteItemWidget extends StatelessWidget {
     });
   }
 
+  void _navigateToItemDetail(BuildContext context) {
+    if (item.item?.Type?.toLowerCase() == 'sell') {
+      // Navigate to shop item detail screen
+      final todayItem = TodayItem(
+        id: item.item?.id,
+        title: item.item?.Title,
+        description: item.item?.description,
+        itemImg: item.item?.itemImg?.cast<String>(),
+        date: item.item?.date,
+        type: item.item?.Type,
+        swapFor: item.item?.SwapFor,
+        city: item.item?.City,
+        year: item.item?.Year,
+        condition: item.item?.Condition,
+        price: item.item?.Price,
+        discount: double.tryParse(item.item?.discount ?? '0'),
+        discountFrom: item.item?.discountFrom,
+        discountTo: item.item?.discountTo,
+        country: item.item?.country,
+        priceAfterDiscount:
+            double.tryParse(item.item?.priceAfterDiscount ?? '0'),
+        discountPercentage: item.item?.discountPercentage,
+        isFavorite: true, // Since this is from favorites
+        // Initialize complex objects with default values to prevent null references
+        user: item.user != null
+            ? UserModel(
+                id: item.user!.id?.toString(),
+                name: item.user!.name,
+                phoneNumber: item.user!.phoneNumber,
+                email: item.user!.email,
+              )
+            : UserModel.initValues(),
+        section: SectionItemModel.initValues(),
+        category: CategoryItem.initValues(),
+        brand: BrandItem.initValues(),
+        subcategory: SubCategory.initValues(),
+        // Set default rating values
+        rateCount: 0,
+        averageRating: 0.0,
+        // Add latitude and longitude with actual values from favorite item
+        latitude: item.item?.latitude ??
+            "0.0", // Use actual latitude from favorite data
+        longitude: item.item?.longitude ??
+            "0.0", // Use actual longitude from favorite data
+      );
+
+      CommentBloc.get.add(GetCommentByItemEvent(itemId: todayItem.id));
+      Utils.openNavNewPage(
+        context,
+        MoreInfoProductScreen(
+          todayDealItem: todayItem,
+          isDaakeshTodayDeal: true,
+        ),
+      );
+    } else if (item.item?.Type?.toLowerCase() == 'swap') {
+      // Navigate to swap item detail screen
+      final trendDealsItem = TrendDealsItem(
+        id: item.item?.id,
+        description: item.item?.description,
+        itemImg: item.item?.itemImg?.cast<String>(),
+        date: item.item?.date,
+        title: item.item?.Title,
+        type: item.item?.Type,
+        swapFor: item.item?.SwapFor,
+        city: item.item?.City,
+        year: item.item?.Year,
+        condition: item.item?.Condition,
+        price: item.item?.Price,
+        discount: double.tryParse(item.item?.discount ?? '0'),
+        discountFrom: item.item?.discountFrom,
+        discountTo: item.item?.discountTo,
+        country: item.item?.country,
+        isFavorite: true, // Since this is from favorites
+        // Initialize complex objects with default values to prevent null references
+        user: item.user != null
+            ? UserModel(
+                id: item.user!.id?.toString(),
+                name: item.user!.name,
+                phoneNumber: item.user!.phoneNumber,
+                email: item.user!.email,
+              )
+            : UserModel.initValues(),
+        section: SectionItemModel.initValues(),
+        category: CategoryItem.initValues(),
+        brand: BrandItem.initValues(),
+        subcategory: SwapSubCategory.initValues(),
+      );
+
+      // Set additional properties that are not in constructor
+      trendDealsItem.countrySwap = item.item?.countrySwap;
+      trendDealsItem.citySwap = item.item?.citySwap;
+      trendDealsItem.offerCount =
+          int.tryParse(item.item?.offersCount ?? '0') ?? 0;
+      // Set latitude and longitude with actual values from favorite item
+      trendDealsItem.latitude = item.item?.latitude ?? "0.0";
+      trendDealsItem.longitude = item.item?.longitude ?? "0.0";
+
+      Utils.openNavNewPage(
+        context,
+        SwapMoreInfoScreen(
+          trendDealsItem: trendDealsItem,
+        ),
+      );
+    }
+  }
+
   Column getNameLocationOffer() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,11 +278,16 @@ class FavouriteItemWidget extends StatelessWidget {
   }
 
   Container getImage() {
+    String imageUrl = '';
+    if (item.item?.itemImg?.isNotEmpty == true) {
+      imageUrl = item.item!.itemImg![0] ?? '';
+    }
+
     return Container(
       color: Colors.blue,
       height: 100,
       width: 100,
-      child: CachedImage(imageUrl: item.item?.itemImg?[0] ?? ''),
+      child: CachedImage(imageUrl: imageUrl),
     );
   }
 }

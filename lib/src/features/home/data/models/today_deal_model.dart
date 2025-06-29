@@ -187,6 +187,9 @@ class TodayItem {
     CategoryItem? category,
     BrandItem? brand,
     SubCategory? subcategory,
+    bool? isFavorite,
+    String? latitude,
+    String? longitude,
   }) {
     return TodayItem(
       id: id ?? this.id,
@@ -213,6 +216,9 @@ class TodayItem {
       category: category ?? this.category,
       brand: brand ?? this.brand,
       subcategory: subcategory ?? this.subcategory,
+      isFavorite: isFavorite ?? this.isFavorite,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
     );
   }
 }

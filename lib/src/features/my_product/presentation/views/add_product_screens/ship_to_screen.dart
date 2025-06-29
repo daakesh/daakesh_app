@@ -199,28 +199,48 @@ class _ShipToScreenState extends State<ShipToScreen> {
                     padding: const EdgeInsets.all(30),
                     isBold: true,
                     text: 'Pick location',
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PickLocationScreen(
-                              onSelectPosition:
-                                  (double latitude, double longitude) {
-                                setState(() {
-                                  _latitude = latitude.toString();
-                                  _longitude = longitude.toString();
-                                });
+                    onPressed: () async {
+                      try {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PickLocationScreen(
+                                onSelectPosition:
+                                    (double latitude, double longitude) {
+                                  setState(() {
+                                    _latitude = latitude.toString();
+                                    _longitude = longitude.toString();
+                                  });
 
-                                AddProBloc.get.latitudePicked =
-                                    latitude.toString();
-                                AddProBloc.get.longitudePicked =
-                                    longitude.toString();
+                                  AddProBloc.get.latitudePicked =
+                                      latitude.toString();
+                                  AddProBloc.get.longitudePicked =
+                                      longitude.toString();
 
-                                print(latitude);
-                                print(longitude);
-                              },
+                                  print(latitude);
+                                  print(longitude);
+                                },
+                              ),
+                            ));
+                      } catch (e) {
+                        print('Error opening location picker: $e');
+                        // Show error dialog
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Location Service Error'),
+                            content: const Text(
+                              'There was an issue with the location service. Please check your Google Maps configuration or try again later.',
                             ),
-                          ));
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     }),
               ),
               _latitude != '' && _longitude != ''
@@ -241,7 +261,13 @@ class _ShipToScreenState extends State<ShipToScreen> {
                               ),
                               TextFormFieldWidget(
                                   controller: TextEditingController(
-                                      text: _latitude.substring(1, 12))),
+                                      text: _latitude.length > 1
+                                          ? _latitude.substring(
+                                              1,
+                                              _latitude.length > 12
+                                                  ? 12
+                                                  : _latitude.length)
+                                          : _latitude)),
                             ],
                           )),
                           const SizedBox(width: 20),
@@ -258,7 +284,13 @@ class _ShipToScreenState extends State<ShipToScreen> {
                               ),
                               TextFormFieldWidget(
                                   controller: TextEditingController(
-                                      text: _longitude.substring(1, 12))),
+                                      text: _longitude.length > 1
+                                          ? _longitude.substring(
+                                              1,
+                                              _longitude.length > 12
+                                                  ? 12
+                                                  : _longitude.length)
+                                          : _longitude)),
                             ],
                           ))
                         ],

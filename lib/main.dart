@@ -21,18 +21,27 @@ void main() async {
       try {
         itemJson = await compute<String, Map<String, dynamic>>(
             _parseJson, data['item']);
-      } catch (_) {
+      } catch (e, stack) {
         itemJson = {};
+        debugPrint('Error parsing item JSON: $e\n$stack');
       }
     } else if (data['item'] is Map<String, dynamic>) {
       itemJson = data['item'] as Map<String, dynamic>?;
     }
+    // Support both offerID and offerId keys
     final offerId = data['offerID'] != null
         ? int.tryParse(data['offerID'].toString())
-        : null;
+        : (data['offerId'] != null
+            ? int.tryParse(data['offerId'].toString())
+            : null);
     final context = Utils.navigatorKey.currentContext;
-    if (context == null) return;
-    if (notificationType == 'comment' && itemJson != null) {
+    if (context == null) {
+      debugPrint('Notification tap: context is null, cannot navigate.');
+      return;
+    }
+    if (notificationType == 'comment' &&
+        itemJson != null &&
+        itemJson.isNotEmpty) {
       Utils.openNavNewPage(
         context,
         MoreInfoProductScreen(
@@ -50,6 +59,9 @@ void main() async {
       return;
     }
     // Add more types as needed
+    debugPrint(
+        'Notification tap: Unhandled notification type or missing data. Type: $notificationType, Data: $data');
+    // Optionally, show a snackbar or dialog to inform the user
   };
   configureDependencies(env: ValueConstants.dev);
   runApp(const AppWidget());

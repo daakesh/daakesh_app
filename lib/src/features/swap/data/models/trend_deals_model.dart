@@ -136,4 +136,63 @@ class TrendDealsItem {
     latitude = json['latitude'].toString();
     longitude = json['longitude'].toString();
   }
+
+  TrendDealsItem copyWith({
+    int? id,
+    String? description,
+    List<String>? itemImg,
+    String? date,
+    String? title,
+    String? type,
+    String? swapFor,
+    String? city,
+    String? year,
+    String? condition,
+    dynamic price,
+    double? discount,
+    String? discountFrom,
+    String? discountTo,
+    String? country,
+    SectionItemModel? section,
+    UserModel? user,
+    CategoryItem? category,
+    BrandItem? brand,
+    SwapSubCategory? subcategory,
+    bool? isFavorite,
+    String? longitude,
+    String? latitude,
+  }) {
+    final newItem = TrendDealsItem(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      itemImg: itemImg ?? this.itemImg,
+      date: date ?? this.date,
+      title: title ?? this.title,
+      type: type ?? this.type,
+      swapFor: swapFor ?? this.swapFor,
+      city: city ?? this.city,
+      year: year ?? this.year,
+      condition: condition ?? this.condition,
+      price: price ?? this.price,
+      discount: discount ?? this.discount,
+      discountFrom: discountFrom ?? this.discountFrom,
+      discountTo: discountTo ?? this.discountTo,
+      country: country ?? this.country,
+      section: section ?? this.section,
+      user: user ?? this.user,
+      category: category ?? this.category,
+      brand: brand ?? this.brand,
+      subcategory: subcategory ?? this.subcategory,
+      isFavorite: isFavorite ?? this.isFavorite,
+      longitude: longitude ?? this.longitude,
+      latitude: latitude ?? this.latitude,
+    );
+
+    // Copy the fields that aren't in constructor
+    newItem.countrySwap = countrySwap;
+    newItem.citySwap = citySwap;
+    newItem.offerCount = offerCount;
+
+    return newItem;
+  }
 }

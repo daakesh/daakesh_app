@@ -18,7 +18,7 @@ import GoogleMaps // ✅ Google Maps
  
 
     // ✅ Google Maps API Key
-    GMSServices.provideAPIKey("YOUR_GOOGLE_MAPS_API_KEY") // ⬅️ Replace with your actual API key
+    GMSServices.provideAPIKey("AIzaSyB-njU3WygKOXJmoNAko7xxBu7BWDOY0c4") // ⬅️ Updated API key
 
     // ✅ Push Notification Delegates
     UNUserNotificationCenter.current().delegate = self

@@ -37,3 +37,13 @@ class SetViewAllFilterDataEvent extends TrendDealsEvent {
 }
 
 class GetViewAllsCitiesEvent extends TrendDealsEvent {}
+
+class UpdateTrendDealsItemFavoriteEvent extends TrendDealsEvent {
+  final int id;
+  final bool isFavorite;
+
+  UpdateTrendDealsItemFavoriteEvent({
+    required this.id,
+    required this.isFavorite,
+  });
+}

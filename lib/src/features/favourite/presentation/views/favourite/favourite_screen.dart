@@ -26,12 +26,11 @@ class FavouriteScreen extends StatelessWidget {
 class _FavouriteScreenContent extends StatelessWidget {
   final TextEditingController searchController = TextEditingController();
 
-  _FavouriteScreenContent({super.key});
+  _FavouriteScreenContent();
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<FavouriteBloc>();
-    final blocListener = context.watch<FavouriteBloc>();
 
     return Column(
       children: [
@@ -42,61 +41,64 @@ class _FavouriteScreenContent extends StatelessWidget {
         buildSearchField(bloc),
         const SizedBox(height: 12),
         Expanded(
-          child: blocListener.state is FavouriteLoadingState
-              ? const Center(child: CircularProgressIndicator())
-              : bloc.favouriteItems.isEmpty
-                  ? const IsEmptyDataWidget(name: 'Shop Favourite')
-                  : ListView.builder(
-                      padding: const EdgeInsets.all(16),
-                      itemCount: bloc.favouriteItems.length,
-                      itemBuilder: (context, index) {
-                        final item = bloc.favouriteItems[index];
-                        return FavouriteItemWidget(
-                          item: item,
-                          onPressedDelete: () {
-                            showMessageDialog(
-                                context: context,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                        'Are you sure to delete this item ? '),
-                                    const SizedBox(height: 50),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                            child: TextButtonWidget(
-                                                text: 'YES',
-                                                onPressed: () {
-                                                  bloc.add(RemoveFavouriteEvent(
-                                                      itemId: item.id!));
+          child: BlocBuilder<FavouriteBloc, FavouriteState>(
+            builder: (context, state) {
+              if (state is FavouriteLoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-                                                  Navigator.pop(context);
+              if (bloc.favouriteItems.isEmpty) {
+                return const IsEmptyDataWidget(name: 'Shop Favourite');
+              }
 
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    const SnackBar(
-                                                        content: Text(
-                                                            'Item Deleted')),
-                                                  );
-                                                })),
-                                        const SizedBox(width: 30),
-                                        Expanded(
-                                            child: TextButtonWidget(
-                                                text: 'NO',
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                })),
-                                      ],
-                                    ),
-                                  ],
-                                ));
-                          },
-                        );
-                      },
-                    ),
+              return ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: bloc.favouriteItems.length,
+                itemBuilder: (context, index) {
+                  final item = bloc.favouriteItems[index];
+                  return FavouriteItemWidget(
+                    item: item,
+                    onPressedDelete: () async {
+                      final result = await showMessageDialog(
+                          context: context,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text('Are you sure to delete this item ? '),
+                              const SizedBox(height: 50),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                      child: TextButtonWidget(
+                                          text: 'YES',
+                                          onPressed: () {
+                                            Navigator.pop(context, true);
+                                          })),
+                                  const SizedBox(width: 30),
+                                  Expanded(
+                                      child: TextButtonWidget(
+                                          text: 'NO',
+                                          onPressed: () {
+                                            Navigator.pop(context, false);
+                                          })),
+                                ],
+                              ),
+                            ],
+                          ));
+
+                      if (result == true) {
+                        bloc.add(RemoveFavouriteEvent(
+                          itemId: item.id!,
+                          actualItemId: item.item?.id,
+                        ));
+                      }
+                    },
+                  );
+                },
+              );
+            },
+          ),
         ),
       ],
     );
@@ -125,68 +127,84 @@ class _FavouriteScreenContent extends StatelessWidget {
   }
 
   Widget getTabbar(FavouriteBloc bloc, BuildContext context) {
-    final isShopTab = bloc.currentTab == FavouriteTapBarENUM.SELL;
+    return BlocBuilder<FavouriteBloc, FavouriteState>(
+      builder: (context, state) {
+        final isShopTab = bloc.currentTab == FavouriteTapBarENUM.SELL;
 
-    return Container(
-      width: double.infinity,
-      height: 50,
-      margin: const EdgeInsets.symmetric(horizontal: 13),
-      decoration: const BoxDecoration(
-        color: ColorName.paleGray,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: Row(
-        children: [
-          // SELL
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                bloc.add(SwapTabBarFavouriteTypeEvent(
-                    favouriteTapBarENUM: FavouriteTapBarENUM.SELL));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: isShopTab ? ColorName.amber : ColorName.paleGray,
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Center(
-                  child: Text(
-                    context.locale.shop_tab_bar,
-                    style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                      fontSize: 18,
-                      color: isShopTab ? ColorName.white : ColorName.blueGray,
+        return Container(
+          width: double.infinity,
+          height: 50,
+          margin: const EdgeInsets.symmetric(horizontal: 13),
+          decoration: const BoxDecoration(
+            color: ColorName.paleGray,
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          child: Row(
+            children: [
+              // SELL
+              Expanded(
+                child: InkWell(
+                  onTap: () {
+                    bloc.add(SwapTabBarFavouriteTypeEvent(
+                        favouriteTapBarENUM: FavouriteTapBarENUM.SELL));
+                  },
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: isShopTab ? ColorName.amber : ColorName.paleGray,
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        context.locale.shop_tab_bar,
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(
+                          fontSize: 18,
+                          color:
+                              isShopTab ? ColorName.white : ColorName.blueGray,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
-          // SWAP
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                bloc.add(SwapTabBarFavouriteTypeEvent(
-                    favouriteTapBarENUM: FavouriteTapBarENUM.SWAP));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: !isShopTab ? ColorName.amber : ColorName.paleGray,
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Center(
-                  child: Text(
-                    context.locale.swap_tab_bar,
-                    style: context.easyTheme.textTheme.headlineMedium!.copyWith(
-                      fontSize: 18,
-                      color: !isShopTab ? ColorName.white : ColorName.blueGray,
+              // SWAP
+              Expanded(
+                child: InkWell(
+                  onTap: () {
+                    bloc.add(SwapTabBarFavouriteTypeEvent(
+                        favouriteTapBarENUM: FavouriteTapBarENUM.SWAP));
+                  },
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: !isShopTab ? ColorName.amber : ColorName.paleGray,
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        context.locale.swap_tab_bar,
+                        style: context.easyTheme.textTheme.headlineMedium!
+                            .copyWith(
+                          fontSize: 18,
+                          color:
+                              !isShopTab ? ColorName.white : ColorName.blueGray,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -11,6 +11,7 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
     on<SetViewAllFilterEvent>(_setViewAllFilter);
     on<GetViewAllCitiesEvent>(_getViewAllCities);
     on<UpdateTodayDealsItem>(_updateTodayDealsItem);
+    on<UpdateTodayDealsItemFavoriteEvent>(_updateTodayDealsItemFavorite);
   }
 
   static TodayDealsBloc get get => BlocProvider.of(Utils.currentContext);
@@ -233,5 +234,49 @@ class TodayDealsBloc extends Bloc<TodayDealsEvent, TodayDealsState> {
         todayDealsListData: updatedTodayDealList,
       ));
     }
+  }
+
+  FutureOr<void> _updateTodayDealsItemFavorite(
+      UpdateTodayDealsItemFavoriteEvent event, Emitter<TodayDealsState> emit) {
+    // Update todayDealsListData
+    List<TodayItem> updatedTodayDealsListData =
+        List.from(state.todayDealsListData);
+    int index = updatedTodayDealsListData
+        .indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTodayDealsListData[index] = updatedTodayDealsListData[index]
+          .copyWith(isFavorite: event.isFavorite);
+    }
+
+    // Update daakeshTodayDealsListData
+    List<TodayItem> updatedDaakeshTodayDealsListData =
+        List.from(state.daakeshTodayDealsListData);
+    int daakeshIndex = updatedDaakeshTodayDealsListData
+        .indexWhere((element) => element.id == event.id);
+
+    if (daakeshIndex != -1) {
+      updatedDaakeshTodayDealsListData[daakeshIndex] =
+          updatedDaakeshTodayDealsListData[daakeshIndex]
+              .copyWith(isFavorite: event.isFavorite);
+    }
+
+    // Update allTodayDealsListData (view all data)
+    List<TodayItem> updatedAllTodayDealsListData =
+        List.from(state.allTodayDealsListData);
+    int allIndex = updatedAllTodayDealsListData
+        .indexWhere((element) => element.id == event.id);
+
+    if (allIndex != -1) {
+      updatedAllTodayDealsListData[allIndex] =
+          updatedAllTodayDealsListData[allIndex]
+              .copyWith(isFavorite: event.isFavorite);
+    }
+
+    emit(state.copyWith(
+      todayDealsListData: updatedTodayDealsListData,
+      daakeshTodayDealsListData: updatedDaakeshTodayDealsListData,
+      allTodayDealsListData: updatedAllTodayDealsListData,
+    ));
   }
 }

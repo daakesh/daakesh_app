@@ -29,6 +29,8 @@ class FavouriteResponseModelDataItem {
   String? priceAfterDiscount;
   String? discountPercentage;
   String? offersCount;
+  String? latitude;
+  String? longitude;
 
   FavouriteResponseModelDataItem({
     this.id,
@@ -61,6 +63,8 @@ class FavouriteResponseModelDataItem {
     this.priceAfterDiscount,
     this.discountPercentage,
     this.offersCount,
+    this.latitude,
+    this.longitude,
   });
   FavouriteResponseModelDataItem.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toInt();
@@ -100,6 +104,8 @@ class FavouriteResponseModelDataItem {
     priceAfterDiscount = json['price_after_discount']?.toString();
     discountPercentage = json['discount_percentage']?.toString();
     offersCount = json['offers_count'].toString();
+    latitude = json['latitude']?.toString();
+    longitude = json['longitude']?.toString();
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -139,6 +145,8 @@ class FavouriteResponseModelDataItem {
     data['store_type'] = storeType;
     data['price_after_discount'] = priceAfterDiscount;
     data['discount_percentage'] = discountPercentage;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
     return data;
   }
 }

@@ -9,6 +9,7 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
     on<ResetViewAllValueEvent>(_resetViewAllValue);
     on<SetViewAllFilterDataEvent>(_setViewAllFilterData);
     on<GetViewAllsCitiesEvent>(_getViewAllsCities);
+    on<UpdateTrendDealsItemFavoriteEvent>(_updateTrendDealsItemFavorite);
   }
 
   static TrendDealsBloc get get => BlocProvider.of(Utils.currentContext);
@@ -172,5 +173,36 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
       List<CityItem> cityItemList = citiesModel.data!.toList();
       emit(state.copyWith(cityItemList: cityItemList));
     });
+  }
+
+  FutureOr<void> _updateTrendDealsItemFavorite(
+      UpdateTrendDealsItemFavoriteEvent event, Emitter<TrendDealsState> emit) {
+    // Update trendDealsListData
+    List<TrendDealsItem> updatedTrendDealsListData =
+        List.from(state.trendDealsListData);
+    int index = updatedTrendDealsListData
+        .indexWhere((element) => element.id == event.id);
+
+    if (index != -1) {
+      updatedTrendDealsListData[index] = updatedTrendDealsListData[index]
+          .copyWith(isFavorite: event.isFavorite);
+    }
+
+    // Update trendDealListData (view all data)
+    List<TrendDealsItem> updatedTrendDealListData =
+        List.from(state.trendDealListData);
+    int viewAllIndex = updatedTrendDealListData
+        .indexWhere((element) => element.id == event.id);
+
+    if (viewAllIndex != -1) {
+      updatedTrendDealListData[viewAllIndex] =
+          updatedTrendDealListData[viewAllIndex]
+              .copyWith(isFavorite: event.isFavorite);
+    }
+
+    emit(state.copyWith(
+      trendDealsListData: updatedTrendDealsListData,
+      trendDealListData: updatedTrendDealListData,
+    ));
   }
 }
