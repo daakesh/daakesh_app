@@ -32,6 +32,32 @@
 -keep class com.google.firebase.** { *; }
 -keep class com.google.android.gms.** { *; }
 
+# Google Maps specific rules
+-keep class com.google.android.gms.maps.** { *; }
+-keep interface com.google.android.gms.maps.** { *; }
+-keep class com.google.maps.android.** { *; }
+-keep interface com.google.maps.android.** { *; }
+
+# Google Play Services
+-keep class com.google.android.gms.common.** { *; }
+-dontwarn com.google.android.gms.**
+
+# Additional rules for older Android versions
+-keep class com.google.android.gms.internal.** { *; }
+-keep class com.google.android.gms.location.** { *; }
+-keep class com.google.android.gms.tasks.** { *; }
+
+# WebView compatibility for older devices
+-keep class com.google.android.gms.maps.model.** { *; }
+-keep class * extends com.google.android.gms.maps.model.** { *; }
+
+# Location services compatibility
+-keep class androidx.core.location.** { *; }
+
+# Network security for older Android versions
+-keep class org.apache.http.** { *; }
+-dontwarn org.apache.http.**
+
 # Gson specific classes
 -keep class com.google.gson.stream.** { *; }
 

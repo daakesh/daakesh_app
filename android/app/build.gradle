@@ -24,6 +24,14 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        
+        // Ensure compatibility with older Android versions
+        vectorDrawables.useSupportLibrary = true
+        
+        // Google Maps renderer configuration
+        manifestPlaceholders = [
+            'com.google.android.geo.API_KEY': 'AIzaSyB-njU3WygKOXJmoNAko7xxBu7BWDOY0c4'
+        ]
     }
     
     signingConfigs {
@@ -75,7 +83,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.0.0')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.3.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
     // Add Play Core dependency for deferred components (fixes R8 errors)
