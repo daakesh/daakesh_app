@@ -23,11 +23,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(cartStateStatus: CartStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CartBloc.get.add(GetCartItemsEvent());
@@ -41,10 +41,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     final result = await getIt.get<HomeUseCases>().getCartItemsByUser();
     result.fold((l) {
       emit(state.copyWith(cartStateStatus: CartStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CartModel cartModel = CartModel.fromJson(r.data);
@@ -139,11 +139,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(cartStateStatus: CartStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
       }
 
       ///SellOrderBloc.get.add(GetMyOrderEvent());

@@ -31,10 +31,10 @@ class MySwapProBloc extends Bloc<MySwapProEvent, MySwapProState> {
 
     result.fold((l) {
       emit(state.copyWith(mySwapProStateStatus: MySwapProStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       MyProductModel myProductModel = MyProductModel.fromJson(r.data);
@@ -72,14 +72,14 @@ class MySwapProBloc extends Bloc<MySwapProEvent, MySwapProState> {
     ProgressCircleDialog.show();
     final result = await getIt.get<MyProductUseCases>().removeProduct(event.id);
     result.fold((l) {
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
-      ShowToastSnackBar.showSnackBars(message: r.data['data'].toString());
+      ShowToastSnackBar.showCustomDialog(message: r.data['data'].toString());
       List<MyProductItem> cartItemsList = state.mySwapProductListData.toList();
       cartItemsList.removeWhere((item) => event.id == item.id);
       emit(state.copyWith(myProductListData: []));

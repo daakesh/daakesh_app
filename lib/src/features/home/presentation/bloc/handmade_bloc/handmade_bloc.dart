@@ -71,10 +71,10 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
         .getHandmadeData(filterDataModel, state.currentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TodayItemModel todayItemModel = TodayItemModel.fromJson(r.data);
@@ -117,10 +117,10 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
     final result = await getIt.get<HomeUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TodayItemModel todayItemModel = TodayItemModel.fromJson(r.data);
@@ -150,10 +150,10 @@ class HandmadeBloc extends Bloc<HandmadeEvent, HandmadeState> {
     final result = await getIt.get<HomeUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(handmadeStateStatus: HandmadeStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);

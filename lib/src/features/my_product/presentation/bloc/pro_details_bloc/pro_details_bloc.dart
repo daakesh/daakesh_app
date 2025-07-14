@@ -25,10 +25,10 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
     final result = await getIt.get<MyProductUseCases>().getSections();
     result.fold((l) {
       emit(state.copyWith(proDetailsStateStatus: ProDetailsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       ProductSectionModel sectionModel = ProductSectionModel.fromJson(r.data);
@@ -65,11 +65,11 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(proDetailsStateStatus: ProDetailsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
         ProgressCircleDialog.dismiss();
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       ProgressCircleDialog.dismiss();
@@ -111,11 +111,11 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(proDetailsStateStatus: ProDetailsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       ProSubCategoryModel proSubCategoryModel =
@@ -172,10 +172,10 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         await getIt.get<MyProductUseCases>().getBrandsBySection(event.secID);
     result.fold((l) {
       emit(state.copyWith(proDetailsStateStatus: ProDetailsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       ProBrandModel proBrandModel = ProBrandModel.fromJson(r.data);
@@ -217,10 +217,10 @@ class ProDetailsBloc extends Bloc<ProDetailsEvent, ProDetailsState> {
         await getIt.get<MyProductUseCases>().isCategoryHasSub(event.catID);
     result.fold((l) {
       emit(state.copyWith(proDetailsStateStatus: ProDetailsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
 

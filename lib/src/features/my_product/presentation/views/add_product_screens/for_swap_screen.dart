@@ -237,7 +237,7 @@ class _ForSwapScreenState extends State<ForSwapScreen> {
     if (displayProductController.text.isEmpty ||
         countryController.text.isEmpty ||
         cityController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.add_pro_data_snack_bar);
       return;
     }

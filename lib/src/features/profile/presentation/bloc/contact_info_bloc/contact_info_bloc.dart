@@ -30,10 +30,10 @@ class ContactInfoBloc extends Bloc<ContactInfoEvent, ContactInfoState> {
     result.fold((l) {
       emit(
           state.copyWith(contactInfoStateStatus: ContactInfoStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       ContactInfoModel contactInfoModel = ContactInfoModel.fromJson(r.data);
@@ -82,11 +82,11 @@ class ContactInfoBloc extends Bloc<ContactInfoEvent, ContactInfoState> {
       ProgressCircleDialog.dismiss();
       emit(
           state.copyWith(contactInfoStateStatus: ContactInfoStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(

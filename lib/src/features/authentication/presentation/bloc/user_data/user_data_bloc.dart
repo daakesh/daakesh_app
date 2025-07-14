@@ -19,10 +19,10 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     final result = await getIt.get<AuthUseCases>().getUserData();
     result.fold((l) {
       emit(state.copyWith(userDataStateStatus: UserDataStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         if (r.data["data"] == null) {
           GetItUtils.user.logOut();
         }
@@ -49,12 +49,12 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       ProgressCircleDialog.dismiss();
 
       emit(state.copyWith(userDataStateStatus: UserDataStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
 
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       GetItUtils.user.logOut();
@@ -74,11 +74,11 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(userDataStateStatus: UserDataStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (r.statusCode != 200) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       GetItUtils.user.logOut();

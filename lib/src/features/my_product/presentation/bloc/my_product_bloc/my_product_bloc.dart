@@ -36,10 +36,10 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
 
     result.fold((l) {
       emit(state.copyWith(myProStateStatus: MyProStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       MyProductModel myProductModel = MyProductModel.fromJson(r.data);
@@ -86,11 +86,11 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(myProStateStatus: MyProStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       MyProBloc.get.add(GetProOverAllRateItemsEvent(itemID: itemId));
@@ -114,10 +114,10 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
     final result = await getIt.get<HomeUseCases>().getCommentCountItem(itemId);
     result.fold((l) {
       emit(state.copyWith(myProStateStatus: MyProStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       int commentCount = r.data['data']['comment_count'];
@@ -166,10 +166,10 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
 
     result.fold((l) {
       emit(state.copyWith(myProStateStatus: MyProStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CommentRateModel commentRateModel = CommentRateModel.fromJson(r.data);
@@ -200,10 +200,10 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
     final result = await getIt.get<HomeUseCases>().getOverAllRateItem(itemID);
     result.fold((l) {
       emit(state.copyWith(myProStateStatus: MyProStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       OverAllRateModel overAllRateModel = OverAllRateModel.fromJson(r.data);
@@ -227,14 +227,14 @@ class MyProBloc extends Bloc<MyProEvent, MyProState> {
     ProgressCircleDialog.show();
     final result = await getIt.get<MyProductUseCases>().removeProduct(event.id);
     result.fold((l) {
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
-      ShowToastSnackBar.showSnackBars(message: r.data['data'].toString());
+      ShowToastSnackBar.showCustomDialog(message: r.data['data'].toString());
       List<MyProductItem> cartItemsList = state.myProductListData.toList();
       cartItemsList.removeWhere((item) => event.id == item.id);
       emit(state.copyWith(myProductListData: []));

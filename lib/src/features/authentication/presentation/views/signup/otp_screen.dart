@@ -39,22 +39,22 @@ class _OTPScreenState extends State<OTPScreen> {
               children: [
                 const Spacer(flex: 1),
                 const Center(child: GeneralDaakeshLogoWidget()),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 Padding(
-                  padding: EdgeInsetsDirectional.only(start: 26),
+                  padding: const EdgeInsetsDirectional.only(start: 26),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(context.locale.otp_title,
                           style: context.easyTheme.textTheme.headlineLarge!
                               .copyWith(fontSize: 40.0)),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(context.locale.otp_instruction,
                           style: context.easyTheme.textTheme.headlineMedium!
                               .copyWith(fontSize: 25.0)),
-                      SizedBox(height: 19),
+                      const SizedBox(height: 19),
                       widget.authManner.isSignUpIn
                           ? BlocBuilder<AuthBloc, AuthState>(
                               builder: (context, state) {
@@ -78,9 +78,9 @@ class _OTPScreenState extends State<OTPScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 39),
+                const SizedBox(height: 39),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -105,7 +105,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                   nextFocus: secondTextField, isFirst: true),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 16,
                           ),
                           Expanded(
@@ -127,7 +127,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 previousFocus: firstTextField,
                                 nextFocus: thirdTextField),
                           )),
-                          SizedBox(
+                          const SizedBox(
                             width: 16,
                           ),
                           Expanded(
@@ -149,7 +149,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 previousFocus: secondTextField,
                                 nextFocus: fourthTextField),
                           )),
-                          SizedBox(
+                          const SizedBox(
                             width: 16,
                           ),
                           Expanded(
@@ -171,7 +171,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 previousFocus: thirdTextField,
                                 nextFocus: fifthTextField),
                           )),
-                          SizedBox(
+                          const SizedBox(
                             width: 16,
                           ),
                           Expanded(
@@ -193,7 +193,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 nextFocus: sixthTextField,
                                 previousFocus: fourthTextField),
                           )),
-                          SizedBox(
+                          const SizedBox(
                             width: 16,
                           ),
                           Expanded(
@@ -216,25 +216,25 @@ class _OTPScreenState extends State<OTPScreen> {
                           )),
                         ],
                       ),
-                      SizedBox(height: 39),
+                      const SizedBox(height: 39),
                       TextButtonWidget(
                           text: context.locale.text_button_send_code_again,
                           onPressed: resendSMSCode),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 1,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 21),
+                  padding: const EdgeInsets.symmetric(horizontal: 21),
                   child: DefaultButtonWidget(
                       text: context.locale.validate_button_title,
                       onPressed: () => onValidate(context)),
                 ),
-                SizedBox(height: 44),
+                const SizedBox(height: 44),
                 const AlreadyHaveAccountWidget(),
-                SizedBox(height: 55),
+                const SizedBox(height: 55),
               ],
             ),
           ),
@@ -276,7 +276,7 @@ class _OTPScreenState extends State<OTPScreen> {
         fourthDigitController.text.isEmpty ||
         fifthDigitController.text.isEmpty ||
         sixthDigitController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.insert_full_code_snack_bar);
       return;
     }

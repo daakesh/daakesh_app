@@ -32,10 +32,10 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
         event.searchValue.toString(), state.currentSearchPage, 1);
     result.fold((l) {
       emit(state.copyWith(swapSearchStateStatus: SwapSearchStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TrendDealsModel searchModel = TrendDealsModel.fromJson(r.data);
@@ -108,10 +108,10 @@ class SwapSearchBloc extends Bloc<SwapSearchEvent, SwapSearchState> {
         state.sortingType);
     result.fold((l) {
       emit(state.copyWith(swapSearchStateStatus: SwapSearchStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TrendDealsModel filterModel =

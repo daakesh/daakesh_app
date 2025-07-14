@@ -64,10 +64,10 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   state.phoneFlag,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: ColorName.blueGray, fontSize: 24),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_drop_down_outlined,
                                   color: ColorName.blueGray,
                                   size: 35,
@@ -96,9 +96,9 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
                       onPressed: () => onNext(context)),
                 ),
               ),
-              SizedBox(height: 44),
+              const SizedBox(height: 44),
               const AlreadyHaveAccountWidget(),
-              SizedBox(height: 55),
+              const SizedBox(height: 55),
             ],
           ),
         ),
@@ -108,7 +108,7 @@ class RegisterPhoneNumberScreen extends StatelessWidget {
 
   void onNext(BuildContext context) async {
     if (phoneNumberController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.fill_phone_number_data_snack_bars);
       return;
     }

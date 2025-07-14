@@ -147,7 +147,7 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
     if (complaintTypeController.text.isEmpty ||
         subjectController.text.isEmpty ||
         remarkController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
+      ShowToastSnackBar.showCustomDialog(message: context.locale.fill_data);
       return;
     }
     ComplaintBloc.get.add(AddComplaintEvent(

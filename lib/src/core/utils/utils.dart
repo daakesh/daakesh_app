@@ -219,7 +219,7 @@ abstract class Utils {
         await launchUrl(Uri.parse(androidUrl));
       }
     } on Exception {
-      ShowToastSnackBar.showSnackBars(message: 'WhatsApp is not installed.');
+      ShowToastSnackBar.showCustomDialog(message: 'WhatsApp is not installed.');
     }
   }
 

@@ -73,10 +73,10 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
             swapFilterDataModel, state.currentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TrendDealsModel filterModel =
@@ -113,10 +113,10 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     final result = await getIt.get<SwapUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);
@@ -135,10 +135,10 @@ class SwapFilterBloc extends Bloc<SwapFilterEvent, SwapFilterState> {
     result.fold((l) {
       emit(state.copyWith(swapFilterStateStatus: SwapFilterStateStatus.ERROR));
 
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       SubCategoryModel subCategory = SubCategoryModel.fromJson(r.data);

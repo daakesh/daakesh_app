@@ -40,15 +40,15 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
         ProgressCircleDialog.dismiss();
 
         emit(state.copyWith(profileStateStatus: PersonalInfoStateStatus.ERROR));
-        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: l.message.toString());
       },
       (r) {
         ProgressCircleDialog.dismiss();
         if (!r.status!) {
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
+          ShowToastSnackBar.showCustomDialog(message: r.message.toString());
           return;
         }
-        ShowToastSnackBar.showSnackBars(
+        ShowToastSnackBar.showCustomDialog(
             message: event.context.locale.profile_changed);
 
         UserDataBloc.get.add(GetUserDataEvent());
@@ -66,11 +66,11 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
         password, GetItUtils.user.userData.phoneNumber.toString());
     result.fold(
       (l) {
-        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: l.message.toString());
       },
       (r) async {
         if (!r.status!) {
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
+          ShowToastSnackBar.showCustomDialog(message: r.message.toString());
           return;
         }
 

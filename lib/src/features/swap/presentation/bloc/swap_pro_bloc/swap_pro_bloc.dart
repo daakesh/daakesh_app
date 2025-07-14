@@ -31,10 +31,10 @@ class SwapProBloc extends Bloc<SwapProEvent, SwapProState> {
         await getIt.get<SwapUseCases>().getMySwapProduct(state.currentPage);
     result.fold((l) {
       emit(state.copyWith(swapProStateStatus: SwapProStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       MyProductModel mySwapProductModel = MyProductModel.fromJson(r.data);

@@ -415,7 +415,7 @@ class _AddProImagesScreenState extends State<AddProImagesScreen> {
 
   void onNext() async {
     if (imagesList.isEmpty && oldImageList.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: 'Please add at least single image');
       return;
     }

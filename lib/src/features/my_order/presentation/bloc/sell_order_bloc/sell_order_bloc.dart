@@ -14,10 +14,10 @@ class SellOrderBloc extends Bloc<SellOrderEvent, SellOrderState> {
     final result = await getIt.get<MyOrderUseCases>().getMyOrders();
     result.fold((l) {
       emit(state.copyWith(sellOrderStateStatus: SellOrderStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       MyOrderModel myOrderModel = MyOrderModel.fromJson(r.data);

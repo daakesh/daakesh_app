@@ -15,10 +15,10 @@ class ComplaintBloc extends Bloc<ComplaintEvent, ComplaintState> {
     final result = await getIt.get<ProfileUseCases>().getAllComplaints();
     result.fold((l) {
       emit(state.copyWith(complaintStateStatus: ComplaintStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(complaintStateStatus: ComplaintStateStatus.SUCCESS));
@@ -39,14 +39,14 @@ class ComplaintBloc extends Bloc<ComplaintEvent, ComplaintState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(complaintStateStatus: ComplaintStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: event.context.locale.complaint_send_successfully);
       emit(state.copyWith(complaintStateStatus: ComplaintStateStatus.SUCCESS));
     });

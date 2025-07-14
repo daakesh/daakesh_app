@@ -17,11 +17,11 @@ class SellerInfoBloc extends Bloc<SellerInfoEvent, SellerInfoState> {
       (l) {
         emit(
             state.copyWith(sellerInfoStateStatus: SellerInfoStateStatus.ERROR));
-        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: l.message.toString());
       },
       (r) {
         if (!r.status!) {
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
+          ShowToastSnackBar.showCustomDialog(message: r.message.toString());
           return;
         }
         List<SellerInfoData> sellerInfoList = <SellerInfoData>[];
@@ -52,12 +52,12 @@ class SellerInfoBloc extends Bloc<SellerInfoEvent, SellerInfoState> {
         ProgressCircleDialog.dismiss();
         emit(
             state.copyWith(sellerInfoStateStatus: SellerInfoStateStatus.ERROR));
-        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: l.message.toString());
       },
       (r) {
         if (!r.status!) {
           ProgressCircleDialog.dismiss();
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
+          ShowToastSnackBar.showCustomDialog(message: r.message.toString());
           return;
         }
         ProgressCircleDialog.dismiss();

@@ -128,10 +128,10 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
 
       await result.fold((l) async {
         emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
-        ShowToastSnackBar.showSnackBars(message: l.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: l.message.toString());
       }, (r) async {
         if (!r.status!) {
-          ShowToastSnackBar.showSnackBars(message: r.message.toString());
+          ShowToastSnackBar.showCustomDialog(message: r.message.toString());
           return;
         }
 
@@ -142,10 +142,10 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
 
         itemData.fold((l) {
           emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
-          ShowToastSnackBar.showSnackBars(message: l.message.toString());
+          ShowToastSnackBar.showCustomDialog(message: l.message.toString());
         }, (r) {
           if (!r.status!) {
-            ShowToastSnackBar.showSnackBars(message: r.message.toString());
+            ShowToastSnackBar.showCustomDialog(message: r.message.toString());
             return;
           }
 
@@ -183,7 +183,7 @@ class AddProBloc extends Bloc<AddProEvent, AddProState> {
         });
       });
     } catch (e) {
-      ShowToastSnackBar.showSnackBars(message: 'Something went wrong.');
+      ShowToastSnackBar.showCustomDialog(message: 'Something went wrong.');
       emit(state.copyWith(addProStateStatus: AddProStateStatus.ERROR));
     } finally {
       // ✅ Always dismiss loading spinner

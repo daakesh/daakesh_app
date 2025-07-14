@@ -253,7 +253,7 @@ class _AddProCategoriesScreenState extends State<AddProCategoriesScreen> {
 
   void onNext() async {
     if (productSecID == null || productCatID == null) {
-      ShowToastSnackBar.showSnackBars(message: context.locale.fill_data);
+      ShowToastSnackBar.showCustomDialog(message: context.locale.fill_data);
       return;
     }
     AddProBloc.get.add(AddProCategoriesEvent(

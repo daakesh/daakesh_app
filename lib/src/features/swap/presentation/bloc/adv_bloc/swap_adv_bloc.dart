@@ -14,10 +14,10 @@ class SwapAdvBloc extends Bloc<SwapAdvEvent, SwapAdvState> {
     final result = await getIt.get<SwapUseCases>().getAdvertisementData();
     result.fold((l) {
       emit(state.copyWith(swapAdvStateStatus: SwapAdvStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       SwapAdvModel swapAdvModel = SwapAdvModel.fromJson(r.data);

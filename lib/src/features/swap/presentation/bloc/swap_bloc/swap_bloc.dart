@@ -35,10 +35,10 @@ class SwapBloc extends Bloc<SwapEvent, SwapState> {
         .getSectionData(state.sectionCurrentPage);
     result.fold((l) {
       emit(state.copyWith(swapStateStatus: SwapStateStatus.ERROR));
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       SwapSectionModel sectionModel = SwapSectionModel.fromJson(r.data);
@@ -79,11 +79,11 @@ class SwapBloc extends Bloc<SwapEvent, SwapState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(swapStateStatus: SwapStateStatus.ERROR));
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
 
@@ -105,10 +105,10 @@ class SwapBloc extends Bloc<SwapEvent, SwapState> {
         .clickAdv(ValueConstants.userId, event.advID);
     result.fold((l) {
       emit(state.copyWith(swapStateStatus: SwapStateStatus.ERROR));
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
 

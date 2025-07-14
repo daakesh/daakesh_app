@@ -13,10 +13,10 @@ class {{feature_name.pascalCase()}}Bloc extends Bloc<{{feature_name.pascalCase()
     final result = await getIt.get<{{feature_name.pascalCase()}}UseCases>().method();
     result.fold((l) {
       emit(state.copyWith({{feature_name}}StateStatus: {{feature_name.pascalCase()}}StateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async{
       if(!r.status!){
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith({{feature_name}}StateStatus: {{feature_name.pascalCase()}}StateStatus.SUCCESS));

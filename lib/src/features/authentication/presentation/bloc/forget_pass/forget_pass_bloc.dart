@@ -28,11 +28,11 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
         ProgressCircleDialog.dismiss();
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       FirebaseAuthentication.verifyPhoneNumber(
@@ -76,12 +76,12 @@ class ForgetPassBloc extends Bloc<ForgetPassEvent, ForgetPassState> {
         '+${state.phoneCode + event.phoneNumber}', event.password, event.email);
     result.fold((l) {
       emit(state.copyWith(forgetPassStateStatus: ForgetPassStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
       ProgressCircleDialog.dismiss();
     }, (r) async {
       if (!r.status!) {
         ProgressCircleDialog.dismiss();
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       ProgressCircleDialog.dismiss();

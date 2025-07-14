@@ -121,10 +121,10 @@ class MyProFuncBloc extends Bloc<MyProFuncEvent, MyProFuncState> {
         state.productTapBar);
     result.fold((l) {
       emit(state.copyWith(myProFuncStateStatus: MyProFuncStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       MyProductModel myProductModel = MyProductModel.fromJson(r.data);

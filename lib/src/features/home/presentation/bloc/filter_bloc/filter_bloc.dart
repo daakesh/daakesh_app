@@ -75,10 +75,10 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
             state.catID, filterDataModel, state.currentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(filterStateStatus: FilterStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TodayItemModel filterModel =
@@ -114,10 +114,10 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     final result = await getIt.get<HomeUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(filterStateStatus: FilterStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);
@@ -132,10 +132,10 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
         await getIt.get<HomeUseCases>().getSubCategories(event.catID);
     result.fold((l) {
       emit(state.copyWith(filterStateStatus: FilterStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       SubCategoryModel subCategory = SubCategoryModel.fromJson(r.data);

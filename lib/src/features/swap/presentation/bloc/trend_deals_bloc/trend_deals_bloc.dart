@@ -35,10 +35,10 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
     result.fold((l) {
       emit(state.copyWith(
           swapTodayDealsStateStatus: SwapTodayDealsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TrendDealsModel trendDealsModel = TrendDealsModel.fromJson(r.data);
@@ -95,10 +95,10 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
     result.fold((l) {
       emit(state.copyWith(
           swapTodayDealsStateStatus: SwapTodayDealsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TrendDealsModel trendDealsModel = TrendDealsModel.fromJson(r.data);
@@ -163,10 +163,10 @@ class TrendDealsBloc extends Bloc<TrendDealsEvent, TrendDealsState> {
     result.fold((l) {
       emit(state.copyWith(
           swapTodayDealsStateStatus: SwapTodayDealsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);

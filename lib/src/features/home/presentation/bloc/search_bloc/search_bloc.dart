@@ -30,10 +30,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         event.searchValue.toString(), state.currentSearchPage, 10);
     result.fold((l) {
       emit(state.copyWith(searchStateStatus: SearchStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       SearchModel searchModel = SearchModel.fromJson(r.data);
@@ -93,10 +93,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         state.sortingType);
     result.fold((l) {
       emit(state.copyWith(searchStateStatus: SearchStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TodayItemModel filterModel =

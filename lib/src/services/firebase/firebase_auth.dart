@@ -16,13 +16,13 @@ class FirebaseAuthentication {
         verificationFailed: (FirebaseAuthException error) {
           if (error.code == 'invalid-phone-number') {
             ProgressCircleDialog.dismiss();
-            ShowToastSnackBar.showSnackBars(
+            ShowToastSnackBar.showCustomDialog(
                 message: 'The provided phone number is not valid.');
             return;
           }
           ProgressCircleDialog.dismiss();
 
-          ShowToastSnackBar.showSnackBars(message: error.toString());
+          ShowToastSnackBar.showCustomDialog(message: error.toString());
           debugPrint("ERROR $error");
         },
         codeSent: (String verificationId, int? resendToken) {
@@ -38,7 +38,7 @@ class FirebaseAuthentication {
 
           _resendToken = resendToken;
           Future.delayed(Duration.zero).then((value) =>
-              ShowToastSnackBar.showSnackBars(
+              ShowToastSnackBar.showCustomDialog(
                   message: context.locale.code_sent_title));
           ProgressCircleDialog.dismiss();
 
@@ -49,7 +49,7 @@ class FirebaseAuthentication {
     } catch (error) {
       ProgressCircleDialog.dismiss();
 
-      ShowToastSnackBar.showSnackBars(message: error.toString());
+      ShowToastSnackBar.showCustomDialog(message: error.toString());
     }
   }
 
@@ -74,7 +74,7 @@ class FirebaseAuthentication {
       }
     } catch (error) {
       ProgressCircleDialog.dismiss();
-      ShowToastSnackBar.showSnackBars(message: error.toString());
+      ShowToastSnackBar.showCustomDialog(message: error.toString());
       debugPrint('Wrong Code');
     }
   }
@@ -93,7 +93,7 @@ class FirebaseAuthentication {
       );
       ProgressCircleDialog.dismiss();
       Future.delayed(Duration.zero).then((value) =>
-          ShowToastSnackBar.showSnackBars(
+          ShowToastSnackBar.showCustomDialog(
               message: context.locale.code_resent_title));
     } catch (error) {
       ProgressCircleDialog.dismiss();

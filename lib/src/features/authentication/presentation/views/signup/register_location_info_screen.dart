@@ -167,7 +167,7 @@ class _RegisterLocationInfoScreenState
     if (countryController.text.isEmpty ||
         cityController.text.isEmpty ||
         addressController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.fill_location_data_snack_bars);
       return;
     }

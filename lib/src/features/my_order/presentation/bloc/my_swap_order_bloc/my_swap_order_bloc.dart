@@ -36,10 +36,10 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
     result.fold((l) {
       emit(
           state.copyWith(mySwapOrderStateStatus: MySwapOrderStateStatus.ERROR));
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
 
@@ -85,10 +85,10 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
     result.fold((l) {
       emit(
           state.copyWith(mySwapOrderStateStatus: MySwapOrderStateStatus.ERROR));
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       SendReceiveSwapReqModel sendReceiveSwapReqModel =
@@ -126,11 +126,11 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
       ProgressCircleDialog.dismiss();
       emit(
           state.copyWith(mySwapOrderStateStatus: MySwapOrderStateStatus.ERROR));
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       int index = state.receiveSwapReqList
@@ -158,11 +158,11 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
       ProgressCircleDialog.dismiss();
       emit(
           state.copyWith(mySwapOrderStateStatus: MySwapOrderStateStatus.ERROR));
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(
@@ -188,14 +188,14 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
     final result = await getIt.get<MyOrderUseCases>().removeOffer(event.id);
     result.fold((l) {
       ProgressCircleDialog.dismiss();
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
-      ShowToastSnackBar.showSnackBars(message: r.data['data'].toString());
+      ShowToastSnackBar.showCustomDialog(message: r.data['data'].toString());
       List<SendReceiveSwapReqItem> sendReceiveListData =
           state.sendSwapReqList.toList();
       sendReceiveListData.removeWhere((item) => event.id == item.id);
@@ -210,14 +210,14 @@ class MySwapOrderBloc extends Bloc<MySwapOrderEvent, MySwapOrderState> {
     final result = await getIt.get<MyOrderUseCases>().removeOffer(event.id);
     result.fold((l) {
       ProgressCircleDialog.dismiss();
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
-      ShowToastSnackBar.showSnackBars(message: r.data['data'].toString());
+      ShowToastSnackBar.showCustomDialog(message: r.data['data'].toString());
       List<SendReceiveSwapReqItem> receiveSwapReqList =
           state.receiveSwapReqList.toList();
       receiveSwapReqList.removeWhere((item) => event.id == item.id);

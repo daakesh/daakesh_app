@@ -38,7 +38,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
       await result.fold(
         (failure) async {
-          ShowToastSnackBar.showErrorDialog(
+          ShowToastSnackBar.showCustomDialog(
             message: 'Failed to load notifications: ${failure.message}',
             title: 'Network Error',
           );

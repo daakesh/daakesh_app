@@ -1,193 +1,3 @@
-// import 'dart:async';
-// import 'package:daakesh/src/features/favourite/data/moldels/favourite_response.dart';
-// import 'package:daakesh/src/features/favourite/domin/usecases/use_cases.export.dart';
-// import 'package:daakesh/src/features/favourite/presentation/bloc/favourite_bloc/favourite_event.dart';
-// import 'package:daakesh/src/features/favourite/presentation/bloc/favourite_bloc/favourite_state.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import '../../../../../src.export.dart';
-
-// class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
-//   FavouriteBloc({
-//     bool isFromProdScreen = false,
-//     bool isFavouriteFromProd = false,
-//     int itemID = 0,
-//   }) : super(FavouriteInitialState()) {
-//     on<GetFavouriteDataEvent>(_getFavouriteData);
-//     on<RemoveFavouriteEvent>(_removeFavouriteItem);
-//     on<SetFavouriteEvent>(_onSetItemFavourite);
-//     on<AddFavouriteEvent>(_addFavouriteItem);
-
-//     on<SwapTabBarFavouriteTypeEvent>(_onSwapTab);
-
-//     add(GetFavouriteDataEvent(
-//       isFavouriteFromProd: isFavouriteFromProd,
-//       isFromProdScreen: isFromProdScreen,
-//       itemID: itemID,
-//     ));
-//   }
-//   FavouriteTapBarENUM currentTab = FavouriteTapBarENUM.SELL;
-
-//   int favouriteItemId = 0;
-//   bool isFavouriteItem = false;
-//   //int currentTabIndex = 0;
-
-//   List<FavouriteResponseModelData> favouriteItems = [];
-
-//   void _onSwapTab(
-//       SwapTabBarFavouriteTypeEvent event, Emitter<FavouriteState> emit) {
-//     currentTab = event.favouriteTapBarENUM;
-
-//     print('currentTab   $currentTab');
-//     emit(FavouriteTabBarChangedState());
-//     add(GetFavouriteDataEvent());
-//   }
-
-//   FutureOr<void> _onSetItemFavourite(
-//       SetFavouriteEvent event, Emitter<FavouriteState> emit) {
-//     isFavouriteItem = !isFavouriteItem;
-//     print('isFavouriteItem: $isFavouriteItem');
-
-//     emit(FavouriteItemChangeState());
-//   }
-
-//   FutureOr<void> _getFavouriteData(
-//       GetFavouriteDataEvent event, Emitter<FavouriteState> emit) async {
-//     emit(FavouriteLoadingState());
-
-//     final result = await getIt.get<FavouriteUseCases>().getFavouriteByID();
-
-//     result.fold((l) {
-//       emit(FavouriteErrorState(message: l.message.toString()));
-//       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-//     }, (r) async {
-//       if (!r.status!) {
-//         ShowToastSnackBar.showSnackBars(message: r.message.toString());
-//         return;
-//       }
-
-//       FavouriteResponseModel favouriteResponseModel =
-//           FavouriteResponseModel.fromJson(r.data);
-
-//       // ✅ Filter based on currentTab (SELL / SWAP)
-//       favouriteItems = favouriteResponseModel.data!.where((value) {
-//         final type = value.item?.Type?.toLowerCase();
-//         return currentTab == FavouriteTapBarENUM.SELL
-//             ? type == 'sell'
-//             : type == 'swap';
-//       }).toList();
-
-//       print('Filtered favouriteItems: $favouriteItems');
-
-//       // ✅ Handle from product screen
-//       if (event.isFromProdScreen && favouriteItems.isNotEmpty) {
-//         if (event.isFavouriteFromProd) {
-//           isFavouriteItem = true;
-//         }
-
-//         final matchedItem = favouriteItems.firstWhere(
-//           (value) => value.item?.id == event.itemID,
-//           orElse: () => FavouriteResponseModelData(),
-//         );
-
-//         favouriteItemId = matchedItem.id ?? 0;
-//         print('Matched favouriteItemId: $favouriteItemId');
-//       }
-
-//       emit(FavouriteLoadedState());
-//     });
-//   }
-
-// //   FutureOr<void> _getFavouriteData(
-// //       GetFavouriteDataEvent event, Emitter<FavouriteState> emit) async {
-// //     emit(FavouriteLoadingState());
-
-// //     final result = await getIt.get<FavouriteUseCases>().getFavouriteByID();
-
-// //     result.fold((l) {
-// //       emit(FavouriteErrorState(message: l.message.toString()));
-// //       ShowToastSnackBar.showSnackBars(message: l.message.toString());
-// //     }, (r) async {
-// //       if (!r.status!) {
-// //         ShowToastSnackBar.showSnackBars(message: r.message.toString());
-// //         return;
-// //       }
-
-// //       FavouriteResponseModel favouriteResponseModel =
-// //           FavouriteResponseModel.fromJson(r.data);
-
-// //       if (currentTabIndex == 0) {
-// //         favouriteItems = favouriteResponseModel.data!
-// //             .where((value) => value.item?.Type == "Sell")
-// //             .toList();
-// //       } else {
-// //         favouriteItems = favouriteResponseModel.data!
-// //             .where((value) => value.item?.Type == "Swap")
-// //             .toList();
-// //       }
-
-// // //!!
-// //       print('favouriteItems    $favouriteItems');
-
-// //       // After loading, check condition
-// //       if (event.isFromProdScreen && favouriteItems.isNotEmpty) {
-// //         if (event.isFavouriteFromProd) {
-// //           isFavouriteItem = true;
-// //         }
-
-// //         final matchedItem = favouriteItems.firstWhere(
-// //           (value) => value.item?.id == event.itemID,
-// //           orElse: () => FavouriteResponseModelData(),
-// //         );
-
-// //         favouriteItemId = matchedItem.id ?? 0;
-// //       }
-
-// //       print('favouriteItemId $favouriteItemId');
-// //     });
-
-// //     emit(FavouriteLoadedState());
-// //   }
-
-//   FutureOr<void> _removeFavouriteItem(
-//       RemoveFavouriteEvent event, Emitter<FavouriteState> emit) async {
-//     final result =
-//         await getIt.get<FavouriteUseCases>().removeFavouriteItem(event.itemId);
-
-//     result.fold((l) {
-//       emit(FavouriteErrorState(message: l.message.toString()));
-//       // ShowToastSnackBar.showSnackBars(message: l.message.toString());
-//     }, (r) {
-//       if (!r.status!) {
-//         ShowToastSnackBar.showSnackBars(message: r.message.toString());
-//         return;
-//       }
-
-//       favouriteItems.where((item) => item.id != event.itemId).toList();
-
-//       ShowToastSnackBar.showSnackBars(message: r.message ?? "Item Deleted");
-//     });
-//   }
-
-//   FutureOr<void> _addFavouriteItem(
-//       AddFavouriteEvent event, Emitter<FavouriteState> emit) async {
-//     final result = await getIt
-//         .get<FavouriteUseCases>()
-//         .addFavouriteItem(ValueConstants.userId, event.itemId);
-
-//     result.fold((l) {
-//       emit(FavouriteErrorState(message: l.message.toString()));
-//       // ShowToastSnackBar.showSnackBars(message: l.message.toString());
-//     }, (r) {
-//       if (!r.status!) {
-//         ShowToastSnackBar.showSnackBars(message: r.message.toString());
-//         return;
-//       }
-
-//       ShowToastSnackBar.showSnackBars(message: r.message ?? "Item Added");
-//     });
-//   }
-// }
-
 import 'dart:async';
 
 import 'package:daakesh/src/features/favourite/data/moldels/favourite_response.dart';
@@ -249,10 +59,10 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
     result.fold((l) {
       emit(FavouriteErrorState(message: l.message.toString()));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
 
@@ -315,9 +125,9 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       if (matchedFavorite.id != null && matchedFavorite.id! > 0) {
         favoriteRecordId = matchedFavorite.id!;
       } else {
-        ShowToastSnackBar.showSnackBars(
-            message: "Cannot remove favorite: Item not found in favorites",
-            isError: true);
+        ShowToastSnackBar.showCustomDialog(
+          message: "Cannot remove favorite: Item not found in favorites",
+        );
         emit(FavouriteLoadedState());
         return;
       }
@@ -325,8 +135,8 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
     // Validate favoriteRecordId before making API call
     if (favoriteRecordId <= 0) {
-      ShowToastSnackBar.showSnackBars(
-          message: "Cannot remove favorite: Invalid ID", isError: true);
+      ShowToastSnackBar.showCustomDialog(
+          message: "Cannot remove favorite: Invalid ID");
       emit(FavouriteLoadedState());
       return;
     }
@@ -337,17 +147,20 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
     result.fold((l) {
       emit(FavouriteErrorState(message: l.message.toString()));
-      ShowToastSnackBar.showSnackBars(
-          message: l.message.toString(), isError: true);
+      ShowToastSnackBar.showCustomDialog(
+        message: l.message.toString(),
+      );
     }, (r) {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(
-            message: r.message.toString(), isError: true);
+        ShowToastSnackBar.showCustomDialog(
+          message: r.message.toString(),
+        );
         emit(FavouriteLoadedState());
         return;
       }
-      ShowToastSnackBar.showSnackBars(
-          message: "Item removed from favourite", isSuccess: true);
+      ShowToastSnackBar.showCustomDialog(
+        message: "Item removed from favourite",
+      );
 
       // Find the item to get its ID for updating the source blocs
       final item = _allFavouriteItems.firstWhere(
@@ -408,12 +221,14 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       emit(FavouriteErrorState(message: l.message.toString()));
     }, (r) {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(
-            message: r.message.toString(), isError: true);
+        ShowToastSnackBar.showCustomDialog(
+          message: r.message.toString(),
+        );
         return;
       }
-      ShowToastSnackBar.showSnackBars(
-          message: "Item added to favourite", isSuccess: true);
+      ShowToastSnackBar.showCustomDialog(
+        message: "Item added to favourite",
+      );
 
       // Update the source blocs to reflect the favorite addition
       // Since we know the itemId, we need to determine if it's a sell or swap item

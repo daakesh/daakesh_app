@@ -263,7 +263,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
   void onNext() async {
     if (productQuantityController.text.isEmpty ||
         productPriceController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.add_pro_data_snack_bar);
       return;
     }
@@ -272,7 +272,7 @@ class _ForSaleScreenState extends State<ForSaleScreen> {
       productPrice: productPriceController.text,
       productDiscount: productDiscountController.text,
     ));
-    Utils.openNewPage(ShipToScreen());
+    Utils.openNewPage(const ShipToScreen());
   }
 
   void cancel() {

@@ -40,10 +40,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         .getSectionData(state.sectionCurrentPage);
     result.fold((l) {
       emit(state.copyWith(homeStateStatus: HomeStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
 

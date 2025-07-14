@@ -15,10 +15,7 @@ class FavouriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorName.whiteSmoke,
-      body: BlocProvider(
-        create: (_) => FavouriteBloc(),
-        child: _FavouriteScreenContent(),
-      ),
+      body: _FavouriteScreenContent(),
     );
   }
 }
@@ -41,63 +38,83 @@ class _FavouriteScreenContent extends StatelessWidget {
         buildSearchField(bloc),
         const SizedBox(height: 12),
         Expanded(
-          child: BlocBuilder<FavouriteBloc, FavouriteState>(
-            builder: (context, state) {
-              if (state is FavouriteLoadingState) {
-                return const Center(child: CircularProgressIndicator());
-              }
-
-              if (bloc.favouriteItems.isEmpty) {
-                return const IsEmptyDataWidget(name: 'Shop Favourite');
-              }
-
-              return ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: bloc.favouriteItems.length,
-                itemBuilder: (context, index) {
-                  final item = bloc.favouriteItems[index];
-                  return FavouriteItemWidget(
-                    item: item,
-                    onPressedDelete: () async {
-                      final result = await showMessageDialog(
-                          context: context,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text('Are you sure to delete this item ? '),
-                              const SizedBox(height: 50),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                      child: TextButtonWidget(
-                                          text: 'YES',
-                                          onPressed: () {
-                                            Navigator.pop(context, true);
-                                          })),
-                                  const SizedBox(width: 30),
-                                  Expanded(
-                                      child: TextButtonWidget(
-                                          text: 'NO',
-                                          onPressed: () {
-                                            Navigator.pop(context, false);
-                                          })),
-                                ],
-                              ),
-                            ],
-                          ));
-
-                      if (result == true) {
-                        bloc.add(RemoveFavouriteEvent(
-                          itemId: item.id!,
-                          actualItemId: item.item?.id,
-                        ));
-                      }
-                    },
-                  );
-                },
-              );
+          child: RefreshIndicator(
+            onRefresh: () async {
+              // Trigger refresh by adding GetFavouriteDataEvent
+              bloc.add(GetFavouriteDataEvent());
+              // Add a small delay to ensure the refresh indicator shows
+              await Future.delayed(const Duration(milliseconds: 500));
             },
+            color: ColorName.amber,
+            child: BlocBuilder<FavouriteBloc, FavouriteState>(
+              builder: (context, state) {
+                if (state is FavouriteLoadingState) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (bloc.favouriteItems.isEmpty) {
+                  // Make empty state scrollable to allow pull-to-refresh
+                  return SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      child: const Center(
+                        child: IsEmptyDataWidget(name: 'Shop Favourite'),
+                      ),
+                    ),
+                  );
+                }
+
+                return ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: bloc.favouriteItems.length,
+                  itemBuilder: (context, index) {
+                    final item = bloc.favouriteItems[index];
+                    return FavouriteItemWidget(
+                      item: item,
+                      onPressedDelete: () async {
+                        final result = await showMessageDialog(
+                            context: context,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                    'Are you sure to delete this item ? '),
+                                const SizedBox(height: 50),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                        child: TextButtonWidget(
+                                            text: 'YES',
+                                            onPressed: () {
+                                              Navigator.pop(context, true);
+                                            })),
+                                    const SizedBox(width: 30),
+                                    Expanded(
+                                        child: TextButtonWidget(
+                                            text: 'NO',
+                                            onPressed: () {
+                                              Navigator.pop(context, false);
+                                            })),
+                                  ],
+                                ),
+                              ],
+                            ));
+
+                        if (result == true) {
+                          bloc.add(RemoveFavouriteEvent(
+                            itemId: item.id!,
+                            actualItemId: item.item?.id,
+                          ));
+                        }
+                      },
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ),
       ],

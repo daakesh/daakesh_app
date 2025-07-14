@@ -240,7 +240,7 @@ class ContactInfoScreen extends StatelessWidget {
     if (personPhoneController.text.isEmpty &&
         commercialPhoneController.text.isEmpty &&
         whatsAppPhoneController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.fill_contact_data);
       return;
     }

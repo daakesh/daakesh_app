@@ -24,10 +24,10 @@ class SwapCommentBloc extends Bloc<SwapCommentEvent, SwapCommentState> {
     result.fold((l) {
       emit(
           state.copyWith(swapCommentStateStatus: SwapCommentStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(
@@ -44,10 +44,10 @@ class SwapCommentBloc extends Bloc<SwapCommentEvent, SwapCommentState> {
     result.fold((l) {
       emit(
           state.copyWith(swapCommentStateStatus: SwapCommentStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(
@@ -64,10 +64,10 @@ class SwapCommentBloc extends Bloc<SwapCommentEvent, SwapCommentState> {
     result.fold((l) {
       emit(
           state.copyWith(swapCommentStateStatus: SwapCommentStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(
@@ -86,10 +86,10 @@ class SwapCommentBloc extends Bloc<SwapCommentEvent, SwapCommentState> {
     result.fold((l) {
       emit(
           state.copyWith(swapCommentStateStatus: SwapCommentStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(

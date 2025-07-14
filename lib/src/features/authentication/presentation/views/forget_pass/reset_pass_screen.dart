@@ -47,9 +47,9 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 const Spacer(
                   flex: 1,
                 ),
-                SizedBox(height: 22),
+                const SizedBox(height: 22),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -70,7 +70,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                           RegExpValidator.clearWhitespace,
                         ],
                       ),
-                      SizedBox(height: 33),
+                      const SizedBox(height: 33),
                       Text(
                         context.locale.confirm_pass_text_field,
                         style: context.easyTheme.textTheme.bodyMedium!.copyWith(
@@ -85,7 +85,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 const Spacer(
@@ -95,7 +95,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     child: DefaultButtonWidget(
                         text: context.locale.reset_button_title,
                         onPressed: () => resetPassword(context))),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 const Spacer(
@@ -111,7 +111,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
 
   void resetPassword(BuildContext context) {
     if (newPassController.text != confirmPassController.text) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.password_confirmation_failed);
       return;
     }

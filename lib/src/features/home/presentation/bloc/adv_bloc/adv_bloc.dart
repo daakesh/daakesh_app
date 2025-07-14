@@ -16,10 +16,10 @@ class AdvBloc extends Bloc<AdvEvent, AdvState> {
     final result = await getIt.get<HomeUseCases>().getAdvertisementData();
     result.fold((l) {
       emit(state.copyWith(advStateStatus: AdvStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       AdvModel advModel = AdvModel.fromJson(r.data);
@@ -36,10 +36,10 @@ class AdvBloc extends Bloc<AdvEvent, AdvState> {
         .clickAdv(ValueConstants.userId, event.advId);
     result.fold((l) {
       emit(state.copyWith(advStateStatus: AdvStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(advStateStatus: AdvStateStatus.SUCCESS));

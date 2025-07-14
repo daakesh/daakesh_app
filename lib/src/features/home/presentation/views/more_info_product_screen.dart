@@ -1,3 +1,4 @@
+import 'package:daakesh/src/features/favourite/presentation/bloc/favourite_bloc/favourite_bloc.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../src.export.dart';
@@ -22,6 +23,8 @@ class MoreInfoProductScreen extends StatelessWidget {
         RateBloc.get.add(EmptyDataEvent());
         CommentBloc.get.add(EmptyCommentDataEvent());
         PassDataBloc.get.add(ResetScaleValueEvent(scale: 1.0));
+
+        context.read<FavouriteBloc>().add(GetFavouriteDataEvent());
       },
       child: RefreshIndicatorWidget(
         onRefresh: () {

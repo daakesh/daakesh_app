@@ -107,7 +107,18 @@ class TodayItem {
     } else {
       itemImg = [''];
     }
-    priceAfterDiscount = json['price_after_discount'] ?? 0.0;
+    // Handle priceAfterDiscount with proper type conversion
+    final priceAfterDiscountValue = json['price_after_discount'];
+    if (priceAfterDiscountValue is int) {
+      priceAfterDiscount = priceAfterDiscountValue.toDouble();
+    } else if (priceAfterDiscountValue is double) {
+      priceAfterDiscount = priceAfterDiscountValue;
+    } else if (priceAfterDiscountValue is String) {
+      priceAfterDiscount = double.tryParse(priceAfterDiscountValue) ?? 0.0;
+    } else {
+      priceAfterDiscount = 0.0;
+    }
+
     discountPercentage = json['discount_percentage'] ?? "0%";
     date = json['date'] ?? "others";
     title = json['Title'] ?? "others";
@@ -117,17 +128,35 @@ class TodayItem {
     year = json['Year'] ?? "others";
     condition = json['Condition'] ?? "others";
     price = json['Price'];
-    discount = json['discount'] ?? 0.0;
+
+    // Handle discount with proper type conversion
+    final discountValue = json['discount'];
+    if (discountValue is int) {
+      discount = discountValue.toDouble();
+    } else if (discountValue is double) {
+      discount = discountValue;
+    } else if (discountValue is String) {
+      discount = double.tryParse(discountValue) ?? 0.0;
+    } else {
+      discount = 0.0;
+    }
+
     discountFrom = json['discount_from'] ?? "others";
     discountTo = json['discount_to'] ?? "others";
     country = json['country'] ?? "Jordan";
     rateCount = json['rate_count'] ?? 0;
-    if (json['avarageRating'] != null) {
-      if (json['avarageRating'] is int) {
-        averageRating = json['avarageRating'].toDouble();
-      }
-      if (json['avarageRating'] is String) {
-        averageRating = double.parse(json['avarageRating']);
+
+    // Handle averageRating with comprehensive type conversion
+    final avgRatingValue = json['avarageRating'];
+    if (avgRatingValue != null) {
+      if (avgRatingValue is int) {
+        averageRating = avgRatingValue.toDouble();
+      } else if (avgRatingValue is double) {
+        averageRating = avgRatingValue;
+      } else if (avgRatingValue is String) {
+        averageRating = double.tryParse(avgRatingValue) ?? 0.0;
+      } else {
+        averageRating = 0.0;
       }
     } else {
       averageRating = 0.0;
@@ -159,8 +188,10 @@ class TodayItem {
     } else {
       isFavorite = false;
     }
-    latitude = json['latitude'].toString();
-    longitude = json['longitude'].toString();
+
+    // Handle latitude and longitude with null safety
+    latitude = json['latitude']?.toString() ?? "0.0";
+    longitude = json['longitude']?.toString() ?? "0.0";
   }
   TodayItem copyWith({
     int? id,

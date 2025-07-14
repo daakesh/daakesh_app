@@ -27,8 +27,8 @@ class InsertCellPhoneScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.only(start: 31, bottom: 20),
+                      padding: const EdgeInsetsDirectional.only(
+                          start: 31, bottom: 20),
                       child: Utils.flipWidget(Assets.svg.arrowBackIcon.svg()),
                     ),
                   ),
@@ -37,14 +37,14 @@ class InsertCellPhoneScreen extends StatelessWidget {
                     flex: 1,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 21),
+                    padding: const EdgeInsets.symmetric(horizontal: 21),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(context.locale.forget_password_title,
                             style: context.easyTheme.textTheme.headlineLarge!
                                 .copyWith(fontSize: 40)),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(context.locale.forget_instruction_title,
@@ -82,12 +82,12 @@ class InsertCellPhoneScreen extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         state.flagEmoji,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: ColorName.blueGray,
                                             fontSize: 24),
                                       ),
                                     ),
-                                    Expanded(
+                                    const Expanded(
                                       child: Icon(
                                         Icons.arrow_drop_down_outlined,
                                         color: ColorName.blueGray,
@@ -152,7 +152,7 @@ class InsertCellPhoneScreen extends StatelessWidget {
     if (phoneNumberController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.forget_snack_bar_title);
       return;
     }

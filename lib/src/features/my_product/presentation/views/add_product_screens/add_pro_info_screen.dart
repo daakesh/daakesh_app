@@ -158,7 +158,7 @@ class _AddProInfoScreenState extends State<AddProInfoScreen> {
   void onNext() async {
     if (productNameController.text.isEmpty ||
         productDescriptionController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.add_pro_data_snack_bar);
       return;
     }

@@ -367,7 +367,8 @@ class _ShipToScreenState extends State<ShipToScreen> {
 
   void onNext() async {
     if (countriesList.isEmpty) {
-      ShowToastSnackBar.showSnackBars(message: context.locale.add_one_country);
+      ShowToastSnackBar.showCustomDialog(
+          message: context.locale.add_one_country);
       return;
     }
 

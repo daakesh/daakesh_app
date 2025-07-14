@@ -31,11 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: ColorName.transparent,
         body: LayoutBuilderWidget(
           child: Padding(
-            padding: EdgeInsetsDirectional.symmetric(horizontal: 20),
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
                 const Directionality(
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         rememberMeValue: value!));
                                   },
                                   value: state.rememberMeValue,
-                                  overlayColor: MaterialStateProperty.all(
+                                  overlayColor: WidgetStateProperty.all(
                                       ColorName.transparent),
                                   hoverColor: ColorName.white,
                                   side: const BorderSide(
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 2,
                           ),
                           Expanded(
@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void onLogin(BuildContext context) {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.login_snack_bar_title);
       return;
     }

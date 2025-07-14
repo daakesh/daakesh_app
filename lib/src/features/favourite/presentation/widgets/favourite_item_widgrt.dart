@@ -188,6 +188,7 @@ class FavouriteItemWidget extends StatelessWidget {
       );
 
       CommentBloc.get.add(GetCommentByItemEvent(itemId: todayItem.id));
+
       Utils.openNavNewPage(
         context,
         MoreInfoProductScreen(

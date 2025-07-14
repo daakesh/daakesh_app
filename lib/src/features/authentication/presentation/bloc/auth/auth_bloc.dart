@@ -28,17 +28,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await getIt.get<AuthUseCases>().onLogin(event.email, event.password);
     result.fold((l) {
       emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
-      ShowToastSnackBar.showErrorDialog(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
       ProgressCircleDialog.dismiss();
     }, (r) async {
       // ProgressCircleDialog.dismiss();
       // if (!r.status!) {
-      //   ShowToastSnackBar.showSnackBars(message: r.message.toString());
+      //   ShowToastSnackBar.showCustomDialog(message: r.message.toString());
       //   return;
       // }
       if (r.data['data'] == null) {
         ProgressCircleDialog.dismiss();
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       saveRememberData(state.rememberMeValue, event.email, event.password);
@@ -115,7 +115,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }, (r) {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       saveRememberData(state.rememberMeValue, state.email, state.password);
@@ -159,7 +159,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(state.copyWith(authStateStatus: AuthStateStatus.ERROR));
     }, (r) {
       if (!r.status!) {
-        ShowToastSnackBar.showErrorDialog(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       //

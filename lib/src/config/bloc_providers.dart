@@ -1,3 +1,4 @@
+import 'package:daakesh/src/features/favourite/presentation/bloc/favourite_bloc/favourite_bloc.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../features/features.export.dart';
@@ -59,6 +60,9 @@ MultiBlocProvider listOfBloc({Widget? child}) {
       BlocProvider<SwapAdvBloc>(create: (_) => SwapAdvBloc()),
       BlocProvider<SwapProBloc>(create: (_) => SwapProBloc()),
       BlocProvider<SwapFilterBloc>(create: (_) => SwapFilterBloc()),
+      BlocProvider<FavouriteBloc>(
+        create: (_) => FavouriteBloc(),
+      ),
 
       ///BlocProvider<SwapCommentBloc>(create: (_) => CommentBloc()),
       ///BlocProvider<SwapRateBloc>(create: (_) => RateBloc()),

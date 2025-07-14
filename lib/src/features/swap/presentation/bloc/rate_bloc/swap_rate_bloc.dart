@@ -23,10 +23,10 @@ class SwapRateBloc extends Bloc<SwapRateEvent, SwapRateState> {
         .addRate(itemId, userId, catID, rateValue);
     result.fold((l) {
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.SUCCESS));
@@ -42,10 +42,10 @@ class SwapRateBloc extends Bloc<SwapRateEvent, SwapRateState> {
         await getIt.get<SwapUseCases>().getRateByItem(itemID, userId);
     result.fold((l) {
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.SUCCESS));
@@ -60,10 +60,10 @@ class SwapRateBloc extends Bloc<SwapRateEvent, SwapRateState> {
     final result = await getIt.get<SwapUseCases>().editRate(id, rateValue);
     result.fold((l) {
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(swapRateStateStatus: SwapRateStateStatus.SUCCESS));

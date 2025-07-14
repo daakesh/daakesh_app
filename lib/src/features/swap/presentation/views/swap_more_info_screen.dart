@@ -14,6 +14,7 @@ class SwapMoreInfoScreen extends StatelessWidget {
       canPop: true,
       onPopInvoked: (value) {
         SwapPassDataBloc.get.add(ResetSwapPassValuesEvent());
+        context.read<FavouriteBloc>().add(GetFavouriteDataEvent());
       },
       child: Scaffold(
         body: CustomScrollView(

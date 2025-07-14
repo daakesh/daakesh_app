@@ -20,10 +20,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final result = await getIt.get<ProfileUseCases>().getLanguageData();
 
     result.fold((l) {
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
 
@@ -93,16 +93,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(profileStateStatus: ProfileStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       UserDataBloc.get.add(GetUserDataEvent());
       ProfileBloc.get.add(ActivateUpdateEvent(isUpdatePersonalActive: false));
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: event.context.locale.update_location_message);
       emit(state.copyWith(profileStateStatus: ProfileStateStatus.SUCCESS));
     });

@@ -42,11 +42,11 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     result.fold((l) {
       ProgressCircleDialog.dismiss();
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       ProgressCircleDialog.dismiss();
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       RateBloc.get.add(GetOverAllRateItemsEvent(itemID: itemId));
@@ -99,10 +99,10 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
 
     result.fold((l) {
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CommentRateModel commentRateModel = CommentRateModel.fromJson(r.data);
@@ -133,10 +133,10 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     final result = await getIt.get<HomeUseCases>().removeComments(id);
     result.fold((l) {
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(commentStateStatus: CommentStateStatus.SUCCESS));
@@ -150,10 +150,10 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     final result = await getIt.get<HomeUseCases>().getCommentCountItem(itemId);
     result.fold((l) {
       emit(state.copyWith(commentStateStatus: CommentStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       int commentCount = r.data['data']['comment_count'];

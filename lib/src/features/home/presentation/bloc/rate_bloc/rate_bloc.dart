@@ -24,10 +24,10 @@ class RateBloc extends Bloc<RateEvent, RateState> {
         .addRate(itemId, userId, catID, rateValue);
     result.fold((l) {
       emit(state.copyWith(rateStateStatus: RateStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(rateStateStatus: RateStateStatus.SUCCESS));
@@ -43,10 +43,10 @@ class RateBloc extends Bloc<RateEvent, RateState> {
         await getIt.get<HomeUseCases>().getRateByItem(itemID, userId);
     result.fold((l) {
       emit(state.copyWith(rateStateStatus: RateStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(rateStateStatus: RateStateStatus.SUCCESS));
@@ -60,10 +60,10 @@ class RateBloc extends Bloc<RateEvent, RateState> {
     final result = await getIt.get<HomeUseCases>().editRate(id, rateValue);
     result.fold((l) {
       emit(state.copyWith(rateStateStatus: RateStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       emit(state.copyWith(rateStateStatus: RateStateStatus.SUCCESS));
@@ -77,10 +77,10 @@ class RateBloc extends Bloc<RateEvent, RateState> {
     final result = await getIt.get<HomeUseCases>().getOverAllRateItem(itemID);
     result.fold((l) {
       emit(state.copyWith(rateStateStatus: RateStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       OverAllRateModel overAllRateModel = OverAllRateModel.fromJson(r.data);

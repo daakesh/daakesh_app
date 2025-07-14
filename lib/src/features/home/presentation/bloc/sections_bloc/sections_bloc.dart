@@ -35,13 +35,13 @@ class SectionsBloc extends Bloc<SectionsEvent, SectionsState> {
         .getCategoryBySectionID(state.secID, state.currentPage);
     result.fold((l) {
       emit(state.copyWith(sectionsStateStatus: SectionsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!event.isSeeMore) {
         ProgressCircleDialog.dismiss();
       }
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CategoryModel categoryData = CategoryModel.fromJson(r.data);

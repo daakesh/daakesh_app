@@ -39,6 +39,28 @@ class ShowToastSnackBar {
     ));
   }
 
+  static void showCustomDialog({
+    required String? message,
+    String? title,
+    bool isError = false,
+    bool isSuccess = false,
+    Duration? duration,
+    SnackBarAction? snackBarAction,
+    VoidCallback? onOkPressed,
+  }) {
+    if (isError) {
+      CustomErrorDialog.show(
+        message: message ?? '',
+        onOkPressed: onOkPressed!,
+      );
+    } else {
+      CustomErrorDialog.showSuccess(
+        message: message ?? '',
+        onOkPressed: onOkPressed,
+      );
+    }
+  }
+
   /// Show custom error dialog instead of snack bar
   static void showErrorDialog({
     required String message,

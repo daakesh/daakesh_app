@@ -277,21 +277,21 @@ class _RegisterPersonalInfoScreenState
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.fill_personal_data_snack_bars);
       return;
     }
     if (!RegExpValidator.isValidEmail(email: emailController.text)) {
-      ShowToastSnackBar.showSnackBars(message: context.locale.bad_format);
+      ShowToastSnackBar.showCustomDialog(message: context.locale.bad_format);
       return;
     }
     if (!RegExpValidator.passwordStrength(password: passwordController.text)) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.password_validation);
       return;
     }
     if (!isAgree) {
-      ShowToastSnackBar.showSnackBars(
+      ShowToastSnackBar.showCustomDialog(
           message: context.locale.terms_and_condition);
       return;
     }

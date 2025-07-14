@@ -36,13 +36,13 @@ class SwapSectionsBloc extends Bloc<SwapSectionsEvent, SwapSectionsState> {
     result.fold((l) {
       emit(state.copyWith(
           swapSectionsStateStatus: SwapSectionsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!event.isSeeMore) {
         ProgressCircleDialog.dismiss();
       }
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       SwapCategoryModel categoryData = SwapCategoryModel.fromJson(r.data);

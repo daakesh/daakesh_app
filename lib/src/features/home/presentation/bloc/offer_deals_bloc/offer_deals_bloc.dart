@@ -19,10 +19,10 @@ class OfferDealsBloc extends Bloc<OfferDealsEvent, OfferDealsState> {
         FilterDataModel(), state.itemsCurrentPage, SortingType.desc);
     result.fold((l) {
       emit(state.copyWith(offerDealsStateStatus: OfferDealsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TodayItemModel todayItemModel = TodayItemModel.fromJson(r.data);
@@ -66,10 +66,10 @@ class OfferDealsBloc extends Bloc<OfferDealsEvent, OfferDealsState> {
         filterDataModel, state.itemsCurrentPage, state.sortingType);
     result.fold((l) {
       emit(state.copyWith(offerDealsStateStatus: OfferDealsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       TodayItemModel todayItemModel = TodayItemModel.fromJson(r.data);
@@ -125,10 +125,10 @@ class OfferDealsBloc extends Bloc<OfferDealsEvent, OfferDealsState> {
     final result = await getIt.get<HomeUseCases>().getCities();
     result.fold((l) {
       emit(state.copyWith(offerDealsStateStatus: OfferDealsStateStatus.ERROR));
-      ShowToastSnackBar.showSnackBars(message: l.message.toString());
+      ShowToastSnackBar.showCustomDialog(message: l.message.toString());
     }, (r) async {
       if (!r.status!) {
-        ShowToastSnackBar.showSnackBars(message: r.message.toString());
+        ShowToastSnackBar.showCustomDialog(message: r.message.toString());
         return;
       }
       CitiesModel citiesModel = CitiesModel.fromJson(r.data);
