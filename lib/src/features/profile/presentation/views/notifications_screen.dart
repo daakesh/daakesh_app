@@ -31,150 +31,155 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const HeaderWidget(withArrowBack: true),
-          const SizedBox(height: 21.0),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 23.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Notifications',
-                  style: context.easyTheme.textTheme.headlineMedium!
-                      .copyWith(fontSize: 24.0),
-                ),
-                BlocBuilder<NotificationsBloc, NotificationsState>(
-                  builder: (context, state) {
-                    if (state.unreadCount > 0) {
-                      return TextButton(
-                        onPressed: () {
-                          context.read<NotificationsBloc>().add(
-                                const MarkAllNotificationsAsReadEvent(),
-                              );
-                        },
-                        child: Text(
-                          'Mark All Read',
-                          style: context.easyTheme.textTheme.bodyMedium!
-                              .copyWith(color: ColorName.blueGray),
-                        ),
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20.0),
-          // Filter Tabs
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 23.0),
-            child: _buildFilterTabs(),
-          ),
-          const SizedBox(height: 20.0),
-          Expanded(
-            child: BlocBuilder<NotificationsBloc, NotificationsState>(
-              builder: (context, state) {
-                if (state.notificationsStateStatus.isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: ColorName.blueGray,
-                    ),
-                  );
-                }
-
-                if (state.notificationsStateStatus.isError) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.error_outline,
-                          size: 64,
-                          color: ColorName.grayishBlue,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Failed to load notifications',
-                          style: context.easyTheme.textTheme.bodyMedium!
-                              .copyWith(color: ColorName.grayishBlue),
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<NotificationsBloc>().add(const GetNotificationsEvent());
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const HeaderWidget(withArrowBack: true),
+            const SizedBox(height: 21.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 23.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Notifications',
+                    style: context.easyTheme.textTheme.headlineMedium!
+                        .copyWith(fontSize: 24.0),
+                  ),
+                  BlocBuilder<NotificationsBloc, NotificationsState>(
+                    builder: (context, state) {
+                      if (state.unreadCount > 0) {
+                        return TextButton(
                           onPressed: () {
                             context.read<NotificationsBloc>().add(
-                                  const GetNotificationsEvent(),
+                                  const MarkAllNotificationsAsReadEvent(),
                                 );
                           },
-                          child: const Text('Retry'),
-                        ),
-                      ],
-                    ),
-                  );
-                }
+                          child: Text(
+                            'Mark All Read',
+                            style: context.easyTheme.textTheme.bodyMedium!
+                                .copyWith(color: ColorName.blueGray),
+                          ),
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            // Filter Tabs
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 23.0),
+              child: _buildFilterTabs(),
+            ),
+            const SizedBox(height: 20.0),
+            Expanded(
+              child: BlocBuilder<NotificationsBloc, NotificationsState>(
+                builder: (context, state) {
+                  if (state.notificationsStateStatus.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: ColorName.blueGray,
+                      ),
+                    );
+                  }
 
-                final filteredNotifications =
-                    _getFilteredNotifications(state.notifications);
-
-                if (filteredNotifications.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Assets.svg.commentIcon.svg(
-                          width: 64,
-                          height: 64,
-                          color: ColorName.grayishBlue,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'No ${_currentFilter.displayName.toLowerCase()} notifications yet',
-                          style: context.easyTheme.textTheme.headlineMedium!
-                              .copyWith(
-                            fontSize: 18,
+                  if (state.notificationsStateStatus.isError) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.error_outline,
+                            size: 64,
                             color: ColorName.grayishBlue,
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'When you have ${_currentFilter.displayName.toLowerCase()} notifications, they will appear here',
-                          style: context.easyTheme.textTheme.bodyMedium!
-                              .copyWith(color: ColorName.grayishBlue),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  );
-                }
-
-                return ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 23.0),
-                  itemCount: filteredNotifications.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 12),
-                  itemBuilder: (context, index) {
-                    final notification = filteredNotifications[index];
-                    return NotificationItemWidget(
-                      notification: notification,
-                      onTap: () {
-                        if (!notification.isRead) {
-                          context.read<NotificationsBloc>().add(
-                                MarkNotificationAsReadEvent(
-                                  notificationId: notification.id,
-                                ),
-                              );
-                        }
-                      },
+                          const SizedBox(height: 16),
+                          Text(
+                            'Failed to load notifications',
+                            style: context.easyTheme.textTheme.bodyMedium!
+                                .copyWith(color: ColorName.grayishBlue),
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<NotificationsBloc>().add(
+                                    const GetNotificationsEvent(),
+                                  );
+                            },
+                            child: const Text('Retry'),
+                          ),
+                        ],
+                      ),
                     );
-                  },
-                );
-              },
+                  }
+
+                  final filteredNotifications =
+                      _getFilteredNotifications(state.notifications);
+
+                  if (filteredNotifications.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Assets.svg.commentIcon.svg(
+                            width: 64,
+                            height: 64,
+                            color: ColorName.grayishBlue,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'No ${_currentFilter.displayName.toLowerCase()} notifications yet',
+                            style: context.easyTheme.textTheme.headlineMedium!
+                                .copyWith(
+                              fontSize: 18,
+                              color: ColorName.grayishBlue,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'When you have ${_currentFilter.displayName.toLowerCase()} notifications, they will appear here',
+                            style: context.easyTheme.textTheme.bodyMedium!
+                                .copyWith(color: ColorName.grayishBlue),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  return ListView.separated(
+                    padding: const EdgeInsets.symmetric(horizontal: 23.0),
+                    itemCount: filteredNotifications.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 12),
+                    itemBuilder: (context, index) {
+                      final notification = filteredNotifications[index];
+                      return NotificationItemWidget(
+                        notification: notification,
+                        onTap: () {
+                          if (!notification.isRead) {
+                            context.read<NotificationsBloc>().add(
+                                  MarkNotificationAsReadEvent(
+                                    notificationId: notification.id,
+                                  ),
+                                );
+                          }
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

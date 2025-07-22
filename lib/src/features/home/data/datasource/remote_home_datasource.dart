@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../src.export.dart';
 
@@ -148,6 +149,16 @@ class RemoteHomeDatasource implements HomeDatasource {
       HomeTodayItemType type,
       int page,
       SortingType sortingType) async {
+    // Get fresh Firebase messaging token
+    String deviceToken = '';
+    try {
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      deviceToken = fcmToken ?? '';
+    } catch (e) {
+      print('🔥 Error getting FCM token: $e');
+      deviceToken = GetItUtils.user.userData.deviceToken ?? '';
+    }
+
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getTodaysItems',
           params: {"type": type.name, "page": "$page"},
@@ -158,6 +169,7 @@ class RemoteHomeDatasource implements HomeDatasource {
             "userID": ValueConstants.userId,
             "type": "sell",
             "owner": "normal",
+            "deviceToken": deviceToken,
             "Filter": filterDataModel.toJson(),
             "orderBy": {
               "name": "price",

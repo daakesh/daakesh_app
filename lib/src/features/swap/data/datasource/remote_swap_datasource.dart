@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../src.export.dart';
 
@@ -112,9 +113,20 @@ class RemoteSwapDatasource implements SwapDatasource {
 
   @override
   Future<Either<Failure, ValidResponse>> getTodayItemsData(
-      SwapFilterDataModel swapFilterDataModel,
-      int page,
-      SortingType sortingType) async {
+    SwapFilterDataModel swapFilterDataModel,
+    int page,
+    SortingType sortingType,
+  ) async {
+    // Get fresh Firebase messaging token
+    String deviceToken = '';
+    try {
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      deviceToken = fcmToken ?? '';
+    } catch (e) {
+      print('🔥 Error getting FCM token: $e');
+      deviceToken = GetItUtils.user.userData.deviceToken ?? '';
+    }
+
     final result = await getIt.get<NetworkService>().post(
           path: 'DaakeshServices/api/item/getTodaysItems',
           params: {"type": "swap", "page": "$page"},
@@ -125,6 +137,7 @@ class RemoteSwapDatasource implements SwapDatasource {
             "userID": ValueConstants.userId,
             "type": "swap",
             "owner": "normal",
+            "deviceToken": deviceToken,
             "Filter": swapFilterDataModel.toJson(),
             "orderBy": {
               "name": "price",
